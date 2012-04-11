@@ -1,0 +1,142 @@
+* And technomancy said
+#+begin_quote 
+Emacs outshines all other editing software in approximately the same
+way that the noonday sun does the stars. It is not just bigger and
+brighter; it simply makes everything else vanish.
+
+-- Neal Stephenson, "In the Beginning was the Command Line"
+#+end_quote
+
+Let there be light  
+
+(and it was good)
+
+** And eschulte described the light so it shall be understood and organized.
+
+(and it was awesome)
+
+*** And thus did Jonnay expand upon for himself.
+
+#+begin_src emacs-lisp :tangle ./init.el
+  ;;; init.el --- Where all the magic begins
+  ;;
+  ;; Part of the Emacs Starter Kit, eschulte fork, with some emacs-kicker, and my own magic.
+  ;;
+  ;; This is the first thing to get loaded.
+  ;;
+  
+  (setq dotfiles-dir (file-name-directory (or load-file-name (buffer-file-name))))
+  
+  (add-to-list 'load-path (expand-file-name
+                           "lisp" (expand-file-name
+                                   "org" (expand-file-name
+                                          "src" dotfiles-dir))))
+  
+  ;; Grab El-Get while we're at it.
+  (add-to-list 'load-path "~/.emacs.d/el-get/el-get") 
+  (unless
+    (require 'el-get nil t)
+    (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+                  (lambda (s)
+                    (end-of-buffer)
+                    (eval-print-last-sexp))))
+  
+  ;; Load up Org Mode and Babel
+  (require 'org-install)
+  
+  ;; load up the main file
+  (org-babel-load-file (expand-file-name "starter-kit.org" dotfiles-dir))
+  
+  ;;; init.el ends here
+  
+#+end_src
+
+** If you didn't figure it out yet...
+   This init file is where everything begins.  It's copy/pasta of eschults goodness, with some dimitri-awesome thrown in.
+
+** Installation
+
+   You need emacs 24. I am sure you can get it and install it, if you
+   haven't already.
+
+   The first step to installing this is to tangle this file so that
+   the init file is executed.   The next step after that is to make
+   your own branch of this repo.
+
+   In case you're new to org-mode and the concept of org-babel, you
+   can put the point in the middle of the source-blocks below, and hit
+   C-c C-c to execute them.
+
+   
+#+begin_src emacs-lisp :results silent
+  (org-babel-tangle)
+#+end_src
+
+  This next code block sets up a git branch.  Change the branch name to your own name.
+
+#+begin_src sh 
+git branch bunny 
+#+end_src
+
+  The final step is to get a copy of el-get.  This is fairly simple.
+  Put your point in the middle of the next code block, and hit C-c
+  C-c.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+  (unless 
+    (require 'el-get nil t) 
+    (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el" 
+                  (lambda (s) 
+                    (end-of-buffer) 
+                    (eval-print-last-sexp))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get") (require 'el-get) 
+;; local sources 
+(setq el-get-sources '((:name magit :after (lambda () (global-set-key
+(kbd "C-x C-z") 'magit-status))) 
+(:name asciidoc :type elpa :after (lambda () (autoload 'doc-mode "doc-mode" nil t) (add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode)) (add-hook 'doc-mode-hook '(lambda () (turn-on-auto-fill) (require 'asciidoc))))) (:name lisppaste :type elpa) (:name emacs-goodies-el :type apt-get))) (setq my-packages (append '(cssh el-get switch-window vkill google-maps nxhtml xcscope yasnippet) (mapcar 'el-get-source-name el-get-sources))) (el-get 'sync my-packages)
+#+END_SRC
+
+** Your Own personal customizations
+
+
+** Testing
+
+   To properly test your magicians kit, you should build the tester, by running the elisp below.  If you don't know Emacs Lisp, you need to
+   learn to become a magician.  If you know emacs lisp, but don't know org-babel, you are about to learn.  Be prepared for some high-lamp
+   magick.  (No, not Linux Apache MySQL PHP.  That's gutter magick.)
+
+   Put your point inside of the ~begin_src~ section, and hit ~C-c C-c~
+
+#+source make-a-tha-test-script
+#+begin_src emacs-lisp :results raw
+(concat "#+begin_src sh :results output silent\n"
+ "  emacs -q -l "
+          (file-name-directory (buffer-file-name))
+          "init.el"
+          "\n"
+          "#+end" "_src" ; don't want the parser to prematurely end here
+)
+#+end_src 
+
+#+results:
+#+begin_src sh :results output silent
+  emacs -q -l /Users/jonathana/projects/emagicians-starter-kit/init.el
+#+end_src
+
+*** Wait, what just happened there?
+
+Ok, check it out, the source block just spits out a string, that gets
+inserted verbatum into the org-mode buffer. this means, I don't
+actually have to care about where you put the starter kit, it just
+builds itself a shell script.  It's kinda like macros, but
+cross-lingual macros.  
+
+
+* Organization
+
+  The circle is cast, and we're ready to go.  At this point all of our pre-initialization goodness is done, and now we can jump to full on
+  emacs customization magick. 

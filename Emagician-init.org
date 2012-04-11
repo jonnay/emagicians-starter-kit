@@ -1,0 +1,49 @@
+* Base initialization.
+
+  Look, if you're here, either you're a mutant (horray!), or I have
+  done something horribly wrong. (boo!).
+
+  Frankly the defaults here should be good enough that no-one should
+  need to change them.  And by good enough I mean, really basic things
+  like bog-standard libraries required, package managers set up.
+  Things like spaces, tabs, and all the important stuff are in their
+  own file.
+
+** Paths, Startup files, etc.
+
+   Load paths, customizations, etc.
+#+begin_src emacs-lisp
+(add-to-list 'load-path emagician-dir)
+(setq package-user-dir (concat starter-kit-dir "elpa"))
+(setq custom-file (concat starter-kit-dir "custom.el"))
+#+end_src
+
+** Ubiquitious Packages
+
+   These need to be not-autoloaded, cause they are EVERYWHERE MAN.
+
+#+begin_src emacs-lisp
+    (require 'cl)
+    (require 'saveplace)
+    (require 'ffap)
+    (require 'uniquify)
+    (require 'ansi-color)
+    (require 'recentf)
+#+end_src
+
+** ELPA 
+   Throwing our lot in with MELPA at this point. 
+#+begin_src emacs-lisp
+    (setq package-archives
+          '(("gnu"         . "http://elpa.gnu.org/packages/")
+            ("melpa"       . "http://melpa.milkbox.net/packages/")))
+    (package-initialize)
+#+end_src
+
+   For sake of archival purposes, here are 2 other potential ELPA
+   archives.
+
+#+begin_example
+            ("original"    . "http://tromey.com/elpa/")
+            ("marmalade"   . "http://marmalade-repo.org/packages/")
+#+end_example

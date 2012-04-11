@@ -1,0 +1,24 @@
+* A starter kit for magicians
+
+  I stand on the shoulders of giants, to weave my own spells.  
+
+  I got tired of my old .emacs file, and poorly maintained collection of extensions, that was working less and less well, the more time went
+  on and on.
+
+  I Love the idea of the starter kits, but I found they made too many
+  assumptions and just wasn't fit for what I needed.  I also have a
+  bit of a "not-invented-here" problem.  It's minor, and I cope pretty
+  well. However to paraphrase Douglas McArther Shaftoe (from the Neal
+  Stephenson novel /Cryptonomicon/.)
+
+#+begin_quote
+
+This is my Emacs.  There are plenty like it, but this one is mine.
+
+#+end_quote
+
+** Working with this
+
+  Installing, customizing, and making it go is as easy as opening the [[file:./Emagician-Install.org]] and then following instructions.  There are
+  plenty of code blocks in there that will get you started for installing and testing.  Basically, you shouldn't ever need to leave the
+  comfort of your org-mode buffer.  

@@ -1,0 +1,109 @@
+* And technomancy said
+#+begin_quote 
+Emacs outshines all other editing software in approximately the same
+way that the noonday sun does the stars. It is not just bigger and
+brighter; it simply makes everything else vanish.
+
+-- Neal Stephenson, "In the Beginning was the Command Line"
+#+end_quote
+
+Let there be light  
+
+(and it was good)
+
+** And eschulte described the light so it shall be understood and organized.
+
+(and it was awesome)
+
+*** And thus did Jonnay expand upon for himself.
+
+** Running Code blocks
+
+   Installing this thing should be as easy as reading through the
+   relevent sections to get used to how the kit works, and then
+   running the code blocks inside.  Running a code-block is as easy as
+   typing C-c C-c inside the relevant code block, and answering "yes"
+   if it asks you whether or not you want to run said code block.
+   
+** Installation
+
+   You need emacs 24. I am sure you can get it and install it, if you
+   haven't already.
+
+*** Make the init files
+
+	Run the code block below:  (~C-c C-c~ inside of the ~#+begin_src~
+	section).  This code below makes the init file. 
+
+**** TODO Buil init file maker
+	 - [ ] file that sets the emagician-kit-dir to the current
+           directory
+	 - [ ] Loads starter kit proper 
+
+#+begin_src emacs-lisp :results silent
+  (org-babel-tangle)
+#+end_src
+
+** Customization and Configuration
+
+  This next code block sets up a git branch.  Change the branch name
+  to your own name. 
+
+#+begin_src sh 
+git branch bunny 
+#+end_src
+
+** Testing
+
+   To properly test your magicians kit, you should build the tester,
+   by running the elisp below.  If you don't know Emacs Lisp, you need
+   to learn to become a magician.  If you know emacs lisp, but don't
+   know org-babel, you are about to learn.  Be prepared for some
+   high-lamp magick.  (No, not Linux Apache MySQL PHP.)
+
+   Run the next code block.  It will emit a new code block below that
+   will run the 
+
+#+source make-a-tha-test-script
+#+begin_src emacs-lisp :results raw
+(concat "#+begin_src sh :results output silent\n"
+ "  emacs -q -l "
+          (file-name-directory (buffer-file-name))
+          "init.el"
+          "\n"
+          "#+end" "_src" ; don't want the parser to prematurely end here
+)
+#+end_src 
+
+#+results:
+#+begin_src sh :results output silent
+  emacs -q -l /Users/jonathana/projects/emagicians-starter-kit/init.el
+#+end_src
+
+*** Wait, what just happened there?
+
+Ok, check it out, the source block just spits out a string, that gets
+inserted verbatum into the org-mode buffer. this means, I don't
+actually have to care about where you put the starter kit, it just
+builds itself a shell script.  It's kinda like macros, but
+cross-lingual macros.  
+
+
+** Taking the plunge
+
+   One you run the next source block, you will have fully installed
+   the Emagicians starter kit.
+	
+   Since we're going to over-write your .emacs.d/init file, we'll back
+   it up first. 
+
+#+begin-src sh 
+NOW=$(date +"%Y-%m-%d_%H-%M-%S")
+FILE="~./emacs.d/init-backup-$NOW.el"
+mv -v ~/.emacs.d/init.el $FILE
+mv -v ./init.el ~/.emcas.d/init.el
+#+end_src
+
+
+   
+   
