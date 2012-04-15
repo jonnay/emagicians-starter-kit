@@ -1,0 +1,3 @@
+* Changelog
+  - v0.1 :: Bassline
+    - Bassline release.  Installation works on my NixOS (GNU/Linux) install.
