@@ -17,40 +17,168 @@ Let there be light
 
 *** And thus did Jonnay expand upon for himself.
 
-** Running Code blocks
+* Running Code blocks
 
-   Installing this thing should be as easy as reading through the
-   relevent sections to get used to how the kit works, and then
-   running the code blocks inside.  Running a code-block is as easy as
-   typing C-c C-c inside the relevant code block, and answering "yes"
-   if it asks you whether or not you want to run said code block.
-   
-** Installation
+  Installing this thing should be as easy as reading through the
+  relevent sections to get used to how the kit works, and then
+  running the code blocks inside.  Running a code-block is as easy as
+  typing C-c C-c inside the relevant code block, and answering "yes"
+  if it asks you whether or not you want to run said code block.
+  
+* Installation
 
-   You need emacs 24. I am sure you can get it and install it, if you
-   haven't already.
+  You need emacs 24. I am sure you can get it and install it, if you
+  haven't already.
 
-*** Make the init files
+** Who the fuck are you?
 
-	Run the code block below:  (~C-c C-c~ inside of the ~#+begin_src~
-	section).  This code below makes the init file. 
+   Who you are, the set of emacs configurations that you will want,
+   will probably remain consistent across machines, user accounts,
+   etc.  At the same time, will need some differentiation amongst
+   emacs starter kits.  This is your "true name".  Make it
+   quazi-original.  if you are boring, a machine-readable fullname
+   will do.
 
-**** TODO Buil init file maker
-	 - [ ] file that sets the emagician-kit-dir to the current
-           directory
-	 - [ ] Loads starter kit proper 
+   We'll use the true name in the naming of your branch, loading your
+   customizations, etc.
+
+   Replace "jonnay" with your name!
+
+#+name: true-name
+#+begin_src emacs-lisp
+(defvar emagician-truename "jonnay" 
+  "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
+#+end_src 
+
+** Make the init files
+
+    Making the init file is a two stage process.
+
+*** Step One: Where are we?
+    The first is to tell the Emagician Starter kit which directory is
+    in.  Run the next codeblock, and watch how it writes a new one
+    below.  You don't need to run the second one. 
+
+    If there already is code below the "results:" block, then just
+    delete it. 
+
+#+begin_src emacs-lisp :results raw
+(concat "#+name: set-this-dir-as-var\n"
+        "#+begin_src emacs-lisp\n"
+        "(defvar emagician-dir\n"
+        "        \"" (file-name-directory (buffer-file-name)) "\"\n" ;BAM! 
+        "        \"Automagically generated variable where the emagicians kit is located\")\n"
+        "#+end_" "src\n")
+#+end_src
+
+#+results:
+#+name: set-this-dir-as-var
+#+begin_src emacs-lisp
+(defvar emagician-dir
+        "/home/jonny/emagicians-starter-kit/"
+        "Automagically generated variable where the emagicians kit is located")
+#+end_src
+
+*** Step Two: Making it go.
+    Then this next code block creates the init.el file by running the
+    next code block.  What this does is it takes the embedded elisp in
+    this file (especially the parts where it determines how you are,
+    and were the emagicians starer kit is) and weaves it together into
+    a file called init.el.
 
 #+begin_src emacs-lisp :results silent
   (org-babel-tangle)
 #+end_src
 
-** Customization and Configuration
+    if you are interested, you can have a look at it:
+
+#+begin_src emacs-lisp :results silent
+(find-file-other-window "./init.el")
+#+end_src
+
+** Branching for great justice
 
   This next code block sets up a git branch.  Change the branch name
-  to your own name. 
+  to your own name.  hit C-C C-C on the next block for branchy git goodness.
 
-#+begin_src sh 
-git branch bunny 
+  This also adds an entry to the .gitignore file that contains an
+  entry to your private customization file.  More on this later
+
+#+begin_src emacs-lisp :results silent
+(shell-command (concat "git branch " emagician-truename))
+(shell-command (concat "git checkout " emagician-truename))
+(shell-command (concat "echo \"" emagician-truename "/private.org\" >> .gitignore"))
+#+end_src
+
+  I shouldn't have to tell you why this is a good idea.
+
+** Customizing and Configuration 
+  In the original starter kit, there were 2 different kinds of custom
+  directories.  Emacs Magicians uses 4.
+
+  The only directory you need to create is your personal one.  All
+  others are optional.
+
+*** Your personal directory
+    This next command is an invokation.  Even if you are going to use
+    the Emagician starter kit as is, you need to run the next code
+    block.  This defines a function that is used to create
+    custom code directories for you, and an index file.
+
+    The first one it creates is based on the identity you specified
+    above.  After that there are other customizations based on your
+    login name, machine name and OS type.
+
+    But you need to run this one first.
+
+    There is also the possibility of you needing to store passwords
+    and such.  The default is to do so in a directory called
+    private.org in your personal directory that is already in your
+    .gitignore file.
+
+    Another option is to store them in a private.org.gpg file.
+
+#+begin_src emacs-lisp :results silent
+(defun emagician-invoke-custom-dir (name) 
+  "Create the customiztaion file, and load it up in emacs.
+This function is actually created when the emagician identifies themself"
+  (let ((filename (concat "./" name)))
+    (make-directory filename)))
+
+(emagician-invoke-custom-dir emagician-truename)
+#+end_src
+
+*** your System-Type directory
+
+If you end up using differnet OS's, you may want to have this set up.
+This would handle per-os level customization.  We use the
+"system-type" variable for determining which system type to use.  We
+do munge it a little by replacing any ~/~ with a ~-~.
+
+#+begin_src emacs-lisp :results silent
+(emagician-invoke-custom-dir
+                       (replace-regexp-in-string "/" 
+                                                 "-" 
+                                                 (symbol-name system-type)))
+#+end_src
+
+*** Your machine file(s)
+
+Different machines are not nessicarily on differnet OS's.  Different
+OS's aren't nessicarily different machines.  Now you can get more
+granular if need be.
+
+
+#+begin_src emacs-lisp :results silent
+(emagician-invoke-custom-dir system-name)
+#+end_src
+
+*** Your account file
+
+Then again, maybe you need to seperate customizations out by user account. Why not?
+
+#+begin_src emacs-lisp :results silent
+(emagician-invoke-custom-dir (user-login-name))
 #+end_src
 
 ** Testing
@@ -62,25 +190,48 @@ git branch bunny
    high-lamp magick.  (No, not Linux Apache MySQL PHP.)
 
    Run the next code block.  It will emit a new code block below that
-   will run the 
+   will properly run the emacs starter kit as a shell command.  You
+   can then run this new code block. 
+
+   Note that you will need to quit the new instance of emacs, so
+   control can return to this instance of emacs.
 
 #+source make-a-tha-test-script
 #+begin_src emacs-lisp :results raw
-(concat "#+begin_src sh :results output silent\n"
- "  emacs -q -l "
-          (file-name-directory (buffer-file-name))
-          "init.el"
-          "\n"
-          "#+end" "_src" ; don't want the parser to prematurely end here
+(concat "#+begin_src sh :results silent\n"
+        "  # run this code block to test your emacs starter kit\n"
+        "  emacs -q -l "
+        (file-name-directory (buffer-file-name))
+        "init.el" 
+        " &"
+        "\n"
+        "#+end" "_src" ; don't want the parser to prematurely end here
 )
 #+end_src 
 
 #+results:
-#+begin_src sh :results output silent
-  emacs -q -l /Users/jonathana/projects/emagicians-starter-kit/init.el
+#+begin_src sh :results silent
+  # run this code block to test your emacs starter kit
+  emacs -q -l /home/jonny/emagicians-starter-kit/init.el 
 #+end_src
 
-*** Wait, what just happened there?
+   If you get the message ~org-babel-execute-src-block: No
+   org-babel-execute function for sh!~ then you need to enable shell
+   mode for babel.  Do that by running this code block:
+
+#+begin_src emacs-lisp :results silent
+(require 'ob-sh)
+#+end_src
+
+   If it is working properly, the ~*Messages*~ buffer of the new emacs
+   instance should read something like:
+
+#+begin_example
+Loading /home/jonny/emagicians-starter-kit/Emagician.el (source)...done
+loaded /home/jonny/emagicians-starter-kit/Emagician.el
+#+end_example
+
+*** A note about some magic... Wait, what just happened there?
 
 Ok, check it out, the source block just spits out a string, that gets
 inserted verbatum into the org-mode buffer. this means, I don't
@@ -88,6 +239,8 @@ actually have to care about where you put the starter kit, it just
 builds itself a shell script.  It's kinda like macros, but
 cross-lingual macros.  
 
+In fact, when the starter kit builds itself, it will use this
+cross-lingual aspect to figure out where it is.
 
 ** Taking the plunge
 
@@ -97,13 +250,43 @@ cross-lingual macros.
    Since we're going to over-write your .emacs.d/init file, we'll back
    it up first. 
 
-#+begin-src sh 
+#+begin_src sh :results output 
 NOW=$(date +"%Y-%m-%d_%H-%M-%S")
-FILE="~./emacs.d/init-backup-$NOW.el"
+FILE="~./.emacs.d/init-backup-$NOW.el"
 mv -v ~/.emacs.d/init.el $FILE
-mv -v ./init.el ~/.emcas.d/init.el
+cp -v ./init.el ~/.emacs.d/
 #+end_src
 
+#+results:
+: `/home/jonny/.emacs.d/init.el' -> `~./.emacs.d/init-backup-2012-04-15_19-25-35.el'
+: `./init.el' -> `/home/jonny/.emacs.d/init.el'
+
+
+* The actual Init file
+
+  This is the init file that is tangled by the ~org-babel-tagle~ command, and then copied over to where you need it to be.  You don't really need to read it... but you can if you like!
+
+#+begin_src emacs-lisp :tangle ./init.el :noweb yes
+;;; init.el --- Where all the magic begins
+;;
+;; Part of the Emagicians Starter Kit. 
+;;
+;; This is the first thing to get loaded.
+;; 
+;; Note, this file is automagickally summoned from Emagician-Install.org
+
+<<true-name>>
+<<set-this-dir-as-var>>
+
+(org-babel-load-file (expand-file-name "Emagician.org" emagician-dir))
+
+#+end_src
 
    
    
+
+* That's All folks!
+#+begin_quote
+Emacs is the ground. We run around and act silly on top of it, and when we die, may our remnants grace its ongoing incrementation.
+--  Thien-Thi Nguyen, comp.emacs
+#+end_quote

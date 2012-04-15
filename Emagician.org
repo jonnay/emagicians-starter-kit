@@ -1,142 +1,190 @@
-* And technomancy said
-#+begin_quote 
-Emacs outshines all other editing software in approximately the same
-way that the noonday sun does the stars. It is not just bigger and
-brighter; it simply makes everything else vanish.
+* Base initialization and Circle Casting
 
--- Neal Stephenson, "In the Beginning was the Command Line"
-#+end_quote
+  Look, if you're here, either you're a mutant (horray!), or I have
+  done something horribly wrong. (boo!).
 
-Let there be light  
+  Frankly the defaults here should be good enough that no-one should
+  need to change them.  And by good enough I mean, really basic things
+  like bog-standard libraries required, package managers set up.
+  Things like spaces, tabs, and all the important stuff are in their
+  own file.
 
-(and it was good)
+** Meta Development
 
-** And eschulte described the light so it shall be understood and organized.
+   Emagician sets up a few of its own functions for helpful debugging and development of itself
 
-(and it was awesome)
-
-*** And thus did Jonnay expand upon for himself.
-
-#+begin_src emacs-lisp :tangle ./init.el
-  ;;; init.el --- Where all the magic begins
-  ;;
-  ;; Part of the Emacs Starter Kit, eschulte fork, with some emacs-kicker, and my own magic.
-  ;;
-  ;; This is the first thing to get loaded.
-  ;;
-  
-  (setq dotfiles-dir (file-name-directory (or load-file-name (buffer-file-name))))
-  
-  (add-to-list 'load-path (expand-file-name
-                           "lisp" (expand-file-name
-                                   "org" (expand-file-name
-                                          "src" dotfiles-dir))))
-  
-  ;; Grab El-Get while we're at it.
-  (add-to-list 'load-path "~/.emacs.d/el-get/el-get") 
-  (unless
-    (require 'el-get nil t)
-    (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-                  (lambda (s)
-                    (end-of-buffer)
-                    (eval-print-last-sexp))))
-  
-  ;; Load up Org Mode and Babel
-  (require 'org-install)
-  
-  ;; load up the main file
-  (org-babel-load-file (expand-file-name "starter-kit.org" dotfiles-dir))
-  
-  ;;; init.el ends here
-  
+#+begin_src
+(defun emagician-reload ()
+  "Reload the init file"
+  (interactive)
+  (org-babel-load-file (expand-file-name "Emagician.org" emagician-dir)))
 #+end_src
 
-** If you didn't figure it out yet...
-   This init file is where everything begins.  It's copy/pasta of eschults goodness, with some dimitri-awesome thrown in.
+** Paths, Startup files, etc.
 
-** Installation
-
-   You need emacs 24. I am sure you can get it and install it, if you
-   haven't already.
-
-   The first step to installing this is to tangle this file so that
-   the init file is executed.   The next step after that is to make
-   your own branch of this repo.
-
-   In case you're new to org-mode and the concept of org-babel, you
-   can put the point in the middle of the source-blocks below, and hit
-   C-c C-c to execute them.
-
-   
-#+begin_src emacs-lisp :results silent
-  (org-babel-tangle)
+   Load paths, customizations, etc.
+#+begin_src emacs-lisp
+(add-to-list 'load-path emagician-dir)
+(setq custom-file (concat emagician-dir "custom.el"))
 #+end_src
 
-  This next code block sets up a git branch.  Change the branch name to your own name.
+** Ubiquitious Packages
 
-#+begin_src sh 
-git branch bunny 
+   These need to be not-autoloaded, cause they are EVERYWHERE MAN.
+
+#+begin_src emacs-lisp
+    (require 'cl)
+    (require 'saveplace)
+    (require 'ffap)
+    (require 'uniquify)
+    (require 'ansi-color)
+    (require 'recentf)
 #+end_src
 
-  The final step is to get a copy of el-get.  This is fairly simple.
-  Put your point in the middle of the next code block, and hit C-c
-  C-c.
+** ELPA 
+   Throwing our lot in with MELPA at this point. 
+#+begin_src emacs-lisp
+    (setq package-user-dir (concat emagician-dir "elpa"))
 
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-  (unless 
-    (require 'el-get nil t) 
-    (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el" 
-                  (lambda (s) 
-                    (end-of-buffer) 
-                    (eval-print-last-sexp))))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get") (require 'el-get) 
-;; local sources 
-(setq el-get-sources '((:name magit :after (lambda () (global-set-key
-(kbd "C-x C-z") 'magit-status))) 
-(:name asciidoc :type elpa :after (lambda () (autoload 'doc-mode "doc-mode" nil t) (add-to-list 'auto-mode-alist '("\\.adoc$" . doc-mode)) (add-hook 'doc-mode-hook '(lambda () (turn-on-auto-fill) (require 'asciidoc))))) (:name lisppaste :type elpa) (:name emacs-goodies-el :type apt-get))) (setq my-packages (append '(cssh el-get switch-window vkill google-maps nxhtml xcscope yasnippet) (mapcar 'el-get-source-name el-get-sources))) (el-get 'sync my-packages)
-#+END_SRC
-
-** Your Own personal customizations
-
-
-** Testing
-
-   To properly test your magicians kit, you should build the tester, by running the elisp below.  If you don't know Emacs Lisp, you need to
-   learn to become a magician.  If you know emacs lisp, but don't know org-babel, you are about to learn.  Be prepared for some high-lamp
-   magick.  (No, not Linux Apache MySQL PHP.  That's gutter magick.)
-
-   Put your point inside of the ~begin_src~ section, and hit ~C-c C-c~
-
-#+source make-a-tha-test-script
-#+begin_src emacs-lisp :results raw
-(concat "#+begin_src sh :results output silent\n"
- "  emacs -q -l "
-          (file-name-directory (buffer-file-name))
-          "init.el"
-          "\n"
-          "#+end" "_src" ; don't want the parser to prematurely end here
-)
-#+end_src 
+    (setq package-archives
+          '(("gnu"         . "http://elpa.gnu.org/packages/")
+            ("melpa"       . "http://melpa.milkbox.net/packages/")))
+    
+    (package-initialize)
+#+end_src
 
 #+results:
-#+begin_src sh :results output silent
-  emacs -q -l /Users/jonathana/projects/emagicians-starter-kit/init.el
+: t
+
+   For sake of archival purposes, here are 2 other potential ELPA
+   archives.
+
+#+begin_example
+            ("original"    . "http://tromey.com/elpa/")
+            ("marmalade"   . "http://marmalade-repo.org/packages/")
+#+end_example
+
+* Base initalization function set
+
+  There are a number of baseline things we need to do, like custom loaders, macros for setting up hooks, etc. etc.
+
+** Starter Kit Load
+
+   Originally from Eschulte.  This function takes a <foo>.org file,
+   and load it.  It can also be given the argument of a sub tree, which 
+   is defined as either a proper ord id, or a tag. 
+
+   If the subtree is a tag, then all subtrees with that tag are collected and loaded.
+
+
+
+#+name: starter-kit-load
+#+begin_src emacs-lisp
+    (defun emagician-starter-kit-load (file &optional header-or-tag)
+      "Load configuration from other starter-kit-*.org files.
+    If the optional argument is the id of a subtree then only
+    configuration from within that subtree will be loaded.  If it is
+    not an id then it will be interpreted as a tag, and only subtrees
+    marked with the given tag will be loaded.
+    
+    For example, to load all of lisp.org simply
+    add (emagician-starter-kit-load \"lisp\") to your configuration.
+    
+    To load only the 'window-system' config from
+    emagician-starter-kit-misc-recommended.org add
+     (emagican-starter-kit-load \"misc-recommended\" \"window-system\")
+    to your configuration."
+      (let ((file (expand-file-name (if (string-match ".+\.org" file)
+                                        file
+                                      (format "%s.org" file))
+                                    emagician-dir)))
+        (org-babel-load-file
+         (if header-or-tag
+             (let* ((base (file-name-nondirectory file))
+                    (dir  (file-name-directory file))
+                    (partial-file (expand-file-name
+                                   (concat "." (file-name-sans-extension base)
+                                           ".part." header-or-tag ".org")
+                                   dir)))
+               (unless (file-exists-p partial-file)
+                 (with-temp-file partial-file
+                   (insert
+                    (with-temp-buffer
+                      (insert-file-contents file)
+                      (save-excursion
+                        (condition-case nil ;; collect as a header
+                            (progn
+                              (org-link-search (concat"#"header-or-tag))
+                              (org-narrow-to-subtree)
+                              (buffer-string))
+                          (error ;; collect all entries with as tags
+                           (let (body)
+                             (org-map-entries
+                              (lambda ()
+                                (save-restriction
+                                  (org-narrow-to-subtree)
+                                  (setq body (concat body "\n" (buffer-string)))))
+                              header-or-tag)
+                             body))))))))
+               partial-file)
+           file))))
 #+end_src
 
-*** Wait, what just happened there?
+** Load User/System Specific Files
+**** System/User specific customizations
+You can keep system- or user-specific customizations here in either
+raw emacs-lisp files or as embedded elisp in org-mode files (as done
+in this document).
 
-Ok, check it out, the source block just spits out a string, that gets
-inserted verbatum into the org-mode buffer. this means, I don't
-actually have to care about where you put the starter kit, it just
-builds itself a shell script.  It's kinda like macros, but
-cross-lingual macros.  
+You can keep elisp source in the =src= directory.  Packages loaded
+from here will override those installed by ELPA.  This is useful if
+you want to track the development versions of a project, or if a
+project is not in elpa.
+
+After we've loaded all the Starter Kit defaults, lets load the User's stuff.
+#+name: starter-kit-load-files
+#+begin_src emacs-lisp
+(when nil
+  (flet ((sk-load (base)
+           (let* ((path          (expand-file-name base emagician-dir))
+                  (literate      (concat path ".org"))
+                  (encrypted-org (concat path ".org.gpg"))
+                  (plain         (concat path ".el"))
+                  (encrypted-el  (concat path ".el.gpg")))
+             (cond
+              ((file-exists-p encrypted-org) (org-babel-load-file encrypted-org))
+              ((file-exists-p encrypted-el)  (load encrypted-el))
+              ((file-exists-p literate)      (org-babel-load-file literate))
+              ((file-exists-p plain)         (load plain)))))
+         (remove-extension (name)
+           (string-match "\\(.*?\\)\.\\(org\\(\\.el\\)?\\|el\\)\\(\\.gpg\\)?$" name)
+           (match-string 1 name)))
+    (let ((elisp-dir (expand-file-name "src" emagician-dir))
+          (user-dir (expand-file-name user-login-name emagician-dir)))
+      ;; add the src directory to the load path
+      (add-to-list 'load-path elisp-dir)
+      ;; load specific files
+      (when (file-exists-p elisp-dir)
+        (let ((default-directory elisp-dir))
+          (normal-top-level-add-subdirs-to-load-path)))
+      ;; load system-specific config
+      (sk-load system-name)
+      ;; load user-specific config
+      (sk-load user-login-name)
+      ;; load any files in the user's directory
+      (when (file-exists-p user-dir)
+        (add-to-list 'load-path user-dir)
+        (mapc #'sk-load
+              (remove-duplicates
+               (mapcar #'remove-extension
+                       (directory-files user-dir t ".*\.\\(org\\|el\\)\\(\\.gpg\\)?$"))
+               :test #'string=)))))
+)
+#+end_src
 
 
-* Organization
-
-  The circle is cast, and we're ready to go.  At this point all of our pre-initialization goodness is done, and now we can jump to full on
-  emacs customization magick. 
+** Settings from M-x customize
+#+name: m-x-customize-customizations
+#+begin_src emacs-lisp
+  (load custom-file 'noerror)
+#+end_src

@@ -12,13 +12,27 @@
   Stephenson novel /Cryptonomicon/.)
 
 #+begin_quote
-
 This is my Emacs.  There are plenty like it, but this one is mine.
-
 #+end_quote
 
 ** Working with this
-
   Installing, customizing, and making it go is as easy as opening the [[file:./Emagician-Install.org]] and then following instructions.  There are
   plenty of code blocks in there that will get you started for installing and testing.  Basically, you shouldn't ever need to leave the
   comfort of your org-mode buffer.  
+
+* A note about tone
+
+  If your primary tool, as both hobby and vocation is your text editor, does it not then follow that it is one of the fundimantally important things in your life?
+
+  But then, would that not put it on the same footing as ones spirituality?
+
+  What if ones spirituality is Millitant Athiest Zenarchic Discordianism?
+
+  Then you would write an Emagicians Startup Kit full of tongue in cheek references to the western magickal tradition.  
+
+  That's what.
+
+* Dedication
+ 
+  To My Wife:  Shell Arkell.  The most important person in my life.
+
