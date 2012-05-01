@@ -1,0 +1,20 @@
+* Shell Mode
+
+** Ansi Color On shells
+  Ansi color in shell mode is goood.
+
+#+name: ansi-color
+#+begin_src emacs-lisp
+    (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+    (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+#+end_src
+
+** Run a shell immediately in emacs so it is available
+
+#+name: shell-on-startup
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook 'shell)
+#+end_src
+
+* Magit Mode
+

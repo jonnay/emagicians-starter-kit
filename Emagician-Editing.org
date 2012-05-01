@@ -1,0 +1,24 @@
+* Transient mark mode
+
+  For now Transient Mark mode is just turned off.  I don't like
+  transients.
+
+  Seriously though, the reason why I like not having transient mark
+  mode is that I have gotten into the habit of dropping marks and
+  using the mark ring.  I also use the mark for nagivation, and having
+  transient mark mode on messes with my workflow.
+
+  If you are opposite, then let me know (file a bug report:
+  https://github.com/jonnay/emagicians-starter-kit/issues/new) and
+  I'll fix the emagicians kit so that transient mark mode can be
+  easily activated.
+
+#+name: turn-off-transient-mark
+#+begin_src emacs-lisp
+  (transient-mark-mode -1)
+#+end_src
+
+
+
+  
+

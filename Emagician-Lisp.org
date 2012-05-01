@@ -1,0 +1,5 @@
+* General lisp setup
+
+** Paredit
+** Show params 
+   (might need extra settings, should be in most other modes)

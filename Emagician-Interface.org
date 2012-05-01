@@ -1,0 +1,69 @@
+* Turn off goofy stuff
+
+Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
+but wouldn't an examination of your mode make more sense? (~C-h m~) Or
+apropos? (~C-h a~)
+
+#+name: turn-off-goofy-shit
+#+begin_src emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-bmode -1)
+#+end_src
+
+* Turn on some extra information
+
+  There are a few ways to change the cursor: blinking, shape and
+  color.  Basically this gives us three different dimensions of
+  information available to us.
+
+** Dimension 1: File status
+   - light blue :: no file or process attached
+   - dark blue :: process attached
+   - yellow :: read only
+   - black :: file visited
+
+** Dimention 2: Funky modes
+   - overwrite :: hollow box
+   - 'normal' :: line
+
+** Dimension 3: ??? - not assigned yet (height/width of line cursors)
+
+** Enchancements
+
+*** TODO fix it so the colors and type can be set by the user
+*** TODO see if cursor-in-non-selected-windows needs updating. 
+
+** The code
+
+#+name: cursor-status
+#+begin_src emacs-lisp
+  ;; Change cursor color according to mode
+  (defvar emagician-set-cursor-color-color "")
+  (defvar emagician-set-cursor-color-type nil)
+  (defvar emagician-set-cursor-color-buffer "")
+  
+  (defun emagician-set-cursor-color-according-to-mode ()
+    "change cursor color according to some minor modes."
+    ;; set-cursor-color is somewhat costly, so we only call it when needed:
+    (let ((color (cond
+                  ((comint-check-proc (current-buffer)) "blue")
+                  (buffer-read-only "white")
+                  ((not (equal buffer-file-name nil)) "black")
+                  (t "cyan")))
+          (type (cond
+                 (overwrite-mode 'hollow)
+                 (t 'box))))
+      (unless (and
+               (string= color emagician-set-cursor-color-color)
+               (string= type emagician-set-cursor-color-type)
+               (string= (buffer-name) emagician-set-cursor-color-buffer))
+        (set-cursor-color (setq emagician-set-cursor-color-color color))
+        (setq cursor-type (setq emagician-set-cursor-color-type type))
+        (setq emagician-set-cursor-color-buffer (buffer-name)))))
+  
+  (add-hook 'post-command-hook 'emagician-set-cursor-color-according-to-mode)
+#+end_src
+
+** TODO set up powerline
+** TODO set up nyan mode

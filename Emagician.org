@@ -64,11 +64,11 @@
             ("marmalade"   . "http://marmalade-repo.org/packages/")
 #+end_example
 
-* Base initalization function set
+** Base initalization function set
 
-  There are a number of baseline things we need to do, like custom loaders, macros for setting up hooks, etc. etc.
+   There are a number of baseline things we need to do, like custom loaders, macros for setting up hooks, etc. etc.
 
-** Starter Kit Load
+*** Starter Kit Load
 
    Originally from Eschulte.  This function takes a <foo>.org file,
    and load it.  It can also be given the argument of a sub tree, which 
@@ -130,8 +130,8 @@
            file))))
 #+end_src
 
-** Load User/System Specific Files
-**** System/User specific customizations
+*** Load User/System Specific Files
+***** System/User specific customizations
 You can keep system- or user-specific customizations here in either
 raw emacs-lisp files or as embedded elisp in org-mode files (as done
 in this document).
@@ -183,8 +183,21 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 #+end_src
 
 
-** Settings from M-x customize
+*** Settings from M-x customize
 #+name: m-x-customize-customizations
 #+begin_src emacs-lisp
   (load custom-file 'noerror)
 #+end_src
+
+* Starter Kit Core
+
+As with teh other starter kit, there are some fundamentals that need
+to be delt with. 
+
+** Basic hook funcitons
+#+begin_src
+(defmacro turn-on-hook (mode) 
+  '())
+#+end_src
+
+** Basic Coding Hooks
