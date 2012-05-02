@@ -18,6 +18,10 @@
   (transient-mark-mode -1)
 #+end_src
 
+* Killing and yanking
+
+** Swap region with kill ring
+** Insert-yank-as-rectangle
 
 
   

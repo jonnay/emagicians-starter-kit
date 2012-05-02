@@ -1,0 +1,6 @@
+* This is *my* emacs
+* There are many alike it.
+* But this one is mine.
+
+  Use this file to Load up relevant sections of emagicians starter
+  kit.
