@@ -1,5 +1,54 @@
 * General lisp setup
 
 ** Paredit
-** Show params 
-   (might need extra settings, should be in most other modes)
+   
+   If you aren't using paredit, do whatever it takes to learnhow to
+   use paredit. 
+
+   Start here: http://emacswiki.org/emacs/ParEdit
+
+#+begin_src emacs-lisp
+(defun turn-on-paredit ()
+  (paredit-mode +1))
+#+end_src
+
+
+** TODO Show params 
+   
+* Elisp
+
+  Elisp is by far the most important Lisp setup.  This needs to be
+  done well, and done right.  If you have *any* suggestions on how to
+  make the elisp setup even better, let me know!
+
+** Formatting
+
+#+begin_src
+(require 'elisp-format)   
+#+end_src
+
+**  Set up hooks 
+
+#+begin_src emacs-lisp
+(add-hook 'emacs-lisp-mode-hook 'starter-kit-remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
+#+end_src
+
+** Integration with emacs itself
+
+#+begin_src emacs-lisp
+(defun starter-kit-remove-elc-on-save ()
+  "If you're saving an elisp file, likely the .elc is no longer valid."
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))))
+#+end_src
+
+* Common Lisp
+
+* Scheme
+
+* Clojure

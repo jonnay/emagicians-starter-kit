@@ -11,7 +11,16 @@ apropos? (~C-h a~)
 (scroll-bar-bmode -1)
 #+end_src
 
-* Turn on some extra information
+* Use Volatile highlights
+
+#+name: volatile highlights
+#+begin_src 
+    (require 'volatile-highlights)
+    (volatile-highlights-mode t)
+#+end_src
+
+
+* Turn on some extra information through the cursor
 
   There are a few ways to change the cursor: blinking, shape and
   color.  Basically this gives us three different dimensions of
