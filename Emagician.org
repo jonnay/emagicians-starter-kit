@@ -81,7 +81,7 @@
 #+name: starter-kit-load
 #+begin_src emacs-lisp
     (defun emagician-starter-kit-load (file &optional header-or-tag)
-      "Load configuration from other starter-kit-*.org files.
+      "Load configuration from other .org files.
     If the optional argument is the id of a subtree then only
     configuration from within that subtree will be loaded.  If it is
     not an id then it will be interpreted as a tag, and only subtrees
@@ -129,7 +129,7 @@
                partial-file)
            file))))
 #+end_src
-
+**** TODO fix documentation 
 *** Load User/System Specific Files
 ***** System/User specific customizations
 You can keep system- or user-specific customizations here in either

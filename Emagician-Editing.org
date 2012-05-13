@@ -1,3 +1,15 @@
+* Files
+** Loading and saving
+*** Tramp Setup
+**** TODO magic here to do The Right Thing (tm) for tramp, regardless of what OS is being used to execute it. 
+**** TODO the best mode (scp? ssh? something else?) should be set as the default.
+**** Set tramp up to play nicely with NixOS
+#+name: tramp
+#+begin_src emacs-lisp
+(require 'tramp) 
+(add-to-list 'tramp-remote-path "/var/run/current-system/sw/bin")
+#+end_src
+
 * Transient mark mode
 
   For now Transient Mark mode is just turned off.  I don't like
@@ -19,10 +31,25 @@
 #+end_src
 
 * Killing and yanking
-
 ** Swap region with kill ring
 ** Insert-yank-as-rectangle
+* Indenting and tabbing 
+  I am not going to solve this for everyone and try to be all things for all peope.  In fact I will bet money that my style of indentation kinda sucks, and look to the emacs community to help me to stop sucking.
+#+begin_src emacs-lisp
+(set-default 'tab-width 4)
+#+end_src
+** Change Behavior of the home key
+   Home should jump between the level of indendation and the first line 
+#+begin_src emacs-lisp
+(global-set-key [home] 'beginning-or-indentation)
+(substitute-key-definition 'beginning-of-line 'beginning-or-indentation global-map)
+#+end_src
 
+#+begin_src emacs-lisp
+(defadvice yank (after indent-region activate)
+  (if (member major-mode programming-modes)
+	  (indent-region (region-beginning) (region-end) nil)))
+#+end_src
 
   
 

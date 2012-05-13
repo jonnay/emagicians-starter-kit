@@ -8,7 +8,7 @@ apropos? (~C-h a~)
 #+begin_src emacs-lisp
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-bmode -1)
+(scroll-bar-mode -1)
 #+end_src
 
 * Turn on some extra information
@@ -67,3 +67,8 @@ apropos? (~C-h a~)
 
 ** TODO set up powerline
 ** TODO set up nyan mode
+
+* Better mode line
+** TODO Start with some hawt Nyan action
+** TODO Then the funky image style mode lines that look awesome
+** TODO fix the font to be non-monospace. 

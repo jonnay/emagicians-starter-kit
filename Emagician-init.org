@@ -47,3 +47,12 @@
             ("original"    . "http://tromey.com/elpa/")
             ("marmalade"   . "http://marmalade-repo.org/packages/")
 #+end_example
+
+** Misc Commands
+   Misc commands of Drew Adams. A Quite prolific writer of awesome elisp.
+
+   Provies some very basic, but very cool commands.  Use the source!
+
+#+begin_src
+(require 'misc-cmds)
+#+end_src

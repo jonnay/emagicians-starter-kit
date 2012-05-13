@@ -1,5 +1,4 @@
 * Shell Mode
-
 ** Ansi Color On shells
   Ansi color in shell mode is goood.
 
@@ -17,4 +16,5 @@
 #+end_src
 
 * Magit Mode
+
 
