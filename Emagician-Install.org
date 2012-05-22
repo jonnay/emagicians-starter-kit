@@ -75,9 +75,10 @@ Let there be light
 #+name: set-this-dir-as-var
 #+begin_src emacs-lisp
 (defvar emagician-dir
-        "/home/jonny/emagicians-starter-kit/"
+        "/Users/jonathana/projects/emagicians-starter-kit/"
         "Automagically generated variable where the emagicians kit is located")
 #+end_src
+
 
 *** Step Two: Making it go.
     Then this next code block creates the init.el file by running the

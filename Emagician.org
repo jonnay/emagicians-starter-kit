@@ -193,7 +193,6 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
   (load custom-file 'noerror)
 #+end_src
 
-
 * Starter Kit Core
 
 As with the other starter kit, there are some fundamentals that need
@@ -220,6 +219,24 @@ to be delt with.
                              (add-hook elisp-mode paredit-mode)))))
     
 #+end_src
+
+* Development Core
+  
+  Ok, if you're an emagician, you're a developer of some kind or
+  another.  You may "just" be working in eslip, or you might be a
+  ployglot proficient in Low-level C, Scheme, Ruby and Rails, and
+  Java. Either way, you're a dev.
+
+** CEDET
+
+   I don't have enough mojo to work with cedet yet.  Working on it.  
+
+#+name: load-cedet
+#+begin_src emacs-lisp
+
+#+end_src
+
+
 
 ** Basic Coding Hooks
 *** TODO needs to be snarfed and barfed from the emacs starter kit

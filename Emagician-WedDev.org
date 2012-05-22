@@ -1,0 +1,42 @@
+* Markup
+** TODO HTML - nxml and nxhtml
+   nXhtml is the best in working with HTML.  
+
+#+begin_src emacs-lisp
+(load (concat emagician-dir "dist/nxhtml/autostart.el"))
+#+end_src 
+
+*** TODO Set up as default mode
+
+	Not just html, but also for various templates, (.tpl.php etc.)
+
+	- .tpl.php
+	- .ctp
+	
+**** TODO Add rails, grails templates.
+**** TODO add other potential template extensions  
+*** Set some better defaults for nxhtml mode
+
+#+begin_src emacs-lisp
+(setq nxhtml-default-encoding 'utf-8)
+(setq nxhtml-skip-welcome 't)
+#+end_src
+
+*** Set up completion style
+#+begin_src emacs-lisp
+(setq popcmp-completion-style 'emacs-default)
+#+end_src
+
+*** TODO Make it html5 compatible
+
+** TODO CSS
+* Web Centeric Languages
+*** TODO PHP
+**** TODO Drupal
+*** TODO Javascript
+**** TODO http://www.randomsample.de/dru5/node/147
+**** TODO Slime JS
+*** TODO JSP
+*** TODO ASP
+	
+	

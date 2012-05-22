@@ -10,4 +10,5 @@
 (emagician-starter-kit-load "Emagician-Helpers")
 (emagician-starter-kit-load "Emagician-Interface")
 (emagician-starter-kit-load "Emagician-Lisp")
+(emagician-starter-kit-load "Emagician-Webdev")
 #end_src

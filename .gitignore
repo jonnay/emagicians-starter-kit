@@ -1,6 +1,5 @@
 jonnay/private.org
 /init.el
-dist/*
 elpa/*
 src/*
 /custom.el
@@ -8,3 +7,5 @@ src/*
 /Emagician-Helpers.el
 /Emagician-Interface.el
 /Emagician-Lisp.el
+/emacs24-starter-kit/
+/starter-kit.org
