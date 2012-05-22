@@ -1,0 +1,9 @@
+* Org Developers Journal
+** TODO write introduction
+   - a journal in science helps the scientist
+   - we're fucking comptuer scientists
+** TODO Write some simple agenda style views
+** TODO retrieve list of all available tags in the journal
+** TODO custom agenda queries for the month, day and year
+** TODO figure out some kind of mechanism to keep log book on top of mind
+

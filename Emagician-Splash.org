@@ -1,0 +1,15 @@
+* Better awesomer splash page
+
+
+
+** Show on startup:
+   - [ ] Sigil
+   - [ ] Diary
+   - [ ] Date/time
+   - [ ] Shortcut list
+     - [ ] Open up Magit status buffers
+     - [ ] Dired to a dir
+     - [ ] Agenda
+** Message info
+   - After load, store messages sowmerhew
+   - diff them with the existing messages and show diffs to user

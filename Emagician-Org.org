@@ -1,0 +1,25 @@
+* Org Mode Setup
+
+** Org Babel
+
+   Some no-brainer org babel setup.
+
+*** Some standard langauges that should come out of the box
+#+begin_src emacs-lisp
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (emacs-lisp . t)
+   (calc . t)
+   ))
+#+end_src
+
+*** Don't confirm on non-destructive languages
+#+begin_src emacs-lisp
+ (defun my-org-confirm-babel-evaluate (lang body)
+            (not (or (string= lang "ditaa")
+                     (string= lang "calc")))
+          (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+#+end_src
+

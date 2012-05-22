@@ -14,11 +14,10 @@ apropos? (~C-h a~)
 * Use Volatile highlights
 
 #+name: volatile highlights
-#+begin_src 
+#+begin_src emacs-lisp
     (require 'volatile-highlights)
     (volatile-highlights-mode t)
 #+end_src
-
 
 * Turn on some extra information through the cursor
 

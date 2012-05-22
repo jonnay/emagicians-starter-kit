@@ -3,3 +3,8 @@ jonnay/private.org
 dist/*
 elpa/*
 src/*
+/custom.el
+/Emagician-Editing.el
+/Emagician-Helpers.el
+/Emagician-Interface.el
+/Emagician-Lisp.el

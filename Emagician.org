@@ -66,6 +66,8 @@
             ("marmalade"   . "http://marmalade-repo.org/packages/")
 #+end_example
 
+** Loading stuff from ELPA automagickally
+   http://kieranhealy.org/esk/starter-kit-elpa.html
 ** Base initalization function set
 
    There are a number of baseline things we need to do, like custom loaders, macros for setting up hooks, etc. etc.
@@ -194,10 +196,12 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 
 * Starter Kit Core
 
-As with teh other starter kit, there are some fundamentals that need
+As with the other starter kit, there are some fundamentals that need
 to be delt with. 
 
 ** Basic hook funcitons
+   This macro will help build your turn-on-minor-mode functions that are so helpful, and automagickally add them to a major mode.  It won't try to re-define the turn-on mode if it is already defined.
+
 #+begin_src emacs-lisp
       (defmacro emagician-minor-in-major-mode (major-mode minor-mode)
         (let ((turn-on-symbol (intern (concat "turn-on-" (symbol-name minor-mode)))))
@@ -218,3 +222,4 @@ to be delt with.
 #+end_src
 
 ** Basic Coding Hooks
+*** TODO needs to be snarfed and barfed from the emacs starter kit
