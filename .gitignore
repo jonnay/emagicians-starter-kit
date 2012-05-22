@@ -1,5 +1,6 @@
 jonnay/private.org
 /init.el
-dist/*
 elpa/*
 src/*
+/emacs24-starter-kit/
+/starter-kit.org

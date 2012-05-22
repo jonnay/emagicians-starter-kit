@@ -4,3 +4,9 @@
 
   Use this file to Load up relevant sections of emagicians starter
   kit.
+
+** Stuff I need:
+
+#+begin_src
+(emagician-starter-kit-load "Emagician-Jonnay")
+#+end_src
