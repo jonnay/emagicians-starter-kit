@@ -78,5 +78,22 @@ apropos? (~C-h a~)
 
 * Better mode line
 ** TODO Start with some hawt Nyan action
-** TODO Then the funky image style mode lines that look awesome
+*** TODO Test Recipe
+#+begin_src emacs-lisp :tangle no 
+    (when nil
+      (let* ((melpa-dir (concat (file-name-directory (buffer-file-name))
+                                "melpa/"))
+             (package-build-recipes-dir (concat melpa-dir "recipes"))
+             (package-build-working-dir (concat melpa-dir "working"))
+             (package-build-archive-dir (concat melpa-dir "packages")))
+        (setq package-build-alist (assq-delete-all 'nyan-mode package-build-alist))
+        (add-to-list 'load-path (concat (file-name-directory (buffer-file-name)) "melpa"))
+        (require 'package-build)
+        (package-build-initialize)
+        (package-build-archive 'nyan-mode)
+        (package-install-file (concat package-build-archive-dir "/nyan-mode-20111230.tar")))
+      ; Blank line for easier execution
+      )    
+#+end_src
+** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
 ** TODO fix the font to be non-monospace. 

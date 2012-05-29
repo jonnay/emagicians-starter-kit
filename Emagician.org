@@ -46,13 +46,28 @@
 ** ELPA 
    Throwing our lot in with MELPA at this point. 
 #+begin_src emacs-lisp
-    (setq package-user-dir (concat emagician-dir "elpa"))
+  (setq package-user-dir (concat emagician-dir "elpa"))
+  
+  (setq package-archives
+        '(("gnu"         . "http://elpa.gnu.org/packages/")
+          ("melpa"       . "http://melpa.milkbox.net/packages/")))
+  
+  (package-initialize)
+  
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+end_src
 
-    (setq package-archives
-          '(("gnu"         . "http://elpa.gnu.org/packages/")
-            ("melpa"       . "http://melpa.milkbox.net/packages/")))
-    
-    (package-initialize)
+*** TODO Sort out this micro-mess
+**** TODO Find a better idiom for expressing emacs-lisp code wihtout initializing it
+**** TODO starter-kit-packages needs to be quazi-dynamically generated. 
+	 - emagician-invoke-package 
+	   - same thing as code below, but not dependent on a sperate list
+#+begin_src emacs-lisp
+  (when nil 
+    (dolist (package starter-kit-packages)
+      (unless (package-installed-p package)
+        (package-install package))))
 #+end_src
 
 #+results:
@@ -66,8 +81,12 @@
             ("marmalade"   . "http://marmalade-repo.org/packages/")
 #+end_example
 
-** Loading stuff from ELPA automagickally
-   http://kieranhealy.org/esk/starter-kit-elpa.html
+*** TODO Loading stuff from ELPA automagickally
+    http://kieranhealy.org/esk/starter-kit-elpa.html
+** Themes
+#+begin_src emacs_lisp
+(add-to-list 'custom-theme-load-path (concat emagician-dir "themes"))
+#+end_src 
 ** Base initalization function set
 
    There are a number of baseline things we need to do, like custom loaders, macros for setting up hooks, etc. etc.
@@ -240,3 +259,8 @@ to be delt with.
 
 ** Basic Coding Hooks
 *** TODO needs to be snarfed and barfed from the emacs starter kit
+* Load Users Cusotmizations
+** System Type Initialization
+** Login name Initialization
+** Machine Name Initialization
+** Person Initialization

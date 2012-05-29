@@ -1,0 +1,59 @@
+* Exporting as a website
+
+** TODO Save website to a seperate directory
+** TODO do some magic to auto-commit to the git branch
+   http://help.github.com/pages/
+   http://ryanfitzer.org/2011/11/easy-syncing-of-github-pages/
+** TODO Set up valid stylesheet for a default
+
+** TODO Test this code
+#+begin_src emacs-lisp
+  ; Inline images in HTML instead of producting links to the image
+  (setq org-export-html-inline-images t)
+  ; Do not use sub or superscripts - I currently don't need this functionality in my documents
+  (setq org-export-with-sub-superscripts nil)
+  ; Use org.css from the norang website for export document stylesheets
+
+  (setq org-export-html-style-include-default nil)
+  ; Do not generate internal css formatting for HTML exports
+  (setq org-export-htmlize-output-type (quote css))
+  ; Export with LaTeX fragments
+  (setq org-export-with-LaTeX-fragments t)
+  
+  (setq emagician-org/publish-project-alist
+        ;
+        ; http://www.norang.ca/  (norang website)
+        ; norang-org are the org-files that generate the content
+        ; norang-extra are images and css files that need to be included
+        ; norang is the top-level project that gets published
+        (quote (("emagician-org"
+                 :base-directory "~/git/www.norang.ca"
+                 :publishing-directory "/ssh:www-data@www:~/www.norang.ca/htdocs"
+                 :recursive t
+                 :table-of-contents nil
+                 :base-extension "org"
+                 :publishing-function org-publish-org-to-html
+                 :style-include-default nil
+                 :section-numbers nil
+                 :table-of-contents t
+                 :style "<link rel=\"stylesheet\" href=\"emagician.css\" type=\"text/css\" />"
+                 :author-info t
+                 :creator-info t)
+                ("emagician-extra"
+                 :base-directory "~/git/www.norang.ca/"
+                 :publishing-directory "/ssh:www-data@www:~/www.norang.ca/htdocs"
+                 :base-extension "css\\|pdf\\|png\\|jpg\\|gif"
+                 :publishing-function org-publish-attachment
+                 :recursive t
+                 :author nil)
+                ("emagician"
+                 :components ("emagician-org" "emagician-extra")))))
+  
+  (defun emagician-meta/save-then-publish ()
+    (interactive)
+    (save-buffer)
+    (org-save-all-org-buffers)
+    (org-publish-current-project))
+  
+  
+#+end_src
