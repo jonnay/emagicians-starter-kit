@@ -58,20 +58,6 @@
     (package-refresh-contents))
 #+end_src
 
-*** TODO Sort out this micro-mess
-**** TODO Find a better idiom for expressing emacs-lisp code wihtout initializing it
-**** TODO starter-kit-packages needs to be quazi-dynamically generated. 
-	 - emagician-invoke-package 
-	   - same thing as code below, but not dependent on a sperate list
-#+begin_src emacs-lisp
-  (when nil 
-    (dolist (package starter-kit-packages)
-      (unless (package-installed-p package)
-        (package-install package))))
-#+end_src
-
-#+results:
-: t
 
    For sake of archival purposes, here are 2 other potential ELPA
    archives.
@@ -239,12 +225,47 @@ to be delt with.
     
 #+end_src
 
+
+** DONE Required Package handling
+
+   Instead of having to front-load packages like paredit, slime, etc.   why can't they be auto-installed as needed?  That's what this does.
+
+   This is so that required packages can be properly loaclized.
+#+begin_src emacs-lisp
+  (defun emagician-expect-package (package)
+    "If the named PACKAGE isn't currently installed, install it"
+    (unless (package-installed-p package)
+      (package-install package)))  
+#+end_src
+
+*** TODO make it check an internet connection before installing
+
 * Development Core
   
   Ok, if you're an emagician, you're a developer of some kind or
   another.  You may "just" be working in eslip, or you might be a
   ployglot proficient in Low-level C, Scheme, Ruby and Rails, and
   Java. Either way, you're a dev.
+
+** TODO Programming modes
+
+#+begin_src emacs-lisp
+  (defvar programming-modes '() 
+    "A list of modes that are development related, and should all behave the same.")
+  
+  (defvar programming-mode-hooks '() 
+    "A list of hooks to run in every programming mode")
+  
+  (defun run-programming-mode-hooks ()
+    "helper function to execute programming mode hooks."
+    (run-hooks 'programming-mode-hooks))
+  
+  
+#+end_src
+
+*** TODO add to "programming-modes" list.  
+*** TODO Fix definition in the yank under editing
+*** TODO add standard hooks into it 
 
 ** CEDET
 
@@ -256,11 +277,21 @@ to be delt with.
 #+end_src
 
 
-
 ** Basic Coding Hooks
 *** TODO needs to be snarfed and barfed from the emacs starter kit
+** Flymake Setup
+#+begin-src emacs-lisp
+(emagician-expect-package 'flymake-cursor)
+#+end_src
 * Load Users Cusotmizations
+** TODO fix this teporary shit here
+#+begin_src emacs-lisp
+(emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay.org"))
+#+end_src
 ** System Type Initialization
+
 ** Login name Initialization
+
 ** Machine Name Initialization
+
 ** Person Initialization

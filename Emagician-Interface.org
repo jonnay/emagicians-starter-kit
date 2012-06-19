@@ -1,4 +1,4 @@
-* Turn off goofy stuff
+* Turn off goofy stuff like menu bars
 
 Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
 but wouldn't an examination of your mode make more sense? (~C-h m~) Or
@@ -11,14 +11,24 @@ apropos? (~C-h a~)
 (scroll-bar-mode -1)
 #+end_src
 
+* Re-bind some keys to more sensable defaults
+** Yes or no
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p) 
+#+end_src
+** Searching
+isearch sould use regexp by default
+#+begin-src emacs-lisp
+(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
+#+end_src
 * Use Volatile highlights
 
 #+name: volatile highlights
-#+begin_src emacs-lisp
-    (require 'volatile-highlights)
+#+begin_src emacs-foo-lisp
+    (emagician-expect-package 'volatile-highlights)
     (volatile-highlights-mode t)
 #+end_src
-
 * Turn on some extra information through the cursor
 
   There are a few ways to change the cursor: blinking, shape and
@@ -77,23 +87,30 @@ apropos? (~C-h a~)
 ** TODO set up nyan mode
 
 * Better mode line
+** Turn on column and line numbers
+#+begin_src emacs-lisp
+(column-number-mode 1)
+(line-number-mode 1)
+#+end_src
 ** TODO Start with some hawt Nyan action
 *** TODO Test Recipe
 #+begin_src emacs-lisp :tangle no 
-    (when nil
-      (let* ((melpa-dir (concat (file-name-directory (buffer-file-name))
-                                "melpa/"))
-             (package-build-recipes-dir (concat melpa-dir "recipes"))
-             (package-build-working-dir (concat melpa-dir "working"))
-             (package-build-archive-dir (concat melpa-dir "packages")))
-        (setq package-build-alist (assq-delete-all 'nyan-mode package-build-alist))
-        (add-to-list 'load-path (concat (file-name-directory (buffer-file-name)) "melpa"))
-        (require 'package-build)
-        (package-build-initialize)
-        (package-build-archive 'nyan-mode)
-        (package-install-file (concat package-build-archive-dir "/nyan-mode-20111230.tar")))
-      ; Blank line for easier execution
-      )    
+  (when nil
+    (progn
+    (add-to-list 'load-path (concat (file-name-directory (buffer-file-name)) "melpa"))
+    (let* ((melpa-dir (concat (file-name-directory (buffer-file-name))
+                              "melpa/"))
+           (package-build-recipes-dir (concat melpa-dir "recipes"))
+           (package-build-working-dir (concat melpa-dir "working"))
+           (package-build-archive-dir (concat melpa-dir "packages")))
+       (require 'package-build)
+      (setq package-build-alist (assq-delete-all 'nyan-mode package-build-alist))
+      (package-build-initialize)
+      (package-build-archive 'nyan-mode)
+  ))
+    ; Blank line for easier execution
+    )    
+  
 #+end_src
 ** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
 ** TODO fix the font to be non-monospace. 

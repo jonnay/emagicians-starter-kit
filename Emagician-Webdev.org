@@ -1,0 +1,16 @@
+* Javascript
+** JSLint
+#+begin_src emacs-lisp
+  (emagician-expect-package 'flymake-jslint)
+  (add-hook 'js-mode-hook 'flymake-jslint-load)
+  
+  (setq flymake-jslint-command "/usr/local/bin/jsl") 
+#+end_src
+*** TODO move the flymake-jslint-command to system type dir 
+** TODO Swank JS
+
+* PHP
+** TODO PHP+ mode
+** TODO Drupal
+** TODO Cake
+

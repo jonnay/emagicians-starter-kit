@@ -4,11 +4,10 @@
 
   Use a file like this to Load up relevant sections of emagicians starter
   kit. 
-
-#+begin_src emacs_lisp
+#+name: startup 
+#+begin_src emacs-lisp
 (emagician-starter-kit-load "Emagician-Editing")
 (emagician-starter-kit-load "Emagician-Helpers")
 (emagician-starter-kit-load "Emagician-Interface")
 (emagician-starter-kit-load "Emagician-Lisp")
-(emagician-starter-kit-load "Emagician-Webdev")
 #end_src

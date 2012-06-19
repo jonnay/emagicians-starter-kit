@@ -33,6 +33,13 @@
 * Killing and yanking
 ** Swap region with kill ring
 ** Insert-yank-as-rectangle
+** when yanking, indent according to the mode
+#+begin_src emacs-lisp
+(defadvice yank (after indent-region activate)
+  (if (member major-mode programming-modes)
+	  (indent-region (region-beginning) (region-end) nil)))
+#+end_src
+
 * Indenting and tabbing 
   I am not going to solve this for everyone and try to be all things for all peope.  In fact I will bet money that my style of indentation kinda sucks, and look to the emacs community to help me to stop sucking.
 #+begin_src emacs-lisp
@@ -40,16 +47,33 @@
 #+end_src
 ** Change Behavior of the home key
    Home should jump between the level of indendation and the first line 
+
+*** Shamelessly stolen from Drew Adams for now
 #+begin_src emacs-lisp
-(global-set-key [home] 'beginning-or-indentation)
+(defun emagician-beginning-or-indentation (&optional n)
+  "Move cursor to beginning of this line or to its indentation.
+If at indentation position of this line, move to beginning of line.
+If at beginning of line, move to beginning of previous line.
+Else, move to indentation position of this line.
+
+With arg N, move backward to the beginning of the Nth previous line.
+Interactively, N is the prefix arg."
+  (interactive "P")
+  (cond ((or (bolp) n)
+         (forward-line (- (prefix-numeric-value n))))
+        ((save-excursion (skip-chars-backward " \t") (bolp)) ; At indentation.
+         (forward-line 0))
+        (t (back-to-indentation))))
+#+end_src
+*** Do key map 
+#+begin_src emacs-lisp
+(global-set-key [home] 'emagician-beginning-or-indentation)
 (substitute-key-definition 'beginning-of-line 'beginning-or-indentation global-map)
+
+
 #+end_src
 
+** Make sure end key always goes to end of hte line
 #+begin_src emacs-lisp
-(defadvice yank (after indent-region activate)
-  (if (member major-mode programming-modes)
-	  (indent-region (region-beginning) (region-end) nil)))
+(global-set-key [end] 'end-of-line)
 #+end_src
-
-  
-

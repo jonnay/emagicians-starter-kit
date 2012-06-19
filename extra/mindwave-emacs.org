@@ -1,0 +1,322 @@
+* Interface Mindwave with emacs
+
+#+begin_src emacs-lisp :tangle yes
+;;; mindwave-emacs.el --- Neurosky mindwave support
+
+;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+#+end_src
+
+mindwave-emacs is a chunk of elisp code that uses the ThinkGearConnector program to pass off mindwave data directly to emacs.
+
+** Usage
+
+*** Data Gathering Example
+
+When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
+
+I wanted something simple that would provide that for me.
+
+This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
+
+Note, that the code assumes that you want everything put in a buffer called ~Brain.org~.
+
+#+begin_src emacs-lisp :tangle gather-into-org.el
+  (defvar dg-mindwave/org-buffer "Brain.org")
+  
+  (defvar dg-mindwave/mark nil)
+  
+  (defun dg-mindwave/if-assoc (key lst)
+    (if (assoc key lst)
+        (number-to-string (cdr (assoc key lst)))
+        " "))
+  
+  (defun dg-mindwave/get-in (lst key keylist)
+    (let ((innerList (assoc key lst)))
+      (mapconcat '(lambda (el)
+                    (if (and innerList 
+                             (assoc el innerList))
+                         (number-to-string (cdr (assoc el innerList)))
+                      "")) 
+                 keylist
+                 " | ")))
+  
+  (defun dg-mindwave/generic-mark ()
+    "Used to generically mark a section of the table"
+    (interactive)
+    (dg-mindwave/mark "mark"))
+  
+  (defun dg-mindwave/mark (mark)
+    "Set a mark on the section of a table"
+    (setq dg-mindwave/mark mark))
+  
+  (defun dg-mindwave/collect-and-write (output)
+    "Hook function to gather and write data to the table."
+        (let* ((out (json-read-from-string output))
+               (string-write (concat "| " 
+                            (format-time-string "%s")
+                            " | "
+                            (dg-mindwave/if-assoc 'poorSignalLevel out) 
+                            " | "
+                            (dg-mindwave/get-in out 'eegPower '(highGamma lowGamma highBeta lowBeta highAlpha lowAlpha theta delta))
+                            " | "
+                            (dg-mindwave/get-in out 'eSense '(attention meditation))
+                            " | "
+                            (when dg-mindwave/mark
+                              (let ((m dg-mindwave/mark))
+                                (setq dg-mindwave/mark)
+                                m))
+                            " | "                          
+                            "\n")))
+          (with-current-buffer dg-mindwave/org-buffer 
+            (goto-char (point-max))
+            (insert string-write))))
+  
+  (defun dg-mindwave/start-recording-session (name)
+    "Sets up an entirely new mindwave session for recording." 
+    (interactive "SMindwave Session Name: ")
+    (save-window-excursion
+      (save-excursion
+        (set-buffer dg-mindwave/org-buffer)
+        (end-of-buffer)
+        (insert "\n\n")
+        (insert "*** ")
+        (insert (current-time-string))
+        (insert "  ")
+        (insert name)
+        (insert "\n")
+        (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
+        (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
+        (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")))
+    (mindwave-get-buffer)
+    (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
+      (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
+  
+  (defun dg-mindwave/stop-recording-session ()
+    "Stops a recording session"
+    (interactive)
+    (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write))
+   
+  (defun dg-mindwave/create-input-buffer ()
+    "Create an input buffer so that marks can be handled"
+    (interactive)
+    (pop-to-buffer (get-buffer-create "*mindwave-input*") )
+    (local-set-key " " 'dg-mindwave/generic-mark)
+    (local-set-key "a" '(lambda () (interactive) (dg-mindwave/mark "a")))
+    (local-set-key "b" '(lambda () (interactive) (dg-mindwave/mark "b")))
+    (local-set-key "c" '(lambda () (interactive) (dg-mindwave/mark "c")))
+    (local-set-key "d" '(lambda () (interactive) (dg-mindwave/mark "d")))
+    (local-set-key "e" '(lambda () (interactive) (dg-mindwave/mark "e")))
+    (local-set-key "f" '(lambda () (interactive) (dg-mindwave/mark "f")))
+    (local-set-key "g" '(lambda () (interactive) (dg-mindwave/mark "g")))
+    (local-set-key "h" '(lambda () (interactive) (dg-mindwave/mark "h")))
+    (local-set-key "i" '(lambda () (interactive) (dg-mindwave/mark "i")))
+    (local-set-key "j" '(lambda () (interactive) (dg-mindwave/mark "j")))
+    (local-set-key "k" '(lambda () (interactive) (dg-mindwave/mark "k")))
+    (local-set-key "l" '(lambda () (interactive) (dg-mindwave/mark "l")))
+    (local-set-key "m" '(lambda () (interactive) (dg-mindwave/mark "m")))
+    (local-set-key "n" '(lambda () (interactive) (dg-mindwave/mark "n")))
+    (local-set-key "o" '(lambda () (interactive) (dg-mindwave/mark "o")))
+    (local-set-key "p" '(lambda () (interactive) (dg-mindwave/mark "p")))
+    (local-set-key "q" '(lambda () (interactive) (dg-mindwave/mark "q")))
+    (local-set-key "r" '(lambda () (interactive) (dg-mindwave/mark "r")))
+    (local-set-key "s" '(lambda () (interactive) (dg-mindwave/mark "s")))
+    (local-set-key "t" '(lambda () (interactive) (dg-mindwave/mark "t")))
+    (local-set-key "u" '(lambda () (interactive) (dg-mindwave/mark "u")))
+    (local-set-key "v" '(lambda () (interactive) (dg-mindwave/mark "v")))
+    (local-set-key "w" '(lambda () (interactive) (dg-mindwave/mark "w")))
+    (local-set-key "x" '(lambda () (interactive) (dg-mindwave/mark "x")))
+    (local-set-key "y" '(lambda () (interactive) (dg-mindwave/mark "y")))
+    (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))
+  
+  
+  
+  (dg-mindwave/collect-and-write "{\"eSense\":{\"attention\":40,\"meditation\":54},\"eegPower\":{\"delta\":1101897,\"theta\":524907,\"lowAlpha\":102269,\"highAlpha\":84392,\"lowBeta\":71996,\"highBeta\":23369,\"lowGamma\":23140,\"highGamma\":6903},\"poorSignalLevel\":0}")
+  
+#+end_src
+
+
+*** Basic testing code
+
+This is the test code that I have been using, just to make sure the code below works.
+
+#+begin_src emacs-lisp :tangle no
+(mindwave-get-buffer)
+(mindwave-get-raw nil)
+(mindwave-get-raw t)
+
+(setq mindwave-hook nil)
+(setq mindwave-raw-hook '())
+(setq mindwave-blink-hook '())
+
+(run-hook-with-args 'mindwave-blink-hook "foo")
+
+(add-hook 'mindwave-hook 'mindwave-debug-standard)
+(add-hook 'mindwave-raw-hook 'mindwave-debug-raw)
+(add-hook 'mindwave-blink-hook 'mindwave-debug-blink)
+
+(defun mindwave-debug-standard  (o) (message "Standard output: %S" o))
+(defun mindwave-debug-raw (o) (message "Raw: %S" o))
+(defun mindwave-debug-blink (o) (message "Blink: %S" o))
+#+end_src
+
+(current-time)
+
+* Basic Houst keeping
+
+
+#+begin_src emacs-lisp :tangle yes
+(require 'json)
+#+end_src
+
+** Set up the client
+*** Basic constants
+#+begin_src emacs-lisp :tangle yes
+  (defvar mindwave-host "localhost")
+  (defvar mindwave-port 13854)
+  
+  (defvar mindwave-appName "mindwave-emacs")
+  (defvar mindwave-appKey (sha1 mindwave-appName))
+#+end_src
+
+*** Connection
+**** Connection variables
+
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-buffer nil "Variable to store the buffer connected to the process")
+(defvar mindwave-process nil "Process that mindwave is connected")
+#+end_src
+
+**** Return lowlevel connection variables 
+According to the documentation of make-comint, if a running process is on the buffer, it is not restarted.  So isntead of trying to maintain state, lets just return the existing process that way.
+ 
+#+begin_src emacs-lisp :tangle yes
+  (defun mindwave-get-buffer ()
+    "Returns the buffer for the mindwave connection"
+    (if (and mindwave-process (process-live-p mindwave-process))
+        mindwave-process
+        (progn
+    (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
+    (setq mindwave-process (get-buffer-process mindwave-buffer))
+    (save-excursion
+      (set-buffer mindwave-buffer)
+      (sleep-for 1)
+      (mindwave-authorize)
+      (sleep-for 1)
+      (mindwave-get-raw nil)
+      (sleep-for 1)
+      (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+    mindwave-buffer)))
+  
+#+end_src
+
+*** Sending Data
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-send-string (str)
+  "Helper function to send STRING directly to the mindwave.
+Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
+  (comint-send-string mindwave-process str))
+#+end_src
+*** Recieving Data
+
+Mindwave emacs sets up 3 hooks:  
+*** The hooks
+**** ~mindwave-hook~
+Called whenever there is a packet that mindwave emacs doesn't natively understand.  The standard 1-packet-per-second packet is an example of this:
+#+begin_src json
+{
+  "eSense":{
+    "attention":47,
+    "meditation":66
+  },
+  "eegPower":{
+    "delta":4479,
+    "theta":42897,
+    "lowAlpha":6952,
+    "highAlpha":21261,
+    "lowBeta":14623,
+    "highBeta":5238,
+    "lowGamma":2546,
+    "highGamma":2512
+  },
+  "poorSignalLevel":0
+}
+#+end_src
+**** ~mindwave-blink-hook~
+Called whenever the mindwave detects a blink.
+
+**** ~mindwave-raw-hook~ 
+Called for when raw packet data is recieved.  Note that many raw packets are recieved at a time, so teh hook is fed an array of strings.  Each string being the numeric raw value.
+
+Note that due to the buffering involved, I am not so sure how much value there really is in the raw eeg value.  
+
+*** Low level details for the hooks 
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-hook '() "Hooks to run when mindwave gets standard input")
+(defvar mindwave-blink-hook '() "Hooks to run when mindwave gets blink input")
+(defvar mindwave-raw-hook '() "Hooks to run when mindwave gets raw input")
+#+end_src
+
+
+#+begin_src emacs-lisp :tangle yes
+  (defun mindwave-comint-filter-function (output)
+    "A helper hook to pass off output to the apropriate hooks"
+    (let ((collected-raw '()))
+      (loop for out 
+            in (split-string output "\C-j" t)
+            do
+            (cond ((and (> (length out) 10) 
+                        (string-equal (substring out 0 10) "{\"rawEeg\":"))
+                   (setq collected-raw (cons (substring out 10 -1) collected-raw)))
+                  
+                  ((and (> (length out) 17) 
+                        (string-equal (substring out 0 17) "{\"blinkStrength\":"))
+                   (run-hook-with-args 'mindwave-blink-hook (substring out 17 -2)))
+                  
+                  ((string-equal "{" (substring out 0 1))
+                   (run-hook-with-args 'mindwave-hook out))))
+      (when (> (length collected-raw) 0)
+        (run-hook-with-args 'mindwave-raw-hook collected-raw)))
+    output)
+#+end_src
+
+** TODO Ask for authorisation
+
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-authorized-p nil "whether or not app is authorized")
+#+end_src 
+
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-authorize () 
+  "provides an autorization request to the mindwave server"
+  (mindwave-send-string (json-encode `(("appName" . ,mindwave-appName) 
+                                       ("appKey" . ,mindwave-appKey)))))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun mindwave-authorized-hook (out)
+  "test"
+  ;(message "Authorize listener: %s" out)
+)
+#+end_src
+
+** Configure
+*** Ask for raw output
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-get-raw (raw)
+  "Return raw output from mindwave.
+RAW is a boolean value as to whether or not to listen for raw values"
+  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
+                                      ("format" . "Json")))))
+#+end_src
+
+#+begin_src 
+;;; mindwave-emacs.el ends here
+#+end_src

@@ -221,6 +221,7 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
  '((sh . t)
    (emacs-lisp . t)
    (calc . t)
+   (gnuplot . t)
    ))
 #+end_src
 

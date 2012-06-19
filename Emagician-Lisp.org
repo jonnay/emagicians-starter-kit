@@ -7,13 +7,20 @@
    Start here: http://emacswiki.org/emacs/ParEdit
 
 #+begin_src emacs-lisp
+(emagician-expect-package 'paredit)
+
 (defun turn-on-paredit ()
   (paredit-mode +1))
 #+end_src
-
+   
 
 ** TODO Show params 
    
+
+** Slime
+#+begin_src emacs-lisp
+(emagician-expect-package 'slime)
+#+end_src
 * Elisp
 
   Elisp is by far the most important Lisp setup.  This needs to be
@@ -26,7 +33,7 @@
 (require 'elisp-format)   
 #+end_src
 
-**  Set up hooks 
+** Set up hooks 
 
 #+begin_src emacs-lisp
 (add-hook 'emacs-lisp-mode-hook 'starter-kit-remove-elc-on-save)
@@ -45,6 +52,9 @@
               (if (file-exists-p (concat buffer-file-name "c"))
                   (delete-file (concat buffer-file-name "c"))))))
 #+end_src
+
+** Header Magick
+*** header2.el for managing emacs wiki files
 
 * Common Lisp
 
