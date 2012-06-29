@@ -11,6 +11,10 @@
 
 * PHP
 ** TODO PHP+ mode
+#+begin_src emacs-lisp
+(emagician-expect-package 'php-mode)
+#+end_src
+
 ** TODO Drupal
 ** TODO Cake
 

@@ -45,22 +45,23 @@
 #+begin_src emacs-lisp
 (set-default 'tab-width 4)
 #+end_src
+
+#+name fix-defaults
+#+begin_src emacs-lisp
+(set-default 'c-basic-offset tab-width)
+(set-default 'cperl-indent-level tab-width)
+(set-default 'nxml-child-indent tab-width)
+#+end_src
 ** Change Behavior of the home key
    Home should jump between the level of indendation and the first line 
 
-*** Shamelessly stolen from Drew Adams for now
+*** Shamelessly hacked from Drew Adams. 
 #+begin_src emacs-lisp
 (defun emagician-beginning-or-indentation (&optional n)
-  "Move cursor to beginning of this line or to its indentation.
-If at indentation position of this line, move to beginning of line.
-If at beginning of line, move to beginning of previous line.
-Else, move to indentation position of this line.
-
-With arg N, move backward to the beginning of the Nth previous line.
-Interactively, N is the prefix arg."
+  "Bounce cursor to beginning of this line or to its indentation."
   (interactive "P")
-  (cond ((or (bolp) n)
-         (forward-line (- (prefix-numeric-value n))))
+  (cond ((bolp) 
+         (back-to-indentation))
         ((save-excursion (skip-chars-backward " \t") (bolp)) ; At indentation.
          (forward-line 0))
         (t (back-to-indentation))))
@@ -69,8 +70,6 @@ Interactively, N is the prefix arg."
 #+begin_src emacs-lisp
 (global-set-key [home] 'emagician-beginning-or-indentation)
 (substitute-key-definition 'beginning-of-line 'beginning-or-indentation global-map)
-
-
 #+end_src
 
 ** Make sure end key always goes to end of hte line

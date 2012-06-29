@@ -19,7 +19,12 @@
 #+end_src
 
 ** Agenda
-
+*** Org agenda files
+#+begin_src emacs-lisp
+  (setq org-agenda-files '("~/org/"
+                           "~/Dropbox/org"))
+  
+#+end_src
 *** Stuck projects
 
 Using Bernt Hansens concept of proejcts and stuck projects.  There is
@@ -213,6 +218,25 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 
    Some no-brainer org babel setup.
 
+*** Extra setup
+
+Wherever possible we always want ot display inline images
+#+begin_src emacs-lisp
+  (add-hook 'org-babel-after-execute-hook 'emagician/display-inline-images 'append)
+  
+  (defun emagician/display-inline-images ()
+    (condition-case nil
+        (org-display-inline-images)
+      (error nil)))
+#+end_src
+
+*** Gnuplot setup
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+(setq gnuplot-program "/usr/local/bin/gnuplot")
+#+end_src
+
 *** Some standard langauges that should come out of the box
 #+begin_src emacs-lisp
 ;; active Babel languages
@@ -221,8 +245,7 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
  '((sh . t)
    (emacs-lisp . t)
    (calc . t)
-   (gnuplot . t)
-   ))
+   (gnuplot . t)))
 #+end_src
 
 *** Don't confirm on non-destructive languages

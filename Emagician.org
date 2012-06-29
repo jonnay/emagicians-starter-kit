@@ -286,7 +286,7 @@ to be delt with.
 * Load Users Cusotmizations
 ** TODO fix this teporary shit here
 #+begin_src emacs-lisp
-(emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay.org"))
+(emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay"))
 #+end_src
 ** System Type Initialization
 

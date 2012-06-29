@@ -6,8 +6,9 @@
   kit. 
 #+name: startup 
 #+begin_src emacs-lisp
-(emagician-starter-kit-load "Emagician-Editing")
-(emagician-starter-kit-load "Emagician-Helpers")
-(emagician-starter-kit-load "Emagician-Interface")
-(emagician-starter-kit-load "Emagician-Lisp")
-#end_src
+(emagician-starter-kit-load "Emagician-Editing.org")
+(emagician-starter-kit-load "Emagician-Helpers.org")
+(emagician-starter-kit-load "Emagician-Interface.org")
+(emagician-starter-kit-load "Emagician-Lisp.org")
+(emagician-starter-kit-load "Emagician-Org.org")
+#+end_src

@@ -81,20 +81,18 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
   
   (defun dg-mindwave/start-recording-session (name)
     "Sets up an entirely new mindwave session for recording." 
-    (interactive "SMindwave Session Name: ")
-    (save-window-excursion
-      (save-excursion
-        (set-buffer dg-mindwave/org-buffer)
-        (end-of-buffer)
-        (insert "\n\n")
-        (insert "*** ")
-        (insert (current-time-string))
-        (insert "  ")
-        (insert name)
-        (insert "\n")
-        (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
-        (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
-        (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")))
+    (interactive "sMindwave Session Name: ")
+    (with-current-buffer dg-mindwave/org-buffer
+      (goto-char (point-max))
+      (insert "\n\n")
+      (insert "*** ")
+      (insert (current-time-string))
+      (insert "  ")
+      (insert name)
+      (insert "\n")
+      (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
+      (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
+      (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n"))
     (mindwave-get-buffer)
     (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
       (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
@@ -102,8 +100,12 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
   (defun dg-mindwave/stop-recording-session ()
     "Stops a recording session"
     (interactive)
-    (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write))
-   
+    (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
+    )
+  
+#+end_src
+**** Window for mark input
+#+begin_src emacs-lisp 
   (defun dg-mindwave/create-input-buffer ()
     "Create an input buffer so that marks can be handled"
     (interactive)
@@ -142,6 +144,27 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
   
 #+end_src
 
+
+**** Timed marks
+
+#+begin_src emacs-lisp
+  (defun dg-mindwave/start-45-second-session (name) 
+    "Start a 45 second session with appropriate marks.  NAME should be a simple name."
+    (interactive "s45 Second Session Name:")
+    (dg-mindwave/start-recording-session name)
+    (run-at-time 15 nil '(lambda ()
+                           (message "Close your Eyes and Relax")
+                           (beep 1) 
+                           (dg-mindwave/mark "relaxed")))
+    (run-at-time 30 nil `(lambda ()
+                           (message name)
+                           (beep 1)
+                           (dg-mindwave/mark ,name)))
+    (run-at-time 45 nil '(lambda ()
+                           (beep 1)
+                           (message "stop")
+                           (dg-mindwave/stop-recording-session))))
+#+end_src
 
 *** Basic testing code
 
