@@ -114,3 +114,48 @@ isearch sould use regexp by default
 #+end_src
 ** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
 ** TODO fix the font to be non-monospace. 
+* Helm.  It's a must.
+
+#+name: helm
+#+begin_src emacs-lisp
+(emagician-expect-package 'helm)
+
+(global-set-key [f2] 'helm-mini)
+#+end_src
+
+** Helm-Mode
+   
+   Use helm for completing read. 
+
+#+begin_src emacs-lisp
+(helm-mode 1)
+#+end_src
+
+** Buffer selection
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+#+end_src
+
+** Files
+*** Insert, write and find files should use helm.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-w")   'helm-write-file)
+(global-set-key (kbd "C-x i")     'helm-insert-file)
+#+end_src
+
+*** Rebind the Control-Backspace binding
+
+	My muscle memory has control-backspace bound to backwards-delete-syntax.  Make it do the right thing.
+
+#+begin_src emacs-lisp
+(define-key helm-find-files-map (kbd "C-<backspace>") 'backward-kill-word)
+(define-key helm-c-read-file-map (kbd "C-<backspace>") 'backward-kill-word)
+#+end_src
+
+**** TODO figure out how to make find-files show the history as well.
+**** TODO Maybe not helm-write-file... it seems sketchy, TBD
+
+

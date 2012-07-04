@@ -252,8 +252,9 @@ Wherever possible we always want ot display inline images
 #+begin_src emacs-lisp
  (defun my-org-confirm-babel-evaluate (lang body)
             (not (or (string= lang "ditaa")
-                     (string= lang "calc")))
-          (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+                     (string= lang "calc"))))
+
+ (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 #+end_src
 
 

@@ -1,4 +1,4 @@
-* Markup
+* Markup (and styling)
 ** TODO HTML - nxml and nxhtml
    nXhtml is the best in working with HTML.  
 
@@ -32,11 +32,24 @@
 ** TODO CSS
 * Web Centeric Languages
 *** TODO PHP
+#+begin_src emacs-lisp
+(emagician-expect-package 'php-mode)
+(emagician-expect-package 'flymake-php)
+#+end_src
 **** TODO Drupal
+
 *** TODO Javascript
+#+begin_src emacs-lisp
+  (emagician-expect-package 'flymake-jslint)
+  (add-hook 'js-mode-hook 'flymake-jslint-load)
+  
+  (setq flymake-jslint-command "/usr/local/bin/jsl") 
+#+end_src
 **** TODO http://www.randomsample.de/dru5/node/147
 **** TODO Slime JS
+
 *** TODO JSP
+
 *** TODO ASP
 	
 	

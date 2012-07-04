@@ -1,0 +1,28 @@
+#+title Startup Compare 
+
+* Header
+#+begin_src emacs-lisp :tangle yes
+;;; startup-compare.el --- Saves your startup messages, and lets you compare them.
+
+;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; Created: 3 July 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL v3    
+
+#+end_src
+
+* Main Documentation
+
+
+* Emacs starting hook to save the messages buffer
+
+* Command to compare the current starting buffer to the last one.
+
+
+#+begin_src 
+;;; mindwave-emacs.el ends here
+#+end_src

@@ -259,14 +259,13 @@ to be delt with.
   (defun run-programming-mode-hooks ()
     "helper function to execute programming mode hooks."
     (run-hooks 'programming-mode-hooks))
-  
-  
+    
 #+end_src
 
 *** TODO add to "programming-modes" list.  
 *** TODO Fix definition in the yank under editing
 *** TODO add standard hooks into it 
-
+	- [ ] auto-pair mode
 ** CEDET
 
    I don't have enough mojo to work with cedet yet.  Working on it.  
@@ -283,7 +282,7 @@ to be delt with.
 #+begin-src emacs-lisp
 (emagician-expect-package 'flymake-cursor)
 #+end_src
-* Load Users Cusotmizations
+* Load Users Customizations
 ** TODO fix this teporary shit here
 #+begin_src emacs-lisp
 (emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay"))

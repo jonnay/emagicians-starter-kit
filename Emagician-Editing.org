@@ -76,3 +76,27 @@
 #+begin_src emacs-lisp
 (global-set-key [end] 'end-of-line)
 #+end_src
+
+* Snippets. 
+
+#+name: 
+#+begin_src emacs-lisp
+  (emagician-expect-package 'yasnippet)
+  (require 'yasnippet)
+
+  (yas/load-directory (expand-file-name "snippets" emagician-dir) t)
+  
+    (defun yas/org-very-safe-expand ()
+      (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+    
+    (defun yas/org-setup ()
+      ;; yasnippet (using the new org-cycle hooks)
+      (make-variable-buffer-local 'yas/trigger-key)
+      (setq yas/trigger-key [tab])
+      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+      (define-key yas/keymap [tab] 'yas/next-field))
+    
+    (add-hook 'org-mode-hook #'yas/org-setup)
+
+#+end_src
+

@@ -9,3 +9,11 @@ src/*
 /Emagician-Lisp.el
 /emacs24-starter-kit/
 /starter-kit.org
+/.DS_Store
+/Emagician-Coding.org~
+/Emagician-Jonnay.el
+/Emagician-Org.el
+/Emagician-WebDev.el
+/extra/gather-into-org.el
+/extra/mindwave-emacs.el
+/melpa/
