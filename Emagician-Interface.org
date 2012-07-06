@@ -83,9 +83,6 @@ isearch sould use regexp by default
   (add-hook 'post-command-hook 'emagician-set-cursor-color-according-to-mode)
 #+end_src
 
-** TODO set up powerline
-** TODO set up nyan mode
-
 * Better mode line
 ** Turn on column and line numbers
 #+begin_src emacs-lisp
@@ -103,8 +100,8 @@ isearch sould use regexp by default
            (package-build-recipes-dir (concat melpa-dir "recipes"))
            (package-build-working-dir (concat melpa-dir "working"))
            (package-build-archive-dir (concat melpa-dir "packages")))
-       (require 'package-build)
-      (setq package-build-alist (assq-delete-all 'nyan-mode package-build-alist))
+        (setq package-build-alist (assq-delete-all 'nyan-mode package-build-alist))
+      (require 'package-build)
       (package-build-initialize)
       (package-build-archive 'nyan-mode)
   ))
@@ -112,8 +109,55 @@ isearch sould use regexp by default
     )    
   
 #+end_src
+
 ** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
+
+   ARG, which one?  not sure yet.  Both kinda suck.
+
+#+begin_src emacs-lisp :notangle
+(emagician-expect-package 'highline)
+(require 'highline)
+#+end_src
+
+#+begin_src emacs-lisp 
+(emagician-expect-package 'powerline)
+(require 'powerline)
+#+end_src
+
+*** DONE Make melpa package
+#+begin_src emacs-lisp :tangle no 
+  (when nil
+    (progn
+      (add-to-list 'load-path (concat (file-name-directory (buffer-file-name)) "melpa"))
+      (let* ((melpa-dir (concat (file-name-directory (buffer-file-name))
+                                "melpa/"))
+             (package-build-recipes-dir (concat melpa-dir "recipes"))
+             (package-build-working-dir (concat melpa-dir "working"))
+             (package-build-archive-dir (concat melpa-dir "packages")))
+        (require 'package-build)
+        (setq package-build-alist (assq-delete-all 'powerline package-build-alist))
+        (package-build-initialize)
+        (package-build-archive 'powerline)
+       
+        ))
+    ; Blank line for easier execution
+    )    
+  
+#+end_src
+*** TODO make pull request
 ** TODO fix the font to be non-monospace. 
+* Frame titles
+  Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
+
+#+begin_src emacs-lisp 
+  (setq frame-title-format
+        '("" 
+          invocation-name 
+          "  -|-+-|-  " 
+          (:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                     "%b"))))
+#+end_src
 * Helm.  It's a must.
 
 #+name: helm
@@ -123,6 +167,8 @@ isearch sould use regexp by default
 (global-set-key [f2] 'helm-mini)
 #+end_src
 
+** Use helm as m-x 
+*** TODO extend it to include complex command history
 ** Helm-Mode
    
    Use helm for completing read. 
@@ -157,5 +203,4 @@ isearch sould use regexp by default
 
 **** TODO figure out how to make find-files show the history as well.
 **** TODO Maybe not helm-write-file... it seems sketchy, TBD
-
 

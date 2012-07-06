@@ -1,3 +1,7 @@
+* Working with Melpa
+
+  Since Melpa is what I am throwing my lot with, do some setup.
+
 * Exporting as a website
 
 ** TODO Save website to a seperate directory

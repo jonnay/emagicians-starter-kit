@@ -129,6 +129,16 @@ to your configuration."
   (unless (package-installed-p package)
     (package-install package)))
 
+(defvar programming-modes '() 
+  "A list of modes that are development related, and should all behave the same.")
+
+(defvar programming-mode-hooks '() 
+  "A list of hooks to run in every programming mode")
+
+(defun run-programming-mode-hooks ()
+  "helper function to execute programming mode hooks."
+  (run-hooks 'programming-mode-hooks))
 
 
-(emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay.org"))
+
+(emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay"))

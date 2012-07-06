@@ -20,6 +20,8 @@
 ** Slime
 #+begin_src emacs-lisp
 (emagician-expect-package 'slime)
+(require 'slime)
+(slime-setup)
 #+end_src
 * Elisp
 

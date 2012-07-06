@@ -17,4 +17,7 @@
 
 * Magit Mode
 
+#+begin-src emacs-lisp
+(global-set-key (kbd "C-c m") 'magit-status)
+#+end_src
 

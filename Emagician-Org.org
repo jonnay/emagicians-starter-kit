@@ -1,9 +1,9 @@
 * Org Mode Setup
 
-** Todo task states
+** TODO Todo task states
 
 #+begin_src emacs-lisp
-  (setq org-too-keywords
+  (setq org-todo-keywords
     '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d!/!)")
       (sequence "WAITING(w@/!)")))
   
@@ -18,10 +18,23 @@
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 #+end_src
 
+
+** Habits
+   Thanks to this: http://orgmode.org/worg/org-tutorials/tracking-habits.html
+
+#+begin_src emacs-lisp
+(require 'org-habit)
+
+;; Shoulda used add-to-list.  Derp.
+(setq org-todo-keywords (append org-todo-keywords '((sequence "HABIT(h)" "|" "DONE(d!)"))))
+(setq org-todokeyword-faces (append org-todo-keyword-faces '(("HABIT" :forground "cyan" :weight bold))))
+
+#+end_src
+*** NEXT switch to add-to-list
 ** Agenda
 *** Org agenda files
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/org/"
+  (setq org-agenda-files '("~/Projects/emagicians-starter-kit"
                            "~/Dropbox/org"))
   
 #+end_src
@@ -206,6 +219,7 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
   
 #+end_src
 
+
 **** TODO Figure out a cool way to add to the agenda
 (tags-todo "-CANCELLED/!"
            ((org-agenda-overriding-header "Stuck Projects")
@@ -230,12 +244,14 @@ Wherever possible we always want ot display inline images
       (error nil)))
 #+end_src
 
+
 *** Gnuplot setup
 
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (setq gnuplot-program "/usr/local/bin/gnuplot")
 #+end_src
+
 
 *** Some standard langauges that should come out of the box
 #+begin_src emacs-lisp
@@ -256,6 +272,7 @@ Wherever possible we always want ot display inline images
 
  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 #+end_src
+
 
 
 ** Time clocking
