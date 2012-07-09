@@ -1,3 +1,9 @@
+* Project Status:
+  Unfit for other humans.
+
+  Right now everything is personally mine that you are going to run into problems with it. Sorry.
+
+  In particular the Emagician-Install.org is broke as hell.
 * A starter kit for magicians
 
   I stand on the shoulders of giants, to weave my own spells.  

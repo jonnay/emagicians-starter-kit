@@ -6,9 +6,8 @@ apropos? (~C-h a~)
 
 #+name: turn-off-goofy-shit
 #+begin_src emacs-lisp
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+    (when (fboundp mode) (funcall mode -1)))
 #+end_src
 
 * Re-bind some keys to more sensable defaults
@@ -18,10 +17,17 @@ apropos? (~C-h a~)
 #+end_src
 ** Searching
 isearch sould use regexp by default
-#+begin-src emacs-lisp
+
+#+begin_src emacs-lisp
 (global-set-key [(control s)] 'isearch-forward-regexp)
 (global-set-key [(control r)] 'isearch-backward-regexp)
 #+end_src
+** Make command a proper meta key under os-x
+
+#+begin_src
+(setq mac-commnad-modifier 'meta)
+#+end_src
+
 * Use Volatile highlights
 
 #+name: volatile highlights

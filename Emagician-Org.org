@@ -1,6 +1,6 @@
 * Org Mode Setup
 
-** TODO Todo task states
+** Todo task states
 
 #+begin_src emacs-lisp
   (setq org-todo-keywords
@@ -13,10 +13,26 @@
                 ("STARTED" forground "blue" :weight bold)
                 ("DONE" :foreground "forest green" :weight bold)
                 ("WAITING" :foreground "orange" :weight bold))))
-  
+#+end_src
+*** Quick task selection 
+#+begin_src  
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 #+end_src
+
+**** Specialized set-task-as-next
+
+#+BEGIN_SRC emacs-lisp
+  (defun emagician-org/todo-to-next ()
+    "sets the todo state of the current headline to next."
+    (interactive)
+    (org-todo "NEXT")
+    (org-set-tags))
+
+  (define-key org-mode-map (kbd "C-c n") 'emagician-org/todo-to-next)
+
+  (add-hook 'org-mode-hook 'flyspell-mode)
+#+END_SRC
 
 
 ** Habits
@@ -31,6 +47,7 @@
 
 #+end_src
 *** NEXT switch to add-to-list
+
 ** Agenda
 *** Org agenda files
 #+begin_src emacs-lisp
@@ -226,8 +243,9 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 		   (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
 **** TODO 
 
-** TODO Capture 
 
+** TODO Capture 
+   
 ** Org Babel
 
    Some no-brainer org babel setup.
@@ -244,14 +262,12 @@ Wherever possible we always want ot display inline images
       (error nil)))
 #+end_src
 
-
 *** Gnuplot setup
 
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (setq gnuplot-program "/usr/local/bin/gnuplot")
 #+end_src
-
 
 *** Some standard langauges that should come out of the box
 #+begin_src emacs-lisp

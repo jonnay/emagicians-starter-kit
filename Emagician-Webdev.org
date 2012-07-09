@@ -39,12 +39,25 @@
 **** TODO Drupal
 
 *** TODO Javascript
+**** FLymake Javascript
 #+begin_src emacs-lisp
   (emagician-expect-package 'flymake-jslint)
   (add-hook 'js-mode-hook 'flymake-jslint-load)
   
   (setq flymake-jslint-command "/usr/local/bin/jsl") 
 #+end_src
+
+**** Slime-js
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/projects/slime-js")
+  (slime-setup '(slime-js slime-repl))
+  (setq slime-js-swank-command "/usr/local/bin/npm")
+  (setq slime-js-swank-args '("run" "swank"))
+#+end_src
+
+**** Node Setup
+
 **** TODO http://www.randomsample.de/dru5/node/147
 **** TODO Slime JS
 

@@ -1,6 +1,16 @@
 * Shell Mode
+** Set the path environment variable
+#+begin_src emacs-lisp
+(setenv "PATH" (concat (getenv "HOME") "/bin:"
+                       "/usr/local/bin:"
+                       (getenv "PATH")))
+
+(add-to-list 'exec-path "/usr/local/bin")
+#+end_src
+
+
 ** Ansi Color On shells
-  Ansi color in shell mode is goood.
+  Ansi color in shell mode is good.
 
 #+name: ansi-color
 #+begin_src emacs-lisp
@@ -17,7 +27,7 @@
 
 * Magit Mode
 
-#+begin-src emacs-lisp
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-c m") 'magit-status)
 #+end_src
 
