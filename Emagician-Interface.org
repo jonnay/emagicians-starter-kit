@@ -1,3 +1,4 @@
+#+title: Interface
 * Turn off goofy stuff like menu bars
 
 Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
@@ -125,7 +126,7 @@ isearch sould use regexp by default
 (require 'highline)
 #+end_src
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :notangle
 (emagician-expect-package 'powerline)
 (require 'powerline)
 #+end_src

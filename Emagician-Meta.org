@@ -10,7 +10,37 @@
    http://ryanfitzer.org/2011/11/easy-syncing-of-github-pages/
 ** TODO Set up valid stylesheet for a default
 
-** TODO Test this code
+#+begin_src css :tangle export/main.css
+
+#+end_src
+
+** Specialized export command
+
+#+begin_src emacs-lisp
+  (require 'org-publish)
+  (defun emagician-export/export ()
+    "Main export function"
+    (let ((org-export-with-section-numbers t)
+          (org-hml-include-timestamps nil)
+          (org-src-fontify-natively t)
+          (org-export-hml-inline-images t)
+          (org-publish-project-alist '(("emagician-org"
+                                        :base-directory emagician-dir
+                                        :base-extension "org"
+                                        :publishing-directory "export"
+                                        :author-info t
+                                        :creator-info t
+                                        :publishing-function org-publish-org-to-html)
+                                       ("emagician-extra"
+                                        :base-directory emagician-dir
+                                        :base-extension "css\\|pdf\\|png\\|jpg"
+                                        :publishing-function org-publish-attachment
+                                        :author nil)
+                                       )))))
+#+end_src
+
+** Reference code
+
 #+begin_src emacs-lisp
   ; Inline images in HTML instead of producting links to the image
   (setq org-export-html-inline-images t)

@@ -28,6 +28,8 @@
 #+begin_src emacs-lisp
 (add-to-list 'load-path emagician-dir)
 (setq custom-file (concat emagician-dir "custom.el"))
+(add-to-list 'load-path (concat emagician-dir "src"))
+(add-to-list 'load-path (concat emagician-dir "dist"))
 #+end_src
 
 ** Ubiquitious Packages
@@ -203,7 +205,7 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 As with the other starter kit, there are some fundamentals that need
 to be delt with. 
 
-** Basic hook funcitons
+** Basic hook functions
    This macro will help build your turn-on-minor-mode functions that are so helpful, and automagickally add them to a major mode.  It won't try to re-define the turn-on mode if it is already defined.
 
 #+begin_src emacs-lisp
@@ -275,7 +277,6 @@ to be delt with.
 
 #+end_src
 
-
 ** Basic Coding Hooks
 *** TODO needs to be snarfed and barfed from the emacs starter kit
 ** Flymake Setup
@@ -294,3 +295,5 @@ to be delt with.
 ** Machine Name Initialization
 
 ** Person Initialization
+* References, Bibliography, Shout Outs, and Props.
+  - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html

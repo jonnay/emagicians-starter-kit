@@ -31,3 +31,9 @@
 (global-set-key (kbd "C-c m") 'magit-status)
 #+end_src
 
+
+* Edit with emacs
+#+begin_src
+(require 'edit-server)
+(edit-server-start)
+#+end_src

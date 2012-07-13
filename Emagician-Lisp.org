@@ -32,7 +32,7 @@
 ** Formatting
 
 #+begin_src
-(require 'elisp-format)   
+(require 'elisp-format)
 #+end_src
 
 ** Set up hooks 

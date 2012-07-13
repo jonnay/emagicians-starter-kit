@@ -32,12 +32,19 @@
 ** TODO CSS
 * Web Centeric Languages
 *** TODO PHP
+	And with PHP, comes a bunch of extra frameworks. 
+
 #+begin_src emacs-lisp
 (emagician-expect-package 'php-mode)
 (emagician-expect-package 'flymake-php)
 #+end_src
+
 **** TODO Drupal
 
+#+begin_src emacs-lisp
+
+#+end_src
+	 
 *** TODO Javascript
 **** FLymake Javascript
 #+begin_src emacs-lisp

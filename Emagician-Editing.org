@@ -1,3 +1,4 @@
+#+title: Movement and Editing
 * Files
 ** Loading and saving
 *** Tramp Setup
@@ -100,3 +101,24 @@
 
 #+end_src
 
+* Undo
+** Undo locations
+*** TODO install goto-last-change or goto-change 
+
+** Undo tree
+
+(find-lisp-object-file-name 'undo-tree-mode (symbol-function 'undo-tree-mode)) 
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'undo-tree)
+(require 'undo-tree)
+
+(global-undo-tree-mode)
+#+end_src
+* Movement
+#+begin_src emacs-lisp
+(emagician-expect-package 'ace-jump-mode)
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+(define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)
+#+end_src

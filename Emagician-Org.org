@@ -1,3 +1,4 @@
+#+title: Org Mode 
 * Org Mode Setup
 
 ** Todo task states
