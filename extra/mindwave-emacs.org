@@ -53,7 +53,7 @@ emacs.
 	
 *** Example one: gather data into an org buffer
 
-#+begin_src emacs-lisp :noweb yes :tangle gather-into-org.el
+#+begin_src emacs-lisp  :tangle gather-into-org.el :noweb yes
 ;;; mindwave-emacs.el --- Neurosky mindwave support
 
 ;; Copyright (C) 2012 Jonathan Arkell
@@ -65,6 +65,12 @@ emacs.
 ;; This file is not part of GNU Emacs.
 ;; Released under the GPL     
 
+<<dg-basic-setup>>
+<<dg-marks>>
+<<dg-write>>
+<<dg-mark-window>>
+<<dg-timed-recording>>
+
 #+end_src
 
 When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
@@ -75,7 +81,7 @@ This chunk of code here illustrates how to use mindwave-emacs.  It will collect 
 
 Note, that the code assumes that you want everything put in a buffer called ~Brain.org~.
 
-#+source: dg-basic-setup
+#+name: dg-basic-setup
 #+begin_src emacs-lisp :tangle no
   
   (require 'mindwave-emacs)
@@ -99,7 +105,7 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
   
 #+end_src
 
-#+source: dg_marks
+#+name: dg_marks
 #+begin_src emacs-lisp :tangle no
   (defvar dg-mindwave/mark nil)
 
@@ -113,7 +119,7 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
     (setq dg-mindwave/mark mark))
 #+end_src
 
-#+source: dg-write
+#+name: dg-write
 #+begin_src emacs-lisp :tangle no
   (defun dg-mindwave/collect-and-write (output)
     "Hook function to gather and write data to the table."
@@ -199,7 +205,7 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 
 
 **** Window for mark input
-#+source dg-mark-window
+#+name dg-mark-window
 #+begin_src emacs-lisp 
   (defun dg-mindwave/create-input-buffer ()
     "Create an input buffer so that marks can be handled"
@@ -236,8 +242,19 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 #+end_src
 
 
-**** Timed marks
-#+source: dg-mark-timed
+**** Timed Recordings
+
+Timed recordings are for micro-experimentation of your EEG.  The idea is that you record EEG activity in 15 second chunks, which each chunk being a different activity.  
+
+  1. a 'whatever chunk', and is basically 15 seconds of "whatever is going on right now".
+  2. a 15 second chunk of eyes closed and relaxing
+  3. a 15 second chunk of experimentation or calibration, for instance:
+	 - eyes closed and relaxing
+	 - eyes opened and relaxing
+	 - eyes closed and breathing deeply
+	 - eyes open and doing complicated math problems.
+
+#+name: dg-timed-recording
 #+begin_src emacs-lisp
   (defun dg-mindwave/start-45-second-session (name) 
     "Start a 45 second session with appropriate marks.  NAME should be a simple name."
@@ -282,14 +299,49 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 
 **** Set up Hooks
 
-#+source: sm-hooksetup
+	 
+
+#+name: sm-hooksetup
 #+begin_src emacs-lisp :tangle no
+  
+  
+  (defconst solarized-mind/brain-ring-size 30)
+  
+  (setq solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
+  
+  (defvar solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
+  (defvar solarized-mind/ring-reset-counter 0)
+  
   (defun solarized-mind/mindwave-hook (vals)
     "Set up hook to solarize your mind, and set up the medicursor."
+    (debug)
     (let ((brain (json-read-from-string vals)))
-      (when (assoc 'eSense brain)
-        (solarized-mind/set-medicursor (cdr (assoc 'meditation (assoc 'eSense brain))))
-        (solarized-mind/set-background (cdr (assoc 'attention  (assoc 'eSense brain)))))))
+      (when (and (assoc 'eSense brain)
+                 (assoc 'poorSignalLevel brain)
+                 (> 50
+                    (cdr (assoc 'poorSignalLevel brain))))
+        (ring-insert solarized-mind/brain-ring 
+                     (cons (cdr (assoc 'meditation (assoc 'eSense brain)))
+                           (cdr (assoc 'attention  (assoc 'eSense brain)))))
+        (when (>= (ring-length solarized-mind/brain-ring) 
+                 solarized-mind/brain-ring-size)
+          (let ((new-ring (make-ring solarized-mind/brain-ring-size))
+                (collapsed-ring (reduce #'(lambda (pair total)
+                                            (cons (+ (car pair) 
+                                                     (car total)) 
+                                                  (+ (cdr pair) 
+                                                     (cdr total))))
+                                        (ring-elements solarized-mind/brain-ring)
+                                        :initial-value (cons 0 0))))
+            (ring-insert new-ring 
+                         (cons (/ (car collapsed-ring)
+                                  solarized-mind/brain-ring-size)
+                               (/ (cdr collapsed-ring)
+                                  solarized-mind/brain-ring-size)))
+            (solarized-mind/set-medicursor (car (ring-ref new-ring 0)))
+            (solarized-mind/set-background (cdr (ring-ref new-ring 0)))
+            (setq solarized-mind/brain-ring new-ring))))))
+  
   
   (defun solarized-mind/start ()
     (interactive)
@@ -309,7 +361,7 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 
 	 This is by far the easiest one to do, so lets do it first.
 
-#+source: sm-medicursor 
+#+name: sm-medicursor 
 #+begin_src emacs-lisp :tangle no
   (defun solarized-mind/set-medicursor (med)
     "Set the cursor to a value from the mindwave"
@@ -328,12 +380,13 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 #+end_src
 
 **** Solarized Mind
-#+source: sm-solarizer
+#+name: sm-solarizer
 #+begin_src emacs-lisp :tangle no
     (require 'hexrgb)
   
   (defun solarized-mind/set-background (att)
     "Sets the background color"
+    (set-background-color (solarized-mind/attention-to-rgb att))
     ;(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb att))
     nil)
   
@@ -347,6 +400,10 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
                            (hexrgb-hsv-to-hex h 
                                               s 
                                               (* v (/ att 100.0)))))
+
+
+
+;(set-face-attribute 'default nil :background (solarized-mind/attention-to-rgb 0))
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
@@ -495,6 +552,8 @@ Note that due to the buffering involved, I am not so sure how much value there r
 ** Configure
 *** Ask for raw output
 #+begin_src emacs-lisp :tangle yes
+(mindwave-get-raw nil)
+
 (defun mindwave-get-raw (raw)
   "Return raw output from mindwave.
 RAW is a boolean value as to whether or not to listen for raw values"

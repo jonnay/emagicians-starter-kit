@@ -274,7 +274,18 @@ to be delt with.
 
 #+name: load-cedet
 #+begin_src emacs-lisp
-
+  (setq semantic-default-submodes 
+        (append semantic-default-submodes
+                '(global-semantic-idle-summary-mode
+                  global-semantic-idle-completions-mode
+                  global-semantic-idle-scheduler-mode
+                  global-semantic-decoration-mode
+                  global-semantic-hilight-func-mode
+                  global-semantic-stickyfuc-mode)))
+  
+  ;; Enable Semantic
+  (semantic-mode 1)
+  
 #+end_src
 
 ** Basic Coding Hooks

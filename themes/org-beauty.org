@@ -1,0 +1,416 @@
+* Beautify Org mode                                                  :define:
+
+** This theme is dedicated to my wife Shell
+   Who--in her beauty, her love and her love for beauty--has shown me
+   that form can enhance function.
+ 
+** Mission
+   - Make headlines easy to read
+   - Make it look more like a published book and/or desktop app, less
+     like angry fruit salad.
+   - Make it awesome to live in an org buffer.
+
+#+begin_src emacs-lisp
+(deftheme org-beautify "Beautify org mode")
+#+end_src emacs-lisp
+
+** Things to do
+*** PROJECT Make this customizable! 
+**** TODO look at org macros or something to easily turn feature sets on and off.
+
+** Colors
+   I the future, I may make it optional to set your own colors.  Not
+   for now.  Mwhahaha.
+
+   Bug me if this bugs you.  Or not.
+
+#+begin_src emacs-lisp :noweb yes :tangle yes
+    (let (<<define-color-values>>
+          <<define-color-names>>)
+
+  (custom-theme-set-faces
+  <<define-calendar>>
+  <<define-org-basic>>
+  <<define-org-headlines>>
+  <<define-org-agenda>>
+  <<define-org-keywords>>
+  <<define-org-todo-keywords>>
+  <<define-outline>>)
+)
+#+end_src
+
+*** Color Values
+
+Like the general scheme that I use, but hate the choice of colors?
+Change these here.
+
+#+name: define-color-values
+#+begin_src emacs-lisp :tangle no
+  (org-beauty-black          "#000000")
+  (org-beauty-grey+1         "#999999")
+  (org-beauty-grey+2         "#cccccc")
+  (org-beauty-grey+3         "#dddddd")
+  (org-beauty-grey+4         "#eeeeee")
+  (org-beauty-white          "#ffffff")
+  (org-beauty-red            "#e02020")
+  (org-beauty-red-dark       "#90000")
+  (org-beauty-yellow         "#e0e050")
+  (org-beauty-yellow-dark    "#e0e050")
+  (org-beauty-green          "#90e090")  
+  (org-beauty-green-dark     "#90e090")  
+  (org-beauty-teal           "#30b0c0")
+  (org-beauty-teal-dark      "#206050")
+  (org-beauty-blue           "#3050f0")  
+  (org-beauty-blue-dark      "#101090")  
+  (org-beauty-purple         "#5000f0")
+  (org-beauty-purpledark     "#2000b0")
+#+end_src
+
+*** Color Names
+    
+    Like the general color I choose, but hate the choice of scheme?
+    Change it here!
+
+    OH, if only CSS had this (which is why SASS(?) is the bomb).
+    
+    I have defined a set of standard color names for org mode, so as to
+    provide a consistent interface.
+
+    the actual variable names are prefaced with org-beauty, lower-case,
+    and separated with hyphens.  Of course.  So "Button Background"
+    transforms to "org-beauty-button-background".
+
+#+name: define-color-names
+#+begin_src emacs-lisp :tangle no :noweb yes
+<<define-basic-names>>
+<<define-state-names>>
+#+end_src
+
+
+**** Basic Names
+    - Foreground :: Pretty simple.  The actual foreground color
+    - Background :: Hurr.. I'm a hoers!
+
+    - Button Border :: Color for the border of a button
+    - Button Background :: Color for the background of a button
+    - Button Face :: Color for the font inside of the button
+
+    The Background color names also have a -1 to -4 set of variants
+    that can be used for interface elements that should jump out of
+    the background a little more.  
+
+#+name: define-basic-names
+#+begin_src emac-lisp
+(org-beauty-foreground org-beauty-black)
+(org-beauty-background org-beauty-white)
+(org-beauty-background-1 org-beauty-grey+1)
+(org-beauty-background-2 org-beauty-grey+2)
+(org-beauty-background-3 org-beauty-grey+3)
+(org-beauty-background-4 org-beauty-grey+4)
+
+#+end_src
+
+**** State colors
+     
+     These colors are general signals as to the kind of information
+     being presented to the user.  Of course, there will be a pretty
+     close correspondence between these and your todo keywords, but
+     there are other uses here (displaying scheduled/deadline times,
+     drawers, etc.)
+
+     These variables expand to "org-beauty-state-<blah>" and have 2
+     variants, dark and light.  So there is also a
+     "org-beauty-state-<blah>-dark" and "org-beauty-state-<blah>-light"
+   
+    - Containers :: Project containers and the like
+    - Current :: Bit of a catch-all here, but basically a signifier for
+                 the current thing.  (started action, time, etc.)
+    - Immediate :: Something that garners immediate attention or
+                   action.  Hot button issues.  (Deadliens, etc.)
+                   (Alerts, next action, etc)
+    - Waiting :: not as hot as Immediate and not as cool as holding
+    - Holding :: Stuff that should have your attention at some point
+    - Finished :: Cool Baby.  Done stuff.
+    - Canceled :: Stuff that is no longer useful
+
+#+name: define-state-colors
+#+begin_src emacs-lisp
+(org-beauty-containers "#33ccaa")
+(org-beauty-current    "#3333cc")
+(org-beauty-immediate  "#cc3333")
+(org-beauty-waiting    "#cc9933")
+(org-beauty-holding    "#ccbb33")
+(org-beauty-finished   "#33cc33")
+(org-beauty-canceed    "#ccbb99") 
+#+end_src
+
+
+** Calendar
+
+   While not strictly org mode, the Calendar and diary is tightly integrated.
+
+   Color Scheme 1 is going to be medium-light gray for the main
+   entries, Black for today, and off-gray for the special entries.
+
+   The following Faces are available:
+   - Calendar Today Face
+   - Diary Anniversary
+   - Diary Button 
+   - Diary
+   - Diary Time
+   - Holiday
+
+   Note that the calendar actually uses the standard font lock
+   keywords to customize the look of the main area. I am not entirely
+   sure how to change that, without changing it for all buffers.
+
+   - Weened :: font-lock-comment-face
+   - Weekday :: font-lock-constant-face
+   - Month/year :: font-lock-function-face
+
+#+name: define-calendar
+#+begin_src emacs-lisp :tangle no
+   `(calendar-today-face   ((t (:foreground ,org-beauty-state-current
+                                :background ,org-beauty-state-current-light
+                                :box (:line-width ,org-beauty-box
+                                      :color ,org-beauty-state-current-dark)            
+                                :weight bold)))  t)
+   `(diary-button          ((t ((:box (:line-width ,org-beauty-box
+                                    :color ,org-beauty-button-border
+                                    :style released-button)
+                                :foreground ,org-beauty-foreground
+                                :background ,org-beauty-button-background)))) t)
+   `(diary                 ((t (:foreground ,org-beauty-todo-todo
+                                :weight bold))) t)
+   `(diary-anniversary     ((t (:foreground ,org-beauty-todo-waiting))) t)
+   `(diary-time            ((t (:foreground ,org-beauty-current))) t)
+   `(holiday               ((t (:foreground ,org-beauty-foreground))) t)  
+#+end_src
+
+
+** Headlines
+   First level headlines should be super big.  Honestly, if I had
+   finer grained control, I would decrease their size a little, and
+   put some white-space at the top of the headline. Second level
+   headlines are smaller. Finally, 3rd level and below are standard
+   font size.
+   
+   This does have one issue. If the org-file goes past 8 levels of
+   indent, your 9th level indent is SUPER HUGE.  Generally I have
+   found that when I do that, I am probably doing something wrong
+   anyway, so I prefer the big angry warning.  It means that I should
+   probably split the current org file into smaller ones.
+
+   We set up a headline inheritance face, and then define each in turn.
+
+
+#+name: define-org-headlines
+#+begin_src emacs-lisp 
+
+(org-beauty-headline ((t (:foreground ,org-beauty-foreground))) t)
+
+(org-level-1 ((t (:height 2.0
+                  :overline ,org-beauty-background
+                  :underline ,org-beauty-foreground-light
+                  :inherit org-beauty-headline))) t)
+(org-level-2 ((t (:height 1.5
+                  :overline ,org-beauty-background
+                  :underline ,org-beauty-foreground-light
+                  :inherit org-beauty-headline)))) t)
+(org-level-3 ((t (:inherit org-beauty-headline))) t)
+(org-level-4 ((t (:inherit org-beauty-headline))) t)
+(org-level-5 ((t (:inherit org-beauty-headline))) t)
+(org-level-6 ((t (:inherit org-beauty-headline))) t)
+(org-level-7 ((t (:inherit org-beauty-headline))) t)
+(org-level-8 ((t (:inherit org-beauty-headline))) t)
+
+#+end_src
+
+
+
+   
+** example source. this dies soon
+
+#+begin_src emacs-lisp 
+;;; zenburn-theme.el --- Dark and clean theme
+
+;; Copyright (C) 2011 Free Software Foundation, Inc.
+
+;; Author: Dirk-Jan C. Binnema <djcb@djcbsoftware.nl>
+;; Created: 2011-05-02
+
+;; This file is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;; <http://www.gnu.org/licenses/>.
+
+;; zenburn theme, a nice low-contrast theme
+
+(deftheme zenburn
+  "The Zenburn theme.")
+
+(let ( (zenburn-fg		"#dcdccc")
+       (zenburn-bg-1		"#2b2b2b")
+       (zenburn-bg		"#3f3f3f")
+       (zenburn-bg+1		"#4f4f4f")
+       (zenburn-bg+2		"#5f5f5f")
+       (zenburn-red+1		"#dca3a3")
+       (zenburn-red		"#cc9393")
+       (zenburn-red-1		"#bc8383")
+       (zenburn-red-2		"#ac7373")
+       (zenburn-red-3		"#9c6363")
+       (zenburn-red-4		"#8c5353")
+       (zenburn-orange		"#dfaf8f")
+       (zenburn-yellow		"#f0dfaf")
+       (zenburn-yellow-1	"#e0cf9f")
+       (zenburn-yellow-2	"#d0bf8f")
+
+       (zenburn-green-4         "#2e3330")
+       (zenburn-green-1		"#5f7f5f")
+       (zenburn-green		"#7f9f7f")
+       (zenburn-green+1		"#8fb28f")
+       (zenburn-green+2		"#9fc59f")
+       (zenburn-green+3		"#afd8af")
+       (zenburn-green+4		"#bfebbf")
+       (zenburn-cyan		"#93e0e3")
+       (zenburn-blue+1		"#94bff3")
+       (zenburn-blue		"#8cd0d3")
+       (zenburn-blue-1		"#7cb8bb")
+       (zenburn-blue-2		"#6ca0a3")
+       (zenburn-blue-3		"#5c888b")
+       (zenburn-blue-4		"#4c7073")
+       (zenburn-blue-5		"#366060")
+       (zenburn-magenta		"#dc8cc3"))
+
+  (custom-theme-set-faces
+    'zenburn
+
+    ;; setup for inheritance
+    `(zenburn-background ((t (:background ,zenburn-bg))))
+    `(zenburn-background-1 ((t (:background ,zenburn-bg+1))))
+    `(zenburn-background-2 ((t (:background ,zenburn-bg+2))))
+    `(zenburn-primary-1 ((t (:foreground ,zenburn-yellow-1 :weight bold))))
+    `(zenburn-primary-2 ((t (:foreground ,zenburn-orange :weight bold))))
+    '(zenburn-primary-3 ((t (:foreground "#dfdfbf" :weight bold))))
+    '(zenburn-primary-4 ((t (:foreground "#dca3a3" :weight bold))))
+    '(zenburn-primary-5 ((t (:foreground "#94bff3" :weight bold))))
+    '(zenburn-highlight-damp ((t (:foreground "#88b090" :background "#2e3330"))))
+    '(zenburn-highlight-alerting ((t (:foreground "#e37170" :background "#332323"))))
+    '(zenburn-highlight-subtle ((t (:background "#464646"))))
+    '(zenburn-lowlight-1 ((t (:foreground "#606060"))))
+    '(zenburn-lowlight-2 ((t (:foreground "#708070"))))
+    `(zenburn-yellow ((t (:foreground ,zenburn-yellow))))
+    `(zenburn-orange ((t (:foreground ,zenburn-orange))))
+    `(zenburn-red ((t (:foreground ,zenburn-red))))
+    `(zenburn-red-1 ((t (:foreground ,zenburn-red-1))))
+    `(zenburn-red-2 ((t (:foreground ,zenburn-red-2))))
+    `(zenburn-red-3 ((t (:foreground ,zenburn-red-3))))
+    `(zenburn-red-4 ((t (:foreground ,zenburn-red-4))))
+    `(zenburn-green-1 ((t (:foreground ,zenburn-green-1))))
+    `(zenburn-green ((t (:foreground ,zenburn-green))))
+    `(zenburn-green+1 ((t (:foreground ,zenburn-green+1))))
+    `(zenburn-green+2 ((t (:foreground ,zenburn-green+2))))
+    `(zenburn-green+3 ((t (:foreground ,zenburn-green+3))))
+    `(zenburn-green+4 ((t (:foreground ,zenburn-green+4))))
+    `(zenburn-blue ((t (:foreground ,zenburn-blue))))
+    `(zenburn-blue-1 ((t (:foreground ,zenburn-blue-1))))
+    `(zenburn-blue-2 ((t (:foreground ,zenburn-blue-2))))
+    `(zenburn-blue-3 ((t (:foreground ,zenburn-blue-3))))
+    `(zenburn-blue-4 ((t (:foreground ,zenburn-blue-4))))
+    '(zenburn-title ((t (:inherit 'variable-pitch :weight bold))))
+
+    ;; calendar
+    '(calendar-today ((t (:underline nil :inherit 'zenburn-primary-2))))
+
+    ;; org-mode
+    `(org-agenda-clocking
+       ((t (:background ,zenburn-green-4 :weight bold))) t)
+    `(org-agenda-date-today
+       ((t (:foreground ,zenburn-cyan :slant italic :weight bold))) t)
+    `(org-agenda-date
+       ((t (:foreground ,zenburn-blue))) t)
+    `(org-agenda-date-weekend
+       ((t (:foreground ,zenburn-blue+1))) t)
+
+    '(org-agenda-structure
+       ((t (:inherit font-lock-comment))))
+    `(org-archived ((t (:foreground ,zenburn-fg :weight bold))))
+    `(org-checkbox ((t (:background ,zenburn-bg+2 :foreground "white"
+			      :box (:line-width 1 :style released-button)))))
+    `(org-date ((t (:foreground ,zenburn-blue :underline t))))
+    `(org-deadline-announce ((t (:foreground ,zenburn-red-1))))
+    `(org-done ((t (:bold t :weight bold :foreground ,zenburn-green+3))))
+    `(org-formula ((t (:foreground ,zenburn-yellow-2))))
+    `(org-headline-done ((t (:foreground ,zenburn-green+3))))
+    `(org-hide ((t (:foreground ,zenburn-bg-1))))
+    `(org-level-1 ((t (:foreground ,zenburn-orange))))
+    `(org-level-2 ((t (:foreground ,zenburn-yellow))))
+    `(org-level-3 ((t (:foreground ,zenburn-blue))))
+    `(org-level-4 ((t (:foreground ,zenburn-cyan))))
+    `(org-level-5 ((t (:foreground ,zenburn-blue-1))))
+    `(org-level-6 ((t (:foreground ,zenburn-blue-2))))
+    `(org-level-7 ((t (:foreground ,zenburn-blue-3))))
+    `(org-level-8 ((t (:foreground ,zenburn-blue-4))))
+    `(org-link ((t (:foreground ,zenburn-yellow-2 :underline t))))
+    `(org-scheduled ((t (:foreground ,zenburn-green+4))))
+    `(org-scheduled-previously ((t (:foreground ,zenburn-red-4))))
+    `(org-scheduled-today ((t (:foreground ,zenburn-blue+1))))
+    `(org-special-keyword ((t (:foreground ,zenburn-yellow-1))))
+    `(org-table ((t (:foreground ,zenburn-green+2))))
+    `(org-tag ((t (:bold t :weight bold))))
+    `(org-time-grid ((t (:foreground ,zenburn-orange))))
+    `(org-todo ((t (:bold t :foreground ,zenburn-red :weight bold))))
+    '(org-upcoming-deadline ((t (:inherit font-lock-keyword-face))))
+    `(org-warning ((t (:bold t :foreground ,zenburn-red :weight bold))))
+
+    ;; outline
+    '(outline-8 ((t (:inherit default))))
+    '(outline-7 ((t (:inherit outline-8 :height 1.0))))
+    '(outline-6 ((t (:inherit outline-7 :height 1.0))))
+    '(outline-5 ((t (:inherit outline-6 :height 1.0))))
+    '(outline-4 ((t (:inherit outline-5 :height 1.0))))
+    '(outline-3 ((t (:inherit outline-4 :height 1.0))))
+    '(outline-2 ((t (:inherit outline-3 :height 1.0))))
+    '(outline-1 ((t (:inherit outline-2  :height 1.0))))
+    ))
+
+(provide-theme 'zenburn)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; End:
+#+end_src
+
+* Install the theme                                                     :run:
+
+  If we are in Emacs startup mode, we should probably use the hook
+  that is run when startup is finished to set the theme, that any
+  other themes (like Zenburn etc.) get run first, and then this can
+  take precedence.
+
+  Otherwise, it should just install itself.
+#+name enable
+#+begin_src emacs-lisp tangle: yes
+  (defun org-beauty-install-theme ()
+    "Installs the Beautiful Org Theme"
+    (enable-theme org-beautify)
+  
+  (if after-init-time
+      (org-beauty-install-theme)
+      (set-hook 'after-init-hook 'org-beauty-install-theme))
+  
+#+end_src
+
+* Testing the theme. 
+(org-babel-load-file "org-beautify.org")
+
+* Misc
+
+
+# -*- eval: (rainbow-mode 1) -*-

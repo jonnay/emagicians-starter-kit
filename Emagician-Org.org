@@ -1,6 +1,9 @@
 #+title: Org Mode 
 * Org Mode Setup
 
+#+begin-src
+(require 'org)
+#+end_src
 ** Todo task states
 
 #+begin_src emacs-lisp

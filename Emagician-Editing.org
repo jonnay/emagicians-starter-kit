@@ -120,5 +120,6 @@
 (emagician-expect-package 'ace-jump-mode)
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
-(define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)
+(eval-after-load 'org-mode
+  (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode))
 #+end_src
