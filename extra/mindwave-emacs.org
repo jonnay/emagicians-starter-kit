@@ -24,9 +24,105 @@ mindwave-emacs is a chunk of elisp code that uses the
 ThinkGearConnector program to pass off mindwave data directly to
 emacs.
 
-** Usage Examples
+* Output Examples
 
-*** Basic testing code
+#+tblname: example
+|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
+|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark    |
+|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
+| 1340229522 |      0 |      6715 |     8839 |     7397 |   12358 |      9428 |    19939 |  21762 |   45012 |         83 |        40 |         |
+| 1340229523 |      0 |      5293 |     7680 |    21524 |    6436 |      7380 |    36453 |  31707 |   61168 |         83 |        61 |         |
+| 1340229524 |      0 |      2659 |    11910 |     8315 |    3606 |      4350 |    12728 |   6604 |   20185 |         78 |        69 |         |
+| 1340229525 |      0 |     42703 |    39375 |    36054 |  133924 |    211462 |   100667 | 576943 |  644892 |         53 |        74 |         |
+| 1340229526 |      0 |     13471 |     7929 |    14365 |   62578 |     20617 |     4383 | 256884 |  906958 |         44 |        51 |         |
+| 1340229527 |      0 |      2271 |     6518 |     6288 |   13430 |     28688 |     8927 |  90855 | 1118085 |         29 |        44 |         |
+| 1340229528 |      0 |      4299 |     5690 |     6973 |    7985 |      8977 |    15999 |  69443 |  114812 |         14 |        34 |         |
+| 1340229529 |      0 |      2968 |     6811 |     6179 |    8471 |      8756 |     4000 |  55889 |   74533 |         21 |        24 |         |
+| 1340229530 |      0 |      1704 |     6543 |     9922 |    2012 |      1750 |    23099 |  14680 |   90702 |         35 |        50 |         |
+| 1340229531 |      0 |      2809 |     2879 |     6017 |   15968 |      7552 |     9412 |   5696 |   71379 |         50 |        56 |         |
+| 1340229532 |      0 |      7705 |     6187 |     7244 |   16578 |     31379 |    12079 | 148379 |   60969 |         44 |        54 |         |
+| 1340229533 |      0 |      5949 |     8210 |     8594 |    6521 |     13802 |    30518 |  39344 |   25372 |         47 |        69 |         |
+| 1340229534 |      0 |      7649 |     4027 |     9078 |    5012 |      4273 |    18162 |  22758 |   38168 |         43 |        63 |         |
+| 1340229535 |      0 |      1678 |     2017 |     3799 |    6433 |      3366 |     4245 |  29764 |    5899 |         35 |        51 |         |
+| 1340229536 |      0 |      1189 |     6646 |     3084 |    3522 |      4005 |     6985 |  14239 |   82198 |         44 |        57 |         |
+| 1340229537 |      0 |      2112 |     9706 |    33960 |   14244 |     26535 |    16577 |  23013 |   21533 |         60 |        56 |         |
+| 1340229538 |      0 |      1905 |     1391 |     8818 |    6341 |     13640 |     4823 |  22706 |   12155 |         60 |        54 | relaxed |
+| 1340229539 |      0 |      1894 |     8464 |     9669 |    4472 |      5817 |    10351 |  12945 |    2834 |         70 |        66 |         |
+| 1340229540 |      0 |      1597 |     3099 |    21082 |    1943 |      8788 |     8036 |  30336 |    6669 |         81 |        61 |         |
+| 1340229541 |      0 |      1861 |     5657 |    13161 |    5321 |     12381 |     2265 |  15898 |   11400 |         81 |        57 |         |
+| 1340229542 |      0 |      1538 |     1899 |     6201 |    5171 |      3724 |     6658 |   1750 |    6385 |         90 |        63 |         |
+| 1340229543 |      0 |      1692 |     3044 |     5080 |    5368 |      5631 |     1747 |   7145 |    3333 |         90 |        60 |         |
+| 1340229544 |      0 |      2217 |     3062 |     4332 |    6559 |      3085 |     7375 |  21089 |   19816 |         78 |        60 |         |
+| 1340229546 |      0 |      2564 |     2950 |     3733 |    7312 |      5809 |    18199 |   5943 |   10327 |         57 |        61 |         |
+| 1340229547 |      0 |      2400 |     5140 |     5839 |    7216 |      8070 |     6510 |  13131 |    2961 |         53 |        64 |         |
+| 1340229548 |      0 |      1836 |     1461 |    10593 |    1334 |     21543 |     5324 |  43509 |   71069 |         53 |        69 |         |
+| 1340229549 |      0 |      2358 |     3557 |     4657 |    4135 |      1947 |     3002 |   8021 |    1432 |         57 |        67 |         |
+| 1340229550 |      0 |      1662 |     1694 |     3111 |    3296 |      2404 |     7591 |   5451 |    6358 |         63 |        63 |         |
+| 1340229551 |      0 |       935 |     3135 |     8643 |    5870 |      6242 |     2730 |   6181 |    1459 |         70 |        60 |         |
+| 1340229552 |      0 |      1835 |     3510 |     4576 |    7218 |      2036 |     2749 |   4368 |    7480 |         81 |        54 |         |
+| 1340229553 |      0 |      1021 |     3251 |     5087 |    5483 |      2280 |     6480 |  11058 |   16476 |         78 |        57 | another |
+| 1340229554 |      0 |      2565 |     1468 |    10513 |   12150 |     21771 |    16130 |  21917 |   17520 |         78 |        60 |         |
+| 1340229555 |      0 |      5049 |     2925 |    14554 |    9252 |      8270 |     2454 |  74591 |    5747 |         66 |        44 |         |
+| 1340229556 |      0 |      2296 |     2791 |     2779 |    2551 |      1375 |     2614 |  29351 |   40429 |         50 |        37 |         |
+| 1340229557 |      0 |      2762 |     2659 |     6519 |    7152 |      4360 |    10126 |   3559 |    5185 |         53 |        43 |         |
+| 1340229558 |      0 |      2613 |     1409 |     4049 |    2419 |      4784 |     3381 |   4948 |   10097 |         57 |        40 |         |
+| 1340229559 |      0 |       438 |     1616 |     1297 |    4130 |      2317 |     6057 |  12810 |  184162 |         50 |        56 |         |
+| 1340229560 |      0 |      1976 |     2660 |     7300 |    5489 |      5101 |     3020 |  10564 |   13617 |         64 |        67 |         |
+| 1340229561 |      0 |      3559 |     4133 |     6696 |    5934 |      2822 |    23207 |   8103 |   15320 |         57 |        70 |         |
+| 1340229562 |      0 |       812 |     3373 |     3133 |    7703 |     17726 |     6897 |  54966 |  143420 |         40 |        64 |         |
+| 1340229563 |      0 |      6667 |     6829 |    10165 |   25519 |     24609 |    85072 | 240138 |  198194 |         34 |        61 |         |
+| 1340229564 |      0 |      2952 |     8474 |    20454 |    8014 |      8553 |    32825 | 154300 |  936155 |         20 |        57 |         |
+| 1340229565 |      0 |      3875 |     3082 |     9643 |    5095 |      6947 |     5616 |  24947 |   59565 |         23 |        44 |         |
+| 1340229566 |      0 |      6780 |     8592 |     9355 |    1226 |     27212 |     6227 |  18259 |   70961 |         37 |        56 |         |
+| 1340229567 |      0 |      5022 |     5286 |     8248 |   11726 |     21470 |    15820 |  25245 |   41331 |         51 |        63 |         |
+
+#+name: gnuplot-example
+#+begin_src gnuplot :var data=example :exports both :file example.png
+reset
+set terminal png size 1024,800
+
+set multiplot layout 7,1
+
+
+unset title
+
+set tmargin 0
+set bmargin 0
+set lmargin 8
+set rmargin 2
+
+set grid
+
+set xtics format ""
+
+set ylabel "EEG"
+set ytics 
+
+set yrange [0 to 2000000]
+plot data u 1:10 w lines title 'D' axis x1y1 lt rgb '#0000cc'
+plot data u 1:9 w lines title 'T' axis x1y1 lt rgb '#0000ff'
+set yrange [0 to 100000]
+plot data u 1:8 w lines title '+A' lt rgb '#00ffff', data u 1:7 with lines title '-A'  lt rgb '#0088ff' 
+plot data u 1:6 w lines title '+B' lt rgb '#00aa00', data u 1:5 with lines title '-B'  lt rgb '#00ff00'
+plot data u 1:4 w lines title '+G' lt rgb '#ff0000', data u 1:3 with lines title '-G'  lt rgb '#ffaa00'
+
+set xlabel "Time"
+
+set yrange [0 to 100]
+
+plot data u 1:11 lt rgb '#00cccc' w lines title 'eM' axis x1y1, \
+     data u 1:12 lt rgb '#ffcc00' w lines title 'eA' axis x1y1 
+
+unset multiplot
+#+end_src
+
+#+RESULTS: gnuplot-example
+[[file:example.png]]
+
+
+* Usage Examples
+
+** Basic testing code
 
 	This is the test code that I have been using, just to make sure that I can actually connect to the mindwave and make it do stuff.
 
@@ -51,12 +147,17 @@ emacs.
 #+end_src
 
 	
-*** Example one: gather data into an org buffer
+** Example one: gather data into an org buffer
+
+	In this example, you can see how to use the base mindwave hooks to capture data into an org buffer.   This actually is far more then a simple example, and is really a full working suite of tools that you can use to examine your neurological state.
+
+	However, I am not a neuroscientist, I am a computer programmer.  If you happen to be a neuroscientist, psychologist or other scientist who can help out my process, I would LOVE to hear from you.  
+ 
 
 #+begin_src emacs-lisp  :tangle gather-into-org.el :noweb yes
 ;;; mindwave-emacs.el --- Neurosky mindwave support
 
-;; Copyright (C) 2012 Jonathan Arkell
+o;; Copyright (C) 2012 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
 ;; Created: 16 June 2012
@@ -65,9 +166,13 @@ emacs.
 ;; This file is not part of GNU Emacs.
 ;; Released under the GPL     
 
+(provide 'mindwave-emacs)
+
 <<dg-basic-setup>>
 <<dg-marks>>
+<<dg-collect>>
 <<dg-write>>
+<<dg-results-table>>
 <<dg-mark-window>>
 <<dg-timed-recording>>
 
@@ -78,7 +183,8 @@ When you purchase a mindwave, it doesn't actually come with any long-termdata lo
 I wanted something simple that would provide that for me.
 
 This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
-
+*** Set up the bacis and get a file for writing ready
+**** TODO change the dependence on Brain.org to something that can be set with customize. 
 Note, that the code assumes that you want everything put in a buffer called ~Brain.org~.
 
 #+name: dg-basic-setup
@@ -88,6 +194,60 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
   
   (defvar dg-mindwave/org-buffer "Brain.org")
     
+#+end_src
+
+*** Marks
+
+   The basic concept of this data gathering scheme is the concept of
+   'marks'.  During the examination of brainwaves, there may be
+   external or internal stimulus that trigger a sensation which may
+   (or may not) trigger a change in brainwave state.  that brainwave
+   state should then be stored on the table for later analysis. 
+
+   Right now a very simple interface is defined and provided.  One can
+   either insert a generic "mark" into the table, and insert a
+   prompted for mark.  A little later we will create a buffer that
+   takes alpha characters as marks.
+
+   - dg-mindwave/generic-mark :: Inserts a generic mark called "mark".
+   - dg-mindwave/mark :: Prompt for a mark name, and mark it with
+        that mark.  
+
+   Note, that the act of prompting for a mark name already skews the
+   results, right?
+
+#+name: dg-marks
+#+begin_src emacs-lisp :tangle no
+  (defvar dg-mindwave/mark nil)
+
+  (defun dg-mindwave/generic-mark ()
+    "Used to generically mark a section of the table"
+    (interactive)
+    (dg-mindwave/mark "mark"))
+  
+  (defun dg-mindwave/mark (mark)
+    "Set a mark on the section of a table"
+    (interactive "sMark: ")
+    (setq dg-mindwave/mark mark))
+#+end_src
+
+**** TODO sk for a symbol, but confirt to string in dg-mindwave/mark
+
+**** TODO figure out a much better interface for marks
+
+	 Right now the current mark implementation is clunky at best.  In
+	 my ideal work I would like to have a way to receive these mark
+	 inputs from the mindwave wearer in as unobtrusive a way as
+	 possible.
+
+*** Data collection
+
+   This is where the magic happens.  A hook is set up to read the
+   various values from the mindwave output, and then write them into
+   an org-mode table. 
+
+#+name: dg-collect
+#+begin_src emacs-lisp
   (defun dg-mindwave/if-assoc (key lst)
     (if (assoc key lst)
         (number-to-string (cdr (assoc key lst)))
@@ -103,24 +263,6 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
                  keylist
                  " | ")))
   
-#+end_src
-
-#+name: dg_marks
-#+begin_src emacs-lisp :tangle no
-  (defvar dg-mindwave/mark nil)
-
-  (defun dg-mindwave/generic-mark ()
-    "Used to generically mark a section of the table"
-    (interactive)
-    (dg-mindwave/mark "mark"))
-  
-  (defun dg-mindwave/mark (mark)
-    "Set a mark on the section of a table"
-    (setq dg-mindwave/mark mark))
-#+end_src
-
-#+name: dg-write
-#+begin_src emacs-lisp :tangle no
   (defun dg-mindwave/collect-and-write (output)
     "Hook function to gather and write data to the table."
         (let* ((out (json-read-from-string output))
@@ -169,7 +311,23 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
     (interactive)
     (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
     )
-  
+#+end_src
+
+***  Results Table 
+
+	In my simple explorations, I found it handy to have a secondary
+	table generated from the first that shows various simple
+	statistical qualities.  
+
+	Again, I am not a scientist, but I do find these result tables to
+	be fairly informative.   If you have any ideas on how to make them
+	better, let me know. 
+
+	Note, that for now the code formatting, especially of the org-mode
+	calc table is kinda yucky and could be better.
+
+#+name dg-results-table
+#+begin_src emacs-lisp  
   (defun dg-mindwave/make-results-table (name)
     "Generate a results table for a mindwave session"
     (interactive "sMindwave Session Name: ")
@@ -180,17 +338,16 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
     (insert "\n")
     (insert " |         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |") (insert "\n")
     (insert " |---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|") (insert "\n")
-    (insert " | vmean   | 0.061611374 | 12192.720 | 15232.820 | 19399.642 | 15180.616 | 17033.287 | 22201.699 | 76134.531 | 270353.25 |  53.241706 | 53.424171 |") (insert "\n")
-    (insert " | vmedian |           0 |    8132.5 |     10014 |   14247.5 |    9695.5 |    8411.5 |    9076.5 |   23773.5 |     62936 |         54 |        56 |") (insert "\n")
-    (insert " | vmax    |          26 |     86970 |    152111 |    192200 |    260706 |    363667 |    799014 |    820033 |   2920134 |        100 |       100 |") (insert "\n")
-    (insert " | vmin    |           0 |       303 |       378 |       638 |       342 |       436 |       311 |      2025 |       300 |          0 |         0 |") (insert "\n")
-    (insert " | vsdev   |   1.2656602 | 12190.021 | 15797.156 | 17531.918 | 20699.664 | 29733.997 | 51731.083 | 124792.48 | 449634.67 |  22.641340 | 17.949459 |") (insert "\n")
-  
-  (insert (concat "    #+TBLFM: @2$2=vmean(remote(" name ",@II$2..@III$2))::@3$2=vmedian(remote(" name ",@II$2..@III$2))::@4$2=vmax(remote(" name ",@II$2..@III$2))::@5$2=vmin(remote(" name ",@II$2..@III$2))::@6$2=vsdev(remote(" name ",@II$2..@III$2))::@2$3=vmean(remote(" name ",@II$3..@III$3))::@3$3=vmedian(remote(" name ",@II$3..@III$3))::@4$3=vmax(remote(" name ",@II$3..@III$3))::@5$3=vmin(remote(" name ",@II$3..@III$3))::@6$3=vsdev(remote(" name ",@II$3..@III$3))::@2$4=vmean(remote(" name ",@II$4..@III$4))::@3$4=vmedian(remote(" name ",@II$4..@III$4))::@4$4=vmax(remote(" name ",@II$4..@III$4))::@5$4=vmin(remote(" name ",@II$4..@III$4))::@6$4=vsdev(remote(" name ",@II$4..@III$4))::@2$5=vmean(remote(" name ",@II$5..@III$5))::@3$5=vmedian(remote(" name ",@II$5..@III$5))::@4$5=vmax(remote(" name ",@II$5..@III$5))::@5$5=vmin(remote(" name ",@II$5..@III$5))::@6$5=vsdev(remote(" name ",@II$5..@III$5))::@2$6=vmean(remote(" name ",@II$6..@III$6))::@3$6=vmedian(remote(" name ",@II$6..@III$6))::@4$6=vmax(remote(" name ",@II$6..@III$6))::@5$6=vmin(remote(" name ",@II$6..@III$6))::@6$6=vsdev(remote(" name ",@II$6..@III$6))::@2$7=vmean(remote(" name ",@II$7..@III$7))::@3$7=vmedian(remote(" name ",@II$7..@III$7))::@4$7=vmax(remote(" name ",@II$7..@III$7))::@5$7=vmin(remote(" name ",@II$7..@III$7))::@6$7=vsdev(remote(" name ",@II$7..@III$7))::@2$8=vmean(remote(" name ",@II$8..@III$8))::@3$8=vmedian(remote(" name ",@II$8..@III$8))::@4$8=vmax(remote(" name ",@II$8..@III$8))::@5$8=vmin(remote(" name ",@II$8..@III$8))::@6$8=vsdev(remote(" name ",@II$8..@III$8))::@2$9=vmean(remote(" name ",@II$9..@III$9))::@3$9=vmedian(remote(" name ",@II$9..@III$9))::@4$9=vmax(remote(" name ",@II$9..@III$9))::@5$9=vmin(remote(" name ",@II$9..@III$9))::@6$9=vsdev(remote(" name ",@II$9..@III$9))::@2$10=vmean(remote(" name ",@II$10..@III$10))::@3$10=vmedian(remote(" name ",@II$10..@III$10))::@4$10=vmax(remote(" name ",@II$10..@III$10))::@5$10=vmin(remote(" name ",@II$10..@III$10))::@6$10=vsdev(remote(" name ",@II$10..@III$10))::@2$11=vmean(remote(" name ",@II$11..@III$11))::@3$11=vmedian(remote(" name ",@II$11..@III$11))::@4$11=vmax(remote(" name ",@II$11..@III$11))::@5$11=vmin(remote(" name ",@II$11..@III$11))::@6$11=vsdev(remote(" name ",@II$11..@III$11))::@2$12=vmean(remote(" name ",@II$12..@III$12))::@3$12=vmedian(remote(" name ",@II$12..@III$12))::@4$12=vmax(remote(" name ",@II$12..@III$12))::@5$12=vmin(remote(" name ",@II$12..@III$12))::@6$12=vsdev(remote(" name ",@II$12..@III$12))")))
+    (insert " | vmean   |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmedian |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmax    |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmin    |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vsdev   |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert (concat "    #+TBLFM: @2$2=vmean(remote(" name ",@II$2..@III$2))::@3$2=vmedian(remote(" name ",@II$2..@III$2))::@4$2=vmax(remote(" name ",@II$2..@III$2))::@5$2=vmin(remote(" name ",@II$2..@III$2))::@6$2=vsdev(remote(" name ",@II$2..@III$2))::@2$3=vmean(remote(" name ",@II$3..@III$3))::@3$3=vmedian(remote(" name ",@II$3..@III$3))::@4$3=vmax(remote(" name ",@II$3..@III$3))::@5$3=vmin(remote(" name ",@II$3..@III$3))::@6$3=vsdev(remote(" name ",@II$3..@III$3))::@2$4=vmean(remote(" name ",@II$4..@III$4))::@3$4=vmedian(remote(" name ",@II$4..@III$4))::@4$4=vmax(remote(" name ",@II$4..@III$4))::@5$4=vmin(remote(" name ",@II$4..@III$4))::@6$4=vsdev(remote(" name ",@II$4..@III$4))::@2$5=vmean(remote(" name ",@II$5..@III$5))::@3$5=vmedian(remote(" name ",@II$5..@III$5))::@4$5=vmax(remote(" name ",@II$5..@III$5))::@5$5=vmin(remote(" name ",@II$5..@III$5))::@6$5=vsdev(remote(" name ",@II$5..@III$5))::@2$6=vmean(remote(" name ",@II$6..@III$6))::@3$6=vmedian(remote(" name ",@II$6..@III$6))::@4$6=vmax(remote(" name ",@II$6..@III$6))::@5$6=vmin(remote(" name ",@II$6..@III$6))::@6$6=vsdev(remote(" name ",@II$6..@III$6))::@2$7=vmean(remote(" name ",@II$7..@III$7))::@3$7=vmedian(remote(" name ",@II$7..@III$7))::@4$7=vmax(remote(" name ",@II$7..@III$7))::@5$7=vmin(remote(" name ",@II$7..@III$7))::@6$7=vsdev(remote(" name ",@II$7..@III$7))::@2$8=vmean(remote(" name ",@II$8..@III$8))::@3$8=vmedian(remote(" name ",@II$8..@III$8))::@4$8=vmax(remote(" name ",@II$8..@III$8))::@5$8=vmin(remote(" name ",@II$8..@III$8))::@6$8=vsdev(remote(" name ",@II$8..@III$8))::@2$9=vmean(remote(" name ",@II$9..@III$9))::@3$9=vmedian(remote(" name ",@II$9..@III$9))::@4$9=vmax(remote(" name ",@II$9..@III$9))::@5$9=vmin(remote(" name ",@II$9..@III$9))::@6$9=vsdev(remote(" name ",@II$9..@III$9))::@2$10=vmean(remote(" name ",@II$10..@III$10))::@3$10=vmedian(remote(" name ",@II$10..@III$10))::@4$10=vmax(remote(" name ",@II$10..@III$10))::@5$10=vmin(remote(" name ",@II$10..@III$10))::@6$10=vsdev(remote(" name ",@II$10..@III$10))::@2$11=vmean(remote(" name ",@II$11..@III$11))::@3$11=vmedian(remote(" name ",@II$11..@III$11))::@4$11=vmax(remote(" name ",@II$11..@III$11))::@5$11=vmin(remote(" name ",@II$11..@III$11))::@6$11=vsdev(remote(" name ",@II$11..@III$11))::@2$12=vmean(remote(" name ",@II$12..@III$12))::@3$12=vmedian(remote(" name ",@II$12..@III$12))::@4$12=vmax(remote(" name ",@II$12..@III$12))::@5$12=vmin(remote(" name ",@II$12..@III$12))::@6$12=vsdev(remote(" name ",@II$12..@III$12))")))
   
 #+end_src
 
-***** Results table (basic)
+***** Results Example (basic)
 
 |         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |
 |---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|
@@ -202,9 +359,19 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
 |         |             |           |           |           |           |           |           |           |           |            |           |
 	 #+TBLFM: @2$2=vmean(remote(bbreak,@II$2..@III$2))::@3$2=vmedian(remote(bbreak,@II$2..@III$2))::@4$2=vmax(remote(bbreak,@II$2..@III$2))::@5$2=vmin(remote(bbreak,@II$2..@III$2))::@6$2=vsdev(remote(bbreak,@II$2..@III$2))::@2$3=vmean(remote(bbreak,@II$3..@III$3))::@3$3=vmedian(remote(bbreak,@II$3..@III$3))::@4$3=vmax(remote(bbreak,@II$3..@III$3))::@5$3=vmin(remote(bbreak,@II$3..@III$3))::@6$3=vsdev(remote(bbreak,@II$3..@III$3))::@2$4=vmean(remote(bbreak,@II$4..@III$4))::@3$4=vmedian(remote(bbreak,@II$4..@III$4))::@4$4=vmax(remote(bbreak,@II$4..@III$4))::@5$4=vmin(remote(bbreak,@II$4..@III$4))::@6$4=vsdev(remote(bbreak,@II$4..@III$4))::@2$5=vmean(remote(bbreak,@II$5..@III$5))::@3$5=vmedian(remote(bbreak,@II$5..@III$5))::@4$5=vmax(remote(bbreak,@II$5..@III$5))::@5$5=vmin(remote(bbreak,@II$5..@III$5))::@6$5=vsdev(remote(bbreak,@II$5..@III$5))::@2$6=vmean(remote(bbreak,@II$6..@III$6))::@3$6=vmedian(remote(bbreak,@II$6..@III$6))::@4$6=vmax(remote(bbreak,@II$6..@III$6))::@5$6=vmin(remote(bbreak,@II$6..@III$6))::@6$6=vsdev(remote(bbreak,@II$6..@III$6))::@2$7=vmean(remote(bbreak,@II$7..@III$7))::@3$7=vmedian(remote(bbreak,@II$7..@III$7))::@4$7=vmax(remote(bbreak,@II$7..@III$7))::@5$7=vmin(remote(bbreak,@II$7..@III$7))::@6$7=vsdev(remote(bbreak,@II$7..@III$7))::@2$8=vmean(remote(bbreak,@II$8..@III$8))::@3$8=vmedian(remote(bbreak,@II$8..@III$8))::@4$8=vmax(remote(bbreak,@II$8..@III$8))::@5$8=vmin(remote(bbreak,@II$8..@III$8))::@6$8=vsdev(remote(bbreak,@II$8..@III$8))::@2$9=vmean(remote(bbreak,@II$9..@III$9))::@3$9=vmedian(remote(bbreak,@II$9..@III$9))::@4$9=vmax(remote(bbreak,@II$9..@III$9))::@5$9=vmin(remote(bbreak,@II$9..@III$9))::@6$9=vsdev(remote(bbreak,@II$9..@III$9))::@2$10=vmean(remote(bbreak,@II$10..@III$10))::@3$10=vmedian(remote(bbreak,@II$10..@III$10))::@4$10=vmax(remote(bbreak,@II$10..@III$10))::@5$10=vmin(remote(bbreak,@II$10..@III$10))::@6$10=vsdev(remote(bbreak,@II$10..@III$10))::@2$11=vmean(remote(bbreak,@II$11..@III$11))::@3$11=vmedian(remote(bbreak,@II$11..@III$11))::@4$11=vmax(remote(bbreak,@II$11..@III$11))::@5$11=vmin(remote(bbreak,@II$11..@III$11))::@6$11=vsdev(remote(bbreak,@II$11..@III$11))::@2$12=vmean(remote(bbreak,@II$12..@III$12))::@3$12=vmedian(remote(bbreak,@II$12..@III$12))::@4$12=vmax(remote(bbreak,@II$12..@III$12))::@5$12=vmin(remote(bbreak,@II$12..@III$12))::@6$12=vsdev(remote(bbreak,@II$12..@III$12))
 
+**** TODO fix formatting of the TBLFM line
+**** TODO make the lisp function re-calc the table after insertion
 
+*** Window for mark input
 
-**** Window for mark input
+	The mark window is a very simple mark interface.  It will allow
+	you to use the lower case letters a through z to insert that
+	letter as a mark, which can be used as a mnemonic for various
+	situations.
+
+	Right now the buffer is just blank, but I will be working on
+	improving it in the future.
+
 #+name dg-mark-window
 #+begin_src emacs-lisp 
   (defun dg-mindwave/create-input-buffer ()
@@ -237,22 +404,33 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
     (local-set-key "w" '(lambda () (interactive) (dg-mindwave/mark "w")))
     (local-set-key "x" '(lambda () (interactive) (dg-mindwave/mark "x")))
     (local-set-key "y" '(lambda () (interactive) (dg-mindwave/mark "y")))
-    (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))
-  
+    (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))  
 #+end_src
 
+**** TODO Make the buffer keep a record of the marks used.
+**** TODO have some kind of way to input inside the mark buffer the meaning of various marks
+**** TODO In the mark buffer, the eeg and signal scores should be displayed. 
 
-**** Timed Recordings
+*** Timed Recordings
 
-Timed recordings are for micro-experimentation of your EEG.  The idea is that you record EEG activity in 15 second chunks, which each chunk being a different activity.  
+Timed recordings are for micro-experimentation of your EEG.  The idea
+is that you record EEG activity in 15 second chunks, which each chunk
+being a different activity.
 
-  1. a 'whatever chunk', and is basically 15 seconds of "whatever is going on right now".
+  1. a 'whatever chunk', and is basically 15 seconds of "whatever is
+     going on right now". 
   2. a 15 second chunk of eyes closed and relaxing
   3. a 15 second chunk of experimentation or calibration, for instance:
 	 - eyes closed and relaxing
 	 - eyes opened and relaxing
 	 - eyes closed and breathing deeply
 	 - eyes open and doing complicated math problems.
+
+This can be used for self experimentation.  At the 15 second mark,
+Emacs will beep at you and tell you to close your eyes.  At the 30
+second mark, it will beep at you and insert the name of the session as
+a mark.  finally, it will beep at the 45 second mark and stop the
+recording session.
 
 #+name: dg-timed-recording
 #+begin_src emacs-lisp
@@ -275,7 +453,7 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
 #+end_src
 	 
 
-*** Example two: solarized mind
+** Example two: solarized mind
 #+begin_src emacs-lisp :tangle solarized-mind.el :noweb yes
 ;;; solarized-mind.el --- changes emacs interface according to brainstate
 
@@ -297,7 +475,7 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
 	- Attention :: Level of 'solarized purity of background color'.  The more attention, the more blue the solarized background.
 	- Meditation :: Cursor blink rate, from 0.25 (less meditative) to 1 (more)
 
-**** Set up Hooks
+*** Set up Hooks
 
 	 
 
@@ -306,8 +484,6 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
   
   
   (defconst solarized-mind/brain-ring-size 30)
-  
-  (setq solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
   
   (defvar solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
   (defvar solarized-mind/ring-reset-counter 0)
@@ -357,7 +533,7 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
 #+end_src
 
 
-**** Medi-Curosr
+*** Medi-Curosr
 
 	 This is by far the easiest one to do, so lets do it first.
 
@@ -379,7 +555,7 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
     (should (eql (solarized-mind/set-medicursor 0  ) 0.25)))
 #+end_src
 
-**** Solarized Mind
+*** Solarized Mind
 #+name: sm-solarizer
 #+begin_src emacs-lisp :tangle no
     (require 'hexrgb)
@@ -413,12 +589,14 @@ Timed recordings are for micro-experimentation of your EEG.  The idea is that yo
   (set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
 #+end_src
 
-* Basic House keeping
+* The code
+
+** Basic House keeping
 #+begin_src emacs-lisp :tangle yes
 (require 'json)
 #+end_src
 
-** Set up the client
+** Set Up the client 
 *** Basic constants
 #+begin_src emacs-lisp :tangle yes
   (defvar mindwave-host "localhost")
@@ -459,20 +637,21 @@ According to the documentation of make-comint, if a running process is on the bu
   
 #+end_src
 
-*** Sending Data
+** Sending Data
+#+name: get raw
 #+begin_src emacs-lisp :tangle yes
 (defun mindwave-send-string (str)
   "Helper function to send STRING directly to the mindwave.
 Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
   (comint-send-string mindwave-process str))
 #+end_src
-*** Recieving Data
+** Recieving Data
 
 Mindwave emacs sets up 3 hooks:  
-*** The hooks
+** The hooks
 **** ~mindwave-hook~
 Called whenever there is a packet that mindwave emacs doesn't natively understand.  The standard 1-packet-per-second packet is an example of this:
-#+begin_src json
+#+begin_example
 {
   "eSense":{
     "attention":47,
@@ -490,7 +669,7 @@ Called whenever there is a packet that mindwave emacs doesn't natively understan
   },
   "poorSignalLevel":0
 }
-#+end_src
+#+end_example
 **** ~mindwave-blink-hook~
 Called whenever the mindwave detects a blink.
 
@@ -531,6 +710,9 @@ Note that due to the buffering involved, I am not so sure how much value there r
 
 ** TODO Ask for authorisation
 
+   For whatever reason, I don't recall having to do this.  But it's
+   provided here just in case.
+
 #+begin_src emacs-lisp :tangle yes
 (defvar mindwave-authorized-p nil "whether or not app is authorized")
 #+end_src 
@@ -552,8 +734,6 @@ Note that due to the buffering involved, I am not so sure how much value there r
 ** Configure
 *** Ask for raw output
 #+begin_src emacs-lisp :tangle yes
-(mindwave-get-raw nil)
-
 (defun mindwave-get-raw (raw)
   "Return raw output from mindwave.
 RAW is a boolean value as to whether or not to listen for raw values"
@@ -561,100 +741,11 @@ RAW is a boolean value as to whether or not to listen for raw values"
                                       ("format" . "Json")))))
 #+end_src
 
-#+begin_src 
+#+begin_src emacs-lisp
 
 (provide 'mindwave-emacs)
 
 ;;; mindwave-emacs.el ends here
 #+end_src
 
-* Output Examples
-
-#+tblname: success
-|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
-|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark    |
-|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
-| 1340229522 |      0 |      6715 |     8839 |     7397 |   12358 |      9428 |    19939 |  21762 |   45012 |         83 |        40 |         |
-| 1340229523 |      0 |      5293 |     7680 |    21524 |    6436 |      7380 |    36453 |  31707 |   61168 |         83 |        61 |         |
-| 1340229524 |      0 |      2659 |    11910 |     8315 |    3606 |      4350 |    12728 |   6604 |   20185 |         78 |        69 |         |
-| 1340229525 |      0 |     42703 |    39375 |    36054 |  133924 |    211462 |   100667 | 576943 |  644892 |         53 |        74 |         |
-| 1340229526 |      0 |     13471 |     7929 |    14365 |   62578 |     20617 |     4383 | 256884 |  906958 |         44 |        51 |         |
-| 1340229527 |      0 |      2271 |     6518 |     6288 |   13430 |     28688 |     8927 |  90855 | 1118085 |         29 |        44 |         |
-| 1340229528 |      0 |      4299 |     5690 |     6973 |    7985 |      8977 |    15999 |  69443 |  114812 |         14 |        34 |         |
-| 1340229529 |      0 |      2968 |     6811 |     6179 |    8471 |      8756 |     4000 |  55889 |   74533 |         21 |        24 |         |
-| 1340229530 |      0 |      1704 |     6543 |     9922 |    2012 |      1750 |    23099 |  14680 |   90702 |         35 |        50 |         |
-| 1340229531 |      0 |      2809 |     2879 |     6017 |   15968 |      7552 |     9412 |   5696 |   71379 |         50 |        56 |         |
-| 1340229532 |      0 |      7705 |     6187 |     7244 |   16578 |     31379 |    12079 | 148379 |   60969 |         44 |        54 |         |
-| 1340229533 |      0 |      5949 |     8210 |     8594 |    6521 |     13802 |    30518 |  39344 |   25372 |         47 |        69 |         |
-| 1340229534 |      0 |      7649 |     4027 |     9078 |    5012 |      4273 |    18162 |  22758 |   38168 |         43 |        63 |         |
-| 1340229535 |      0 |      1678 |     2017 |     3799 |    6433 |      3366 |     4245 |  29764 |    5899 |         35 |        51 |         |
-| 1340229536 |      0 |      1189 |     6646 |     3084 |    3522 |      4005 |     6985 |  14239 |   82198 |         44 |        57 |         |
-| 1340229537 |      0 |      2112 |     9706 |    33960 |   14244 |     26535 |    16577 |  23013 |   21533 |         60 |        56 |         |
-| 1340229538 |      0 |      1905 |     1391 |     8818 |    6341 |     13640 |     4823 |  22706 |   12155 |         60 |        54 | relaxed |
-| 1340229539 |      0 |      1894 |     8464 |     9669 |    4472 |      5817 |    10351 |  12945 |    2834 |         70 |        66 |         |
-| 1340229540 |      0 |      1597 |     3099 |    21082 |    1943 |      8788 |     8036 |  30336 |    6669 |         81 |        61 |         |
-| 1340229541 |      0 |      1861 |     5657 |    13161 |    5321 |     12381 |     2265 |  15898 |   11400 |         81 |        57 |         |
-| 1340229542 |      0 |      1538 |     1899 |     6201 |    5171 |      3724 |     6658 |   1750 |    6385 |         90 |        63 |         |
-| 1340229543 |      0 |      1692 |     3044 |     5080 |    5368 |      5631 |     1747 |   7145 |    3333 |         90 |        60 |         |
-| 1340229544 |      0 |      2217 |     3062 |     4332 |    6559 |      3085 |     7375 |  21089 |   19816 |         78 |        60 |         |
-| 1340229546 |      0 |      2564 |     2950 |     3733 |    7312 |      5809 |    18199 |   5943 |   10327 |         57 |        61 |         |
-| 1340229547 |      0 |      2400 |     5140 |     5839 |    7216 |      8070 |     6510 |  13131 |    2961 |         53 |        64 |         |
-| 1340229548 |      0 |      1836 |     1461 |    10593 |    1334 |     21543 |     5324 |  43509 |   71069 |         53 |        69 |         |
-| 1340229549 |      0 |      2358 |     3557 |     4657 |    4135 |      1947 |     3002 |   8021 |    1432 |         57 |        67 |         |
-| 1340229550 |      0 |      1662 |     1694 |     3111 |    3296 |      2404 |     7591 |   5451 |    6358 |         63 |        63 |         |
-| 1340229551 |      0 |       935 |     3135 |     8643 |    5870 |      6242 |     2730 |   6181 |    1459 |         70 |        60 |         |
-| 1340229552 |      0 |      1835 |     3510 |     4576 |    7218 |      2036 |     2749 |   4368 |    7480 |         81 |        54 |         |
-| 1340229553 |      0 |      1021 |     3251 |     5087 |    5483 |      2280 |     6480 |  11058 |   16476 |         78 |        57 | another |
-| 1340229554 |      0 |      2565 |     1468 |    10513 |   12150 |     21771 |    16130 |  21917 |   17520 |         78 |        60 |         |
-| 1340229555 |      0 |      5049 |     2925 |    14554 |    9252 |      8270 |     2454 |  74591 |    5747 |         66 |        44 |         |
-| 1340229556 |      0 |      2296 |     2791 |     2779 |    2551 |      1375 |     2614 |  29351 |   40429 |         50 |        37 |         |
-| 1340229557 |      0 |      2762 |     2659 |     6519 |    7152 |      4360 |    10126 |   3559 |    5185 |         53 |        43 |         |
-| 1340229558 |      0 |      2613 |     1409 |     4049 |    2419 |      4784 |     3381 |   4948 |   10097 |         57 |        40 |         |
-| 1340229559 |      0 |       438 |     1616 |     1297 |    4130 |      2317 |     6057 |  12810 |  184162 |         50 |        56 |         |
-| 1340229560 |      0 |      1976 |     2660 |     7300 |    5489 |      5101 |     3020 |  10564 |   13617 |         64 |        67 |         |
-| 1340229561 |      0 |      3559 |     4133 |     6696 |    5934 |      2822 |    23207 |   8103 |   15320 |         57 |        70 |         |
-| 1340229562 |      0 |       812 |     3373 |     3133 |    7703 |     17726 |     6897 |  54966 |  143420 |         40 |        64 |         |
-| 1340229563 |      0 |      6667 |     6829 |    10165 |   25519 |     24609 |    85072 | 240138 |  198194 |         34 |        61 |         |
-| 1340229564 |      0 |      2952 |     8474 |    20454 |    8014 |      8553 |    32825 | 154300 |  936155 |         20 |        57 |         |
-| 1340229565 |      0 |      3875 |     3082 |     9643 |    5095 |      6947 |     5616 |  24947 |   59565 |         23 |        44 |         |
-| 1340229566 |      0 |      6780 |     8592 |     9355 |    1226 |     27212 |     6227 |  18259 |   70961 |         37 |        56 |         |
-| 1340229567 |      0 |      5022 |     5286 |     8248 |   11726 |     21470 |    15820 |  25245 |   41331 |         51 |        63 |         |
-#+begin_src gnuplot :var data=success :exports code :file success.png
-reset
-set terminal png size 1024,800
-
-set multiplot layout 7,1
-
-
-unset title
-
-set tmargin 0
-set bmargin 0
-set lmargin 8
-set rmargin 2
-
-set grid
-
-set xtics format ""
-
-set ylabel "EEG"
-set ytics 
-
-set yrange [0 to 2000000]
-plot data u 1:10 w lines title 'D' axis x1y1 lt rgb '#0000cc'
-plot data u 1:9 w lines title 'T' axis x1y1 lt rgb '#0000ff'
-set yrange [0 to 100000]
-plot data u 1:8 w lines title '+A' lt rgb '#00ffff', data u 1:7 with lines title '-A'  lt rgb '#0088ff' 
-plot data u 1:6 w lines title '+B' lt rgb '#00aa00', data u 1:5 with lines title '-B'  lt rgb '#00ff00'
-plot data u 1:4 w lines title '+G' lt rgb '#ff0000', data u 1:3 with lines title '-G'  lt rgb '#ffaa00'
-
-set xlabel "Time"
-
-set yrange [0 to 100]
-
-plot data u 1:11 lt rgb '#00cccc' w lines title 'eM' axis x1y1, \
-     data u 1:12 lt rgb '#ffcc00' w lines title 'eA' axis x1y1 
-
-unset multiplot
-#+end_src
-
+ 
