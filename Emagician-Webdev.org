@@ -42,7 +42,7 @@
 **** TODO Drupal
 
 #+begin_src emacs-lisp
-
+(add-to-list 'auto-mode-alist '("\\.module" . php-mode))
 #+end_src
 	 
 *** TODO Javascript
@@ -59,14 +59,15 @@
 #+begin_src emacs-lisp
   (add-to-list 'load-path "~/projects/slime-js")
   (slime-setup '(slime-js slime-repl))
-  (setq slime-js-swank-command "/usr/local/bin/npm")
-  (setq slime-js-swank-args '("run" "swank"))
+  (setq slime-js-swank-command "/usr/local/bin/swank-js")
+  (setq slime-js-swank-args '())
+;;  (setq slime-js-swank-command "/usr/local/bin/npm")
+;;  (setq slime-js-swank-args '("run" "swank"))
 #+end_src
 
 **** Node Setup
 
 **** TODO http://www.randomsample.de/dru5/node/147
-**** TODO Slime JS
 
 *** TODO JSP
 

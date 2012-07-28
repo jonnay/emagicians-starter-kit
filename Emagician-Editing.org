@@ -116,9 +116,19 @@
 (global-undo-tree-mode)
 #+end_src
 * Movement
+** Ace Jump
 #+begin_src emacs-lisp
 (emagician-expect-package 'ace-jump-mode)
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
-(define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)
+
+(add-hook 'org-mode-hook #'(lambda () (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)))
+#+end_src
+
+*** TODO fix problem with emagician/define-mode-key
+
+#+begin-src emacs-lisp :tangle no
+(emagician/define-mode-key 'org-mode (kbd "C-c C-SPC") 'ace-jump-mode)
+
+(macroexpand '(emagician/define-mode-key 'org-mode "C-c C-SPC" 'ace-jump-mode))
 #+end_src

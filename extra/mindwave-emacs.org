@@ -24,494 +24,9 @@ mindwave-emacs is a chunk of elisp code that uses the
 ThinkGearConnector program to pass off mindwave data directly to
 emacs.
 
-** Usage Examples
-
-*** Basic testing code
-
-	This is the test code that I have been using, just to make sure that I can actually connect to the mindwave and make it do stuff.
-
-#+begin_src emacs-lisp :tangle no
-(mindwave-get-buffer)
-(mindwave-get-raw nil)
-(mindwave-get-raw t)
-
-(setq mindwave-hook nil)
-(setq mindwave-raw-hook '())
-(setq mindwave-blink-hook '())
-
-(run-hook-with-args 'mindwave-blink-hook "foo")
-
-(add-hook 'mindwave-hook 'mindwave-debug-standard)
-(add-hook 'mindwave-raw-hook 'mindwave-debug-raw)
-(add-hook 'mindwave-blink-hook 'mindwave-debug-blink)
-
-(defun mindwave-debug-standard  (o) (message "Standard output: %S" o))
-(defun mindwave-debug-raw (o) (message "Raw: %S" o))
-(defun mindwave-debug-blink (o) (message "Blink: %S" o))
-#+end_src
-
-	
-*** Example one: gather data into an org buffer
-
-#+begin_src emacs-lisp :noweb yes :tangle gather-into-org.el
-;;; mindwave-emacs.el --- Neurosky mindwave support
-
-;; Copyright (C) 2012 Jonathan Arkell
-
-;; Author: Jonathan Arkell <jonnay@jonnay.net>
-;; Created: 16 June 2012
-;; Keywords: comint mindwave
-
-;; This file is not part of GNU Emacs.
-;; Released under the GPL     
-
-#+end_src
-
-When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
-
-I wanted something simple that would provide that for me.
-
-This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
-
-Note, that the code assumes that you want everything put in a buffer called ~Brain.org~.
-
-#+source: dg-basic-setup
-#+begin_src emacs-lisp :tangle no
-  
-  (require 'mindwave-emacs)
-  
-  (defvar dg-mindwave/org-buffer "Brain.org")
-    
-  (defun dg-mindwave/if-assoc (key lst)
-    (if (assoc key lst)
-        (number-to-string (cdr (assoc key lst)))
-        " "))
-  
-  (defun dg-mindwave/get-in (lst key keylist)
-    (let ((innerList (assoc key lst)))
-      (mapconcat '(lambda (el)
-                    (if (and innerList 
-                             (assoc el innerList))
-                         (number-to-string (cdr (assoc el innerList)))
-                      "")) 
-                 keylist
-                 " | ")))
-  
-#+end_src
-
-#+source: dg_marks
-#+begin_src emacs-lisp :tangle no
-  (defvar dg-mindwave/mark nil)
-
-  (defun dg-mindwave/generic-mark ()
-    "Used to generically mark a section of the table"
-    (interactive)
-    (dg-mindwave/mark "mark"))
-  
-  (defun dg-mindwave/mark (mark)
-    "Set a mark on the section of a table"
-    (setq dg-mindwave/mark mark))
-#+end_src
-
-#+source: dg-write
-#+begin_src emacs-lisp :tangle no
-  (defun dg-mindwave/collect-and-write (output)
-    "Hook function to gather and write data to the table."
-        (let* ((out (json-read-from-string output))
-               (string-write (concat "| " 
-                            (format-time-string "%s")
-                            " | "
-                            (dg-mindwave/if-assoc 'poorSignalLevel out) 
-                            " | "
-                            (dg-mindwave/get-in out 'eegPower '(highGamma lowGamma highBeta lowBeta highAlpha lowAlpha theta delta))
-                            " | "
-                            (dg-mindwave/get-in out 'eSense '(attention meditation))
-                            " | "
-                            (when dg-mindwave/mark
-                              (let ((m dg-mindwave/mark))
-                                (setq dg-mindwave/mark)
-                                m))
-                            " | "                          
-                            "\n")))
-          (with-current-buffer dg-mindwave/org-buffer 
-            (goto-char (point-max))
-            (insert string-write))))
-  
-  (defun dg-mindwave/start-recording-session (name)
-    "Sets up an entirely new mindwave session for recording." 
-    (interactive "sMindwave Session Name: ")
-    (with-current-buffer dg-mindwave/org-buffer
-      (goto-char (point-max))
-      (insert "\n\n")
-      (insert "*** ")
-      (insert (current-time-string))
-      (insert "  ")
-      (insert name)
-      (insert "\n")
-      (insert "#+TBLNAME: ")
-      (insert name)
-      (insert "\n")
-      (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
-      (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
-      (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n"))
-    (mindwave-get-buffer)
-    (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
-      (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
-  
-  (defun dg-mindwave/stop-recording-session ()
-    "Stops a recording session"
-    (interactive)
-    (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
-    )
-  
-  (defun dg-mindwave/make-results-table (name)
-    "Generate a results table for a mindwave session"
-    (interactive "sMindwave Session Name: ")
-    (insert "\n")
-    (insert "#+TBLNAME: ")
-    (insert name)
-    (insert "_results")
-    (insert "\n")
-    (insert " |         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |") (insert "\n")
-    (insert " |---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|") (insert "\n")
-    (insert " | vmean   | 0.061611374 | 12192.720 | 15232.820 | 19399.642 | 15180.616 | 17033.287 | 22201.699 | 76134.531 | 270353.25 |  53.241706 | 53.424171 |") (insert "\n")
-    (insert " | vmedian |           0 |    8132.5 |     10014 |   14247.5 |    9695.5 |    8411.5 |    9076.5 |   23773.5 |     62936 |         54 |        56 |") (insert "\n")
-    (insert " | vmax    |          26 |     86970 |    152111 |    192200 |    260706 |    363667 |    799014 |    820033 |   2920134 |        100 |       100 |") (insert "\n")
-    (insert " | vmin    |           0 |       303 |       378 |       638 |       342 |       436 |       311 |      2025 |       300 |          0 |         0 |") (insert "\n")
-    (insert " | vsdev   |   1.2656602 | 12190.021 | 15797.156 | 17531.918 | 20699.664 | 29733.997 | 51731.083 | 124792.48 | 449634.67 |  22.641340 | 17.949459 |") (insert "\n")
-  
-  (insert (concat "    #+TBLFM: @2$2=vmean(remote(" name ",@II$2..@III$2))::@3$2=vmedian(remote(" name ",@II$2..@III$2))::@4$2=vmax(remote(" name ",@II$2..@III$2))::@5$2=vmin(remote(" name ",@II$2..@III$2))::@6$2=vsdev(remote(" name ",@II$2..@III$2))::@2$3=vmean(remote(" name ",@II$3..@III$3))::@3$3=vmedian(remote(" name ",@II$3..@III$3))::@4$3=vmax(remote(" name ",@II$3..@III$3))::@5$3=vmin(remote(" name ",@II$3..@III$3))::@6$3=vsdev(remote(" name ",@II$3..@III$3))::@2$4=vmean(remote(" name ",@II$4..@III$4))::@3$4=vmedian(remote(" name ",@II$4..@III$4))::@4$4=vmax(remote(" name ",@II$4..@III$4))::@5$4=vmin(remote(" name ",@II$4..@III$4))::@6$4=vsdev(remote(" name ",@II$4..@III$4))::@2$5=vmean(remote(" name ",@II$5..@III$5))::@3$5=vmedian(remote(" name ",@II$5..@III$5))::@4$5=vmax(remote(" name ",@II$5..@III$5))::@5$5=vmin(remote(" name ",@II$5..@III$5))::@6$5=vsdev(remote(" name ",@II$5..@III$5))::@2$6=vmean(remote(" name ",@II$6..@III$6))::@3$6=vmedian(remote(" name ",@II$6..@III$6))::@4$6=vmax(remote(" name ",@II$6..@III$6))::@5$6=vmin(remote(" name ",@II$6..@III$6))::@6$6=vsdev(remote(" name ",@II$6..@III$6))::@2$7=vmean(remote(" name ",@II$7..@III$7))::@3$7=vmedian(remote(" name ",@II$7..@III$7))::@4$7=vmax(remote(" name ",@II$7..@III$7))::@5$7=vmin(remote(" name ",@II$7..@III$7))::@6$7=vsdev(remote(" name ",@II$7..@III$7))::@2$8=vmean(remote(" name ",@II$8..@III$8))::@3$8=vmedian(remote(" name ",@II$8..@III$8))::@4$8=vmax(remote(" name ",@II$8..@III$8))::@5$8=vmin(remote(" name ",@II$8..@III$8))::@6$8=vsdev(remote(" name ",@II$8..@III$8))::@2$9=vmean(remote(" name ",@II$9..@III$9))::@3$9=vmedian(remote(" name ",@II$9..@III$9))::@4$9=vmax(remote(" name ",@II$9..@III$9))::@5$9=vmin(remote(" name ",@II$9..@III$9))::@6$9=vsdev(remote(" name ",@II$9..@III$9))::@2$10=vmean(remote(" name ",@II$10..@III$10))::@3$10=vmedian(remote(" name ",@II$10..@III$10))::@4$10=vmax(remote(" name ",@II$10..@III$10))::@5$10=vmin(remote(" name ",@II$10..@III$10))::@6$10=vsdev(remote(" name ",@II$10..@III$10))::@2$11=vmean(remote(" name ",@II$11..@III$11))::@3$11=vmedian(remote(" name ",@II$11..@III$11))::@4$11=vmax(remote(" name ",@II$11..@III$11))::@5$11=vmin(remote(" name ",@II$11..@III$11))::@6$11=vsdev(remote(" name ",@II$11..@III$11))::@2$12=vmean(remote(" name ",@II$12..@III$12))::@3$12=vmedian(remote(" name ",@II$12..@III$12))::@4$12=vmax(remote(" name ",@II$12..@III$12))::@5$12=vmin(remote(" name ",@II$12..@III$12))::@6$12=vsdev(remote(" name ",@II$12..@III$12))")))
-  
-#+end_src
-
-***** Results table (basic)
-
-|         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |
-|---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|
-| vmean   | 0.061611374 | 12192.720 | 15232.820 | 19399.642 | 15180.616 | 17033.287 | 22201.699 | 76134.531 | 270353.25 |  53.241706 | 53.424171 |
-| vmedian |           0 |    8132.5 |     10014 |   14247.5 |    9695.5 |    8411.5 |    9076.5 |   23773.5 |     62936 |         54 |        56 |
-| vmax    |          26 |     86970 |    152111 |    192200 |    260706 |    363667 |    799014 |    820033 |   2920134 |        100 |       100 |
-| vmin    |           0 |       303 |       378 |       638 |       342 |       436 |       311 |      2025 |       300 |          0 |         0 |
-| vsdev   |   1.2656602 | 12190.021 | 15797.156 | 17531.918 | 20699.664 | 29733.997 | 51731.083 | 124792.48 | 449634.67 |  22.641340 | 17.949459 |
-|         |             |           |           |           |           |           |           |           |           |            |           |
-	 #+TBLFM: @2$2=vmean(remote(bbreak,@II$2..@III$2))::@3$2=vmedian(remote(bbreak,@II$2..@III$2))::@4$2=vmax(remote(bbreak,@II$2..@III$2))::@5$2=vmin(remote(bbreak,@II$2..@III$2))::@6$2=vsdev(remote(bbreak,@II$2..@III$2))::@2$3=vmean(remote(bbreak,@II$3..@III$3))::@3$3=vmedian(remote(bbreak,@II$3..@III$3))::@4$3=vmax(remote(bbreak,@II$3..@III$3))::@5$3=vmin(remote(bbreak,@II$3..@III$3))::@6$3=vsdev(remote(bbreak,@II$3..@III$3))::@2$4=vmean(remote(bbreak,@II$4..@III$4))::@3$4=vmedian(remote(bbreak,@II$4..@III$4))::@4$4=vmax(remote(bbreak,@II$4..@III$4))::@5$4=vmin(remote(bbreak,@II$4..@III$4))::@6$4=vsdev(remote(bbreak,@II$4..@III$4))::@2$5=vmean(remote(bbreak,@II$5..@III$5))::@3$5=vmedian(remote(bbreak,@II$5..@III$5))::@4$5=vmax(remote(bbreak,@II$5..@III$5))::@5$5=vmin(remote(bbreak,@II$5..@III$5))::@6$5=vsdev(remote(bbreak,@II$5..@III$5))::@2$6=vmean(remote(bbreak,@II$6..@III$6))::@3$6=vmedian(remote(bbreak,@II$6..@III$6))::@4$6=vmax(remote(bbreak,@II$6..@III$6))::@5$6=vmin(remote(bbreak,@II$6..@III$6))::@6$6=vsdev(remote(bbreak,@II$6..@III$6))::@2$7=vmean(remote(bbreak,@II$7..@III$7))::@3$7=vmedian(remote(bbreak,@II$7..@III$7))::@4$7=vmax(remote(bbreak,@II$7..@III$7))::@5$7=vmin(remote(bbreak,@II$7..@III$7))::@6$7=vsdev(remote(bbreak,@II$7..@III$7))::@2$8=vmean(remote(bbreak,@II$8..@III$8))::@3$8=vmedian(remote(bbreak,@II$8..@III$8))::@4$8=vmax(remote(bbreak,@II$8..@III$8))::@5$8=vmin(remote(bbreak,@II$8..@III$8))::@6$8=vsdev(remote(bbreak,@II$8..@III$8))::@2$9=vmean(remote(bbreak,@II$9..@III$9))::@3$9=vmedian(remote(bbreak,@II$9..@III$9))::@4$9=vmax(remote(bbreak,@II$9..@III$9))::@5$9=vmin(remote(bbreak,@II$9..@III$9))::@6$9=vsdev(remote(bbreak,@II$9..@III$9))::@2$10=vmean(remote(bbreak,@II$10..@III$10))::@3$10=vmedian(remote(bbreak,@II$10..@III$10))::@4$10=vmax(remote(bbreak,@II$10..@III$10))::@5$10=vmin(remote(bbreak,@II$10..@III$10))::@6$10=vsdev(remote(bbreak,@II$10..@III$10))::@2$11=vmean(remote(bbreak,@II$11..@III$11))::@3$11=vmedian(remote(bbreak,@II$11..@III$11))::@4$11=vmax(remote(bbreak,@II$11..@III$11))::@5$11=vmin(remote(bbreak,@II$11..@III$11))::@6$11=vsdev(remote(bbreak,@II$11..@III$11))::@2$12=vmean(remote(bbreak,@II$12..@III$12))::@3$12=vmedian(remote(bbreak,@II$12..@III$12))::@4$12=vmax(remote(bbreak,@II$12..@III$12))::@5$12=vmin(remote(bbreak,@II$12..@III$12))::@6$12=vsdev(remote(bbreak,@II$12..@III$12))
-
-
-
-**** Window for mark input
-#+source dg-mark-window
-#+begin_src emacs-lisp 
-  (defun dg-mindwave/create-input-buffer ()
-    "Create an input buffer so that marks can be handled"
-    (interactive)
-    (pop-to-buffer (get-buffer-create "*mindwave-input*") )
-    (local-set-key " " 'dg-mindwave/generic-mark)
-    (local-set-key "a" '(lambda () (interactive) (dg-mindwave/mark "a")))
-    (local-set-key "b" '(lambda () (interactive) (dg-mindwave/mark "b")))
-    (local-set-key "c" '(lambda () (interactive) (dg-mindwave/mark "c")))
-    (local-set-key "d" '(lambda () (interactive) (dg-mindwave/mark "d")))
-    (local-set-key "e" '(lambda () (interactive) (dg-mindwave/mark "e")))
-    (local-set-key "f" '(lambda () (interactive) (dg-mindwave/mark "f")))
-    (local-set-key "g" '(lambda () (interactive) (dg-mindwave/mark "g")))
-    (local-set-key "h" '(lambda () (interactive) (dg-mindwave/mark "h")))
-    (local-set-key "i" '(lambda () (interactive) (dg-mindwave/mark "i")))
-    (local-set-key "j" '(lambda () (interactive) (dg-mindwave/mark "j")))
-    (local-set-key "k" '(lambda () (interactive) (dg-mindwave/mark "k")))
-    (local-set-key "l" '(lambda () (interactive) (dg-mindwave/mark "l")))
-    (local-set-key "m" '(lambda () (interactive) (dg-mindwave/mark "m")))
-    (local-set-key "n" '(lambda () (interactive) (dg-mindwave/mark "n")))
-    (local-set-key "o" '(lambda () (interactive) (dg-mindwave/mark "o")))
-    (local-set-key "p" '(lambda () (interactive) (dg-mindwave/mark "p")))
-    (local-set-key "q" '(lambda () (interactive) (dg-mindwave/mark "q")))
-    (local-set-key "r" '(lambda () (interactive) (dg-mindwave/mark "r")))
-    (local-set-key "s" '(lambda () (interactive) (dg-mindwave/mark "s")))
-    (local-set-key "t" '(lambda () (interactive) (dg-mindwave/mark "t")))
-    (local-set-key "u" '(lambda () (interactive) (dg-mindwave/mark "u")))
-    (local-set-key "v" '(lambda () (interactive) (dg-mindwave/mark "v")))
-    (local-set-key "w" '(lambda () (interactive) (dg-mindwave/mark "w")))
-    (local-set-key "x" '(lambda () (interactive) (dg-mindwave/mark "x")))
-    (local-set-key "y" '(lambda () (interactive) (dg-mindwave/mark "y")))
-    (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))
-  
-#+end_src
-
-
-**** Timed marks
-#+source: dg-mark-timed
-#+begin_src emacs-lisp
-  (defun dg-mindwave/start-45-second-session (name) 
-    "Start a 45 second session with appropriate marks.  NAME should be a simple name."
-    (interactive "s45 Second Session Name:")
-    (dg-mindwave/start-recording-session name)
-    (run-at-time 15 nil '(lambda ()
-                           (message "Close your Eyes and Relax")
-                           (beep 1) 
-                           (dg-mindwave/mark "relaxed")))
-    (run-at-time 30 nil `(lambda ()
-                           (message ,name)
-                           (beep 1)
-                           (dg-mindwave/mark ,name)))
-    (run-at-time 45 nil '(lambda ()
-                           (beep 1)
-                           (message "stop")
-                           (dg-mindwave/stop-recording-session))))
-#+end_src
-	 
-
-*** Example two: solarized mind
-#+begin_src emacs-lisp :tangle solarized-mind.el :noweb yes
-;;; solarized-mind.el --- changes emacs interface according to brainstate
-
-;; Copyright (C) 2012 Jonathan Arkell
-
-;; Author: Jonathan Arkell <jonnay@jonnay.net>
-;; Created: 16 June 2012
-;; Keywords: comint mindwave
-
-;; This file is not part of GNU Emacs.
-;; Released under the GPL     
-
-  (require 'mindwave-emacs)
-
-#+end_src 
-
-	Assuming you're using the solarized (dark) theme, lets say that you want the background color to change according to how attentive you are.
-	
-	- Attention :: Level of 'solarized purity of background color'.  The more attention, the more blue the solarized background.
-	- Meditation :: Cursor blink rate, from 0.25 (less meditative) to 1 (more)
-
-**** Set up Hooks
-
-#+source: sm-hooksetup
-#+begin_src emacs-lisp :tangle no
-  (defun solarized-mind/mindwave-hook (vals)
-    "Set up hook to solarize your mind, and set up the medicursor."
-    (let ((brain (json-read-from-string vals)))
-      (when (assoc 'eSense brain)
-        (solarized-mind/set-medicursor (cdr (assoc 'meditation (assoc 'eSense brain))))
-        (solarized-mind/set-background (cdr (assoc 'attention  (assoc 'eSense brain)))))))
-  
-  (defun solarized-mind/start ()
-    (interactive)
-    (mindwave-get-buffer)
-    (when (not (member 'solarized-mind/mindwave-hook 'mindwave-hook))
-      (message "Adding Mindwave hook")
-      (add-hook 'mindwave-hook 'solarized-mind/mindwave-hook)))
-  
-  (defun solarized-mind/stop ()
-    (interactive)
-    (remove-hook 'mindwave-hook 'solarized-mind/mindwave-hook))
-  
-#+end_src
-
-
-**** Medi-Curosr
-
-	 This is by far the easiest one to do, so lets do it first.
-
-#+source: sm-medicursor 
-#+begin_src emacs-lisp :tangle no
-  (defun solarized-mind/set-medicursor (med)
-    "Set the cursor to a value from the mindwave"
-    (setq blink-cursor-interval
-          (if ( = 0 med)
-              0.25
-              (+ 0.25
-                 (/ med 100.0)))))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-  (ert-deftest sm-medicursor/setValidRates ()
-    (should (eql (solarized-mind/set-medicursor 100) 1.25))
-    (should (eql (solarized-mind/set-medicursor 50) 0.75))
-    (should (eql (solarized-mind/set-medicursor 0  ) 0.25)))
-#+end_src
-
-**** Solarized Mind
-#+source: sm-solarizer
-#+begin_src emacs-lisp :tangle no
-    (require 'hexrgb)
-  
-  (defun solarized-mind/set-background (att)
-    "Sets the background color"
-    ;(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb att))
-    nil)
-  
-  ;(frame-parameter nil 'background-color)
-  (defun solarized-mind/attention-to-rgb (att)
-    "Takes an attention value (out of 100) and returns a color between #000000 and #002b36"
-    (let ((h (hexrgb-hue "#002b36"))
-          (s (hexrgb-saturation "#002b36"))
-          (v (hexrgb-value "#002b36")))
-      
-                           (hexrgb-hsv-to-hex h 
-                                              s 
-                                              (* v (/ att 100.0)))))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-  (solarized-mind/attention-to-rgb 100)
-  (solarized-mind/attention-to-rgb 50)
-  (solarized-mind/attention-to-rgb 0)
-  (set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
-#+end_src
-
-* Basic House keeping
-#+begin_src emacs-lisp :tangle yes
-(require 'json)
-#+end_src
-
-** Set up the client
-*** Basic constants
-#+begin_src emacs-lisp :tangle yes
-  (defvar mindwave-host "localhost")
-  (defvar mindwave-port 13854)
-  
-  (defvar mindwave-appName "mindwave-emacs")
-  (defvar mindwave-appKey (sha1 mindwave-appName))
-#+end_src
-
-*** Connection
-**** Connection variables
-
-#+begin_src emacs-lisp :tangle yes
-(defvar mindwave-buffer nil "Variable to store the buffer connected to the process")
-(defvar mindwave-process nil "Process that mindwave is connected")
-#+end_src
-
-**** Return lowlevel connection variables 
-According to the documentation of make-comint, if a running process is on the buffer, it is not restarted.  So isntead of trying to maintain state, lets just return the existing process that way.
- 
-#+begin_src emacs-lisp :tangle yes
-  (defun mindwave-get-buffer ()
-    "Returns the buffer for the mindwave connection"
-    (if (and mindwave-process (process-live-p mindwave-process))
-        mindwave-process
-        (progn
-    (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
-    (setq mindwave-process (get-buffer-process mindwave-buffer))
-    (save-excursion
-      (set-buffer mindwave-buffer)
-      (sleep-for 1)
-      (mindwave-authorize)
-      (sleep-for 1)
-      (mindwave-get-raw nil)
-      (sleep-for 1)
-      (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
-    mindwave-buffer)))
-  
-#+end_src
-
-*** Sending Data
-#+begin_src emacs-lisp :tangle yes
-(defun mindwave-send-string (str)
-  "Helper function to send STRING directly to the mindwave.
-Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
-  (comint-send-string mindwave-process str))
-#+end_src
-*** Recieving Data
-
-Mindwave emacs sets up 3 hooks:  
-*** The hooks
-**** ~mindwave-hook~
-Called whenever there is a packet that mindwave emacs doesn't natively understand.  The standard 1-packet-per-second packet is an example of this:
-#+begin_src json
-{
-  "eSense":{
-    "attention":47,
-    "meditation":66
-  },
-  "eegPower":{
-    "delta":4479,
-    "theta":42897,
-    "lowAlpha":6952,
-    "highAlpha":21261,
-    "lowBeta":14623,
-    "highBeta":5238,
-    "lowGamma":2546,
-    "highGamma":2512
-  },
-  "poorSignalLevel":0
-}
-#+end_src
-**** ~mindwave-blink-hook~
-Called whenever the mindwave detects a blink.
-
-**** ~mindwave-raw-hook~ 
-Called for when raw packet data is recieved.  Note that many raw packets are recieved at a time, so teh hook is fed an array of strings.  Each string being the numeric raw value.
-
-Note that due to the buffering involved, I am not so sure how much value there really is in the raw eeg value.  
-
-*** Low level details for the hooks 
-#+begin_src emacs-lisp :tangle yes
-(defvar mindwave-hook '() "Hooks to run when mindwave gets standard input")
-(defvar mindwave-blink-hook '() "Hooks to run when mindwave gets blink input")
-(defvar mindwave-raw-hook '() "Hooks to run when mindwave gets raw input")
-#+end_src
-
-
-#+begin_src emacs-lisp :tangle yes
-  (defun mindwave-comint-filter-function (output)
-    "A helper hook to pass off output to the apropriate hooks"
-    (let ((collected-raw '()))
-      (loop for out 
-            in (split-string output "\C-j" t)
-            do
-            (cond ((and (> (length out) 10) 
-                        (string-equal (substring out 0 10) "{\"rawEeg\":"))
-                   (setq collected-raw (cons (substring out 10 -1) collected-raw)))
-                  
-                  ((and (> (length out) 17) 
-                        (string-equal (substring out 0 17) "{\"blinkStrength\":"))
-                   (run-hook-with-args 'mindwave-blink-hook (substring out 17 -2)))
-                  
-                  ((string-equal "{" (substring out 0 1))
-                   (run-hook-with-args 'mindwave-hook out))))
-      (when (> (length collected-raw) 0)
-        (run-hook-with-args 'mindwave-raw-hook collected-raw)))
-    output)
-#+end_src
-
-** TODO Ask for authorisation
-
-#+begin_src emacs-lisp :tangle yes
-(defvar mindwave-authorized-p nil "whether or not app is authorized")
-#+end_src 
-
-#+begin_src emacs-lisp :tangle yes
-(defun mindwave-authorize () 
-  "provides an autorization request to the mindwave server"
-  (mindwave-send-string (json-encode `(("appName" . ,mindwave-appName) 
-                                       ("appKey" . ,mindwave-appKey)))))
-#+end_src
-
-#+begin_src emacs-lisp
-(defun mindwave-authorized-hook (out)
-  "test"
-  ;(message "Authorize listener: %s" out)
-)
-#+end_src
-
-** Configure
-*** Ask for raw output
-#+begin_src emacs-lisp :tangle yes
-(defun mindwave-get-raw (raw)
-  "Return raw output from mindwave.
-RAW is a boolean value as to whether or not to listen for raw values"
-  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
-                                      ("format" . "Json")))))
-#+end_src
-
-#+begin_src 
-
-(provide 'mindwave-emacs)
-
-;;; mindwave-emacs.el ends here
-#+end_src
-
 * Output Examples
 
-#+tblname: success
+#+tblname: example
 |------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
 |       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark    |
 |------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
@@ -560,7 +75,9 @@ RAW is a boolean value as to whether or not to listen for raw values"
 | 1340229565 |      0 |      3875 |     3082 |     9643 |    5095 |      6947 |     5616 |  24947 |   59565 |         23 |        44 |         |
 | 1340229566 |      0 |      6780 |     8592 |     9355 |    1226 |     27212 |     6227 |  18259 |   70961 |         37 |        56 |         |
 | 1340229567 |      0 |      5022 |     5286 |     8248 |   11726 |     21470 |    15820 |  25245 |   41331 |         51 |        63 |         |
-#+begin_src gnuplot :var data=success :exports code :file success.png
+
+#+name: gnuplot-example
+#+begin_src gnuplot :var data=example :exports both :file example.png
 reset
 set terminal png size 1024,800
 
@@ -599,3 +116,636 @@ plot data u 1:11 lt rgb '#00cccc' w lines title 'eM' axis x1y1, \
 unset multiplot
 #+end_src
 
+#+RESULTS: gnuplot-example
+[[file:example.png]]
+
+
+* Usage Examples
+
+** Basic testing code
+
+	This is the test code that I have been using, just to make sure that I can actually connect to the mindwave and make it do stuff.
+
+#+begin_src emacs-lisp :tangle no
+(mindwave-get-buffer)
+(mindwave-get-raw nil)
+(mindwave-get-raw t)
+
+(setq mindwave-hook nil)
+(setq mindwave-raw-hook '())
+(setq mindwave-blink-hook '())
+
+(run-hook-with-args 'mindwave-blink-hook "foo")
+
+(add-hook 'mindwave-hook 'mindwave-debug-standard)
+(add-hook 'mindwave-raw-hook 'mindwave-debug-raw)
+(add-hook 'mindwave-blink-hook 'mindwave-debug-blink)
+
+(defun mindwave-debug-standard  (o) (message "Standard output: %S" o))
+(defun mindwave-debug-raw (o) (message "Raw: %S" o))
+(defun mindwave-debug-blink (o) (message "Blink: %S" o))
+#+end_src
+
+	
+** Example one: gather data into an org buffer
+
+	In this example, you can see how to use the base mindwave hooks to capture data into an org buffer.   This actually is far more then a simple example, and is really a full working suite of tools that you can use to examine your neurological state.
+
+	However, I am not a neuroscientist, I am a computer programmer.  If you happen to be a neuroscientist, psychologist or other scientist who can help out my process, I would LOVE to hear from you.  
+ 
+
+#+begin_src emacs-lisp  :tangle gather-into-org.el :noweb yes
+;;; mindwave-emacs.el --- Neurosky mindwave support
+
+o;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+(provide 'mindwave-emacs)
+
+<<dg-basic-setup>>
+<<dg-marks>>
+<<dg-collect>>
+<<dg-write>>
+<<dg-results-table>>
+<<dg-mark-window>>
+<<dg-timed-recording>>
+
+#+end_src
+
+When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
+
+I wanted something simple that would provide that for me.
+
+This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
+*** Set up the bacis and get a file for writing ready
+**** TODO change the dependence on Brain.org to something that can be set with customize. 
+Note, that the code assumes that you want everything put in a buffer called ~Brain.org~.
+
+#+name: dg-basic-setup
+#+begin_src emacs-lisp :tangle no
+  
+  (require 'mindwave-emacs)
+  
+  (defvar dg-mindwave/org-buffer "Brain.org")
+    
+#+end_src
+
+*** Marks
+
+   The basic concept of this data gathering scheme is the concept of
+   'marks'.  During the examination of brainwaves, there may be
+   external or internal stimulus that trigger a sensation which may
+   (or may not) trigger a change in brainwave state.  that brainwave
+   state should then be stored on the table for later analysis. 
+
+   Right now a very simple interface is defined and provided.  One can
+   either insert a generic "mark" into the table, and insert a
+   prompted for mark.  A little later we will create a buffer that
+   takes alpha characters as marks.
+
+   - dg-mindwave/generic-mark :: Inserts a generic mark called "mark".
+   - dg-mindwave/mark :: Prompt for a mark name, and mark it with
+        that mark.  
+
+   Note, that the act of prompting for a mark name already skews the
+   results, right?
+
+#+name: dg-marks
+#+begin_src emacs-lisp :tangle no
+  (defvar dg-mindwave/mark nil)
+
+  (defun dg-mindwave/generic-mark ()
+    "Used to generically mark a section of the table"
+    (interactive)
+    (dg-mindwave/mark "mark"))
+  
+  (defun dg-mindwave/mark (mark)
+    "Set a mark on the section of a table"
+    (interactive "sMark: ")
+    (setq dg-mindwave/mark mark))
+#+end_src
+
+**** TODO sk for a symbol, but confirt to string in dg-mindwave/mark
+
+**** TODO figure out a much better interface for marks
+
+	 Right now the current mark implementation is clunky at best.  In
+	 my ideal work I would like to have a way to receive these mark
+	 inputs from the mindwave wearer in as unobtrusive a way as
+	 possible.
+
+*** Data collection
+
+   This is where the magic happens.  A hook is set up to read the
+   various values from the mindwave output, and then write them into
+   an org-mode table. 
+
+#+name: dg-collect
+#+begin_src emacs-lisp
+  (defun dg-mindwave/if-assoc (key lst)
+    (if (assoc key lst)
+        (number-to-string (cdr (assoc key lst)))
+        " "))
+  
+  (defun dg-mindwave/get-in (lst key keylist)
+    (let ((innerList (assoc key lst)))
+      (mapconcat '(lambda (el)
+                    (if (and innerList 
+                             (assoc el innerList))
+                         (number-to-string (cdr (assoc el innerList)))
+                      "")) 
+                 keylist
+                 " | ")))
+  
+  (defun dg-mindwave/collect-and-write (output)
+    "Hook function to gather and write data to the table."
+        (let* ((out (json-read-from-string output))
+               (string-write (concat "| " 
+                            (format-time-string "%s")
+                            " | "
+                            (dg-mindwave/if-assoc 'poorSignalLevel out) 
+                            " | "
+                            (dg-mindwave/get-in out 'eegPower '(highGamma lowGamma highBeta lowBeta highAlpha lowAlpha theta delta))
+                            " | "
+                            (dg-mindwave/get-in out 'eSense '(attention meditation))
+                            " | "
+                            (when dg-mindwave/mark
+                              (let ((m dg-mindwave/mark))
+                                (setq dg-mindwave/mark)
+                                m))
+                            " | "                          
+                            "\n")))
+          (with-current-buffer dg-mindwave/org-buffer 
+            (goto-char (point-max))
+            (insert string-write))))
+  
+  (defun dg-mindwave/start-recording-session (name)
+    "Sets up an entirely new mindwave session for recording." 
+    (interactive "sMindwave Session Name: ")
+    (with-current-buffer dg-mindwave/org-buffer
+      (goto-char (point-max))
+      (insert "\n\n")
+      (insert "*** ")
+      (insert (current-time-string))
+      (insert "  ")
+      (insert name)
+      (insert "\n")
+      (insert "#+TBLNAME: ")
+      (insert name)
+      (insert "\n")
+      (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
+      (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
+      (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n"))
+    (mindwave-get-buffer)
+    (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
+      (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
+  
+  (defun dg-mindwave/stop-recording-session ()
+    "Stops a recording session"
+    (interactive)
+    (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
+    )
+#+end_src
+
+***  Results Table 
+
+	In my simple explorations, I found it handy to have a secondary
+	table generated from the first that shows various simple
+	statistical qualities.  
+
+	Again, I am not a scientist, but I do find these result tables to
+	be fairly informative.   If you have any ideas on how to make them
+	better, let me know. 
+
+	Note, that for now the code formatting, especially of the org-mode
+	calc table is kinda yucky and could be better.
+
+#+name dg-results-table
+#+begin_src emacs-lisp  
+  (defun dg-mindwave/make-results-table (name)
+    "Generate a results table for a mindwave session"
+    (interactive "sMindwave Session Name: ")
+    (insert "\n")
+    (insert "#+TBLNAME: ")
+    (insert name)
+    (insert "_results")
+    (insert "\n")
+    (insert " |         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |") (insert "\n")
+    (insert " |---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|") (insert "\n")
+    (insert " | vmean   |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmedian |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmax    |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vmin    |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert " | vsdev   |             | 		  | 		  | 		  | 		  |			  |			  | 		  | 		  |  		   |		   |") (insert "\n")
+    (insert (concat "    #+TBLFM: @2$2=vmean(remote(" name ",@II$2..@III$2))::@3$2=vmedian(remote(" name ",@II$2..@III$2))::@4$2=vmax(remote(" name ",@II$2..@III$2))::@5$2=vmin(remote(" name ",@II$2..@III$2))::@6$2=vsdev(remote(" name ",@II$2..@III$2))::@2$3=vmean(remote(" name ",@II$3..@III$3))::@3$3=vmedian(remote(" name ",@II$3..@III$3))::@4$3=vmax(remote(" name ",@II$3..@III$3))::@5$3=vmin(remote(" name ",@II$3..@III$3))::@6$3=vsdev(remote(" name ",@II$3..@III$3))::@2$4=vmean(remote(" name ",@II$4..@III$4))::@3$4=vmedian(remote(" name ",@II$4..@III$4))::@4$4=vmax(remote(" name ",@II$4..@III$4))::@5$4=vmin(remote(" name ",@II$4..@III$4))::@6$4=vsdev(remote(" name ",@II$4..@III$4))::@2$5=vmean(remote(" name ",@II$5..@III$5))::@3$5=vmedian(remote(" name ",@II$5..@III$5))::@4$5=vmax(remote(" name ",@II$5..@III$5))::@5$5=vmin(remote(" name ",@II$5..@III$5))::@6$5=vsdev(remote(" name ",@II$5..@III$5))::@2$6=vmean(remote(" name ",@II$6..@III$6))::@3$6=vmedian(remote(" name ",@II$6..@III$6))::@4$6=vmax(remote(" name ",@II$6..@III$6))::@5$6=vmin(remote(" name ",@II$6..@III$6))::@6$6=vsdev(remote(" name ",@II$6..@III$6))::@2$7=vmean(remote(" name ",@II$7..@III$7))::@3$7=vmedian(remote(" name ",@II$7..@III$7))::@4$7=vmax(remote(" name ",@II$7..@III$7))::@5$7=vmin(remote(" name ",@II$7..@III$7))::@6$7=vsdev(remote(" name ",@II$7..@III$7))::@2$8=vmean(remote(" name ",@II$8..@III$8))::@3$8=vmedian(remote(" name ",@II$8..@III$8))::@4$8=vmax(remote(" name ",@II$8..@III$8))::@5$8=vmin(remote(" name ",@II$8..@III$8))::@6$8=vsdev(remote(" name ",@II$8..@III$8))::@2$9=vmean(remote(" name ",@II$9..@III$9))::@3$9=vmedian(remote(" name ",@II$9..@III$9))::@4$9=vmax(remote(" name ",@II$9..@III$9))::@5$9=vmin(remote(" name ",@II$9..@III$9))::@6$9=vsdev(remote(" name ",@II$9..@III$9))::@2$10=vmean(remote(" name ",@II$10..@III$10))::@3$10=vmedian(remote(" name ",@II$10..@III$10))::@4$10=vmax(remote(" name ",@II$10..@III$10))::@5$10=vmin(remote(" name ",@II$10..@III$10))::@6$10=vsdev(remote(" name ",@II$10..@III$10))::@2$11=vmean(remote(" name ",@II$11..@III$11))::@3$11=vmedian(remote(" name ",@II$11..@III$11))::@4$11=vmax(remote(" name ",@II$11..@III$11))::@5$11=vmin(remote(" name ",@II$11..@III$11))::@6$11=vsdev(remote(" name ",@II$11..@III$11))::@2$12=vmean(remote(" name ",@II$12..@III$12))::@3$12=vmedian(remote(" name ",@II$12..@III$12))::@4$12=vmax(remote(" name ",@II$12..@III$12))::@5$12=vmin(remote(" name ",@II$12..@III$12))::@6$12=vsdev(remote(" name ",@II$12..@III$12))")))
+  
+#+end_src
+
+***** Results Example (basic)
+
+|         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |
+|---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|
+| vmean   | 0.061611374 | 12192.720 | 15232.820 | 19399.642 | 15180.616 | 17033.287 | 22201.699 | 76134.531 | 270353.25 |  53.241706 | 53.424171 |
+| vmedian |           0 |    8132.5 |     10014 |   14247.5 |    9695.5 |    8411.5 |    9076.5 |   23773.5 |     62936 |         54 |        56 |
+| vmax    |          26 |     86970 |    152111 |    192200 |    260706 |    363667 |    799014 |    820033 |   2920134 |        100 |       100 |
+| vmin    |           0 |       303 |       378 |       638 |       342 |       436 |       311 |      2025 |       300 |          0 |         0 |
+| vsdev   |   1.2656602 | 12190.021 | 15797.156 | 17531.918 | 20699.664 | 29733.997 | 51731.083 | 124792.48 | 449634.67 |  22.641340 | 17.949459 |
+|         |             |           |           |           |           |           |           |           |           |            |           |
+	 #+TBLFM: @2$2=vmean(remote(bbreak,@II$2..@III$2))::@3$2=vmedian(remote(bbreak,@II$2..@III$2))::@4$2=vmax(remote(bbreak,@II$2..@III$2))::@5$2=vmin(remote(bbreak,@II$2..@III$2))::@6$2=vsdev(remote(bbreak,@II$2..@III$2))::@2$3=vmean(remote(bbreak,@II$3..@III$3))::@3$3=vmedian(remote(bbreak,@II$3..@III$3))::@4$3=vmax(remote(bbreak,@II$3..@III$3))::@5$3=vmin(remote(bbreak,@II$3..@III$3))::@6$3=vsdev(remote(bbreak,@II$3..@III$3))::@2$4=vmean(remote(bbreak,@II$4..@III$4))::@3$4=vmedian(remote(bbreak,@II$4..@III$4))::@4$4=vmax(remote(bbreak,@II$4..@III$4))::@5$4=vmin(remote(bbreak,@II$4..@III$4))::@6$4=vsdev(remote(bbreak,@II$4..@III$4))::@2$5=vmean(remote(bbreak,@II$5..@III$5))::@3$5=vmedian(remote(bbreak,@II$5..@III$5))::@4$5=vmax(remote(bbreak,@II$5..@III$5))::@5$5=vmin(remote(bbreak,@II$5..@III$5))::@6$5=vsdev(remote(bbreak,@II$5..@III$5))::@2$6=vmean(remote(bbreak,@II$6..@III$6))::@3$6=vmedian(remote(bbreak,@II$6..@III$6))::@4$6=vmax(remote(bbreak,@II$6..@III$6))::@5$6=vmin(remote(bbreak,@II$6..@III$6))::@6$6=vsdev(remote(bbreak,@II$6..@III$6))::@2$7=vmean(remote(bbreak,@II$7..@III$7))::@3$7=vmedian(remote(bbreak,@II$7..@III$7))::@4$7=vmax(remote(bbreak,@II$7..@III$7))::@5$7=vmin(remote(bbreak,@II$7..@III$7))::@6$7=vsdev(remote(bbreak,@II$7..@III$7))::@2$8=vmean(remote(bbreak,@II$8..@III$8))::@3$8=vmedian(remote(bbreak,@II$8..@III$8))::@4$8=vmax(remote(bbreak,@II$8..@III$8))::@5$8=vmin(remote(bbreak,@II$8..@III$8))::@6$8=vsdev(remote(bbreak,@II$8..@III$8))::@2$9=vmean(remote(bbreak,@II$9..@III$9))::@3$9=vmedian(remote(bbreak,@II$9..@III$9))::@4$9=vmax(remote(bbreak,@II$9..@III$9))::@5$9=vmin(remote(bbreak,@II$9..@III$9))::@6$9=vsdev(remote(bbreak,@II$9..@III$9))::@2$10=vmean(remote(bbreak,@II$10..@III$10))::@3$10=vmedian(remote(bbreak,@II$10..@III$10))::@4$10=vmax(remote(bbreak,@II$10..@III$10))::@5$10=vmin(remote(bbreak,@II$10..@III$10))::@6$10=vsdev(remote(bbreak,@II$10..@III$10))::@2$11=vmean(remote(bbreak,@II$11..@III$11))::@3$11=vmedian(remote(bbreak,@II$11..@III$11))::@4$11=vmax(remote(bbreak,@II$11..@III$11))::@5$11=vmin(remote(bbreak,@II$11..@III$11))::@6$11=vsdev(remote(bbreak,@II$11..@III$11))::@2$12=vmean(remote(bbreak,@II$12..@III$12))::@3$12=vmedian(remote(bbreak,@II$12..@III$12))::@4$12=vmax(remote(bbreak,@II$12..@III$12))::@5$12=vmin(remote(bbreak,@II$12..@III$12))::@6$12=vsdev(remote(bbreak,@II$12..@III$12))
+
+**** TODO fix formatting of the TBLFM line
+**** TODO make the lisp function re-calc the table after insertion
+
+*** Window for mark input
+
+	The mark window is a very simple mark interface.  It will allow
+	you to use the lower case letters a through z to insert that
+	letter as a mark, which can be used as a mnemonic for various
+	situations.
+
+	Right now the buffer is just blank, but I will be working on
+	improving it in the future.
+
+#+name dg-mark-window
+#+begin_src emacs-lisp 
+  (defun dg-mindwave/create-input-buffer ()
+    "Create an input buffer so that marks can be handled"
+    (interactive)
+    (pop-to-buffer (get-buffer-create "*mindwave-input*") )
+    (local-set-key " " 'dg-mindwave/generic-mark)
+    (local-set-key "a" '(lambda () (interactive) (dg-mindwave/mark "a")))
+    (local-set-key "b" '(lambda () (interactive) (dg-mindwave/mark "b")))
+    (local-set-key "c" '(lambda () (interactive) (dg-mindwave/mark "c")))
+    (local-set-key "d" '(lambda () (interactive) (dg-mindwave/mark "d")))
+    (local-set-key "e" '(lambda () (interactive) (dg-mindwave/mark "e")))
+    (local-set-key "f" '(lambda () (interactive) (dg-mindwave/mark "f")))
+    (local-set-key "g" '(lambda () (interactive) (dg-mindwave/mark "g")))
+    (local-set-key "h" '(lambda () (interactive) (dg-mindwave/mark "h")))
+    (local-set-key "i" '(lambda () (interactive) (dg-mindwave/mark "i")))
+    (local-set-key "j" '(lambda () (interactive) (dg-mindwave/mark "j")))
+    (local-set-key "k" '(lambda () (interactive) (dg-mindwave/mark "k")))
+    (local-set-key "l" '(lambda () (interactive) (dg-mindwave/mark "l")))
+    (local-set-key "m" '(lambda () (interactive) (dg-mindwave/mark "m")))
+    (local-set-key "n" '(lambda () (interactive) (dg-mindwave/mark "n")))
+    (local-set-key "o" '(lambda () (interactive) (dg-mindwave/mark "o")))
+    (local-set-key "p" '(lambda () (interactive) (dg-mindwave/mark "p")))
+    (local-set-key "q" '(lambda () (interactive) (dg-mindwave/mark "q")))
+    (local-set-key "r" '(lambda () (interactive) (dg-mindwave/mark "r")))
+    (local-set-key "s" '(lambda () (interactive) (dg-mindwave/mark "s")))
+    (local-set-key "t" '(lambda () (interactive) (dg-mindwave/mark "t")))
+    (local-set-key "u" '(lambda () (interactive) (dg-mindwave/mark "u")))
+    (local-set-key "v" '(lambda () (interactive) (dg-mindwave/mark "v")))
+    (local-set-key "w" '(lambda () (interactive) (dg-mindwave/mark "w")))
+    (local-set-key "x" '(lambda () (interactive) (dg-mindwave/mark "x")))
+    (local-set-key "y" '(lambda () (interactive) (dg-mindwave/mark "y")))
+    (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))  
+#+end_src
+
+**** TODO Make the buffer keep a record of the marks used.
+**** TODO have some kind of way to input inside the mark buffer the meaning of various marks
+**** TODO In the mark buffer, the eeg and signal scores should be displayed. 
+
+*** Timed Recordings
+
+Timed recordings are for micro-experimentation of your EEG.  The idea
+is that you record EEG activity in 15 second chunks, which each chunk
+being a different activity.
+
+  1. a 'whatever chunk', and is basically 15 seconds of "whatever is
+     going on right now". 
+  2. a 15 second chunk of eyes closed and relaxing
+  3. a 15 second chunk of experimentation or calibration, for instance:
+	 - eyes closed and relaxing
+	 - eyes opened and relaxing
+	 - eyes closed and breathing deeply
+	 - eyes open and doing complicated math problems.
+
+This can be used for self experimentation.  At the 15 second mark,
+Emacs will beep at you and tell you to close your eyes.  At the 30
+second mark, it will beep at you and insert the name of the session as
+a mark.  finally, it will beep at the 45 second mark and stop the
+recording session.
+
+#+name: dg-timed-recording
+#+begin_src emacs-lisp
+  (defun dg-mindwave/start-45-second-session (name) 
+    "Start a 45 second session with appropriate marks.  NAME should be a simple name."
+    (interactive "s45 Second Session Name:")
+    (dg-mindwave/start-recording-session name)
+    (run-at-time 15 nil '(lambda ()
+                           (message "Close your Eyes and Relax")
+                           (beep 1) 
+                           (dg-mindwave/mark "relaxed")))
+    (run-at-time 30 nil `(lambda ()
+                           (message ,name)
+                           (beep 1)
+                           (dg-mindwave/mark ,name)))
+    (run-at-time 45 nil '(lambda ()
+                           (beep 1)
+                           (message "stop")
+                           (dg-mindwave/stop-recording-session))))
+#+end_src
+	 
+
+** Example two: solarized mind
+#+begin_src emacs-lisp :tangle solarized-mind.el :noweb yes
+;;; solarized-mind.el --- changes emacs interface according to brainstate
+
+;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+  (require 'mindwave-emacs)
+
+#+end_src 
+
+	Assuming you're using the solarized (dark) theme, lets say that you want the background color to change according to how attentive you are.
+	
+	- Attention :: Level of 'solarized purity of background color'.  The more attention, the more blue the solarized background.
+	- Meditation :: Cursor blink rate, from 0.25 (less meditative) to 1 (more)
+
+*** Set up Hooks
+
+	 
+
+#+name: sm-hooksetup
+#+begin_src emacs-lisp :tangle no
+  
+  
+  (defconst solarized-mind/brain-ring-size 30)
+  
+  (defvar solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
+  (defvar solarized-mind/ring-reset-counter 0)
+  
+  (defun solarized-mind/mindwave-hook (vals)
+    "Set up hook to solarize your mind, and set up the medicursor."
+    (debug)
+    (let ((brain (json-read-from-string vals)))
+      (when (and (assoc 'eSense brain)
+                 (assoc 'poorSignalLevel brain)
+                 (> 50
+                    (cdr (assoc 'poorSignalLevel brain))))
+        (ring-insert solarized-mind/brain-ring 
+                     (cons (cdr (assoc 'meditation (assoc 'eSense brain)))
+                           (cdr (assoc 'attention  (assoc 'eSense brain)))))
+        (when (>= (ring-length solarized-mind/brain-ring) 
+                 solarized-mind/brain-ring-size)
+          (let ((new-ring (make-ring solarized-mind/brain-ring-size))
+                (collapsed-ring (reduce #'(lambda (pair total)
+                                            (cons (+ (car pair) 
+                                                     (car total)) 
+                                                  (+ (cdr pair) 
+                                                     (cdr total))))
+                                        (ring-elements solarized-mind/brain-ring)
+                                        :initial-value (cons 0 0))))
+            (ring-insert new-ring 
+                         (cons (/ (car collapsed-ring)
+                                  solarized-mind/brain-ring-size)
+                               (/ (cdr collapsed-ring)
+                                  solarized-mind/brain-ring-size)))
+            (solarized-mind/set-medicursor (car (ring-ref new-ring 0)))
+            (solarized-mind/set-background (cdr (ring-ref new-ring 0)))
+            (setq solarized-mind/brain-ring new-ring))))))
+  
+  
+  (defun solarized-mind/start ()
+    (interactive)
+    (mindwave-get-buffer)
+    (when (not (member 'solarized-mind/mindwave-hook 'mindwave-hook))
+      (message "Adding Mindwave hook")
+      (add-hook 'mindwave-hook 'solarized-mind/mindwave-hook)))
+  
+  (defun solarized-mind/stop ()
+    (interactive)
+    (remove-hook 'mindwave-hook 'solarized-mind/mindwave-hook))
+  
+#+end_src
+
+
+*** Medi-Curosr
+
+	 This is by far the easiest one to do, so lets do it first.
+
+#+name: sm-medicursor 
+#+begin_src emacs-lisp :tangle no
+  (defun solarized-mind/set-medicursor (med)
+    "Set the cursor to a value from the mindwave"
+    (setq blink-cursor-interval
+          (if ( = 0 med)
+              0.25
+              (+ 0.25
+                 (/ med 100.0)))))
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+  (ert-deftest sm-medicursor/setValidRates ()
+    (should (eql (solarized-mind/set-medicursor 100) 1.25))
+    (should (eql (solarized-mind/set-medicursor 50) 0.75))
+    (should (eql (solarized-mind/set-medicursor 0  ) 0.25)))
+#+end_src
+
+*** Solarized Mind
+#+name: sm-solarizer
+#+begin_src emacs-lisp :tangle no
+    (require 'hexrgb)
+  
+  (defun solarized-mind/set-background (att)
+    "Sets the background color"
+    (set-background-color (solarized-mind/attention-to-rgb att))
+    ;(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb att))
+    nil)
+  
+  ;(frame-parameter nil 'background-color)
+  (defun solarized-mind/attention-to-rgb (att)
+    "Takes an attention value (out of 100) and returns a color between #000000 and #002b36"
+    (let ((h (hexrgb-hue "#002b36"))
+          (s (hexrgb-saturation "#002b36"))
+          (v (hexrgb-value "#002b36")))
+      
+                           (hexrgb-hsv-to-hex h 
+                                              s 
+                                              (* v (/ att 100.0)))))
+
+
+
+;(set-face-attribute 'default nil :background (solarized-mind/attention-to-rgb 0))
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+  (solarized-mind/attention-to-rgb 100)
+  (solarized-mind/attention-to-rgb 50)
+  (solarized-mind/attention-to-rgb 0)
+  (set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
+#+end_src
+
+* The code
+
+** Basic House keeping
+#+begin_src emacs-lisp :tangle yes
+(require 'json)
+#+end_src
+
+** Set Up the client 
+*** Basic constants
+#+begin_src emacs-lisp :tangle yes
+  (defvar mindwave-host "localhost")
+  (defvar mindwave-port 13854)
+  
+  (defvar mindwave-appName "mindwave-emacs")
+  (defvar mindwave-appKey (sha1 mindwave-appName))
+#+end_src
+
+*** Connection
+**** Connection variables
+
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-buffer nil "Variable to store the buffer connected to the process")
+(defvar mindwave-process nil "Process that mindwave is connected")
+#+end_src
+
+**** Return lowlevel connection variables 
+According to the documentation of make-comint, if a running process is on the buffer, it is not restarted.  So isntead of trying to maintain state, lets just return the existing process that way.
+ 
+#+begin_src emacs-lisp :tangle yes
+  (defun mindwave-get-buffer ()
+    "Returns the buffer for the mindwave connection"
+    (if (and mindwave-process (process-live-p mindwave-process))
+        mindwave-process
+        (progn
+    (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
+    (setq mindwave-process (get-buffer-process mindwave-buffer))
+    (save-excursion
+      (set-buffer mindwave-buffer)
+      (sleep-for 1)
+      (mindwave-authorize)
+      (sleep-for 1)
+      (mindwave-get-raw nil)
+      (sleep-for 1)
+      (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+    mindwave-buffer)))
+  
+#+end_src
+
+** Sending Data
+#+name: get raw
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-send-string (str)
+  "Helper function to send STRING directly to the mindwave.
+Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
+  (comint-send-string mindwave-process str))
+#+end_src
+** Recieving Data
+
+Mindwave emacs sets up 3 hooks:  
+** The hooks
+**** ~mindwave-hook~
+Called whenever there is a packet that mindwave emacs doesn't natively understand.  The standard 1-packet-per-second packet is an example of this:
+#+begin_example
+{
+  "eSense":{
+    "attention":47,
+    "meditation":66
+  },
+  "eegPower":{
+    "delta":4479,
+    "theta":42897,
+    "lowAlpha":6952,
+    "highAlpha":21261,
+    "lowBeta":14623,
+    "highBeta":5238,
+    "lowGamma":2546,
+    "highGamma":2512
+  },
+  "poorSignalLevel":0
+}
+#+end_example
+**** ~mindwave-blink-hook~
+Called whenever the mindwave detects a blink.
+
+**** ~mindwave-raw-hook~ 
+Called for when raw packet data is recieved.  Note that many raw packets are recieved at a time, so teh hook is fed an array of strings.  Each string being the numeric raw value.
+
+Note that due to the buffering involved, I am not so sure how much value there really is in the raw eeg value.  
+
+*** Low level details for the hooks 
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-hook '() "Hooks to run when mindwave gets standard input")
+(defvar mindwave-blink-hook '() "Hooks to run when mindwave gets blink input")
+(defvar mindwave-raw-hook '() "Hooks to run when mindwave gets raw input")
+#+end_src
+
+
+#+begin_src emacs-lisp :tangle yes
+  (defun mindwave-comint-filter-function (output)
+    "A helper hook to pass off output to the apropriate hooks"
+    (let ((collected-raw '()))
+      (loop for out 
+            in (split-string output "\C-j" t)
+            do
+            (cond ((and (> (length out) 10) 
+                        (string-equal (substring out 0 10) "{\"rawEeg\":"))
+                   (setq collected-raw (cons (substring out 10 -1) collected-raw)))
+                  
+                  ((and (> (length out) 17) 
+                        (string-equal (substring out 0 17) "{\"blinkStrength\":"))
+                   (run-hook-with-args 'mindwave-blink-hook (substring out 17 -2)))
+                  
+                  ((string-equal "{" (substring out 0 1))
+                   (run-hook-with-args 'mindwave-hook out))))
+      (when (> (length collected-raw) 0)
+        (run-hook-with-args 'mindwave-raw-hook collected-raw)))
+    output)
+#+end_src
+
+** TODO Ask for authorisation
+
+   For whatever reason, I don't recall having to do this.  But it's
+   provided here just in case.
+
+#+begin_src emacs-lisp :tangle yes
+(defvar mindwave-authorized-p nil "whether or not app is authorized")
+#+end_src 
+
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-authorize () 
+  "provides an autorization request to the mindwave server"
+  (mindwave-send-string (json-encode `(("appName" . ,mindwave-appName) 
+                                       ("appKey" . ,mindwave-appKey)))))
+#+end_src
+
+#+begin_src emacs-lisp
+(defun mindwave-authorized-hook (out)
+  "test"
+  ;(message "Authorize listener: %s" out)
+)
+#+end_src
+
+** Configure
+*** Ask for raw output
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-get-raw (raw)
+  "Return raw output from mindwave.
+RAW is a boolean value as to whether or not to listen for raw values"
+  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
+                                      ("format" . "Json")))))
+#+end_src
+
+#+begin_src emacs-lisp
+
+(provide 'mindwave-emacs)
+
+;;; mindwave-emacs.el ends here
+#+end_src
+
+ 

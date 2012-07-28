@@ -1,6 +1,9 @@
 #+title: Org Mode 
 * Org Mode Setup
 
+#+begin-src
+(require 'org)
+#+end_src
 ** Todo task states
 
 #+begin_src emacs-lisp
@@ -30,7 +33,10 @@
     (org-todo "NEXT")
     (org-set-tags))
 
-  (define-key org-mode-map (kbd "C-c n") 'emagician-org/todo-to-next)
+  (eval-after-load 'org-mode
+                   (define-key org-mode-map 
+                               (kbd "C-c n") 
+                               'emagician-org/todo-to-next))
 
   (add-hook 'org-mode-hook 'flyspell-mode)
 #+END_SRC
