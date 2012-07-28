@@ -248,6 +248,43 @@ to be delt with.
   another.  You may "just" be working in eslip, or you might be a
   ployglot proficient in Low-level C, Scheme, Ruby and Rails, and
   Java. Either way, you're a dev.
+** Key Definition Hooks
+
+   Bit of a crappy definition here, but it's something.  This can be probably better handled.
+
+#+begin_src emacs-lisp
+  (defmacro emagician/define-mode-key (mode-name key command)
+    (let ((define-key-fname (make-symbol (concat (symbol-name mode-name)
+                                                 "-key-["
+                                                 (replace-regexp-in-string "\s"
+                                                                           "_"
+                                                                           key)
+                                                 "]-"
+                                                 (symbol-name command)
+                                                 "-hook"))))
+    `(progn
+      (defun ,define-key-fname ()
+        "Automatically generated hook function"
+        (define-key ,(make-symbol (concat (symbol-name mode-name) "-map")) ,key ,command))
+      (add-to-hook ,(make-symbol (concat (symbol-name mode-name) "-hook")) 
+                   ,define-key-fname))))
+(when nil
+(let ((mode-name 'org-mode)
+      (key "C-x C-SPC ")
+      (command 'foo))
+(make-symbol (concat (symbol-name mode-name)
+                                                 "-key-["
+                                                 (replace-regexp-in-string "\s"
+                                                                           "_"
+                                                                           key)
+                                                 "]-"
+                                                 (symbol-name command)
+                                                 "-hook"))
+)
+)
+#+end_src
+*** TODO Figure out if this needs to be optimized
+*** TODO make a new definition to build a custom command
 
 ** TODO Programming modes
 
@@ -260,8 +297,7 @@ to be delt with.
   
   (defun run-programming-mode-hooks ()
     "helper function to execute programming mode hooks."
-    (run-hooks 'programming-mode-hooks))
-    
+    (run-hooks 'programming-mode-hooks))    
 #+end_src
 
 *** TODO add to "programming-modes" list.  
@@ -290,6 +326,11 @@ to be delt with.
 
 ** Basic Coding Hooks
 *** TODO needs to be snarfed and barfed from the emacs starter kit
+** WhichFunc
+#+begin_src emacs-lisp
+(which-function-mode t)
+#+end_src
+*** TODO add magic to it.  maybe look at programming modes
 ** Flymake Setup
 #+begin-src emacs-lisp
 (emagician-expect-package 'flymake-cursor)
