@@ -121,7 +121,7 @@ isearch sould use regexp by default
 
    ARG, which one?  not sure yet.  Both kinda suck.
 
-#+begin_src emacs-lisp :notangle
+#+begin _src emacs-lisp :notangle
 (emagician-expect-package 'highline)
 (require 'highline)
 #+end_src

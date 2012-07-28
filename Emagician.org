@@ -265,9 +265,12 @@ to be delt with.
 #+end_src
 
 *** TODO add to "programming-modes" list.  
+*** TODO line numbers
 *** TODO Fix definition in the yank under editing
 *** TODO add standard hooks into it 
 	- [ ] auto-pair mode
+	- [ ] linum mode
+	- [ ] flash parens ()
 ** CEDET
 
    I don't have enough mojo to work with cedet yet.  Working on it.  
