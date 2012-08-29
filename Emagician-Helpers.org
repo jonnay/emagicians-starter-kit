@@ -31,9 +31,9 @@
 (global-set-key (kbd "C-c m") 'magit-status)
 #+end_src
 
-
 * Edit with emacs
-#+begin_src
-(require 'edit-server)
-(edit-server-start)
+#+begin_src emacs-lisp
+  (when (require 'edit-server nil t)
+    (edit-server-start))
 #+end_src
+  

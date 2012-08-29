@@ -126,9 +126,22 @@ isearch sould use regexp by default
 (require 'highline)
 #+end_src
 
-#+begin_src emacs-lisp :notangle
+#+begin_src emacs-lisp 
 (emagician-expect-package 'powerline)
 (require 'powerline)
+#+end_src
+
+   And set it up.
+
+#+begin_src emacs-lisp
+  (custom-set-faces 
+     '(powerline-active1 ((t (:inherit (mode-line) :background "plum2"))))
+     '(powerline-active2 ((t (:inherit (mode-line) :background "plum3"))))
+     
+     '(powerline-inactive1
+       ((t (:background "turquoise3" :inherit mode-line-inactive))))
+     '(powerline-inactive2
+       ((t (:background "turquoise4" :inherit mode-line-inactive)))))
 #+end_src
 
 *** DONE Make melpa package

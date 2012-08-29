@@ -119,7 +119,6 @@ unset multiplot
 #+RESULTS: gnuplot-example
 [[file:example.png]]
 
-
 * Usage Examples
 
 ** Basic testing code
@@ -155,7 +154,7 @@ unset multiplot
  
 
 #+begin_src emacs-lisp  :tangle gather-into-org.el :noweb yes
-;;; mindwave-emacs.el --- Neurosky mindwave support
+;;; gander-into-org.el --- Gather Mindwave Data into an org file 
 
 o;; Copyright (C) 2012 Jonathan Arkell
 
@@ -468,6 +467,10 @@ recording session.
 
   (require 'mindwave-emacs)
 
+<<sm-hooksetup>>
+<<sm-medicursor>>
+<<sm-solarizer>>
+
 #+end_src 
 
 	Assuming you're using the solarized (dark) theme, lets say that you want the background color to change according to how attentive you are.
@@ -477,7 +480,37 @@ recording session.
 
 *** Set up Hooks
 
+	We set up a ring that is used to store both the attention and the
+	meditation values.  Every second we store the data from the eSense
+	and put it in the ring.  Once the ring is full, we "collapse" the
+	ring, get the mean of those values, and stick them on the first
+	element of the list.
+
+	This provides a bit of continutity to the list.  It makes me
+	wonder if there is a better way to handle it to provide more
+	continuity overall, or even, if that is desireable?  Is it better
+	to have small local updates as to ones relaxation and attention
+	states, or is it better to have a global one?
+
+**** Digressions
+
+	 One option is to store say 5-10 elements of history as part of
+	 the ring.  A ring inside of a ring if you will.  On the first
+	 pass through the 30 elements, the average would be in position 1,
+	 then the next round of averages in position 2, and so on, until
+	 all 5 are filled up.
+
+	 At this point, one of two strategies could be followed:
 	 
+	 1. The first element is over-written with the latest new values,
+        and that continues on.  This would give an overall reading
+        that progresses forward in time.
+	 2. The mean of the first 5 elements is put into position 1, and
+        then positions 2-5 are cleared, and the strategy continues.
+        This has the benifit of always providing a baseline context.
+
+***** TODO Set it up so that different strategies can be tried
+**** Code
 
 #+name: sm-hooksetup
 #+begin_src emacs-lisp :tangle no
@@ -490,7 +523,6 @@ recording session.
   
   (defun solarized-mind/mindwave-hook (vals)
     "Set up hook to solarize your mind, and set up the medicursor."
-    (debug)
     (let ((brain (json-read-from-string vals)))
       (when (and (assoc 'eSense brain)
                  (assoc 'poorSignalLevel brain)
@@ -517,7 +549,19 @@ recording session.
             (solarized-mind/set-medicursor (car (ring-ref new-ring 0)))
             (solarized-mind/set-background (cdr (ring-ref new-ring 0)))
             (setq solarized-mind/brain-ring new-ring))))))
-  
+#+end_src
+
+*** User-interface
+
+	Such as it is.  Right now there is only 2 commands:
+
+	- solarized-mind/start :: Start solarized mind, set up the hook,
+         and start mindwave.
+	- solarized-mind/stop :: Remove the solarized mind hook.  Doesn't
+         actually try and stop the mindwave connection however.
+
+#+name: sm-interface
+#+begin_src emacs-lisp :tangle no
   
   (defun solarized-mind/start ()
     (interactive)
@@ -530,6 +574,17 @@ recording session.
     (interactive)
     (remove-hook 'mindwave-hook 'solarized-mind/mindwave-hook))
   
+#+end_src
+
+#+name: sm-window
+#+begin_src emacs-lisp :tangle no
+  
+  (defun solarized-mind/show ()
+    "Show the state of the users mind."
+    (interactive)
+    (with-output-to-temp-buffer "solarized-mind"
+      (pp solarized-mind/brain-ring)))
+ 
 #+end_src
 
 
@@ -589,7 +644,31 @@ recording session.
   (set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
 #+end_src
 
+
+** Example three: connecting via raw serial and storing the raw EEG waveform
+
+If we're going to do this, lets just take a brief look at the space requirements:
+
+| EEG Bytes per packet   |        2 |
+| Max Packets Per second |      512 |
+|------------------------+----------|
+| BPS                    |     1024 |
+|------------------------+----------|
+| Bytes per minute       |    61440 |
+| Bytes per hour         |  3686400 |
+| Megabytes per hour     | 3.515625 |
+#+TBLFM: @3$2=@-2*@-1::@4$2=60*@-1::@5$2=@-1*60::@6$2=@-1/2^20
+
+Of course, this is purely just for the data alone, not for any kind of other storage requirements.  Even with that in mind, I think we should be okay.
+
+*** Setting everything up
+** Example four: connecting via raw serial, and storing raw EEG along with timestamp
+
+
+
 * The code
+
+  Without much further ado:
 
 ** Basic House keeping
 #+begin_src emacs-lisp :tangle yes
@@ -598,6 +677,7 @@ recording session.
 
 ** Set Up the client 
 *** Basic constants
+**** Thinkgear connector client
 #+begin_src emacs-lisp :tangle yes
   (defvar mindwave-host "localhost")
   (defvar mindwave-port 13854)
@@ -606,15 +686,34 @@ recording session.
   (defvar mindwave-appKey (sha1 mindwave-appName))
 #+end_src
 
-*** Connection
-**** Connection variables
+**** Raw Serial client
+#+begin_src emacs-lisp :tangle yes
+(defconst mindwave-serial-baud 57600)
+(defconst mindwave-auth-key 0000)
+#+end_src
 
+*** Connection
+	There are 2 different ways to connect to the mind wave.  The first way is through the ThinkGear connector, and the second is via a raw serial connection.
+
+	The ThinkGear connector is high level, slow, and easy to work with, providing JSON data.
+
+	The raw serial method is low level, fast, and a little more difficult.
+
+**** Connection variables - Think Gear Connector
 #+begin_src emacs-lisp :tangle yes
 (defvar mindwave-buffer nil "Variable to store the buffer connected to the process")
 (defvar mindwave-process nil "Process that mindwave is connected")
 #+end_src
 
+**** Connection Variables - Raw Serial
+
+#+begin_src emacs-lisp :tangle yes
+
+#+end_src
+
 **** Return lowlevel connection variables 
+***** ThinkGear Connector
+
 According to the documentation of make-comint, if a running process is on the buffer, it is not restarted.  So isntead of trying to maintain state, lets just return the existing process that way.
  
 #+begin_src emacs-lisp :tangle yes
@@ -623,19 +722,44 @@ According to the documentation of make-comint, if a running process is on the bu
     (if (and mindwave-process (process-live-p mindwave-process))
         mindwave-process
         (progn
-    (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
-    (setq mindwave-process (get-buffer-process mindwave-buffer))
-    (save-excursion
-      (set-buffer mindwave-buffer)
-      (sleep-for 1)
-      (mindwave-authorize)
-      (sleep-for 1)
-      (mindwave-get-raw nil)
-      (sleep-for 1)
-      (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
-    mindwave-buffer)))
+          (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
+          (setq mindwave-process (get-buffer-process mindwave-buffer))
+          (save-excursion
+            (set-buffer mindwave-buffer)
+            (buffer-disable-undo mindwave-buffer)
+            (sleep-for 1)
+            (mindwave-authorize)
+            (sleep-for 1)
+            (mindwave-get-raw nil)
+            (sleep-for 1)
+            (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+          mindwave-buffer)))
   
 #+end_src
+
+***** Raw Serial
+
+We'll be using the commands available here: [[info:elisp#Serial%20Ports]]
+
+For now, we're going to assume that only a single serial port will be connected to a mindwave.
+#+begin_src emacs-lisp :tangle yes
+  (defun mindwave-make-serial-process ()
+    "Creates a serial process for mindwave, or returns the current one if it exists.
+  Note that this function assumes that you'll only ever have one mindwave connected."
+    (if (process-live-p mindwave-serial-process)
+        mindwave-serial-process
+      (setq mindwave-serial-process (make-serial-process :port mindwave-serial-port
+                                                         :speed mindwave-serial-baud
+                                                         :coding-system 'binary
+                                                         :filter mindwave-serial-filter))))
+#+end_src
+
+Note that since we are in development mode right now, we are not going
+to detach the buffer yet (but will soon). I think this can be done by
+using ~:buffer nil~ in the make-serial-process args, but if not,
+~(set-process-buffer mindwave-serial-process nil)~ should work.  Of
+course, if we do that, we'll need to make sure the last form on that
+function is ~mindwave-serial-process~ so it properly returns a process!
 
 ** Sending Data
 #+name: get raw
@@ -645,6 +769,7 @@ According to the documentation of make-comint, if a running process is on the bu
 Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
   (comint-send-string mindwave-process str))
 #+end_src
+
 ** Recieving Data
 
 Mindwave emacs sets up 3 hooks:  
@@ -707,11 +832,19 @@ Note that due to the buffering involved, I am not so sure how much value there r
         (run-hook-with-args 'mindwave-raw-hook collected-raw)))
     output)
 #+end_src
+** Configure
+*** Ask for raw output
+#+begin_src emacs-lisp :tangle yes
+(defun mindwave-get-raw (raw)
+  "Return raw output from mindwave.
+RAW is a boolean value as to whether or not to listen for raw values"
+  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
+                                      ("format" . "Json")))))
+#+end_src
 
-** TODO Ask for authorisation
+** Ask for authorization
 
-   For whatever reason, I don't recall having to do this.  But it's
-   provided here just in case.
+   Authorization doesn't seem to be supported yet... but here it is at any rate.
 
 #+begin_src emacs-lisp :tangle yes
 (defvar mindwave-authorized-p nil "whether or not app is authorized")
@@ -730,18 +863,8 @@ Note that due to the buffering involved, I am not so sure how much value there r
   ;(message "Authorize listener: %s" out)
 )
 #+end_src
-
-** Configure
-*** Ask for raw output
+* The End
 #+begin_src emacs-lisp :tangle yes
-(defun mindwave-get-raw (raw)
-  "Return raw output from mindwave.
-RAW is a boolean value as to whether or not to listen for raw values"
-  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
-                                      ("format" . "Json")))))
-#+end_src
-
-#+begin_src emacs-lisp
 
 (provide 'mindwave-emacs)
 
