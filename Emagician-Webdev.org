@@ -1,9 +1,9 @@
 * Markup (and styling)
 ** TODO HTML - nxml and nxhtml
-   nXhtml is the best in working with HTML.  
+   nXhtml is the best in working with HTML.  Except when it isn't.
 
 #+begin_src emacs-lisp
-(load (concat emagician-dir "dist/nxhtml/autostart.el"))
+;(load (concat emagician-dir "dist/nxhtml/autostart.el"))
 #+end_src 
 
 *** TODO Set up as default mode
@@ -30,6 +30,9 @@
 *** TODO Make it html5 compatible
 
 ** TODO CSS
+#+begin_src emacs-lisp
+(emagician-expect-package 'flymake-css)
+#+end_src
 * Web Centeric Languages
 *** TODO PHP
 	And with PHP, comes a bunch of extra frameworks. 

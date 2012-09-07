@@ -234,7 +234,9 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 
 As with the other starter kit, there are some fundamentals that need
 to be delt with. 
-
+** TODO Write hook macro
+   - name, hook to hook into, arguments, body
+   -> hook function defined, and added
 ** Basic hook functions
    This macro will help build your turn-on-minor-mode functions that are so helpful, and automagickally add them to a major mode.  It won't try to re-define the turn-on mode if it is already defined.
 

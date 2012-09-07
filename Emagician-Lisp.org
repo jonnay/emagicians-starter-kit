@@ -23,6 +23,8 @@
 (require 'slime)
 (slime-setup)
 #+end_src
+
+
 * Elisp
 
   Elisp is by far the most important Lisp setup.  This needs to be
@@ -42,6 +44,8 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 #+end_src
+
+** Auto-complete magic
 
 ** Integration with emacs itself
 

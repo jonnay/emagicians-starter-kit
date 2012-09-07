@@ -78,27 +78,121 @@
 (global-set-key [end] 'end-of-line)
 #+end_src
 
-* Snippets. 
+* Delimiters
+** Rainbow Delimiters 
+   Not really sure if this should be interface, or more in the movement and editing section.
 
-#+name: 
+   It's nice to have a good string for testing:
+   (((((((((((((((((()))))))))))))))))))
+
+   I am not 100% sure I like this colorscheme.  The Angry red unmatched delimiter is nice.
+
+#+begin_src emacs-lisp
+  (emagician-expect-package 'rainbow-delimiters)
+  (add-hook 'emacs-startup-hook 'global-rainbow-delimiters-mode)
+  
+  (custom-set-faces
+   '(rainbow-delimiters-depth-1-face ((t :background "grey95")))
+   '(rainbow-delimiters-depth-2-face ((t :background "grey90")))
+   '(rainbow-delimiters-depth-3-face ((t :background "grey85")))
+   '(rainbow-delimiters-depth-4-face ((t :background "grey80")))
+   '(rainbow-delimiters-depth-5-face ((t :background "grey75")))
+   '(rainbow-delimiters-depth-6-face ((t :background "grey70")))
+   '(rainbow-delimiters-depth-7-face ((t :background "grey65")))
+   '(rainbow-delimiters-depth-8-face ((t :background "grey60")))
+   '(rainbow-delimiters-depth-9-face ((t :background "grey55")))
+   '(rainbow-delimiters-unmatched-face ((t :background "firebrick2"))))
+  
+#+end_src
+* Snippets
+
+#+name: snippets 
 #+begin_src emacs-lisp
   (emagician-expect-package 'yasnippet)
-  (require 'yasnippet)
-
-  (yas/load-directory (expand-file-name "snippets" emagician-dir) t)
   
-    (defun yas/org-very-safe-expand ()
-      (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-    
-    (defun yas/org-setup ()
-      ;; yasnippet (using the new org-cycle hooks)
-      (make-variable-buffer-local 'yas/trigger-key)
-      (setq yas/trigger-key [tab])
-      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-      (define-key yas/keymap [tab] 'yas/next-field))
-    
-    (add-hook 'org-mode-hook #'yas/org-setup)
+  (setq yas-snippet-dirs (expand-file-name "assets/snippets" emagician-dir))
+  (setq yas-trigger-key nil)
+  (setq yas-next-field-key "<next>")
+  (setq yas-prev-field-key "<prev>")
+  (require 'yasnippet)
+  
+  
+  ;; I actually don't think this rigamaroll is needed anymore
+  
+  (defun yas/org-very-safe-expand ()
+    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+  
+  (defun yas/org-setup ()
+    ;; yasnippet (using the new org-cycle hooks)
+    (make-variable-buffer-local 'yas/trigger-key)
+    (setq yas/trigger-key [tab])
+    (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+    (define-key yas/keymap [tab] 'yas/next-field))
+  
+  ;(add-hook 'org-mode-hook #'yas/org-setup)
+  
+  
+#+end_src
 
+* Auto-complete 
+
+#+name: auto-complete
+#+begin_src emacs-lisp
+(emagician-expect-package 'auto-complete)
+#+end_src 
+
+** Standard Auto-complete setup
+
+#+begin_src emacs-lisp 
+(require 'auto-complete-config)
+(ac-config-default)
+(ac-flyspell-workaround)
+
+(global-auto-complete-mode t)
+(setq ac-auto-show-menu t)
+(setq ac-dwim t)
+(setq ac-use-menu-map t)
+(setq ac-quick-help-delay 1)
+(setq ac-quick-help-height 60)
+#+end_src
+
+** Dictionaries
+#+begin_src emacs-lisp
+  (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician-dir))
+#+end_src
+*** TODO make sure there is a sort of assits directory, and merge with yasnippet
+*** TODO make emagicians starter kit generate the dictionaries itself
+*** TODO write jQuery dictionary.  
+**** TODO purify myself afterwards by writing one for Ender
+
+** Sources
+
+   *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
+
+*** Default
+
+#+begin_src emacs-lisp
+  (set-default 'ac-sources
+               '(ac-source-yasnippet
+                 ac-source-dictionary
+                 ac-source-words-in-buffer
+                 ac-source-words-in-same-mode-buffers
+                 ac-source-words-in-all-buffer
+                 ac-source-semantic))
+  
+  
+#+end_src
+*** TODO fix ac-source-yasnippet as a default
+
+** Keyboard setup
+
+#+begin_src emacs-lisp
+;;Key triggers
+(define-key ac-completing-map (kbd "C-M-n") 'ac-next)
+(define-key ac-completing-map (kbd "C-M-p") 'ac-previous)
+(define-key ac-completing-map "\t" 'ac-complete)
+(define-key ac-completing-map (kbd "M-RET") 'ac-help)
+(define-key ac-completing-map "\r" 'nil)
 #+end_src
 
 * Undo
@@ -118,11 +212,11 @@
 * Movement
 ** Ace Jump
 #+begin_src emacs-lisp
-(emagician-expect-package 'ace-jump-mode)
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
-
-(add-hook 'org-mode-hook #'(lambda () (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)))
+  (emagician-expect-package 'ace-jump-mode)
+  (require 'ace-jump-mode)
+  (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+  (setq erc-track-enable-keybindings nil)
+  (add-hook 'org-mode-hook #'(lambda () (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode)))
 #+end_src
 
 *** TODO fix problem with emagician/define-mode-key
@@ -131,4 +225,10 @@
 (emagician/define-mode-key 'org-mode (kbd "C-c C-SPC") 'ace-jump-mode)
 
 (macroexpand '(emagician/define-mode-key 'org-mode "C-c C-SPC" 'ace-jump-mode))
+#+end_src
+** Saveplace
+   Saveplace allows emacs to remember where you were in a file.  It is very handy and transparent.
+#+begin_src emacs-lisp
+(require 'saveplace)
+(setq-default save-place t)
 #+end_src

@@ -1,6 +1,7 @@
-* Working with Melpa
+* Working with the starer kit
+** TODO load all files
+** TODO helm source
 
-  Since Melpa is what I am throwing my lot with, do some setup.
 
 * Exporting as a website
 
@@ -11,7 +12,17 @@
 ** TODO Set up valid stylesheet for a default
 
 #+begin_src css :tangle export/main.css
-
+  body {
+      margin: 1em;
+      background-color: #f0f8ff;
+  }
+  
+  h1 {
+      border: 0px solid #000;
+      border-bottom-width: 1px;
+  }
+  
+  
 #+end_src
 
 ** Specialized export command

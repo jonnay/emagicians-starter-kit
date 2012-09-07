@@ -1,0 +1,1517 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Mindwave Emacs</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Mindwave Emacs"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-08-04 15:16:36 MDT"/>
+<meta name="author" content="Jonathan Arkell"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Mindwave Emacs</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Interface Mindwave with emacs</a></li>
+<li><a href="#sec-2">2 Output Examples</a></li>
+<li><a href="#sec-3">3 Usage Examples</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Basic testing code</a></li>
+<li><a href="#sec-3-2">3.2 Example one: gather data into an org buffer</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1 Set up the bacis and get a file for writing ready</a></li>
+<li><a href="#sec-3-2-2">3.2.2 Marks</a></li>
+<li><a href="#sec-3-2-3">3.2.3 Data collection</a></li>
+<li><a href="#sec-3-2-4">3.2.4 Results Table</a></li>
+<li><a href="#sec-3-2-5">3.2.5 Window for mark input</a></li>
+<li><a href="#sec-3-2-6">3.2.6 Timed Recordings</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3 Example two: solarized mind</a>
+<ul>
+<li><a href="#sec-3-3-1">3.3.1 Set up Hooks</a></li>
+<li><a href="#sec-3-3-2">3.3.2 User-interface</a></li>
+<li><a href="#sec-3-3-3">3.3.3 Medi-Curosr</a></li>
+<li><a href="#sec-3-3-4">3.3.4 Solarized Mind</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-4">4 The code</a>
+<ul>
+<li><a href="#sec-4-1">4.1 Basic House keeping</a></li>
+<li><a href="#sec-4-2">4.2 Set Up the client</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1 Basic constants</a></li>
+<li><a href="#sec-4-2-2">4.2.2 Connection</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3 Sending Data</a></li>
+<li><a href="#sec-4-4">4.4 Recieving Data</a></li>
+<li><a href="#sec-4-5">4.5 The hooks</a>
+<ul>
+<li><a href="#sec-4-5-1">4.5.1 Low level details for the hooks</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-6">4.6 Ask for authorisation</a></li>
+<li><a href="#sec-4-7">4.7 Configure</a>
+<ul>
+<li><a href="#sec-4-7-1">4.7.1 Ask for raw output</a></li>
+</ul></li>
+</ul>
+</li>
+<li><a href="#sec-5">5 The End</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Interface Mindwave with emacs</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+
+
+<pre class="example">;;; mindwave-emacs.el --- Neurosky mindwave support
+
+;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell &lt;jonnay@jonnay.net&gt;
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+;;; Commentary: 
+;; Please see the org-file that this was generated from. 
+
+
+
+</pre>
+
+
+<p>
+mindwave-emacs is a chunk of elisp code that uses the
+ThinkGearConnector program to pass off mindwave data directly to
+emacs.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Output Examples</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="right">time</th><th scope="col" class="right">signal</th><th scope="col" class="right">highGamma</th><th scope="col" class="right">lowGamma</th><th scope="col" class="right">highBeta</th><th scope="col" class="right">lowBeta</th><th scope="col" class="right">highAlpha</th><th scope="col" class="right">lowAlpha</th><th scope="col" class="right">theta</th><th scope="col" class="right">delta</th><th scope="col" class="right">meditation</th><th scope="col" class="right">attention</th><th scope="col" class="left">mark</th></tr>
+</thead>
+<tbody>
+<tr><td class="right">1340229522</td><td class="right">0</td><td class="right">6715</td><td class="right">8839</td><td class="right">7397</td><td class="right">12358</td><td class="right">9428</td><td class="right">19939</td><td class="right">21762</td><td class="right">45012</td><td class="right">83</td><td class="right">40</td><td class="left"></td></tr>
+<tr><td class="right">1340229523</td><td class="right">0</td><td class="right">5293</td><td class="right">7680</td><td class="right">21524</td><td class="right">6436</td><td class="right">7380</td><td class="right">36453</td><td class="right">31707</td><td class="right">61168</td><td class="right">83</td><td class="right">61</td><td class="left"></td></tr>
+<tr><td class="right">1340229524</td><td class="right">0</td><td class="right">2659</td><td class="right">11910</td><td class="right">8315</td><td class="right">3606</td><td class="right">4350</td><td class="right">12728</td><td class="right">6604</td><td class="right">20185</td><td class="right">78</td><td class="right">69</td><td class="left"></td></tr>
+<tr><td class="right">1340229525</td><td class="right">0</td><td class="right">42703</td><td class="right">39375</td><td class="right">36054</td><td class="right">133924</td><td class="right">211462</td><td class="right">100667</td><td class="right">576943</td><td class="right">644892</td><td class="right">53</td><td class="right">74</td><td class="left"></td></tr>
+<tr><td class="right">1340229526</td><td class="right">0</td><td class="right">13471</td><td class="right">7929</td><td class="right">14365</td><td class="right">62578</td><td class="right">20617</td><td class="right">4383</td><td class="right">256884</td><td class="right">906958</td><td class="right">44</td><td class="right">51</td><td class="left"></td></tr>
+<tr><td class="right">1340229527</td><td class="right">0</td><td class="right">2271</td><td class="right">6518</td><td class="right">6288</td><td class="right">13430</td><td class="right">28688</td><td class="right">8927</td><td class="right">90855</td><td class="right">1118085</td><td class="right">29</td><td class="right">44</td><td class="left"></td></tr>
+<tr><td class="right">1340229528</td><td class="right">0</td><td class="right">4299</td><td class="right">5690</td><td class="right">6973</td><td class="right">7985</td><td class="right">8977</td><td class="right">15999</td><td class="right">69443</td><td class="right">114812</td><td class="right">14</td><td class="right">34</td><td class="left"></td></tr>
+<tr><td class="right">1340229529</td><td class="right">0</td><td class="right">2968</td><td class="right">6811</td><td class="right">6179</td><td class="right">8471</td><td class="right">8756</td><td class="right">4000</td><td class="right">55889</td><td class="right">74533</td><td class="right">21</td><td class="right">24</td><td class="left"></td></tr>
+<tr><td class="right">1340229530</td><td class="right">0</td><td class="right">1704</td><td class="right">6543</td><td class="right">9922</td><td class="right">2012</td><td class="right">1750</td><td class="right">23099</td><td class="right">14680</td><td class="right">90702</td><td class="right">35</td><td class="right">50</td><td class="left"></td></tr>
+<tr><td class="right">1340229531</td><td class="right">0</td><td class="right">2809</td><td class="right">2879</td><td class="right">6017</td><td class="right">15968</td><td class="right">7552</td><td class="right">9412</td><td class="right">5696</td><td class="right">71379</td><td class="right">50</td><td class="right">56</td><td class="left"></td></tr>
+<tr><td class="right">1340229532</td><td class="right">0</td><td class="right">7705</td><td class="right">6187</td><td class="right">7244</td><td class="right">16578</td><td class="right">31379</td><td class="right">12079</td><td class="right">148379</td><td class="right">60969</td><td class="right">44</td><td class="right">54</td><td class="left"></td></tr>
+<tr><td class="right">1340229533</td><td class="right">0</td><td class="right">5949</td><td class="right">8210</td><td class="right">8594</td><td class="right">6521</td><td class="right">13802</td><td class="right">30518</td><td class="right">39344</td><td class="right">25372</td><td class="right">47</td><td class="right">69</td><td class="left"></td></tr>
+<tr><td class="right">1340229534</td><td class="right">0</td><td class="right">7649</td><td class="right">4027</td><td class="right">9078</td><td class="right">5012</td><td class="right">4273</td><td class="right">18162</td><td class="right">22758</td><td class="right">38168</td><td class="right">43</td><td class="right">63</td><td class="left"></td></tr>
+<tr><td class="right">1340229535</td><td class="right">0</td><td class="right">1678</td><td class="right">2017</td><td class="right">3799</td><td class="right">6433</td><td class="right">3366</td><td class="right">4245</td><td class="right">29764</td><td class="right">5899</td><td class="right">35</td><td class="right">51</td><td class="left"></td></tr>
+<tr><td class="right">1340229536</td><td class="right">0</td><td class="right">1189</td><td class="right">6646</td><td class="right">3084</td><td class="right">3522</td><td class="right">4005</td><td class="right">6985</td><td class="right">14239</td><td class="right">82198</td><td class="right">44</td><td class="right">57</td><td class="left"></td></tr>
+<tr><td class="right">1340229537</td><td class="right">0</td><td class="right">2112</td><td class="right">9706</td><td class="right">33960</td><td class="right">14244</td><td class="right">26535</td><td class="right">16577</td><td class="right">23013</td><td class="right">21533</td><td class="right">60</td><td class="right">56</td><td class="left"></td></tr>
+<tr><td class="right">1340229538</td><td class="right">0</td><td class="right">1905</td><td class="right">1391</td><td class="right">8818</td><td class="right">6341</td><td class="right">13640</td><td class="right">4823</td><td class="right">22706</td><td class="right">12155</td><td class="right">60</td><td class="right">54</td><td class="left">relaxed</td></tr>
+<tr><td class="right">1340229539</td><td class="right">0</td><td class="right">1894</td><td class="right">8464</td><td class="right">9669</td><td class="right">4472</td><td class="right">5817</td><td class="right">10351</td><td class="right">12945</td><td class="right">2834</td><td class="right">70</td><td class="right">66</td><td class="left"></td></tr>
+<tr><td class="right">1340229540</td><td class="right">0</td><td class="right">1597</td><td class="right">3099</td><td class="right">21082</td><td class="right">1943</td><td class="right">8788</td><td class="right">8036</td><td class="right">30336</td><td class="right">6669</td><td class="right">81</td><td class="right">61</td><td class="left"></td></tr>
+<tr><td class="right">1340229541</td><td class="right">0</td><td class="right">1861</td><td class="right">5657</td><td class="right">13161</td><td class="right">5321</td><td class="right">12381</td><td class="right">2265</td><td class="right">15898</td><td class="right">11400</td><td class="right">81</td><td class="right">57</td><td class="left"></td></tr>
+<tr><td class="right">1340229542</td><td class="right">0</td><td class="right">1538</td><td class="right">1899</td><td class="right">6201</td><td class="right">5171</td><td class="right">3724</td><td class="right">6658</td><td class="right">1750</td><td class="right">6385</td><td class="right">90</td><td class="right">63</td><td class="left"></td></tr>
+<tr><td class="right">1340229543</td><td class="right">0</td><td class="right">1692</td><td class="right">3044</td><td class="right">5080</td><td class="right">5368</td><td class="right">5631</td><td class="right">1747</td><td class="right">7145</td><td class="right">3333</td><td class="right">90</td><td class="right">60</td><td class="left"></td></tr>
+<tr><td class="right">1340229544</td><td class="right">0</td><td class="right">2217</td><td class="right">3062</td><td class="right">4332</td><td class="right">6559</td><td class="right">3085</td><td class="right">7375</td><td class="right">21089</td><td class="right">19816</td><td class="right">78</td><td class="right">60</td><td class="left"></td></tr>
+<tr><td class="right">1340229546</td><td class="right">0</td><td class="right">2564</td><td class="right">2950</td><td class="right">3733</td><td class="right">7312</td><td class="right">5809</td><td class="right">18199</td><td class="right">5943</td><td class="right">10327</td><td class="right">57</td><td class="right">61</td><td class="left"></td></tr>
+<tr><td class="right">1340229547</td><td class="right">0</td><td class="right">2400</td><td class="right">5140</td><td class="right">5839</td><td class="right">7216</td><td class="right">8070</td><td class="right">6510</td><td class="right">13131</td><td class="right">2961</td><td class="right">53</td><td class="right">64</td><td class="left"></td></tr>
+<tr><td class="right">1340229548</td><td class="right">0</td><td class="right">1836</td><td class="right">1461</td><td class="right">10593</td><td class="right">1334</td><td class="right">21543</td><td class="right">5324</td><td class="right">43509</td><td class="right">71069</td><td class="right">53</td><td class="right">69</td><td class="left"></td></tr>
+<tr><td class="right">1340229549</td><td class="right">0</td><td class="right">2358</td><td class="right">3557</td><td class="right">4657</td><td class="right">4135</td><td class="right">1947</td><td class="right">3002</td><td class="right">8021</td><td class="right">1432</td><td class="right">57</td><td class="right">67</td><td class="left"></td></tr>
+<tr><td class="right">1340229550</td><td class="right">0</td><td class="right">1662</td><td class="right">1694</td><td class="right">3111</td><td class="right">3296</td><td class="right">2404</td><td class="right">7591</td><td class="right">5451</td><td class="right">6358</td><td class="right">63</td><td class="right">63</td><td class="left"></td></tr>
+<tr><td class="right">1340229551</td><td class="right">0</td><td class="right">935</td><td class="right">3135</td><td class="right">8643</td><td class="right">5870</td><td class="right">6242</td><td class="right">2730</td><td class="right">6181</td><td class="right">1459</td><td class="right">70</td><td class="right">60</td><td class="left"></td></tr>
+<tr><td class="right">1340229552</td><td class="right">0</td><td class="right">1835</td><td class="right">3510</td><td class="right">4576</td><td class="right">7218</td><td class="right">2036</td><td class="right">2749</td><td class="right">4368</td><td class="right">7480</td><td class="right">81</td><td class="right">54</td><td class="left"></td></tr>
+<tr><td class="right">1340229553</td><td class="right">0</td><td class="right">1021</td><td class="right">3251</td><td class="right">5087</td><td class="right">5483</td><td class="right">2280</td><td class="right">6480</td><td class="right">11058</td><td class="right">16476</td><td class="right">78</td><td class="right">57</td><td class="left">another</td></tr>
+<tr><td class="right">1340229554</td><td class="right">0</td><td class="right">2565</td><td class="right">1468</td><td class="right">10513</td><td class="right">12150</td><td class="right">21771</td><td class="right">16130</td><td class="right">21917</td><td class="right">17520</td><td class="right">78</td><td class="right">60</td><td class="left"></td></tr>
+<tr><td class="right">1340229555</td><td class="right">0</td><td class="right">5049</td><td class="right">2925</td><td class="right">14554</td><td class="right">9252</td><td class="right">8270</td><td class="right">2454</td><td class="right">74591</td><td class="right">5747</td><td class="right">66</td><td class="right">44</td><td class="left"></td></tr>
+<tr><td class="right">1340229556</td><td class="right">0</td><td class="right">2296</td><td class="right">2791</td><td class="right">2779</td><td class="right">2551</td><td class="right">1375</td><td class="right">2614</td><td class="right">29351</td><td class="right">40429</td><td class="right">50</td><td class="right">37</td><td class="left"></td></tr>
+<tr><td class="right">1340229557</td><td class="right">0</td><td class="right">2762</td><td class="right">2659</td><td class="right">6519</td><td class="right">7152</td><td class="right">4360</td><td class="right">10126</td><td class="right">3559</td><td class="right">5185</td><td class="right">53</td><td class="right">43</td><td class="left"></td></tr>
+<tr><td class="right">1340229558</td><td class="right">0</td><td class="right">2613</td><td class="right">1409</td><td class="right">4049</td><td class="right">2419</td><td class="right">4784</td><td class="right">3381</td><td class="right">4948</td><td class="right">10097</td><td class="right">57</td><td class="right">40</td><td class="left"></td></tr>
+<tr><td class="right">1340229559</td><td class="right">0</td><td class="right">438</td><td class="right">1616</td><td class="right">1297</td><td class="right">4130</td><td class="right">2317</td><td class="right">6057</td><td class="right">12810</td><td class="right">184162</td><td class="right">50</td><td class="right">56</td><td class="left"></td></tr>
+<tr><td class="right">1340229560</td><td class="right">0</td><td class="right">1976</td><td class="right">2660</td><td class="right">7300</td><td class="right">5489</td><td class="right">5101</td><td class="right">3020</td><td class="right">10564</td><td class="right">13617</td><td class="right">64</td><td class="right">67</td><td class="left"></td></tr>
+<tr><td class="right">1340229561</td><td class="right">0</td><td class="right">3559</td><td class="right">4133</td><td class="right">6696</td><td class="right">5934</td><td class="right">2822</td><td class="right">23207</td><td class="right">8103</td><td class="right">15320</td><td class="right">57</td><td class="right">70</td><td class="left"></td></tr>
+<tr><td class="right">1340229562</td><td class="right">0</td><td class="right">812</td><td class="right">3373</td><td class="right">3133</td><td class="right">7703</td><td class="right">17726</td><td class="right">6897</td><td class="right">54966</td><td class="right">143420</td><td class="right">40</td><td class="right">64</td><td class="left"></td></tr>
+<tr><td class="right">1340229563</td><td class="right">0</td><td class="right">6667</td><td class="right">6829</td><td class="right">10165</td><td class="right">25519</td><td class="right">24609</td><td class="right">85072</td><td class="right">240138</td><td class="right">198194</td><td class="right">34</td><td class="right">61</td><td class="left"></td></tr>
+<tr><td class="right">1340229564</td><td class="right">0</td><td class="right">2952</td><td class="right">8474</td><td class="right">20454</td><td class="right">8014</td><td class="right">8553</td><td class="right">32825</td><td class="right">154300</td><td class="right">936155</td><td class="right">20</td><td class="right">57</td><td class="left"></td></tr>
+<tr><td class="right">1340229565</td><td class="right">0</td><td class="right">3875</td><td class="right">3082</td><td class="right">9643</td><td class="right">5095</td><td class="right">6947</td><td class="right">5616</td><td class="right">24947</td><td class="right">59565</td><td class="right">23</td><td class="right">44</td><td class="left"></td></tr>
+<tr><td class="right">1340229566</td><td class="right">0</td><td class="right">6780</td><td class="right">8592</td><td class="right">9355</td><td class="right">1226</td><td class="right">27212</td><td class="right">6227</td><td class="right">18259</td><td class="right">70961</td><td class="right">37</td><td class="right">56</td><td class="left"></td></tr>
+<tr><td class="right">1340229567</td><td class="right">0</td><td class="right">5022</td><td class="right">5286</td><td class="right">8248</td><td class="right">11726</td><td class="right">21470</td><td class="right">15820</td><td class="right">25245</td><td class="right">41331</td><td class="right">51</td><td class="right">63</td><td class="left"></td></tr>
+</tbody>
+</table>
+
+
+
+
+
+<pre class="example">reset
+set terminal png size 1024,800
+
+set multiplot layout 7,1
+
+
+unset title
+
+set tmargin 0
+set bmargin 0
+set lmargin 8
+set rmargin 2
+
+set grid
+
+set xtics format ""
+
+set ylabel "EEG"
+set ytics 
+
+set yrange [0 to 2000000]
+plot data u 1:10 w lines title 'D' axis x1y1 lt rgb '#0000cc'
+plot data u 1:9 w lines title 'T' axis x1y1 lt rgb '#0000ff'
+set yrange [0 to 100000]
+plot data u 1:8 w lines title '+A' lt rgb '#00ffff', data u 1:7 with lines title '-A'  lt rgb '#0088ff' 
+plot data u 1:6 w lines title '+B' lt rgb '#00aa00', data u 1:5 with lines title '-B'  lt rgb '#00ff00'
+plot data u 1:4 w lines title '+G' lt rgb '#ff0000', data u 1:3 with lines title '-G'  lt rgb '#ffaa00'
+
+set xlabel "Time"
+
+set yrange [0 to 100]
+
+plot data u 1:11 lt rgb '#00cccc' w lines title 'eM' axis x1y1, \
+     data u 1:12 lt rgb '#ffcc00' w lines title 'eA' axis x1y1 
+
+unset multiplot
+</pre>
+
+
+<p>
+<img src="example.png"  alt="example.png" />
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Usage Examples</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Basic testing code</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p>
+    This is the test code that I have been using, just to make sure that I can actually connect to the mindwave and make it do stuff.
+</p>
+
+
+
+<pre class="example">(mindwave-get-buffer)
+(mindwave-get-raw nil)
+(mindwave-get-raw t)
+
+(setq mindwave-hook nil)
+(setq mindwave-raw-hook '())
+(setq mindwave-blink-hook '())
+
+(run-hook-with-args 'mindwave-blink-hook "foo")
+
+(add-hook 'mindwave-hook 'mindwave-debug-standard)
+(add-hook 'mindwave-raw-hook 'mindwave-debug-raw)
+(add-hook 'mindwave-blink-hook 'mindwave-debug-blink)
+
+(defun mindwave-debug-standard  (o) (message "Standard output: %S" o))
+(defun mindwave-debug-raw (o) (message "Raw: %S" o))
+(defun mindwave-debug-blink (o) (message "Blink: %S" o))
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Example one: gather data into an org buffer</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>
+    In this example, you can see how to use the base mindwave hooks to capture data into an org buffer.   This actually is far more then a simple example, and is really a full working suite of tools that you can use to examine your neurological state.
+</p>
+<p>
+    However, I am not a neuroscientist, I am a computer programmer.  If you happen to be a neuroscientist, psychologist or other scientist who can help out my process, I would LOVE to hear from you.  
+</p>
+
+
+
+
+<pre class="example">;;; mindwave-emacs.el --- Neurosky mindwave support
+
+o;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell &lt;jonnay@jonnay.net&gt;
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+(provide 'mindwave-emacs)
+
+
+(require 'mindwave-emacs)
+
+(defvar dg-mindwave/org-buffer "Brain.org")
+
+(defvar dg-mindwave/mark nil)
+
+(defun dg-mindwave/generic-mark ()
+  "Used to generically mark a section of the table"
+  (interactive)
+  (dg-mindwave/mark "mark"))
+
+(defun dg-mindwave/mark (mark)
+  "Set a mark on the section of a table"
+  (interactive "sMark: ")
+  (setq dg-mindwave/mark mark))
+(defun dg-mindwave/if-assoc (key lst)
+  (if (assoc key lst)
+      (number-to-string (cdr (assoc key lst)))
+      " "))
+
+(defun dg-mindwave/get-in (lst key keylist)
+  (let ((innerList (assoc key lst)))
+    (mapconcat '(lambda (el)
+                  (if (and innerList 
+                           (assoc el innerList))
+                       (number-to-string (cdr (assoc el innerList)))
+                    "")) 
+               keylist
+               " | ")))
+
+(defun dg-mindwave/collect-and-write (output)
+  "Hook function to gather and write data to the table."
+      (let* ((out (json-read-from-string output))
+             (string-write (concat "| " 
+                          (format-time-string "%s")
+                          " | "
+                          (dg-mindwave/if-assoc 'poorSignalLevel out) 
+                          " | "
+                          (dg-mindwave/get-in out 'eegPower '(highGamma lowGamma highBeta lowBeta highAlpha lowAlpha theta delta))
+                          " | "
+                          (dg-mindwave/get-in out 'eSense '(attention meditation))
+                          " | "
+                          (when dg-mindwave/mark
+                            (let ((m dg-mindwave/mark))
+                              (setq dg-mindwave/mark)
+                              m))
+                          " | "                          
+                          "\n")))
+        (with-current-buffer dg-mindwave/org-buffer 
+          (goto-char (point-max))
+          (insert string-write))))
+
+(defun dg-mindwave/start-recording-session (name)
+  "Sets up an entirely new mindwave session for recording." 
+  (interactive "sMindwave Session Name: ")
+  (with-current-buffer dg-mindwave/org-buffer
+    (goto-char (point-max))
+    (insert "\n\n")
+    (insert "*** ")
+    (insert (current-time-string))
+    (insert "  ")
+    (insert name)
+    (insert "\n")
+    (insert "#+TBLNAME: ")
+    (insert name)
+    (insert "\n")
+    (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
+    (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
+    (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n"))
+  (mindwave-get-buffer)
+  (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
+    (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
+
+(defun dg-mindwave/stop-recording-session ()
+  "Stops a recording session"
+  (interactive)
+  (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
+  )
+
+
+
+(defun dg-mindwave/start-45-second-session (name) 
+  "Start a 45 second session with appropriate marks.  NAME should be a simple name."
+  (interactive "s45 Second Session Name:")
+  (dg-mindwave/start-recording-session name)
+  (run-at-time 15 nil '(lambda ()
+                         (message "Close your Eyes and Relax")
+                         (beep 1) 
+                         (dg-mindwave/mark "relaxed")))
+  (run-at-time 30 nil `(lambda ()
+                         (message ,name)
+                         (beep 1)
+                         (dg-mindwave/mark ,name)))
+  (run-at-time 45 nil '(lambda ()
+                         (beep 1)
+                         (message "stop")
+                         (dg-mindwave/stop-recording-session))))
+
+</pre>
+
+
+<p>
+When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
+</p>
+<p>
+I wanted something simple that would provide that for me.
+</p>
+<p>
+This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
+</p>
+</div>
+
+<div id="outline-container-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Set up the bacis and get a file for writing ready</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+<ul>
+<li id="sec-3-2-1-1"><span class="todo TODO">TODO</span> change the dependence on Brain.org to something that can be set with customize.<br/>
+Note, that the code assumes that you want everything put in a buffer called <code>Brain.org</code>.
+
+
+
+
+<pre class="example">
+(require 'mindwave-emacs)
+
+(defvar dg-mindwave/org-buffer "Brain.org")
+
+</pre>
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Marks</h4>
+<div class="outline-text-4" id="text-3-2-2">
+
+
+<p>
+   The basic concept of this data gathering scheme is the concept of
+   'marks'.  During the examination of brainwaves, there may be
+   external or internal stimulus that trigger a sensation which may
+   (or may not) trigger a change in brainwave state.  that brainwave
+   state should then be stored on the table for later analysis. 
+</p>
+<p>
+   Right now a very simple interface is defined and provided.  One can
+   either insert a generic "mark" into the table, and insert a
+   prompted for mark.  A little later we will create a buffer that
+   takes alpha characters as marks.
+</p>
+<dl>
+<dt>dg-mindwave/generic-mark</dt><dd>Inserts a generic mark called "mark".
+</dd>
+<dt>dg-mindwave/mark</dt><dd>Prompt for a mark name, and mark it with
+        that mark.  
+</dd>
+</dl>
+
+
+<p>
+   Note, that the act of prompting for a mark name already skews the
+   results, right?
+</p>
+
+
+
+<pre class="example">(defvar dg-mindwave/mark nil)
+
+(defun dg-mindwave/generic-mark ()
+  "Used to generically mark a section of the table"
+  (interactive)
+  (dg-mindwave/mark "mark"))
+
+(defun dg-mindwave/mark (mark)
+  "Set a mark on the section of a table"
+  (interactive "sMark: ")
+  (setq dg-mindwave/mark mark))
+</pre>
+
+
+<ul>
+<li id="sec-3-2-2-1"><span class="todo TODO">TODO</span> sk for a symbol, but confirt to string in dg-mindwave/mark<br/>
+
+</li>
+</ul>
+<ul>
+<li id="sec-3-2-2-2"><span class="todo TODO">TODO</span> figure out a much better interface for marks<br/>
+
+<p>
+     Right now the current mark implementation is clunky at best.  In
+     my ideal work I would like to have a way to receive these mark
+     inputs from the mindwave wearer in as unobtrusive a way as
+     possible.
+</p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> Data collection</h4>
+<div class="outline-text-4" id="text-3-2-3">
+
+
+<p>
+   This is where the magic happens.  A hook is set up to read the
+   various values from the mindwave output, and then write them into
+   an org-mode table. 
+</p>
+
+
+
+<pre class="example">(defun dg-mindwave/if-assoc (key lst)
+  (if (assoc key lst)
+      (number-to-string (cdr (assoc key lst)))
+      " "))
+
+(defun dg-mindwave/get-in (lst key keylist)
+  (let ((innerList (assoc key lst)))
+    (mapconcat '(lambda (el)
+                  (if (and innerList 
+                           (assoc el innerList))
+                       (number-to-string (cdr (assoc el innerList)))
+                    "")) 
+               keylist
+               " | ")))
+
+(defun dg-mindwave/collect-and-write (output)
+  "Hook function to gather and write data to the table."
+      (let* ((out (json-read-from-string output))
+             (string-write (concat "| " 
+                          (format-time-string "%s")
+                          " | "
+                          (dg-mindwave/if-assoc 'poorSignalLevel out) 
+                          " | "
+                          (dg-mindwave/get-in out 'eegPower '(highGamma lowGamma highBeta lowBeta highAlpha lowAlpha theta delta))
+                          " | "
+                          (dg-mindwave/get-in out 'eSense '(attention meditation))
+                          " | "
+                          (when dg-mindwave/mark
+                            (let ((m dg-mindwave/mark))
+                              (setq dg-mindwave/mark)
+                              m))
+                          " | "                          
+                          "\n")))
+        (with-current-buffer dg-mindwave/org-buffer 
+          (goto-char (point-max))
+          (insert string-write))))
+
+(defun dg-mindwave/start-recording-session (name)
+  "Sets up an entirely new mindwave session for recording." 
+  (interactive "sMindwave Session Name: ")
+  (with-current-buffer dg-mindwave/org-buffer
+    (goto-char (point-max))
+    (insert "\n\n")
+    (insert "*** ")
+    (insert (current-time-string))
+    (insert "  ")
+    (insert name)
+    (insert "\n")
+    (insert "#+TBLNAME: ")
+    (insert name)
+    (insert "\n")
+    (insert "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n")
+    (insert "|       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark |\n")
+    (insert  "|------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+------|\n"))
+  (mindwave-get-buffer)
+  (when (not (member 'dg-mindwave/collect-and-write 'mindwave-hook))
+    (add-hook 'mindwave-hook 'dg-mindwave/collect-and-write)))
+
+(defun dg-mindwave/stop-recording-session ()
+  "Stops a recording session"
+  (interactive)
+  (remove-hook 'mindwave-hook 'dg-mindwave/collect-and-write)
+  )
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-4" class="outline-4">
+<h4 id="sec-3-2-4"><span class="section-number-4">3.2.4</span> Results Table</h4>
+<div class="outline-text-4" id="text-3-2-4">
+
+
+<p>
+    In my simple explorations, I found it handy to have a secondary
+    table generated from the first that shows various simple
+    statistical qualities.  
+</p>
+<p>
+    Again, I am not a scientist, but I do find these result tables to
+    be fairly informative.   If you have any ideas on how to make them
+    better, let me know. 
+</p>
+<p>
+    Note, that for now the code formatting, especially of the org-mode
+    calc table is kinda yucky and could be better.
+</p>
+
+
+
+<pre class="example">(defun dg-mindwave/make-results-table (name)
+  "Generate a results table for a mindwave session"
+  (interactive "sMindwave Session Name: ")
+  (insert "\n")
+  (insert "#+TBLNAME: ")
+  (insert name)
+  (insert "_results")
+  (insert "\n")
+  (insert " |         |      signal | highGamma |  lowGamma |  highBeta |   lowBeta | highAlpha |  lowAlpha |     theta |     delta | meditation | attention |") (insert "\n")
+  (insert " |---------+-------------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+------------+-----------|") (insert "\n")
+  (insert " | vmean   |             |           |           |           |           |           |           |           |           |            |           |") (insert "\n")
+  (insert " | vmedian |             |           |           |           |           |           |           |           |           |            |           |") (insert "\n")
+  (insert " | vmax    |             |           |           |           |           |           |           |           |           |            |           |") (insert "\n")
+  (insert " | vmin    |             |           |           |           |           |           |           |           |           |            |           |") (insert "\n")
+  (insert " | vsdev   |             |           |           |           |           |           |           |           |           |            |           |") (insert "\n")
+  (insert (concat "    #+TBLFM: @2$2=vmean(remote(" name ",@II$2..@III$2))::@3$2=vmedian(remote(" name ",@II$2..@III$2))::@4$2=vmax(remote(" name ",@II$2..@III$2))::@5$2=vmin(remote(" name ",@II$2..@III$2))::@6$2=vsdev(remote(" name ",@II$2..@III$2))::@2$3=vmean(remote(" name ",@II$3..@III$3))::@3$3=vmedian(remote(" name ",@II$3..@III$3))::@4$3=vmax(remote(" name ",@II$3..@III$3))::@5$3=vmin(remote(" name ",@II$3..@III$3))::@6$3=vsdev(remote(" name ",@II$3..@III$3))::@2$4=vmean(remote(" name ",@II$4..@III$4))::@3$4=vmedian(remote(" name ",@II$4..@III$4))::@4$4=vmax(remote(" name ",@II$4..@III$4))::@5$4=vmin(remote(" name ",@II$4..@III$4))::@6$4=vsdev(remote(" name ",@II$4..@III$4))::@2$5=vmean(remote(" name ",@II$5..@III$5))::@3$5=vmedian(remote(" name ",@II$5..@III$5))::@4$5=vmax(remote(" name ",@II$5..@III$5))::@5$5=vmin(remote(" name ",@II$5..@III$5))::@6$5=vsdev(remote(" name ",@II$5..@III$5))::@2$6=vmean(remote(" name ",@II$6..@III$6))::@3$6=vmedian(remote(" name ",@II$6..@III$6))::@4$6=vmax(remote(" name ",@II$6..@III$6))::@5$6=vmin(remote(" name ",@II$6..@III$6))::@6$6=vsdev(remote(" name ",@II$6..@III$6))::@2$7=vmean(remote(" name ",@II$7..@III$7))::@3$7=vmedian(remote(" name ",@II$7..@III$7))::@4$7=vmax(remote(" name ",@II$7..@III$7))::@5$7=vmin(remote(" name ",@II$7..@III$7))::@6$7=vsdev(remote(" name ",@II$7..@III$7))::@2$8=vmean(remote(" name ",@II$8..@III$8))::@3$8=vmedian(remote(" name ",@II$8..@III$8))::@4$8=vmax(remote(" name ",@II$8..@III$8))::@5$8=vmin(remote(" name ",@II$8..@III$8))::@6$8=vsdev(remote(" name ",@II$8..@III$8))::@2$9=vmean(remote(" name ",@II$9..@III$9))::@3$9=vmedian(remote(" name ",@II$9..@III$9))::@4$9=vmax(remote(" name ",@II$9..@III$9))::@5$9=vmin(remote(" name ",@II$9..@III$9))::@6$9=vsdev(remote(" name ",@II$9..@III$9))::@2$10=vmean(remote(" name ",@II$10..@III$10))::@3$10=vmedian(remote(" name ",@II$10..@III$10))::@4$10=vmax(remote(" name ",@II$10..@III$10))::@5$10=vmin(remote(" name ",@II$10..@III$10))::@6$10=vsdev(remote(" name ",@II$10..@III$10))::@2$11=vmean(remote(" name ",@II$11..@III$11))::@3$11=vmedian(remote(" name ",@II$11..@III$11))::@4$11=vmax(remote(" name ",@II$11..@III$11))::@5$11=vmin(remote(" name ",@II$11..@III$11))::@6$11=vsdev(remote(" name ",@II$11..@III$11))::@2$12=vmean(remote(" name ",@II$12..@III$12))::@3$12=vmedian(remote(" name ",@II$12..@III$12))::@4$12=vmax(remote(" name ",@II$12..@III$12))::@5$12=vmin(remote(" name ",@II$12..@III$12))::@6$12=vsdev(remote(" name ",@II$12..@III$12))")))
+
+</pre>
+
+
+<ul>
+<li id="sec-3-2-4-1">Results Example (basic)<br/>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" /><col class="right" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left"></th><th scope="col" class="right">signal</th><th scope="col" class="right">highGamma</th><th scope="col" class="right">lowGamma</th><th scope="col" class="right">highBeta</th><th scope="col" class="right">lowBeta</th><th scope="col" class="right">highAlpha</th><th scope="col" class="right">lowAlpha</th><th scope="col" class="right">theta</th><th scope="col" class="right">delta</th><th scope="col" class="right">meditation</th><th scope="col" class="right">attention</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">vmean</td><td class="right">0.061611374</td><td class="right">12192.720</td><td class="right">15232.820</td><td class="right">19399.642</td><td class="right">15180.616</td><td class="right">17033.287</td><td class="right">22201.699</td><td class="right">76134.531</td><td class="right">270353.25</td><td class="right">53.241706</td><td class="right">53.424171</td></tr>
+<tr><td class="left">vmedian</td><td class="right">0</td><td class="right">8132.5</td><td class="right">10014</td><td class="right">14247.5</td><td class="right">9695.5</td><td class="right">8411.5</td><td class="right">9076.5</td><td class="right">23773.5</td><td class="right">62936</td><td class="right">54</td><td class="right">56</td></tr>
+<tr><td class="left">vmax</td><td class="right">26</td><td class="right">86970</td><td class="right">152111</td><td class="right">192200</td><td class="right">260706</td><td class="right">363667</td><td class="right">799014</td><td class="right">820033</td><td class="right">2920134</td><td class="right">100</td><td class="right">100</td></tr>
+<tr><td class="left">vmin</td><td class="right">0</td><td class="right">303</td><td class="right">378</td><td class="right">638</td><td class="right">342</td><td class="right">436</td><td class="right">311</td><td class="right">2025</td><td class="right">300</td><td class="right">0</td><td class="right">0</td></tr>
+<tr><td class="left">vsdev</td><td class="right">1.2656602</td><td class="right">12190.021</td><td class="right">15797.156</td><td class="right">17531.918</td><td class="right">20699.664</td><td class="right">29733.997</td><td class="right">51731.083</td><td class="right">124792.48</td><td class="right">449634.67</td><td class="right">22.641340</td><td class="right">17.949459</td></tr>
+</tbody>
+</table>
+
+
+</li>
+</ul>
+<ul>
+<li id="sec-3-2-4-1"><span class="todo TODO">TODO</span> fix formatting of the TBLFM line<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3-2-4-2"><span class="todo TODO">TODO</span> make the lisp function re-calc the table after insertion<br/>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-2-5" class="outline-4">
+<h4 id="sec-3-2-5"><span class="section-number-4">3.2.5</span> Window for mark input</h4>
+<div class="outline-text-4" id="text-3-2-5">
+
+
+<p>
+    The mark window is a very simple mark interface.  It will allow
+    you to use the lower case letters a through z to insert that
+    letter as a mark, which can be used as a mnemonic for various
+    situations.
+</p>
+<p>
+    Right now the buffer is just blank, but I will be working on
+    improving it in the future.
+</p>
+
+
+
+<pre class="example">(defun dg-mindwave/create-input-buffer ()
+  "Create an input buffer so that marks can be handled"
+  (interactive)
+  (pop-to-buffer (get-buffer-create "*mindwave-input*") )
+  (local-set-key " " 'dg-mindwave/generic-mark)
+  (local-set-key "a" '(lambda () (interactive) (dg-mindwave/mark "a")))
+  (local-set-key "b" '(lambda () (interactive) (dg-mindwave/mark "b")))
+  (local-set-key "c" '(lambda () (interactive) (dg-mindwave/mark "c")))
+  (local-set-key "d" '(lambda () (interactive) (dg-mindwave/mark "d")))
+  (local-set-key "e" '(lambda () (interactive) (dg-mindwave/mark "e")))
+  (local-set-key "f" '(lambda () (interactive) (dg-mindwave/mark "f")))
+  (local-set-key "g" '(lambda () (interactive) (dg-mindwave/mark "g")))
+  (local-set-key "h" '(lambda () (interactive) (dg-mindwave/mark "h")))
+  (local-set-key "i" '(lambda () (interactive) (dg-mindwave/mark "i")))
+  (local-set-key "j" '(lambda () (interactive) (dg-mindwave/mark "j")))
+  (local-set-key "k" '(lambda () (interactive) (dg-mindwave/mark "k")))
+  (local-set-key "l" '(lambda () (interactive) (dg-mindwave/mark "l")))
+  (local-set-key "m" '(lambda () (interactive) (dg-mindwave/mark "m")))
+  (local-set-key "n" '(lambda () (interactive) (dg-mindwave/mark "n")))
+  (local-set-key "o" '(lambda () (interactive) (dg-mindwave/mark "o")))
+  (local-set-key "p" '(lambda () (interactive) (dg-mindwave/mark "p")))
+  (local-set-key "q" '(lambda () (interactive) (dg-mindwave/mark "q")))
+  (local-set-key "r" '(lambda () (interactive) (dg-mindwave/mark "r")))
+  (local-set-key "s" '(lambda () (interactive) (dg-mindwave/mark "s")))
+  (local-set-key "t" '(lambda () (interactive) (dg-mindwave/mark "t")))
+  (local-set-key "u" '(lambda () (interactive) (dg-mindwave/mark "u")))
+  (local-set-key "v" '(lambda () (interactive) (dg-mindwave/mark "v")))
+  (local-set-key "w" '(lambda () (interactive) (dg-mindwave/mark "w")))
+  (local-set-key "x" '(lambda () (interactive) (dg-mindwave/mark "x")))
+  (local-set-key "y" '(lambda () (interactive) (dg-mindwave/mark "y")))
+  (local-set-key "z" '(lambda () (interactive) (dg-mindwave/mark "z"))))  
+</pre>
+
+
+<ul>
+<li id="sec-3-2-5-1"><span class="todo TODO">TODO</span> Make the buffer keep a record of the marks used.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3-2-5-2"><span class="todo TODO">TODO</span> have some kind of way to input inside the mark buffer the meaning of various marks<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3-2-5-3"><span class="todo TODO">TODO</span> In the mark buffer, the eeg and signal scores should be displayed.<br/>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-2-6" class="outline-4">
+<h4 id="sec-3-2-6"><span class="section-number-4">3.2.6</span> Timed Recordings</h4>
+<div class="outline-text-4" id="text-3-2-6">
+
+
+<p>
+Timed recordings are for micro-experimentation of your EEG.  The idea
+is that you record EEG activity in 15 second chunks, which each chunk
+being a different activity.
+</p>
+<ol>
+<li>a 'whatever chunk', and is basically 15 seconds of "whatever is
+     going on right now". 
+</li>
+<li>a 15 second chunk of eyes closed and relaxing
+</li>
+<li>a 15 second chunk of experimentation or calibration, for instance:
+<ul>
+<li>eyes closed and relaxing
+</li>
+<li>eyes opened and relaxing
+</li>
+<li>eyes closed and breathing deeply
+</li>
+<li>eyes open and doing complicated math problems.
+</li>
+</ul>
+
+</li>
+</ol>
+
+
+<p>
+This can be used for self experimentation.  At the 15 second mark,
+Emacs will beep at you and tell you to close your eyes.  At the 30
+second mark, it will beep at you and insert the name of the session as
+a mark.  finally, it will beep at the 45 second mark and stop the
+recording session.
+</p>
+
+
+
+<pre class="example">(defun dg-mindwave/start-45-second-session (name) 
+  "Start a 45 second session with appropriate marks.  NAME should be a simple name."
+  (interactive "s45 Second Session Name:")
+  (dg-mindwave/start-recording-session name)
+  (run-at-time 15 nil '(lambda ()
+                         (message "Close your Eyes and Relax")
+                         (beep 1) 
+                         (dg-mindwave/mark "relaxed")))
+  (run-at-time 30 nil `(lambda ()
+                         (message ,name)
+                         (beep 1)
+                         (dg-mindwave/mark ,name)))
+  (run-at-time 45 nil '(lambda ()
+                         (beep 1)
+                         (message "stop")
+                         (dg-mindwave/stop-recording-session))))
+</pre>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Example two: solarized mind</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+
+
+<pre class="example">;;; solarized-mind.el --- changes emacs interface according to brainstate
+
+;; Copyright (C) 2012 Jonathan Arkell
+
+;; Author: Jonathan Arkell &lt;jonnay@jonnay.net&gt;
+;; Created: 16 June 2012
+;; Keywords: comint mindwave
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL     
+
+  (require 'mindwave-emacs)
+
+
+
+(defconst solarized-mind/brain-ring-size 30)
+
+(defvar solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
+(defvar solarized-mind/ring-reset-counter 0)
+
+(defun solarized-mind/mindwave-hook (vals)
+  "Set up hook to solarize your mind, and set up the medicursor."
+  (let ((brain (json-read-from-string vals)))
+    (when (and (assoc 'eSense brain)
+               (assoc 'poorSignalLevel brain)
+               (&gt; 50
+                  (cdr (assoc 'poorSignalLevel brain))))
+      (ring-insert solarized-mind/brain-ring 
+                   (cons (cdr (assoc 'meditation (assoc 'eSense brain)))
+                         (cdr (assoc 'attention  (assoc 'eSense brain)))))
+      (when (&gt;= (ring-length solarized-mind/brain-ring) 
+               solarized-mind/brain-ring-size)
+        (let ((new-ring (make-ring solarized-mind/brain-ring-size))
+              (collapsed-ring (reduce #'(lambda (pair total)
+                                          (cons (+ (car pair) 
+                                                   (car total)) 
+                                                (+ (cdr pair) 
+                                                   (cdr total))))
+                                      (ring-elements solarized-mind/brain-ring)
+                                      :initial-value (cons 0 0))))
+          (ring-insert new-ring 
+                       (cons (/ (car collapsed-ring)
+                                solarized-mind/brain-ring-size)
+                             (/ (cdr collapsed-ring)
+                                solarized-mind/brain-ring-size)))
+          (solarized-mind/set-medicursor (car (ring-ref new-ring 0)))
+          (solarized-mind/set-background (cdr (ring-ref new-ring 0)))
+          (setq solarized-mind/brain-ring new-ring))))))
+(defun solarized-mind/set-medicursor (med)
+  "Set the cursor to a value from the mindwave"
+  (setq blink-cursor-interval
+        (if ( = 0 med)
+            0.25
+            (+ 0.25
+               (/ med 100.0)))))
+    (require 'hexrgb)
+
+  (defun solarized-mind/set-background (att)
+    "Sets the background color"
+    (set-background-color (solarized-mind/attention-to-rgb att))
+    ;(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb att))
+    nil)
+
+  ;(frame-parameter nil 'background-color)
+  (defun solarized-mind/attention-to-rgb (att)
+    "Takes an attention value (out of 100) and returns a color between #000000 and #002b36"
+    (let ((h (hexrgb-hue "#002b36"))
+          (s (hexrgb-saturation "#002b36"))
+          (v (hexrgb-value "#002b36")))
+
+                           (hexrgb-hsv-to-hex h 
+                                              s 
+                                              (* v (/ att 100.0)))))
+
+
+
+;(set-face-attribute 'default nil :background (solarized-mind/attention-to-rgb 0))
+
+</pre>
+
+
+<p>
+    Assuming you're using the solarized (dark) theme, lets say that you want the background color to change according to how attentive you are.
+</p>
+<dl>
+<dt>Attention</dt><dd>Level of 'solarized purity of background color'.  The more attention, the more blue the solarized background.
+</dd>
+<dt>Meditation</dt><dd>Cursor blink rate, from 0.25 (less meditative) to 1 (more)
+</dd>
+</dl>
+
+
+
+</div>
+
+<div id="outline-container-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Set up Hooks</h4>
+<div class="outline-text-4" id="text-3-3-1">
+
+
+<p>
+    We set up a ring that is used to store both the attention and the
+    meditation values.  Every second we store the data from the eSense
+    and put it in the ring.  Once the ring is full, we "collapse" the
+    ring, get the mean of those values, and stick them on the first
+    element of the list.
+</p>
+<p>
+    This provides a bit of continutity to the list.  It makes me
+    wonder if there is a better way to handle it to provide more
+    continuity overall, or even, if that is desireable?  Is it better
+    to have small local updates as to ones relaxation and attention
+    states, or is it better to have a global one?
+</p>
+<ul>
+<li id="sec-3-3-1-1">Digressions<br/>
+
+<p>
+     One option is to store say 5-10 elements of history as part of
+     the ring.  A ring inside of a ring if you will.  On the first
+     pass through the 30 elements, the average would be in position 1,
+     then the next round of averages in position 2, and so on, until
+     all 5 are filled up.
+</p>
+<p>
+     At this point, one of two strategies could be followed:
+</p>
+<ol>
+<li>The first element is over-written with the latest new values,
+        and that continues on.  This would give an overall reading
+        that progresses forward in time.
+</li>
+<li>The mean of the first 5 elements is put into position 1, and
+        then positions 2-5 are cleared, and the strategy continues.
+        This has the benifit of always providing a baseline context.
+</li>
+</ol>
+
+
+<ul>
+<li id="sec-3-3-1-1-1"><span class="todo TODO">TODO</span> Set it up so that different strategies can be tried<br/>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-3-3-1-2">Code<br/>
+
+
+
+
+<pre class="example">
+
+(defconst solarized-mind/brain-ring-size 30)
+
+(defvar solarized-mind/brain-ring (make-ring solarized-mind/brain-ring-size))
+(defvar solarized-mind/ring-reset-counter 0)
+
+(defun solarized-mind/mindwave-hook (vals)
+  "Set up hook to solarize your mind, and set up the medicursor."
+  (let ((brain (json-read-from-string vals)))
+    (when (and (assoc 'eSense brain)
+               (assoc 'poorSignalLevel brain)
+               (&gt; 50
+                  (cdr (assoc 'poorSignalLevel brain))))
+      (ring-insert solarized-mind/brain-ring 
+                   (cons (cdr (assoc 'meditation (assoc 'eSense brain)))
+                         (cdr (assoc 'attention  (assoc 'eSense brain)))))
+      (when (&gt;= (ring-length solarized-mind/brain-ring) 
+               solarized-mind/brain-ring-size)
+        (let ((new-ring (make-ring solarized-mind/brain-ring-size))
+              (collapsed-ring (reduce #'(lambda (pair total)
+                                          (cons (+ (car pair) 
+                                                   (car total)) 
+                                                (+ (cdr pair) 
+                                                   (cdr total))))
+                                      (ring-elements solarized-mind/brain-ring)
+                                      :initial-value (cons 0 0))))
+          (ring-insert new-ring 
+                       (cons (/ (car collapsed-ring)
+                                solarized-mind/brain-ring-size)
+                             (/ (cdr collapsed-ring)
+                                solarized-mind/brain-ring-size)))
+          (solarized-mind/set-medicursor (car (ring-ref new-ring 0)))
+          (solarized-mind/set-background (cdr (ring-ref new-ring 0)))
+          (setq solarized-mind/brain-ring new-ring))))))
+</pre>
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> User-interface</h4>
+<div class="outline-text-4" id="text-3-3-2">
+
+
+<p>
+    Such as it is.  Right now there is only 2 commands:
+</p>
+<dl>
+<dt>solarized-mind/start</dt><dd>Start solarized mind, set up the hook,
+         and start mindwave.
+</dd>
+<dt>solarized-mind/stop</dt><dd>Remove the solarized mind hook.  Doesn't
+         actually try and stop the mindwave connection however.
+</dd>
+</dl>
+
+
+
+
+
+<pre class="example">
+(defun solarized-mind/start ()
+  (interactive)
+  (mindwave-get-buffer)
+  (when (not (member 'solarized-mind/mindwave-hook 'mindwave-hook))
+    (message "Adding Mindwave hook")
+    (add-hook 'mindwave-hook 'solarized-mind/mindwave-hook)))
+
+(defun solarized-mind/stop ()
+  (interactive)
+  (remove-hook 'mindwave-hook 'solarized-mind/mindwave-hook))
+
+</pre>
+
+
+
+<pre class="example">
+(defun solarized-mind/show ()
+  "Show the state of the users mind."
+  (interactive)
+  (with-output-to-temp-buffer "solarized-mind"
+    (pp solarized-mind/brain-ring)))
+
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3-3" class="outline-4">
+<h4 id="sec-3-3-3"><span class="section-number-4">3.3.3</span> Medi-Curosr</h4>
+<div class="outline-text-4" id="text-3-3-3">
+
+
+<p>
+     This is by far the easiest one to do, so lets do it first.
+</p>
+
+
+
+<pre class="example">(defun solarized-mind/set-medicursor (med)
+  "Set the cursor to a value from the mindwave"
+  (setq blink-cursor-interval
+        (if ( = 0 med)
+            0.25
+            (+ 0.25
+               (/ med 100.0)))))
+</pre>
+
+
+
+<pre class="example">(ert-deftest sm-medicursor/setValidRates ()
+  (should (eql (solarized-mind/set-medicursor 100) 1.25))
+  (should (eql (solarized-mind/set-medicursor 50) 0.75))
+  (should (eql (solarized-mind/set-medicursor 0  ) 0.25)))
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3-4" class="outline-4">
+<h4 id="sec-3-3-4"><span class="section-number-4">3.3.4</span> Solarized Mind</h4>
+<div class="outline-text-4" id="text-3-3-4">
+
+
+
+
+<pre class="example">    (require 'hexrgb)
+
+  (defun solarized-mind/set-background (att)
+    "Sets the background color"
+    (set-background-color (solarized-mind/attention-to-rgb att))
+    ;(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb att))
+    nil)
+
+  ;(frame-parameter nil 'background-color)
+  (defun solarized-mind/attention-to-rgb (att)
+    "Takes an attention value (out of 100) and returns a color between #000000 and #002b36"
+    (let ((h (hexrgb-hue "#002b36"))
+          (s (hexrgb-saturation "#002b36"))
+          (v (hexrgb-value "#002b36")))
+
+                           (hexrgb-hsv-to-hex h 
+                                              s 
+                                              (* v (/ att 100.0)))))
+
+
+
+;(set-face-attribute 'default nil :background (solarized-mind/attention-to-rgb 0))
+</pre>
+
+
+
+<pre class="example">(solarized-mind/attention-to-rgb 100)
+(solarized-mind/attention-to-rgb 50)
+(solarized-mind/attention-to-rgb 0)
+(set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
+</pre>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> The code</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Basic House keeping</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+
+
+<pre class="example">(require 'json)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Set Up the client</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+</div>
+
+<div id="outline-container-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Basic constants</h4>
+<div class="outline-text-4" id="text-4-2-1">
+
+
+
+
+<pre class="example">(defvar mindwave-host "localhost")
+(defvar mindwave-port 13854)
+
+(defvar mindwave-appName "mindwave-emacs")
+(defvar mindwave-appKey (sha1 mindwave-appName))
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Connection</h4>
+<div class="outline-text-4" id="text-4-2-2">
+
+<ul>
+<li id="sec-4-2-2-1">Connection variables<br/>
+
+
+
+
+<pre class="example">(defvar mindwave-buffer nil "Variable to store the buffer connected to the process")
+(defvar mindwave-process nil "Process that mindwave is connected")
+</pre>
+
+
+</li>
+</ul>
+<ul>
+<li id="sec-4-2-2-2">Return lowlevel connection variables<br/>
+According to the documentation of make-comint, if a running process is on the buffer, it is not restarted.  So isntead of trying to maintain state, lets just return the existing process that way.
+
+
+
+
+<pre class="example">(defun mindwave-get-buffer ()
+  "Returns the buffer for the mindwave connection"
+  (if (and mindwave-process (process-live-p mindwave-process))
+      mindwave-process
+      (progn
+  (setq mindwave-buffer (make-comint "mindwave" (cons mindwave-host mindwave-port)))
+  (setq mindwave-process (get-buffer-process mindwave-buffer))
+  (save-excursion
+    (set-buffer mindwave-buffer)
+    (sleep-for 1)
+    (mindwave-authorize)
+    (sleep-for 1)
+    (mindwave-get-raw nil)
+    (sleep-for 1)
+    (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+  mindwave-buffer)))
+
+</pre>
+
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Sending Data</h3>
+<div class="outline-text-3" id="text-4-3">
+
+
+
+
+<pre class="example">(defun mindwave-send-string (str)
+  "Helper function to send STRING directly to the mindwave.
+Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configuration."
+  (comint-send-string mindwave-process str))
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Recieving Data</h3>
+<div class="outline-text-3" id="text-4-4">
+
+
+<p>
+Mindwave emacs sets up 3 hooks:  
+</p></div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> The hooks</h3>
+<div class="outline-text-3" id="text-4-5">
+
+<ul>
+<li id="sec-4-5-1"><code>mindwave-hook</code><br/>
+Called whenever there is a packet that mindwave emacs doesn't natively understand.  The standard 1-packet-per-second packet is an example of this:
+
+
+
+<pre class="example">{
+  "eSense":{
+    "attention":47,
+    "meditation":66
+  },
+  "eegPower":{
+    "delta":4479,
+    "theta":42897,
+    "lowAlpha":6952,
+    "highAlpha":21261,
+    "lowBeta":14623,
+    "highBeta":5238,
+    "lowGamma":2546,
+    "highGamma":2512
+  },
+  "poorSignalLevel":0
+}
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-4-5-2"><code>mindwave-blink-hook</code><br/>
+Called whenever the mindwave detects a blink.
+
+</li>
+</ul>
+<ul>
+<li id="sec-4-5-3"><code>mindwave-raw-hook</code><br/>
+Called for when raw packet data is recieved.  Note that many raw packets are recieved at a time, so teh hook is fed an array of strings.  Each string being the numeric raw value.
+
+<p>
+Note that due to the buffering involved, I am not so sure how much value there really is in the raw eeg value.  
+</p>
+</li>
+</ul>
+
+</div>
+
+<div id="outline-container-4-5-1" class="outline-4">
+<h4 id="sec-4-5-1"><span class="section-number-4">4.5.1</span> Low level details for the hooks</h4>
+<div class="outline-text-4" id="text-4-5-1">
+
+
+
+
+<pre class="example">(defvar mindwave-hook '() "Hooks to run when mindwave gets standard input")
+(defvar mindwave-blink-hook '() "Hooks to run when mindwave gets blink input")
+(defvar mindwave-raw-hook '() "Hooks to run when mindwave gets raw input")
+</pre>
+
+
+
+
+<pre class="example">(defun mindwave-comint-filter-function (output)
+  "A helper hook to pass off output to the apropriate hooks"
+  (let ((collected-raw '()))
+    (loop for out 
+          in (split-string output "\C-j" t)
+          do
+          (cond ((and (&gt; (length out) 10) 
+                      (string-equal (substring out 0 10) "{\"rawEeg\":"))
+                 (setq collected-raw (cons (substring out 10 -1) collected-raw)))
+
+                ((and (&gt; (length out) 17) 
+                      (string-equal (substring out 0 17) "{\"blinkStrength\":"))
+                 (run-hook-with-args 'mindwave-blink-hook (substring out 17 -2)))
+
+                ((string-equal "{" (substring out 0 1))
+                 (run-hook-with-args 'mindwave-hook out))))
+    (when (&gt; (length collected-raw) 0)
+      (run-hook-with-args 'mindwave-raw-hook collected-raw)))
+  output)
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> <span class="todo TODO">TODO</span> Ask for authorisation</h3>
+<div class="outline-text-3" id="text-4-6">
+
+
+<p>
+   For whatever reason, I don't recall having to do this.  But it's
+   provided here just in case.
+</p>
+
+
+
+<pre class="example">(defvar mindwave-authorized-p nil "whether or not app is authorized")
+</pre>
+
+
+
+<pre class="example">(defun mindwave-authorize () 
+  "provides an autorization request to the mindwave server"
+  (mindwave-send-string (json-encode `(("appName" . ,mindwave-appName) 
+                                       ("appKey" . ,mindwave-appKey)))))
+</pre>
+
+
+
+<pre class="example">(defun mindwave-authorized-hook (out)
+  "test"
+  ;(message "Authorize listener: %s" out)
+)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Configure</h3>
+<div class="outline-text-3" id="text-4-7">
+
+
+</div>
+
+<div id="outline-container-4-7-1" class="outline-4">
+<h4 id="sec-4-7-1"><span class="section-number-4">4.7.1</span> Ask for raw output</h4>
+<div class="outline-text-4" id="text-4-7-1">
+
+
+
+
+<pre class="example">(defun mindwave-get-raw (raw)
+  "Return raw output from mindwave.
+RAW is a boolean value as to whether or not to listen for raw values"
+  (mindwave-send-string (json-encode `(("enableRawOutput" . ,(if raw t json-false))
+                                      ("format" . "Json")))))
+</pre>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> The End</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+
+<pre class="example">
+(provide 'mindwave-emacs)
+
+;;; mindwave-emacs.el ends here
+</pre>
+
+
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2012-08-04 15:16:36 MDT</p>
+<p class="author">Author: Jonathan Arkell</p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

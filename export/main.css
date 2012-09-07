@@ -1,0 +1,9 @@
+body {
+    margin: 1em;
+	background-color: #f0f8ff;
+}
+
+h1 {
+    border: 0px solid #000;
+    border-bottom-width: 1px;
+}

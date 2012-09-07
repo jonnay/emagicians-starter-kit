@@ -1,0 +1,14 @@
+#+title: Thee Stack
+
+* HABIT Primary
+  - Lisp is Secret Alien Technology
+  - Currently Learning about
+	- Undo-Tree - C-x u
+	- Ace-Jump - C-c C-SPC
+* Secondary
+** TODO Write elisp to display a random function 
+
+* Tertiary
+** TODO somehow pull in an agenda here to display all open NEXT items on emagicians starter kit.
+* Splash screens 
+[[file:/Applications/Emacs.app/Contents/Resources/lisp/startup.el.gz::%3B%3B%3B%20Fancy%20splash%20screen][file:/Applications/Emacs.app/Contents/Resources/lisp/startup.el.gz::;;; Fancy splash screen]]

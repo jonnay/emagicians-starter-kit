@@ -250,7 +250,14 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 
   Some no-brainer org babel setup.
 
-** Extra setup
+** Handling of source in org files
+
+#+begin_src emacs-lisp
+(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
+#+end_src
+
+** Inline images
 
 Wherever possible we always want ot display inline images
 #+begin_src emacs-lisp
@@ -282,11 +289,11 @@ Wherever possible we always want ot display inline images
 
 ** Don't confirm on non-destructive languages
 #+begin_src emacs-lisp
- (defun my-org-confirm-babel-evaluate (lang body)
+ (defun emagician/org-confirm-babel-evaluate (lang body)
             (not (or (string= lang "ditaa")
                      (string= lang "calc"))))
 
- (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+ (setq org-confirm-babel-evaluate 'emagician/org-confirm-babel-evaluate)
 #+end_src
 
 
@@ -322,4 +329,11 @@ Wherever possible we always want ot display inline images
 * Links
 (require 'org-info)
 * TODO org-elisp-symbol
-* 
+* TODO tidy
+#+begin_src emacs-lisp :tangle no
+    (let ((buf (org-element-parse-buffer))) ;; convert current buffer to ELisp
+      (dolist (rule cleanup-rules) ;; run cleanup transformations on the buffer
+        (setq buf (funcall rule buf)))
+      (delete-region (point-min) (point-max)) ;; replace the buffer contents
+      (insert (org-element-interpret-data buf))) ;; with the cleaned results
+#+end_src
