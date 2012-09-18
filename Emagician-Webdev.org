@@ -6,6 +6,11 @@
 ;(load (concat emagician-dir "dist/nxhtml/autostart.el"))
 #+end_src 
 
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.html?" . nxml-mode))
+  
+#+end_src emacs-lisp
+
 *** TODO Set up as default mode
 
 	Not just html, but also for various templates, (.tpl.php etc.)
@@ -35,17 +40,24 @@
 #+end_src
 * Web Centeric Languages
 *** TODO PHP
-	And with PHP, comes a bunch of extra frameworks. 
+	
+	Trying out PHP+ mode.  It apparently doens't autoload. BOO.
 
 #+begin_src emacs-lisp
-(emagician-expect-package 'php-mode)
-(emagician-expect-package 'flymake-php)
-#+end_src
+  (emagician-expect-package 'php+-mode) 
+  (emagician-expect-package 'flymake-php)
+  (add-to-list 'auto-mode-alist '("\\.php" . php+-mode))
+  
+  (require 'php+-mode)
+  (php+-mode-setup)
+  #+end_src
+
+And with PHP, comes a bunch of extra frameworks. 
 
 **** TODO Drupal
 
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.module" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.module" . php+-mode))
 #+end_src
 	 
 *** TODO Javascript
@@ -60,7 +72,7 @@
 **** Slime-js
 
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "~/projects/slime-js")
+  (add-to-list 'load-path "~/projects/emacs/slime-js")
   (slime-setup '(slime-js slime-repl))
   (setq slime-js-swank-command "/usr/local/bin/swank-js")
   (setq slime-js-swank-args '())

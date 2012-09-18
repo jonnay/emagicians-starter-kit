@@ -19,9 +19,17 @@
         (concat ";; -|-+-|- Invocation Failure.  Sorry." "\n"
                 ";; You know what to do." "\n"
                 ";; \n"
-                ";; It's dangerous to go alone, here take this:" "\n"
-                "(shell-command \"emacs --debug-init)"))
-                
+                ";; \n"
+                ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+                ";;                      ;;" "\n"      
+                ";; It's dangerous to go ;;" "\n"
+                ";; alone! take this:    ;;" "\n"
+                ";;                      ;;" "\n"
+                ";;    ♨   (☉_o)   ♨   ;;" "\n"
+                ";;                      ;;" "\n"
+                ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
+                "\n"
+                "(shell-command \"emacs --debug-init\")\n"))                
 #+end_src  
 
 ** Meta Development
@@ -306,27 +314,13 @@ to be delt with.
   another.  You may "just" be working in eslip, or you might be a
   ployglot proficient in Low-level C, Scheme, Ruby and Rails, and
   Java. Either way, you're a dev.
-** TODO Programming modes
+**  Programming mode hooks 
 
 #+begin_src emacs-lisp
-  (defvar programming-modes '() 
-    "A list of modes that are development related, and should all behave the same.")
-  
-  (defvar programming-mode-hooks '() 
-    "A list of hooks to run in every programming mode")
-  
-  (defun run-programming-mode-hooks ()
-    "helper function to execute programming mode hooks."
-    (run-hooks 'programming-mode-hooks))    
-#+end_src
-
-
-
-*** TODO Fix definition in the yank under editing
-*** TODO add standard hooks into it 
-#+begin_src emacs-lisp
-(add-hook 'programming-mode-hooks 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
+(emagician/define-mode-key prog (kbd "RET") newline-and-indent)
 #+end_src 
+
 ** Global Modes that are cool
 *** Show Paren Mode
 #+begin_src emacs-lisp

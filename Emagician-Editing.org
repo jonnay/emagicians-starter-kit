@@ -104,6 +104,25 @@
    '(rainbow-delimiters-unmatched-face ((t :background "firebrick2"))))
   
 #+end_src
+* Spell checking
+#+begin_src emacs-lisp
+  (emagician-expect-package  'flyspell-lazy)
+  
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  
+  (require 'flyspell-lazy)
+  (flyspell-lazy-mode 1)
+#+end_src
+
+** TODO add chunk to further enhance aspell timing
+   - [ ] check if aspell is avail
+   - [ ] check if it is in use
+   - [ ] run code 
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'ispell-extra-args "--sug-mode=ultra")
+#+end_src
+
+
 * Snippets
 
 #+name: snippets 

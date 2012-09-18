@@ -2,21 +2,21 @@
 * Interface Mindwave with emacs
 
 #+begin_src emacs-lisp :tangle yes
-;;; mindwave-emacs.el --- Neurosky mindwave support
-
-;; Copyright (C) 2012 Jonathan Arkell
-
-;; Author: Jonathan Arkell <jonnay@jonnay.net>
-;; Created: 16 June 2012
-;; Keywords: comint mindwave
-;; Version 0.1 
-
-;; This file is not part of GNU Emacs.
-;; Released under the GPL     
-
-;;; Commentary: 
-;; Please see the org-file that this was generated from. 
-
+  ;;; mindwave-emacs.el --- Neurosky mindwave support
+  
+  ;; Copyright (C) 2012 Jonathan Arkell
+  
+  ;; Author: Jonathan Arkell <jonnay@jonnay.net>
+  ;; Created: 16 June 2012
+  ;; Keywords: comint mindwave
+  ;; Version 0.1 
+  
+  ;; This file is not part of GNU Emacs.
+  ;; Released under the GPL     
+  
+  ;;; Commentary: 
+  ;; Please see the org-file that this was generated from. 
+  
 #+end_src
 
 mindwave-emacs is a chunk of elisp code that uses the
@@ -24,13 +24,14 @@ ThinkGearConnector program to pass off mindwave data directly to
 emacs.  Bundled with it is a data logger, eeg power display and data logger.
 
 Everything in this software is pulled from one giant org file.  The
-documentation, source-code and everything.  This is all part of a
+documentation, source-code... everything.  This is all part of a
 "proof of concept" of being able to write and release elisp all inside
 of an orgmode file.
 
 ** Load the files
 
-   This chunk of code is handy for loading the elisp files.
+   This chunk of code is handy for loading the elisp files.  It is mostly for my own testing.  
+
 #+begin_src emacs-lisp :tangle no
   (load-file "./mindwave-emacs.el")
   (load-file "./gather-into-org.el")
@@ -44,13 +45,35 @@ of an orgmode file.
   - v0.0 ::
 	- first release on github.
   - v1.0 ::
-	- rewrite of the hook API to be smarter in handling eSense, and eegPower
+	- rewrite of the hook API.
+	- documentation inside of a texinfo file. 
+
+* Contributing
+  
+  Mindwave emacs needs YOU!
+
+  Here are a few things that need working on:
+
+  - Better, reusable gnuplot graphs in data-gather-into-org
+  - Better statistical analysis on the summary table in data-gather-into-org
+  - Tweaks on data-gather-into-org to make it more user-friendly
+  - Low level serial interface into mindwave, so that low-level EEG values can be recorded
+  - better 'mark' interface for delineating incoming stimulus.  There might need to be 2 different interfaces, one for self experimenting mad scientists like myself, and one for actual scientists.
 	
 * Usage Examples
 
+  If you want to start playing with mindwave emacs, you will want to have a look at the usage examples.  Each example is a fully functional piece of code that you can use for your neurological feedback needs.
+
+  - gather-in-org :: Pulls eSense (attention/meditation) and eegPower (relative eeg bands) from the mindwave, and puts them into a formatted org table.
+  - solarized-mind :: Displays attention level as the background of emacs.  Currently it assumes you are using the solarized-dark theme.  The more attentive you are, the lighter blue your background is.
+  - mindwave-display :: throws up a buffer displaying the users current neurological state.  (eSense and eegPower)
+
 ** Basic testing code
 
-	This is the test code that I have been using, just to make sure that I can actually connect to the mindwave and make it do stuff.
+	Here is some extremely early testing code that I was using to see
+	if the mindwave code was working.  This is provided mostly for
+	informational purposes.  For better example code, see the examples
+	below.
 
 #+begin_src emacs-lisp :tangle no
 (mindwave-get-buffer)
@@ -74,13 +97,19 @@ of an orgmode file.
 
 ** Example one: gather data into an org buffer
 
-	In this example, you can see how to use the base mindwave hooks to capture data into an org buffer.   This actually is far more then a simple example, and is really a full working suite of tools that you can use to examine your neurological state.
+	In this example, you can see how to use the base mindwave hooks to
+	capture data into an org buffer.  This actually is far more then a
+	simple example, and is really a full working suite of tools that
+	you can use to examine your neurological state.
 
-	However, I am not a neuroscientist, I am a computer programmer.  If you happen to be a neuroscientist, psychologist or other scientist who can help out my process, I would LOVE to hear from you.  
+	However, I am not a neuroscientist, I am a computer programmer.
+	If you happen to be a neuroscientist, psychologist or other
+	scientist who can help out my process, I would LOVE to hear from
+	you.
  
 
-#+begin_src emacs-lisp  :tangle gather-into-org.el :noweb yes
-  ;;; gander-into-org.el --- Gather Mindwave Data into an org file 
+#+begin_src emacs-lisp  :tangle data-gather-into-org.el :noweb yes
+  ;;; data-gather-into-org.el --- Gather Mindwave Data into an org file 
   
   ;; Copyright (C) 2012 Jonathan Arkell
   
@@ -103,13 +132,29 @@ of an orgmode file.
   
 #+end_src
 
-When you purchase a mindwave, it doesn't actually come with any long-termdata logging code, and while there is an open source tool to show your brainwaves on a graph, it again doesn't provide logging.
+When you purchase a mindwave, it doesn't actually come with any
+long-term data logging tools.  There is an open source tool to show
+your brainwaves on a graph, but again it doesn't provide logging.
 
 I wanted something simple that would provide that for me.
 
-This chunk of code here illustrates how to use mindwave-emacs.  It will collect the eSense, eegPower and signal level into a table, that could theoretically be further processed into R, and then even plotted with various programs.
+This chunk of code here illustrates how to use mindwave-emacs.  It
+will collect the eSense, eegPower and signal level into a table, that
+could theoretically be further processed into R, and then even plotted
+with various programs.  I've provided some gnuplot code that will
+graph things pretty nicely.
+
+data-gather works in 2 different modes.  The first mode is continuous recording mode, and can be started wtih ~dg-mindwave/start-recording-session~.  This will start the recording, and won't stop it untill the command ~dg-mindwave/stop-recording-session~ is issued.
+
+The second mode is a little different.  It is used for 45 second "calibration" sessions.  The theory is that you start the session, with 15 seconds of throw away data, and then the subject is to spend the next 15 seconds relaxing, and then the final 15 seconds doing a particular task.  This can be started with ~dg-mindwave/start-45-second-session~ and stops automatically after the 45 seconds. 
+
+In both modes the concept of a "mark" applies.  This shows when a particular stimulus is encountered.  You can use ~dg-mindwave/generic-mark~ to insert a mark called "mark", or use ~dg-mindwave/mark~ to prompt for the name of the mark.  In their chase, once input, the mark will be inserted immediately.
+
 *** Output Example 
 
+	This is an example of the output of a 45 second recording session.  Notice the "relaxed" and "tester" marks.
+
+**** Table 
 #+tblname: example
 |------------+--------+-----------+----------+----------+---------+-----------+----------+--------+---------+------------+-----------+---------|
 |       time | signal | highGamma | lowGamma | highBeta | lowBeta | highAlpha | lowAlpha |  theta |   delta | meditation | attention | mark    |
@@ -160,6 +205,7 @@ This chunk of code here illustrates how to use mindwave-emacs.  It will collect 
 | 1340229566 |      0 |      6780 |     8592 |     9355 |    1226 |     27212 |     6227 |  18259 |   70961 |         37 |        56 |         |
 | 1340229567 |      0 |      5022 |     5286 |     8248 |   11726 |     21470 |    15820 |  25245 |   41331 |         51 |        63 |         |
 
+**** Gnuplot code 
 #+name: gnuplot-example
 #+begin_src gnuplot :var data=example :exports both :file example.png
 reset
@@ -251,8 +297,6 @@ Note, that the code assumes that you want everything put in a buffer called ~Bra
     (interactive "sMark: ")
     (setq dg-mindwave/mark mark))
 #+end_src
-
-**** TODO sk for a symbol, but confirt to string in dg-mindwave/mark
 
 **** TODO figure out a much better interface for marks
 
@@ -634,27 +678,7 @@ recording session.
   (set-frame-parameter nil 'background-color (solarized-mind/attention-to-rgb 0))
 #+end_src
 
-** Example three: connecting via raw serial and storing the raw EEG waveform
-
-If we're going to do this, lets just take a brief look at the space requirements:
-
-| EEG Bytes per packet   |        2 |
-| Max Packets Per second |      512 |
-|------------------------+----------|
-| BPS                    |     1024 |
-|------------------------+----------|
-| Bytes per minute       |    61440 |
-| Bytes per hour         |  3686400 |
-| Megabytes per hour     | 3.515625 |
-#+TBLFM: @3$2=@-2*@-1::@4$2=60*@-1::@5$2=@-1*60::@6$2=@-1/2^20
-
-Of course, this is purely just for the data alone, not for any kind of other storage requirements.  Even with that in mind, I think we should be okay.
-
-*** Setting everything up
-
-** Example four: connecting via raw serial, and storing raw EEG along with timestamp
-
-** Example five: A buffer displaying the current mindwave stats
+** Example three: mindwave-display A buffer displaying the current mindwave stats
 
 #+begin_src emacs-lisp :tangle mindwave-display.el :noweb yes
 ;;; mindwave-display.el --- A simplified mindwave display file
@@ -684,16 +708,16 @@ Of course, this is purely just for the data alone, not for any kind of other sto
     "Timer responsible for updating the output buffer")
   
   (defcustom mw-display/colors
-    '((delta . ("RoyalBlue3" . "RoyalBlue4"))
-      (theta . ("DeepSkyBlue3" . "DeepSkyBlue4"))
-      (lowAlpha . ("cyan3" . "cyan4"))
-      (highAlpha . ("aquamarine3" . "aquamarine4"))
-      (lowBeta . ("yellow3" . "yellow4"))
-      (highBeta . ("gold3" . "gold4"))
-      (lowGamma . ("tan3" . "tan4"))
-      (highGamma . ("firebrick3" . "firebrick4"))
-      (attention . ("grey80" . "grey60"))
-      (meditation . ("grey40" . "grey20")))
+    '((delta . ("RoyalBlue2" . "RoyalBlue4"))
+      (theta . ("DeepSkyBlue2" . "DeepSkyBlue4"))
+      (lowAlpha . ("cyan2" . "cyan4"))
+      (highAlpha . ("aquamarine2" . "aquamarine4"))
+      (lowBeta . ("yellow2" . "yellow4"))
+      (highBeta . ("gold2" . "gold4"))
+      (lowGamma . ("tan2" . "tan4"))
+      (highGamma . ("firebrick2" . "firebrick4"))
+      (attention . ("MistyRose2" . "MistyRose4"))
+      (meditation . ("seashell2" . "seashell4")))
     "The colors to use when displaying the graph."
     :safe t
     :group 'mindwave)
@@ -738,6 +762,8 @@ Of course, this is purely just for the data alone, not for any kind of other sto
       (insert "\n")
       (mw-display/insert-eeg 'meditation 'eSense)
       (mw-display/insert-eeg 'attention 'eSense)
+      (insert "\n")
+      (insert (pp-to-string mindwave/current))
       (toggle-read-only 1)))
   
   (defun mw-display/insert-eeg (band type)
@@ -756,19 +782,205 @@ Of course, this is purely just for the data alone, not for any kind of other sto
   
   (defun mw-display/graph (val total band)
     "Return a simple string bar graph from VAL and TOTAL"
-    (let ((gsize (round (min (* (/ (float val) total) 
+    (let* ((gsize (round (min (* (/ (float val) total) 
                                  50)
-                              50))))
-      (propertize (format "%50s| %8s %12s " 
-                          (propertize (make-string gsize ?#))
-                          val
-                          band)
-                  'face `(:background ,(car (cdr (assoc band mw-display/colors))) 
-                          :foreground "grey1")
-                          :weight "ultra-bold")))
+                              50)))
+           (esize (- 50 gsize)))
+      (concat (propertize (make-string esize ?\ )
+                          'face `(:background ,(cdr (cdr (assoc band mw-display/colors)))
+                                  :foreground "grey1"))
+              (propertize (make-string gsize ?\ )
+                          'face `(:background ,(car (cdr (assoc band mw-display/colors))) 
+                                 :foreground "grey1"
+                                 :weight "ultra-bold"))
+              (propertize (format " | %8s %12s " 
+                                  val
+                                  band)
+                          'face `(:background ,(car (cdr (assoc band mw-display/colors))) 
+                                 :foreground "grey1"
+                                 :weight "ultra-bold")))))
   
   (mw-display/write-values)
+    
 #+end_src
+
+** Example four: connecting via raw serial, and storing raw EEG along with timestamp
+
+If we're going to do this, lets just take a brief look at the space requirements:
+
+| EEG Bytes per packet   |        2 |
+| Max Packets Per second |      512 |
+|------------------------+----------|
+| BPS                    |     1024 |
+|------------------------+----------|
+| Bytes per minute       |    61440 |
+| Bytes per hour         |  3686400 |
+| Megabytes per hour     | 3.515625 |
+#+TBLFM: @3$2=@-2*@-1::@4$2=60*@-1::@5$2=@-1*60::@6$2=@-1/2^20
+
+Of course, this is purely just for the data alone, not for any kind of other storage requirements.  Even with that in mind, I think we should be okay.
+
+*** Setting everything up
+** Example five: 23 million dollar man
+
+   The Point of the 23 million dollar man (6 Million, adjusted for Eris and Inflation) is to gather enough mindwave data to start to reason about your brian during varios hours, days of the week, and perhaps even days of the month or days--or months--of the year.
+
+   In order to do that, we will need data.  Lots of data.  But not too much data!
+
+   So the point of the 23 million dollar man is to store some of that data.  Note that our grain size is rather large here (hour in a day).  It is only because of the eegPower bands that we can really do this.  
+
+   As an example, it shows how to maintain a running average.
+
+   Just as an aside, I am consdiering renaming this to 23-million-person, or even 23-million-erisian, because perhaps 23-million-man is sexist.  
+
+*** Define a customization vars
+	- store-in-org-file
+	- tblname-of-data
+
+#+name: 23mm-custom
+#+begin_src emacs-lisp :tangle no
+  (defgroup 23-million-man nil 
+    "23 Million Man.  An stats collector for mindwave")
+  
+  (defcustom 23-million-man/store-in-org-file "~/Dropbox/org/Brain.org"
+    "Full file path of where to store the data."
+    :group '23-million-man
+    :type 'file)
+  
+  (defcustom 23-million-man/tblname-of-data "23million"
+    "Name of the table where data is to be stored."
+    :type 'symbol
+    :group '23-million-man)
+  
+#+end_src
+
+*** Store hourly averages so statistical analysis can be performed on a per-hour, per day basis
+
+#+name: 23mm-running-average
+#+begin_src emacs-lisp :tangle no
+  (defvar 23-million-man/average-this-hour nil)
+  
+  (defun 23-million-man/running-average-hook (average-brain-ring)
+    "Takes an AVERAGE-BRAIN-RING, and then updates the hourly average."
+    (let ((total (+ (if 23-million-man/average-this-hour
+                        (car 23-million-man/average-this-hour)
+                      0)
+                    1))
+          (average (if 23-million-man/average-this-hour
+                       (cdr 23-million-man/average-this-hour)
+                     0)))
+      (setq 23-million-man/average-this-hour 
+            (cons total
+                  (mindwave/brain-ring-apply '/ 
+                                             (mindwave/brin-ring-apply '+  
+                                                                       average
+                                                                       average-brain-ring)
+                                             (mindwave/make-single-val-brain-ring total))))))
+#+end_src
+
+*** Table insertion
+	
+	Unlike the shitty make-a-bunch-of-assumptions code for gather-into-org, this one will be better.  Much better.
+
+	First, we will name a table and always write to that table.  Then when we're done writing, we'll make a new line, with the comment #mindwave-last-pos, and store our position in a variable.  This way we will be able to return to our pos, and verify that the position is right.
+
+#+name: 23mm-doinsertion
+#+begin_src emacs-lisp :tangle no
+  (defun 23-million-man/tbl-buffer-pos nil)
+  (defconst 23-million-man/tbl-current-pos-marker "#mindwave-23million-pos")
+  
+  (defun 23-million-man/do-insertion-into-file (data)
+    "Inserts DATA into the 23-million-man table."
+    (save-excursion
+      (progn 
+        (set-buffer (find-file-noselect 23-million-man/store-in-org-file))
+        (when (null 23-million-man/tbl-buffer-pos)
+            (23-million-man/find-buffer-pos))
+        (goto-char 23-million-man/tbl-buffer-pos)
+        (when (not (string-equal (buffer-substring-no-properties (line-beginning-position) 
+                                                                 (line-end-position))
+                                 23-million-man/tbl-current-pos-marker))
+          (error (concat "23-million-man: ARG, can't find the proper position to insert data! make sure you have '" 23-million-man/tbl-current-pos-marker "' at the bottom of your data table."))))
+      (delete-region (line-beginning-position) 
+                     (line-end-position))
+      (insert data)
+      (insert 23-million-man/tbl-current-pos-marker)
+      (setq 23-million-man/tbl-buffer-pos (line-beginning-position))
+      (insert "\n"))) 
+  
+  (defun 23-million-man/find-buffer-pos () 
+    "find the current insert buffer position for the mindwave table.  
+  Start by opening the file if we have to."
+    (goto-char (point-min))
+    (if (re-search-forward (concat "^[ \t]*#\\+TBLNAME:[ \t]*" 
+                                   23-million-man/tblname-of-data
+                                   "[ \t]*$")
+                           nil t)
+        (progn 
+          (goto-char (match-beginning 0))
+          (if (re-search-forward 23-million-man/tbl-current-pos-marker nil t)
+              (setq 23-million-man/tbl-buffer-pos (match-beginning 0))
+            (error (concat "Cant find marker to insert data.  Make sure you have " 23-million-man/tbl-current-pos-marker " on your table."))))
+      (error (concat "Can't find table data " 23-million-man/tblname-of-data))))
+  
+#+end_src
+
+*** Inserting the data 
+
+#+name: 23mm-insert
+#+begin_src emacs-lisp :tangle no 
+  (defun 23-million-man/write-running-average (brain)
+    "Writes the running average.  used as part of a run-timer"
+    (let ((time (decode-time))))
+    (insert (format "| %s   | %s    | %s  | %s   |   %s   | %s        | %s         | %s        | %s       | %s       | %s      | %s        | %s       | %s    | %s    |\n"
+                    (nth 5 time)
+                    (nth 4 time)
+                    (nth 3 time)
+                    (nth 2 time)
+                    (nth 1 time)
+                    (cdr (assoc 'poorSignalLevel brain))
+                    (mindwave/access-in 'eegPower 'lowGamma brain)
+                    (mindwave/access-in 'eegPower 'highGamma brain)
+                    (mindwave/access-in 'eegPower 'lowBeta brain)
+                    (mindwave/access-in 'eegPower 'highBeta brain)
+                    (mindwave/access-in 'eegPower 'lowAlpha brain)
+                    (mindwave/access-in 'eegPower 'highAlpha brain)
+                    (mindwave/access-in 'eegPower 'theta brain)
+                    (mindwave/access-in 'eegPower 'delta brain)
+                    (mindwave/access-in 'eSense 'attention brain)
+                    (mindwave/access-in 'eSense 'meditaiton brain))))
+  
+#+end_src	
+
+** Example five: magickal-commit.  Store total average brainwave state of a coding session in a magit commit.
+   
+   I am not sure how this is going to play out exactly yet, but this is something that needs to be done.
+
+   During the editing of a file in a buffer, the attention/meditation level is stored on a per-buffer basis.  Before a magit commit, if the buffer/file is part of a repository, it should inject that files average into the commit.  Probably in a format like:
+#+begin_src js :tangle no :export code
+  // developer-state
+  {
+    "eeg" : {
+        "eSense" : {
+            "attention": 60,
+            "meditation": 80
+        }
+    }  
+  }
+  // end-developer-state
+#+end_src
+
+   Node that we use json so that it is easily consumable by other
+   tools.  Even though everyone knows that sexprs are way cooler.
+
+*** Moving and Exponential Averages
+	
+	I'm going to start with the simplest case, which is to get a moving average of the last hour of brain activity.  It might also be interesting to play with Exponential Smoothing, but that comes later.
+
+	https://en.wikipedia.org/wiki/Exponential_smoothing
+
+	Note that the ring-full hook function will automagickally return an average of the last 30 values. 
+
 
 * The code
 
@@ -857,7 +1069,7 @@ According to the documentation of make-comint, if a running process is on the bu
             (sleep-for 1)
             (mindwave-get-raw nil)
             (sleep-for 1)
-            (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+            (add-hook 'comint-preoutput-filter-functions 'mindwave-comint-filter-function nil t))
           mindwave-buffer)))
   
 #+end_src
@@ -933,7 +1145,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                  (highBeta   . 0)
                  (lowGamma   . 0)
                  (highGamma  . 0)))
-    (blink . 0))
+    (blinkStrength . 0))
 #+end_src
 
 **** ~mindwave-blink-hook~ 
@@ -978,6 +1190,8 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
       (mindwave-if-in-list 'a '((a 1)) (setq r mw-result))
       (should r)))
   
+  (defconst mindwave-debug t)
+  
   (defun mindwave-comint-filter-function (output)
     "A helper hook to pass off output to the apropriate hooks"
     (when (and (stringp output) 
@@ -990,8 +1204,11 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
               (if (and (assoc 'poorSignalLevel brain)
                        (> (cdr (assoc 'poorSignalLevel brain))
                           mindwave-poor-signal-level))
-                  (run-hook-with-args 'mindwave-poor-signal-hook 
-                                      (cdr (assoc 'poorSignalLevel brain)))
+                  (progn 
+                    (when (assoc 'poorSignalLevel brain)
+                      (mindwave/set-current 'poorSignalLevel (cdr (assoc 'poorSignalLevel brain)))
+                      (run-hook-with-args 'mindwave-poor-signal-hook 
+                                          (cdr (assoc 'poorSignalLevel brain)))))
                 (progn
                   (mindwave-if-in-list-run-hook 'rawEeg brain 'mindwave-raw-hook)
                   (mindwave-if-in-list 'poorSignalLevel brain
@@ -1000,17 +1217,17 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                   (mindwave-if-in-list 'eSense brain
                     (mindwave/set-current 'eSense mw-result)
                     (run-hook-with-args mindwave-e-sense-hook mw-result))
-                  (mindwave-if-in-list 'blink brain
-                    (mindwave/set-current 'blink mw-result)
+                  (mindwave-if-in-list 'blinkstrength  brain
+                    (mindwave/set-current 'blinkStrength  mw-result)
                     (run-hook-with-args 'mindwave-blink-hook mw-result))
                   (mindwave-if-in-list 'eegPower brain
                     (mindwave/set-current 'eegPower mw-result)
                     (run-hook-with-args 'mindwave-eeg-power-hook mw-result)
                     (mindwave/brain-ring-update brain)))))))
-    output)
+    (if mindwave-debug output ""))
   
 #+end_src
-
+****** TODO refactor the comint filter function a little better, especially around signal level 
 *** Current State
 
 	Shows the current state of the mindwave.  Note that there is no guarantees about the freshness of that data.  In particular, the blink strength is likely to be quite stale.
@@ -1028,7 +1245,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                           (highBeta   . 0)
                                           (lowGamma   . 0)
                                           (highGamma  . 0)))
-                             (blink . 0))
+                             (blinkStrength . 0))
     "The last known values from the mindwave headset.")
   
   (defun mindwave/set-current (key val)
@@ -1041,9 +1258,9 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                  (if (equal key 'eegPower)
                                      (cons key val)
                                      (assoc 'eegPower mindwave/current))
-                                 (if (equal key 'blink)
+                                 (if (equal key 'blinkStrength)
                                      (cons key val)
-                                     (assoc 'blink mindwave/current)))))
+                                     (assoc 'blinkStrength mindwave/current)))))
   
   (ert-deftest mindwave/current-setters ()
     (setq mindwave/current '((poorSignalLevel . 200)
@@ -1057,10 +1274,10 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                           (highBeta   . 0)
                                           (lowGamma   . 0)
                                           (highGamma  . 0)))
-                             (blink . 0)))
-    (mindwave/set-current 'blink 255)
-    (should (equal (assoc 'blink mindwave/current)
-                   '(blink . 255)))
+                             (blinkStrength . 0)))
+    (mindwave/set-current 'blinkStrength 255)
+    (should (equal (assoc 'blinkStrength mindwave/current)
+                   '(blinkStrength . 255)))
   
     (should (equal mindwave/current
                    '((poorSignalLevel . 200)
@@ -1074,7 +1291,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                   (highBeta   . 0)
                                   (lowGamma   . 0)
                                   (highGamma  . 0)))
-                     (blink . 255)))))
+                     (blinkStrength . 255)))))
   
 #+end_src
 
@@ -1117,7 +1334,7 @@ memory.  For an example of this, see the solarized-mind example.
 
 
 
-****** Access-in, quick access to ~((eSense . ((meditation . foo) ...)) ...) 
+****** Access-in, quick access to ~((eSense . ((meditation . foo) ...)) ...)~
 
 	  We'll need to access the guts of our rings pretty frequently, so here is a convenience function and a test.
 
@@ -1128,22 +1345,23 @@ memory.  For an example of this, see the solarized-mind example.
     (cdr (assoc inner-key (cdr (assoc outer-key list)))))
   
   (ert-deftest mindwave/test-access-in ()
-    (should (equal (should (equal (mindwave/access-in 'outer 
-                                                      'inner 
-                                                      '((outer1 . (inner1 . 0))
-                                                        (outer . ((inner . 23)))))
-                                23)))))
+    (should (equal (mindwave/access-in 'outer 
+                                       'inner 
+                                       '((outer1 . (inner1 . 0))
+                                         (outer . ((inner . 23)))))
+                   23)))
   
-
+  
 #+end_src 
 
 
-******* Make a new brain-ring entry from args
+***** Make a new brain-ring entry from args
 
 #+begin_src emacs-lisp  :tangle yes
-  (defun mindwave/brain-ring-make-entry (meditation attention delta theta lowAlpha highAlpha lowBeta highBeta lowGamma highGamma)
+  (defun mindwave/make-brain-ring (meditation attention delta theta lowAlpha highAlpha lowBeta highBeta lowGamma highGamma &optional poorSignalLevel)
       "convenience function to make a valid brain ring entry"
-      `((eSense . ((meditation  . ,meditation)
+      `((poorSignalLevel . ,(or poorSignalLevel 0))
+        (eSense . ((meditation  . ,meditation)
                    (attention   . ,attention)))
         (eegPower . ((delta     . ,delta) 
                      (theta     . ,theta)
@@ -1153,16 +1371,40 @@ memory.  For an example of this, see the solarized-mind example.
                      (highBeta  . ,highBeta)
                      (lowGamma  . ,lowGamma)
                      (highGamma . ,highGamma)))))
+  
+  (ert-deftest mindwave/make-brain-ring 
+      "Maker tests. Super simple,"
+    (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
+                   (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0  0)))
+    (should (equal (mindwave/make-brain-ring 2 3 5 23 32 46 92 184 7 13 21)
+                   (mindwave/make-brain-ring 2 3 5 23 32 46 92 184 7 13 21))))
+  
+  (defun mindwave/make-single-val-brain-ring (val)
+    "Convenience function to make a brain ring of a single value VAL.
+  Useful for dealing with averages."
+    (mindwave/make-brain-ring val 
+                              val val val val val val val val
+                              val val))
+  
+  (ert-deftest mindwave/make-brain-ring 
+      "Maker tests. Super simple,"
+    (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
+                   (mindwave/make-single-val-brain-ring 0)))
+    (should (equal (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1 1)
+                   (mindwave/make-single-val-brain-ring 1))))
+  
 #+end_src 
 
-******* Run a function with 2 rings as the args
+
+
+***** Run a function with 2 rings as the args
 
 	   This could be expanded to handle multiple args, but no need for that yet.
 
 #+begin_src emacs-lisp    :tangle yes
   (defun mindwave/brain-ring-apply (fn ring1 ring2)
     "Takes the \"brain-rings\" RING1 and RING2 and runs FN on it's guts"
-    (mindwave/brain-ring-make-entry 
+    (mindwave/make-brain-ring
      (funcall fn (mindwave/access-in 'eSense 'meditation ring1)
                  (mindwave/access-in 'eSense 'meditation ring2))
      (funcall fn (mindwave/access-in 'eSense 'attention ring1)
@@ -1182,26 +1424,30 @@ memory.  For an example of this, see the solarized-mind example.
      (funcall fn (mindwave/access-in 'eegPower 'lowGamma ring1)
                  (mindwave/access-in 'eegPower 'lowGamma ring2))
      (funcall fn (mindwave/access-in 'eegPower 'highGamma ring1)
-                 (mindwave/access-in 'eegPower 'highGamma ring2))))
+                 (mindwave/access-in 'eegPower 'highGamma ring2))
+     (funcall fn (cdr (assoc 'poorSignalLevel ring1))
+                 (cdr (assoc 'poorSignalLevel ring2)))))
   
   (ert-deftest mindwave/test-brain-ring-add ()
-    (should (equal (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0)
+    (should (equal (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0)
                    (mindwave/brain-ring-apply '+ 
-                                              (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0)
-                                              (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
-    (should (equal (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
+                                              (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0)
+                                              (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
+    (should (equal (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
                    (mindwave/brain-ring-apply '+
-                                              (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
-                                              (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
-    (should (equal (mindwave/brain-ring-make-entry 2 3 4 5 6 7 8 9 10 11)
+                                              (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
+                                              (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
+    (should (equal (mindwave/make-brain-ring 2 3 4 5 6 7 8 9 10 11)
                    (mindwave/brain-ring-apply '+
-                                              (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
-                                              (mindwave/brain-ring-make-entry 1 1 1 1 1 1 1 1 1 1)))))
-  
-
+                                              (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
+                                              (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1))))
+    (should (equal (mindwave/make-brain-ring 2 3 4 5 6 7 8 9 10 11 12)
+                   (mindwave/brain-ring-apply '+
+                                              (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10 11)
+                                              (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1 1)))))
 #+end_src 
 
-******* Ring Update
+***** Ring Update
 
 	   This function is called on every eSense/eeg update.  When the
 	   signal level is good, and the mindwave data contains both
@@ -1232,15 +1478,14 @@ memory.  For an example of this, see the solarized-mind example.
               (collapsed-ring (reduce #'(lambda (brain total) 
                                           (mindwave/brain-ring-apply '+ brain total)) 
                                       (ring-elements mindwave/brain-ring)
-                                      :initial-value (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
+                                      :initial-value (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
           (setq mindwave/brain-ring new-ring)
           (run-hook-with-args 'mindwave/brain-ring-full-hook
                               (mindwave/brain-ring-apply '/ 
                                                          collapsed-ring 
-                                                         (mindwave/brain-ring-make-entry s s s s s s s s s s)))))))
+                                                         (mindwave/make-brain-ring s s s s s s s s s s)))))))
 #+end_src
-
-
+	   
 ** Configure
 *** Ask for raw output
 #+begin_src emacs-lisp :tangle yes

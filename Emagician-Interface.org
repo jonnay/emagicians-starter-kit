@@ -2,6 +2,16 @@
 
 
 * Visual Interface Chunks
+** Maximize primary window
+#+begin_src emacs-lisp
+  (emagician-expect-package 'maxframe)
+  (require 'maxframe)
+  (add-hook 'window-setup-hook 'maximize-frame t)
+  
+  (case system-type
+    ((darwin) (setq mf-display-padding-height 60)))
+  
+#+end_src
 ** Turn off goofy stuff like menu bars
 
 Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
@@ -250,6 +260,7 @@ isearch sould use regexp by default
 ** Sauron.  Notifications Plus+!
 #+begin_src emacs-lisp 
   (emagician-expect-package 'sauron)
+  (add-hook 'emacs-startup-hook 'sauron-start)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -259,15 +270,16 @@ isearch sould use regexp by default
 *** Listen for
 
 #+begin_src emacs-lisp
-  (setq sauron-line-length 120
-        sauron-watch-patterns '("jon")
-        sauron-watch-nicks '("jonnay" "shell" "sunnay" "sh3ll23"))
-  
-  (add-hook 'sauron-event-block-functions 'emagician/sauron-ignore-bunk-irc)
-  
-  (defun emagician/sauron-ignore-bunk-irc (origin prio msg &optional props)
-    "Hook to ignore nicks in IRC output"
-    (or (string-match "^*** Users" msg)))
+    (setq sauron-line-length 120
+          sauron-watch-patterns '("jon")
+          sauron-watch-nicks '("jonnay" "shell" "sunnay" "sh3ll23"))
+    
+    (add-hook 'sauron-event-block-functions 'emagician/sauron-ignore-bunk-irc)
+    
+    (defun emagician/sauron-ignore-bunk-irc (origin prio msg &optional props)
+      "Hook to ignore nicks in IRC output"
+      (or (string-match "^*** Users" msg)
+          (string-match "jon_best" msg)))
 #+end_src
 
 *** Sauron notifications
