@@ -1,6 +1,4 @@
 #+title: Interface
-
-
 * Visual Interface Chunks
 ** Maximize primary window
 #+begin_src emacs-lisp

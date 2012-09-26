@@ -36,9 +36,10 @@
 ** Insert-yank-as-rectangle
 ** when yanking, indent according to the mode
 #+begin_src emacs-lisp
-(defadvice yank (after indent-region activate)
-  (if (member major-mode programming-modes)
-	  (indent-region (region-beginning) (region-end) nil)))
+  (defadvice yank (after indent-region activate)
+    "indent the region after a yank if we're in a programming mode."
+    (if (derived-mode-p 'prog-mode)
+        (indent-region (region-beginning) (region-end) nil)))
 #+end_src
 
 * Indenting and tabbing 

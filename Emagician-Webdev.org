@@ -7,8 +7,7 @@
 #+end_src 
 
 #+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.html?" . nxml-mode))
-  
+  (add-to-list 'auto-mode-alist '("\\.html?" . nxml-mode))  
 #+end_src emacs-lisp
 
 *** TODO Set up as default mode
@@ -38,6 +37,13 @@
 #+begin_src emacs-lisp
 (emagician-expect-package 'flymake-css)
 #+end_src
+** TODO XML
+
+#+begin_src emacs-lisp
+  (defun turn-off-rainbow-delimiters ()
+    (rainbow-delimiters-mode nil))
+  (add-hook 'nxml-mode 'turn-off-rainbow-delimiters)
+#+end_src 
 * Web Centeric Languages
 *** TODO PHP
 	

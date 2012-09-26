@@ -60,7 +60,7 @@ of an orgmode file.
   - Low level serial interface into mindwave, so that low-level EEG values can be recorded
   - better 'mark' interface for delineating incoming stimulus.  There might need to be 2 different interfaces, one for self experimenting mad scientists like myself, and one for actual scientists.
 	
-* Usage Examples
+* Usage Examples and Applications
 
   If you want to start playing with mindwave emacs, you will want to have a look at the usage examples.  Each example is a fully functional piece of code that you can use for your neurological feedback needs.
 
@@ -831,14 +831,14 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
    As an example, it shows how to maintain a running average.
 
-   Just as an aside, I am consdiering renaming this to 23-million-person, or even 23-million-erisian, because perhaps 23-million-man is sexist.  
+   Just as an aside, I am consdiering renaming this to 23-million-person, or even 23-million-erisian, because perhaps "23-million-man" is sexist.  
 
 *** Define a customization vars
 	- store-in-org-file
 	- tblname-of-data
 
 #+name: 23mm-custom
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no :results silent
   (defgroup 23-million-man nil 
     "23 Million Man.  An stats collector for mindwave")
   
@@ -854,28 +854,48 @@ Of course, this is purely just for the data alone, not for any kind of other sto
   
 #+end_src
 
+	
 *** Store hourly averages so statistical analysis can be performed on a per-hour, per day basis
 
 #+name: 23mm-running-average
-#+begin_src emacs-lisp :tangle no
-  (defvar 23-million-man/average-this-hour nil)
+#+begin_src emacs-lisp :tangle no  :results silent
+  (defcustom 23-million-man/ring-averages-per-insertion 2
+    "Number of insertions to put into the table every time the ring fills up.
+  This is your effective resolution.  Here are some general approximations and timing:
+  
+  val  time
+  1    30 seconds
+  2    1 minute
+  30   15 minutes
+  60   30 minutes
+  120  1 hour"
+    :group '23-million-man)
+  
+  (defvar 23-million-man/running-average-data nil
+    "Data structure to hold the running average.
+  It is in the format of:
+   (average-brain-ring-so-far . total)")
   
   (defun 23-million-man/running-average-hook (average-brain-ring)
-    "Takes an AVERAGE-BRAIN-RING, and then updates the hourly average."
-    (let ((total (+ (if 23-million-man/average-this-hour
-                        (car 23-million-man/average-this-hour)
+    "Takes an AVERAGE-BRAIN-RING, and then updates the minute average."
+    (let ((total (+ (if 23-million-man/running-average-data
+                        (car 23-million-man/running-average-data)
                       0)
                     1))
-          (average (if 23-million-man/average-this-hour
-                       (cdr 23-million-man/average-this-hour)
-                     0)))
-      (setq 23-million-man/average-this-hour 
+          (average (if 23-million-man/running-average-data
+                       (cdr 23-million-man/running-average-data)
+                     (mindwave/make-single-val-brain-ring 0))))
+      (setq 23-million-man/running-average-data
             (cons total
                   (mindwave/brain-ring-apply '/ 
-                                             (mindwave/brin-ring-apply '+  
+                                             (mindwave/brain-ring-apply '+  
                                                                        average
                                                                        average-brain-ring)
-                                             (mindwave/make-single-val-brain-ring total))))))
+                                             (mindwave/make-single-val-brain-ring total))))
+      (when (>= total 23-million-man/ring-averages-per-insertion)
+        (23-million-man/do-insertion-into-file (car 23-million-man/running-average-data))
+        (setq 23-million-man/running-average-data nil))))
+  
 #+end_src
 
 *** Table insertion
@@ -885,8 +905,8 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 	First, we will name a table and always write to that table.  Then when we're done writing, we'll make a new line, with the comment #mindwave-last-pos, and store our position in a variable.  This way we will be able to return to our pos, and verify that the position is right.
 
 #+name: 23mm-doinsertion
-#+begin_src emacs-lisp :tangle no
-  (defun 23-million-man/tbl-buffer-pos nil)
+#+begin_src emacs-lisp :tangle no  :results silent
+  (defvar 23-million-man/tbl-buffer-pos nil)
   (defconst 23-million-man/tbl-current-pos-marker "#mindwave-23million-pos")
   
   (defun 23-million-man/do-insertion-into-file (data)
@@ -895,7 +915,7 @@ Of course, this is purely just for the data alone, not for any kind of other sto
       (progn 
         (set-buffer (find-file-noselect 23-million-man/store-in-org-file))
         (when (null 23-million-man/tbl-buffer-pos)
-            (23-million-man/find-buffer-pos))
+          (23-million-man/find-buffer-pos))
         (goto-char 23-million-man/tbl-buffer-pos)
         (when (not (string-equal (buffer-substring-no-properties (line-beginning-position) 
                                                                  (line-end-position))
@@ -911,17 +931,24 @@ Of course, this is purely just for the data alone, not for any kind of other sto
   (defun 23-million-man/find-buffer-pos () 
     "find the current insert buffer position for the mindwave table.  
   Start by opening the file if we have to."
-    (goto-char (point-min))
-    (if (re-search-forward (concat "^[ \t]*#\\+TBLNAME:[ \t]*" 
-                                   23-million-man/tblname-of-data
-                                   "[ \t]*$")
-                           nil t)
-        (progn 
-          (goto-char (match-beginning 0))
-          (if (re-search-forward 23-million-man/tbl-current-pos-marker nil t)
-              (setq 23-million-man/tbl-buffer-pos (match-beginning 0))
-            (error (concat "Cant find marker to insert data.  Make sure you have " 23-million-man/tbl-current-pos-marker " on your table."))))
-      (error (concat "Can't find table data " 23-million-man/tblname-of-data))))
+    (save-excursion 
+      (set-buffer (find-file-noselect 23-million-man/store-in-org-file))
+      (goto-char (point-min))
+      (if (re-search-forward (concat "^[ \t]*#\\+TBLNAME:[ \t]*" 
+                                     23-million-man/tblname-of-data
+                                     "[ \t]*$")
+                             nil t)
+          (progn 
+            (goto-char (match-beginning 0))
+            (if (re-search-forward 23-million-man/tbl-current-pos-marker nil t)
+                (setq 23-million-man/tbl-buffer-pos (match-beginning 0))
+              (error (concat "Cant find marker to insert data.  Make sure you have " 23-million-man/tbl-current-pos-marker " on your table."))))
+        (error (concat "Can't find table data " 23-million-man/tblname-of-data)))))
+    
+  (ert-deftest 23-million-man/find-buffer-pos () 
+    ""
+    (should (< 0 (23-million-man/find-buffer-pos)))
+    (should-not (null 23-million-man/tbl-buffer-pos)))
   
 #+end_src
 
@@ -951,6 +978,13 @@ Of course, this is purely just for the data alone, not for any kind of other sto
                     (mindwave/access-in 'eSense 'meditaiton brain))))
   
 #+end_src	
+
+*** Timer
+#+begin_src emacs-lisp :tangle no 
+  
+#+end_src
+
+
 
 ** Example five: magickal-commit.  Store total average brainwave state of a coding session in a magit commit.
    
@@ -1232,7 +1266,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
 
 	Shows the current state of the mindwave.  Note that there is no guarantees about the freshness of that data.  In particular, the blink strength is likely to be quite stale.
 
-#+begin_src emacs-lisp  :tangle yes
+#+begin_src emacs-lisp  :tangle yes  :results silent
   
   (defvar mindwave/current '((poorSignalLevel . 200)
                              (eSense . ((attention . 0)
