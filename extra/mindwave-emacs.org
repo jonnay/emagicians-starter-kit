@@ -821,9 +821,33 @@ If we're going to do this, lets just take a brief look at the space requirements
 Of course, this is purely just for the data alone, not for any kind of other storage requirements.  Even with that in mind, I think we should be okay.
 
 *** Setting everything up
-** Example five: 23 million dollar man
+** Example five: 23 million dollar erisian
 
-   The Point of the 23 million dollar man (6 Million, adjusted for Eris and Inflation) is to gather enough mindwave data to start to reason about your brian during varios hours, days of the week, and perhaps even days of the month or days--or months--of the year.
+#+begin_src emacs-lisp :tangle 23-million-dollar-erisian.el :noweb yes
+  ;;; 23-million-erisian.el --- Gnosis quantified with Neurosky.
+  
+  ;; Copyright (C) 2012 Jonathan Arkell
+  
+  ;; Author: Jonathan Arkell <jonnay@jonnay.net>
+  ;; Created: 16 June 2012
+  ;; Keywords: mindwave
+  ;; Version 0.1 
+  
+  ;; This file is not part of GNU Emacs.
+  ;; Released under the GPL     
+  
+  ;;; Commentary: 
+  ;; Please see the org-file that this was generated from. 
+
+<<23mm-custom>>
+<<23mm-commands>>
+<<23mm-running-average>>
+<<23mm-doinsertion>>
+<<23mm-insert>>
+<<23mm-timer>>
+#+end_src
+
+   The Point of the 23 million dollar erisian (6 Million, adjusted for Eris and Inflation) is to gather enough mindwave data to start to reason about your brian during varios hours, days of the week, and perhaps even days of the month or days--or months--of the year.
 
    In order to do that, we will need data.  Lots of data.  But not too much data!
 
@@ -831,7 +855,7 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
    As an example, it shows how to maintain a running average.
 
-   Just as an aside, I am consdiering renaming this to 23-million-person, or even 23-million-erisian, because perhaps "23-million-man" is sexist.  
+   Just as an aside, I renamed this file. 23-million-person is boring, so: 23-million-erisian.  Why? because perhaps "23-million-man" is sexist.  
 
 *** Define a customization vars
 	- store-in-org-file
@@ -839,18 +863,18 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
 #+name: 23mm-custom
 #+begin_src emacs-lisp :tangle no :results silent
-  (defgroup 23-million-man nil 
+  (defgroup 23-million-erisian nil 
     "23 Million Man.  An stats collector for mindwave")
   
-  (defcustom 23-million-man/store-in-org-file "~/Dropbox/org/Brain.org"
+  (defcustom 23-million-erisian/store-in-org-file "~/Dropbox/org/Brain.org"
     "Full file path of where to store the data."
-    :group '23-million-man
+    :group '23-million-erisian
     :type 'file)
   
-  (defcustom 23-million-man/tblname-of-data "23million"
+  (defcustom 23-million-erisian/tblname-of-data "23million"
     "Name of the table where data is to be stored."
     :type 'symbol
-    :group '23-million-man)
+    :group '23-million-erisian)
   
 #+end_src
 
@@ -859,7 +883,7 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
 #+name: 23mm-running-average
 #+begin_src emacs-lisp :tangle no  :results silent
-  (defcustom 23-million-man/ring-averages-per-insertion 2
+  (defcustom 23-million-erisian/ring-averages-per-insertion 2
     "Number of insertions to put into the table every time the ring fills up.
   This is your effective resolution.  Here are some general approximations and timing:
   
@@ -869,33 +893,34 @@ Of course, this is purely just for the data alone, not for any kind of other sto
   30   15 minutes
   60   30 minutes
   120  1 hour"
-    :group '23-million-man)
+    :group '23-million-erisian)
   
-  (defvar 23-million-man/running-average-data nil
+  (defvar 23-million-erisian/running-average-data nil
     "Data structure to hold the running average.
   It is in the format of:
-   (average-brain-ring-so-far . total)")
+   (total-as-int . average-brain-ring-so-far)")
   
-  (defun 23-million-man/running-average-hook (average-brain-ring)
+  (defun 23-million-erisian/running-average-hook (average-brain-ring)
     "Takes an AVERAGE-BRAIN-RING, and then updates the minute average."
-    (let ((total (+ (if 23-million-man/running-average-data
-                        (car 23-million-man/running-average-data)
+    (let ((total (+ (if 23-million-erisian/running-average-data
+                        (car 23-million-erisian/running-average-data)
                       0)
                     1))
-          (average (if 23-million-man/running-average-data
-                       (cdr 23-million-man/running-average-data)
+          (average (if 23-million-erisian/running-average-data
+                       (cdr 23-million-erisian/running-average-data)
                      (mindwave/make-single-val-brain-ring 0))))
-      (setq 23-million-man/running-average-data
+      (setq 23-million-erisian/running-average-data
             (cons total
-                  (mindwave/brain-ring-apply '/ 
+                  (mindwave/brain-ring-apply 'mindwave/safe-div
                                              (mindwave/brain-ring-apply '+  
                                                                        average
                                                                        average-brain-ring)
                                              (mindwave/make-single-val-brain-ring total))))
-      (when (>= total 23-million-man/ring-averages-per-insertion)
-        (23-million-man/do-insertion-into-file (car 23-million-man/running-average-data))
-        (setq 23-million-man/running-average-data nil))))
+      (when (>= total 23-million-erisian/ring-averages-per-insertion)
+        (23-million-erisian/do-insertion-into-file (cdr 23-million-erisian/running-average-data))
+        (setq 23-million-erisian/running-average-data nil))))
   
+
 #+end_src
 
 *** Table insertion
@@ -906,49 +931,48 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
 #+name: 23mm-doinsertion
 #+begin_src emacs-lisp :tangle no  :results silent
-  (defvar 23-million-man/tbl-buffer-pos nil)
-  (defconst 23-million-man/tbl-current-pos-marker "#mindwave-23million-pos")
+  (defvar 23-million-erisian/tbl-buffer-pos nil)
+  (defconst 23-million-erisian/tbl-current-pos-marker "#mindwave-23million-pos")
   
-  (defun 23-million-man/do-insertion-into-file (data)
-    "Inserts DATA into the 23-million-man table."
+  (defun 23-million-erisian/do-insertion-into-file (data)
+    "Inserts DATA into the 23-million-erisian table."
     (save-excursion
       (progn 
-        (set-buffer (find-file-noselect 23-million-man/store-in-org-file))
-        (when (null 23-million-man/tbl-buffer-pos)
-          (23-million-man/find-buffer-pos))
-        (goto-char 23-million-man/tbl-buffer-pos)
+        (set-buffer (find-file-noselect 23-million-erisian/store-in-org-file))
+        (23-million-erisian/find-buffer-pos)        
+        (goto-char 23-million-erisian/tbl-buffer-pos)
         (when (not (string-equal (buffer-substring-no-properties (line-beginning-position) 
                                                                  (line-end-position))
-                                 23-million-man/tbl-current-pos-marker))
-          (error (concat "23-million-man: ARG, can't find the proper position to insert data! make sure you have '" 23-million-man/tbl-current-pos-marker "' at the bottom of your data table."))))
+                                 23-million-erisian/tbl-current-pos-marker))
+          (error (concat "23-million-erisian: ARG, can't find the proper position to insert data! make sure you have '" 23-million-erisian/tbl-current-pos-marker "' at the bottom of your data table."))))
       (delete-region (line-beginning-position) 
                      (line-end-position))
-      (insert data)
-      (insert 23-million-man/tbl-current-pos-marker)
-      (setq 23-million-man/tbl-buffer-pos (line-beginning-position))
+      (23-million-erisian/write-running-average data)
+      (setq 23-million-erisian/tbl-buffer-pos (line-beginning-position))
+      (insert 23-million-erisian/tbl-current-pos-marker)
       (insert "\n"))) 
   
-  (defun 23-million-man/find-buffer-pos () 
+  (defun 23-million-erisian/find-buffer-pos () 
     "find the current insert buffer position for the mindwave table.  
   Start by opening the file if we have to."
     (save-excursion 
-      (set-buffer (find-file-noselect 23-million-man/store-in-org-file))
+      (set-buffer (find-file-noselect 23-million-erisian/store-in-org-file))
       (goto-char (point-min))
       (if (re-search-forward (concat "^[ \t]*#\\+TBLNAME:[ \t]*" 
-                                     23-million-man/tblname-of-data
+                                     23-million-erisian/tblname-of-data
                                      "[ \t]*$")
                              nil t)
           (progn 
             (goto-char (match-beginning 0))
-            (if (re-search-forward 23-million-man/tbl-current-pos-marker nil t)
-                (setq 23-million-man/tbl-buffer-pos (match-beginning 0))
-              (error (concat "Cant find marker to insert data.  Make sure you have " 23-million-man/tbl-current-pos-marker " on your table."))))
-        (error (concat "Can't find table data " 23-million-man/tblname-of-data)))))
+            (if (re-search-forward 23-million-erisian/tbl-current-pos-marker nil t)
+                (setq 23-million-erisian/tbl-buffer-pos (match-beginning 0))
+              (error (concat "Cant find marker to insert data.  Make sure you have " 23-million-erisian/tbl-current-pos-marker " on your table."))))
+        (error (concat "Can't find table data " 23-million-erisian/tblname-of-data)))))
     
-  (ert-deftest 23-million-man/find-buffer-pos () 
+  (ert-deftest 23-million-erisian/find-buffer-pos () 
     ""
-    (should (< 0 (23-million-man/find-buffer-pos)))
-    (should-not (null 23-million-man/tbl-buffer-pos)))
+    (should (< 0 (23-million-erisian/find-buffer-pos)))
+    (should-not (null 23-million-erisian/tbl-buffer-pos)))
   
 #+end_src
 
@@ -956,35 +980,50 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
 #+name: 23mm-insert
 #+begin_src emacs-lisp :tangle no 
-  (defun 23-million-man/write-running-average (brain)
-    "Writes the running average.  used as part of a run-timer"
-    (let ((time (decode-time))))
-    (insert (format "| %s   | %s    | %s  | %s   |   %s   | %s        | %s         | %s        | %s       | %s       | %s      | %s        | %s       | %s    | %s    |\n"
-                    (nth 5 time)
-                    (nth 4 time)
-                    (nth 3 time)
-                    (nth 2 time)
-                    (nth 1 time)
-                    (cdr (assoc 'poorSignalLevel brain))
-                    (mindwave/access-in 'eegPower 'lowGamma brain)
-                    (mindwave/access-in 'eegPower 'highGamma brain)
-                    (mindwave/access-in 'eegPower 'lowBeta brain)
-                    (mindwave/access-in 'eegPower 'highBeta brain)
-                    (mindwave/access-in 'eegPower 'lowAlpha brain)
-                    (mindwave/access-in 'eegPower 'highAlpha brain)
-                    (mindwave/access-in 'eegPower 'theta brain)
-                    (mindwave/access-in 'eegPower 'delta brain)
-                    (mindwave/access-in 'eSense 'attention brain)
-                    (mindwave/access-in 'eSense 'meditaiton brain))))
-  
-#+end_src	
-
-*** Timer
-#+begin_src emacs-lisp :tangle no 
-  
+    (defun 23-million-erisian/write-running-average (brain)
+      "Writes the running average.  used as part of a run-timer"
+      (let ((time (decode-time)))
+                        ;   y     m     d     h     m    s      g     g    b      b     a     a    t      d     m     a     
+        (insert (format "| %4s | %5s | %3s | %4s | %6s | %6s | %9s | %8s | %8s | %7s | %9s | %8s | %8s | %10s | %10s | %9s | \n"
+                        (nth 5 time)
+                        (nth 4 time)
+                        (nth 3 time)
+                        (nth 2 time)
+                        (nth 1 time)
+                        (cdr (assoc 'poorSignalLevel brain))
+                        (mindwave/access-in 'eegPower 'lowGamma brain)
+                        (mindwave/access-in 'eegPower 'highGamma brain)
+                        (mindwave/access-in 'eegPower 'lowBeta brain)
+                        (mindwave/access-in 'eegPower 'highBeta brain)
+                        (mindwave/access-in 'eegPower 'lowAlpha brain)
+                        (mindwave/access-in 'eegPower 'highAlpha brain)
+                        (mindwave/access-in 'eegPower 'theta brain)
+                        (mindwave/access-in 'eegPower 'delta brain)
+                        (mindwave/access-in 'eSense 'meditation brain)
+                        (mindwave/access-in 'eSense 'attention brain)))))  
 #+end_src
 
-
+#+begin_src emacs-lisp :tangle no
+  (23-million-erisian/write-running-average (mindwave/make-single-val-brain-ring 10))
+  (mindwave/access-in 'eSense 'meditation  (mindwave/make-single-val-brain-ring 10))
+#+end_src
+*** Hook
+#+name: 23mm-commands
+#+begin_src emacs-lisp :tangle no 
+  ;; note, I do this a lot, maybe it is time to abstract it properly in mindwave-emacs
+  (defun 23-million-erisian/start ()
+    "Start recording the 23 million erisian."
+    (interactive)
+    (mindwave-get-buffer)
+    (when (not (member '23-million-erisian/running-average-hook mindwave/brain-ring-full-hook))
+      (add-hook 'mindwave/brain-ring-full-hook '23-million-erisian/running-average-hook)))
+  
+  (defun 23-million-erisian/stop ()
+    "Stop recording the 23 million erisian"
+    (interactive)
+    (remove-hook 'mindwave/brain-ring-full-hook '23-million-erisian/running-average-hook))
+  
+#+end_src
 
 ** Example five: magickal-commit.  Store total average brainwave state of a coding session in a magit commit.
    
@@ -1015,7 +1054,7 @@ Of course, this is purely just for the data alone, not for any kind of other sto
 
 	Note that the ring-full hook function will automagickally return an average of the last 30 values. 
 
-
+** Example six: positive re-inforcement when you are in the state of flow. 
 * The code
 
   Without much further ado:
@@ -1224,7 +1263,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
       (mindwave-if-in-list 'a '((a 1)) (setq r mw-result))
       (should r)))
   
-  (defconst mindwave-debug t)
+  (defvar mindwave-debug nil)
   
   (defun mindwave-comint-filter-function (output)
     "A helper hook to pass off output to the apropriate hooks"
@@ -1366,8 +1405,6 @@ memory.  For an example of this, see the solarized-mind example.
   
 #+end_src 
 
-
-
 ****** Access-in, quick access to ~((eSense . ((meditation . foo) ...)) ...)~
 
 	  We'll need to access the guts of our rings pretty frequently, so here is a convenience function and a test.
@@ -1383,31 +1420,33 @@ memory.  For an example of this, see the solarized-mind example.
                                        'inner 
                                        '((outer1 . (inner1 . 0))
                                          (outer . ((inner . 23)))))
-                   23)))
-  
-  
+                   23)))  
 #+end_src 
 
 
 ***** Make a new brain-ring entry from args
 
+There are two ways to make a brain ring, either through ~mindwave/make-brain-ring~ which will allow you to set each and every value, or ~mindwave/make-single-val-brain-ring~.
+
+****** Brain Brings 
+
 #+begin_src emacs-lisp  :tangle yes
   (defun mindwave/make-brain-ring (meditation attention delta theta lowAlpha highAlpha lowBeta highBeta lowGamma highGamma &optional poorSignalLevel)
-      "convenience function to make a valid brain ring entry"
-      `((poorSignalLevel . ,(or poorSignalLevel 0))
-        (eSense . ((meditation  . ,meditation)
-                   (attention   . ,attention)))
-        (eegPower . ((delta     . ,delta) 
-                     (theta     . ,theta)
-                     (lowAlpha  . ,lowAlpha)
-                     (highAlpha . ,highAlpha)
-                     (lowBeta   . ,lowBeta)
-                     (highBeta  . ,highBeta)
-                     (lowGamma  . ,lowGamma)
-                     (highGamma . ,highGamma)))))
+    "convenience function to make a valid brain ring entry"
+    `((poorSignalLevel . ,(or poorSignalLevel 0))
+      (eSense . ((meditation  . ,meditation)
+                 (attention   . ,attention)))
+      (eegPower . ((delta     . ,delta) 
+                   (theta     . ,theta)
+                   (lowAlpha  . ,lowAlpha)
+                   (highAlpha . ,highAlpha)
+                   (lowBeta   . ,lowBeta)
+                   (highBeta  . ,highBeta)
+                   (lowGamma  . ,lowGamma)
+                   (highGamma . ,highGamma)))))
   
-  (ert-deftest mindwave/make-brain-ring 
-      "Maker tests. Super simple,"
+  (ert-deftest mindwave/make-brain-ring ()
+    "Maker tests. Super simple,"
     (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
                    (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0  0)))
     (should (equal (mindwave/make-brain-ring 2 3 5 23 32 46 92 184 7 13 21)
@@ -1415,18 +1454,27 @@ memory.  For an example of this, see the solarized-mind example.
   
   (defun mindwave/make-single-val-brain-ring (val)
     "Convenience function to make a brain ring of a single value VAL.
-  Useful for dealing with averages."
+    Useful for dealing with averages."
     (mindwave/make-brain-ring val 
                               val val val val val val val val
                               val val))
   
-  (ert-deftest mindwave/make-brain-ring 
-      "Maker tests. Super simple,"
+  (ert-deftest mindwave/make-brain-ring ()
+    "Maker tests. Super simple,"
     (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
                    (mindwave/make-single-val-brain-ring 0)))
     (should (equal (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1 1)
                    (mindwave/make-single-val-brain-ring 1))))
   
+  ;; Averaging the brain ring can be a little dicey since we expect poorSignalLevel to be 0
+  (defun mindwave/safe-div (dividend divisor) 
+    "Another division function safe to use with averaging. 0 save-div 0 = 0"
+    (if (and (= 0 dividend)
+             (= 0 divisor))
+        0
+      (/ dividend divisor)))
+  
+    
 #+end_src 
 
 
@@ -1515,7 +1563,7 @@ memory.  For an example of this, see the solarized-mind example.
                                       :initial-value (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
           (setq mindwave/brain-ring new-ring)
           (run-hook-with-args 'mindwave/brain-ring-full-hook
-                              (mindwave/brain-ring-apply '/ 
+                              (mindwave/brain-ring-apply 'mindwave/safe-div 
                                                          collapsed-ring 
                                                          (mindwave/make-brain-ring s s s s s s s s s s)))))))
 #+end_src

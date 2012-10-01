@@ -224,10 +224,14 @@
 (find-lisp-object-file-name 'undo-tree-mode (symbol-function 'undo-tree-mode)) 
 
 #+begin_src emacs-lisp
-(emagician-expect-package 'undo-tree)
-(require 'undo-tree)
-
-(global-undo-tree-mode)
+  (emagician-expect-package 'undo-tree)
+  (setq undo-tree-enable-undo-in-region t
+        undo-tree-visualizer-diff t)
+  
+  (require 'undo-tree)
+  
+  (global-undo-tree-mode)
+  
 #+end_src
 * Movement
 ** Ace Jump

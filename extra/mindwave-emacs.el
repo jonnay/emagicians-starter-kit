@@ -57,7 +57,7 @@ senses connection problems.  This is generally between 0 and
           (sleep-for 1)
           (mindwave-get-raw nil)
           (sleep-for 1)
-          (add-hook 'comint-output-filter-functions 'mindwave-comint-filter-function nil t))
+          (add-hook 'comint-preoutput-filter-functions 'mindwave-comint-filter-function nil t))
         mindwave-buffer)))
 
 (defun mindwave-make-serial-process ()
@@ -108,6 +108,8 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
     (mindwave-if-in-list 'a '((a 1)) (setq r mw-result))
     (should r)))
 
+(defvar mindwave-debug nil)
+
 (defun mindwave-comint-filter-function (output)
   "A helper hook to pass off output to the apropriate hooks"
   (when (and (stringp output) 
@@ -120,8 +122,11 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
             (if (and (assoc 'poorSignalLevel brain)
                      (> (cdr (assoc 'poorSignalLevel brain))
                         mindwave-poor-signal-level))
-                (run-hook-with-args 'mindwave-poor-signal-hook 
-                                    (cdr (assoc 'poorSignalLevel brain)))
+                (progn 
+                  (when (assoc 'poorSignalLevel brain)
+                    (mindwave/set-current 'poorSignalLevel (cdr (assoc 'poorSignalLevel brain)))
+                    (run-hook-with-args 'mindwave-poor-signal-hook 
+                                        (cdr (assoc 'poorSignalLevel brain)))))
               (progn
                 (mindwave-if-in-list-run-hook 'rawEeg brain 'mindwave-raw-hook)
                 (mindwave-if-in-list 'poorSignalLevel brain
@@ -130,14 +135,14 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                 (mindwave-if-in-list 'eSense brain
                   (mindwave/set-current 'eSense mw-result)
                   (run-hook-with-args mindwave-e-sense-hook mw-result))
-                (mindwave-if-in-list 'blink brain
-                  (mindwave/set-current 'blink mw-result)
+                (mindwave-if-in-list 'blinkstrength  brain
+                  (mindwave/set-current 'blinkStrength  mw-result)
                   (run-hook-with-args 'mindwave-blink-hook mw-result))
                 (mindwave-if-in-list 'eegPower brain
                   (mindwave/set-current 'eegPower mw-result)
                   (run-hook-with-args 'mindwave-eeg-power-hook mw-result)
                   (mindwave/brain-ring-update brain)))))))
-  output)
+  (if mindwave-debug output ""))
 
 (defvar mindwave/current '((poorSignalLevel . 200)
                            (eSense . ((attention . 0)
@@ -150,7 +155,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                         (highBeta   . 0)
                                         (lowGamma   . 0)
                                         (highGamma  . 0)))
-                           (blink . 0))
+                           (blinkStrength . 0))
   "The last known values from the mindwave headset.")
 
 (defun mindwave/set-current (key val)
@@ -163,9 +168,9 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                (if (equal key 'eegPower)
                                    (cons key val)
                                    (assoc 'eegPower mindwave/current))
-                               (if (equal key 'blink)
+                               (if (equal key 'blinkStrength)
                                    (cons key val)
-                                   (assoc 'blink mindwave/current)))))
+                                   (assoc 'blinkStrength mindwave/current)))))
 
 (ert-deftest mindwave/current-setters ()
   (setq mindwave/current '((poorSignalLevel . 200)
@@ -179,10 +184,10 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                         (highBeta   . 0)
                                         (lowGamma   . 0)
                                         (highGamma  . 0)))
-                           (blink . 0)))
-  (mindwave/set-current 'blink 255)
-  (should (equal (assoc 'blink mindwave/current)
-                 '(blink . 255)))
+                           (blinkStrength . 0)))
+  (mindwave/set-current 'blinkStrength 255)
+  (should (equal (assoc 'blinkStrength mindwave/current)
+                 '(blinkStrength . 255)))
 
   (should (equal mindwave/current
                  '((poorSignalLevel . 200)
@@ -196,7 +201,7 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
                                 (highBeta   . 0)
                                 (lowGamma   . 0)
                                 (highGamma  . 0)))
-                   (blink . 255)))))
+                   (blinkStrength . 255)))))
 
 (defconst mindwave/brain-ring-size 30)
 
@@ -210,28 +215,58 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
   (cdr (assoc inner-key (cdr (assoc outer-key list)))))
 
 (ert-deftest mindwave/test-access-in ()
-  (should (equal (should (equal (mindwave/access-in 'outer 
-                                                    'inner 
-                                                    '((outer1 . (inner1 . 0))
-                                                      (outer . ((inner . 23)))))
-                              23)))))
+  (should (equal (mindwave/access-in 'outer 
+                                     'inner 
+                                     '((outer1 . (inner1 . 0))
+                                       (outer . ((inner . 23)))))
+                 23)))
 
-(defun mindwave/brain-ring-make-entry (meditation attention delta theta lowAlpha highAlpha lowBeta highBeta lowGamma highGamma)
-    "convenience function to make a valid brain ring entry"
-    `((eSense . ((meditation  . ,meditation)
-                 (attention   . ,attention)))
-      (eegPower . ((delta     . ,delta) 
-                   (theta     . ,theta)
-                   (lowAlpha  . ,lowAlpha)
-                   (highAlpha . ,highAlpha)
-                   (lowBeta   . ,lowBeta)
-                   (highBeta  . ,highBeta)
-                   (lowGamma  . ,lowGamma)
-                   (highGamma . ,highGamma)))))
+(defun mindwave/make-brain-ring (meditation attention delta theta lowAlpha highAlpha lowBeta highBeta lowGamma highGamma &optional poorSignalLevel)
+  "convenience function to make a valid brain ring entry"
+  `((poorSignalLevel . ,(or poorSignalLevel 0))
+    (eSense . ((meditation  . ,meditation)
+               (attention   . ,attention)))
+    (eegPower . ((delta     . ,delta) 
+                 (theta     . ,theta)
+                 (lowAlpha  . ,lowAlpha)
+                 (highAlpha . ,highAlpha)
+                 (lowBeta   . ,lowBeta)
+                 (highBeta  . ,highBeta)
+                 (lowGamma  . ,lowGamma)
+                 (highGamma . ,highGamma)))))
+
+(ert-deftest mindwave/make-brain-ring ()
+  "Maker tests. Super simple,"
+  (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
+                 (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0  0)))
+  (should (equal (mindwave/make-brain-ring 2 3 5 23 32 46 92 184 7 13 21)
+                 (mindwave/make-brain-ring 2 3 5 23 32 46 92 184 7 13 21))))
+
+(defun mindwave/make-single-val-brain-ring (val)
+  "Convenience function to make a brain ring of a single value VAL.
+  Useful for dealing with averages."
+  (mindwave/make-brain-ring val 
+                            val val val val val val val val
+                            val val))
+
+(ert-deftest mindwave/make-brain-ring ()
+  "Maker tests. Super simple,"
+  (should (equal (mindwave/make-brain-ring 0 0 0  0  0  0  0   0 0  0)
+                 (mindwave/make-single-val-brain-ring 0)))
+  (should (equal (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1 1)
+                 (mindwave/make-single-val-brain-ring 1))))
+
+;; Averaging the brain ring can be a little dicey since we expect poorSignalLevel to be 0
+(defun mindwave/safe-div (dividend divisor) 
+  "Another division function safe to use with averaging. 0 save-div 0 = 0"
+  (if (and (= 0 dividend)
+           (= 0 divisor))
+      0
+    (/ dividend divisor)))
 
 (defun mindwave/brain-ring-apply (fn ring1 ring2)
   "Takes the \"brain-rings\" RING1 and RING2 and runs FN on it's guts"
-  (mindwave/brain-ring-make-entry 
+  (mindwave/make-brain-ring
    (funcall fn (mindwave/access-in 'eSense 'meditation ring1)
                (mindwave/access-in 'eSense 'meditation ring2))
    (funcall fn (mindwave/access-in 'eSense 'attention ring1)
@@ -251,21 +286,27 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
    (funcall fn (mindwave/access-in 'eegPower 'lowGamma ring1)
                (mindwave/access-in 'eegPower 'lowGamma ring2))
    (funcall fn (mindwave/access-in 'eegPower 'highGamma ring1)
-               (mindwave/access-in 'eegPower 'highGamma ring2))))
+               (mindwave/access-in 'eegPower 'highGamma ring2))
+   (funcall fn (cdr (assoc 'poorSignalLevel ring1))
+               (cdr (assoc 'poorSignalLevel ring2)))))
 
 (ert-deftest mindwave/test-brain-ring-add ()
-  (should (equal (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0)
+  (should (equal (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0)
                  (mindwave/brain-ring-apply '+ 
-                                            (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0)
-                                            (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
-  (should (equal (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
+                                            (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0)
+                                            (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
+  (should (equal (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
                  (mindwave/brain-ring-apply '+
-                                            (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
-                                            (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
-  (should (equal (mindwave/brain-ring-make-entry 2 3 4 5 6 7 8 9 10 11)
+                                            (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
+                                            (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
+  (should (equal (mindwave/make-brain-ring 2 3 4 5 6 7 8 9 10 11)
                  (mindwave/brain-ring-apply '+
-                                            (mindwave/brain-ring-make-entry 1 2 3 4 5 6 7 8 9 10)
-                                            (mindwave/brain-ring-make-entry 1 1 1 1 1 1 1 1 1 1)))))
+                                            (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10)
+                                            (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1))))
+  (should (equal (mindwave/make-brain-ring 2 3 4 5 6 7 8 9 10 11 12)
+                 (mindwave/brain-ring-apply '+
+                                            (mindwave/make-brain-ring 1 2 3 4 5 6 7 8 9 10 11)
+                                            (mindwave/make-brain-ring 1 1 1 1 1 1 1 1 1 1 1)))))
 
 (defun mindwave/brain-ring-update (brain)
   "Keep a running tally of your neurological state."
@@ -282,12 +323,12 @@ Please use `mindwave-authorize' or `mindwave-get-raw' for user-level configurati
             (collapsed-ring (reduce #'(lambda (brain total) 
                                         (mindwave/brain-ring-apply '+ brain total)) 
                                     (ring-elements mindwave/brain-ring)
-                                    :initial-value (mindwave/brain-ring-make-entry 0 0 0 0 0 0 0 0 0 0))))
+                                    :initial-value (mindwave/make-brain-ring 0 0 0 0 0 0 0 0 0 0))))
         (setq mindwave/brain-ring new-ring)
         (run-hook-with-args 'mindwave/brain-ring-full-hook
-                            (mindwave/brain-ring-apply '/ 
+                            (mindwave/brain-ring-apply 'mindwave/safe-div 
                                                        collapsed-ring 
-                                                       (mindwave/brain-ring-make-entry s s s s s s s s s s)))))))
+                                                       (mindwave/make-brain-ring s s s s s s s s s s)))))))
 
 (defun mindwave-get-raw (raw)
   "Return raw output from mindwave.

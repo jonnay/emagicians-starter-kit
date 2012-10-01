@@ -2,7 +2,6 @@
 * There are many alike it.
 * But this one is mine.
 
-
 #+begin_src emacs-lisp
 (setq x-colors (ns-list-colors))
 (setq sql-mysql-program "/Applications/XAMPP/xamppfiles/bin/mysql")
