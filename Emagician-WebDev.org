@@ -76,12 +76,13 @@ And with PHP, comes a bunch of extra frameworks.
 #+end_src
 
 **** Slime-js
-
+***** TODO set up dev-mode for this. 
 #+begin_src emacs-lisp
+(when (not (string= system-name "my-melody"))
   (add-to-list 'load-path "~/projects/emacs/slime-js")
   (slime-setup '(slime-js slime-repl))
   (setq slime-js-swank-command "/usr/local/bin/swank-js")
-  (setq slime-js-swank-args '())
+  (setq slime-js-swank-args '()))
 ;;  (setq slime-js-swank-command "/usr/local/bin/npm")
 ;;  (setq slime-js-swank-args '("run" "swank"))
 #+end_src

@@ -3,12 +3,14 @@
 * But this one is mine.
 
 #+begin_src emacs-lisp
-(setq x-colors (ns-list-colors))
-(setq sql-mysql-program "/Applications/XAMPP/xamppfiles/bin/mysql")
-(setq org-latex-to-pdf-process 
-      '("/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
-        "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
-        "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (when (equal system-type 'darwin)
+    (setq x-colors (ns-list-colors))
+    (setq sql-mysql-program "/Applications/XAMPP/xamppfiles/bin/mysql")
+    (setq org-latex-to-pdf-process 
+          '("/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
+            "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
+            "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f")))
+  
 #+end_src
 
   Use a file like this to Load up relevant sections of emagicians starter

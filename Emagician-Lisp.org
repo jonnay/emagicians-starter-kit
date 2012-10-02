@@ -8,12 +8,12 @@
 
 #+begin_src emacs-lisp
 (emagician-expect-package 'paredit)
-
+(require 'paredit)
 (defun turn-on-paredit ()
   (paredit-mode +1))
 #+end_src
    
-
+   
 ** TODO Show params 
    
 
