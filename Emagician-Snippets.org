@@ -1,0 +1,41 @@
+#+TITLE: YASnippets 
+
+* This is not the file you are looking for...
+  If you want to configure yasnippets for the emagiians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
+
+** Org
+
+[[assets/snippets/org-mode/]]
+
+#+BEGIN_SRC 
+
+** Javascript 
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/.yas.parents
+text-mode
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/function
+# name: function(...) { ... }
+# key: function
+# --
+function(${1:args}) {
+    $0
+} 
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/var
+# name: var (declare)
+# key: var
+# --
+var $0;
+#+end_src
+
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/var.assign
+# name: var (assign)
+# key: var
+# --
+var $1 = $0;
+#+end_src
+

@@ -9,11 +9,47 @@
   Things like spaces, tabs, and all the important stuff are in their
   own file.
 
+** Breakage happens, lets try and make it easier to deal with.
+   Snarfed this idea from https://github.com/overtone/emacs-live.
+   Which goes to show: even if you use the word brogrammer you might
+   still have good ideas.
+
+#+begin_src emacs-lisp
+  (setq initial-scratch-message
+        (concat ";; -|-+-|- Invocation Failure.  Sorry." "\n"
+                ";; You know what to do." "\n"
+                ";; \n"
+                ";; \n"
+                ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+                ";;                      ;;" "\n"      
+                ";; It's dangerous to go ;;" "\n"
+                ";; alone! take this:    ;;" "\n"
+                ";;                      ;;" "\n"
+                ";;    ♨   (☉_o)   ♨   ;;" "\n"
+                ";;                      ;;" "\n"
+                ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
+                "\n"
+                "(shell-command \"emacs --debug-init\")\n"))                
+#+end_src  
+
+** Inhibit the splash screen, and use the scratch buffer as our screen.
+#+begin_src emacs-lisp
+  (setq inhibit-splash-screen t)
+  
+  (defun emagician/show-scratch ()
+    "Show the scratch buffer"
+    (interactive)
+    (set-window-buffer nil "*scratch*"))
+  
+  (add-hook 'emacs-startup-hook 'emagician/show-scratch t)
+#+end_src
 ** Meta Development
 
-   Emagician sets up a few of its own functions for helpful debugging and development of itself
+   Emagician sets up a few of its own functions for helpful debugging
+   and development of itself.  Most of these are to be found in
+   [[file:Emagician-Meta.org]], but a little bit of bootstrapping is nice.
 
-#+begin_src
+#+begin_src emacs-lisp
 (defun emagician-reload ()
   "Reload the init file"
   (interactive)
@@ -32,6 +68,17 @@
 (add-to-list 'load-path (concat emagician-dir "dist"))
 #+end_src
 
+*** More breakage help
+	Since we now know where the emagician dir is, and it is okay, lets add that to the initial scratch message.
+
+#+begin_src emacs-lisp
+  (setq initial-scratch-message 
+        (concat initial-scratch-message
+                "\n"
+                "(find-file-other-window emagician-dir)" "\n"
+                "(find-file-other-window (concat emagician-dir \"*.org\") t)" "\n"))
+#+end_src
+
 ** Ubiquitious Packages
 
    These need to be not-autoloaded, cause they are EVERYWHERE MAN.
@@ -46,13 +93,15 @@
 #+end_src
 
 ** ELPA 
-   Throwing our lot in with MELPA at this point. 
+   MELPA, ELPA and Marmalade!  Oh my!
+
 #+begin_src emacs-lisp
   (setq package-user-dir (concat emagician-dir "elpa"))
   
   (setq package-archives
         '(("gnu"         . "http://elpa.gnu.org/packages/")
-          ("melpa"       . "http://melpa.milkbox.net/packages/")))
+          ("melpa"       . "http://melpa.milkbox.net/packages/")
+          ("marmalade"   . "http://marmalade-repo.org/packages/")))
   
   (package-initialize)
   
@@ -91,54 +140,55 @@
 
 #+name: starter-kit-load
 #+begin_src emacs-lisp
-    (defun emagician-starter-kit-load (file &optional header-or-tag)
-      "Load configuration from other .org files.
-    If the optional argument is the id of a subtree then only
-    configuration from within that subtree will be loaded.  If it is
-    not an id then it will be interpreted as a tag, and only subtrees
-    marked with the given tag will be loaded.
-    
-    For example, to load all of lisp.org simply
-    add (emagician-starter-kit-load \"lisp\") to your configuration.
-    
-    To load only the 'window-system' config from
-    emagician-starter-kit-misc-recommended.org add
-     (emagican-starter-kit-load \"misc-recommended\" \"window-system\")
-    to your configuration."
-      (let ((file (expand-file-name (if (string-match ".+\.org" file)
-                                        file
-                                      (format "%s.org" file))
-                                    emagician-dir)))
-        (org-babel-load-file
-         (if header-or-tag
-             (let* ((base (file-name-nondirectory file))
-                    (dir  (file-name-directory file))
-                    (partial-file (expand-file-name
-                                   (concat "." (file-name-sans-extension base)
-                                           ".part." header-or-tag ".org")
-                                   dir)))
-               (unless (file-exists-p partial-file)
-                 (with-temp-file partial-file
-                   (insert
-                    (with-temp-buffer
-                      (insert-file-contents file)
-                      (save-excursion
-                        (condition-case nil ;; collect as a header
-                            (progn
-                              (org-link-search (concat"#"header-or-tag))
-                              (org-narrow-to-subtree)
-                              (buffer-string))
-                          (error ;; collect all entries with as tags
-                           (let (body)
-                             (org-map-entries
-                              (lambda ()
-                                (save-restriction
-                                  (org-narrow-to-subtree)
-                                  (setq body (concat body "\n" (buffer-string)))))
-                              header-or-tag)
-                             body))))))))
-               partial-file)
-           file))))
+  (defun emagician-starter-kit-load (file &optional header-or-tag)
+    "Load configuration from other .org files.
+  If the optional argument is the id of a subtree then only
+  configuration from within that subtree will be loaded.  If it is
+  not an id then it will be interpreted as a tag, and only subtrees
+  marked with the given tag will be loaded.
+  
+  For example, to load all of lisp.org simply
+  add (emagician-starter-kit-load \"lisp\") to your configuration.
+  
+  To load only the 'window-system' config from
+  emagician-starter-kit-misc-recommended.org add
+   (emagican-starter-kit-load \"misc-recommended\" \"window-system\")
+  to your configuration."
+    (let ((file (expand-file-name (if (string-match ".+\.org" file)
+                                      file
+                                    (format "%s.org" file))
+                                  emagician-dir)))
+      (org-babel-load-file
+       (if header-or-tag
+           (let* ((base (file-name-nondirectory file))
+                  (dir  (file-name-directory file))
+                  (partial-file (expand-file-name
+                                 (concat "." (file-name-sans-extension base)
+                                         ".part." header-or-tag ".org")
+                                 dir)))
+             (unless (file-exists-p partial-file)
+               (with-temp-file partial-file
+                 (insert
+                  (with-temp-buffer
+                    (insert-file-contents file)
+                    (save-excursion
+                      (condition-case nil ;; collect as a header
+                          (progn
+                            (org-link-search (concat"#"header-or-tag))
+                            (org-narrow-to-subtree)
+                            (buffer-string))
+                        (error ;; collect all entries with as tags
+                         (let (body)
+                           (org-map-entries
+                            (lambda ()
+                              (save-restriction
+                                (org-narrow-to-subtree)
+                                (setq body (concat body "\n" (buffer-string)))))
+                            header-or-tag)
+                           body))))))))
+             partial-file)
+         file))))
+  
 #+end_src
 **** TODO fix documentation 
 *** Load User/System Specific Files
@@ -204,7 +254,9 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 
 As with the other starter kit, there are some fundamentals that need
 to be delt with. 
-
+** TODO Write hook macro
+   - name, hook to hook into, arguments, body
+   -> hook function defined, and added
 ** Basic hook functions
    This macro will help build your turn-on-minor-mode functions that are so helpful, and automagickally add them to a major mode.  It won't try to re-define the turn-on mode if it is already defined.
 
@@ -227,7 +279,33 @@ to be delt with.
     
 #+end_src
 
+*** Key Definition Hooks
 
+   Bit of a crappy definition here, but it's something.  This can be probably better handled.
+
+#+begin_src emacs-lisp
+    (defmacro emagician/define-mode-key (mode-name key command)
+      (let ((define-key-fname (make-symbol (concat (symbol-name mode-name)
+                                                   "-key-<"
+                                                   (replace-regexp-in-string "\s"
+                                                                             "_"
+                                                                             (key-description key))
+                                                   ">-"
+                                                   (symbol-name command)
+                                                   "-hook"))))
+        `(progn
+           (defun ,define-key-fname ()
+             "Automatically generated hook function"
+             (define-key ,(make-symbol (concat (symbol-name mode-name) "-map")) ,key ,command))
+           (add-hook (quote ,(make-symbol (concat (symbol-name mode-name) "-hook"))) 
+                     (quote ,define-key-fname)))))
+  
+  (when nil
+    (macroexpand '(emagician/define-mode-key org-mode (kbd "C-SPC") foo))
+  )
+#+end_src
+**** TODO Figure out if this needs to be optimized
+**** TODO make a new definition to build a custom command
 ** DONE Required Package handling
 
    Instead of having to front-load packages like paredit, slime, etc.   why can't they be auto-installed as needed?  That's what this does.
@@ -248,58 +326,22 @@ to be delt with.
   another.  You may "just" be working in eslip, or you might be a
   ployglot proficient in Low-level C, Scheme, Ruby and Rails, and
   Java. Either way, you're a dev.
-** Key Definition Hooks
+**  Programming mode hooks 
 
-   Bit of a crappy definition here, but it's something.  This can be probably better handled.
-
+*** Newline and indent
 #+begin_src emacs-lisp
-  (defmacro emagician/define-mode-key (mode-name key command)
-    (let ((define-key-fname (make-symbol (concat (symbol-name mode-name)
-                                                 "-key-["
-                                                 (replace-regexp-in-string "\s"
-                                                                           "_"
-                                                                           key)
-                                                 "]-"
-                                                 (symbol-name command)
-                                                 "-hook"))))
-    `(progn
-      (defun ,define-key-fname ()
-        "Automatically generated hook function"
-        (define-key ,(make-symbol (concat (symbol-name mode-name) "-map")) ,key ,command))
-      (add-to-hook ,(make-symbol (concat (symbol-name mode-name) "-hook")) 
-                   ,define-key-fname))))
-(when nil
-(let ((mode-name 'org-mode)
-      (key "C-x C-SPC ")
-      (command 'foo))
-(make-symbol (concat (symbol-name mode-name)
-                                                 "-key-["
-                                                 (replace-regexp-in-string "\s"
-                                                                           "_"
-                                                                           key)
-                                                 "]-"
-                                                 (symbol-name command)
-                                                 "-hook"))
-)
-)
+(emagician/define-mode-key prog "RET" newline-and-indent)
 #+end_src
-*** TODO Figure out if this needs to be optimized
-*** TODO make a new definition to build a custom command
-
-** TODO Programming modes
-
+*** Line numbers
 #+begin_src emacs-lisp
-  (defvar programming-modes '() 
-    "A list of modes that are development related, and should all behave the same.")
-  
-  (defvar programming-mode-hooks '() 
-    "A list of hooks to run in every programming mode")
-  
-  (defun run-programming-mode-hooks ()
-    "helper function to execute programming mode hooks."
-    (run-hooks 'programming-mode-hooks))    
-#+end_src
+(add-hook 'prog-mode-hook 'linum-mode)
+#+end_src 
 
+** Global Modes that are cool
+*** Show Paren Mode
+#+begin_src emacs-lisp
+(show-paren-mode)
+#+end_src
 *** TODO add to "programming-modes" list.  
 *** TODO line numbers
 *** TODO Fix definition in the yank under editing
@@ -307,8 +349,7 @@ to be delt with.
 	- [ ] auto-pair mode
 	- [ ] linum mode
 	- [ ] flash parens ()
-** CEDET
-
+*** CEDET
    I don't have enough mojo to work with cedet yet.  Working on it.  
 
 #+name: load-cedet
@@ -327,22 +368,24 @@ to be delt with.
   
 #+end_src
 
-** Basic Coding Hooks
-*** TODO needs to be snarfed and barfed from the emacs starter kit
-** WhichFunc
+*** WhichFunc
 #+begin_src emacs-lisp
 (which-function-mode t)
 #+end_src
 *** TODO add magic to it.  maybe look at programming modes
-** Flymake Setup
+*** Flymake Setup
 #+begin-src emacs-lisp
 (emagician-expect-package 'flymake-cursor)
 #+end_src
+
+** Basic Coding Hooks
+*** TODO needs to be snarfed and barfed from the emacs starter kit
 * Load Users Customizations
-** TODO fix this teporary shit here
+** TODO fix this temporary shit here
 #+begin_src emacs-lisp
 (emagician-starter-kit-load (concat emagician-dir "Emagician-Jonnay"))
 #+end_src
+** TODO Update the scratch variable here so that it points the user to exactly where it failed.
 ** System Type Initialization
 
 ** Login name Initialization
@@ -350,5 +393,18 @@ to be delt with.
 ** Machine Name Initialization
 
 ** Person Initialization
+* Set the scratch variable.
+
+#+begin_src emacs-lisp
+  (setq initial-scratch-message
+        (concat ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"
+                ";;; Hail Eris.  All Hail Discordia." "\n"
+                ";;; " "\n"
+                (format ";;; Your startup took approximately %.2f seconds" 
+                        (- (float-time after-init-time)
+                           (float-time before-init-time))) "\n"                                                      
+                ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"))
+#+end_src 
+
 * References, Bibliography, Shout Outs, and Props.
   - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html

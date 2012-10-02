@@ -50,6 +50,9 @@ Let there be light
   "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
 #+end_src 
 
+#+RESULTS: true-name
+: emagician-truename
+
 ** Make the init files
 
     Making the init file is a two stage process.
@@ -78,6 +81,9 @@ Let there be light
         "/Users/jonathana/projects/emagicians-starter-kit/"
         "Automagically generated variable where the emagicians kit is located")
 #+end_src
+
+#+RESULTS: set-this-dir-as-var
+: emagician-dir
 
 
 *** Step Two: Making it go.
@@ -213,7 +219,7 @@ Then again, maybe you need to seperate customizations out by user account. Why n
 #+results:
 #+begin_src sh :results silent
   # run this code block to test your emacs starter kit
-  emacs -q -l /home/jonny/emagicians-starter-kit/init.el 
+  emacs -q -l /Users/joneathana/projects/emagicians-starter-kit/init.el &
 #+end_src
 
    If you get the message ~org-babel-execute-src-block: No

@@ -1,0 +1,104 @@
+#+title: Emacs Media Servator
+
+* Mission
+
+  Provide a media library to Emacs that is a cut above most other media libraries.  What defines "a cut above"?
+  - Decoupling files from the machine they are located in.  (ever tried to move your iTunes library?)
+  - DON'T SCREW WITH THE LOCATION OF A FILE UNLESS EXPLICITLY TOLD TO.
+  - Give the user a way to tag mp3s.  Not ID3 (though that is helpful) but tag this song as "funky" this song as "party" this song as "meditation", etc. etc.
+  - Hook into mindwave emacs to bug the user to tag a playing song if:
+	- the song needs proper tagging
+	- the user hasn't tagged it
+  - Let the user just give a mood, and let the servator do the rest.
+	- again, hook into mindwave emacs
+  - Provide an open system so others can join in the fun, even if they don't have emacs.
+
+* Lets start with the basics
+
+  The whole plan is to get to a point where I can start playing mp3 files from emacs fairly easily.  Right now I am doing direct calls to mpg123 through shell.  This is "fairly" easy, but it would be fine, mighty fine, to call an interactive function to play an mp3.  
+
+** Playing an mp3
+
+   Note that we have to immediately start working with a process because of the blocking nature.
+
+#+begin_src emacs-lisp
+  (defvar em-servator/player-proc nil "Process for playing songs")
+  
+  (defun em-servator/play (song)
+    "Plays SONG using MPG123.
+  This is the base-conciousness of Emacs Media Servator."
+    (interactive "fMP3 file to play: ")
+    (if (not (process-live-p em-servator/player-proc))
+        (setq em-servator/player-proc (start-process "player-servator" nil "mpg123" song))
+      (progn
+        (interrupt-process em-servator/player-proc)
+        (sit-for 0.125)
+        (em-servator/play song))))
+#+end_src
+
+*** Testing
+
+	Sadly no way to unit test this, except to execute it and see.  So far it seems to work.
+
+** Storing MP3s
+
+   Okay, so we can play an MP3, now we want to start storing meta data about mp3s.  So we need a few things:
+   - Mongo DB.  This is part of making it an open system so others can join the fun.
+   - A way to add files to the system, and mark or ignore duplicates
+   - A way to Easily find out if 2 different paths lead to the same file.  We'll use the fpcalc tool for that.
+
+
+*** Getting Mongo connected.
+
+**** Getting Mongo
+
+	Sorry, if you aren't an em-magician, you're on your own.  I suggest a  (package-install 'mongo)
+
+#+begin_src emacs-lisp
+  (when (fboundp 'emagician-expect-package)
+    (emagician-expect-package 'mongo))
+#+end_src
+	
+**** Getting a Mongo Connection
+
+	 We assume mongo is already running.
+
+#+begin_src emacs-lisp
+  (require 'mongo)
+  (defvar em-servator/mongo-db nil)
+  
+  (defun em-servator/open ()
+    "Open the mongo DB."
+    (setq em-servator/mongo-db (mongo-open-database :make-default nil)))
+  
+  (defun em-servator/with-mongo (fun &rest args)
+    "Run FUN with ARGS once we have a connection."
+    (if (process-live-p em-servator/mongo-db)
+        (apply fun rest)
+      (progn
+        (em-servator/open)
+        (sit-for 0.5)
+        (em-servator/with-mongo fun args))))
+#+end_src
+
+**** Add an MP3 file by name to the collection
+
+	 This is actually the most challenging part of everything so far.
+
+	 We'll need the following data points:
+	 - File Path
+	 - File Name
+	 - Tags
+	 - the Fingerprint
+	 - meta-data from ID3 tags
+
+
+* Some Future funkiness
+
+** TODO hook into sauron to show the currently playing song
+** TODO hook into sauron to warn that a song and playlist is going to completely end
+** TODO use mindwave emacs to hassle the user about an untagged song if the attention level is low
+
+* Some Mojo - (songs used during the composition of the servator)
+  - The Irresistible Force - Flying High
+

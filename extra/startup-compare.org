@@ -16,13 +16,11 @@
 #+end_src
 
 * Main Documentation
-
-
 * Emacs starting hook to save the messages buffer
-
 * Command to compare the current starting buffer to the last one.
 
 
+* Be-de-be-de-be-da-be-da-be-that's all folks!
 #+begin_src 
-;;; mindwave-emacs.el ends here
+;;; startup-compare.el ends here
 #+end_src

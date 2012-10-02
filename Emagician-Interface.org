@@ -1,5 +1,16 @@
 #+title: Interface
-* Turn off goofy stuff like menu bars
+* Visual Interface Chunks
+** Maximize primary window
+#+begin_src emacs-lisp
+  (emagician-expect-package 'maxframe)
+  (require 'maxframe)
+  (add-hook 'window-setup-hook 'maximize-frame t)
+  
+  (case system-type
+    ((darwin) (setq mf-display-padding-height 60)))
+  
+#+end_src
+** Turn off goofy stuff like menu bars
 
 Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
 but wouldn't an examination of your mode make more sense? (~C-h m~) Or
@@ -11,55 +22,43 @@ apropos? (~C-h a~)
     (when (fboundp mode) (funcall mode -1)))
 #+end_src
 
-* Re-bind some keys to more sensable defaults
-** Yes or no
-#+begin_src emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p) 
-#+end_src
-** Searching
-isearch sould use regexp by default
+*** Turn off the splash screen
 
 #+begin_src emacs-lisp
-(global-set-key [(control s)] 'isearch-forward-regexp)
-(global-set-key [(control r)] 'isearch-backward-regexp)
-#+end_src
-** Make command a proper meta key under os-x
-
-#+begin_src
-(setq mac-commnad-modifier 'meta)
+  (setq inhibit-startup-screen t)  
 #+end_src
 
-* Use Volatile highlights
+** Use Volatile highlights
 
 #+name: volatile highlights
 #+begin_src emacs-foo-lisp
     (emagician-expect-package 'volatile-highlights)
     (volatile-highlights-mode t)
 #+end_src
-* Turn on some extra information through the cursor
+** Turn on some extra information through the cursor
 
-  There are a few ways to change the cursor: blinking, shape and
-  color.  Basically this gives us three different dimensions of
-  information available to us.
+   There are a few ways to change the cursor: blinking, shape and
+   color.  Basically this gives us three different dimensions of
+   information available to us.
 
-** Dimension 1: File status
-   - light blue :: no file or process attached
-   - dark blue :: process attached
-   - yellow :: read only
-   - black :: file visited
+*** Dimension 1: File status
+   	- light blue :: no file or process attached
+   	- dark blue :: process attached
+   	- yellow :: read only
+   	- grey :: file visited
 
-** Dimention 2: Funky modes
-   - overwrite :: hollow box
-   - 'normal' :: line
+*** Dimention 2: Funky modes
+   	- overwrite :: hollow box
+   	- 'normal' :: line
 
-** Dimension 3: ??? - not assigned yet (height/width of line cursors)
+*** Dimension 3: ??? - not assigned yet (height/width of line cursors)
 
-** Enchancements
+*** Enchancements
 
-*** TODO fix it so the colors and type can be set by the user
-*** TODO see if cursor-in-non-selected-windows needs updating. 
+**** TODO fix it so the colors and type can be set by the user
+**** TODO see if cursor-in-non-selected-windows needs updating. 
 
-** The code
+*** The code
 
 #+name: cursor-status
 #+begin_src emacs-lisp
@@ -74,7 +73,7 @@ isearch sould use regexp by default
     (let ((color (cond
                   ((comint-check-proc (current-buffer)) "blue")
                   (buffer-read-only "white")
-                  ((not (equal buffer-file-name nil)) "black")
+                  ((not (equal buffer-file-name nil)) "grey50")
                   (t "cyan")))
           (type (cond
                  (overwrite-mode 'hollow)
@@ -89,15 +88,14 @@ isearch sould use regexp by default
   
   (add-hook 'post-command-hook 'emagician-set-cursor-color-according-to-mode)
 #+end_src
-
-* Better mode line
-** Turn on column and line numbers
+** Better mode line
+*** Turn on column and line numbers
 #+begin_src emacs-lisp
 (column-number-mode 1)
 (line-number-mode 1)
 #+end_src
-** TODO Start with some hawt Nyan action
-*** TODO Test Recipe
+*** TODO Start with some hawt Nyan action
+**** TODO Test Recipe
 #+begin_src emacs-lisp :tangle no 
   (when nil
     (progn
@@ -117,7 +115,7 @@ isearch sould use regexp by default
   
 #+end_src
 
-** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
+*** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
 
    ARG, which one?  not sure yet.  Both kinda suck.
 
@@ -126,12 +124,31 @@ isearch sould use regexp by default
 (require 'highline)
 #+end_src
 
-#+begin_src emacs-lisp :notangle
+#+begin_src emacs-lisp 
 (emagician-expect-package 'powerline)
 (require 'powerline)
 #+end_src
 
-*** DONE Make melpa package
+   And set it up.
+
+#+begin_src emacs-lisp
+  (custom-set-faces 
+     '(powerline-active1 ((t (:inherit (mode-line) :background "plum2"))))
+     '(powerline-active2 ((t (:inherit (mode-line) :background "plum3"))))
+     
+     '(powerline-inactive1
+       ((t (:background "turquoise3" :inherit mode-line-inactive))))
+     '(powerline-inactive2
+       ((t (:background "turquoise4" :inherit mode-line-inactive)))))
+#+end_src
+
+For some reason powerline wants to be reset using ~powerline-center-theme~
+
+#+begin_src emacs-lisp
+(powerline-center-theme)
+#+end_src
+
+**** DONE Make melpa package
 #+begin_src emacs-lisp :tangle no 
   (when nil
     (progn
@@ -151,9 +168,9 @@ isearch sould use regexp by default
     )    
   
 #+end_src
-*** TODO make pull request
-** TODO fix the font to be non-monospace. 
-* Frame titles
+**** TODO make pull request
+*** TODO fix the font to be non-monospace. 
+** Frame titles
   Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
 
 #+begin_src emacs-lisp 
@@ -165,7 +182,33 @@ isearch sould use regexp by default
                      (abbreviate-file-name (buffer-file-name))
                      "%b"))))
 #+end_src
-* Helm.  It's a must.
+
+
+* Functional Interface Chunks
+** Re-bind some keys to more sensable defaults
+*** Yes or no
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p) 
+#+end_src
+*** Searching
+isearch sould use regexp by default
+
+#+begin_src emacs-lisp
+(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
+#+end_src
+*** Make command a proper meta key under os-x
+
+#+begin_src emacs-lisp
+(setq mac-command-modifier 'meta)
+#+end_src
+** Save History across emacs sessions
+#+begin_src emacs-lisp
+(setq savehist-additional-variables '(search ring regexp-search-ring kill-ring compile-command))
+(setq savehist-autosave-interval 60)
+(savehist-mode t)
+#+end_src 
+** Helm.  It's a must.
 
 #+name: helm
 #+begin_src emacs-lisp
@@ -174,32 +217,34 @@ isearch sould use regexp by default
 (global-set-key [f2] 'helm-mini)
 #+end_src
 
-** Use helm as m-x 
-*** TODO extend it to include complex command history
-** Helm-Mode
+*** Use helm as m-x 
+**** TODO extend it to include complex command history
+*** Helm-Mode
    
    Use helm for completing read. 
 
 #+begin_src emacs-lisp
 (helm-mode 1)
+(global-set-key (kbd "M-x")     'helm-M-x)
 #+end_src
 
-** Buffer selection
+*** Buffer selection
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 #+end_src
 
-** Files
-*** Insert, write and find files should use helm.
+*** Files
+**** Extended Command, Insert, write and find files should use helm.
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-w")   'helm-write-file)
-(global-set-key (kbd "C-x i")     'helm-insert-file)
+(global-set-key (kbd "C-x C-w") 'helm-write-file)
+(global-set-key (kbd "C-x i")   'helm-insert-file)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring)
 #+end_src
 
-*** Rebind the Control-Backspace binding
+**** Rebind the Control-Backspace binding
 
 	My muscle memory has control-backspace bound to backwards-delete-syntax.  Make it do the right thing.
 
@@ -208,6 +253,114 @@ isearch sould use regexp by default
 (define-key helm-c-read-file-map (kbd "C-<backspace>") 'backward-kill-word)
 #+end_src
 
-**** TODO figure out how to make find-files show the history as well.
-**** TODO Maybe not helm-write-file... it seems sketchy, TBD
+***** TODO figure out how to make find-files show the history as well.
+***** TODO Maybe not helm-write-file... it seems sketchy, TBD
+*** Set up an emagician helm, bind to F3.
+
+#+begin_src emacs-lisp
+  (defvar emagician/helm-c-source-files
+    `((name  . "Find Emagician Files")
+      (candidates . ,(lambda () 
+                      (when (file-accessible-directory-p emagician-dir)
+                        (directory-files emagician-dir t))))
+      (match . (lambda (candidate)
+               (string-match (regexp-quote helm-pattern)
+                             candidate)))
+      (keymap . ,helm-generic-files-map)
+      (candidate-transformer . emagician/helm-ct-is-org-file)
+      (help-message . helm-generic-file-help-message)
+      (mode-line . ,helm-generic-file-mode-line-string)
+      (type . file)))
+  
+  (defun emagician/helm-ct-is-org-file (candidates)
+    (remove-if-not (lambda (c)
+                     (and (string= (substring c -4) ".org")
+                          (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
+                   candidates))
+  
+  
+  (defun emagician/helm-emagician-dir () 
+    "List all the org files in the Emagician dir"
+    (interactive)
+    (helm-other-buffer emagician/helm-c-source-files
+                       "*emagician-|-+-|-files*"))
+  
+  (global-set-key (kbd "<F3>") 'emagician/helm-emagician-dir)
+    
+#+end_src
+** Sauron.  Notifications Plus+!
+#+begin_src emacs-lisp 
+  (emagician-expect-package 'sauron)
+  (add-hook 'emacs-startup-hook 'sauron-start)
+#+end_src
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f3>") 'sauron-toggle-hide-show)
+  (global-set-key (kbd "S-<f3>") 'sauron-clear)  
+#+end_src
+*** Listen for
+
+#+begin_src emacs-lisp
+    (setq sauron-line-length 120
+          sauron-watch-patterns '("jon")
+          sauron-watch-nicks '("jonnay" "shell" "sunnay" "sh3ll23"))
+    
+    (add-hook 'sauron-event-block-functions 'emagician/sauron-ignore-bunk-irc)
+    
+    (defun emagician/sauron-ignore-bunk-irc (origin prio msg &optional props)
+      "Hook to ignore nicks in IRC output"
+      (or (string-match "^*** Users" msg)
+          (string-match "jon_best" msg)))
+#+end_src
+
+*** Sauron notifications
+
+	Okay, here is the think emagicians...  notifications are actually
+	kinda important.  Think a bout it, here is a sound that you will
+	be bombarding your nervous system with whenever something
+	quasi-important happens.  So I think the trick here is to choose
+	sounds that actually make sense, and to use them consistently.
+	Not just for an emacs notification handler, but also for your
+	smart phone.
+
+	So, lets set up some arbitrary notification levels here.  Hopefully they will be less arbitrary in the future.
+
+	1. background noise
+	2. Something minor needing attention, like an email
+	3. Something minor needing a bit more attention, an SMS, Direct IRC/twitter message, IM
+	4. Something that needs attention really quick, like an impending appointment.
+	5. High attention something.
+	6. Something that needs attention NOW, like a phone call.
+
+#+begin_src emacs-lisp
+  (add-hook 'sauron-event-added-functions 'emagician/sauron-event-added-functions)
+  
+  (defun emagician/sauron-event-added-functions (origin priority msg &rest props)
+    (case priority
+      (2 (sauron-fx-sox (expand-file-name "assets/audio/perry.ogg")))
+      (3 (sauron-fx-sox (expand-file-name "assets/audio/meep.ogg")))
+      (4 (sauron-fx-sox (expand-file-name "assets/audio/doofenschmirtzJingle.ogg")))
+      (5 (sauron-fx-sox (expand-file-name "assets/audio/dobedobe.ogg")))
+      (6 (sauron-fx-sox (expand-file-name "assets/audio/perrytheme.ogg")))))
+#+end_src
+
+**** TODO Add todochiku (and others while you're at it) to emagician starter kit
+**** DONE Fix Sounds 
+	 - State "DONE"       from "TODO"       [2012-10-01 Mon 20:57]
+***** DONE Find Proper Sounds
+ 	  - State "DONE"       from "TODO"       [2012-09-04 Tue 00:22]
+	  - [X] Perry Growl https://www.youtube.com/watch?v=Kaz-CvBgfW8&feature=related
+	  - [X] Meep! https://www.youtube.com/watch?v=Kaz-CvBgfW8&feature=related
+      - [X] Doofenschmirts Evil Incorperated! https://www.youtube.com/watch?v=hxrWRK2AY-8
+	  - [X] Do-be-do-be-do-ah! https://www.youtube.com/watch?v=bVPd6hf-Nlw
+***** DONE Listenn-to-youtube them
+	  - State "DONE"       from "TODO"       [2012-09-04 Tue 12:45]
+	  - [X] Perry Growl https://www.youtube.com/watch?v=Kaz-CvBgfW8&feature=related
+	  - [X] Meep! https://www.youtube.com/watch?v=Kaz-CvBgfW8&feature=related
+      - [X] Doofenschmirts Evil Incorperated! https://www.youtube.com/watch?v=hxrWRK2AY-8
+	  - [X] Do-be-do-be-do-ah! https://www.youtube.com/watch?v=bVPd6hf-Nlw
+***** DONE Convert to ogg
+	  - State "DONE"       from "TODO"       [2012-09-04 Tue 12:45]
+***** DONE Fix audio to not suck in the studio.  (files are in dropbox)
+	  - State "DONE"       from "TODO"       [2012-10-01 Mon 20:57]
 

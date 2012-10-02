@@ -1,10 +1,8 @@
 #+title: Org Mode 
-* Org Mode Setup
-
 #+begin-src
 (require 'org)
 #+end_src
-** Todo task states
+* Todo task states
 
 #+begin_src emacs-lisp
   (setq org-todo-keywords
@@ -18,13 +16,13 @@
                 ("DONE" :foreground "forest green" :weight bold)
                 ("WAITING" :foreground "orange" :weight bold))))
 #+end_src
-*** Quick task selection 
+** Quick task selection 
 #+begin_src  
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 #+end_src
 
-**** Specialized set-task-as-next
+*** Specialized set-task-as-next
 
 #+BEGIN_SRC emacs-lisp
   (defun emagician-org/todo-to-next ()
@@ -32,17 +30,13 @@
     (interactive)
     (org-todo "NEXT")
     (org-set-tags))
-
-  (eval-after-load 'org-mode
-                   (define-key org-mode-map 
-                               (kbd "C-c n") 
-                               'emagician-org/todo-to-next))
+  
+  (emagician/define-mode-key org-mode "C-c n" emagician-org/todo-to-next)
 
   (add-hook 'org-mode-hook 'flyspell-mode)
 #+END_SRC
 
-
-** Habits
+* Habits
    Thanks to this: http://orgmode.org/worg/org-tutorials/tracking-habits.html
 
 #+begin_src emacs-lisp
@@ -53,16 +47,16 @@
 (setq org-todokeyword-faces (append org-todo-keyword-faces '(("HABIT" :forground "cyan" :weight bold))))
 
 #+end_src
-*** NEXT switch to add-to-list
+** NEXT switch to add-to-list
 
-** Agenda
-*** Org agenda files
+* Agenda
+** Org agenda files
 #+begin_src emacs-lisp
   (setq org-agenda-files '("~/Projects/emagicians-starter-kit"
                            "~/Dropbox/org"))
   
 #+end_src
-*** Stuck projects
+** Stuck projects
 
 Using Bernt Hansens concept of proejcts and stuck projects.  There is
 also quite a number of groovy helper functions
@@ -244,20 +238,26 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 #+end_src
 
 
-**** TODO Figure out a cool way to add to the agenda
+*** TODO Figure out a cool way to add to the agenda
 (tags-todo "-CANCELLED/!"
            ((org-agenda-overriding-header "Stuck Projects")
 		   (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
-**** TODO 
+*** TODO 
 
+* TODO Capture 
+  
+* Org Babel
 
-** TODO Capture 
-   
-** Org Babel
+  Some no-brainer org babel setup.
 
-   Some no-brainer org babel setup.
+** Handling of source in org files
 
-*** Extra setup
+#+begin_src emacs-lisp
+(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
+#+end_src
+
+** Inline images
 
 Wherever possible we always want ot display inline images
 #+begin_src emacs-lisp
@@ -269,14 +269,14 @@ Wherever possible we always want ot display inline images
       (error nil)))
 #+end_src
 
-*** Gnuplot setup
+** Gnuplot setup
 
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 (setq gnuplot-program "/usr/local/bin/gnuplot")
 #+end_src
 
-*** Some standard langauges that should come out of the box
+** Some standard langauges that should come out of the box
 #+begin_src emacs-lisp
 ;; active Babel languages
 (org-babel-do-load-languages
@@ -287,18 +287,17 @@ Wherever possible we always want ot display inline images
    (gnuplot . t)))
 #+end_src
 
-*** Don't confirm on non-destructive languages
+** Don't confirm on non-destructive languages
 #+begin_src emacs-lisp
- (defun my-org-confirm-babel-evaluate (lang body)
+ (defun emagician/org-confirm-babel-evaluate (lang body)
             (not (or (string= lang "ditaa")
                      (string= lang "calc"))))
 
- (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+ (setq org-confirm-babel-evaluate 'emagician/org-confirm-babel-evaluate)
 #+end_src
 
 
-
-** Time clocking
+* TODO Time clocking
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports."
   (let* ((ts (plist-get params :tstart))
@@ -327,3 +326,14 @@ Wherever possible we always want ot display inline images
           (format-time-string (car org-time-stamp-formats)
                               (seconds-to-time end))))
         (setq start (+ 86400 start))))))
+* Links
+(require 'org-info)
+* TODO org-elisp-symbol
+* TODO tidy
+#+begin_src emacs-lisp :tangle no
+    (let ((buf (org-element-parse-buffer))) ;; convert current buffer to ELisp
+      (dolist (rule cleanup-rules) ;; run cleanup transformations on the buffer
+        (setq buf (funcall rule buf)))
+      (delete-region (point-min) (point-max)) ;; replace the buffer contents
+      (insert (org-element-interpret-data buf))) ;; with the cleaned results
+#+end_src

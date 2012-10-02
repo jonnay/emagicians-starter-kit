@@ -28,12 +28,33 @@
 * Magit Mode
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-c m") 'magit-status)
+  (global-set-key (kbd "C-c m") 'magit-status)
+  
+  (when (locate-file "git-achievements" exec-path)
+    (setq magit-git-executable "git-achievements"))
 #+end_src
 
-
 * Edit with emacs
-#+begin_src
-(require 'edit-server)
-(edit-server-start)
+#+begin_src emacs-lisp
+  (when (require 'edit-server nil t)
+    (edit-server-start))
+#+end_src
+  
+* Emacs server
+#+begin_src emacs-lisp
+(server-start)
+#+end_src
+
+* Bitlbee - IM with emacs. 
+
+#+begin_src emacs-lisp
+  (emagician-expect-package 'bitlbee)
+  
+  (setq bitlbee-user-directory "/usr/local/etc/bitlbee")
+  (setq bitlbee-executable "/usr/local/sbin/bitlbee")
+  
+  (defun emagician-hook/bitlbee-run-if-needed ()
+    "Runs bitlbee if required."
+    (require 'bitlbee)
+    (bitlbee-start))
 #+end_src
