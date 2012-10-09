@@ -1,5 +1,9 @@
 * Base initialization and Circle Casting
 
+#+begin_src emacs-lisp
+(defconst emagician/version "0.2.1")
+#+end_src
+
   Look, if you're here, either you're a mutant (horray!), or I have
   done something horribly wrong. (boo!).
 
@@ -19,6 +23,7 @@
         (concat ";; -|-+-|- Invocation Failure.  Sorry." "\n"
                 ";; You know what to do." "\n"
                 ";; \n"
+                ";; Emagician Starter kit Version: " emagician/version "\n"
                 ";; \n"
                 ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
                 ";;                      ;;" "\n"      
@@ -136,10 +141,9 @@
 
    If the subtree is a tag, then all subtrees with that tag are collected and loaded.
 
-
-
 #+name: starter-kit-load
 #+begin_src emacs-lisp
+  (defvar emagician--starter-kit-depth 0)
   (defun emagician-starter-kit-load (file &optional header-or-tag)
     "Load configuration from other .org files.
   If the optional argument is the id of a subtree then only
@@ -154,40 +158,49 @@
   emagician-starter-kit-misc-recommended.org add
    (emagican-starter-kit-load \"misc-recommended\" \"window-system\")
   to your configuration."
-    (let ((file (expand-file-name (if (string-match ".+\.org" file)
+  
+    (setq initial-scratch-message 
+          (concat initial-scratch-message "\n"
+                  ";; Loading " file))           
+    (let* ((file (expand-file-name (if (string-match ".+\.org" file)
                                       file
                                     (format "%s.org" file))
-                                  emagician-dir)))
-      (org-babel-load-file
-       (if header-or-tag
-           (let* ((base (file-name-nondirectory file))
-                  (dir  (file-name-directory file))
-                  (partial-file (expand-file-name
-                                 (concat "." (file-name-sans-extension base)
-                                         ".part." header-or-tag ".org")
-                                 dir)))
-             (unless (file-exists-p partial-file)
-               (with-temp-file partial-file
-                 (insert
-                  (with-temp-buffer
-                    (insert-file-contents file)
-                    (save-excursion
-                      (condition-case nil ;; collect as a header
-                          (progn
-                            (org-link-search (concat"#"header-or-tag))
-                            (org-narrow-to-subtree)
-                            (buffer-string))
-                        (error ;; collect all entries with as tags
-                         (let (body)
-                           (org-map-entries
-                            (lambda ()
-                              (save-restriction
-                                (org-narrow-to-subtree)
-                                (setq body (concat body "\n" (buffer-string)))))
-                            header-or-tag)
-                           body))))))))
-             partial-file)
-         file))))
+                                  emagician-dir))
+           (load-result       
+            (org-babel-load-file
+             (if header-or-tag
+                 (let* ((base (file-name-nondirectory file))
+                        (dir  (file-name-directory file))
+                        (partial-file (expand-file-name
+                                       (concat "." (file-name-sans-extension base)
+                                               ".part." header-or-tag ".org")
+                                       dir)))
+                   (unless (file-exists-p partial-file)
+                     (with-temp-file partial-file
+                       (insert
+                        (with-temp-buffer
+                          (insert-file-contents file)
+                          (save-excursion
+                            (condition-case nil ;; collect as a header
+                                (progn
+                                  (org-link-search (concat"#"header-or-tag))
+                                  (org-narrow-to-subtree)
+                                  (buffer-string))
+                              (error ;; collect all entries with as tags
+                               (let (body)
+                                 (org-map-entries
+                                  (lambda ()
+                                    (save-restriction
+                                      (org-narrow-to-subtree)
+                                      (setq body (concat body "\n" (buffer-string)))))
+                                  header-or-tag)
+                                 body))))))))
+                   partial-file)
+               file))))
+      (setq initial-scratch-message 
+            (concat initial-scratch-message
+                    "...done!" "\n"))
+      load-result))
   
 #+end_src
 **** TODO fix documentation 
@@ -306,7 +319,7 @@ to be delt with.
 #+end_src
 **** TODO Figure out if this needs to be optimized
 **** TODO make a new definition to build a custom command
-** DONE Required Package handling
+** Required Package handling
 
    Instead of having to front-load packages like paredit, slime, etc.   why can't they be auto-installed as needed?  That's what this does.
 
@@ -387,24 +400,41 @@ to be delt with.
 #+end_src
 ** TODO Update the scratch variable here so that it points the user to exactly where it failed.
 ** System Type Initialization
-
-** Login name Initialization
-
+  
 ** Machine Name Initialization
+   
+** Login name Initialization
 
 ** Person Initialization
 * Set the scratch variable.
 
 #+begin_src emacs-lisp
+  
   (setq initial-scratch-message
         (concat ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"
                 ";;; Hail Eris.  All Hail Discordia." "\n"
+                ";; Emagician Starter kit Version: " emagician/version "\n"
                 ";;; " "\n"
                 (format ";;; Your startup took approximately %.2f seconds" 
                         (- (float-time after-init-time)
                            (float-time before-init-time))) "\n"                                                      
-                ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"))
+                ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"
+                ";;; "
+                ;; (mapconcat (lambda (line) 
+                ;;              (concat ";;; line \n")) 
+                ;;            (split-string (cookie (concat emagician-dir 
+                ;;                                          "assets/collected-chaos.lines")
+                ;;                                  ""
+                ;;                                  "")
+                ;;                          "\n")
+  
+                ;;            " ")
+                ))
 #+end_src 
 
 * References, Bibliography, Shout Outs, and Props.
   - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html
+* The End
+#+begin_src 
+(provide 'emagician)
+#+end_src

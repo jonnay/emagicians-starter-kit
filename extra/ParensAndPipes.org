@@ -1,0 +1,12 @@
+#+title: Parens and Pipes
+
+* From Bars and Pipes.  The best sequencer I never got to use.
+
+* Ideas
+** Lispy without being too scary (but enough to get them addicted to paren-crack)
+** Intellisensey and self documenting.  Every command every arg must be documented.
+** Std in, out and error.  Pipes etc.
+** should be able to hold on to the last input, easily stash it, etc.
+   (cat filename) -> lotsa output
+   (head ,it)   [i hate the ,it syntax]
+   

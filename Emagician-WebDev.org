@@ -94,5 +94,9 @@ And with PHP, comes a bunch of extra frameworks.
 *** TODO JSP
 
 *** TODO ASP
-	
+* Other Misc Web Goodness
+** Websockets
+#+begin_src emacs-lisp
+(emagician-expect-package 'websocket)
+#+end_src	
 	

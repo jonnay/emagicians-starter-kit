@@ -1,3 +1,18 @@
 * Changelog
   - v0.1 :: Bassline
     - Bassline release.  Installation works on my NixOS (GNU/Linux) install.
+  - v0.2 :: Customizable Release
+	- Lots of changes, too many to mention.  Here is a few pertinent ones:
+	- Fixed install to build files, not directories.  Now this can actually be used by other people
+    - Added websockets
+	- Added achievements
+    - Added "Emagician Lamp" File, contains collected works of chaos
+	- Added Markdown Mode
+    - Moved emagician helm customizations to Meta where they belong
+	- Sauron to F3, Meta emagician to <S-F3>
+	- Updated print length and depth.
+	- Made the characters eyes a little more cross platform on startup.
+	- Made the startup screen always show the new-and-improved scratch buffer
+	- When loading a file, a loading message gets inserted into the debug scratch buffer
+	- Identify the version of the emagicians starter kit on teh scratch buffer
+	

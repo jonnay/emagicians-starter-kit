@@ -31,6 +31,18 @@
   done well, and done right.  If you have *any* suggestions on how to
   make the elisp setup even better, let me know!
 
+** Evaluation and printing
+
+Set up some defaults for print level.  Note that we assume that depth mistakes are made, but not length.
+
+
+#+begin_src emacs-lisp
+  (setq eval-expression-print-length 9000
+        print-length nil
+        eval-expression-print-level 20
+        print-level 900)
+#+end_src
+
 ** Formatting
 
 #+begin_src

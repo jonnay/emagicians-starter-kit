@@ -1,5 +1,12 @@
 #+title: Interface
 * Visual Interface Chunks
+** Solarized theme.  YAY!
+#+begin_src emacs-lisp
+  (emagician-expect-package 'solarized-theme)
+  (load-theme 'solarized-dark)
+#+end_src
+*** TODO set the theme based on the time. Shouldn't be hard. 
+**** NEXT write simple theme select function 
 ** Maximize primary window
 #+begin_src emacs-lisp
   (emagician-expect-package 'maxframe)
@@ -255,39 +262,6 @@ isearch sould use regexp by default
 
 ***** TODO figure out how to make find-files show the history as well.
 ***** TODO Maybe not helm-write-file... it seems sketchy, TBD
-*** Set up an emagician helm, bind to F3.
-
-#+begin_src emacs-lisp
-  (defvar emagician/helm-c-source-files
-    `((name  . "Find Emagician Files")
-      (candidates . ,(lambda () 
-                      (when (file-accessible-directory-p emagician-dir)
-                        (directory-files emagician-dir t))))
-      (match . (lambda (candidate)
-               (string-match (regexp-quote helm-pattern)
-                             candidate)))
-      (keymap . ,helm-generic-files-map)
-      (candidate-transformer . emagician/helm-ct-is-org-file)
-      (help-message . helm-generic-file-help-message)
-      (mode-line . ,helm-generic-file-mode-line-string)
-      (type . file)))
-  
-  (defun emagician/helm-ct-is-org-file (candidates)
-    (remove-if-not (lambda (c)
-                     (and (string= (substring c -4) ".org")
-                          (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
-                   candidates))
-  
-  
-  (defun emagician/helm-emagician-dir () 
-    "List all the org files in the Emagician dir"
-    (interactive)
-    (helm-other-buffer emagician/helm-c-source-files
-                       "*emagician-|-+-|-files*"))
-  
-  (global-set-key (kbd "<F3>") 'emagician/helm-emagician-dir)
-    
-#+end_src
 ** Sauron.  Notifications Plus+!
 #+begin_src emacs-lisp 
   (emagician-expect-package 'sauron)
@@ -296,7 +270,6 @@ isearch sould use regexp by default
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f3>") 'sauron-toggle-hide-show)
-  (global-set-key (kbd "S-<f3>") 'sauron-clear)  
 #+end_src
 *** Listen for
 

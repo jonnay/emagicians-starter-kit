@@ -126,7 +126,7 @@ Let there be light
   The only directory you need to create is your personal one.  All
   others are optional.
 
-*** Your personal directory
+*** Your personal file
     This next command is an invokation.  Even if you are going to use
     the Emagician starter kit as is, you need to run the next code
     block.  This defines a function that is used to create
@@ -146,13 +146,14 @@ Let there be light
     Another option is to store them in a private.org.gpg file.
 
 #+begin_src emacs-lisp :results silent
-(defun emagician-invoke-custom-dir (name) 
-  "Create the customiztaion file, and load it up in emacs.
-This function is actually created when the emagician identifies themself"
-  (let ((filename (concat "./" name)))
-    (make-directory filename)))
-
-(emagician-invoke-custom-dir emagician-truename)
+  (defun emagician-invoke-custom-file (name) 
+    "Create the customiztaion file, and load it up in emacs.
+  This function is actually created when the emagician identifies themself"
+    (let ((filename (concat "./" name)))
+      (find-file-other-window (concat name ".org"))
+      (save-buffer)))
+  
+  (emagician-invoke-custom-file emagician-truename)
 #+end_src
 
 *** Your System-Type directory
@@ -163,7 +164,7 @@ This would handle per-os level customization.  We use the
 do munge it a little by replacing any ~/~ with a ~-~.
 
 #+begin_src emacs-lisp :results silent
-(emagician-invoke-custom-dir
+(emagician-invoke-custom-file
                        (replace-regexp-in-string "/" 
                                                  "-" 
                                                  (symbol-name system-type)))
@@ -177,7 +178,7 @@ granular if need be.
 
 
 #+begin_src emacs-lisp :results silent
-(emagician-invoke-custom-dir system-name)
+(emagician-invoke-custom-file system-name)
 #+end_src
 
 *** Your account file

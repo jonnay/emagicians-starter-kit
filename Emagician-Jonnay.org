@@ -23,4 +23,6 @@
 (emagician-starter-kit-load "Emagician-Lisp.org")
 (emagician-starter-kit-load "Emagician-Org.org")
 (emagician-starter-kit-load "Emagician-WebDev.org")
+(emagician-starter-kit-load "Emagician-Meta.org")
+(emagician-starter-kit-load "Emagician-Lamp.org")
 #+end_src

@@ -123,7 +123,6 @@
 (add-to-list 'ispell-extra-args "--sug-mode=ultra")
 #+end_src
 
-
 * Snippets
 
 #+name: snippets 
@@ -255,4 +254,11 @@
 #+begin_src emacs-lisp
 (require 'saveplace)
 (setq-default save-place t)
+#+end_src
+* Extra modes
+** Markdown
+#+begin_src emacs-lisp
+(emagician-expect-package 'markdown-mode)
+
+(add-to-list 'auto-mode-alist '("\\.md" 'markdown-mode))
 #+end_src

@@ -1,6 +1,65 @@
 * Working with the starer kit
-** TODO load all files
-** TODO helm source
+** As an org file
+
+   Because the Emagician starter kit is an org file, it can be peppered with todo's tags, etc. which gives us a great way to view this source-code.
+
+*** ~TODO~ Items 
+
+	The GTD Methodology is pretty solid. At the very least the Emagician Starter kit follow the formula of:
+	
+	- ~TODO~ items are items to be done.  Any todo item that has subtasks is a project.  This allows for infinitely nesting projects.
+	- ~NEXT~ items are next actions.
+	- ~TODO~ items with sub items and no ~NEXT~ items are stuck.
+
+	For more info, please see [[file:Emagician-Org.org]].
+
+*** Tags 
+	
+	Not many tags in use yet, except 2:
+	- asset :: contains a src block that is an asset (i.e. a snippet, cookie file, css file) rather then elisp
+
+**** TODO pull out a list of tags via the agenda.
+
+*** Agendas
+
+**** Show all Stuck Emagician Projects
+
+**** Show all emagician next tasks. 
+
+** Helm Source
+#+begin_src emacs-lisp
+  (defvar emagician/helm-c-source-files
+    `((name  . "Find Emagician Files")
+      (header-name . (lambda (_)))
+      (candidates . ,(lambda () 
+                      (when (file-accessible-directory-p emagician-dir)
+                        (directory-files emagician-dir t))))
+      (match helm-c-match-on-file-name helm-c-match-on-directory-name)
+      (keymap . ,helm-generic-files-map)
+      (candidate-transformer . emagician/helm-ct-is-org-file)
+      (help-message . helm-generic-file-help-message)
+      (mode-line . ,helm-generic-file-mode-line-string)
+      (type . file)))
+  
+  (defun emagician/helm-ct-is-org-file (candidates)
+    (remove-if-not (lambda (c)
+                     (and (string= (substring c -4) ".org")
+                          (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
+                   candidates))
+  
+  
+  (defun emagician/helm-emagician-dir () 
+    "List all the org files in the Emagician dir"
+    (interactive)
+    (helm :sources emagician/helm-c-source-files
+          :candidate-number-limit 40
+          :buffer "*emagician-|-+-|-files*"))
+  
+  (global-set-key (kbd "S-<f3>") 'emagician/helm-emagician-dir)
+    
+    
+#+end_src
+
 
 
 * Exporting as a website
