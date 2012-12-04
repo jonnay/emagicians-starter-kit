@@ -5,7 +5,28 @@
   (emagician-expect-package 'solarized-theme)
   (load-theme 'solarized-dark)
 #+end_src
-*** TODO set the theme based on the time. Shouldn't be hard. 
+*** TODO set the theme based on the time
+#+begin_src emacs-lisp
+  (defvar emagician/change-solarized-is-dark t)
+  
+  (defun emagician/change-solarized-based-on-time ()
+    "Change from solarized dark to solarized light based on the time of day."
+    (let ((turn-light (or (>= (third (decode-time)) 19)
+                          (< (third (decode-time)) 8))))
+      (cond ((and turn-light emagician/change-solarized-is-dark)
+             (setq emagician/change-solarized-is-dark 'nil)
+             (load-theme 'solarized-light))
+            ((and (not turn-light)
+                  (not emagician/change-solarized-is-dark))
+             (setq emagician/change-solarized-is-dark 't)
+             (load-theme 'solarized-dark)))))
+  
+  (defvar emagician/change-solarized-timer
+    (run-at-time nil 
+                 (* 60 60)
+                 'emagician/change-solarized-based-on-time)
+    "Timer variable for the change-solarized function.  Provided so you can cancel it.")
+#+end_src
 **** NEXT write simple theme select function 
 ** Maximize primary window
 #+begin_src emacs-lisp
@@ -95,11 +116,16 @@ apropos? (~C-h a~)
   
   (add-hook 'post-command-hook 'emagician-set-cursor-color-according-to-mode)
 #+end_src
+** Highlight current line
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+#+end_src
 ** Better mode line
-*** Turn on column and line numbers
+*** Turn on column and line numbers; file size 
 #+begin_src emacs-lisp
 (column-number-mode 1)
 (line-number-mode 1)
+(size-indication-mode t) 
 #+end_src
 *** TODO Start with some hawt Nyan action
 **** TODO Test Recipe
@@ -190,32 +216,65 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
                      "%b"))))
 #+end_src
 
-
+  
 * Functional Interface Chunks
-** Re-bind some keys to more sensable defaults
-*** Yes or no
+** DZ, make it easy to run secondary services
+#+begin_src emacs-lisp
+(emagician-expect-package 'dizzee)
+#+end_src
+*** Example on how to use dizzee
+#+begin_src emacs-lisp :tangle no
+  (dz-defservice foo/solr
+                 "start.sh"
+                 :cd "~/projects/work/foo/apache-solr-1.4.1/example/")
+#+end_src
+** Message Buffer
+100 lines is not enough.  5000 is a good place to start.
+#+begin_src emacs-lisp
+(setq messages-buffer-max-size 5000)
+#+end_src 
+** Global keybindings and related 
+    - For editing specific keybindings, hit [[file:./Emagician-Editing.org]]
+	- For mode specific editing, check that mode's Emagician-*.org file (or parent, like Emagician-Lisp.org for scheme.)
+*** Re-bind some keys to more sensable defaults
+**** Yes or no
 #+begin_src emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p) 
 #+end_src
-*** Searching
+**** Searching															:keybinding:
 isearch sould use regexp by default
 
 #+begin_src emacs-lisp
 (global-set-key [(control s)] 'isearch-forward-regexp)
 (global-set-key [(control r)] 'isearch-backward-regexp)
 #+end_src
-*** Make command a proper meta key under os-x
-
+**** Make command a proper meta key under os-x				 :osx:keybinding:
 #+begin_src emacs-lisp
 (setq mac-command-modifier 'meta)
 #+end_src
+
+*** Turn into a guru										   :experimental:
+	Guru mode is supposed to help you learn "proper" emacs keys.  For instance, nstead of the arrow key: C-f.
+
+	Jury is out on it still
+#+begin-src
+(emagician-expect-package 'guru-mode)
+(require 'guru-mode)
+(guru-global-mode +1)
+#+end_src
 ** Save History across emacs sessions
+*** Bigger recent files list
+#+begin_src emacs-lisp
+(setq recentf-max-saved-items 100)
+
+#+end_src
+*** Save emacs command history
 #+begin_src emacs-lisp
 (setq savehist-additional-variables '(search ring regexp-search-ring kill-ring compile-command))
 (setq savehist-autosave-interval 60)
 (savehist-mode t)
 #+end_src 
-** Helm.  It's a must.
+** Helm.  It's a must.											 :keybinding:
 
 #+name: helm
 #+begin_src emacs-lisp
@@ -234,7 +293,7 @@ isearch sould use regexp by default
 (helm-mode 1)
 (global-set-key (kbd "M-x")     'helm-M-x)
 #+end_src
-
+   
 *** Buffer selection
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
@@ -262,7 +321,17 @@ isearch sould use regexp by default
 
 ***** TODO figure out how to make find-files show the history as well.
 ***** TODO Maybe not helm-write-file... it seems sketchy, TBD
-** Sauron.  Notifications Plus+!
+
+*** Fix MELPA/Marmalade brokenness
+
+#+begin_src emacs-lisp
+  (defun emagician-helm/allow-shutdown-after-upgrade ()
+    "Allows emacs to shutdown if helm was upgraded"
+    (remove-hook 'kill-emacs-hook 'helm-c-adaptive-save-history))
+  
+#+end_src
+**** TODO see if there is a post-install hook that we can use to do this automagickally
+** Sauron.  Notifications Plus+!								 :keybinding:
 #+begin_src emacs-lisp 
   (emagician-expect-package 'sauron)
   (add-hook 'emacs-startup-hook 'sauron-start)
@@ -337,3 +406,10 @@ isearch sould use regexp by default
 ***** DONE Fix audio to not suck in the studio.  (files are in dropbox)
 	  - State "DONE"       from "TODO"       [2012-10-01 Mon 20:57]
 
+
+*** Emagician Sauron Extensions
+**** TODO add temprorary watch:
+(add-to-list 'sauron-watch-patterns "perry")
+**** TODO remove watch:
+(interactive ...completion patttern thingy sauron-watch-patterns)
+(delq 'sauron-watch-patterns "perry")

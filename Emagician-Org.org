@@ -2,63 +2,123 @@
 #+begin-src
 (require 'org)
 #+end_src
-* Todo task states
-
-#+begin_src emacs-lisp
-  (setq org-todo-keywords
-    '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d!/!)")
-      (sequence "WAITING(w@/!)")))
-  
-  (setq org-todo-keyword-faces
-        (quote (("TODO" :foreground "red" :weight bold)
-                ("NEXT" :foreground "cyan" :weight bold)
-                ("STARTED" forground "blue" :weight bold)
-                ("DONE" :foreground "forest green" :weight bold)
-                ("WAITING" :foreground "orange" :weight bold))))
-#+end_src
-** Quick task selection 
-#+begin_src  
-  (setq org-use-fast-todo-selection t)
-  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-#+end_src
-
-*** Specialized set-task-as-next
-
-#+BEGIN_SRC emacs-lisp
-  (defun emagician-org/todo-to-next ()
-    "sets the todo state of the current headline to next."
-    (interactive)
-    (org-todo "NEXT")
-    (org-set-tags))
-  
-  (emagician/define-mode-key org-mode "C-c n" emagician-org/todo-to-next)
-
-  (add-hook 'org-mode-hook 'flyspell-mode)
-#+END_SRC
-
-* Habits
-   Thanks to this: http://orgmode.org/worg/org-tutorials/tracking-habits.html
-
-#+begin_src emacs-lisp
-(require 'org-habit)
-
-;; Shoulda used add-to-list.  Derp.
-(setq org-todo-keywords (append org-todo-keywords '((sequence "HABIT(h)" "|" "DONE(d!)"))))
-(setq org-todokeyword-faces (append org-todo-keyword-faces '(("HABIT" :forground "cyan" :weight bold))))
-
-#+end_src
-** NEXT switch to add-to-list
-
 * Agenda
-** Org agenda files
+** Set up a better agenda
+
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/Projects/emagicians-starter-kit"
-                           "~/Dropbox/org"))
-  
+(setq org-agenda-dim-blocked-tasks t)
 #+end_src
+
+*** Main agenda
+	- Week at a glance at top
+	- Next items in a list, ordered by org file
+
+#+begin_src emacs-lisp :noweb yes
+    (global-set-key (kbd "C-c a") 'org-agenda)
+    
+    (defun emagician-agenda/daily-wisdom (&rest args)
+      "Show some daily wisdom in the agenda"
+      ;(insert (org-add-props "-|-+-|-"
+      ;            nil 'face 'org-agenda-structure) "\n")
+      ;(insert (concat (emagician/cookie) "\n" ))
+      )
+    
+    (let ((refile-tasks '(tags "REFILE" 
+                               ((org-agenda-overriding-header "Tasks to Refile")
+                                (org-tags-match-list-sublevels))))
+          (stuck-projects '(tags-todo "-CANCELLED/!"
+                                      ((org-agenda-overriding-header "Stuck Projects")
+                                       (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+                                       (org-agenda-todo-ignore-scheduled t)
+                                       (org-agenda-todo-ignore-deadlines t)
+                                       (org-agenda-todo-ignore-with-date t)
+                                       (org-tags-match-list-sublevels t)
+                                       (org-agenda-sorting-strategy
+                                        '(todo-state-down effort-up category-keep)))))
+          (next-tasks '(tags-todo "-REFILE-CANCELLED/!-HOLD-WAITING"
+                                   ((org-agenda-overriding-header "Next Actions")
+                                    (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
+                                    (org-agenda-todo-ignore-scheduled t)
+                                    (org-agenda-todo-ignore-deadlines t)
+                                    (org-agenda-todo-ignore-with-date t)
+                                    (org-agenda-sorting-strategy
+                                     '(category-down category-keep))))))
+      (setq org-agenda-custom-commands
+            `((" " "Agenda"
+               ((agenda "" nil)
+                (emagician-agenda/daily-wisdom 
+                 "" 
+                 ((org-agenda-overriding-header " -|-+-|-"))) 
+                ,next-tasks
+                ,refile-tasks
+                ,stuck-projects))
+              ("y" "Wisdom... YOW!"
+               ((agenda "" nil)
+                (emagician-agenda/daily-wisdom)))
+              ("W" "Weekly Review -- Unfinished."))))
+          (global-set-key (kbd "C-c a") 'org-agenda)
+        
+        (defun emagician-agenda/daily-wisdom (&rest args)
+          "Show some daily wisdom in the agenda"
+          (message "%s" args)
+          (concat (emagician/cookie) "\n" ))
+        
+        (let ((refile-tasks '(tags "REFILE" 
+                                   ((org-agenda-overriding-header "Tasks to Refile")
+                                    (org-tags-match-list-sublevels))))
+              (stuck-projects '(tags-todo "-CANCELLED/!"
+                                          ((org-agenda-overriding-header "Stuck Projects")
+                                           (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
+                                           (org-agenda-todo-ignore-scheduled t)
+                                           (org-agenda-todo-ignore-deadlines t)
+                                           (org-agenda-todo-ignore-with-date t)
+                                           (org-tags-match-list-sublevels t)
+                                           (org-agenda-sorting-strategy
+                                            '(todo-state-down effort-up category-keep)))))
+              (next-tasks '(tags-todo "-REFILE-CANCELLED/!-HOLD-WAITING"
+                                       ((org-agenda-overriding-header "Next Actions")
+                                        (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
+                                        (org-agenda-todo-ignore-scheduled t)
+                                        (org-agenda-todo-ignore-deadlines t)
+                                        (org-agenda-todo-ignore-with-date t)
+                                        (org-agenda-sorting-strategy
+                                         '(category-down category-keep))))))
+          (setq org-agenda-custom-commands
+                `((" " "Agenda"
+                   ((agenda "" nil)
+                    (emagician-agenda/daily-wisdom 
+                     "" 
+                     ((org-agenda-overriding-header " -|-+-|-"))) 
+                    ,next-tasks
+                    ,refile-tasks
+                    ,stuck-projects))
+                  ("y" "Wisdom... YOW!"
+                   ((agenda "" nil)
+                    (emagician-agenda/daily-wisdom)))
+                  ("W" "Weekly Review -- Unfinished."))))
+        
+#+end_src
+
+*** TODO figure out context
+**** NEXT set up contexts in a list
+**** TODO Add to tags
+**** TODO Set up as agenda views, via macro if need be. 
+
+** Org agenda files
+*** Load up all the agenda files
+#+begin_src emacs-lisp
+  (defun emagician/start-agenda-hook ()
+    "Hook for showing the agenda on startup"
+    (org-agenda 'nil "a"))
+  
+  (add-hook 'emacs-startup-hook 'emagician/start-agenda-hook)
+#+end_src
+**** TODO warn user of org-agenda is empty
+**** TODO [#A] Fix agenda to load itself after a set idle time. 
+
 ** Stuck projects
 
-Using Bernt Hansens concept of proejcts and stuck projects.  There is
+Using Brent Hansens concept of projects and stuck projects.  There is
 also quite a number of groovy helper functions
 
 Originally from http://doc.norang.ca/org-mode.html#Projects
@@ -242,8 +302,53 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 (tags-todo "-CANCELLED/!"
            ((org-agenda-overriding-header "Stuck Projects")
 		   (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
-*** TODO 
 
+** TODO Custom Agenda that shows next tasks
+* Todo task states
+
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d!/!)")
+      (sequence "WAITING(w@/!)")))
+  
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "cyan" :weight bold)
+                ("STARTED" forground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold))))
+#+end_src
+** Quick task selection 
+#+begin_src  
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+#+end_src
+
+*** Specialized set-task-as-next
+
+#+BEGIN_SRC emacs-lisp
+  (defun emagician-org/todo-to-next ()
+    "sets the todo state of the current headline to next."
+    (interactive)
+    (org-todo "NEXT")
+    (org-set-tags))
+  
+  (emagician/define-mode-key org-mode "C-c n" emagician-org/todo-to-next)
+
+  (add-hook 'org-mode-hook 'flyspell-mode)
+#+END_SRC
+* Habits
+   Thanks to this: http://orgmode.org/worg/org-tutorials/tracking-habits.html
+
+#+begin_src emacs-lisp
+(require 'org-habit)
+
+;; Shoulda used add-to-list.  Derp.
+(setq org-todo-keywords (append org-todo-keywords '((sequence "HABIT(h)" "|" "DONE(d!)"))))
+(setq org-todokeyword-faces (append org-todo-keyword-faces '(("HABIT" :forground "cyan" :weight bold))))
+
+#+end_src
+** NEXT switch to add-to-list
 * TODO Capture 
   
 * Org Babel
@@ -262,6 +367,8 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 Wherever possible we always want ot display inline images
 #+begin_src emacs-lisp
   (add-hook 'org-babel-after-execute-hook 'emagician/display-inline-images 'append)
+  
+  (setq org-startup-with-inline-images t)
   
   (defun emagician/display-inline-images ()
     (condition-case nil
@@ -296,7 +403,13 @@ Wherever possible we always want ot display inline images
  (setq org-confirm-babel-evaluate 'emagician/org-confirm-babel-evaluate)
 #+end_src
 
-
+** Graphing
+*** TODO Plantuml
+**** TODO get plantuml jar, throw in distbin or something
+**** TODO make sure to add some kind of update code somwerhesrs for bins like this. even if its just a todo 
+**** TODO set up  (setq org-plantuml-jar-path "~/Downloads/plantuml.jar")
+*** TODO ditaa
+  
 * TODO Time clocking
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports."
@@ -327,7 +440,10 @@ Wherever possible we always want ot display inline images
                               (seconds-to-time end))))
         (setq start (+ 86400 start))))))
 * Links
+#+begin-src emacs-lisp
 (require 'org-info)
+(define-key global-map "\C-cl" 'org-store-link)
+#+end_src
 * TODO org-elisp-symbol
 * TODO tidy
 #+begin_src emacs-lisp :tangle no
@@ -337,3 +453,134 @@ Wherever possible we always want ot display inline images
       (delete-region (point-min) (point-max)) ;; replace the buffer contents
       (insert (org-element-interpret-data buf))) ;; with the cleaned results
 #+end_src
+* Auto-complete
+** Set up some custom sources
+#+begin_src emacs-lisp :tangle no
+  (defvar emagician/ac-candidates-org-properties
+    '(("TODO" . "The TODO keyword of the entry.")
+      ("TAGS" . "The tags defined directly in the headline.")
+      ("ALLTAGS" . "All tags, including inherited ones.")
+      ("CATEGORY" . "The category of an entry.")
+      ("PRIORITY" . "The priority of the entry, a string with a single letter.")
+      ("DEADLINE" . "The deadline time string, without the angular brackets.")
+      ("SCHEDULED" . "The scheduling timestamp, without the angular brackets.")
+      ("CLOSED" . "When was this entry closed?")
+      ("TIMESTAMP" . "The first keyword-less timestamp in the entry.")
+      ("TIMESTAMP_IA" . "The first inactive timestamp in the entry.")
+      ("CLOCKSUM" . "The sum of CLOCK intervals in the subtree.  `org-clock-sum' must be run first to compute the values in the current buffer.")
+      ("BLOCKED" . "`t' if task is currently blocked by children or siblings")
+      ("ITEM" . "The content of the entry.")
+      ("FILE" . "The filename the entry is located in.")
+      ("END" . "End a drawer")))
+  
+  (defvar ac-source-org-properties
+    '((candidates . (mapcar 'car emagician/ac-candidates-org-properties))
+      (document   . (mapcar 'cdr emagician/ac-candidates-org-properties))
+      (symbol     . prop)))
+  
+  (defvar emagician/ac-candidates-org-sheplus
+    '((("BEGIN_CENTER" . "Center block")
+       ("END_CENTER" . "End Center block")
+       ("BEGIN_COMMENT" . "Text to not be exported.")
+       ("END_COMMENT" . "End comment block.")
+       ("BEGIN_DOCBOOK" . "Inserted into docbook export literally")
+       ("END_DOCBOOK" . "")
+       ("BEGIN_HTML" . "Inserted into html export literally")
+       ("HTML" . "single line literal HTML for export")
+       ("END_HTML" . "")
+       ("BEGIN_LaTeX" . "Inserted into latex export literally")
+       ("LaTeX" . "Single line literal Latex for export")
+       ("END_LaTeX" . "Inserted into latex export literally")
+       ("BEGIN_EXAMPLE" . "Verbatim example")
+       ("END_EXAMPLE" . "End Verbatim example")
+       ("BEGIN_QUOTE" . "Multi-line quote.")
+       ("END_QUOTE" . "End of quote block.")
+       ("BEGIN_SRC" . "Source block. ")
+       ("END_SRC" . "End of source block")
+       ("BEGIN_VERSE" . "keep linebreaks, but maintain formatting")
+       ("END_VERSE" . "end of verse block.")
+       ("CALL" . "Eval a code block.
+  ,#+CALL: name[header args](args) end of header args
+  ,#+CALL: double(n=4)
+  ,#+CALL: double[:results output](n=4)
+  ,#+CALL: double{:results html](n=4) :results html")
+       ("CAPTION" . "Image or table caption")
+       ("INCLUDE" . "Include a file.  
+  ,#+INCLUDE: \"file.org\" :prefix1 \"  + \" :prefix: \" \" str :minlevel 3
+  ,#+INCLUDE: \"~/.emacs\" src emacs-lisp
+  ,#+INCLUDE: \"somefoo\" quote 
+  ,#+INCLUDE: \"somefoo\" example
+  ,#+INCLUDE: \"somefoo\" :lines \"5-10\"
+  ,#+INCLUDE: \"somefoo\" :lines \"5-10\"
+  ,#+INCLUDE: \"somefoo\" :lines \"5-10\"")
+       ("INDEX" . "Add entry to index.  #+INDEX: Foo!Bar")
+       ("LABEL" . "Internal cross reference, i.e. tbl:some-foo or fig:SED-hR4049")
+       ("MACRO" . "#+MACRO: name     replacement text with $1 and $2 as arguments."))))
+  
+  (defvar emagician/ac-candidates-org-sheplushead
+    '(("TITLE" . "Title of the document")
+      ("ARCHIVE" . "Archive location.  #+ARCHIVE: %s_foo::")
+      ("CATEGORY" . "category for document")
+      ("COLUMNS" . "Set column properties, i.e. #+COLUMNS: %25FOo %TAGS %PRIORITY %TODO")
+      ("CONSTANTS" . "Set constants.  i.e. #+CONTANTS: pi=3.14, tau=6.28")
+      ("DRAWERS" . "List of drawer names.  #+DRAWERS: HIDDEN PROPERTIES STATE")
+      ("FILETAGS" . "Tags that this file should inherit")
+      ("TAGS" . "#+TAGS: foo(f) bar baz \\n new line of tags")
+      ("LINK" . "Link Abbreviation,  #+LINK: foo http://example.com/")
+      ("STARTUP" . "Startup options.
+  noptag to turn offorg-ta-persistent-alist")
+  
+      ("OPTIONS" . "Change options, i.e. #+OPTIONS: H:4 toc:nil
+  H:org-export-headline-levels
+  num: 
+  toc:org-export-with-toc
+  skip:org-export-skip-text-before-1st-heading
+  @:
+  ::
+  |:
+  ^:
+  -:
+  F:
+  todo:
+  tasks:
+  pri:
+  Tags:
+  <:
+  ,*:
+  TeX:
+  LaTeX:
+  skip:
+  author:
+  email:
+  creator:
+  timestamp:
+  d:
+  "
+  )))
+  
+  (defvar emagician/ac-candidates-org-export-sheplushead
+    "AUTHOR"
+    "DATE"
+    "DESCRIPTION"
+    "EMAIL"
+    "KEYWORDS"
+    "LANGUAGE"
+    "TEXT"
+    "BIND"
+    "LINK_UP"
+    "LINK_HOME"
+    "LATEX_HEADER"
+    "EXPORT_SELECT_TAGS"
+    "EXPORT_EXCLUDE_TAGS"
+    "XSLT")
+  
+#+end_src
+* TODO do something with this coolness
+(defun jonnay-org-remember-loop ()
+  "Go to a special place for rapid task entry and refiling"
+  (interactive)
+  (org-open-link-from-string "file:~/Dropbox/org/GTD.org::* Org-Loop")
+  (next-line)
+  (let ((heat-death-of-the-universe '()))
+	(loop until heat-death-of-the-universe
+	      do (org-remember nil ?i))))

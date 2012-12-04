@@ -15,24 +15,25 @@ other stuff
 
    This gives us an interesting opportunity to display a random something.  For an emagician, one may want to display the following:
    - a "psychological workout" task for the day
-   - a card of personal meaning (tarot, i-ching, discordian tarot, whatevs)
+   - a card of personal meaning (tarot, I-Ching, Discordian tarot, whatevs)
    - a personal challange to overcome for that day.
    - A note of wisdom. 
 
 ** Code
 
+
 #+begin_src emacs-lisp
   (defun emagician/cookie () 
     "return a piece of wisdom from the collected works of chaos"
-    (interactive)
     (let ((cookie-delimiter "\n%%\n")
           (curr-buff (current-buffer)))
       (cookie (expand-file-name "assets/collected-chaos.lines" emagician-dir)
               "Loading Chaotic Wisdom..."
               "Loaded!")))
-
-
 #+end_src
+
+*** TODO Om Nom
+**** NEXT write simple chunk to display a cookie
 
 ** Content
 
@@ -489,12 +490,88 @@ And when it has gone past I will turn the inner eye to see its path.
 Where the fear has gone there will be nothing.
 Only I will remain.
 %%
+Consult Your Pineal Gland.
 #+end_src
 
 
 * Learning Emacs through Achievements
 #+begin_src emacs-lisp
-  (add-to-list 'load-path (expand-file-name "dist/gvol-emacs-achievements" emagician-dir))
-  
+  (add-to-list 'load-path (expand-file-name "dist/emacs-achievements" emagician-dir))  
   (require 'achievements)
 #+end_src
+
+* Learning to Spell I
+** ispell-command-loop after advice
+
+#+name: emagician/fix-mm-commentary
+#+begin_src org
+  ,  
+  ,  This file is part of the emagicians starter kit, which is available
+  ,  here: https://github.com/jonnay/emagicians-starter-kit
+  ,  
+  ,  Note that if you are using this .el file, you probably aren't using
+  ,  the emagicians sarter kit, which is fine. You dont need this for
+  ,  that.
+  
+  ,* Motivation
+  
+  ,  I used to type necessary wrong.  ALL THE TIME. I misspelled it so
+  ,  often that it was part of my muscle memory.  It is one of *THOSE*
+  ,  words for me.  There are others, that by muscle, or brain memory,
+  ,  are "burned in" as a particular pattern.
+  , 
+  ,  This is an attempt to break that pattern, by forcing you to re-type
+  ,  your misspelled words 3 times.
+  
+  ,* Usage
+  
+  ,  - Step 1 :: Require this file
+  ,  - Step 2 :: Use M-$ to check the spelling of your misspelled word
+  ,  - Step 3 :: follow the directions of the prompt
+  
+  
+  
+#+end_src
+
+#+name: emagician/fix-mm-advice
+#+begin_src emacs-lisp
+  (defadvice ispell-command-loop (after emagician/fix-muscle-memory last activate)
+    "Force the user to type in the misspelled/mis-typoed word 5 times, to burn it into muscle memory."
+    (let ((times 0)
+          (total-times 3))
+      (debug)
+      (while (< times total-times)
+        (setq times
+              (+ times (if (string= (read-string (format "Re-type \"%s\" correctly (%d/%d): "  ad-return-value times total-times))
+                                ad-return-value)
+                       1
+                     -1))))))
+#+end_src
+
+** TODO simple output .el for MELPA
+
+#+begin_src emacs-lisp :tangle emagician-fix-spell-memory.el  :noweb yes :padline no
+  ;;; emagician-fix-spelling. --- Simple hack into ispell to fix (muscle) memory problems
+ 
+  ;; Copyright (C) 2012 Jonathan Arkell
+  
+  ;; Author: Jonathan Arkell <jonnay@jonnay.net>
+  ;; Created: 5 Oct 2012
+  ;; Keywords: erc bitlbee bot
+  ;; Version 0.1
+  
+  ;; This file is not part of GNU Emacs.
+  ;; Released under the GPL v3.0
+  
+  ;;; Commentary:
+  ;; <<emagician/fix-mm-commentary>>
+  
+  ;;; Code:
+  
+  <<emagician/fix-mm-advice>>
+  
+  (provide 'emagician-fix-spell-memory)
+  
+  ;;; emagician-fix-spell-memory ends here
+#+end_src
+

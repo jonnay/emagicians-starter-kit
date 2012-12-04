@@ -11,6 +11,11 @@
 (add-to-list 'tramp-remote-path "/var/run/current-system/sw/bin")
 #+end_src
 
+** Backups
+#+begin_src emacs-lisp
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+#+end_src
 * Transient mark mode
 
   For now Transient Mark mode is just turned off.  I don't like
@@ -184,22 +189,26 @@
 *** TODO write jQuery dictionary.  
 **** TODO purify myself afterwards by writing one for Ender
 
+
 ** Sources
 
    *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
 
-*** Default
+** pcomplete as a source
+
+#+begin_src emacs-lisp
+  (ac-define-source pcomplete
+    '((candidates . pcomplete-completions)))
+#+end_src
+
+*** Default Sources
 
 #+begin_src emacs-lisp
   (set-default 'ac-sources
                '(ac-source-yasnippet
                  ac-source-dictionary
                  ac-source-words-in-buffer
-                 ac-source-words-in-same-mode-buffers
-                 ac-source-words-in-all-buffer
-                 ac-source-semantic))
-  
-  
+                 ac-source-words-in-same-mode-buffers))
 #+end_src
 *** TODO fix ac-source-yasnippet as a default
 
@@ -223,14 +232,15 @@
 (find-lisp-object-file-name 'undo-tree-mode (symbol-function 'undo-tree-mode)) 
 
 #+begin_src emacs-lisp
-  (emagician-expect-package 'undo-tree)
-  (setq undo-tree-enable-undo-in-region t
-        undo-tree-visualizer-diff t)
-  
-  (require 'undo-tree)
-  
-  (global-undo-tree-mode)
-  
+    (emagician-expect-package 'undo-tree)
+    (setq undo-tree-enable-undo-in-region t
+          undo-tree-visualizer-diff t
+          undo-tree-visualizer-timestamps t)
+    
+    (require 'undo-tree)
+    
+    (global-undo-tree-mode)
+    
 #+end_src
 * Movement
 ** Ace Jump

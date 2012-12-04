@@ -1,1 +1,42 @@
 * Aspell setup
+* Fix broken colors on emacs for mac os x 
+#+begin_src emacs-lisp
+(when (fboundp 'ns-list-colors)
+  (setq x-colors (ns-list-colors)))
+#+end_src
+
+* Assuming a standard latex setup
+** You will want to get the latest version of mactex to make this go:
+   http://www.tug.org/mactex/
+
+#+begin_src emacs-lisp
+    (setq org-latex-to-pdf-process 
+          '("/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
+            "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f" 
+            "/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+#+end_src
+
+** TODO make this not suck.
+
+* Fix /usr/bin/emacs on mac os 
+** TODO fix this, needs to run asyncronously.
+#+begin_src sh :tangle no
+echo "#!/bin/bash" >/tmp/askemacspass
+echo "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient --eval '(format \"%s\" (read-passwd \"sudo password:\"))' --socket-name \"/var/folders/h6/16v67y914rn75xt1vbm57qg4000629/T/emacs6217/server\" | sed 's/\"\(.*\)\"/\1/'" >>/tmp/askemacspass
+chmod 777 /tmp/askemacspass
+export SUDO_ASKPASS="/tmp/askemacspass"
+sudo mv /usr/bin/emacs /usr/bin/emacs-osx-dist
+sudo mv /usr/share/emacs /usr/share/emacs-dist
+rm /tmp/askemacspass
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sh :tangle no
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+#+end_src
+
+** TODO Fix up the emacs client to use the stock one
+** TODO dynamically find the daemon socket
+** TODO somehow figure out wehther or not the stock emacs is installed, and warn the user.

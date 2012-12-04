@@ -95,6 +95,10 @@ And with PHP, comes a bunch of extra frameworks.
 
 *** TODO ASP
 * Other Misc Web Goodness
+** Apache config editing
+#+begin_src emacs-lisp
+(emagician-expect-package 'apache-mode)
+#+end_src
 ** Websockets
 #+begin_src emacs-lisp
 (emagician-expect-package 'websocket)

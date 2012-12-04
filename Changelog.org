@@ -15,4 +15,24 @@
 	- Made the startup screen always show the new-and-improved scratch buffer
 	- When loading a file, a loading message gets inserted into the debug scratch buffer
 	- Identify the version of the emagicians starter kit on teh scratch buffer
-	
+  - v0.3 :: Update release
+	- Fix a few problems with the customizations
+	- Set utf-8 as the default coding system
+  - v0.4 :: Major Update Release
+    - Added a number of todos
+	- Added pcomplete as a source to auto-complete
+	- Configure more of undo-tree
+	- Added some email configuration. not done yet though
+	- Added some git pcompletion context sensitivity from Mickey
+	- Made solarized switch based on time of day
+	- Added Dizee to the interface section, with an example
+	- Added function to deal with helm upgrades.
+	- Fixed remove-elc-on-save to be a little nicer (named hook)
+	- Added erefactor and checkdoc to lisp.  Needs a bit of work though
+	- better org setup. Not 100% though
+	- Added org to the package archive.
+	- Made emagician-starter-kit-load output the name of hte file it is loading
+	- Proper utf8 preference for coding systems
+	- Proper loading of personal customization files
+	- Added lines from collected chaos to the scratch-buffer-come-splash-screen
+	- Added riff-raff. An insane idea.

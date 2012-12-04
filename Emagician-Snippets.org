@@ -1,5 +1,5 @@
 #+TITLE: YASnippets 
-
+#+results: silent
 * This is not the file you are looking for...
   If you want to configure yasnippets for the emagiians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
 
@@ -39,3 +39,7 @@ var $0;
 var $1 = $0;
 #+end_src
 
+
+
+** Lisp
+src

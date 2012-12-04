@@ -1,23 +1,32 @@
 * Beautify Org mode                                                  :define:
 
 ** This theme is dedicated to my wife Shell
-   Who--in her beauty, her love and her love for beauty--has shown me
+   Who--in her beauty, her love, and her love for beauty--has shown me
    that form can enhance function.
  
 ** Mission
-   - Make headlines easy to read
+   - Make org mode headlines easy to read.  In the solarized theme in particular, but any theme in general
    - Make it look more like a published book and/or desktop app, less
      like angry fruit salad.
    - Make it awesome to live in an org buffer.
 
+** Roadmap
+
+   - v0.1 :: First Release
+	 - Make the solarized org colors suck a lot less, and the buffers look a lot nicer.
+   - Future
+	 - Better color customizations
+	 - Look into alternate font settings
+	 - Iconficiations?
+
 #+begin_src emacs-lisp
-(deftheme org-beautify "Beautify org mode")
+(deftheme org-beauty "Beautify org mode")
 #+end_src emacs-lisp
 
 ** Things to do
-*** PROJECT Make this customizable! 
+*** TODO Make this customizable! 
 **** TODO look at org macros or something to easily turn feature sets on and off.
-
+**** TODO Maybe use customization variables?
 ** Colors
    I the future, I may make it optional to set your own colors.  Not
    for now.  Mwhahaha.
@@ -25,7 +34,8 @@
    Bug me if this bugs you.  Or not.
 
 #+begin_src emacs-lisp :noweb yes :tangle yes
-    (let (<<define-color-values>>
+    (let* (
+          <<define-color-values>>
           <<define-color-names>>)
 
   (custom-theme-set-faces
@@ -71,7 +81,7 @@ Change these here.
     Like the general color I choose, but hate the choice of scheme?
     Change it here!
 
-    OH, if only CSS had this (which is why SASS(?) is the bomb).
+    OH, if only CSS had this (which is why SASS is the bomb).
     
     I have defined a set of standard color names for org mode, so as to
     provide a consistent interface.
@@ -118,7 +128,7 @@ Change these here.
      there are other uses here (displaying scheduled/deadline times,
      drawers, etc.)
 
-     These variables expand to "org-beauty-state-<blah>" and have 2
+     These /Users/jonathana/Projects/emagicians-starter-kit/themes/varibables expand to "org-beauty-state-<blah>" and have 2
      variants, dark and light.  So there is also a
      "org-beauty-state-<blah>-dark" and "org-beauty-state-<blah>-light"
    
@@ -133,15 +143,15 @@ Change these here.
     - Finished :: Cool Baby.  Done stuff.
     - Canceled :: Stuff that is no longer useful
 
-#+name: define-state-colors
+#+name: define-state-names 
 #+begin_src emacs-lisp
-(org-beauty-containers "#33ccaa")
-(org-beauty-current    "#3333cc")
-(org-beauty-immediate  "#cc3333")
-(org-beauty-waiting    "#cc9933")
-(org-beauty-holding    "#ccbb33")
-(org-beauty-finished   "#33cc33")
-(org-beauty-canceed    "#ccbb99") 
+(org-beauty-containers org-beauty-yellow)
+(org-beauty-current    org-beauty-teal)
+(org-beauty-immediate  org-beauty-red)
+(org-beauty-waiting    org-beauty-yellow)
+(org-beauty-holding    org-beauty-red)
+(org-beauty-finished   org-beauty-green)
+(org-beauty-cancelled  org-beauty-purple) 
 #+end_src
 
 
@@ -395,11 +405,11 @@ Change these here.
   take precedence.
 
   Otherwise, it should just install itself.
-#+name enable
+#+name: enable
 #+begin_src emacs-lisp tangle: yes
   (defun org-beauty-install-theme ()
     "Installs the Beautiful Org Theme"
-    (enable-theme org-beautify)
+    (enable-theme 'org-beauty))
   
   (if after-init-time
       (org-beauty-install-theme)
@@ -408,8 +418,9 @@ Change these here.
 #+end_src
 
 * Testing the theme. 
-(org-babel-load-file "org-beautify.org")
-
+#+begin_src emacs-lisp :tangle no
+(org-babel-load-file "org-beauty.org")
+#+end_src
 * Misc
 
 

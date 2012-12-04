@@ -12,18 +12,15 @@
 (defun turn-on-paredit ()
   (paredit-mode +1))
 #+end_src
+      
+** TODO Show parans 
    
-   
-** TODO Show params 
-   
-
 ** Slime
 #+begin_src emacs-lisp
 (emagician-expect-package 'slime)
 (require 'slime)
 (slime-setup)
 #+end_src
-
 
 * Elisp
 
@@ -52,30 +49,50 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
 ** Set up hooks 
 
 #+begin_src emacs-lisp
-(add-hook 'emacs-lisp-mode-hook 'starter-kit-remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'emagician/remove-elc-on-save)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 #+end_src
 
 ** Auto-complete magic
 
-** Integration with emacs itself
+** Remove .elc files on save. 
 
 #+begin_src emacs-lisp
-(defun starter-kit-remove-elc-on-save ()
-  "If you're saving an elisp file, likely the .elc is no longer valid."
-  (make-local-variable 'after-save-hook)
-  (add-hook 'after-save-hook
-            (lambda ()
-              (if (file-exists-p (concat buffer-file-name "c"))
-                  (delete-file (concat buffer-file-name "c"))))))
+  (defun emagician/remove-elc-on-save () 
+    "Remove the .elc of this file, if it is emacs-lisp"
+    (if (eq major-mode 'emacs-lisp-mode)
+      (if (file-exists-p (concat buffer-file-name "c"))
+          (delete-file (concat buffer-file-name "c")))))
+
+  (add-hook 'after-save-hook 'emagician/remove-elc-on-save)
 #+end_src
 
 ** Header Magick
 *** header2.el for managing emacs wiki files
+
+** erefactor 
+#+begin_src emacs-lisp
+(emagician-expect-package 'erefactor)
+#+end_src
+** checkdoc 
+
+#+begin_src emacs-lisp
+  (defun emagician/run-checkdoc () 
+    "run checkdoc on save if it is an elisp file"
+    (if (and (eq major-mode 'emacs-lisp-mode)
+             (not (member buffer-file-name (cons package-user-dir package-directory-list)))) 
+        (checkdoc)))
+  
+  (add-hook 'after-save-hook 'emagician/run-checkdoc)
+#+end_src
+*** TODO fix the problem with this
+**** NEXT (delq nil (mapcar ....))
 
 * Common Lisp
 
 * Scheme
 
 * Clojure
+
+

@@ -17,3 +17,4 @@ src/*
 /melpa/
 *~
 /Emagician-Meta.el
+/extra/node_modules

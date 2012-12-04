@@ -1,0 +1,34 @@
+#+title: Email
+
+Email.  What waht? The email.
+
+* Davmail -- non suck in the Microsoft Outlook Office Ghetto.
+** Sending
+#+begin_src emacs-lisp
+  (setq send-mail-function 'smtpmail-send-it)
+  (setq smtpmail-smtp-server "localhost")
+  (setq smtpmail-smtp-service 1025)
+  (setq smtpmail-debug-info t) 
+  (require 'starttls)
+  (require 'smtpmail)
+
+  (setq smtpmail-auth-credentials
+      '(("localhost" 1025 "jonathana" )))
+  
+  (setq smtpmail-starttls-credentials
+        '(("localhost" 1025 nil nil)))
+  
+#+end_src
+
+** TODO fix this to not suck. 											:mac:shell:
+#+begin_src sh :results print
+brew install starttls
+#+end_src
+
+#+RESULTS:
+
+* mu4e. 
+** TODO fix this to not suck.											:mac:shell:
+#+begin_src sh
+brew install mu
+#+end_src
