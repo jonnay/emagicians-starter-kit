@@ -21,13 +21,14 @@
 ;; 
 ;; * Motivation
 ;; 
-;;   I used to type necessary wrong.  ALL THE TIME. I misspelled it so
-;;   often that it was part of my muscle memory.  It is one of *THOSE*
+;;   I used to type 'necessary' wrong... ALL THE TIME. I misspelled it so
+;;   often that it became part of my muscle memory.  It is one of *THOSE*
 ;;   words for me.  There are others, that by muscle, or brain memory,
 ;;   are "burned in" as a particular pattern.
 ;;  
 ;;   This is an attempt to break that pattern, by forcing you to re-type
-;;   your misspelled words 3 times.
+;;   your misspelled words 3 times.  This should help overcome any broken
+;;   muscle and brain memory.
 ;; 
 ;; * Usage
 ;; 
@@ -44,7 +45,6 @@
   "Force the user to type in the misspelled/mis-typoed word 5 times, to burn it into muscle memory."
   (let ((times 0)
         (total-times 3))
-    (debug)
     (while (< times total-times)
       (setq times
             (+ times (if (string= (read-string (format "Re-type \"%s\" correctly (%d/%d): "  ad-return-value times total-times))

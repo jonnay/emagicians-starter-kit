@@ -515,13 +515,14 @@ Consult Your Pineal Gland.
   
   ,* Motivation
   
-  ,  I used to type necessary wrong.  ALL THE TIME. I misspelled it so
-  ,  often that it was part of my muscle memory.  It is one of *THOSE*
+  ,  I used to type 'necessary' wrong... ALL THE TIME. I misspelled it so
+  ,  often that it became part of my muscle memory.  It is one of *THOSE*
   ,  words for me.  There are others, that by muscle, or brain memory,
   ,  are "burned in" as a particular pattern.
   , 
   ,  This is an attempt to break that pattern, by forcing you to re-type
-  ,  your misspelled words 3 times.
+  ,  your misspelled words 3 times.  This should help overcome any broken
+  ,  muscle and brain memory.
   
   ,* Usage
   
@@ -539,7 +540,6 @@ Consult Your Pineal Gland.
     "Force the user to type in the misspelled/mis-typoed word 5 times, to burn it into muscle memory."
     (let ((times 0)
           (total-times 3))
-      (debug)
       (while (< times total-times)
         (setq times
               (+ times (if (string= (read-string (format "Re-type \"%s\" correctly (%d/%d): "  ad-return-value times total-times))
@@ -548,7 +548,7 @@ Consult Your Pineal Gland.
                      -1))))))
 #+end_src
 
-** TODO simple output .el for MELPA
+** Simple output .el for MELPA
 
 #+begin_src emacs-lisp :tangle emagician-fix-spell-memory.el  :noweb yes :padline no
   ;;; emagician-fix-spelling. --- Simple hack into ispell to fix (muscle) memory problems
@@ -575,3 +575,33 @@ Consult Your Pineal Gland.
   ;;; emagician-fix-spell-memory ends here
 #+end_src
 
+** Test Melpa recipe 
+
+   This test code is kinda crappy, but it works.
+
+*** TODO move this code into emagician proper 
+
+	Initialize package-build for... you know... building
+
+#+begin_src emacs-lisp :tangle no
+  (let* ((melpa-dir (concat (file-name-directory (buffer-file-name))
+                            "melpa/")))
+    (setq package-build-recipes-dir (concat melpa-dir "recipes"))
+    (setq package-build-working-dir (concat melpa-dir "working"))
+    (setq package-build-archive-dir (concat melpa-dir "packages")))
+  (add-to-list 'load-path (concat (file-name-directory (buffer-file-name)) "melpa"))
+  (require 'package-build)
+#+end_src
+
+	GO!
+
+#+begin_src emacs-lisp :tangle no 
+  (when nil
+    (progn
+      (setq package-build-alist (assq-delete-all 'emagician-fix-spell-memory package-build-alist))
+      (package-build-initialize)
+      (package-build-archive 'emagician-fix-spell-memory)
+    )
+    ; Blank line for easier execution
+    )    
+#+end_src
