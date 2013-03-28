@@ -1,4 +1,4 @@
-;;; emagician-fix-spelling. --- Simple hack into ispell to fix (muscle) memory problems
+;;; emagician-fix-spell-memory.el --- Simple hack into ispell to fix (muscle) memory problems
  
 ;; Copyright (C) 2012 Jonathan Arkell
 
