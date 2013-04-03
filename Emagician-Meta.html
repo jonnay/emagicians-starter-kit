@@ -7,60 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="Emagician-Meta"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-08-29 23:26:06 MDT"/>
+<meta name="generated" content="2013-01-22 13:14:40 MST"/>
 <meta name="author" content="Jonathan Arkell"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
-  pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
-  }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
-  dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
-    background: #ffffcc;
-  }
-  textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="export/main.css"/>
+
 <script type="text/javascript">
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
@@ -99,12 +50,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 Working with Melpa</a></li>
+<li><a href="#sec-1">1 Working with the starer kit</a>
+<ul>
+<li><a href="#sec-1-1">1.1 As an org file</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 <code>TODO</code> Items</a></li>
+<li><a href="#sec-1-1-2">1.1.2 Tags</a></li>
+<li><a href="#sec-1-1-3">1.1.3 Agendas</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2 Helm Source</a></li>
+</ul>
+</li>
 <li><a href="#sec-2">2 Exporting as a website</a>
 <ul>
-<li><a href="#sec-2-1">2.1 Save website to a seperate directory</a></li>
+<li><a href="#sec-2-1">2.1 Save website to a separate directory</a></li>
 <li><a href="#sec-2-2">2.2 do some magic to auto-commit to the git branch</a></li>
-<li><a href="#sec-2-3">2.3 Set up valid stylesheet for a default</a></li>
+<li><a href="#sec-2-3">2.3 Set up stylesheets</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1 Solarized style colors</a></li>
+<li><a href="#sec-2-3-2">2.3.2 Main org structures</a></li>
+</ul>
+</li>
 <li><a href="#sec-2-4">2.4 Specialized export command</a></li>
 <li><a href="#sec-2-5">2.5 Reference code</a></li>
 </ul>
@@ -114,13 +81,133 @@
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Working with Melpa</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Working with the starer kit</h2>
 <div class="outline-text-2" id="text-1">
 
 
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> As an org file</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
 <p>
-  Since Melpa is what I am throwing my lot with, do some setup.
+   Because the Emagician starter kit is an org file, it can be peppered with todo's tags, etc. which gives us a great way to view this source-code.
 </p>
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> <code>TODO</code> Items</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+<p>
+    The GTD Methodology is pretty solid. At the very least the Emagician Starter kit follow the formula of:
+</p>
+<ul>
+<li><code>TODO</code> items are items to be done.  Any todo item that has subtasks is a project.  This allows for infinitely nesting projects.
+</li>
+<li><code>NEXT</code> items are next actions.
+</li>
+<li><code>TODO</code> items with sub items and no <code>NEXT</code> items are stuck.
+</li>
+</ul>
+
+
+<p>
+    For more info, please see <a href="Emagician-Org.html">Emagician-Org</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Tags</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+
+<p>    
+    Not many tags in use yet, except 2:
+</p><dl>
+<dt>asset</dt><dd>contains a src block that is an asset (i.e. a snippet, cookie file, css file) rather then elisp
+</dd>
+</dl>
+
+
+<ul>
+<li id="sec-1-1-2-1"><span class="todo TODO">TODO</span> pull out a list of tags via the agenda.<br/>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Agendas</h4>
+<div class="outline-text-4" id="text-1-1-3">
+
+
+<ul>
+<li id="sec-1-1-3-1">Show all Stuck Emagician Projects<br/>
+
+</li>
+</ul>
+<ul>
+<li id="sec-1-1-3-2">Show all emagician next tasks.<br/>
+
+</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Helm Source</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/helm-c-source-files</span>
+  `((name  . <span class="org-string">"Find Emagician Files"</span>)
+    (header-name . (<span class="org-keyword">lambda</span> (_)))
+    (candidates . ,(<span class="org-keyword">lambda</span> () 
+                    (<span class="org-keyword">when</span> (file-accessible-directory-p emagician-dir)
+                      (directory-files emagician-dir t))))
+    (match helm-c-match-on-file-name helm-c-match-on-directory-name)
+    (keymap . ,helm-generic-files-map)
+    (candidate-transformer . emagician/helm-ct-is-org-file)
+    (help-message . helm-generic-file-help-message)
+    (mode-line . ,helm-generic-file-mode-line-string)
+    (type . file)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-ct-is-org-file</span> (candidates)
+  (remove-if-not (<span class="org-keyword">lambda</span> (c)
+                   (and (string= (substring c -4) <span class="org-string">".org"</span>)
+                        (not (string= (substring (file-name-nondirectory c) 0 2) <span class="org-string">".#"</span>))))
+                 candidates))
+
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-emagician-dir</span> () 
+  <span class="org-doc">"List all the org files in the Emagician dir"</span>
+  (interactive)
+  (helm <span class="org-builtin">:sources</span> emagician/helm-c-source-files
+        <span class="org-builtin">:candidate-number-limit</span> 40
+        <span class="org-builtin">:buffer</span> <span class="org-string">"*emagician-|-+-|-files*"</span>))
+
+(global-set-key (kbd <span class="org-string">"S-&lt;f3&gt;"</span>) 'emagician/helm-emagician-dir)
+
+
+</pre>
+
+
+
+
+</div>
 </div>
 
 </div>
@@ -134,7 +221,7 @@
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> Save website to a seperate directory</h3>
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <span class="todo TODO">TODO</span> Save website to a separate directory</h3>
 <div class="outline-text-3" id="text-2-1">
 
 </div>
@@ -152,19 +239,85 @@
 </div>
 
 <div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <span class="todo TODO">TODO</span> Set up valid stylesheet for a default</h3>
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Set up stylesheets</h3>
 <div class="outline-text-3" id="text-2-3">
 
 
 
 
-
-<pre class="example">body {
-    margin: 1em;
-}
+<pre class="src src-emacs-lisp">(emagician-expect-package 'sass-mode)
+(org-babel-do-load-languages 'org-babel-load-languages
+  (append org-babel-load-langauges '((sass . t))))
 </pre>
 
 
+
+
+<pre class="src src-sass"><span class="org-variable-name">$base03:</span>    #002b36;
+<span class="org-variable-name">$base02:</span>    #073642;
+<span class="org-variable-name">$base01:</span>    #586e75;
+<span class="org-variable-name">$base00:</span>    #657b83;
+<span class="org-variable-name">$base0:</span>     #839496;
+<span class="org-variable-name">$base1:</span>     #93a1a1;
+<span class="org-variable-name">$base2:</span>     #eee8d5;
+<span class="org-variable-name">$base3:</span>     #fdf6e3;
+<span class="org-variable-name">$yellow:</span>    #b58900;
+<span class="org-variable-name">$orange:</span>    #cb4b16;
+<span class="org-variable-name">$red:</span>       #dc322f;
+<span class="org-variable-name">$magenta:</span>   #d33682;
+<span class="org-variable-name">$violet:</span>    #6c71c4;
+<span class="org-variable-name">$blue:</span>      #268bd2;
+<span class="org-variable-name">$cyan:</span>      #2aa198;
+<span class="org-variable-name">$green:</span>     #859900;
+
+
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Solarized style colors</h4>
+<div class="outline-text-4" id="text-2-3-1">
+
+
+
+
+<pre class="src src-sass"><span class="org-variable-name">$base03:</span>    #002b36;
+<span class="org-variable-name">$base02:</span>    #073642;
+<span class="org-variable-name">$base01:</span>    #586e75;
+<span class="org-variable-name">$base00:</span>    #657b83;
+<span class="org-variable-name">$base0:</span>     #839496;
+<span class="org-variable-name">$base1:</span>     #93a1a1;
+<span class="org-variable-name">$base2:</span>     #eee8d5;
+<span class="org-variable-name">$base3:</span>     #fdf6e3;
+<span class="org-variable-name">$yellow:</span>    #b58900;
+<span class="org-variable-name">$orange:</span>    #cb4b16;
+<span class="org-variable-name">$red:</span>       #dc322f;
+<span class="org-variable-name">$magenta:</span>   #d33682;
+<span class="org-variable-name">$violet:</span>    #6c71c4;
+<span class="org-variable-name">$blue:</span>      #268bd2;
+<span class="org-variable-name">$cyan:</span>      #2aa198;
+<span class="org-variable-name">$green:</span>     #859900;
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Main org structures</h4>
+<div class="outline-text-4" id="text-2-3-2">
+
+
+
+
+<pre class="src src-sass"></pre>
+
+
+</div>
 </div>
 
 </div>
@@ -177,25 +330,25 @@
 
 
 
-<pre class="example">(require 'org-publish)
-(defun emagician-export/export ()
-  "Main export function"
-  (let ((org-export-with-section-numbers t)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">org-publish</span>)
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-export/export</span> ()
+  <span class="org-doc">"Main export function"</span>
+  (<span class="org-keyword">let</span> ((org-export-with-section-numbers t)
         (org-hml-include-timestamps nil)
         (org-src-fontify-natively t)
         (org-export-hml-inline-images t)
-        (org-publish-project-alist '(("emagician-org"
-                                      :base-directory emagician-dir
-                                      :base-extension "org"
-                                      :publishing-directory "export"
-                                      :author-info t
-                                      :creator-info t
-                                      :publishing-function org-publish-org-to-html)
-                                     ("emagician-extra"
-                                      :base-directory emagician-dir
-                                      :base-extension "css\\|pdf\\|png\\|jpg"
-                                      :publishing-function org-publish-attachment
-                                      :author nil)
+        (org-publish-project-alist '((<span class="org-string">"emagician-org"</span>
+                                      <span class="org-builtin">:base-directory</span> emagician-dir
+                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
+                                      <span class="org-builtin">:publishing-directory</span> <span class="org-string">"export"</span>
+                                      <span class="org-builtin">:author-info</span> t
+                                      <span class="org-builtin">:creator-info</span> t
+                                      <span class="org-builtin">:publishing-function</span> org-publish-org-to-html)
+                                     (<span class="org-string">"emagician-extra"</span>
+                                      <span class="org-builtin">:base-directory</span> emagician-dir
+                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">pdf</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">png</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">jpg"</span>
+                                      <span class="org-builtin">:publishing-function</span> org-publish-attachment
+                                      <span class="org-builtin">:author</span> nil)
                                      )))))
 </pre>
 
@@ -212,48 +365,48 @@
 
 
 
-<pre class="example">; Inline images in HTML instead of producting links to the image
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">; </span><span class="org-comment">Inline images in HTML instead of producting links to the image</span>
 (setq org-export-html-inline-images t)
-; Do not use sub or superscripts - I currently don't need this functionality in my documents
+<span class="org-comment-delimiter">; </span><span class="org-comment">Do not use sub or superscripts - I currently don't need this functionality in my documents</span>
 (setq org-export-with-sub-superscripts nil)
-; Use org.css from the norang website for export document stylesheets
+<span class="org-comment-delimiter">; </span><span class="org-comment">Use org.css from the norang website for export document stylesheets</span>
 
 (setq org-export-html-style-include-default nil)
-; Do not generate internal css formatting for HTML exports
+<span class="org-comment-delimiter">; </span><span class="org-comment">Do not generate internal css formatting for HTML exports</span>
 (setq org-export-htmlize-output-type (quote css))
-; Export with LaTeX fragments
+<span class="org-comment-delimiter">; </span><span class="org-comment">Export with LaTeX fragments</span>
 (setq org-export-with-LaTeX-fragments t)
 
 (setq emagician-org/publish-project-alist
-      ;
-      ; http://www.norang.ca/  (norang website)
-      ; norang-org are the org-files that generate the content
-      ; norang-extra are images and css files that need to be included
-      ; norang is the top-level project that gets published
-      (quote (("emagician-org"
-               :base-directory "~/git/www.norang.ca"
-               :publishing-directory "/ssh:www-data@www:~/www.norang.ca/htdocs"
-               :recursive t
-               :table-of-contents nil
-               :base-extension "org"
-               :publishing-function org-publish-org-to-html
-               :style-include-default nil
-               :section-numbers nil
-               :table-of-contents t
-               :style "&lt;link rel=\"stylesheet\" href=\"emagician.css\" type=\"text/css\" /&gt;"
-               :author-info t
-               :creator-info t)
-              ("emagician-extra"
-               :base-directory "~/git/www.norang.ca/"
-               :publishing-directory "/ssh:www-data@www:~/www.norang.ca/htdocs"
-               :base-extension "css\\|pdf\\|png\\|jpg\\|gif"
-               :publishing-function org-publish-attachment
-               :recursive t
-               :author nil)
-              ("emagician"
-               :components ("emagician-org" "emagician-extra")))))
+      <span class="org-comment-delimiter">;</span>
+      <span class="org-comment-delimiter">; </span><span class="org-comment">http://www.norang.ca/  (norang website)</span>
+      <span class="org-comment-delimiter">; </span><span class="org-comment">norang-org are the org-files that generate the content</span>
+      <span class="org-comment-delimiter">; </span><span class="org-comment">norang-extra are images and css files that need to be included</span>
+      <span class="org-comment-delimiter">; </span><span class="org-comment">norang is the top-level project that gets published</span>
+      (quote ((<span class="org-string">"emagician-org"</span>
+               <span class="org-builtin">:base-directory</span> <span class="org-string">"~/git/www.norang.ca"</span>
+               <span class="org-builtin">:publishing-directory</span> <span class="org-string">"/ssh:www-data@www:~/www.norang.ca/htdocs"</span>
+               <span class="org-builtin">:recursive</span> t
+               <span class="org-builtin">:table-of-contents</span> nil
+               <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
+               <span class="org-builtin">:publishing-function</span> org-publish-org-to-html
+               <span class="org-builtin">:style-include-default</span> nil
+               <span class="org-builtin">:section-numbers</span> nil
+               <span class="org-builtin">:table-of-contents</span> t
+               <span class="org-builtin">:style</span> <span class="org-string">"&lt;link rel=\"stylesheet\" href=\"emagician.css\" type=\"text/css\" /&gt;"</span>
+               <span class="org-builtin">:author-info</span> t
+               <span class="org-builtin">:creator-info</span> t)
+              (<span class="org-string">"emagician-extra"</span>
+               <span class="org-builtin">:base-directory</span> <span class="org-string">"~/git/www.norang.ca/"</span>
+               <span class="org-builtin">:publishing-directory</span> <span class="org-string">"/ssh:www-data@www:~/www.norang.ca/htdocs"</span>
+               <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">pdf</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">png</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">jpg</span><span class="org-regexp-grouping-backslash"><span class="org-string">\\</span></span><span class="org-regexp-grouping-construct"><span class="org-string">|</span></span><span class="org-string">gif"</span>
+               <span class="org-builtin">:publishing-function</span> org-publish-attachment
+               <span class="org-builtin">:recursive</span> t
+               <span class="org-builtin">:author</span> nil)
+              (<span class="org-string">"emagician"</span>
+               <span class="org-builtin">:components</span> (<span class="org-string">"emagician-org"</span> <span class="org-string">"emagician-extra"</span>)))))
 
-(defun emagician-meta/save-then-publish ()
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-meta/save-then-publish</span> ()
   (interactive)
   (save-buffer)
   (org-save-all-org-buffers)
@@ -268,7 +421,7 @@
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2012-08-29 23:26:06 MDT</p>
+<p class="date">Date: 2013-01-22 13:14:40 MST</p>
 <p class="author">Author: Jonathan Arkell</p>
 <p class="creator">Org version 7.8.11 with Emacs version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

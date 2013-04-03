@@ -1,0 +1,22 @@
+* Ruby
+
+  More and more the tools I use require Ruby.  One day I will dive into that.  But for now, this file is ... just enough.
+
+  Ruby Genii are encouraged to make this org-setup file awesome.
+
+** Make RVM go
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'rvm)
+(rvm-use-default)
+#+end_src
+
+** Add gems dir to path												   :fixme:path:
+
+#+begin_src emacs-lisp
+  (setenv "PATH" 
+          (concat (getenv "PATH")
+                  ":"
+                  (substring (shell-command-to-string "~/.rvm/bin/rvm gemdir") 0 -1)
+                  "/bin"))
+#+end_src

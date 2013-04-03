@@ -2,6 +2,19 @@
 #+begin-src
 (require 'org)
 #+end_src
+* Fixes																	:fix:
+** Saveplace 
+   From Worg, http://orgmode.org/worg/org-hacks.html#sec-2-2
+#+begin_src emacs-lisp
+  (defun emagician-org/fix-saveplace ()
+    "Fixes a bit of brokenness with saveplace.el and org-mode"
+    (when (outline-invisible-p)
+      (save-excursion
+        (outline-previous-visible-heading 1)
+        (org-show-subtree))))
+  
+  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)
+#+end_src
 * Agenda
 ** Set up a better agenda
 
@@ -14,89 +27,44 @@
 	- Next items in a list, ordered by org file
 
 #+begin_src emacs-lisp :noweb yes
-    (global-set-key (kbd "C-c a") 'org-agenda)
-    
-    (defun emagician-agenda/daily-wisdom (&rest args)
-      "Show some daily wisdom in the agenda"
-      ;(insert (org-add-props "-|-+-|-"
-      ;            nil 'face 'org-agenda-structure) "\n")
-      ;(insert (concat (emagician/cookie) "\n" ))
-      )
-    
-    (let ((refile-tasks '(tags "REFILE" 
-                               ((org-agenda-overriding-header "Tasks to Refile")
-                                (org-tags-match-list-sublevels))))
-          (stuck-projects '(tags-todo "-CANCELLED/!"
-                                      ((org-agenda-overriding-header "Stuck Projects")
-                                       (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
-                                       (org-agenda-todo-ignore-scheduled t)
-                                       (org-agenda-todo-ignore-deadlines t)
-                                       (org-agenda-todo-ignore-with-date t)
-                                       (org-tags-match-list-sublevels t)
-                                       (org-agenda-sorting-strategy
-                                        '(todo-state-down effort-up category-keep)))))
-          (next-tasks '(tags-todo "-REFILE-CANCELLED/!-HOLD-WAITING"
-                                   ((org-agenda-overriding-header "Next Actions")
-                                    (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
-                                    (org-agenda-todo-ignore-scheduled t)
-                                    (org-agenda-todo-ignore-deadlines t)
-                                    (org-agenda-todo-ignore-with-date t)
-                                    (org-agenda-sorting-strategy
-                                     '(category-down category-keep))))))
-      (setq org-agenda-custom-commands
-            `((" " "Agenda"
-               ((agenda "" nil)
-                (emagician-agenda/daily-wisdom 
-                 "" 
-                 ((org-agenda-overriding-header " -|-+-|-"))) 
-                ,next-tasks
-                ,refile-tasks
-                ,stuck-projects))
-              ("y" "Wisdom... YOW!"
-               ((agenda "" nil)
-                (emagician-agenda/daily-wisdom)))
-              ("W" "Weekly Review -- Unfinished."))))
-          (global-set-key (kbd "C-c a") 'org-agenda)
-        
-        (defun emagician-agenda/daily-wisdom (&rest args)
-          "Show some daily wisdom in the agenda"
-          (message "%s" args)
-          (concat (emagician/cookie) "\n" ))
-        
-        (let ((refile-tasks '(tags "REFILE" 
-                                   ((org-agenda-overriding-header "Tasks to Refile")
-                                    (org-tags-match-list-sublevels))))
-              (stuck-projects '(tags-todo "-CANCELLED/!"
-                                          ((org-agenda-overriding-header "Stuck Projects")
-                                           (org-agenda-skip-function 'bh/skip-projects-and-habits-and-single-tasks)
-                                           (org-agenda-todo-ignore-scheduled t)
-                                           (org-agenda-todo-ignore-deadlines t)
-                                           (org-agenda-todo-ignore-with-date t)
-                                           (org-tags-match-list-sublevels t)
-                                           (org-agenda-sorting-strategy
-                                            '(todo-state-down effort-up category-keep)))))
-              (next-tasks '(tags-todo "-REFILE-CANCELLED/!-HOLD-WAITING"
-                                       ((org-agenda-overriding-header "Next Actions")
-                                        (org-agenda-skip-function 'bh/skip-project-tasks-maybe)
-                                        (org-agenda-todo-ignore-scheduled t)
-                                        (org-agenda-todo-ignore-deadlines t)
-                                        (org-agenda-todo-ignore-with-date t)
-                                        (org-agenda-sorting-strategy
-                                         '(category-down category-keep))))))
-          (setq org-agenda-custom-commands
-                `((" " "Agenda"
-                   ((agenda "" nil)
-                    (emagician-agenda/daily-wisdom 
-                     "" 
-                     ((org-agenda-overriding-header " -|-+-|-"))) 
-                    ,next-tasks
-                    ,refile-tasks
-                    ,stuck-projects))
-                  ("y" "Wisdom... YOW!"
-                   ((agenda "" nil)
-                    (emagician-agenda/daily-wisdom)))
-                  ("W" "Weekly Review -- Unfinished."))))
-        
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  
+  (defun emagician-agenda/daily-wisdom (&rest args)
+    "Show some daily wisdom in the agenda"
+    (debug)
+    (setq buffer-read-only nil) 
+      (insert (org-add-props "                       -|-+-|-                       "
+                  nil 'face 'org-agenda-structure) "\n")
+      (insert (concat (emagician/cookie) "\n" ))
+      (insert "\n")
+      (insert (make-string (window-width) org-agenda-block-separator)\n))
+  
+  (let ((refile-tasks '(tags "REFILE" 
+                             ((org-agenda-overriding-header "Tasks to Refile")
+                              (org-tags-match-list-sublevels))))
+        (stuck-projects '(tags-todo "-CANCELLED/!"
+                                    ((org-agenda-overriding-header "Stuck Projects")
+                                     (org-agenda-skip-function 'emagician-org/skip-non-stuck-projects))))
+        (next-tasks '(tags-todo "-REFILE-CANCELLED/!NEXT"
+                                ((org-agenda-overriding-header "Next Actions")
+                                 (org-agenda-skip-function 'emagician-org/skip-projects-and-habits-and-single-tasks)
+                                 (org-agenda-todo-ignore-scheduled t)
+                                 (org-agenda-todo-ignore-deadlines t)
+                                 (org-agenda-todo-ignore-with-date t)
+                                 (org-tags-match-list-sublevels t)
+                                 (org-agenda-sorting-strategy
+                                  '(category-down category-keep))))))
+  
+    (setq org-agenda-custom-commands
+          `((" " "Agenda"
+             ((agenda "" nil) 
+              (emagician-agenda/daily-wisdom  "" nil)
+              ,next-tasks
+              ,stuck-projects))
+            ("y" "Wisdom... YOW!"
+             ((emagician-agenda/daily-wisdom "" nil)))
+            ("W" "Weekly Review -- Unfinished."))))
+  
 #+end_src
 
 *** TODO figure out context
@@ -123,178 +91,192 @@ also quite a number of groovy helper functions
 
 Originally from http://doc.norang.ca/org-mode.html#Projects
 #+begin_src emacs-lisp
-  (defun emagician-org/is-project-p ()
-    "Any task with a todo keyword subtask"
+  (defun emagician-org/find-project-task ()
+    "Move point to the parent (project) task if any"
     (save-restriction
       (widen)
-      (let ((has-subtask)
-            (subtree-end (save-excursion (org-end-of-subtree t)))
-            (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-        (save-excursion
-          (forward-line 1)
-          (while (and (not has-subtask)
-                      (< (point) subtree-end)
-                      (re-search-forward "^\*+ " subtree-end t))
-            (when (member (org-get-todo-state) org-todo-keywords-1)
-              (setq has-subtask t))))
-        (and is-a-task has-subtask))))
-  
-  (defun emagician-org/is-project-subtree-p ()
-    "Any task with a todo keyword that is in a project subtree.
-  Callers of this function already widen the buffer view."
-    (let ((task (save-excursion (org-back-to-heading 'invisible-ok)
-                                (point))))
-      (save-excursion
-        (emagician-org/find-project-task)
-        (if (equal (point) task)
-            nil
-          t))))
-  
-  (defun emagician-org/is-task-p ()
-    "Any task with a todo keyword and no subtask"
-    (save-restriction
-      (widen)
-      (let ((has-subtask)
-            (subtree-end (save-excursion (org-end-of-subtree t)))
-            (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-        (save-excursion
-          (forward-line 1)
-          (while (and (not has-subtask)
-                      (< (point) subtree-end)
-                      (re-search-forward "^\*+ " subtree-end t))
-            (when (member (org-get-todo-state) org-todo-keywords-1)
-              (setq has-subtask t))))
-        (and is-a-task (not has-subtask)))))
-  
-  (defun emagician-org/is-subproject-p ()
-    "Any task which is a subtask of another project"
-    (let ((is-subproject)
-          (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
-      (save-excursion
-        (while (and (not is-subproject) (org-up-heading-safe))
+      (let ((parent-task (save-excursion (org-back-to-heading 'invisible-ok) (point))))
+        (while (org-up-heading-safe)
           (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
-            (setq is-subproject t))))
-      (and is-a-task is-subproject)))
+            (setq parent-task (point))))
+        (goto-char parent-task)
+        parent-task)))
   
-  (defun emagician-org/list-sublevels-for-projects-indented ()
-    "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
-    This is normally used by skipping functions where this variable is already local to the agenda."
-    (if (marker-buffer org-agenda-restrict-begin)
-        (setq org-tags-match-list-sublevels 'indented)
-      (setq org-tags-match-list-sublevels nil))
-    nil)
   
-  (defun emagician-org/list-sublevels-for-projects ()
-    "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
-    This is normally used by skipping functions where this variable is already local to the agenda."
-    (if (marker-buffer org-agenda-restrict-begin)
-        (setq org-tags-match-list-sublevels t)
-      (setq org-tags-match-list-sublevels nil))
-    nil)
-  
-  (defun emagician-org/skip-non-stuck-projects ()
-    "Skip trees that are not stuck projects"
-    (emagician-org/list-sublevels-for-projects-indented)
-    (save-restriction
-      (widen)
-      (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-        (if (emagician-org/is-project-p)
-            (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
-                   (has-next ))
-              (save-excursion
-                (forward-line 1)
-                (while (and (not has-next) (< (point) subtree-end) (re-search-forward "^\\*+ NEXT " subtree-end t))
-                  (unless (member "WAITING" (org-get-tags-at))
-                      (setq has-next t))))
-              (if has-next
-                  next-headline
-                nil)) ; a stuck project, has subtasks but no next task
-          next-headline))))
-  
-  (defun emagician-org/skip-non-projects ()
-    "Skip trees that are not projects"
-    (emagician-org/list-sublevels-for-projects-indented)
-    (if (save-excursion (emagician-org/skip-non-stuck-projects))
-        (save-restriction
-          (widen)
-          (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-            (if (emagician-org/is-project-p)
-                nil
-              subtree-end)))
-      (org-end-of-subtree t)))
-  
-  (defun emagician-org/skip-project-trees-and-habits ()
-    "Skip trees that are projects"
-    (save-restriction
-      (widen)
-      (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-        (cond
-         ((emagician-org/is-project-p)
-          subtree-end)
-         ((org-is-habit-p)
-          subtree-end)
-         (t
-          nil)))))
-  
-  (defun emagician-org/skip-projects-and-habits-and-single-tasks ()
-    "Skip trees that are projects, tasks that are habits, single non-project tasks"
-    (save-restriction
-      (widen)
-      (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-        (cond
-         ((org-is-habit-p)
-          next-headline)
-         ((emagician-org/is-project-p)
-          next-headline)
-         ((and (emagician-org/is-task-p) (not (emagician-org/is-project-subtree-p)))
-          next-headline)
-         (t
-          nil)))))
-  
-  (defun emagician-org/skip-project-tasks-maybe ()
-    "Show tasks related to the current restriction.
-  When restricted to a project, skip project and sub project tasks, habits, NEXT tasks, and loose tasks.
-  When not restricted, skip project and sub-project tasks, habits, and project related tasks."
-    (save-restriction
-      (widen)
-      (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
-             (next-headline (save-excursion (or (outline-next-heading) (point-max))))
-             (limit-to-project (marker-buffer org-agenda-restrict-begin)))
-        (cond
-         ((emagician-org/is-project-p)
-          next-headline)
-         ((org-is-habit-p)
-          subtree-end)
-         ((and (not limit-to-project)
-               (emagician-org/is-project-subtree-p))
-          subtree-end)
-         ((and limit-to-project
-               (emagician-org/is-project-subtree-p)
-               (member (org-get-todo-state) (list "NEXT")))
-          subtree-end)
-         (t
-          nil)))))
-  
-  (defun emagician-org/skip-projects-and-habits ()
-    "Skip trees that are projects and tasks that are habits"
-    (save-restriction
-      (widen)
-      (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-        (cond
-         ((emagician-org/is-project-p)
-          subtree-end)
-         ((org-is-habit-p)
-          subtree-end)
-         (t
-          nil)))))
-  
-  (defun emagician-org/skip-non-subprojects ()
-    "Skip trees that are not projects"
-    (let ((next-headline (save-excursion (outline-next-heading))))
-      (if (emagician-org/is-subproject-p)
-          nil
-        next-headline)))
-  
+    (defun emagician-org/is-project-p ()
+      "Any task with a todo keyword subtask"
+      (save-restriction
+        (widen)
+        (let ((has-subtask)
+              (subtree-end (save-excursion (org-end-of-subtree t)))
+              (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
+          (save-excursion
+            (forward-line 1)
+            (while (and (not has-subtask)
+                        (< (point) subtree-end)
+                        (re-search-forward "^\*+ " subtree-end t))
+              (when (member (org-get-todo-state) org-todo-keywords-1)
+                (setq has-subtask t))))
+          (and is-a-task has-subtask))))
+    
+    (defun emagician-org/is-project-subtree-p ()
+      "Any task with a todo keyword that is in a project subtree.
+    Callers of this function already widen the buffer view."
+      (let ((task (save-excursion (org-back-to-heading 'invisible-ok)
+                                  (point))))
+        (save-excursion
+          (emagician-org/find-project-task)
+          (if (equal (point) task)
+              nil
+            t))))
+    
+    (defun emagician-org/is-task-p ()
+      "Any task with a todo keyword and no subtask"
+      (save-restriction
+        (widen)
+        (let ((has-subtask)
+              (subtree-end (save-excursion (org-end-of-subtree t)))
+              (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
+          (save-excursion
+            (forward-line 1)
+            (while (and (not has-subtask)
+                        (< (point) subtree-end)
+                        (re-search-forward "^\*+ " subtree-end t))
+              (when (member (org-get-todo-state) org-todo-keywords-1)
+                (setq has-subtask t))))
+          (and is-a-task (not has-subtask)))))
+    
+    (defun emagician-org/is-subproject-p ()
+      "Any task which is a subtask of another project"
+      (let ((is-subproject)
+            (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
+        (save-excursion
+          (while (and (not is-subproject) (org-up-heading-safe))
+            (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+              (setq is-subproject t))))
+        (and is-a-task is-subproject)))
+    
+    (defun emagician-org/list-sublevels-for-projects-indented ()
+      "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
+      This is normally used by skipping functions where this variable is already local to the agenda."
+      (if (marker-buffer org-agenda-restrict-begin)
+          (setq org-tags-match-list-sublevels 'indented)
+        (setq org-tags-match-list-sublevels nil))
+      nil)
+    
+    (defun emagician-org/list-sublevels-for-projects ()
+      "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
+      This is normally used by skipping functions where this variable is already local to the agenda."
+      (if (marker-buffer org-agenda-restrict-begin)
+          (setq org-tags-match-list-sublevels t)
+        (setq org-tags-match-list-sublevels nil))
+      nil)
+    
+    (defun emagician-org/skip-non-stuck-projects ()
+      "Skip trees that are not stuck projects"
+      (emagician-org/list-sublevels-for-projects-indented)
+      (save-restriction
+        (widen)
+        (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+          (if (emagician-org/is-project-p)
+              (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
+                     (has-next ))
+                (save-excursion
+                  (forward-line 1)
+                  (while (and (not has-next) 
+                              (< (point) subtree-end) 
+                              (re-search-forward "^\\*+ NEXT " subtree-end t))
+                    (unless (member "WAITING" (org-get-tags-at))
+                        (setq has-next t))))
+                (if has-next
+                    next-headline
+                  nil)) ; a stuck project, has subtasks but no next task
+            next-headline))))
+    
+    (defun emagician-org/skip-non-projects ()
+      "Skip trees that are not projects"
+      (emagician-org/list-sublevels-for-projects-indented)
+      (if (save-excursion (emagician-org/skip-non-stuck-projects))
+          (save-restriction
+            (widen)
+            (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+              (if (emagician-org/is-project-p)
+                  nil
+                subtree-end)))
+        (org-end-of-subtree t)))
+    
+    (defun emagician-org/skip-project-trees-and-habits ()
+      "Skip trees that are projects"
+      (save-restriction
+        (widen)
+        (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+          (cond
+           ((emagician-org/is-project-p)
+            subtree-end)
+           ((org-is-habit-p)
+            subtree-end)
+           (t
+            nil)))))
+    
+    (defun emagician-org/skip-projects-and-habits-and-single-tasks ()
+      "Skip trees that are projects, tasks that are habits, single non-project tasks"
+      (save-restriction
+        (widen)
+        (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+          (cond
+           ((org-is-habit-p)
+            next-headline)
+           ((emagician-org/is-project-p)
+            next-headline)
+           ((and (emagician-org/is-task-p) (not (emagician-org/is-project-subtree-p)))
+            next-headline)
+           (t
+            nil)))))
+    
+    (defun emagician-org/skip-project-tasks-maybe ()
+      "Show tasks related to the current restriction.
+    When restricted to a project, skip project and sub project tasks, habits, NEXT tasks, and loose tasks.
+    When not restricted, skip project and sub-project tasks, habits, and project related tasks."
+      (save-restriction
+        (widen)
+        (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
+               (next-headline (save-excursion (or (outline-next-heading) (point-max))))
+               (limit-to-project (marker-buffer org-agenda-restrict-begin)))
+          (cond
+           ((emagician-org/is-project-p)
+            next-headline)
+           ((org-is-habit-p)
+            subtree-end)
+           ((and (not limit-to-project)
+                 (emagician-org/is-project-subtree-p))
+            subtree-end)
+           ((and limit-to-project
+                 (emagician-org/is-project-subtree-p)
+                 (member (org-get-todo-state) (list "NEXT")))
+            subtree-end)
+           (t
+            nil)))))
+    
+    (defun emagician-org/skip-projects-and-habits ()
+      "Skip trees that are projects and tasks that are habits"
+      (save-restriction
+        (widen)
+        (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+          (cond
+           ((emagician-org/is-project-p)
+            subtree-end)
+           ((org-is-habit-p)
+            subtree-end)
+           (t
+            nil)))))
+    
+    (defun emagician-org/skip-non-subprojects ()
+      "Skip trees that are not projects"
+      (let ((next-headline (save-excursion (outline-next-heading))))
+        (if (emagician-org/is-subproject-p)
+            nil
+          next-headline)))
+    
 #+end_src
 
 
@@ -303,6 +285,41 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
            ((org-agenda-overriding-header "Stuck Projects")
 		   (org-agenda-skip-function 'bh/skip-non-stuck-projects)))
 
+** Agenda and the sky.
+
+   
+
+*** Sunset/Sunrise/Lunar Calendar
+%%(diary-sunrise-sunset)
+*** Lunar Phases
+    :PROPERTIES:
+	:CATEGORY: Lunar
+	:END:
+ %%(lunar-phases)
+
+#+begin_src emacs-lisp
+  (setq lunar-phase-names
+        '("● New Moon" ; Unicode symbol: 🌑 Use full circle as fallback
+          "☽ First Quarter Moon"
+          "○ Full Moon" ; Unicode symbol: 🌕 Use empty circle as fallback
+          "☾ Last Quarter Moon"))
+  
+  (org-no-warnings (defvar date))
+  (defun lunar-phases ()
+    "Show lunar phase in Agenda buffer."
+    (require 'lunar)
+    (let* ((phase-list (lunar-phase-list (nth 0 date) (nth 2 date)))
+           (phase (find-if (lambda (phase) (equal (car phase) date))
+                              phase-list)))
+      (when phase
+        (setq ret (concat (lunar-phase-name (nth 2 phase)) " "
+                          (substring (nth 1 phase) 0 5))))))
+#+end_src emacs-lisp
+
+*** TODO Location aware org...?
+**** NEXT someone has else done this.  Find it.
+**** NEXT look at simple webservice:
+	 http://freegeoip.net/static/index.html
 ** TODO Custom Agenda that shows next tasks
 * Todo task states
 
@@ -354,7 +371,7 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 * Org Babel
 
   Some no-brainer org babel setup.
-
+  
 ** Handling of source in org files
 
 #+begin_src emacs-lisp
@@ -376,7 +393,7 @@ Wherever possible we always want ot display inline images
       (error nil)))
 #+end_src
 
-** Gnuplot setup
+** Gnuplot setup 
 
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
@@ -391,6 +408,7 @@ Wherever possible we always want ot display inline images
  '((sh . t)
    (emacs-lisp . t)
    (calc . t)
+   (ditaa . t)
    (gnuplot . t)))
 #+end_src
 
@@ -408,8 +426,13 @@ Wherever possible we always want ot display inline images
 **** TODO get plantuml jar, throw in distbin or something
 **** TODO make sure to add some kind of update code somwerhesrs for bins like this. even if its just a todo 
 **** TODO set up  (setq org-plantuml-jar-path "~/Downloads/plantuml.jar")
-*** TODO ditaa
+*** ditaa
+#+begin_src emacs-lisp
+  (setq org-ditaa-jar-path (expand-file-name "ditaa.jar" (concat emagician-dir "assets/bin/ditaa/")))
   
+  
+  
+#+end_src  
 * TODO Time clocking
 (defun org-dblock-write:rangereport (params)
   "Display day-by-day time reports."
@@ -440,7 +463,7 @@ Wherever possible we always want ot display inline images
                               (seconds-to-time end))))
         (setq start (+ 86400 start))))))
 * Links
-#+begin-src emacs-lisp
+#+begin_src emacs-lisp
 (require 'org-info)
 (define-key global-map "\C-cl" 'org-store-link)
 #+end_src
@@ -575,6 +598,36 @@ Wherever possible we always want ot display inline images
     "XSLT")
   
 #+end_src
+
+* Pomodoro magick
+** TODO find out if test works, and turn into proper emagician code
+  testing this for now
+
+  - fix clock in bug. 
+
+#+begin_src emacs-lisp
+(add-to-list 'org-modules 'org-timer)
+(setq org-timer-default-timer 25)
+
+(add-hook 'org-clock-in-hook '(lambda () 
+      (if (not org-timer-current-timer) 
+      (org-timer-set-timer '(16)))))
+
+* Gamification magick
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (expand-file-name "dist/gamify" emagician-dir)) 
+  (setq gamify-org-p t)
+  (require 'gamify)
+  (gamify-start)
+#+end_src
+
+
+* TODO Quick key
+** TODO install popup thinger 
+*** NEXT check old emacs if it is there
+** TODO bind to F4
+** TODO write helm thing to set the current project 
+
 * TODO do something with this coolness
 (defun jonnay-org-remember-loop ()
   "Go to a special place for rapid task entry and refiling"

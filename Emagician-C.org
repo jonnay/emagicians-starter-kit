@@ -1,0 +1,15 @@
+#+title: C Development
+
+I don't do much C/C++ development, but I am doing some Arduino.
+
+* Arduino
+
+** Setup for the Arduino make file
+Get the makefile from here: https://github.com/mjoldfield/Arduino-Makefile
+#+begin_src emacs-lisp
+    (setenv "ARDUINO_DIR" "/Applications/Arduino.app/Contents/Resources/Java")
+    (setenv "ARDMK_DIR" "~/projects/arduino/Arduino-Makefile")
+#+end_src
+
+** CEDET goodness
+

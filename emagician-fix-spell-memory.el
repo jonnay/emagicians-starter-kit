@@ -36,19 +36,26 @@
 ;;   - Step 2 :: Use M-$ to check the spelling of your misspelled word
 ;;   - Step 3 :: follow the directions of the prompt
 ;; 
+;; * Changelog
 ;; 
-;; 
+;;   - v 0.1 :: First Version
+;;   - v 0.2 :: 
+;;     - Minor documentation fix. 
+;;   - v 0.3 ::
+;;     - Fix bug when using ispell 
 
 ;;; Code:
 
 (defadvice ispell-command-loop (after emagician/fix-muscle-memory last activate)
-  "Force the user to type in the misspelled/mis-typoed word 5 times, to burn it into muscle memory."
-  (let ((times 0)
-        (total-times 3))
+  "Force the user to type in the misspelled/mis-typoed word 3 times, to burn it into muscle memory."
+  (let* ((total-times 3)
+         (times (if (null ad-return-value)
+                    total-times 
+                  0)))
     (while (< times total-times)
       (setq times
             (+ times (if (string= (read-string (format "Re-type \"%s\" correctly (%d/%d): "  ad-return-value times total-times))
-                              ad-return-value)
+                                  ad-return-value)
                      1
                    -1))))))
 

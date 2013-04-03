@@ -284,7 +284,8 @@ cp -v ./init.el ~/.emacs.d/
 
 <<true-name>>
 <<set-this-dir-as-var>>
-
+(require 'org-install)
+(require 'ob-tangle)
 (org-babel-load-file (expand-file-name "Emagician.org" emagician-dir))
 
 #+end_src

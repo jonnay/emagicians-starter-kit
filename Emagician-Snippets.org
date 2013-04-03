@@ -1,7 +1,7 @@
 #+TITLE: YASnippets 
 #+results: silent
 * This is not the file you are looking for...
-  If you want to configure yasnippets for the emagiians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
+  If you want to configure yasnippets for the emagicians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
 
 ** Org
 
@@ -40,6 +40,22 @@ var $1 = $0;
 #+end_src
 
 
+#+begin_src yasnippet :tangle assets/snippets/js-mode/describe
+# name: var (assign)
+# key: var
+# --
+describe("$1", function(done) {
+	$0
+});
+#+end_src
 
+#+begin_src yasnippet :tangle assets/snippets/js-mode/it
+# name: var (assign)
+# key: var
+# --
+it("$1", function(done) {
+	$0
+});
+#+end_src
 ** Lisp
 src

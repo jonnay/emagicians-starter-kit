@@ -1,0 +1,29 @@
+#+title: Banana --- Tools for webmonkeys
+
+* Eeeep Eeepp! -- Mission
+  
+  Provide a set of tiny, but useful tools in the development of
+  websites, while fitting into the emacs-way as much as possible, and
+  remain mode agnostic.
+
+* TODO Site definitions
+
+  - should update browse-url-filename-alist
+  - should transform ffap paths from / to <siteroot>/
+
+** NEXT create a banana-add-siteroot
+
+* TODO Path completion
+
+  - should complete filename paths of / to <siteroot>/
+
+** NEXT Find where the filename completion portion of auto-complete is
+(ac-define-source banana-filename
+  '(candidates . ac-banana-filename-canditate)
+   (prefix . valid-file) ; not sure
+   (requires . 0 ) ; not sure
+   (action . ac-start) 
+   (limit . nil)) 
+** TODO modify as needed
+
+

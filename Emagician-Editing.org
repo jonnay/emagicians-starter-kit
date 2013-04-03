@@ -12,10 +12,26 @@
 #+end_src
 
 ** Backups
+*** Disabling this was such a monumentally stupidly bad idea. 
+	My excuse is that it was a self-inflicted curse for not understanding what I was snarfing and barfing.
 #+begin_src emacs-lisp
-(setq auto-save-default nil)
-(setq make-backup-files nil)
+(setq auto-save-default t)
 #+end_src
+
+*** Backup files are annoying, until they save your skin 
+This was snarfed from Magnars [fn:1]
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+#+end_src
+
 * Transient mark mode
 
   For now Transient Mark mode is just turned off.  I don't like
@@ -36,18 +52,42 @@
   (transient-mark-mode -1)
 #+end_src
 
-* Killing and yanking
-** Swap region with kill ring
-** Insert-yank-as-rectangle
-** when yanking, indent according to the mode
+* Working with Text
+** Filling
+*** Unfill [fn:2]
+#+begin_src emacs-lisp
+(defun unfill-paragraph ()
+  "Unfill a paragraph at or after point."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
+#+end_src
+** Killing and yanking
+*** TODO Swap region with kill ring
+*** TODO Insert-yank-as-rectangle
+*** when yanking, indent according to the mode
 #+begin_src emacs-lisp
   (defadvice yank (after indent-region activate)
     "indent the region after a yank if we're in a programming mode."
     (if (derived-mode-p 'prog-mode)
         (indent-region (region-beginning) (region-end) nil)))
 #+end_src
+**** TODO make sure there is a way to not indent accoring to the mode
+***** NEXT write the advice to be around, so it can skip on a prefix arg of 0.
+*** kill-buffer-file-name
 
-* Indenting and tabbing 
+#+begin_src emacs-lisp
+  (defun kill-buffer-file-name () 
+    "Show current buffer's filename in the echo area and add it to the kill ring." 
+    (interactive) 
+    (let ((buffer-file-name (buffer-file-name))) 
+      (if (null buffer-file-name) 
+          (message "Buffer %s is not associated with a file." (buffer-name)) 
+        (message "%s" (kill-new buffer-file-name)))))
+#+end_src
+** Indenting and tabbing 
   I am not going to solve this for everyone and try to be all things for all peope.  In fact I will bet money that my style of indentation kinda sucks, and look to the emacs community to help me to stop sucking.
 #+begin_src emacs-lisp
 (set-default 'tab-width 4)
@@ -59,10 +99,10 @@
 (set-default 'cperl-indent-level tab-width)
 (set-default 'nxml-child-indent tab-width)
 #+end_src
-** Change Behavior of the home key
-   Home should jump between the level of indendation and the first line 
+*** Change Behavior of the home key
+   	Home should jump between the level of indendation and the first line 
 
-*** Shamelessly hacked from Drew Adams. 
+**** Shamelessly hacked from Drew Adams. 
 #+begin_src emacs-lisp
 (defun emagician-beginning-or-indentation (&optional n)
   "Bounce cursor to beginning of this line or to its indentation."
@@ -73,13 +113,13 @@
          (forward-line 0))
         (t (back-to-indentation))))
 #+end_src
-*** Do key map 
+**** Do key map 
 #+begin_src emacs-lisp
 (global-set-key [home] 'emagician-beginning-or-indentation)
 (substitute-key-definition 'beginning-of-line 'beginning-or-indentation global-map)
 #+end_src
 
-** Make sure end key always goes to end of hte line
+*** Make sure end key always goes to end of hte line
 #+begin_src emacs-lisp
 (global-set-key [end] 'end-of-line)
 #+end_src
@@ -140,6 +180,7 @@
   (setq yas-prev-field-key "<prev>")
   (require 'yasnippet)
   
+  (add-hook 'prog-mode-hook 'yas-minor-mode-on)
   
   ;; I actually don't think this rigamaroll is needed anymore
   
@@ -187,8 +228,8 @@
 *** TODO make sure there is a sort of assits directory, and merge with yasnippet
 *** TODO make emagicians starter kit generate the dictionaries itself
 *** TODO write jQuery dictionary.  
+**** NEXT google up a jquery keyword list
 **** TODO purify myself afterwards by writing one for Ender
-
 
 ** Sources
 
@@ -272,3 +313,14 @@
 
 (add-to-list 'auto-mode-alist '("\\.md" 'markdown-mode))
 #+end_src
+
+* Footnotes
+
+[fn:1]  http://whattheemacsd.com/init.el-02.html
+
+[fn:2] From didi on #emacs
+
+
+
+
+

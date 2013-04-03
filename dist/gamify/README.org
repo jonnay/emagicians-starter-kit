@@ -1,0 +1,16 @@
+* Gamify
+
+Gamify is an Emacs package that will turn your ordinary, boring day-to-day Emacs experience into something awesome!
+Well, not really... You can use it to track your soft and professional skills developement while keeping you motivated to do stuff such as your [[http://orgmode.org/][Org-Mode]] tasks and enhencing your productivity.
+
+* Installation
+
+Copy all the =.el= files into a directory in your Emacs =load-path= and optionally =byte-compile-file= them.
+
+* Customization
+
+There are quite a few tweakable variables. Just check the source, dang it!
+
+* Stuff TODO
+
+- Add achievements and similar stuff for even more awesomeness.

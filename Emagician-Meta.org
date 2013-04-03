@@ -15,8 +15,14 @@
 
 *** Tags 
 	
-	Not many tags in use yet, except 2:
+	Configs usually have crosscutting concerns.  Like Keys.
+
+	So yea. Tags FTW.
+	
 	- asset :: contains a src block that is an asset (i.e. a snippet, cookie file, css file) rather then elisp
+	- keybinding :: modify the binding of a key. hurdur.
+	- osx :: Mac specific junk.
+	- experimental :: Stuff that is being worked on, in progress, and probably half-baked.
 
 **** TODO pull out a list of tags via the agenda.
 
@@ -63,26 +69,55 @@
 
 
 * Exporting as a website
-
-** TODO Save website to a seperate directory
+** TODO Save website to a separate directory
 ** TODO do some magic to auto-commit to the git branch
    http://help.github.com/pages/
    http://ryanfitzer.org/2011/11/easy-syncing-of-github-pages/
-** TODO Set up valid stylesheet for a default
-
-#+begin_src css :tangle export/main.css
-  body {
-      margin: 1em;
-      background-color: #f0f8ff;
-  }
-  
-  h1 {
-      border: 0px solid #000;
-      border-bottom-width: 1px;
-  }
+** Set up stylesheets
+#+begin_src emacs-lisp
+  (emagician-expect-package 'sass-mode)
   
   
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               (append org-babel-load-languages '((sass . t))))
 #+end_src
+
+
+#+begin_src sass :tangle export/main.scss :noweb yes 
+<<colors>>
+<<org-structures>>
+#+end_src
+
+#+RESULTS:
+
+*** Solarized style colors 
+#+name: colors
+#+begin_src sass
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+#+end_src
+
+#+RESULTS: colors
+
+*** Main org structures
+#+name: org-structures
+#+begin_src sass
+
+#+end_src 
 
 ** Specialized export command
 
@@ -160,4 +195,44 @@
     (org-publish-current-project))
   
   
+#+end_src
+
+   
+* TODO Emagician Package Archive							   :experimental:
+
+  Why not?  Some packages Aren't available on ELPA, or MELPA.  So it'd be nice to have another location for them.
+
+  This will also serve as documentation and examples on how to work with Elpakit. 
+
+** Elpakit basic setup
+#+begin_src emacs-lisp :tangle no
+(emagician-expect-package 'elpakit)
+#+end_src
+
+** Define the archive
+#+begin_src emacs-lisp :tangle no
+  (elpakit (expand-file-name "empa/archive" emagician-dir)
+           '("empa/recipes/prosjekt"
+             "empa/recipes/emacs-achievements"))
+
+*** NEXT test the build? 
+
+#+end_src
+
+** Recipes
+
+   Maybe they should be moved?  Maybe they should say? I don't know.
+
+#+begin_src emacs-lisp :tangle empa/recipes/prosjekt
+      (prosjekt 
+       :doc "A emacs extension for working with projects"
+       :repo "abingham/prosjekt" 
+       :fetcher github)
+#+end_src
+
+#+begin_src emacs-lisp :tangle empa/recipes/emacs-achievements
+      (emacs-achievements 
+       :doc "a fun way to learn about Emacs."
+       :repo "abingham/prosjekt" 
+       :fetcher github)
 #+end_src

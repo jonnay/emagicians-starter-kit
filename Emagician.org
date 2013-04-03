@@ -13,6 +13,22 @@
   Things like spaces, tabs, and all the important stuff are in their
   own file.
 
+** Splash 
+
+*** Show on startup:
+   	- [ ] Sigil
+   	- [ ] Diary
+   	- [ ] Date/time
+   	- [ ] Shortcut list
+      - [ ] Open up Magit status buffers
+      - [ ] Dired to a dir
+      - [ ] Agenda
+*** Warn user if there were problems on load 
+
+*** Message info
+	- After load, store messages sowmerhew
+	- diff them with the existing messages and show diffs to user
+
 ** Breakage happens, lets try and make it easier to deal with.
    Snarfed this idea from https://github.com/overtone/emacs-live.
    Which goes to show: even if you use the word brogrammer you might
@@ -273,30 +289,37 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
 * Starter Kit Core
 As with the other starter kit, there are some fundamentals that need
 to be delt with. 
-** TODO Write hook macro
+** Write hook macro
    - name, hook to hook into, arguments, body
    -> hook function defined, and added
 
 #+begin_src emacs-lisp
-  (defmacro emagician/defhook (name hook &rest body)
-    (let* ((docp (stringp (read (car body))))
-           (body (if docp (cdr body) body)))
+  (defmacro emagician/defhook (name hook &rest b)
+    (let* ((docp (stringp (car b)))
+           (body (if docp (cdr b) b)))
       `(progn 
          (defun ,name () 
-           ,(concat doc "\nEmagically defined with emagician/defhook.")
-           ,body)
+           ,(concat (if docp (car b) "Not Documented\n") "\nEmagically defined with emagician/defhook.")
+           ,@body)
          (add-hook (quote ,hook) (quote ,name)))))
   
-  
 #+end_src
+
+(macroexpand '(emagician/defhook name hook "docstring" body))
+(progn (defun name nil "docstring
+Emagically defined with emagician/defhook." body) (add-hook (quote hook) (quote name)))
+
+
 *** NEXT write tests
+*** NEXT fix indentation 
+*** NEXT fix slightly shoddy implementation to not suck. 
 ** TODO write a mode-specific-hook macro.
    i.e. (if (eq major-mode ...) ...)
 *** NEXT write macro
 *** TODO write tests
 ** Basic hook functions and macros
 *** defhook 
-*** emagician/minor-in-major-mode
+*** emagician/minor-in-major-mode 
    This macro will help build your turn-on-minor-mode functions that are so helpful, and automagickally add them to a major mode.  It won't try to re-define the turn-on mode if it is already defined.
 
 #+begin_src emacs-lisp
@@ -514,7 +537,13 @@ to be delt with.
 #+end_src 
 
 * References, Bibliography, Shout Outs, and Props.
+  - ESchultes Emacs Starter Kit :: https://github.com/eschulte/emacs-starter-kit
   - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html
+  - Emacs Starter Kit :: https://github.com/technomancy/emacs-starter-kit
+  - Cabbage  :: https://github.com/senny/cabbage
+  - Emacs Live :: https://github.com/overtone/emacs-live (even if they are brogrammers)
+  - novoid :: https://github.com/novoid/dot-emacs
+  - ocodo :: https://github.com/ocodo/emacs.d
 * The End
 #+begin_src 
 (provide 'emagician)

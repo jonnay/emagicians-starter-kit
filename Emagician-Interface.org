@@ -128,6 +128,7 @@ apropos? (~C-h a~)
 (size-indication-mode t) 
 #+end_src
 *** TODO Start with some hawt Nyan action
+**** NEXT try and fix the problem with this recipe not storing images
 **** TODO Test Recipe
 #+begin_src emacs-lisp :tangle no 
   (when nil
@@ -148,14 +149,7 @@ apropos? (~C-h a~)
   
 #+end_src
 
-*** TODO http://www.emacswiki.org/emacs/powerline.el Then the funky image style mode lines that look awesome
-
-   ARG, which one?  not sure yet.  Both kinda suck.
-
-#+begin _src emacs-lisp :notangle
-(emagician-expect-package 'highline)
-(require 'highline)
-#+end_src
+*** Images to the mode line to make them look awesome. 
 
 #+begin_src emacs-lisp 
 (emagician-expect-package 'powerline)
@@ -166,13 +160,13 @@ apropos? (~C-h a~)
 
 #+begin_src emacs-lisp
   (custom-set-faces 
-     '(powerline-active1 ((t (:inherit (mode-line) :background "plum2"))))
-     '(powerline-active2 ((t (:inherit (mode-line) :background "plum3"))))
+     '(powerline-active1 ((t (:inherit (mode-line) :background "grey70"))))
+     '(powerline-active2 ((t (:inherit (mode-line) :background "grey80"))))
      
      '(powerline-inactive1
-       ((t (:background "turquoise3" :inherit mode-line-inactive))))
+       ((t (:background "grey40" :inherit mode-line-inactive))))
      '(powerline-inactive2
-       ((t (:background "turquoise4" :inherit mode-line-inactive)))))
+       ((t (:background "grey50" :inherit mode-line-inactive)))))
 #+end_src
 
 For some reason powerline wants to be reset using ~powerline-center-theme~
@@ -216,11 +210,64 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
                      "%b"))))
 #+end_src
 
-  
+** Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.		 :keybinding:
+
+#+begin_src emacs-lisp
+(global-unset-key [(control z)])
+#+end_src
+   
 * Functional Interface Chunks
+** Memo Pop
+*** NEXT check that it can be downloaded
+*** TODO enable code
+*** TODO write maker functions
+*** TODO write update so that current project can be set
+(require 'memo-pop)
+(define-prefix-command 'memo-pop-prefix)
+(global-set-key [f4] 'memo-pop-prefix)
+(global-set-key [f4 f2] '(lambda () (interactive) (memo-pop "~/Dropbox/org/GTD.org")))
+(global-set-key [f4 f4] '(lambda () (interactive) (message "[f2] GTD   [f3] Personal   [f4] Help   [f5] Bestbuy   [f6] Career   [f7] Game")))
+(global-set-key [f4 f5] '(lambda () (interactive) (memo-pop "~/Dropbox/org/BestBuy.org")))
+(global-set-key [f4 f6] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Career.org")))
+(global-set-key [f4 f7] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Game.org")))
+
+** Prosjekt 
+#+begin_src emacs-lisp
+(add-to-list 'load-path (expand-file-name "dist/prosjekt/prosjekt" emagician-dir))
+(add-to-list 'load-path (expand-file-name "dist/prosjekt/prosjekt/ext"  emagician-dir))
+(require 'prosjekt)
+(require 'helm-prosjekt)
+#+end_src
+
+*** General key bindings
+#+begin_src emacs-lisp
+(global-set-key (kbd "S-<f2>") 'helm-prosjekt)
+#+end_src 
+
+**** Prosjekt key bindings
+	- Execution and compiling
+	  - [f5]   :: compile
+	  - [f6]   :: test?
+	  - [f7]   :: execute?
+	  - [f8]   :: 
+    - Project information
+      - [S-f5] :: Pop up org file
+      - [S-f6] :: Agenda for project
+      - [S-f7] :: magit?
+      - [S-f8]
+    - Server Interactions
+      - [C-f5] :: Restart primary server
+      - [C-f6] :: Restart DB server?
+      - [C-f7] :: 
+      - [C-f8] :: 
+** Compile with F5
+#+begin_src emacs-lisp
+(global-set-key (kbd "<f5>") 'compile)
+#+end_src
 ** DZ, make it easy to run secondary services
 #+begin_src emacs-lisp
 (emagician-expect-package 'dizzee)
+(require 'dizzee)
 #+end_src
 *** Example on how to use dizzee
 #+begin_src emacs-lisp :tangle no
@@ -233,7 +280,18 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 #+begin_src emacs-lisp
 (setq messages-buffer-max-size 5000)
 #+end_src 
-** Global keybindings and related 
+
+** Searching
+*** Rebind standard keys										 :keybinding:
+
+isearch sould use regexp by default
+
+#+begin_src emacs-lisp
+(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
+#+end_src
+
+** Global keybindings and related								 :keybinding:
     - For editing specific keybindings, hit [[file:./Emagician-Editing.org]]
 	- For mode specific editing, check that mode's Emagician-*.org file (or parent, like Emagician-Lisp.org for scheme.)
 *** Re-bind some keys to more sensable defaults
@@ -241,13 +299,7 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 #+begin_src emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p) 
 #+end_src
-**** Searching															:keybinding:
-isearch sould use regexp by default
 
-#+begin_src emacs-lisp
-(global-set-key [(control s)] 'isearch-forward-regexp)
-(global-set-key [(control r)] 'isearch-backward-regexp)
-#+end_src
 **** Make command a proper meta key under os-x				 :osx:keybinding:
 #+begin_src emacs-lisp
 (setq mac-command-modifier 'meta)
@@ -305,7 +357,6 @@ isearch sould use regexp by default
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-w") 'helm-write-file)
 (global-set-key (kbd "C-x i")   'helm-insert-file)
 (global-set-key (kbd "M-y")     'helm-show-kill-ring)
 #+end_src
@@ -316,7 +367,6 @@ isearch sould use regexp by default
 
 #+begin_src emacs-lisp
 (define-key helm-find-files-map (kbd "C-<backspace>") 'backward-kill-word)
-(define-key helm-c-read-file-map (kbd "C-<backspace>") 'backward-kill-word)
 #+end_src
 
 ***** TODO figure out how to make find-files show the history as well.

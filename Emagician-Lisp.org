@@ -81,14 +81,17 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
   (defun emagician/run-checkdoc () 
     "run checkdoc on save if it is an elisp file"
     (if (and (eq major-mode 'emacs-lisp-mode)
-             (not (member buffer-file-name (cons package-user-dir package-directory-list)))) 
+             (> (length buffer-file-name)
+                (length package-user-dir))
+             (not (string= (concat package-user-dir "/")
+                           (substring buffer-file-name 0 (+ 1 (length package-user-dir))))))
         (checkdoc)))
   
   (add-hook 'after-save-hook 'emagician/run-checkdoc)
 #+end_src
 *** TODO fix the problem with this
 **** NEXT (delq nil (mapcar ....))
-
+	 
 * Common Lisp
 
 * Scheme

@@ -180,8 +180,8 @@ Change these here.
 
 #+name: define-calendar
 #+begin_src emacs-lisp :tangle no
-   `(calendar-today-face   ((t (:foreground ,org-beauty-state-current
-                                :background ,org-beauty-state-current-light
+   `(calendar-today-face   ((t (:foreground ,org-beauty-current
+                                :background ,org-beauty-current-light
                                 :box (:line-width ,org-beauty-box
                                       :color ,org-beauty-state-current-dark)            
                                 :weight bold)))  t)

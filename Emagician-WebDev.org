@@ -1,15 +1,8 @@
 * Markup (and styling)
-** TODO HTML - nxml and nxhtml
-   nXhtml is the best in working with HTML.  Except when it isn't.
-
+** TODO HTML - nxml 
 #+begin_src emacs-lisp
-;(load (concat emagician-dir "dist/nxhtml/autostart.el"))
-#+end_src 
-
-#+begin_src emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.html?" . nxml-mode))  
+  (add-to-list 'auto-mode-alist '("\\.html?\\|\\.tpl\\|\\.tpl\\.php" . nxml-mode))  
 #+end_src emacs-lisp
-
 *** TODO Set up as default mode
 
 	Not just html, but also for various templates, (.tpl.php etc.)
@@ -19,24 +12,55 @@
 	
 **** TODO Add rails, grails templates.
 **** TODO add other potential template extensions  
+**** NEXT .tpl.php - verify it works 
+**** NEXT .ctp
+
+
+
+*** Set up schemas
+
+Thanks to instant_sunshine[fn:1] for information 
+
+**** NEXT set up dist directory 
+(adjoin "~/.emacs.d/nxml-schemas/schemas.xml" rng-schema-locating-files)
+
+**** TODO Grab schemas from https://github.com/ocodo/emacs.d/tree/master/nxml-schemas
+**** TODO Grab other schemas from https://github.com/jixiuf/emacs_conf/tree/master/script/nxml
+
+
+*** TODO Make it html5 compatible
+
+*** Lorum Ipsum
+#+begin_src emacs-lisp
+(emagician-expect-package 'lorem-ipsum)
+#+end_src
+
+** Nxhtml kinda sucks, but here are some configs to make it suck less. But it sucks
 *** Set some better defaults for nxhtml mode
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq nxhtml-default-encoding 'utf-8)
 (setq nxhtml-skip-welcome 't)
 #+end_src
 
 *** Set up completion style
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq popcmp-completion-style 'emacs-default)
 #+end_src
 
-*** TODO Make it html5 compatible
 
-** TODO CSS
-#+begin_src emacs-lisp
+** TODO CSS															:flymake:
+#+begin_src emacs-lisp 
 (emagician-expect-package 'flymake-css)
 #+end_src
+*** TODO show-css mode 
+	https://github.com/smmcg/showcss-mode
+**** NEXT set up expect package
+**** NEXT Configure
+*** TODO Less
+#+begin_src emacs-lisp
+(emagician-expect-package 'less-css-mode)
+#+end_src emacs-lisp
 ** TODO XML
 
 #+begin_src emacs-lisp
@@ -44,8 +68,10 @@
     (rainbow-delimiters-mode nil))
   (add-hook 'nxml-mode 'turn-off-rainbow-delimiters)
 #+end_src 
+
+
 * Web Centeric Languages
-*** TODO PHP
+*** TODO PHP														:flymake:
 	
 	Trying out PHP+ mode.  It apparently doens't autoload. BOO.
 
@@ -67,7 +93,27 @@ And with PHP, comes a bunch of extra frameworks.
 #+end_src
 	 
 *** TODO Javascript
-**** FLymake Javascript
+**** Auto Complete source setup
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+**** Pretty print the JSON object following point
+#+begin_src emacs-lisp
+(defun emagician-web/pp-json ()
+  "Pretty-print the json object following point.
+Originally called esk-pp-json, from the Emacs Starter Kit."
+  (interactive)
+  (require 'json)
+  (let ((json-object (save-excursion (json-read))))
+    (switch-to-buffer "*json*")
+    (delete-region (point-min) (point-max))
+    (insert (pp json-object))
+    (goto-char (point-min))))
+#+end_src
+
+**** FLymake Javascript												:flymake:
 #+begin_src emacs-lisp
   (emagician-expect-package 'flymake-jslint)
   (add-hook 'js-mode-hook 'flymake-jslint-load)
@@ -102,5 +148,10 @@ And with PHP, comes a bunch of extra frameworks.
 ** Websockets
 #+begin_src emacs-lisp
 (emagician-expect-package 'websocket)
-#+end_src	
+#+end_src
+
+* Footnotes
+
+[fn:1] http://www.reddit.com/r/emacs/comments/1a8zk1/nxmlmode_and_schemas_do_you/
+	
 	

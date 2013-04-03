@@ -36,3 +36,10 @@
 	- Proper loading of personal customization files
 	- Added lines from collected chaos to the scratch-buffer-come-splash-screen
 	- Added riff-raff. An insane idea.
+  - v0.5 Another massive release, lots of changes, too many to list. And Emacs horrifically crashed writing the last change log. Short version:
+    - A bit better organization
+	- added change logs
+	- org agenda actually works
+	- More references of where I found code
+	- shell to eshell. Not convinced it is what I want or need.
+	- Tightened up the invokation a little.

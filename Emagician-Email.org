@@ -2,6 +2,12 @@
 
 Email.  What waht? The email.
 
+NOTE!  This section sucks.  I am in the process of trying to make it not suck...
+
+But it sucks.
+
+Outlook sucks.
+
 * Davmail -- non suck in the Microsoft Outlook Office Ghetto.
 ** Sending
 #+begin_src emacs-lisp
@@ -20,7 +26,7 @@ Email.  What waht? The email.
   
 #+end_src
 
-** TODO fix this to not suck. 											:mac:shell:
+** TODO fix this to not suck. 											:osx:shell:
 #+begin_src sh :results print
 brew install starttls
 #+end_src

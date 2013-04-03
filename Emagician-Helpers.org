@@ -77,34 +77,45 @@
 
 #+name: shell-on-startup
 #+begin_src emacs-lisp
-(add-hook 'emacs-startup-hook 'shell)
+;(add-hook 'emacs-startup-hook 'shell)
 #+end_src
 
-* Git
+** Consider switching to eshell
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook 'eshell)
+(emagician-expect-package 'eshell-manual)
+#+end_src
+
+
+* Git													:keybinding:external:
 
 #+begin_src emacs-lisp
-
+  
   (emagician-expect-package 'magit)
   (emagician-expect-package 'git-commit-mode)
   (emagician-expect-package 'gitconfig-mode)
   (emagician-expect-package 'gitignore-mode)
-
+  (emagician-expect-package 'helm-ls-git)
+  
   (global-set-key (kbd "C-c m") 'magit-status)
   
   (when (locate-file "git-achievements" exec-path)
     (setq magit-git-executable "git-achievements"))
 #+end_src
 ** NEXT Set up git help with info using emacs. 
+
 * Edit with emacs
 #+begin_src emacs-lisp
   (when (require 'edit-server nil t)
     (edit-server-start))
 #+end_src
   
+
 * Emacs server
 #+begin_src emacs-lisp
 (server-start)
 #+end_src
+  
 
 * Info diectory
 ** Set up Var
@@ -169,10 +180,11 @@
 #+end_src
 :END:
 
+
 * ERC + Bitlbee - IM with emacs. 
 
-#+begin-src emacs-lisp
-  (eval-after-load "erc"
+#+begin_src emacs-lisp
+  (eval-after-load 'erc
     '(progn
        (add-to-list 'erc-modules 'log)
 	   (add-to-list 'erc-modules 'autoaway)
@@ -186,26 +198,70 @@
         erc-log-write-after-send t
         erc-log-write-after-insert t)
   
-  (setq erc-hide-list '("MODE"))
+  (setq erc-hide-list '("MODE" "JOIN" "PART" "QUIT"))
 #+end_src
 
-
-#+begin_src emacs-lisp
-  (emagician-expect-package 'bitlbee)
-     
-  (setq bitlbee-user-directory "/usr/local/etc/bitlbee")
-  (setq bitlbee-executable "/usr/local/sbin/bitlbee")
-  
-  (defun emagician-hook/bitlbee-run-if-needed ()
-    "Runs bitlbee if required."
-    (require 'bitlbee)
-    (bitlbee-start))
-#+end_src
+** NEXT move the log into my personal config 
 
 * Processes through dizzee
 
-  I don't have a great example of htis yet.. but maybe soon.  This package is the shit though.
+  I don't have a great example of htis yet.. but maybe soon.  This package is The Shit[fn:1] though.
 
 #+begin_src emacs-lisp
 (emagician-expect-package 'dizzee)
 #+end_src
+
+** TODO Move this into interface? 
+
+
+* RSS reading through Newsticker
+** Set up emagician feeds
+   This is set up as it's own variable, so you can add it. Because, hopefully it's useful.
+
+#+begin_src emacs-lisp
+  (setq emagician/newsticker-url-list 
+  '(("Emacs Wiki" "http://www.emacswiki.org/emacs/?action=rss")
+    ("Reddit" "http://www.reddit.com/r/emacs/.rss") ; I've never seen a more wretched hive of scum and mysogeny.  but /r/emacs is mostly okay.
+    ("Worg" "http://orgmode.org/w/?p=worg.git;a=rss;opt=--no-merges")
+    ("Stack Overflow" "http://stackoverflow.com/feeds/tag?tagnames=emacs&sort=newest")
+    ("MELPA Twitter Feed" "http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=melpa_emacs")
+    ("Emacs Haiku" "http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=EmacsHaiku")
+  ))
+  
+  (setq emagician/newsticker-productivity 
+        '(("Buffer... not sure about this one" "http://blog.bufferapp.com/"))
+        )
+  
+#+end_src
+
+** Set up newsticker proper
+*** TODO set up external dependency here for w3m				   :external:
+#+begin_src emacs-lisp
+  (require 'newsticker)
+  
+  ; W3M HTML renderer isn't essential, but it's pretty useful.
+  (emagician-expect-package 'w3m)
+  (require 'w3m)
+  
+  (setq newsticker-html-renderer 'w3m-region)
+  
+  ; We want our feeds pulled every 10 minutes.
+  (setq newsticker-retrieval-interval 600)
+  
+  ; Setup the feeds. We'll have a look at these in just a second.
+  (setq newsticker-url-list-defaults nil)
+  (setq newsticker-url-list emagician/newsticker-url-list)
+  
+  ; Optionally bind a shortcut for your new RSS reader.
+  (global-set-key (kbd "C-c r") 'emagician/newsticker-start-and-view)
+  
+  (defun emagician/newsticker-start-and-view ()
+    "Start and launch newsticker."
+    (interactive)
+    (newsticker-start t)
+    (newsticker-treeview))
+#+end_src
+
+* Footnotes
+[fn:1] "The Shit" is a good thing.  
+ 
