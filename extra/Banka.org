@@ -1,0 +1,74 @@
+* Banka - Pomodoro! Tomato!
+  
+  The Pomodoro technique is a method of 25 minute time boxing.  One of
+  the key aspects of the Pomodoro technique is the physical pen and
+  paper and timer.  " The physical act of winding up the timer
+  confirms the user's determination to start the task; ticking
+  externalises desire to complete the task; ringing announces a
+  break. Flow and focus become associated with these physical
+  stimuli."[fn:1]
+
+  Banka attempts to be the Emacs analog of the Pomodoro technique.  At
+  it's core it is simply a visual timer that can help you focus.  The
+  more you work with Banka (and the more I code it), the more features
+  it will expose to you. 
+
+* Code
+
+** Customizeable vars
+
+*** Inter - Face.
+
+	Tomato In Unicode:  [🍅]
+	Tomato In Japanese: [蕃茄]
+
+#+begin_src emacs-lisp
+  (defface banka-title-face
+    '((default
+        (:weight bold 
+         :overline "red"
+         :size 2.0
+         :box (:line-width 4 :color "red" :style nil)
+         :foreground "black" :background "red"))
+      (nil nil))
+    "Face for title bars"
+    :group 'banka)
+  
+  (defface banka-inter-face
+    '((default
+        (:weight bold 
+         :overline "red"
+         :size 2.0
+         :box (:line-width 4 :color "red" :style nil)
+         :foreground "black" :background "red"))
+      (nil nil))
+    "Face for title bars"
+    :group 'banka)
+  
+  (defcustom banka-character 
+    "蕃茄"
+    "String to use for the banka character."
+    :type 'string)
+#+end_src
+	
+
+** Set up a pomodoro window and write to it
+*** TODO fix the window thing to open a proper under window. Look at org source.
+
+#+begin_src emacs-lisp
+  
+  (progn
+    (with-temp-buffer-window "*Banka*" '(display-buffer-pop-up-window '((window-height . 10))) nil
+      (print (propertize "Banka" :face 'banka-title-face))
+      (print "\n\n")
+      (print (propertize banka-character :face 'banka-inter-face))
+      (print "-------------------------------------"))q
+#+end_src
+
+* Footnotes
+
+[fn:1] [[Pomodoro Technique]] ([http://en.wikipedia.org/w/index.php?title=Pomodoro_Technique&oldid=545690732 this version])
+
+
+
+  
