@@ -612,6 +612,7 @@ Wherever possible we always want ot display inline images
 (add-hook 'org-clock-in-hook '(lambda () 
       (if (not org-timer-current-timer) 
       (org-timer-set-timer '(16)))))
+#+end_src
 
 * Gamification magick
 #+begin_src emacs-lisp

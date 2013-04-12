@@ -14,7 +14,7 @@
 #+end_src
       
 ** TODO Show parans 
-   
+** TODO checkparans as an after save hook    
 ** Slime
 #+begin_src emacs-lisp
 (emagician-expect-package 'slime)
@@ -27,7 +27,12 @@
   Elisp is by far the most important Lisp setup.  This needs to be
   done well, and done right.  If you have *any* suggestions on how to
   make the elisp setup even better, let me know!
-
+** TODO redshank
+** TODO elint?
+** TODO elisp-slime-nav
+** TODO Dim Parems
+** TODO Pretty lambdas
+** TODO Simple-Call-Tree_Plus
 ** Evaluation and printing
 
 Set up some defaults for print level.  Note that we assume that depth mistakes are made, but not length.
@@ -45,6 +50,7 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
 #+begin_src
 (require 'elisp-format)
 #+end_src
+*** TODO check out eval-expr 
 
 ** Set up hooks 
 

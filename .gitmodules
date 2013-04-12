@@ -1,0 +1,3 @@
+[submodule "melpa"]
+	path = melpa
+	url = git@github.com:jonnay/melpa.git
