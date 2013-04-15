@@ -215,10 +215,11 @@
 
 
 * RSS reading through Newsticker
+** TODO re-enable this if it can stop sucking
 ** Set up emagician feeds
    This is set up as it's own variable, so you can add it. Because, hopefully it's useful.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (setq emagician/newsticker-url-list 
   '(("Emacs Wiki" "http://www.emacswiki.org/emacs/?action=rss")
     ("Reddit" "http://www.reddit.com/r/emacs/.rss") ; I've never seen a more wretched hive of scum and mysogeny.  but /r/emacs is mostly okay.
@@ -236,7 +237,7 @@
 
 ** Set up newsticker proper
 *** TODO set up external dependency here for w3m				   :external:
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (require 'newsticker)
   
   ; W3M HTML renderer isn't essential, but it's pretty useful.

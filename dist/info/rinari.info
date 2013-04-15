@@ -1,0 +1,507 @@
+This is doc/rinari.info, produced by makeinfo version 4.8 from
+./rinari.texi.
+
+INFO-DIR-SECTION Emacs
+START-INFO-DIR-ENTRY
+* Rinari Minor Mode: (Rinari).      Ruby on Rails Framework Support
+END-INFO-DIR-ENTRY
+
+   This manual is for Rinari. A Ruby on Rails Minor Mode for Emacs.
+
+   Copyright (C) 2008 Eric Schulte, 2006 - 2007 Phil Hagelberg, Forrest
+Chang, Ryan Davis, Paul Stickne, and others
+
+   (This manual is modeled off of the very fine org-mode info
+documentation.)
+
+
+File: rinari.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
+
+Rinari
+******
+
+This manual is for Rinari. A Ruby on Rails Minor Mode for Emacs.
+
+   Copyright (C) 2008 Eric Schulte, 2006 - 2007 Phil Hagelberg, Forrest
+Chang, Ryan Davis, Paul Stickne, and others
+
+   (This manual is modeled off of the very fine org-mode info
+documentation.)
+
+   Contents
+
+* Menu:
+
+* Introduction::                      Brief summary of what Rinari is (and isn't)
+* Install::                           Installing Rinari in your Emacs
+* Navigation::                        Jumping between files in your Rails project
+* Test/Behavior Driven Development::  Support for Test Driven Development
+* Execution::                         Running tests, consoles, and web-servers
+* Miscellaneous::                     Leftover functions
+* Add Ons::                           Additional Emacs tools that work well with Rinari and Rails
+
+   Links
+
+   * Project page on rubyforge `http://rubyforge.org/projects/rinari/'
+
+   * Latest versions available at
+     `http://github.com/eschulte/rinari/tree/master'
+
+   * Post Questions/Comments to
+     `http://groups.google.com/group/emacs-on-rails'
+
+   * For an html version of this documentation see
+     `http://rinari.rubyforge.org/'
+
+   * For information on the previous version of Rinari see
+     `http://rinari.rubyforge.org/old.html'
+
+
+File: rinari.info,  Node: Introduction,  Next: Install,  Prev: Top,  Up: Top
+
+1 Introduction
+**************
+
+Rinari Is Not A Ruby IDE.
+
+   Well, OK it kind of is. Rinari is a set of Emacs Lisp functions aimed
+towards making Emacs (or XEmacs) into a top-notch Ruby on Rails
+development environment.
+
+   Currently Rinari focuses on the core functionality most everyone
+would use when working on a Rails applications including...
+
+   * _Navigation_ between files in your Rails project (*note
+     Navigation::)
+
+   * Facilitation of _Test/Behavior Driven Development_ (*note
+     Test/Behavior Driven Development::)
+
+   * _Execution_ of tests, consoles, and web-servers (*note Execution::)
+
+   Rinari does not deal with syntax highlighting for rhtml files (or
+.html.erb from here on out all erb templated html files will be referred
+to as "rhtml" files), while all of the Rinari functions will be
+available from within your rhtml files you are free to chose from the
+many stand-alone options for editing rhtml files (*note Rhtml Setup::).
+
+   Rinari development is fueled largely by the discussion on the mailing
+list at `http://groups.google.com/group/emacs-on-rails'.  If you have
+any questions, comments, or suggestions for improving Rinari please
+take them to the list.  The latest version of Rinari will always be
+available at `http://github.com/eschulte/rinari/tree/master'.
+
+
+File: rinari.info,  Node: Install,  Next: Basic Setup,  Prev: Introduction,  Up: Top
+
+2 Install
+*********
+
+Emacs
+
+   Having a working copy and working knowledge of Emacs are definite
+prerequisites for using Rinari.
+
+   * For information on obtaining and installing emacs see
+     `www.gnu.org/software/emacs/' or
+     `http://en.wikipedia.org/wiki/Emacs'.
+
+   * If you are new to Emacs or any of the following doesn't make sense
+     to you, read through the Emacs tutorial.  To do so open Emacs and
+     press `C-ht' (meaning press the "h" key while holding down the
+     "Ctrl" key and then press the "t" key).
+
+   ELPA
+
+   Rinari and the Major Modes mentioned below are now available through
+ELPA (the "Emacs List Package Archive") see `http://tromey.com/elpa/'
+for more information on using ELPA to install Rinari.
+
+   Currently the version of Rinari available through ELPA does not work
+well with Rails3. If you want Rinari for Rails3 then download the
+latest from GitHub at `http://github.com/eschulte/rinari'. See the
+Basic Setup section.
+
+   Emacs Starter Kit
+
+   Available at
+`http://github.com/technomancy/emacs-starter-kit/tree/master', the
+Emacs Starter Kit contains a good default Emacs setup and comes
+pre-bundled with many useful packages including Rinari and relevant Ruby
+and web development Major Modes.  This can be a good way for beginners
+to get a jump start on their Emacs setup and for experienced Emacs users
+to organize their setup and see many new tools they may have missed.
+
+   Major Modes
+
+   There are a collection of Major Modes which are useful when working
+on a Rails project (not the least of which is Ruby-Mode!).  You might
+want to check this Major Mode List (*note Add Ons::) to ensure that you
+aren't missing anything vital.
+
+   Manual Rinari Setup
+
+* Menu:
+
+* Basic Setup::          The minimum required to get going with Rinari
+* Rhtml Setup::          Select and setup a Major mode for rhtml files
+* Optional Setup::       Some additional setup options
+
+   From here on out
+
+   The remainder of this document describes the functions and usage of
+Rinari in detail.  To see all of the functions provided by rinari try
+`C-hb' then search for rinari, or `M-x rinari-<tab>'.
+
+
+File: rinari.info,  Node: Basic Setup,  Next: Rhtml Setup,  Prev: Install,  Up: Install
+
+2.1 Basic Setup
+===============
+
+The latest Rinari can be obtained from
+`http://github.com/eschulte/rinari/tree/master'.  Select the "download"
+button to grab an archive of the source code, or checkout a copy using
+git (Note: when cloning Rinari using git it is necessary to explicitly
+update the submodules included with Rinari) by executing the following.
+
+     git clone git://github.com/eschulte/rinari.git
+     cd rinari
+     git submodule init
+     git submodule update
+
+   Place the base rinari directory into your Emacs lisp directory. To
+automatically load Rinari every time you open Emacs add these lines of
+code to your .emacs file:
+
+       ;; Interactively Do Things (highly recommended, but not strictly required)
+       (require 'ido)
+       (ido-mode t)
+
+       ;; Rinari
+       (add-to-list 'load-path "~/path/to/your/elisp/rinari")
+       (require 'rinari)
+
+
+File: rinari.info,  Node: Rhtml Setup,  Next: Optional Setup,  Prev: Basic Setup,  Up: Install
+
+2.2 Rhtml Setup
+===============
+
+There are three options for editing .rhtml files in Emacs.  They are
+presented here in order of decreasing functionality.
+
+* Menu:
+
+* nXhtml-Mode::           a package for web development
+* MuMaMo-Mode::           allows multiple major modes in a single buffer
+* rhtml-Mode::            edit rhtml files without using multiple major modes
+
+
+File: rinari.info,  Node: nXhtml-Mode,  Next: MuMaMo-Mode,  Prev: Rhtml Setup,  Up: Rhtml Setup
+
+2.2.1 nXhtml-Mode
+-----------------
+
+nXhtml-Mode is a package for web development with Emacs.  For more
+information see `http://www.emacswiki.org/cgi-bin/wiki/NxhtmlMode#toc1'.
+
+   To use nXhtml-Mode mode download it from
+`http://ourcomments.org/Emacs/nXhtml/doc/nxhtml.html'.  Then save the
+resulting directory into your elisp directory and add the following to
+your Emacs init file (replacing "nxml-directory" with the name of your
+downloaded nxml directory).
+
+     ;;; nxml (HTML ERB template support)
+     (load "~/path/to/your/elisp/nxml-directory/autostart.el")
+
+     (setq
+      nxhtml-global-minor-mode t
+      mumamo-chunk-coloring 'submode-colored
+      nxhtml-skip-welcome t
+      indent-region-mode t
+      rng-nxml-auto-validate-flag nil
+      nxml-degraded t)
+     (add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-nxhtml-mumamo-mode))
+
+
+File: rinari.info,  Node: MuMaMo-Mode,  Next: rhtml-Mode,  Prev: nXhtml-Mode,  Up: Rhtml Setup
+
+2.2.2 MuMaMo-Mode
+-----------------
+
+MuMaMo-Mode allow Multiple Major Modes in a single Emacs buffer.  For
+more information see `http://www.emacswiki.org/cgi-bin/wiki/MuMaMo'.
+
+   MuMaMo-Mode comes bundled with nXhtml-Mode, so to install it download
+nXhtml-Mode from `http://ourcomments.org/Emacs/nXhtml/doc/nxhtml.html'.
+To use MuMaMo-Mode when editing rhtml files, save the resulting
+directory into your elisp directory, then add the following to your
+Emacs init file (replacing "nxml-directory" with the name of your
+downloaded nxml directory).
+
+     ;; MuMaMo-Mode for rhtml files
+     (add-to-list 'load-path "~/path/to/your/elisp/nxml-directory/util")
+     (require 'mumamo-fun)
+     (setq mumamo-chunk-coloring 'submode-colored)
+     (add-to-list 'auto-mode-alist '("\\.rhtml$" . eruby-html-mumamo-mode))
+     (add-to-list 'auto-mode-alist '("\\.html\\.erb$" . eruby-html-mumamo-mode))
+
+
+File: rinari.info,  Node: rhtml-Mode,  Prev: MuMaMo-Mode,  Up: Rhtml Setup
+
+2.2.3 rhtml-Mode
+----------------
+
+_rhtml-mode_ is part of the original Rinari project.  It allows editing
+of rhtml projects without having to use the often flaky MMM-Mode
+`http://www.emacswiki.org/cgi-bin/wiki/MultipleModes'.  _rhtml-mode_ is
+presented here as an alternate option to nxhtml-mode which doesn't work
+for many people.
+
+   To use _rhtml-mode_ for editing rhtml files, download the rhtml
+directory from `http://github.com/eschulte/rhtml/tree/master' and place
+it in your elisp directory, then include the following in you emacs
+.init file
+
+     ;;; rhtml-mode
+     (add-to-list 'load-path "~/path/to/your/elisp/rhtml")
+     (require 'rhtml-mode)
+     (add-hook 'rhtml-mode-hook
+     	  (lambda () (rinari-launch)))
+
+
+File: rinari.info,  Node: Optional Setup,  Next: Navigation,  Prev: Rhtml Setup,  Up: Install
+
+2.3 Optional Setup
+==================
+
+documentation
+
+   To make and install the info documentation cd into `rinari'
+directory and run the following rake command (you must have super user
+privileges to install the info documentation).
+
+     rake doc:install_info
+
+   To make an html version of the documentation cd into the `rinari'
+directory and run the following rake command.
+
+     rake doc:make_html
+
+   ido-mode
+
+   While ido-mode
+`http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings' is not
+strictly required it is very helpful in combination with many of Rinari
+functions.  Also, the Rinari functions were developed using ido-mode
+and may not work well in it's absence.  For more information about
+enabling ido-mode see the link below, or to just go ahead and try it
+out add the following to your emacs init file.
+
+     ;; Interactively Do Things
+     (require 'ido)
+     (ido-mode t)
+
+   TAGS
+
+   To have Rinari automatically update your `tags-file-name' variable
+to point to the tags of your current rails project, set
+`rinari-tags-file-name' (*note Navigation::) to the path to your tags
+file relative to the root of your rails applications.
+
+     (setq rinari-tags-file-name "TAGS")
+
+
+File: rinari.info,  Node: Navigation,  Next: Test/Behavior Driven Development,  Prev: Optional Setup,  Up: Top
+
+3 Navigation
+************
+
+Rinari leverages the structure of Rails projects to allow immediate
+navigation between source files.
+
+   So for example if you are in a buffer open to _foo_controller.rb_, a
+call to `rinari-find-model' will open the _foo.rb_ model file.  Say you
+are currently inside the _bar_ method in a buffer visiting
+_foo_controller.rb_, then calling `rinari-find-test' will take you to
+the _test_bar_ method in _test/functional/foo_controller_test.rb_, or
+calling `rinari-find-view' will open _app/views/foos/bar.rhtml_.
+
+   All told there are currently 17 different rinari-find-* functions,
+which are all bound to similar hopefully intuitive keybindings allowing
+you to go anywhere from anywhere.  To see the full range of rinari-find
+functions along with their bindings enter a rails project, activate
+rinari and call describe-bindings `\H-b'.  The current list is also
+shown below.
+
+     C-c ; f c	rinari-find-controller
+     C-c ; f e	rinari-find-environment
+     C-c ; f f	rinari-find-file-in-project
+     C-c ; f h	rinari-find-helper
+     C-c ; f i	rinari-find-migration
+     C-c ; f j	rinari-find-javascript
+     C-c ; f l	rinari-find-plugin
+     C-c ; f m	rinari-find-model
+     C-c ; f n	rinari-find-configuration
+     C-c ; f o	rinari-find-log
+     C-c ; f p	rinari-find-public
+     C-c ; f s	rinari-find-script
+     C-c ; f t	rinari-find-test
+     C-c ; f v	rinari-find-view
+     C-c ; f w	rinari-find-worker
+     C-c ; f x	rinari-find-fixture
+     C-c ; f y	rinari-find-stylesheet
+
+   TAGS (jumping to method definitions)
+
+   Emacs (as all grownup text editors should) makes use of tags (for a
+description of tags and their use see
+`http://ctags.sourceforge.net/whatis.html').  In Emacs the `find-tag'
+command is bound by default to `M-.'.  It is often convenient to use a
+different set of TAGS for every rails project.  Rinari facilitates this
+by automatically updating your `tags-file-name' variable whenever you
+enter a rails project, through the use of the `rinari-tags-file-name'
+variable.  Just set `rianri-tags-file' to the path to your tags files
+relative to the root of the rails project.  For example...
+
+     (setq rinari-tags-file-name "TAGS")
+
+   to create such a tags file using exuberant ctags
+(`http://ctags.sourceforge.net/') try executing something like the
+following from the root of your rails project.
+
+     ctags-exuberant -a -e -f TAGS --tag-relative -R app lib vendor
+
+
+File: rinari.info,  Node: Test/Behavior Driven Development,  Next: Execution,  Prev: Navigation,  Up: Top
+
+4 Test/Behavior Driven Development
+**********************************
+
+Rinari facilitates a development style reliant upon unit and functional
+tests by providing a single command `rinari-test' which executes the
+unit or functional test related to the current buffer and method.  The
+results of the test are dumped into an emacs Compilation buffer which
+allows jumping between error messages and the related source code.
+
+ -- Function: rinari-test
+     Test the current ruby function.  If current function is not a
+     test, then try to jump to the related test and run it.  Dump
+     output to a compilation buffer allowing jumping between errors and
+     source code.
+
+
+File: rinari.info,  Node: Execution,  Next: Miscellaneous,  Prev: Test/Behavior Driven Development,  Up: Top
+
+5 Execution
+***********
+
+Some Rails tools work better inside of emacs.  Specifically running rake
+tasks, tests, console, the web-server, and browsing your SQL database.
+Rinari provides functions for running all of these tools inside
+specialized emacs buffers.
+
+ -- Function: rinari-rake
+     Tab completion selection of a rake task to execute with the output
+     dumped to a compilation buffer allowing jumping between errors and
+     source code.  With optional prefix argument allows editing of the
+     rake command.
+
+ -- Function: rinari-console
+     "Run script/console in a compilation buffer, with command history
+     and links between errors and source code.  Use a prefix argument
+     to edit command line options."
+
+ -- Function: rinari-sql
+     Browse the application's database.  Looks up login information
+     from your conf/database.sql file.
+
+ -- Function: rinari-web-server
+     Run script/server.  Dump output to a compilation buffer allowing
+     jumping between errors and source code.
+
+ -- Function: rinari-test
+     Test the current ruby function.  If current function is not a
+     test, then try to jump to the related test using
+     `rinari-find-test'.  Dump output to a compilation buffer allowing
+     jumping between errors and source code.
+
+
+File: rinari.info,  Node: Miscellaneous,  Next: Add Ons,  Prev: Execution,  Up: Top
+
+6 Miscellaneous
+***************
+
+Miscellaneous functions...
+
+ -- Function: rinari-rgrep
+     Search through the rails project using `rgrep' for a string or
+     `regexp'.  With optional prefix argument just run `rgrep'.
+
+ -- Function: rinari-insert-erb-skeleton
+     Insert an erb skeleton at point, with optional prefix argument
+     don't include an '='.
+
+
+File: rinari.info,  Node: Add Ons,  Prev: Miscellaneous,  Up: Top
+
+7 Add Ons
+*********
+
+Previous versions of both emacs-rails mode, and Rinari were very feature
+rich, but bloated and cumbersome.  To maintain a small, clean, reliable,
+functional, and hackable core Rinari will shun much of the "bells and
+whistles" type functionality.  However that is not to say that these
+extra goodies might not be useful.
+
+   This page should serve as marshaling point for links to some other
+tools/packages that work well with Rinari and Rails in general.  If you
+have any ideas for additions to this list, or for new Rinari features
+please let us know at `http://groups.google.com/group/emacs-on-rails'.
+
+   Essential Major Modes for working with Rails
+   * Ruby Mode, and some other general Ruby-Emacs goodies can be found
+     in the `/misc' directory of your ruby distribution and at
+     `http://svn.ruby-lang.org/cgi-bin/viewvc.cgi/trunk/misc/'
+
+   * YAML Mode `http://www.emacswiki.org/cgi-bin/wiki/YamlMode'
+
+   * CSS Mode
+     `http://www.emacswiki.org/cgi-bin/emacs/css-mode-simple.el'
+
+   * JavaScript Mode
+     `http://www.emacswiki.org/cgi-bin/wiki/JavaScriptMode#toc1'
+
+   Other Tools
+   * Rhtml Mode Minor Mode for editing rhtml files (without MMM-Mode)
+     *note rhtml-Mode::
+
+   * Snippets `http://code.google.com/p/yasnippet/' and Rails snippets
+     `http://github.com/eschulte/yasnippets-rails/tree/master'
+
+   * ruby-debug support
+     `http://groups.google.com/group/emacs-on-rails/browse_thread/thread/dfaa224905b51487'
+
+   * ido Mode
+     `http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings'
+
+
+
+Tag Table:
+Node: Top476
+Node: Introduction1846
+Node: Install3227
+Node: Basic Setup5441
+Node: Rhtml Setup6407
+Node: nXhtml-Mode6878
+Node: MuMaMo-Mode7835
+Node: rhtml-Mode8827
+Node: Optional Setup9634
+Node: Navigation10934
+Node: Test/Behavior Driven Development13469
+Node: Execution14249
+Node: Miscellaneous15635
+Node: Add Ons16080
+
+End Tag Table

@@ -123,7 +123,7 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
 
 **** Slime-js
 ***** TODO set up dev-mode for this. 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (when (not (string= system-name "my-melody"))
   (add-to-list 'load-path "~/Dropbox/Creativity/code/emacs-projects/slime-js")
   (slime-setup '(slime-js slime-repl))
@@ -132,6 +132,7 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
 ;;  (setq slime-js-swank-command "/usr/local/bin/npm")
 ;;  (setq slime-js-swank-args '("run" "swank"))
 #+end_src
+***** TODO set up swank js properly through a combo on NPM magic and making the package available
 
 **** Node Setup
 

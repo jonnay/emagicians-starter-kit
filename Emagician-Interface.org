@@ -231,8 +231,9 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 (global-set-key [f4 f6] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Career.org")))
 (global-set-key [f4 f7] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Game.org")))
 
-** Prosjekt 
-#+begin_src emacs-lisp
+** Prosjekt
+*** TODO Figure out a better project manager and disable this one probably 
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path (expand-file-name "dist/prosjekt/prosjekt" emagician-dir))
 (add-to-list 'load-path (expand-file-name "dist/prosjekt/prosjekt/ext"  emagician-dir))
 (require 'prosjekt)

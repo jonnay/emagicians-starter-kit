@@ -223,14 +223,16 @@ $green:     #859900;
 
    Maybe they should be moved?  Maybe they should say? I don't know.
 
-#+begin_src emacs-lisp :tangle empa/recipes/prosjekt
+was in empa/recipes/prosjekt
+#+begin_src emacs-lisp :tangle no
       (prosjekt 
        :doc "A emacs extension for working with projects"
        :repo "abingham/prosjekt" 
        :fetcher github)
 #+end_src
 
-#+begin_src emacs-lisp :tangle empa/recipes/emacs-achievements
+was in  empa/recipes/emacs-achievements
+#+begin_src emacs-lisp :tangle no
       (emacs-achievements 
        :doc "a fun way to learn about Emacs."
        :repo "abingham/prosjekt" 

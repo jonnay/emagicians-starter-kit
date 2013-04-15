@@ -78,12 +78,10 @@ Let there be light
 #+name: set-this-dir-as-var
 #+begin_src emacs-lisp
 (defvar emagician-dir
-        "/Users/jonathana/projects/emagicians-starter-kit/"
+        "/Users/jarkell/projects/emagicians-starter-kit/"
         "Automagically generated variable where the emagicians kit is located")
 #+end_src
 
-#+RESULTS: set-this-dir-as-var
-: emagician-dir
 
 
 *** Step Two: Making it go.
@@ -186,7 +184,7 @@ granular if need be.
 Then again, maybe you need to seperate customizations out by user account. Why not?
 
 #+begin_src emacs-lisp :results silent
-(emagician-invoke-custom-dir (user-login-name))
+(emagician-invoke-custom-file (user-login-name))
 #+end_src
 
 ** Testing
@@ -204,6 +202,8 @@ Then again, maybe you need to seperate customizations out by user account. Why n
    Note that you will need to quit the new instance of emacs, so
    control can return to this instance of emacs.
 
+*** TODO fix this little block here.  It runs the /usr/bin/emacs inside of OSX
+
 #+source make-a-tha-test-script
 #+begin_src emacs-lisp :results raw
 (concat "#+begin_src sh :results silent\n"
@@ -217,11 +217,7 @@ Then again, maybe you need to seperate customizations out by user account. Why n
 )
 #+end_src 
 
-#+results:
-#+begin_src sh :results silent
-  # run this code block to test your emacs starter kit
-  emacs -q -l /Users/joneathana/projects/emagicians-starter-kit/init.el &
-#+end_src
+*** No org-babel-execute function for sh?
 
    If you get the message ~org-babel-execute-src-block: No
    org-babel-execute function for sh!~ then you need to enable shell
@@ -230,6 +226,8 @@ Then again, maybe you need to seperate customizations out by user account. Why n
 #+begin_src emacs-lisp :results silent
 (require 'ob-sh)
 #+end_src
+
+*** what you should see when it works
 
    If it is working properly, the ~*Messages*~ buffer of the new emacs
    instance should read something like:
@@ -250,6 +248,8 @@ cross-lingual macros.
 In fact, when the starter kit builds itself, it will use this
 cross-lingual aspect to figure out where it is.
 
+
+
 ** Taking the plunge
 
    One you run the next source block, you will have fully installed
@@ -264,9 +264,6 @@ FILE="~./.emacs.d/init-backup-$NOW.el"
 mv -v ~/.emacs.d/init.el $FILE
 cp -v ./init.el ~/.emacs.d/
 #+end_src
-
-#+results:
-: ./init.el -> /Users/jonathana/.emacs.d/init.el
 
 
 * The actual Init file

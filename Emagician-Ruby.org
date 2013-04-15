@@ -1,22 +1,87 @@
-* Ruby
+#+title: Ruby
 
   More and more the tools I use require Ruby.  One day I will dive into that.  But for now, this file is ... just enough.
 
   Ruby Genii are encouraged to make this org-setup file awesome.
 
-** Make RVM go
+* Ruby version management
 
+** Set up through rbenv
+
+*** TODO fix problem with path not working on eshell.  BOO.
+**** TODO kludge it 
+	 - [ ] find out how addpath works in eshell
+	 - [ ] then do the same thing automagickally through a hook
+*** From the readme on the "neckbeard setup"
 #+begin_src emacs-lisp
+  (defun emagician/add-to-path (path &rest front)
+    (setenv "PATH"
+            (concat 
+             (if front 
+                 path
+               (getenv "PATH"))
+             ":"
+             (if front
+                 (getenv "PATH")
+               path))))
+  
+  (emagician/add-to-path "~/.rbenv/shims" t)
+  
+#+end_src
+
+*** Add a rehash command
+#+begin_src emacs-lisp
+(defun emagician/ruby-rbenv-rehash ()
+  "Run the rbenv rehash command"
+  (interactive)
+  (start-process-shell-command "rbenv-rehash" nil "rbenv rehash"))
+
+(emagician/ruby-rbenv-rehash)
+#+end_src
+
+*** Add a gem install command
+#+begin_src emacs-lisp
+  (defun emagician/ruby-gem-install (gem)
+    "Installs a Ruby Gem."
+    (interactive "sGem to install?: ")
+    (let ((proc (start-process-shell-command "gems" "*ruby*" (concat "gem install " gem))))
+      (set-process-sentinel proc
+       #'(lambda (proc event) 
+           (when (string= event "finished")
+             (emagician/ruby-rbenv-rehash))))))
+#+end_src
+
+*** Testing 
+Just in case it doesn't work, these command can be helpful for testing.
+#+begin_src emacs-lisp :tangle no
+(start-process-shell-command "gems" "*gem*" "echo $PATH")
+(start-process-shell-command "gems" "*gem*" "ruby" "--version")
+
+#+end_src
+
+** RVM
+   thorugh some research it appears RVM is *not* the way to go.  This is kept here for reference however
+*** Make RVM go
+
+#+begin_src emacs-lisp :tangle no
 (emagician-expect-package 'rvm)
 (rvm-use-default)
 #+end_src
 
-** Add gems dir to path												   :fixme:path:
 
-#+begin_src emacs-lisp
+*** Add gems dir to path										 :fixme:path:
+**** TODO this should really be set up as an emagician/add-path function
+#+begin_src emacs-lisp :tangle no
   (setenv "PATH" 
           (concat (getenv "PATH")
                   ":"
                   (substring (shell-command-to-string "~/.rvm/bin/rvm gemdir") 0 -1)
                   "/bin"))
+#+end_src
+
+* Rinari
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'rinari)
+(emagician-expect-package 'rhtml-mode)
 #+end_src
