@@ -494,9 +494,8 @@ Consult Your Pineal Gland.
 %%
 "For when you look within the parens / the enemy that lurks within
 		  is but the closure of your mind"
-APOLK, Rite of the Parenthetical Hierophant, 16°=60°
+APOLK, Rite of the Parenthetical Hierophant, 16<degrees>=60<degrees>
 #+end_src
-
 
 * Learning Emacs through Achievements
 #+begin_src emacs-lisp
@@ -617,6 +616,6 @@ APOLK, Rite of the Parenthetical Hierophant, 16°=60°
     )    
 #+end_src
 
-** TODO Update package to muscle memory bound keys
+** TODO Update package to muscle memory bind keys
 *** NEXT find hook point. Start with helm, go from there
 *** NEXT see if we can get the proper key combo 

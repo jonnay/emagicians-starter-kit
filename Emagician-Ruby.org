@@ -14,19 +14,7 @@
 	 - [ ] then do the same thing automagickally through a hook
 *** From the readme on the "neckbeard setup"
 #+begin_src emacs-lisp
-  (defun emagician/add-to-path (path &rest front)
-    (setenv "PATH"
-            (concat 
-             (if front 
-                 path
-               (getenv "PATH"))
-             ":"
-             (if front
-                 (getenv "PATH")
-               path))))
-  
-  (emagician/add-to-path "~/.rbenv/shims" t)
-  
+  (emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
 #+end_src
 
 *** Add a rehash command
@@ -80,6 +68,8 @@ Just in case it doesn't work, these command can be helpful for testing.
 #+end_src
 
 * Rinari
+
+  Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goofy Acronym Assertion!)
 
 #+begin_src emacs-lisp
 (emagician-expect-package 'rinari)

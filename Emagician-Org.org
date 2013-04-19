@@ -31,13 +31,12 @@
   
   (defun emagician-agenda/daily-wisdom (&rest args)
     "Show some daily wisdom in the agenda"
-    (debug)
-    (setq buffer-read-only nil) 
-      (insert (org-add-props "                       -|-+-|-                       "
+      (setq buffer-read-only nil) 
+      (insert (org-add-props "                                              -|-+-|-                                              "
                   nil 'face 'org-agenda-structure) "\n")
       (insert (concat (emagician/cookie) "\n" ))
       (insert "\n")
-      (insert (make-string (window-width) org-agenda-block-separator)\n))
+      (insert (make-string (window-width) org-agenda-block-separator) "\n"))
   
   (let ((refile-tasks '(tags "REFILE" 
                              ((org-agenda-overriding-header "Tasks to Refile")
@@ -53,14 +52,17 @@
                                  (org-agenda-todo-ignore-with-date t)
                                  (org-tags-match-list-sublevels t)
                                  (org-agenda-sorting-strategy
-                                  '(category-down category-keep))))))
+                                  '(category-down category-keep)))))
+        (waiting-tasks '(tags-todo "-REFILE-CANCELLED/!WAITING"
+                                   ((org-agenda-overriding-header "Waiting on")))))
   
     (setq org-agenda-custom-commands
           `((" " "Agenda"
              ((agenda "" nil) 
               (emagician-agenda/daily-wisdom  "" nil)
               ,next-tasks
-              ,stuck-projects))
+              ,stuck-projects
+              ,waiting-tasks))
             ("y" "Wisdom... YOW!"
              ((emagician-agenda/daily-wisdom "" nil)))
             ("W" "Weekly Review -- Unfinished."))))
@@ -325,13 +327,13 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 
 #+begin_src emacs-lisp
   (setq org-todo-keywords
-    '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d!/!)")
+    '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d@/!)")
       (sequence "WAITING(w@/!)")))
   
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
                 ("NEXT" :foreground "cyan" :weight bold)
-                ("STARTED" forground "blue" :weight bold)
+                ("STARTED" foreground "blue" :weight bold)
                 ("DONE" :foreground "forest green" :weight bold)
                 ("WAITING" :foreground "orange" :weight bold))))
 #+end_src
@@ -354,6 +356,25 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 
   (add-hook 'org-mode-hook 'flyspell-mode)
 #+END_SRC
+* TODO Capture									   :fixme:require:keybinding:
+Thanks Brent Hansen!  [fn:1]
+
+#+begin_src emacs-lisp 
+(require 'org-capture)
+;; This is kinda dumb. Sorry. 
+(setq org-default-notes-file "~/org/GTD.org")
+
+(global-set-key (kbd "C-c r") 'org-capture)
+#+end_src
+
+** Basic capture template 
+#+begin_src emacs-lisp
+  (setq org-capture-templates
+        `(("i" "Incoming task" entry (file+headline ,org-default-notes-file "Inbox" )
+           "** TODO %?    ")))
+  
+#+end_src
+** TODO org-protocol
 * Habits
    Thanks to this: http://orgmode.org/worg/org-tutorials/tracking-habits.html
 
@@ -363,11 +384,27 @@ Originally from http://doc.norang.ca/org-mode.html#Projects
 ;; Shoulda used add-to-list.  Derp.
 (setq org-todo-keywords (append org-todo-keywords '((sequence "HABIT(h)" "|" "DONE(d!)"))))
 (setq org-todokeyword-faces (append org-todo-keyword-faces '(("HABIT" :forground "cyan" :weight bold))))
-
 #+end_src
-** NEXT switch to add-to-list
-* TODO Capture 
+
+** Set up a capture template to make making Habits easy
+#+begin_src emacs-lisp
+  (add-to-list 'org-capture-templates 
+    `("h" "Habit" 
+      entry 
+      (file ,org-default-notes-file)
+      ,(concat  "* HABIT %?      :habit:\n" 
+                "  SCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n" 
+                "  :PROPERTIES:\n" 
+                "  :STYLE: habit\n"
+                "  :REPEAT_TO_STATE: NEXT\n" 
+                "  :END:\n")))
+  (setq org-habit-completed-glyph "✓")
+  (setq org-habit-show-all-today t)
   
+#+end_src
+
+** NEXT switch to add-to-list
+
 * Org Babel
 
   Some no-brainer org babel setup.
@@ -638,3 +675,8 @@ Wherever possible we always want ot display inline images
   (let ((heat-death-of-the-universe '()))
 	(loop until heat-death-of-the-universe
 	      do (org-remember nil ?i))))
+
+* Footnotes
+
+[fn:1] http://doc.norang.ca/org-mode.html#Capture
+

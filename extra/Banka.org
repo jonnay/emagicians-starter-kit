@@ -53,7 +53,7 @@
 	
 
 ** Set up a pomodoro window and write to it
-*** TODO fix the window thing to open a proper under window. Look at org source.
+*** NEXT fix the window thing to open a proper under window. Look at org source.
 
 #+begin_src emacs-lisp
   
@@ -64,6 +64,26 @@
       (print (propertize banka-character :face 'banka-inter-face))
       (print "-------------------------------------"))q
 #+end_src
+
+*** TODO update to allow a seperate frame instead of a window
+**** NEXT custom var
+**** NEXT frame code
+*** TODO Set up a timer to update the second count.  
+**** NEXT set up timer
+**** NEXT update the face to be easy to see where you are at with the timer
+**** NEXT Write a solarized theme
+
+** TODO Set up Keyindings and effects
+*** TODO Interruption ~'~
+*** TODO Fatal Interruption ~"~
+*** TODO Done ~X~
+*** TODO 
+
+** Next features
+   - org
+   - todochiku
+   - sauron
+   - other
 
 * Footnotes
 

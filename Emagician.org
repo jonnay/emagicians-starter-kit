@@ -399,6 +399,25 @@ Emagically defined with emagician/defhook." body) (add-hook (quote hook) (quote 
 ** TODO figure out if an executeable exists, and do stuff based on that
 *** NEXT browse info to see if that functionality exists
 *** TODO Write case for pdflatex: [[file:darwin.org::*You%20will%20want%20to%20get%20the%20latest%20version%20of%20mactex%20to%20make%20this%20go:][file:darwin.org::*You will want to get the latest version of mactex to make this go:]]
+** Paths in emacs can be a little wonky.  A lot wonky on OSX.  Contend with that.
+#+begin_src emacs-lisp
+    (defun emagician/add-to-path (path &rest front)
+      "Adds PATH to the PATH env variable, eshell-path-env as well as exec-path.
+  If FRONT is non nil, then PATH will be prepended to the env and shell vars.  
+  The exec-path always will always have it prepended. "
+      (let ((shell-path (concat 
+                         (if front 
+                             path
+                           (getenv "PATH"))
+                         ":"
+                         (if front
+                             (getenv "PATH")
+                           path))))
+        (setenv "PATH" shell-path)
+        (setq eshell-path-env shell-path)
+        (setq exec-path (cons path exec-path))))
+    
+#+end_src
 * More sensible emacs defaults
 ** Format and Coding system
 #+begin_src emacs-lisp
@@ -460,14 +479,22 @@ Emagically defined with emagician/defhook." body) (add-hook (quote hook) (quote 
 #+begin_src emacs-lisp
 (which-function-mode t)
 #+end_src
-*** TODO add magic to it.  maybe look at programming modes
-*** Flymake Setup
+**** TODO add magic to it.  maybe look at programming modes
+
+*** Flycheck is flymake plus!
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'flycheck) 
+(add-hook 'after-init-hook #'global-flycheck-mode)
+#+end_src
+
+*** Flymake Setup												  :depricate:
 **** Pah! Mouse menus.  PAH I say.
-#+begin-src emacs-lisp
+#+begin-src emacs-lisp :tangle no
 (emagician-expect-package 'flymake-cursor)
 #+end_src
 **** Tone flymake down a little
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq flymake-no-changes-timeout 2.5)
 #+end_src
 

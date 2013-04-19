@@ -49,10 +49,15 @@ Thanks to instant_sunshine[fn:1] for information
 #+end_src
 
 
-** TODO CSS															:flymake:
-#+begin_src emacs-lisp 
+** TODO CSS															:flymake:deprecated:
+#+begin_src emacs-lisp :tangle no
 (emagician-expect-package 'flymake-css)
 #+end_src
+
+#+begin_src emacs-lisp 
+(add-to-list 'auto-mode-alist '("\\.css\\.erb" . css-mode))
+#+end_src 
+
 *** TODO show-css mode 
 	https://github.com/smmcg/showcss-mode
 **** NEXT set up expect package
@@ -135,8 +140,16 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
 ***** TODO set up swank js properly through a combo on NPM magic and making the package available
 
 **** Node Setup
-
+#+begin_src emacs-lisp
+(emagician/add-to-path "/usr/local/share/npm/bin")
+#+end_src
 **** TODO http://www.randomsample.de/dru5/node/147
+
+**** Coffee Script Setup
+#+begin_src emacs-lisp
+(emagician-expect-package 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee.erb" . coffee-mode))
+#+end_src
 
 *** TODO JSP
 
