@@ -659,7 +659,9 @@ Wherever possible we always want ot display inline images
   (gamify-start)
 #+end_src
 
-
+* TODO Refiling
+  This needs to be way more ergonomic.
+  Start with org-refile-use-outline-path and go from there. 
 * TODO Quick key
 ** TODO install popup thinger 
 *** NEXT check old emacs if it is there

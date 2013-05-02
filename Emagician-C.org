@@ -2,6 +2,11 @@
 
 I don't do much C/C++ development, but I am doing some Arduino.
 
+* General
+
+** TODO auto complete sources
+   https://github.com/brianjcj/auto-complete-clang
+
 * Arduino
 
 ** Setup for the Arduino make file

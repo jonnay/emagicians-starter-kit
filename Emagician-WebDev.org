@@ -151,6 +151,11 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
 (add-to-list 'auto-mode-alist '("\\.coffee.erb" . coffee-mode))
 #+end_src
 
+I am not sure if this a coffeescript convention or not, but ... here it is.
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.jst.ejs" . nxml-mode))
+#+end_src
+
 *** TODO JSP
 
 *** TODO ASP

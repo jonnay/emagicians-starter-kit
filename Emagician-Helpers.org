@@ -95,6 +95,7 @@
   (emagician-expect-package 'git-commit-mode)
   (emagician-expect-package 'gitconfig-mode)
   (emagician-expect-package 'gitignore-mode)
+  (emagician-expect-package 'magithub)
   (emagician-expect-package 'helm-ls-git)
   
   (global-set-key (kbd "C-c m") 'magit-status)
@@ -103,6 +104,7 @@
     (setq magit-git-executable "git-achievements"))
 #+end_src
 ** NEXT Set up git help with info using emacs. 
+
 
 * Edit with emacs
 #+begin_src emacs-lisp

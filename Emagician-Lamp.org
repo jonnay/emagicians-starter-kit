@@ -561,7 +561,7 @@ APOLK, Rite of the Parenthetical Hierophant, 16<degrees>=60<degrees>
 ** Simple output .el for MELPA
 
 #+begin_src emacs-lisp :tangle emagician-fix-spell-memory.el  :noweb yes :padline no
-  ;;; emagician-fix-spelling. --- Simple hack into ispell to fix (muscle) memory problems
+  ;;; emagician-fix-spell-memory.el --- Simple hack into ispell to fix (muscle) memory problems
  
   ;; Copyright (C) 2012 Jonathan Arkell
   
