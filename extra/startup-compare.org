@@ -40,6 +40,7 @@
 #+end_src
 
 * Be-de-be-de-be-da-be-da-be-that's all folks!
-#+begin_src 
+#+begin_src emacs-lisp
+(provide 'startup-compare)
 ;;; startup-compare.el ends here
 #+end_src

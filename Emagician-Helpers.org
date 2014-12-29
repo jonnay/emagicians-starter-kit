@@ -7,7 +7,8 @@
 
 (add-to-list 'exec-path "/usr/local/bin")
 #+end_src
-** Ansi Color On shells
+** Standard Shells
+*** Ansi Color On shells
   Ansi color in shell mode is good.
 
 #+name: ansi-color
@@ -17,11 +18,11 @@
   
 #+end_src
 
-** Set up pcomplete and auto complete on shell
+*** Set up pcomplete and auto complete on shell
    
    Thanks http://blog.supermomonga.com/!  
 
-   There should be a Japanese/English emacs exhange program.
+   There should be a Japanese/English emacs exchange program.
 
 #+begin_src emacs-lisp
   (defun set-up-auto-complete-for-shell-mode ()
@@ -33,8 +34,8 @@
 
 (add-hook 'shell-mode-hook 'set-up-auto-complete-for-shell-mode)  
 #+end_src
-
-*** Git pcompletion in the shell. 
+   
+**** Git pcompletion in the shell. 
 	(From Mikey in Mastering emacs: http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/)
 
 	Do check out that link to understand how pcomplete works.
@@ -73,36 +74,213 @@
     (pcomplete-here* (pcmpl-git-get-refs "heads")))))
 #+end_src
 
-** Run a shell immediately in emacs so it is available
+*** Run a shell immediately in emacs so it is available
 
 #+name: shell-on-startup
 #+begin_src emacs-lisp
 ;(add-hook 'emacs-startup-hook 'shell)
 #+end_src
 
-** Consider switching to eshell
+** Eshell
 #+begin_src emacs-lisp
 (add-hook 'emacs-startup-hook 'eshell)
 (emagician-expect-package 'eshell-manual)
 #+end_src
 
+*** P complete with eshell too.
+	Thanks to Tassilo[fn:2] for this bit of wisdom. 
 
-* Git													:keybinding:external:
+#+begin_src emacs-lisp
+;;**** Git Completion
 
+(defun pcmpl-git-commands ()
+  "Return the most common git commands by parsing the git output."
+  (with-temp-buffer
+    (call-process-shell-command "git" nil (current-buffer) nil "help" "--all")
+    (goto-char 0)
+    (search-forward "available git commands in")
+    (let (commands)
+      (while (re-search-forward
+	      "^[[:blank:]]+\\([[:word:]-.]+\\)[[:blank:]]*\\([[:word:]-.]+\\)?"
+	      nil t)
+	(push (match-string 1) commands)
+	(when (match-string 2)
+	  (push (match-string 2) commands)))
+      (sort commands #'string<))))
+
+(defconst pcmpl-git-commands (pcmpl-git-commands)
+  "List of `git' commands.")
+
+(defvar pcmpl-git-ref-list-cmd "git for-each-ref refs/ --format='%(refname)'"
+  "The `git' command to run to get a list of refs.")
+
+(defun pcmpl-git-get-refs (type)
+  "Return a list of `git' refs filtered by TYPE."
+  (with-temp-buffer
+    (insert (shell-command-to-string pcmpl-git-ref-list-cmd))
+    (goto-char (point-min))
+    (let (refs)
+      (while (re-search-forward (concat "^refs/" type "/\\(.+\\)$") nil t)
+	(push (match-string 1) refs))
+      (nreverse refs))))
+
+(defun pcmpl-git-remotes ()
+  "Return a list of remote repositories."
+  (split-string (shell-command-to-string "git remote")))
+
+(defun pcomplete/git ()
+  "Completion for `git'."
+  ;; Completion for the command argument.
+  (pcomplete-here* pcmpl-git-commands)
+  (cond
+   ((pcomplete-match "help" 1)
+    (pcomplete-here* pcmpl-git-commands))
+   ((pcomplete-match (regexp-opt '("pull" "push")) 1)
+    (pcomplete-here (pcmpl-git-remotes)))
+   ;; provide branch completion for the command `checkout'.
+   ((pcomplete-match "checkout" 1)
+    (pcomplete-here* (append (pcmpl-git-get-refs "heads")
+			     (pcmpl-git-get-refs "tags"))))
+   (t
+    (while (pcomplete-here (pcomplete-entries))))))
+#+end_src
+
+I only use git currentlky, so the stuff below is useless to me.
+#+begin_src emacs-lisp :tangle no
+;;**** Bzr Completion
+
+(defun pcmpl-bzr-commands ()
+  "Return the most common bzr commands by parsing the bzr output."
+  (with-temp-buffer
+    (call-process-shell-command "bzr" nil (current-buffer) nil "help" "commands")
+    (goto-char 0)
+    (let (commands)
+      (while (re-search-forward "^\\([[:word:]-]+\\)[[:blank:]]+" nil t)
+	(push (match-string 1) commands))
+      (sort commands #'string<))))
+
+(defconst pcmpl-bzr-commands (pcmpl-bzr-commands)
+  "List of `bzr' commands.")
+
+(defun pcomplete/bzr ()
+  "Completion for `bzr'."
+  ;; Completion for the command argument.
+  (pcomplete-here* pcmpl-bzr-commands)
+  (cond
+   ((pcomplete-match "help" 1)
+    (pcomplete-here* pcmpl-bzr-commands))
+   (t
+    (while (pcomplete-here (pcomplete-entries))))))
+
+;;**** Mercurial (hg) Completion
+
+(defun pcmpl-hg-commands ()
+  "Return the most common hg commands by parsing the hg output."
+  (with-temp-buffer
+    (call-process-shell-command "hg" nil (current-buffer) nil "-v" "help")
+    (goto-char 0)
+    (search-forward "list of commands:")
+    (let (commands
+	  (bound (save-excursion
+		   (re-search-forward "^[[:alpha:]]")
+		   (forward-line 0)
+		   (point))))
+      (while (re-search-forward
+	      "^[[:blank:]]\\([[:word:]]+\\(?:, [[:word:]]+\\)*\\)" bound t)
+	(let ((match (match-string 1)))
+	  (if (not (string-match "," match))
+	      (push (match-string 1) commands)
+	    (dolist (c (split-string match ", ?"))
+	      (push c commands)))))
+      (sort commands #'string<))))
+
+(defconst pcmpl-hg-commands (pcmpl-hg-commands)
+  "List of `hg' commands.")
+
+(defun pcomplete/hg ()
+  "Completion for `hg'."
+  ;; Completion for the command argument.
+  (pcomplete-here* pcmpl-hg-commands)
+  (cond
+   ((pcomplete-match "help" 1)
+    (pcomplete-here* pcmpl-hg-commands))
+   (t
+    (while (pcomplete-here (pcomplete-entries))))))
+#+end_src
+
+
+*** If we pcomplete. lets auto complete
+
+#+begin_src emacs-lisp
+    (emagician/def-named-hook emagician/ac-setup-for-eshell-mode shell-mode-hook
+      (setq ac-sources 
+            '(ac-source-pcomplete ac-source-filename ac-source-files-in-current-dir ac-source-words-in-buffer)))
+#+end_src
+
+* MaGit 												:keybinding:external:
+  
 #+begin_src emacs-lisp
   
   (emagician-expect-package 'magit)
   (emagician-expect-package 'git-commit-mode)
   (emagician-expect-package 'gitconfig-mode)
   (emagician-expect-package 'gitignore-mode)
-  (emagician-expect-package 'magithub)
+  
   (emagician-expect-package 'helm-ls-git)
-  
-  (global-set-key (kbd "C-c m") 'magit-status)
-  
+    
   (when (locate-file "git-achievements" exec-path)
     (setq magit-git-executable "git-achievements"))
+  (global-set-key (kbd "C-c m") 'magit-status)
 #+end_src
+
+** Git Messaging...?
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'git-messenger)
+#+end_src
+
+** Gutter
+
+#+begin_src emacs-lisp
+(emagician-expect-package 'git-gutter)
+(global-git-gutter-mode t)
+
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x v p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x v n") 'git-gutter:next-hunk)
+
+;; Stage current hunk
+(global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+
+;; Revert current hunk
+(global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
+
+
+(setq git-gutter:window-width 1)
+(setq git-gutter:added-sign "++ ")
+(setq git-gutter:deleted-sign "-- ")
+(setq git-gutter:modified-sign "== ")
+
+(set-face-foreground 'git-gutter:modified "purple") ;; background color
+(set-face-foreground 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:deleted "red")
+#+end_src
+
+#+RESULTS:
+
+** Ma-Git-Hub													  :depricate:
+
+   We wan't to use SSL with github.  Thanks. 
+
+   There is a bug with magit currently. Disabled.
+
+#+begin_src emacs-lisp :tangle no
+  (emagician-expect-package 'magithub)
+  (setq magithub-use-ssl t)
+#+end_src
+
 ** NEXT Set up git help with info using emacs. 
 
 
@@ -205,6 +383,7 @@
 
 ** NEXT move the log into my personal config 
 
+
 * Processes through dizzee
 
   I don't have a great example of htis yet.. but maybe soon.  This package is The Shit[fn:1] though.
@@ -216,7 +395,7 @@
 ** TODO Move this into interface? 
 
 
-* RSS reading through Newsticker
+* RSS reading through Newsticker								   :disabled:
 ** TODO re-enable this if it can stop sucking
 ** Set up emagician feeds
    This is set up as it's own variable, so you can add it. Because, hopefully it's useful.
@@ -265,6 +444,10 @@
     (newsticker-treeview))
 #+end_src
 
+
+
 * Footnotes
 [fn:1] "The Shit" is a good thing.  
+
+[fn:2]  https://tsdh.wordpress.com/2013/05/31/eshell-completion-for-git-bzr-and-hg/
  

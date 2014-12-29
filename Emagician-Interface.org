@@ -1,12 +1,31 @@
 #+title: Interface
 * Visual Interface Chunks
-** Solarized theme.  YAY!
-#+begin_src emacs-lisp
+** Theme
+*** Moe, moe, kyun!  
+#+begin_src emacs-lisp 
+  (emagician-expect-package 'moe-theme)
+  (require 'moe-theme)
+  
+  (setq moe-theme-mode-line-color 'yellow)
+  (moe-dark)
+  (powerline-moe-theme)
+#+end_src
+
+#+RESULTS:
+: t
+
+*** Solarized theme.											  :depriated:
+Getting real tired of shitty fruit salad
+#+begin_src emacs-lisp :tangle no
   (emagician-expect-package 'solarized-theme)
   (load-theme 'solarized-dark)
 #+end_src
-*** TODO set the theme based on the time
-#+begin_src emacs-lisp
+
+#+RESULTS:
+: t
+
+*** TODO set the theme based on the time :deprecated
+#+begin_src emacs-lisp :tangle no
   (defvar emagician/change-solarized-is-dark t)
   
   (defun emagician/change-solarized-based-on-time ()
@@ -27,17 +46,57 @@
                  'emagician/change-solarized-based-on-time)
     "Timer variable for the change-solarized function.  Provided so you can cancel it.")
 #+end_src
+
+#+RESULTS:
+: emagician/change-solarized-timer
+
 **** NEXT write simple theme select function 
-** Maximize primary window
-#+begin_src emacs-lisp
-  (emagician-expect-package 'maxframe)
-  (require 'maxframe)
-  (add-hook 'window-setup-hook 'maximize-frame t)
-  
-  (case system-type
-    ((darwin) (setq mf-display-padding-height 60)))
-  
+** Better fonts
+*** TODO Fix problem with prog modes before re-enabling this. 
+   Thanks to this guy! http://yoo2080.wordpress.com/2013/05/30/monospace-font-in-tables-and-source-code-blocks-in-org-mode-proportional-font-in-other-parts/
+#+begin_src emacs-lisp :tangle no
+(add-hook 'text-mode-hook 'variable-pitch-mode)
+
+(defun my-adjoin-to-list-or-symbol (element list-or-symbol)
+  (let ((list (if (not (listp list-or-symbol))
+                  (list list-or-symbol)
+                list-or-symbol)))
+    (require 'cl-lib)
+    (cl-adjoin element list)))
+
+(eval-after-load "org"
+  '(mapc
+    (lambda (face)
+      (set-face-attribute
+       face nil
+       :inherit
+       (my-adjoin-to-list-or-symbol
+        'fixed-pitch
+        (face-attribute face :inherit))))
+    (list 'org-code 'org-block 'org-table 'org-block-background)))
+
+;;; display Info mode buffers in proportional font
+(add-hook 'Info-mode-hook 'variable-pitch-mode)
+
+;;; but code examples in monospace font
+(defvar my-rx-info-code (rx bol "     " (* not-newline) eol))
+(add-hook 'Info-mode-hook 'my-Info-font-lock)
+(defun my-Info-font-lock ()
+  (interactive)
+  (require 'org)
+  (font-lock-add-keywords
+   nil
+   `((,my-rx-info-code
+      .
+      ;; let's just use org-block
+      (quote org-block)
+      ))))
+
 #+end_src
+
+#+RESULTS:
+: my-Info-font-lock
+
 ** Turn off goofy stuff like menu bars
 
 Seriously, you __MIGHT__ need the menu to pick up on emacs featuers,
@@ -47,8 +106,9 @@ apropos? (~C-h a~)
 #+name: turn-off-goofy-shit
 #+begin_src emacs-lisp
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
-    (when (fboundp mode) (funcall mode -1)))
+    (when (fboundp mode) (message "%s" mode) (funcall mode -1)))
 #+end_src
+#+RESULTS: turn-off-goofy-shit
 
 *** Turn off the splash screen
 
@@ -56,13 +116,33 @@ apropos? (~C-h a~)
   (setq inhibit-startup-screen t)  
 #+end_src
 
-** Use Volatile highlights
+#+RESULTS:
+: t
 
+** Maximize primary window
+
+   This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup.  At least on OS X.
+
+#+begin_src emacs-lisp 
+(setq default-frame-parameters '((fullscreen . maximized)))
+(defun emagician/full-screen ()
+  "Fullscreen mode!"
+  (interactive) 
+  (modify-frame-parameters nil '((fullscreen . maximized))))
+(emagician/full-screen)
+#+end_src
+
+** Use Volatile highlights
 #+name: volatile highlights
-#+begin_src emacs-foo-lisp
+#+begin_src emacs-lisp
     (emagician-expect-package 'volatile-highlights)
+    (require 'volatile-highlights)
     (volatile-highlights-mode t)
 #+end_src
+
+#+RESULTS: volatile
+: t
+
 ** Turn on some extra information through the cursor
 
    There are a few ways to change the cursor: blinking, shape and
@@ -116,10 +196,18 @@ apropos? (~C-h a~)
   
   (add-hook 'post-command-hook 'emagician-set-cursor-color-according-to-mode)
 #+end_src
+
+#+RESULTS: cursor-status
+| global-font-lock-mode-check-buffers | global-auto-complete-mode-check-buffers | global-undo-tree-mode-check-buffers | global-git-gutter-mode-check-buffers | global-edit-server-edit-mode-check-buffers | global-flycheck-mode-check-buffers | global-rainbow-delimiters-mode-check-buffers | global-hl-line-highlight | emagician-set-cursor-color-according-to-mode | mode-local-post-major-mode-change |
+
 ** Highlight current line
 #+begin_src emacs-lisp
 (global-hl-line-mode 1)
 #+end_src
+
+#+RESULTS:
+: t
+
 ** Better mode line
 *** Turn on column and line numbers; file size 
 #+begin_src emacs-lisp
@@ -127,6 +215,10 @@ apropos? (~C-h a~)
 (line-number-mode 1)
 (size-indication-mode t) 
 #+end_src
+
+#+RESULTS:
+: t
+
 *** TODO Start with some hawt Nyan action
 **** NEXT try and fix the problem with this recipe not storing images
 **** TODO Test Recipe
@@ -149,6 +241,8 @@ apropos? (~C-h a~)
   
 #+end_src
 
+#+RESULTS:
+
 *** Images to the mode line to make them look awesome. 
 
 #+begin_src emacs-lisp 
@@ -156,24 +250,25 @@ apropos? (~C-h a~)
 (require 'powerline)
 #+end_src
 
-   And set it up.
+#+RESULTS:
+: powerline
 
-#+begin_src emacs-lisp
-  (custom-set-faces 
-     '(powerline-active1 ((t (:inherit (mode-line) :background "grey70"))))
-     '(powerline-active2 ((t (:inherit (mode-line) :background "grey80"))))
-     
-     '(powerline-inactive1
-       ((t (:background "grey40" :inherit mode-line-inactive))))
-     '(powerline-inactive2
-       ((t (:background "grey50" :inherit mode-line-inactive)))))
+   And set it up.
+**** Moe theme integration :theme:
+#+begin_src emacs-lisp 
+;(powerline-moe-theme)
 #+end_src
+
+#+RESULTS:
 
 For some reason powerline wants to be reset using ~powerline-center-theme~
 
 #+begin_src emacs-lisp
 (powerline-center-theme)
 #+end_src
+
+#+RESULTS:
+| %e | (:eval (let* ((active (powerline-selected-window-active)) (mode-line (if active (quote mode-line) (quote mode-line-inactive))) (face1 (if active (quote powerline-active1) (quote powerline-inactive1))) (face2 (if active (quote powerline-active2) (quote powerline-inactive2))) (separator-left (intern (format powerline-%s-%s powerline-default-separator (car powerline-default-separator-dir)))) (separator-right (intern (format powerline-%s-%s powerline-default-separator (cdr powerline-default-separator-dir)))) (lhs (list (powerline-raw %* nil (quote l)) (powerline-buffer-size nil (quote l)) (powerline-buffer-id nil (quote l)) (powerline-raw  ) (funcall separator-left mode-line face1) (powerline-narrow face1 (quote l)) (powerline-vc face1))) (rhs (list (powerline-raw global-mode-string face1 (quote r)) (powerline-raw %4l face1 (quote r)) (powerline-raw : face1) (powerline-raw %3c face1 (quote r)) (funcall separator-right face1 mode-line) (powerline-raw  ) (powerline-raw %6p nil (quote r)) (powerline-hud face2 face1))) (center (list (powerline-raw   face1) (funcall separator-left face1 face2) (when (boundp (quote erc-modified-channels-object)) (powerline-raw erc-modified-channels-object face2 (quote l))) (powerline-major-mode face2 (quote l)) (powerline-process face2) (powerline-raw  : face2) (powerline-minor-modes face2 (quote l)) (powerline-raw   face2) (funcall separator-right face2 face1)))) (concat (powerline-render lhs) (powerline-fill-center face1 (/ (powerline-width center) 2.0)) (powerline-render center) (powerline-fill face1 (powerline-width rhs)) (powerline-render rhs)))) |
 
 **** DONE Make melpa package
 #+begin_src emacs-lisp :tangle no 
@@ -195,8 +290,15 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
     )    
   
 #+end_src
+
+#+RESULTS:
+
 **** TODO make pull request
 *** TODO fix the font to be non-monospace. 
+*** Smart Mode Line
+#+begin_src  emacs-lisp 
+(emagician-expect-package 'smart-mode-line)
+#+end_src
 ** Frame titles
   Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
 
@@ -209,16 +311,44 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
                      (abbreviate-file-name (buffer-file-name))
                      "%b"))))
 #+end_src
+   
+** Visual File indicators
+*** Indent guides												  :depricated:
+#+begin_src emacs-lisp :tangle no
+(emagician-expect-package 'indent-guide)
+(require 'indent-guide)
+(indent-guide-global-mode t)
+(setq indent-guide-char "⏐")
+#+end_src
 
 ** Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.		 :keybinding:
 
 #+begin_src emacs-lisp
 (global-unset-key [(control z)])
+(global-unset-key (kbd "C-x C-z"))
 #+end_src
-   
 * Functional Interface Chunks
+** Discovery
+
+#+begin_src emacs-lisp 
+(emagician-expect-package 'discover-my-major)
+(global-set-key (kbd "C-h C-m") 'discover-my-major)
+#+end_src
+
+** Better mark ring handling :keybinding:
+#+begin_src 
+(emagician-expect-package 'show-marks)
+#+end_src
+** Pomodoro
+#+begin_src emacs-lisp 
+
+(emagician-expect-package 'pomodoro)
+
+#+end_src
+
 ** Memo Pop
-*** NEXT check that it can be downloaded
+*** DONE check that it can be downloaded
+	- State "DONE"       from "NEXT"       [2013-05-15 Wed 08:51]
 *** TODO enable code
 *** TODO write maker functions
 *** TODO write update so that current project can be set
@@ -231,7 +361,18 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 (global-set-key [f4 f6] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Career.org")))
 (global-set-key [f4 f7] '(lambda () (interactive) (memo-pop "~/Dropbox/org/Game.org")))
 
-** Prosjekt
+** Winmove
+*** NEXT figure out sane keybindings here
+*** TODO enable
+*** TODO write simple grump function
+#+begin_src emacs-lisp :tangle no
+(global-set-key [(meta ?B)] 'windmove-left)  ; was unbound
+(global-set-key [(meta ?P)] 'windmove-up)    ; was unbound
+(global-set-key [(meta ?F)] 'windmove-right) ; was unbound
+(global-set-key [(meta ?N)] 'windmove-down)  ; was unbound
+#+end_src
+
+** Prosjekt														  :depricate:
 *** TODO Figure out a better project manager and disable this one probably 
 #+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path (expand-file-name "dist/prosjekt/prosjekt" emagician-dir))
@@ -241,7 +382,7 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 #+end_src
 
 *** General key bindings
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp tangle: no
 (global-set-key (kbd "S-<f2>") 'helm-prosjekt)
 #+end_src 
 
@@ -283,6 +424,13 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
                  "start.sh"
                  :cd "~/projects/work/foo/apache-solr-1.4.1/example/")
 #+end_src
+** Ace window jump
+#+begin_src emacs-lisp 
+(emagician-expect-package 'ace-window)
+(require 'ace-window)
+(global-set-key (kbd "C-x C-o") 'ace-window)
+#+end_src
+
 ** Message Buffer
 100 lines is not enough.  5000 is a good place to start.
 #+begin_src emacs-lisp
@@ -292,7 +440,7 @@ For some reason powerline wants to be reset using ~powerline-center-theme~
 ** Searching
 *** Rebind standard keys										 :keybinding:
 
-isearch sould use regexp by default
+isearch should use regexp by default
 
 #+begin_src emacs-lisp
 (global-set-key [(control s)] 'isearch-forward-regexp)
@@ -314,10 +462,10 @@ isearch sould use regexp by default
 #+end_src
 
 *** Turn into a guru										   :experimental:
-	Guru mode is supposed to help you learn "proper" emacs keys.  For instance, nstead of the arrow key: C-f.
+	Guru mode is supposed to help you learn "proper" emacs keys.  For instance, instead of the arrow key: C-f.
 
 	Jury is out on it still
-#+begin-src
+#+begin-src emacs-lisp
 (emagician-expect-package 'guru-mode)
 (require 'guru-mode)
 (guru-global-mode +1)
@@ -339,8 +487,21 @@ isearch sould use regexp by default
 #+name: helm
 #+begin_src emacs-lisp
 (emagician-expect-package 'helm)
+(emagician-expect-package 'helm-ls-git)
+(require 'helm-ls-git)
+(global-set-key [f2] 'helm-emagician)
+#+end_src
 
-(global-set-key [f2] 'helm-mini)
+#+begin_src emacs-lisp
+  (defun helm-emagician ()
+    "Slowly going to become a super helm-dwim"
+    (interactive)
+    (require 'helm-files)
+    (helm-other-buffer '(helm-source-buffers-list
+                         helm-source-ls-git
+                         helm-source-recentf                      
+                         helm-source-buffer-not-found)
+                       "*helm mini*"))
 #+end_src
 
 *** Use helm as m-x 
@@ -349,9 +510,9 @@ isearch sould use regexp by default
    
    Use helm for completing read. 
 
-#+begin_src emacs-lisp
-(helm-mode 1)
-(global-set-key (kbd "M-x")     'helm-M-x)
+#+begin_src emacs-lisp 
+  (helm-mode 1)
+  (global-set-key (kbd "M-x")     'helm-M-x)
 #+end_src
    
 *** Buffer selection
@@ -361,11 +522,14 @@ isearch sould use regexp by default
 #+end_src
 
 *** Files
+**** Show full paths
+#+begin_src emacs-lisp
+(setq helm-ff-transformer-show-only-basename nil)
+#+end_src
 **** Extended Command, Insert, write and find files should use helm.
 
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x i")   'helm-insert-file)
 (global-set-key (kbd "M-y")     'helm-show-kill-ring)
 #+end_src
 
@@ -373,14 +537,15 @@ isearch sould use regexp by default
 
 	My muscle memory has control-backspace bound to backwards-delete-syntax.  Make it do the right thing.
 
-#+begin_src emacs-lisp
-(define-key helm-find-files-map (kbd "C-<backspace>") 'backward-kill-word)
+#+begin_src emacs-lisp :tangle no
+(eval-after-load 'helm
+  (progn (define-key helm-find-files-map (kbd "C-<backspace>") 'backward-kill-word)))
 #+end_src
 
 ***** TODO figure out how to make find-files show the history as well.
 ***** TODO Maybe not helm-write-file... it seems sketchy, TBD
 
-*** Fix MELPA/Marmalade brokenness
+*** Fix MELPA/Marmalade/Helm brokenness
 
 #+begin_src emacs-lisp
   (defun emagician-helm/allow-shutdown-after-upgrade ()
@@ -389,7 +554,7 @@ isearch sould use regexp by default
   
 #+end_src
 **** TODO see if there is a post-install hook that we can use to do this automagickally
-** Sauron.  Notifications Plus+!								 :keybinding:
+** Sauron.  Notifications Plus+! 								 :keybinding:
 #+begin_src emacs-lisp 
   (emagician-expect-package 'sauron)
   (add-hook 'emacs-startup-hook 'sauron-start)
@@ -413,9 +578,9 @@ isearch sould use regexp by default
           (string-match "jon_best" msg)))
 #+end_src
 
-*** Sauron notifications
+*** Sauron notifications  
 
-	Okay, here is the think emagicians...  notifications are actually
+	Okay, here is the thing emagicians...  notifications are actually
 	kinda important.  Think a bout it, here is a sound that you will
 	be bombarding your nervous system with whenever something
 	quasi-important happens.  So I think the trick here is to choose
@@ -444,6 +609,13 @@ isearch sould use regexp by default
       (6 (sauron-fx-sox (expand-file-name "assets/audio/perrytheme.ogg")))))
 #+end_src
 
+	Note that sauroon-fx-sox needs Sox, which can be installed via homebrew 
+
+#+begin_example
+brew install vorbis-tools
+brew install sox
+#+end_example 
+
 **** TODO Add todochiku (and others while you're at it) to emagician starter kit
 **** DONE Fix Sounds 
 	 - State "DONE"       from "TODO"       [2012-10-01 Mon 20:57]
@@ -471,3 +643,29 @@ isearch sould use regexp by default
 **** TODO remove watch:
 (interactive ...completion patttern thingy sauron-watch-patterns)
 (delq 'sauron-watch-patterns "perry")
+
+*** Sauron Circe
+#+begin_src emacs-lisp 
+   (require 'circe)
+  
+   (defun sauron-circe-start ()
+     "Start watching IRC."
+     (if (not (boundp 'circe-version))
+         (progn 
+           (message "sauron-circe not available")
+           nil)
+       (progn
+         (circe-add-message-handler "PRIVMSG" 'sr-circe-PRIVMSG-handler)
+         t
+       )))
+  
+  (defun sr-circe-PRIVMSG-handler (nick user host command args)
+    (if (string-match-p "jarkell" (cadr args))
+        (sauron-add-event 'circe 3 (format "%s: %s" nick (cadr args)))))
+  
+  (defun sauron-circe-stop ()
+    "'Stop' watching IRC.  Circe doesn't have any way to stop watching.")
+  
+  (setq sauron-modules '(sauron-circe))
+  (provide 'sauron-circe)
+#+end_src

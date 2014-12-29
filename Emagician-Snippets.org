@@ -1,14 +1,66 @@
 #+TITLE: YASnippets 
+#+PROPERTY: padline no 
 #+results: silent
 * This is not the file you are looking for...
   If you want to configure yasnippets for the emagicians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
 
-** Org
+* Building															  :build:
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets")
+(emagician/expect-dir "./assets/snippets/js-mode")
+(emagician/expect-dir "./assets/snippets/coffeescript-mode")
+(emagician/expect-dir "./assets/snippets/org-mode")
+(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
+(emagician/expect-dir "./assets/snippets/ruby-mode")
+#+end_src
 
-[[assets/snippets/org-mode/]]
+** Execute this during development
+#+begin_src emacs-lisp :tangle no
+  (defun emagician/snippet-tangle-and-reload () 
+    "Helper function to automagickally tangle and reload snippets after the snippet file is saved"
+    (org-babel-tangle)
+    (yas-reload-all))
+  
+  (add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)
+#+end_src
+ 
+ 
+* Text modes
+** Org :org:
+*** Source blocks.  A majority of mine are elisp and snippets 
+#+begin_src yasnippet :tangle assets/snippets/org-mode/src
+  ,# name: source block
+  ,# key: src
+  ,# --
+  ,#+name: $1
+  ,#+begin_src $2 $3
+  ,$0
+  ,#+end_src
+#+end_src
 
-#+BEGIN_SRC 
+#+begin_src yasnippet :tangle assets/snippets/org-mode/lisp
+  ,# name: emacs-lisp
+  ,# key: lisp
+  ,# --
+  ,#+begin_src emacs-lisp $1
+  ,$0
+  ,#+end_src
+#+end_src
 
+#+begin_src yasnippet :tangle assets/snippets/org-mode/yasnippet
+  ,# name: yasnippet
+  ,# key: snippet
+  ,# --
+  ,#+begin_src yasnippet :tangle assets/snippets/$1/$2
+  ,# name: $2
+  ,# key: $2
+  ,#--
+  ,$0
+  ,#+end_src
+#+end_src
+
+ 
+* Programming modes 
 ** Javascript 
 
 #+begin_src yasnippet :tangle assets/snippets/js-mode/.yas.parents
@@ -57,5 +109,49 @@ it("$1", function(done) {
 	$0
 });
 #+end_src
+** Coffeescript
+#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if
+  # name: if
+  # key: if
+  # -- 
+  if $1
+    $0
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if.else
+  # name: if
+  # key: if
+  # -- 
+  if $1
+    $2
+  else v$0
+#+end_src
+
 ** Lisp
-src
+#+begin_src yasnippet :tangle assets/snippets/emacs-lisp-mode/defun
+# name: defun
+# key: defun
+#--
+(defun $1 ($2) 
+  "$3"
+  $0)
+#+end_src
+
+** Ruby
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/def
+  # name: def
+  # key: def
+  # -- 
+  def $1 $2
+    $0
+  end
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/if
+  # name: if
+  # key: if
+  # -- 
+  if ($1)
+    $0
+  end
+#+end_src

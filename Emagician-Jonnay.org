@@ -21,10 +21,12 @@
 (emagician-starter-kit-load "Emagician-Helpers.org")
 (emagician-starter-kit-load "Emagician-Interface.org")
 (emagician-starter-kit-load "Emagician-Lisp.org")
-(emagician-starter-kit-load "Emagician-Org.org")
+(emagician-starter-kit-load "Emagician-Eshell.org")
+;(emagician-starter-kit-load "Emagician-Org.org")
 (emagician-starter-kit-load "Emagician-WebDev.org")
 (emagician-starter-kit-load "Emagician-Meta.org")
 (emagician-starter-kit-load "Emagician-Lamp.org")
 (emagician-starter-kit-load "Emagician-C.org")
 (emagician-starter-kit-load "Emagician-Ruby.org")
+(emagician-starter-kit-load "themes/org-beautify.org")
 #+end_src

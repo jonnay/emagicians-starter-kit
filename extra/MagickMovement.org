@@ -1,0 +1,86 @@
+#+TITLE: Magickal Movement
+
+* Overview
+
+This is an experiment in cursor movement.  Basically the idea is to
+look at repeated cursor movement, and do what the user means, rather
+than slavishly do what the user is doing.
+
+Say for instance we take the line: (the vertical bar represents the point)
+
+"Hail Eris, All Hail Discordia!"
+
+Normally if I move the cursor right 2 times, the point would be at the
+letter 'i' in Hail.  Thats probably dumb.  Really, if I am hitting
+forward twice, it is more likely I am trying to get somewhere beyond
+the i in 'Hail'. Maybe I want the next word?
+
+This package works on that assumption.  It narrows down where you want
+to go based on logical keypresses and units.
+
+** Divide and Conquor
+
+If you don't want the beginning or end, then you probalby want the middle, right? 
+
+Left/Right arrow key hit once, move one character
+
+Twice, start in MagicalMovement Mode, and assume you meant next
+logical unit.  Forward one more move my logical unit once more.  Back,
+you obviously meant somewhere in that word.
+
+** Shift
+
+What if shift was a zoom?  Shift to micro-itize the movements?  Might be dumb.  Lets try it!
+
+* The State Machine
+
+| State    | Effect                     | Action taken     | To State |
+|----------+----------------------------+------------------+----------|
+| Start    | None                       | Direction Chosen | →        |
+|----------+----------------------------+------------------+----------|
+| →        | Forward 1 unit             | →                | →→       |
+|----------+----------------------------+------------------+----------|
+| →→       | Forward 1 syntax unit      | →                | →→→      |
+|----------+----------------------------+------------------+----------|
+| →→→      | Forward to 1/2 EOL         | →                | →→→→     |
+|----------+----------------------------+------------------+----------|
+| →→→→     | Forward to EOL next line   | →                | EOL→     |
+|----------+----------------------------+------------------+----------|
+| EOL→     | Forward to EOL next line   | →                | EOL→→    |
+|----------+----------------------------+------------------+----------|
+| EOL→→    | Forward to next empty line | →                | →→→→→→→  |
+|----------+----------------------------+------------------+----------|
+| →→→→→→→  | FOrward to next epty lien  | →                | →→→→→→→→ |
+|----------+----------------------------+------------------+----------|
+| →→→→→→→→ | Forward to Eof             | ←                |          |
+|----------+----------------------------+------------------+----------|
+|          |                            |                  |          |
+
+
+Unit (char, syntax, line, linegroup, file) 
+Direction
+
+#+begin_src emacs-lisp 
+(defvar magick-move-unit nil)
+(defvar magick-move-units '(char syntax line linegroup file))
+(defvar magick-move-state nil) ; (rrwnd back nil forward ffwd)
+#+end_src
+
+
+#+begin_src emacs-lisp
+
+(defun magick-move-left ()
+  "leftward key hit" 
+  (case magick-move-state 
+	
+	(rwnd (magick-move-change-unit -1))
+	(back (magick-move-set-state 'rwnd))
+	(forward (magick-move-set-state 'ffwd))
+	(ffwd (magick-move-change-unit +1)))
+  )
+
+(defun magick-move-progress () 
+ 
+)
+#+end_src
+

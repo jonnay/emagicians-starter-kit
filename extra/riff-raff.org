@@ -59,7 +59,7 @@
   </html>
 #+end_src
 ** And the CSS
-#+begin_src 
+#+begin_src less 
 .connected { background-color: #0f0; }
 .disconnected { background-color: #f00; }
 #+end_src

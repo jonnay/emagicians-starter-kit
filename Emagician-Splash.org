@@ -1,5 +1,8 @@
-* Better awesomer splash page
+* Better Moar Awesomer splash page
 
+  
+
+* Misc old ideas
 ** Show on startup:
    - [ ] Sigil
    - [ ] Diary

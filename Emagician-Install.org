@@ -281,6 +281,10 @@ cp -v ./init.el ~/.emacs.d/
 
 <<true-name>>
 <<set-this-dir-as-var>>
+;; This suks, but we need org mode propery running
+(setq package-user-dir (concat emagician-dir "elpa"))
+(let ((package-load-list '((org-plus-contrib t))))
+  (package-initialize))
 (require 'org-install)
 (require 'ob-tangle)
 (org-babel-load-file (expand-file-name "Emagician.org" emagician-dir))

@@ -52,6 +52,16 @@ This was snarfed from Magnars [fn:1]
   (transient-mark-mode -1)
 #+end_src
 
+* Multiple Cursors												 :keybinding:
+#+begin_src emacs-lisp
+(emagician-expect-package 'multiple-cursors)
+(global-set-key (kbd "C-S-c e") 'mc/edit-lines)
+
+(global-set-key (kbd "C-S-c n") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-S-c p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-c h") 'mc/mark-all-like-this)
+#+end_src
+
 * Working with Text
 ** Filling
 *** Unfill [fn:2]
@@ -64,7 +74,19 @@ This was snarfed from Magnars [fn:1]
 
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
 #+end_src
-** Killing and yanking
+** Killing and yanking												   :kill:
+*** System clipboard should be part of the kill ring if at all possible
+#+begin_src emacs-lisp
+(setq save-interprogram-paste-before-kill t)
+#+end_src
+This code is subsumed by teh var above.
+#+begin_src emacs-lisp :tangle no
+(defadvice kill-new (before kill-new-push-xselection-on-kill-ring activate)
+  "Before putting new kill onto the kill-ring, add the clipboard/external selection to the kill ring"
+  (let ((have-paste (and interprogram-paste-function
+                         (funcall interprogram-paste-function))))
+    (when have-paste (push have-paste kill-ring))))
+#+end_src
 *** TODO Swap region with kill ring
 *** TODO Insert-yank-as-rectangle
 *** when yanking, indent according to the mode
@@ -87,6 +109,19 @@ This was snarfed from Magnars [fn:1]
           (message "Buffer %s is not associated with a file." (buffer-name)) 
         (message "%s" (kill-new buffer-file-name)))))
 #+end_src
+*** Basic Kill nicities 
+**** Big kill ring!
+	 Since the ring is searchable by helm, this is not only fine, but desireable!
+#+begin_src emacs-lisp 
+(setq kill-ring-max 120)
+#+end_src
+**** Other 
+#+begin_src emacs-lisp 
+(setq kill-whole-line t)
+(setq kill-read-only-ok t)
+#+end_src
+
+
 ** Indenting and tabbing 
   I am not going to solve this for everyone and try to be all things for all peope.  In fact I will bet money that my style of indentation kinda sucks, and look to the emacs community to help me to stop sucking.
 #+begin_src emacs-lisp
@@ -126,6 +161,8 @@ This was snarfed from Magnars [fn:1]
 
 * Delimiters
 ** Rainbow Delimiters 
+   - Totally broken
+
    Not really sure if this should be interface, or more in the movement and editing section.
 
    It's nice to have a good string for testing:
@@ -133,7 +170,7 @@ This was snarfed from Magnars [fn:1]
 
    I am not 100% sure I like this colorscheme.  The Angry red unmatched delimiter is nice.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (emagician-expect-package 'rainbow-delimiters)
   (add-hook 'emacs-startup-hook 'global-rainbow-delimiters-mode)
   
@@ -181,7 +218,8 @@ This was snarfed from Magnars [fn:1]
   (require 'yasnippet)
   
   (add-hook 'prog-mode-hook 'yas-minor-mode-on)
-  
+  (add-hook 'org-mode-hook 'yas-minor-mode-on)
+
   ;; I actually don't think this rigamaroll is needed anymore
   
   (defun yas/org-very-safe-expand ()
@@ -196,6 +234,7 @@ This was snarfed from Magnars [fn:1]
   
   ;(add-hook 'org-mode-hook #'yas/org-setup)
   
+  (yas/reload-all)
   
 #+end_src
 
@@ -217,16 +256,18 @@ This was snarfed from Magnars [fn:1]
 (setq ac-auto-show-menu t)
 (setq ac-dwim t)
 (setq ac-use-menu-map t)
-(setq ac-quick-help-delay 1)
-(setq ac-quick-help-height 60)
+(setq ac-quick-help-delay 0.25)
+(setq ac-quick-help-height 20)
 #+end_src
 
 ** Dictionaries
 #+begin_src emacs-lisp
+  (emagician/expect-dir "assets/ac-dictionaries")
   (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician-dir))
+  
 #+end_src
-*** TODO make sure there is a sort of assits directory, and merge with yasnippet
 *** TODO make emagicians starter kit generate the dictionaries itself
+
 *** TODO write jQuery dictionary.  
 **** NEXT google up a jquery keyword list
 **** TODO purify myself afterwards by writing one for Ender
@@ -311,9 +352,12 @@ This was snarfed from Magnars [fn:1]
 #+begin_src emacs-lisp
 (emagician-expect-package 'markdown-mode)
 
-(add-to-list 'auto-mode-alist '("\\.md" 'markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 #+end_src
-
+** Yaml
+#+begin_src emacs-lisp
+  (emagician-expect-package 'yaml-mode)
+#+end_src
 * Footnotes
 
 [fn:1]  http://whattheemacsd.com/init.el-02.html

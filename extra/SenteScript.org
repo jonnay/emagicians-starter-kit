@@ -1,0 +1,163 @@
+#+title: Sente Script
+
+Because Lispyscript doesn't go far enough.
+
+* Mission
+
+  Make javascript suck far less by:
+
+  - Providing a scheme syntax, and partial scheme semantics to javascript to make it easier to write applications
+	- let instead of var
+	- Allow for self documentation that can be turned on and off during compilation
+	- dynamic (and hopefully easy to use) compilation/interpretation
+
+  - Interpreted it should be very schemey and cool, with just the right bondage and discipline.  Compiled it should be fast, slick javascript.
+* Syntax
+
+  - Super slimmed down:
+	- ; comments
+	- #| |# multiline nestible comments
+	- parens () []
+	- Strings "fo\"o"
+	- Numbers [-=][0-9.]
+	- symbols 'foo
+	- quasi-quotation `(fooo ,bar) and `(foo ,@bar)
+	- VERY small support for hash-forms
+	  - #null
+	  - #undefined
+	  - #| multi-lines 
+  - JS extensions
+	- 
+
+* Features
+  Not nessicarily implemented.  At all. 
+** Lexical Macros 
+
+   (let-macro ((arrayify arg)
+               (if (not (array? ,arg)) (set! ,arg [,arg])))
+     { (registerThingr (function (argA) (arraify argA)))
+       (registerAnotehr (function (argB) (arraify argB))))})
+
+** Source Maps
+https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit?hl=en_US&pli=1&pli=1
+** One to one Line numbers.
+
+(if (null? a) b (+ d e)) ->  if (typeof a == "null") return b; else return (d + e); 
+
+** Dispatch on type and pattern
+
+** Proper Scheme-style Symbols integer? vs. integerp
+   integer? -> function integer_p_() or "integer?": function() 
+
+* Key Language Pieces
+** Read
+   - Loop
+	 - whitespace? -> continue
+	 - (? -> left-paren-token
+	 - )? -> right-paren-token
+	 - alpha? -> (read-identifier first-char)
+	 - numeric? -> (read-number first-char)
+	 - "? -> (read-string first-char)
+
+#+begin_src js
+  (function() {
+  
+  SenteScript.internal = SenteScript.internal || {};
+  SenteScript.internal.reader = {};
+  
+  var sir =  SenteScript.internal.reader;
+  sir.character = {}
+  
+  sir.tokens = {
+      left_paren_token: function() { this.token = "("; },
+      right_paren_token: function() { this.token = ")"; }
+      string: function(s) { this.val = s; }
+      symbol: function(s) { this.val = s; }
+      number: function(n) { this.val = n; }
+  }
+  
+  
+  var cha = sir.character;
+  
+  cha.isWhitespace(c) {
+      return (c == " " || c == "\t" || c == "\r" || c == "\n")
+  }
+  
+  cha.isLeftParen(c) { return c == "(" }
+  cha.isRightParan(c) { return c == ")" }
+  cha.isStartOfString(c) { return c == "\"" }
+  cha.isStartOfSymbol(c) { return c.match(/[A-Za-z!-*<>]/) }
+  cha.isSymbolChar(c) { return c.match(/[A-Za-z!-*<>+-]/)} 
+  cha.isNumber(c) { return (c.match(/[0-9]/)) }
+  cha.isNumeric = cha.isNumber;
+  
+  sir.read = function(str) {
+      
+  }
+  
+  sir.read_token = function() {
+      while (sir.read_char = c) {
+          if (cha.isWhitespace(c)) continue;
+          else if (cha.isLeftParen(c)) return sir.tokens.left_paren_token();
+          else if (cha.isRightParan(c)) return sir.tokens.right_paren_token();
+          else if (cha.isStartOfSymbol(c)) return sir.read_identifier(c);
+          else if (cha.isStartOfString(c)) return sir.read_string(c);
+          else if (cha.isNumeric(c)) return sir.read_number(c);
+          else throw new sir.ParseError();        
+      }
+  } 
+  
+  sir.read_identifier = function(chars) {
+      while (sir.peekchar = c) {
+          if (cha.isWhitespace(c) || cha.isRightParen(c) || cha.isLeftParen(c)) 
+              return sir.make("identifier", chars)
+          else if (cha.isSymbolChar(c)) {
+              chars = chars + c
+              continue;
+          } else throw new sir.ParseError();
+      }
+      return sir.make("identifier", chars)
+  }
+  
+  sir.read_identifier_table = {
+      terminals: [ cha.isWhitespace, cha.isRightParen, cha.isLeftParen ],
+      continuation: cha.isSymbolChar
+      branches: []
+  };
+  
+  sir.read_string_table = {
+      terminals: [ cha.isEndOfString ]
+      continuation: cha.any 
+      branches: []
+  }
+  
+  
+  
+  
+  
+  
+  sir.ParseError = function(m) {
+      this.name = "ParseError";
+      this.message = m || "Unspecified Parse Error";
+  }
+   
+  }).call(this);
+#+end_src
+
+*** Things to do
+**** Numbers 
+***** TODO negatives
+***** TODO decimal points
+***** TODO radix
+**** TODO reader macros 
+**** TODO single line comments
+**** TODO multi line comments
+** Eval
+
+** Apply
+
+#+end_scr
+
+** Eval
+** Apply
+* Interpreter 

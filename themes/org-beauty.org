@@ -64,16 +64,22 @@ Change these here.
   (org-beauty-white          "#ffffff")
   (org-beauty-red            "#e02020")
   (org-beauty-red-dark       "#90000")
+  (org-beauty-red-light      "#F03030")
   (org-beauty-yellow         "#e0e050")
   (org-beauty-yellow-dark    "#e0e050")
+  (org-beauty-yellow-light   "#f0f060")
   (org-beauty-green          "#90e090")  
   (org-beauty-green-dark     "#90e090")  
+  (org-beauty-green-light    "#a0Ffa0")  
   (org-beauty-teal           "#30b0c0")
   (org-beauty-teal-dark      "#206050")
+  (org-beauty-teal-light     "#40c0d0")
   (org-beauty-blue           "#3050f0")  
   (org-beauty-blue-dark      "#101090")  
+  (org-beauty-blue-light     "#4060ff")  
   (org-beauty-purple         "#5000f0")
   (org-beauty-purpledark     "#2000b0")
+  (org-beauty-purple-light   "#6000ff")
 #+end_src
 
 *** Color Names

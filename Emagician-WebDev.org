@@ -1,6 +1,60 @@
 * Markup (and styling)
-** TODO HTML - nxml 
+** Web mode 
+#+begin_src emacs-lisp 
+(emagician-expect-package 'web-mode)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jst.ejs\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+#+end_src
+
+
 #+begin_src emacs-lisp
+(setq web-mode-enable-block-face t)
+(setq web-mode-enable-comment-keywords t)
+(setq web-mode-enable-current-element-highlight t)
+#+end_src
+
+*** Autocomplete :autocomplete:
+#+begin_src emacs-lisp 
+(emagician-expect-package 'ac-html)
+
+(add-to-list 'web-mode-ac-sources-alist
+             '("html" . (
+                         ;; attribute-value better to be first
+                         ac-source-yasnippet
+                         ac-source-html-attribute-value
+                         ac-source-html-tag
+                         ac-source-html-attribute
+                         ac-source-words-in-buffer
+                         ac-source-words-in-same-mode-buffers)))
+#+end_src
+
+
+
+** Zencoding
+
+(emagician-expect-package 'zencoding-mode)
+** Nxhtml kinda sucks, but here are some configs to make it suck less. But it sucks
+*** Set some better defaults for nxhtml mode
+
+#+begin_src emacs-lisp :tangle no
+(setq nxhtml-default-encoding 'utf-8)
+(setq nxhtml-skip-welcome 't)
+#+end_src
+
+*** Set up completion style
+#+begin_src emacs-lisp :tangle no
+(setq popcmp-completion-style 'emacs-default)
+#+end_src
+**  HTML - nxml - also sucks, crashes emacs sometimes  :depricated:
+#+begin_src emacs-lisp :tangle no
   (add-to-list 'auto-mode-alist '("\\.html?\\|\\.tpl\\|\\.tpl\\.php" . nxml-mode))  
 #+end_src emacs-lisp
 *** TODO Set up as default mode
@@ -16,7 +70,6 @@
 **** NEXT .ctp
 
 
-
 *** Set up schemas
 
 Thanks to instant_sunshine[fn:1] for information 
@@ -27,27 +80,12 @@ Thanks to instant_sunshine[fn:1] for information
 **** TODO Grab schemas from https://github.com/ocodo/emacs.d/tree/master/nxml-schemas
 **** TODO Grab other schemas from https://github.com/jixiuf/emacs_conf/tree/master/script/nxml
 
-
 *** TODO Make it html5 compatible
 
 *** Lorum Ipsum
 #+begin_src emacs-lisp
 (emagician-expect-package 'lorem-ipsum)
 #+end_src
-
-** Nxhtml kinda sucks, but here are some configs to make it suck less. But it sucks
-*** Set some better defaults for nxhtml mode
-
-#+begin_src emacs-lisp :tangle no
-(setq nxhtml-default-encoding 'utf-8)
-(setq nxhtml-skip-welcome 't)
-#+end_src
-
-*** Set up completion style
-#+begin_src emacs-lisp :tangle no
-(setq popcmp-completion-style 'emacs-default)
-#+end_src
-
 
 ** TODO CSS															:flymake:deprecated:
 #+begin_src emacs-lisp :tangle no
@@ -58,14 +96,31 @@ Thanks to instant_sunshine[fn:1] for information
 (add-to-list 'auto-mode-alist '("\\.css\\.erb" . css-mode))
 #+end_src 
 
+
 *** TODO show-css mode 
 	https://github.com/smmcg/showcss-mode
 **** NEXT set up expect package
 **** NEXT Configure
 *** TODO Less
+#+begin_src emacs-lisp 
+  (defun emagician/css-key-extensions-hook ()
+    (define-key less-css-mode-map "\M-\C-x" 'slime-js-refresh-css))
+#+end_src
+
 #+begin_src emacs-lisp
 (emagician-expect-package 'less-css-mode)
+
+(add-hook 'less-css-mode-hook 'emagician/css-key-extensions-hook)
 #+end_src emacs-lisp
+
+
+
+*** SASSy
+#+begin_src emacs-lisp
+  (emagician-expect-package 'scss-mode)
+  (setq scss-compile-at-save nil)
+#+end_src
+
 ** TODO XML
 
 #+begin_src emacs-lisp
@@ -73,6 +128,8 @@ Thanks to instant_sunshine[fn:1] for information
     (rainbow-delimiters-mode nil))
   (add-hook 'nxml-mode 'turn-off-rainbow-delimiters)
 #+end_src 
+
+
 
 
 * Web Centeric Languages
@@ -99,9 +156,362 @@ And with PHP, comes a bunch of extra frameworks.
 	 
 *** TODO Javascript
 **** Auto Complete source setup
-
+***** Jquery
 #+begin_src emacs-lisp
+  (ac-define-source jquery
+    '((prefix . "\s$\(.+?\)\.")
+      (symbol . "f")
+      (candidates . (list 
+                     ".add()"
+                     ".addBack()"
+                     ".addClass()"
+                     ".after()"
+                     ".ajaxComplete()"
+                     ".ajaxError()"
+                     ".ajaxSend()"
+                     ".ajaxStart()"
+                     ".ajaxStop()"
+                     ".ajaxSuccess()"
+                     ".andSelf()"
+                     ".animate()"
+                     ".append()"
+                     ".appendTo()"
+                     ".attr()"
+                     ".before()"
+                     ".bind()"
+                     ".blur()"
+                     ".add()"
+                     ".disable()"
+                     ".disabled()"
+                     ".empty()"
+                     ".fire()"
+                     ".fired()"
+                     ".fireWith()"
+                     ".has()"
+                     ".lock()"
+                     ".locked()"
+                     ".remove()"
+                     ".change()"
+                     ".children()"
+                     ".class”)"
+                     ".clearQueue()"
+                     ".click()"
+                     ".clone()"
+                     ".closest()"
+                     ".contents()"
+                     ".context"
+                     ".css()"
+                     ".data()"
+                     ".dblclick()"
+                     ".always()"
+                     ".done()"
+                     ".fail()"
+                     ".isRejected()"
+                     ".isResolved()"
+                     ".notify()"
+                     ".notifyWith()"
+                     ".pipe()"
+                     ".progress()"
+                     ".promise()"
+                     ".reject()"
+                     ".rejectWith()"
+                     ".resolve()"
+                     ".resolveWith()"
+                     ".state()"
+                     ".then()"
+                     ".delay()"
+                     ".delegate()"
+                     ".dequeue()"
+                     ".detach()"
+                     ".die()"
+                     ".each()"
+                     ".empty()"
+                     ".end()"
+                     ".eq()"
+                     ".error()"
+                     ".currentTargetevent"
+                     ".dataevent"
+                     ".delegateTargetevent"
+                     ".isDefaultPrevented()"
+                     ".isImmediatePropagationStopped()"
+                     ".isPropagationStopped()"
+                     ".metaKeyevent"
+                     ".namespaceevent"
+                     ".pageXevent"
+                     ".pageYevent"
+                     ".preventDefault()"
+                     ".relatedTargetevent"
+                     ".resultevent"
+                     ".stopImmediatePropagation()"
+                     ".stopPropagation()"
+                     ".targetevent"
+                     ".timeStampevent"
+                     ".typeevent"
+                     ".which"
+                     ".fadeIn()"
+                     ".fadeOut()"
+                     ".fadeTo()"
+                     ".fadeToggle()"
+                     ".filter()"
+                     ".find()"
+                     ".finish()"
+                     ".first()"
+                     ".focus()"
+                     ".focusin()"
+                     ".focusout()"
+                     ".get()"
+                     ".has()"
+                     ".hasClass()"
+                     ".height()"
+                     ".hide()"
+                     ".hover()"
+                     ".html()"
+                     ".index()"
+                     ".innerHeight()"
+                     ".innerWidth()"
+                     ".insertAfter()"
+                     ".insertBefore()"
+                     ".is()"
+                     ".jqueryy"
+                     ".ajax()"
+                     ".ajaxPrefilter()"
+                     ".ajaxSetup()"
+                     ".ajaxTransport()"
+                     ".boxModel"
+                     ".browser"
+                     ".Callbacks()"
+                     ".contains()"
+                     ".cssHooks"
+                     ".data()"
+                     ".Deferred()"
+                     ".dequeue()"
+                     ".each()"
+                     ".error()"
+                     ".extend()"
+                     ".fn"
+                     ".extend()"
+                     ".fx"
+                     ".interval"
+                     ".fx"
+                     ".get()"
+                     ".getJSON()"
+                     ".getScript()"
+                     ".globalEval()"
+                     ".grep()"
+                     ".hasData()"
+                     ".holdReady()"
+                     ".inArray()"
+                     ".isArray()"
+                     ".isEmptyObject()"
+                     ".isFunction()"
+                     ".isNumeric()"
+                     ".isPlainObject()"
+                     ".isWindow()"
+                     ".isXMLDoc()"
+                     ".makeArray()"
+                     ".map()"
+                     ".merge()"
+                     ".noConflict()"
+                     ".noop()"
+                     ".now()"
+                     ".param()"
+                     ".parseHTML()"
+                     ".parseJSON()"
+                     ".parseXML()"
+                     ".post()"
+                     ".proxy()"
+                     ".queue()"
+                     ".removeData()"
+                     ".sub()"
+                     ".supportjQuery"
+                     ".trim()"
+                     ".type()"
+                     ".unique()"
+                     ".when()"
+                     ".keydown()"
+                     ".keypress()"
+                     ".keyup()"
+                     ".last()"
+                     ".length"
+                     ".live()"
+                     ".load()"
+                     ".load()"
+                     ".map()"
+                     ".mousedown()"
+                     ".mouseenter()"
+                     ".mouseleave()"
+                     ".mousemove()"
+                     ".mouseout()"
+                     ".mouseover()"
+                     ".mouseup()"
+                     ".next()"
+                     ".nextAll()"
+                     ".nextUntil()"
+                     ".not()"
+                     ".off()"
+                     ".offset()"
+                     ".offsetParent()"
+                     ".on()"
+                     ".one()"
+                     ".outerHeight()"
+                     ".outerWidth()"
+                     ".parent()"
+                     ".parents()"
+                     ".parentsUntil()"
+                     ".position()"
+                     ".prepend()"
+                     ".prependTo()"
+                     ".prev()"
+                     ".prevAll()"
+                     ".prevUntil()"
+                     ".promise()"
+                     ".prop()"
+                     ".pushStack()"
+                     ".queue()"
+                     ".ready()"
+                     ".remove()"
+                     ".removeAttr()"
+                     ".removeClass()"
+                     ".removeData()"
+                     ".removeProp()"
+                     ".replaceAll()"
+                     ".replaceWith()"
+                     ".resize()"
+                     ".scroll()"
+                     ".scrollLeft()"
+                     ".scrollTop()"
+                     ".select()"
+                     ".selector"
+                     ".serialize()"
+                     ".serializeArray()"
+                     ".show()"
+                     ".siblings()"
+                     ".size()"
+                     ".slice()"
+                     ".slideDown()"
+                     ".slideToggle()"
+                     ".slideUp()"
+                     ".stop()"
+                     ".submit()"
+                     ".text()"
+                     ".toArray()"
+                     ".toggle()"
+                     ".toggle()"
+                     ".toggleClass()"
+                     ".trigger()"
+                     ".triggerHandler()"
+                     ".unbind()"
+                     ".undelegate()"
+                     ".unload()"
+                     ".unwrap()"
+                     ".val()"
+                     ".width()"
+                     ".wrap()"
+                     ".wrapAll()"
+                     ".wrapInner()"))))
+#+end_src
 
+***** Underscore
+#+begin_src emacs-lisp
+  (ac-define-source underscore
+    '((prefix . "\s_\\.")
+      (symbol . "f")
+      (candidates . (list 
+                     "each"
+                     "map"
+                     "reduce"
+                     "reduceRight"
+                     "find"
+                     "filter"
+                     "where"
+                     "findWhere"
+                     "reject"
+                     "every"
+                     "some"
+                     "contains"
+                     "invoke"
+                     "pluck"
+                     "max"
+                     "min"
+                     "sortBy"
+                     "groupBy"
+                     "indexBy"
+                     "countBy"
+                     "shuffle"
+                     "sample"
+                     "toArray"
+                     "size"
+                     "first"
+                     "initial"
+                     "last"
+                     "rest"
+                     "compact"
+                     "flatten"
+                     "without"
+                     "union"
+                     "intersection"
+                     "difference"
+                     "uniq"
+                     "zip"
+                     "object"
+                     "indexOf"
+                     "lastIndexOf"
+                     "sortedIndex"
+                     "range"
+                     "bind"
+                     "bindAll"
+                     "partial"
+                     "memoize"
+                     "delay"
+                     "defer"
+                     "throttle"
+                     "debounce"
+                     "once"
+                     "after"
+                     "wrap"
+                     "compose"
+                     "keys"
+                     "values"
+                     "pairs"
+                     "invert"
+                     "functions"
+                     "extend"
+                     "pick"
+                     "omit"
+                     "defaults"
+                     "clone"
+                     "tap"
+                     "has"
+                     "isEqual"
+                     "isEmpty"
+                     "isElement"
+                     "isArray"
+                     "isObject"
+                     "isArguments"
+                     "isFunction"
+                     "isString"
+                     "isNumber"
+                     "isFinite"
+                     "isBoolean"
+                     "isDate"
+                     "isRegExp"
+                     "isNaN"
+                     "isNull"
+                     "isUndefined"
+                     "noConflict"
+                     "identity"
+                     "times"
+                     "random"
+                     "mixin"
+                     "uniqueId"
+                     "escape"
+                     "unescape"
+                     "result"
+                     "template"
+                     "chain"
+                     "value"))))
+  
+  
 #+end_src
 
 **** Pretty print the JSON object following point
@@ -118,13 +528,6 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
     (goto-char (point-min))))
 #+end_src
 
-**** FLymake Javascript												:flymake:
-#+begin_src emacs-lisp
-  (emagician-expect-package 'flymake-jslint)
-  (add-hook 'js-mode-hook 'flymake-jslint-load)
-  
-  (setq flymake-jslint-command "/usr/local/bin/jsl") 
-#+end_src
 
 **** Slime-js
 ***** TODO set up dev-mode for this. 
@@ -149,11 +552,26 @@ Originally called esk-pp-json, from the Emacs Starter Kit."
 #+begin_src emacs-lisp
 (emagician-expect-package 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee.erb" . coffee-mode))
+(eval-after-load 'coffee-mode '(define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer))
 #+end_src
 
-I am not sure if this a coffeescript convention or not, but ... here it is.
+Coffeescript is almost always indented by 2 spaces.
+
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.jst.ejs" . nxml-mode))
+(setq coffee-tab-width 2)
+#+end_src
+
+***** Autocomplete for Coffeescript
+#+begin_src emacs-lisp
+            (defun emagician/ac-setup/coffeescript-mode-setup ()
+              (setq ac-sources '(ac-source-yasnippet 
+                                 ac-source-words-in-buffer 
+                                 ac-source-words-in-same-mode-buffers
+                                 ac-source-underscore
+                                 ac-source-jquery))
+              (auto-complete-mode t))
+            
+            (add-hook 'coffee-mode-hook 'emagician/ac-setup/coffeescript-mode-setup)
 #+end_src
 
 *** TODO JSP
@@ -168,7 +586,10 @@ I am not sure if this a coffeescript convention or not, but ... here it is.
 #+begin_src emacs-lisp
 (emagician-expect-package 'websocket)
 #+end_src
-
+** REST Client
+#+begin_src emacs-lisp
+(emagician-expect-package 'restclient)
+#+end_src
 * Footnotes
 
 [fn:1] http://www.reddit.com/r/emacs/comments/1a8zk1/nxmlmode_and_schemas_do_you/

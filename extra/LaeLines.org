@@ -1,0 +1,12 @@
+#+title: Location Aware Emacs -- Lae Lines
+
+* Basic structure
+
+#+begin_src emacs-lisp :tangle no
+((predicate-func trigger execution-thunk)
+ ...)
+#+end_src
+
+#+begin_src emacs-lisp 
+(defun lae-helper-connected-to-net-p (netlist))
+#+end_src

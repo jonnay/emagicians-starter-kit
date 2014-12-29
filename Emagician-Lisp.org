@@ -12,14 +12,23 @@
 (defun turn-on-paredit ()
   (paredit-mode +1))
 #+end_src
+
+
       
-** TODO Show parans 
-** TODO checkparans as an after save hook    
+** TODO Show parens 
+** TODO checkparens as an after save hook    
 ** Slime
-#+begin_src emacs-lisp
-(emagician-expect-package 'slime)
-(require 'slime)
-(slime-setup)
+
+** Highlighting
+#+begin_src emacs-lisp 
+  (require 'highlight-sexps)
+  (add-hook 'lisp-mode-hook 'highlight-sexps-mode)
+  (add-hook 'emacs-lisp-mode-hook 'highlight-sexps-mode)
+  
+  (setq hl-sexp-background-colors '("gray35" "gray40" "gray45" "gray50" "gray55" "gray60" "gray65" "gray70" "gray75"))
+  (setq hl-sexp-colors '())
+  
+  (hl-sexp-color-update)
 #+end_src
 
 * Elisp
@@ -27,32 +36,33 @@
   Elisp is by far the most important Lisp setup.  This needs to be
   done well, and done right.  If you have *any* suggestions on how to
   make the elisp setup even better, let me know!
-** TODO redshank
-** TODO elint?
-** TODO elisp-slime-nav
-** TODO Dim Parems
-** TODO Pretty lambdas
-** TODO Simple-Call-Tree_Plus
-** Evaluation and printing
+** Emacs lisp Writing
+*** TODO redshank
+*** TODO elint?
+*** TODO elisp-slime-nav
+*** TODO Dim Parems
+*** TODO Pretty lambdas
+*** TODO Simple-Call-Tree_Plus
+*** Evaluation and printing
 
 Set up some defaults for print level.  Note that we assume that depth mistakes are made, but not length.
 
-
 #+begin_src emacs-lisp
   (setq eval-expression-print-length 9000
-        print-length nil
+        print-length 90000
         eval-expression-print-level 20
         print-level 900)
 #+end_src
 
-** Formatting
-
-#+begin_src
+*** Formatting
+**** TODO add this to the emagician package archive when ready. 
+#+begin_src emacs-lisp :tangle no
+(emagician-expect-package 'elisp-format)
 (require 'elisp-format)
 #+end_src
-*** TODO check out eval-expr 
+**** TODO check out eval-expr 
 
-** Set up hooks 
+*** Set up hooks 
 
 #+begin_src emacs-lisp
 (add-hook 'emacs-lisp-mode-hook 'emagician/remove-elc-on-save)
@@ -60,9 +70,9 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
 (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 #+end_src
 
-** Auto-complete magic
+*** Auto-complete magic
 
-** Remove .elc files on save. 
+*** Remove .elc files on save. 
 
 #+begin_src emacs-lisp
   (defun emagician/remove-elc-on-save () 
@@ -70,18 +80,18 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
     (if (eq major-mode 'emacs-lisp-mode)
       (if (file-exists-p (concat buffer-file-name "c"))
           (delete-file (concat buffer-file-name "c")))))
-
+  
   (add-hook 'after-save-hook 'emagician/remove-elc-on-save)
 #+end_src
 
-** Header Magick
-*** header2.el for managing emacs wiki files
+*** Header Magick
+**** header2.el for managing emacs wiki files
 
-** erefactor 
+*** erefactor 
 #+begin_src emacs-lisp
 (emagician-expect-package 'erefactor)
 #+end_src
-** checkdoc 
+*** checkdoc 
 
 #+begin_src emacs-lisp
   (defun emagician/run-checkdoc () 
@@ -96,13 +106,37 @@ Set up some defaults for print level.  Note that we assume that depth mistakes a
   
   (add-hook 'after-save-hook 'emagician/run-checkdoc)
 #+end_src
-*** TODO fix the problem with this
-**** NEXT (delq nil (mapcar ....))
-	 
+**** TODO fix the problem with this
+***** NEXT (delq nil (mapcar ....))
+	  
+	  
+** Emacs Lisp Environment
+
+   Lets ad some funk.  Shall we?
+
+*** Lexically
+
+#+begin_src emacs-lisp
+  (defmacro lexically (&rest forms)
+    "Lexically execute forms"
+    `(eval '(progn ,@forms) t))
+#+end_src
+
+*** Macro expand
+#+begin_src emacs-lisp
+(macroexpand '(lexically (defun (foo) (bar)) (defun (baz) (blarg))))
+#+end_src
+
+*** Asyc
+#+begin_src emacs-lisp 
+(emagician-expect-package 'async)
+#+end_src
+	
 * Common Lisp
 
 * Scheme
 
 * Clojure
+** Cider
 
-
+(emagician-expect-package 'cider)

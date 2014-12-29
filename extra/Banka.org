@@ -1,3 +1,6 @@
+#+title: Banka
+#+property: results silent
+
 * Banka - Pomodoro! Tomato!
   
   The Pomodoro technique is a method of 25 minute time boxing.  One of
@@ -13,64 +16,190 @@
   more you work with Banka (and the more I code it), the more features
   it will expose to you. 
 
+* Changelog
+  - V0.1 :: horray!
+			
 * Code
-
 ** Customizeable vars
-
 *** Inter - Face.
-
-	Tomato In Unicode:  [🍅]
+	Tomato In Emoji:    [🍅]
 	Tomato In Japanese: [蕃茄]
 
 #+begin_src emacs-lisp
-  (defface banka-title-face
+  (defface banka-title
     '((default
         (:weight bold 
          :overline "red"
-         :size 2.0
+         :height 1.25
          :box (:line-width 4 :color "red" :style nil)
          :foreground "black" :background "red"))
       (nil nil))
     "Face for title bars"
     :group 'banka)
   
-  (defface banka-inter-face
+  (defface banka-character
     '((default
         (:weight bold 
          :overline "red"
-         :size 2.0
+         :height 3.99
          :box (:line-width 4 :color "red" :style nil)
-         :foreground "black" :background "red"))
+         :foreground "red"))
       (nil nil))
-    "Face for title bars"
+    "Face for the banka logo"
     :group 'banka)
   
-  (defcustom banka-character 
+  (defface banka-interface
+    '((default
+        (:inherit 'default))
+      (nil nil))
+    "Face for the banka interface"
+    :group 'banka)
+#+end_src
+
+
+#+begin_src emacs-lisp
+  (defcustom banka-logo
     "蕃茄"
     "String to use for the banka character."
     :type 'string)
 #+end_src
-	
+
+	Or Set it to emoji!
+
+#+begin_src emacs-lisp
+  (setq banka-logo "🍅")
+#+end_src
+
+** Timer 
+#+begin_src emacs-lisp
+  (defconst banka-timer-at-time (* 60 25))
+  (defconst banka-update-time 1)
+  
+  (defvar banka-timer (cons nil nil) 
+    "Timer construct for banka
+     The car is the emacs timer for banka display and management.
+     The cdr is the `current-time' of when the banka started")
+  
+  (defun banka-start-timer ()
+    (when (timerp (car banka-timer))
+      (cancel-timer (car banka-timer))
+      (run-hooks 'banka-timer-restarted-hook))
+    (setcdr banka-timer nil)
+    (setq banka-timer 
+          (cons (run-at-time nil
+                             banka-update-time
+                             'banka-timer-update)
+                (current-time))))
+  
+  (defun banka-timer-update
+    "Timer function that is updated every second"
+    (when (> (time-subtract (current-time)
+                            (cdr banka-timer))
+             banka-timer-at-time)
+      (banka-timer-finished))
+    (bankda-display))
+  
+  (defun banka-interupt-timer
+    "Interrupt the current timer")
+  
+  (defun banka-timer-finished
+    "Note to the user that the current timer is finished"
+    (banka-popup)
+    (banka-stop-timer)
+    (run-hook 'banka-timer-finished-hook))
+#+end_src
+
+#+begin_src emacs-lisp
+  (ert-deftest banka-timer-start-update ()
+    (let ((banka-timer (cons nil nil)))
+      (banka-start-timer)
+      (should (timerp banka-timer))
+      (let ((banka-timer (cons (car banka-timer)
+                               (encode-time 1 1 1 1 1 1970)))
+            (banka-timer-finished-hook '())
+            (banka-timer-restarted-hook '())
+            (ran-finished nil)
+            (ran-started nil))
+        (add-hook banka-timer-finished-hook '(lambda () (setq ran-finished t)))
+        (add-hook banka-timer-started-hook '(lambda () (setq ran-started t)))
+        (sleep-for 1)
+        (should ran-finished)
+        (should (equal (car banka-timer) nil))
+        (should (equal (cdr banka-timer) nil)))))
+#+end_src
 
 ** Set up a pomodoro window and write to it
 *** NEXT fix the window thing to open a proper under window. Look at org source.
 
 #+begin_src emacs-lisp
+  (define-derived-mode banka-mode nil "Banka" 
+    (buffer-disable-undo))
   
-  (progn
-    (with-temp-buffer-window "*Banka*" '(display-buffer-pop-up-window '((window-height . 10))) nil
-      (print (propertize "Banka" :face 'banka-title-face))
-      (print "\n\n")
-      (print (propertize banka-character :face 'banka-inter-face))
-      (print "-------------------------------------"))q
+  (defun banka-update () 
+    "Updates the banka buffer"
+    (let ((b (get-buffer-create "*Banka*"))
+          (banka-window-height 10))
+      (with-current-buffer b
+        (banka-mode)
+        (erase-buffer)
+        (insert (propertize "Banka\n" 'face 'banka-title)) 
+        (insert (propertize banka-logo 'face 'banka-character-face))
+        (insert (propertize (banka-get-string-elapsed-from (cdr banka-timer)))))
+      (pop-to-buffer b 
+                     '((display-buffer-reuse-window
+                        display-buffer-pop-up-window
+                        display-buffer-pop-up-frame) 
+                       (window-height banka-window-height))
+                     nil)))
+;switch-to-buffer?
+#+end_src
+(banka-update)
+(display-buffer-reuse-window
+         display-buffer-pop-up-window
+         display-buffer-pop-up-frame)
+
+#+begin_src emacs-lisp
+  (defun banka-get-string-elapsed-from (from-time &optional to-time)
+    "Returns the human readable time of the banka timer"
+    (let ((decoded-time (decode-time (time-subtract (or to-time (current-time))
+                                                    (or from-time (current-time))))))
+      (format "%2d:%2d" 
+              (cadr decoded-time)
+              (car decoded-time))))
+  
+  (ert-deftest test-banka-get-string-elapsed-from ()
+    "Time formatting"
+    (should (string= " 0: 0"
+                     (banka-get-string-elapsed-from nil)))
+    (should (string= " 0: 0"
+                     (banka-get-string-elapsed-from (current-time))))
+    (should (string= " 0: 0"
+                     (banka-get-string-elapsed-from (current-time) (current-time))))
+    (should (string= " 0: 1"
+                     (banka-get-string-elapsed-from (encode-time 0 0 0 0 0 0)
+                                                    (encode-time 1 0 0 0 0 0))))
+    (should (string= " 1: 5"
+                     (banka-get-string-elapsed-from (encode-time 0 0 0 0 0 0)
+                                                    (encode-time 5 1 0 0 0 0)))))
 #+end_src
 
-*** TODO update to allow a seperate frame instead of a window
+*** TODO update to allow a separate frame instead of a window
 **** NEXT custom var
+#+begin_src emacs-lisp 
+(defcustom banka-new-frame
+    t
+    "String to use for the banka character."
+    :type 'boolean)
+#+end_srcdelete from policies where product_id=6 and business_id=1;
+delete from policies where product_id=6 and business_id=1;
+delete from policies where product_id=6 and business_id=1;
+
+
+
 **** NEXT frame code
-*** TODO Set up a timer to update the second count.  
-**** NEXT set up timer
+[[file:~/projects/emagicians-starter-kit/elpa/sauron-20130818.2134/sauron.el::(defun%20sr-show-in-separate-frame%20()][file:~/projects/emagicians-starter-kit/elpa/sauron-20130818.2134/sauron.el::(defun sr-show-in-separate-frame ()]]
 **** NEXT update the face to be easy to see where you are at with the timer
+
 **** NEXT Write a solarized theme
 
 ** TODO Set up Keyindings and effects

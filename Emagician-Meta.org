@@ -34,13 +34,14 @@
 
 ** Helm Source
 #+begin_src emacs-lisp
+  (helm-ff-directory-files emagician-dir)
+  
   (defvar emagician/helm-c-source-files
     `((name  . "Find Emagician Files")
       (header-name . (lambda (_)))
       (candidates . ,(lambda () 
                       (when (file-accessible-directory-p emagician-dir)
                         (directory-files emagician-dir t))))
-      (match helm-c-match-on-file-name helm-c-match-on-directory-name)
       (keymap . ,helm-generic-files-map)
       (candidate-transformer . emagician/helm-ct-is-org-file)
       (help-message . helm-generic-file-help-message)
@@ -74,16 +75,13 @@
    http://help.github.com/pages/
    http://ryanfitzer.org/2011/11/easy-syncing-of-github-pages/
 ** Set up stylesheets
-#+begin_src emacs-lisp
-  (emagician-expect-package 'sass-mode)
-  
-  
+#+begin_src emacs-lisp :tangle no
   (org-babel-do-load-languages 'org-babel-load-languages
-                               (append org-babel-load-languages '((sass . t))))
+                               (append org-babel-load-languages '((less . t))))
 #+end_src
 
 
-#+begin_src sass :tangle export/main.scss :noweb yes 
+#+begin_src less :tangle export/main.less :noweb yes 
 <<colors>>
 <<org-structures>>
 #+end_src
@@ -92,7 +90,7 @@
 
 *** Solarized style colors 
 #+name: colors
-#+begin_src sass
+#+begin_src  less
 $base03:    #002b36;
 $base02:    #073642;
 $base01:    #586e75;
@@ -111,11 +109,9 @@ $cyan:      #2aa198;
 $green:     #859900;
 #+end_src
 
-#+RESULTS: colors
-
 *** Main org structures
 #+name: org-structures
-#+begin_src sass
+#+begin_src less
 
 #+end_src 
 
@@ -125,28 +121,64 @@ $green:     #859900;
   (require 'org-publish)
   (defun emagician-export/export ()
     "Main export function"
+    (interactive)
+    (org-babel-tangle-file (expand-file-name "Emagician-Meta.org" emagician-dir))
     (let ((org-export-with-section-numbers t)
-          (org-hml-include-timestamps nil)
+          (org-html-include-timestamps nil)
           (org-src-fontify-natively t)
           (org-export-hml-inline-images t)
-          (org-publish-project-alist '(("emagician-org"
-                                        :base-directory emagician-dir
+          (org-publish-project-alist `(("emagician-org"
+                                        :base-directory ,emagician-dir
                                         :base-extension "org"
                                         :publishing-directory "export"
                                         :author-info t
                                         :creator-info t
-                                        :publishing-function org-publish-org-to-html)
+                                        :publishing-function org-publish-org-to-html
+                                        :auto-sitemap t
+                                        :recursive t
+                                        :exclude "\\(jarkell.org\\|jonny.org\\|jonnay.org\\)"
+                                        :html-head-extra "<link rel=\"stylesheet\" href=\"\">"
+                                        :htmlized-source t)
                                        ("emagician-extra"
-                                        :base-directory emagician-dir
+                                        :base-directory ,emagician-dir
                                         :base-extension "css\\|pdf\\|png\\|jpg"
                                         :publishing-function org-publish-attachment
                                         :author nil)
-                                       )))))
+                                       )))
+      (org-publish "emagician-org")))
 #+end_src
 
 ** Reference code
 
-#+begin_src emacs-lisp
+*** From Guerry
+#+begin_src emacs-lisp :tangle no
+   ("cours-images"
+         :base-directory "~/install/git/CoursCreationSiteWeb/images/"
+         :base-extension "png\\|jpg\\|gif"
+         :publishing-directory "~/public_html/org/homepage/cours-creation-site-web/images/"
+         :publishing-function org-publish-attachment)
+
+        ("dotemacs"
+         :base-directory "~/install/git/dotemacs/"
+         :html-extension "html"
+         :base-extension "org"
+         :publishing-directory "/home/guerry/public_html/org/homepage/"
+         :publishing-function (org-html-publish-to-html)
+         :auto-sitemap nil
+         :recursive t
+         :makeindex t
+         :preserve-breaks nil
+         :sitemap-sort-files chronologically
+         :section-numbers nil
+         :with-toc nil
+         :html-head-extra "<link rel=\"stylesheet\" href=\"http://lumiere.ens.fr/~guerry/u/org.css\" type=\"text/css\" />"
+         :html-preamble nil
+         :htmlized-source t
+         :html-postamble nil)
+#+end_src
+
+*** From NOrang
+#+begin_src emacs-lisp tangle no
   ; Inline images in HTML instead of producting links to the image
   (setq org-export-html-inline-images t)
   ; Do not use sub or superscripts - I currently don't need this functionality in my documents
@@ -207,32 +239,55 @@ $green:     #859900;
 ** Elpakit basic setup
 #+begin_src emacs-lisp :tangle no
 (emagician-expect-package 'elpakit)
+
+(emagician/expect-dir "empa")
+(emagician/expect-dir "empa/packages")
+(emagician/expect-dir "empa/archives")
+(emagician/expect-dir "empa/recipies")
+
+  (defvar emagician/archive/package-dir
+    (expand-file-name "empa/packages" emagician-dir)
+    "Directory where packages are built") 
 #+end_src
 
+
 ** Define the archive
+#+begin_src emacs-lisp
+  
+  (defvar emagician/archive/packages 
+    '(memopop 
+      achievements)
+    "A list of packages to be built")
+#+end_src
+
+
 #+begin_src emacs-lisp :tangle no
+  (mapcar (lambda (p) 
+            (emagician/expect-dir (expand-file-name (symbol-name p) 
+                                                    emagician/archive/package-dir)))
+          emagician/archive/packages)
+  
   (elpakit (expand-file-name "empa/archive" emagician-dir)
-           '("empa/recipes/prosjekt"
-             "empa/recipes/emacs-achievements"))
-
-*** NEXT test the build? 
-
+           (mapcar (lambda (p)
+                     (concat "empa/packages/" (symbol-name p)))
+                   emagician/archive/packages))
+  
 #+end_src
 
 ** Recipes
 
    Maybe they should be moved?  Maybe they should say? I don't know.
 
-was in empa/recipes/prosjekt
-#+begin_src emacs-lisp :tangle no
-      (prosjekt 
-       :doc "A emacs extension for working with projects"
-       :repo "abingham/prosjekt" 
-       :fetcher github)
+
+#+begin_src emacs-lisp :tangle empa/recipies/memopop
+  (memopop
+    :doc Helps you pop up and pop out a specific file buffer easily.
+    :description 
+    :fetcher 'wiki)
 #+end_src
 
-was in  empa/recipes/emacs-achievements
-#+begin_src emacs-lisp :tangle no
+was in  
+#+begin_src emacs-lisp :tangle empa/recipies/emacs-achievements
       (emacs-achievements 
        :doc "a fun way to learn about Emacs."
        :repo "abingham/prosjekt" 

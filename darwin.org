@@ -1,4 +1,57 @@
 * Aspell setup
+* I don't use hyper on mac.
+#+begin_src emacs-lisp
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
+#+end_src
+
+* Fix info path of mac emacs
+  This doesn't work... sadly.
+#+begin_src emacs-lisp :tangle no
+  (setq Info-default-directory-list 
+        (list (concat (substring (car command-line-args)
+                                 0
+                                 (string-match "Contents" (car  command-line-args)))
+                      "Contents/Resources/info")))
+  
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'Info-directory-list (list (concat (substring (car command-line-args)
+                                 0
+                                 (string-match "Contents" (car  command-line-args)))
+                      "Contents/Resources/info")))
+#+end_src
+
+  But this does... after going to the actual download dir and doing a ~make install-info~
+
+#+begin_src emacs-lips
+(add-to-list 'Info-directory-list "/usr/local/info")
+#+end_src
+
+* Apple Color Emoji 
+#+begin_src emacs-lisp
+    (defun emagician/update-unicode-block-with-font (block font)
+      "Adds FONT to BLOCK in `unicode-fonts-block-font-mapping"
+      (let ((b (assoc block unicode-fonts-block-font-mapping)))
+        (when (not b)
+          (error "Block %s not found!" block))
+        (setf (cdr b) (list (cons font (cadr b))))
+        b))
+    
+    (emagician/update-unicode-block-with-font "Dingbats" "Apple Color Emoji")
+    (emagician/update-unicode-block-with-font "Emoticons" "Apple Color Emoji")
+    (emagician/update-unicode-block-with-font "Miscellaneous Symbols and Pictographs" "Apple Color Emoji")
+    (emagician/update-unicode-block-with-font "Transport and Map Symbols" "Apple Color Emoji")
+    (setq unicode-fonts-setup-done nil)
+    (unicode-fonts-setup)
+#+end_src
+
+
+#+begin_src emacs-lisp
+(when nil nil)
+#+end_src
+
 * Fix broken colors on emacs for mac os x 
 #+begin_src emacs-lisp
 (when (fboundp 'ns-list-colors)

@@ -1,0 +1,46 @@
+* Making Eshell ROCK
+
+** Fix problems with muscle Memory
+
+#+begin_src emacs-lisp 
+(eshell/alias "vi" "find-file $1") 
+#+end_src
+
+
+** Alias common stuff
+
+#+begin_src emacs-lisp 
+(eshell/alias "open"  "find-file $1")
+#+end_src
+
+** Alias for sshing
+#+begin_src emacs-lisp 
+(eshell/alias 'ssh "cd /ssh:$1:~")
+#+end_src
+
+* Prompts
+
+#+begin_src emacs-lisp 
+  (defmacro with-face (str &rest properties)
+    `(propertize ,str 'face (list ,@properties)))
+  
+  (defun shk-eshell-prompt ()
+    
+    (let ((header-bg "#fff"))
+      (concat
+       (with-face (concat (eshell/pwd) " "))
+       (with-face
+        (or (ignore-errors (format "(%s)" (vc-responsible-backend default-directory))) "")
+        :background header-bg)
+       (with-face "\n" :background header-bg)
+       (with-face user-login-name :foreground "blue")
+       "@"
+       (with-face "localhost" :foreground "green")
+       (if (= (user-uid) 0)
+           (with-face " #" :foreground "red")
+         " $")
+       " ")))
+
+  (setq eshell-prompt-function 'shk-eshell-prompt)
+  (setq eshell-highlight-prompt nil)
+#+end_src

@@ -495,6 +495,58 @@ Consult Your Pineal Gland.
 "For when you look within the parens / the enemy that lurks within
 		  is but the closure of your mind"
 APOLK, Rite of the Parenthetical Hierophant, 16<degrees>=60<degrees>
+%%
+I hate to advocate drugs, alcohol, violence,
+or insanity to anyone, but they've always worked for me.
+- Hunter S. Thompson
+%%
+Life should not be a journey to the grave
+with the intention of arriving safely
+in a pretty and well preserved body,
+but rather to skid in broadside in a cloud of smoke,
+thoroughly used up, totally worn out,
+and loudly proclaiming, "Wow! What a Ride!"
+- Hunter S. Thompson
+%%
+When the going gets weird, the weird turn pro.
+- Hunter S. Thompson
+%%
+In a closed society where everybody's guilty,
+the only crime is getting caught.
+In a world of thieves, the only final sin is stupidity.
+- Hunter S. Thompson
+%%
+Tom Knight and the Lisp Machine
+
+A novice was trying to fix a broken Lisp machine by turning the power off and on.
+Knight, seeing what the student was doing, spoke sternly: “You cannot fix a machine by just power-cycling it with no understanding of what is going wrong.”
+Knight turned the machine off and on.
+The machine worked.
+%%
+Moon instructs a student
+
+One day a student came to Moon and said: “I understand how to make a better garbage collector. We must keep a reference count of the pointers to each cons.”
+Moon patiently told the student the following story:
+“One day a student came to Moon and said: ‘I understand how to make a better garbage collector...
+%%
+Sussman attains enlightenment
+
+In the days when Sussman was a novice, Minsky once came to him as he sat hacking at the PDP-6.
+“What are you doing?”, asked Minsky.
+“I am training a randomly wired neural net to play Tic-Tac-Toe” Sussman replied.
+“Why is the net wired randomly?”, asked Minsky.
+“I do not want it to have any preconceptions of how to play”, Sussman said.
+Minsky then shut his eyes.
+“Why do you close your eyes?”, Sussman asked his teacher.
+“So that the room will be empty.”
+At that moment, Sussman was enlightened.
+%%
+Drescher and the toaster
+
+A disciple of another sect once came to Drescher as he was eating his morning meal.
+“I would like to give you this personality test”, said the outsider, “because I want you to be happy.”
+Drescher took the paper that was offered him and put it into the toaster, saying: “I wish the toaster to be happy, too.”
+%%
 #+end_src
 
 * Learning Emacs through Achievements

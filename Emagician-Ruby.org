@@ -35,7 +35,12 @@
        #'(lambda (proc event) 
            (when (string= event "finished")
              (emagician/ruby-rbenv-rehash))))))
+
 #+end_src
+
+*** And a bundle install
+**** NEXT see if rinari has this 
+**** TODO write this (go backwards in directories) 
 
 *** Testing 
 Just in case it doesn't work, these command can be helpful for testing.
@@ -65,7 +70,10 @@ Just in case it doesn't work, these command can be helpful for testing.
                   "/bin"))
 #+end_src
 
-
+* Rspec
+#+begin_src emacs-lisp
+(emagician-expect-package 'rspec-mode)
+#+end_src
 * Rinari
 
   Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goofy Acronym Assertion!)
@@ -91,7 +99,7 @@ Just in case it doesn't work, these command can be helpful for testing.
   (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 #+end_src
 
-* Ruby BLock mode
+* Ruby Block mode
 
 #+begin_src emacs-lisp
     (emagician-expect-package 'ruby-block)
@@ -104,6 +112,27 @@ Just in case it doesn't work, these command can be helpful for testing.
     
 #+end_src
 
+* Completion through rsense   :shell-command:autocomplete:
+
+#+begin_src emacs-lisp
+  
+  (setq rsense-home "/usr/local/Cellar/rsense/0.3")
+  (add-to-list 'load-path (concat rsense-home "/etc"))
+  (require 'rsense)
+  
+  (defun emagician-ruby-mode-setup ()
+    (add-to-list 'ac-source-rsense-method (cons 'symbol "f"))
+    (add-to-list 'ac-source-rsense-constant (cons 'symbol "c"))
+    (add-to-list 'ac-sources 'ac-source-rsense-method)
+    (add-to-list 'ac-sources 'ac-source-rsense-constant))
+  
+  (add-hook 'ruby-mode-hook 'emagician-ruby-mode-setup)
+#+end_src
+ 
+* Yari for rdoc goodness
+#+begin_src emacs-lisp
+(emagician-expect-package 'yari)
+#+end_src
 * Footnotes
 
 [fn:1] https://github.com/technomancy/emacs-starter-kit/blob/v2/modules/starter-kit-ruby.el
