@@ -1,3 +1,20 @@
+;;; org-beautify -- A sub-theme to make org-mode more beautiful.
+;; Copyright (C) 2014 Jonathan Arkell
+
+;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; Created: 5 Oct 2012
+;; Keywords: org theme
+;; Version 0.1
+
+;; This file is not part of GNU Emacs.
+;; Released under the GPL v3.0
+
+;;; Commentary:
+;; Load this theme over top your existing theme, and it should be golden.
+;; If you find any incompatibilities, let me know with what theme and
+;; I will try and fix it.
+
+;;; Code:
 
 (deftheme org-beautify "Beautify org mode")
 
@@ -27,8 +44,8 @@
                           `(org-checkbox ((t (:foreground ,background-color :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
 
                           `(org-headline-done ((t (:foreground "586e75" :strike-through t))))
-                          `(org-done ((t (:foreground "586e75" :strike-through t)))))
-                            
-    )
+                          `(org-done ((t (:foreground "586e75" :strike-through t))))))
 
 (provide-theme 'org-beautify)
+
+;;; org-beautify.el ends here

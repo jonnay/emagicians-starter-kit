@@ -1,20 +1,20 @@
 #+title: Org-Beautify
-#+begin-src emacs-lisp :padline no
+#+begin_src emacs-lisp :tangle yes :padline no 
   ;;; org-beautify -- A sub-theme to make org-mode more beautiful.
-  ;; Copyright (C) 2012 Jonathan Arkell
+  ;; Copyright (C) 2014 Jonathan Arkell
   
   ;; Author: Jonathan Arkell <jonnay@jonnay.net>
   ;; Created: 5 Oct 2012
-  ;; Keywords: erc bitlbee bot
+  ;; Keywords: org theme
   ;; Version 0.1
   
   ;; This file is not part of GNU Emacs.
   ;; Released under the GPL v3.0
   
   ;;; Commentary:
-  ;; Load this theme overtop of your existing theme, and it should be golden.
+  ;; Load this theme over top your existing theme, and it should be golden.
   ;; If you find any incompatibilities, let me know with what theme and
-  ;; I will try and fix it. 
+  ;; I will try and fix it.
 
   ;;; Code: 
 #+end_src
@@ -69,9 +69,7 @@
                             `(org-checkbox ((t (:foreground ,background-color :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
 
                             `(org-headline-done ((t (:foreground "586e75" :strike-through t))))
-                            `(org-done ((t (:foreground "586e75" :strike-through t)))))
-                              
-      )
+                            `(org-done ((t (:foreground "586e75" :strike-through t))))))
 #+end_src
 ** 2nd level
 *** third
@@ -137,4 +135,6 @@
 * Fin 👯
 #+begin_src emacs-lisp :tangle yes
 (provide-theme 'org-beautify)
+
+;;; org-beautify.el ends here
 #+end_src
