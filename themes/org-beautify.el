@@ -1,18 +1,30 @@
-;;; org-beautify -- A sub-theme to make org-mode more beautiful.
+;;; org-beautify --- A sub-theme to make org-mode more beautiful.
 ;; Copyright (C) 2014 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
+;; package-Version: 0.1
 ;; Created: 5 Oct 2012
 ;; Keywords: org theme
-;; Version 0.1
 
 ;; This file is not part of GNU Emacs.
 ;; Released under the GPL v3.0
 
 ;;; Commentary:
-;; Load this theme over top your existing theme, and it should be golden.
-;; If you find any incompatibilities, let me know with what theme and
-;; I will try and fix it.
+;; An attempt to improve the typography of an org-mode file.
+
+;; Load this theme over top your existing theme, and you should
+;; be golden.  If you find any incompatibilities, let me know
+;; with what theme and I will try and fix it.
+
+;; This is part of the Emagicians Starter kit--but available
+;; separately.
+
+;; When loading a whole new theme overtop, org-beautify will 
+;; still be active with the old theme.  Just unload org-beautify
+;; and then reload it, and everything will be fine again. 
+
+;; The Source for this file is here:
+;; https://github.com/jonnay/emagicians-starter-kit/blob/master/themes/org-beautify.org
 
 ;;; Code:
 
