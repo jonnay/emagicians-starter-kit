@@ -1,4 +1,4 @@
-;;; org-beautify --- A sub-theme to make org-mode more beautiful.
+;;; org-beautify.el --- A sub-theme to make org-mode more beautiful.
 ;; Copyright (C) 2014 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
@@ -26,9 +26,9 @@
 ;; The Source for this file is here:
 ;; https://github.com/jonnay/emagicians-starter-kit/blob/master/themes/org-beautify.org
 
-;;; Code:
+;;; Code: 
 
-(deftheme org-beautify "Beautify org mode")
+(deftheme org-beautify "Sub-theme to beautify org mode")
 
 (let* ((base-font-color (face-foreground 'default  nil 'default))
        (background-color (face-background 'default nil 'default))

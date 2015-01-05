@@ -1,6 +1,6 @@
 #+title: Org-Beautify
 #+begin_src emacs-lisp :tangle yes :padline no 
-  ;;; org-beautify --- A sub-theme to make org-mode more beautiful.
+  ;;; org-beautify.el --- A sub-theme to make org-mode more beautiful.
   ;; Copyright (C) 2014 Jonathan Arkell
   
   ;; Author: Jonathan Arkell <jonnay@jonnay.net>
@@ -29,6 +29,8 @@
   ;; https://github.com/jonnay/emagicians-starter-kit/blob/master/themes/org-beautify.org
 
   ;;; Code: 
+
+  (deftheme org-beautify "Sub-theme to beautify org mode")
 #+end_src
 * This theme is dedicated to my wife Shell
   Who--in her beauty, her love, and her love for beauty--has shown me
@@ -51,9 +53,6 @@
 	 - Iconficiations?
 	 - Look at making headlines span the full line, and make an org-mode pull request if required
 
-#+begin_src emacs-lisp :tangle yes
-(deftheme org-beautify "Beautify org mode")
-#+end_src emacs-lisp
 
 * Headlines etc
 #+begin_src emacs-lisp :tangle yes
