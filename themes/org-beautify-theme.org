@@ -4,7 +4,7 @@
   ;; Copyright (C) 2014 Jonathan Arkell
   
   ;; Author: Jonathan Arkell <jonnay@jonnay.net>
-  ;; package-Version: 0.1.1
+  ;; package-Version: 0.1.2
   ;; Created: 5 Oct 2012
   ;; Keywords: org theme
   
@@ -47,7 +47,8 @@
 	 - Make the colors suck a lot less, and the buffers look a lot nicer.
    - v0.1.1 :: [2014-01-06]
      - Fix checkboxes
-
+   - v0.1.2 :: [2014-01-06]
+     - Add Verdana font to fall back on
 
 * Road map
 
@@ -77,6 +78,7 @@ For now the beautification is:
 
 #+begin_src emacs-lisp :tangle yes
   (let* ((sans-font (cond ((x-list-fonts "Lucida Grande") '(:font "Lucida Grande"))
+                          ((x-list-fonts "Verdana") '(:font "Verdana"))
                           ((x-family-fonts "Sans Serif") '(:family "Sans Serif"))
                           (nil (warn "Cannot find a Sans Serif Font.  Please report at: https://github.com/jonnay/emagicians-starter-kit/issues"))))
          (base-font-color (face-foreground 'default  nil 'default))

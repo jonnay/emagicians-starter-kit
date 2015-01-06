@@ -2,7 +2,7 @@
 ;; Copyright (C) 2014 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
-;; package-Version: 0.1.1
+;; package-Version: 0.1.2
 ;; Created: 5 Oct 2012
 ;; Keywords: org theme
 
@@ -31,6 +31,7 @@
 (deftheme org-beautify-theme "Sub-theme to beautify org mode")
 
 (let* ((sans-font (cond ((x-list-fonts "Lucida Grande") '(:font "Lucida Grande"))
+                        ((x-list-fonts "Verdana") '(:font "Verdana"))
                         ((x-family-fonts "Sans Serif") '(:family "Sans Serif"))
                         (nil (warn "Cannot find a Sans Serif Font.  Please report at: https://github.com/jonnay/emagicians-starter-kit/issues"))))
        (base-font-color (face-foreground 'default  nil 'default))
