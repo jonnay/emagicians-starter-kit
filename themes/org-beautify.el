@@ -30,7 +30,10 @@
 
 (deftheme org-beautify "Sub-theme to beautify org mode")
 
-(let* ((base-font-color (face-foreground 'default  nil 'default))
+(let* ((sans-font (cond ((x-list-fonts "Lucida Grande") '(:font "Lucida Grande"))
+                        ((x-family-fonts "Sans Serif") '(:family "Sans Serif"))
+                        (nil (warn "Cannot find a Sans Serif Font.  Please report at: https://github.com/jonnay/emagicians-starter-kit/issues"))))
+       (base-font-color (face-foreground 'default  nil 'default))
        (background-color (face-background 'default nil 'default))
        (headline `(:inherit default :foreground ,base-font-color))
        (primary-color (face-foreground 'mode-line nil))
@@ -38,15 +41,15 @@
        (padding `(:line-width 5 :color ,background-color))
        (org-highlights `(:foreground ,base-font-color :background ,secondary-color)))
   (custom-theme-set-faces 'org-beautify
-                          `(org-agenda-structure ((t (:inherit default :font "Lucida Grande" :height 2.0 :underline nil))))
+                          `(org-agenda-structure ((t (:inherit default ,@sans-font :height 2.0 :underline nil))))
                           `(org-level-8 ((t ,headline)))
                           `(org-level-7 ((t ,headline)))
                           `(org-level-6 ((t ,headline)))
                           `(org-level-5 ((t ,headline)))
                           `(org-level-4 ((t ,headline)))
                           `(org-level-3 ((t (,@headline  :box ,padding))))
-                          `(org-level-2 ((t (,@headline :font "Lucida Grande" :height 1.25 :box ,padding))))
-                          `(org-level-1 ((t (,@headline :font "Lucida Grande" :height 1.5 :box ,padding))))
+                          `(org-level-2 ((t (,@headline ,@sans-font :height 1.25 :box ,padding))))
+                          `(org-level-1 ((t (,@headline ,@sans-font :height 1.5 :box ,padding ))))
                           `(org-document-title ((t (:inherit org-level-1 :height 2.0 :underline nil :box ,padding))))
 
                           `(org-block ((t (:foreground ,base-font-color :background ,background-color :box nil))))
