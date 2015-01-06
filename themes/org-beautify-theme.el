@@ -1,4 +1,4 @@
-;;; org-beautify.el --- A sub-theme to make org-mode more beautiful.
+;;; org-beautify-theme.el --- A sub-theme to make org-mode more beautiful.
 ;; Copyright (C) 2014 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
@@ -19,16 +19,16 @@
 ;; This is part of the Emagicians Starter kit--but available
 ;; separately.
 
-;; When loading a whole new theme overtop, org-beautify will 
-;; still be active with the old theme.  Just unload org-beautify
+;; When loading a whole new theme overtop, org-beautify-theme will 
+;; still be active with the old theme.  Just unload org-beautify-theme
 ;; and then reload it, and everything will be fine again. 
 
 ;; The Source for this file is here:
-;; https://github.com/jonnay/emagicians-starter-kit/blob/master/themes/org-beautify.org
+;; https://github.com/jonnay/emagicians-starter-kit/blob/master/themes/org-beautify-theme.org
 
 ;;; Code: 
 
-(deftheme org-beautify "Sub-theme to beautify org mode")
+(deftheme org-beautify-theme "Sub-theme to beautify org mode")
 
 (let* ((sans-font (cond ((x-list-fonts "Lucida Grande") '(:font "Lucida Grande"))
                         ((x-family-fonts "Sans Serif") '(:family "Sans Serif"))
@@ -40,7 +40,7 @@
        (secondary-color (face-background 'secondary-selection nil 'region))
        (padding `(:line-width 5 :color ,background-color))
        (org-highlights `(:foreground ,base-font-color :background ,secondary-color)))
-  (custom-theme-set-faces 'org-beautify
+  (custom-theme-set-faces 'org-beautify-theme
                           `(org-agenda-structure ((t (:inherit default ,@sans-font :height 2.0 :underline nil))))
                           `(org-level-8 ((t ,headline)))
                           `(org-level-7 ((t ,headline)))
@@ -58,9 +58,9 @@
 
                           `(org-checkbox ((t (:foreground ,background-color :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
 
-                          `(org-headline-done ((t (:foreground "586e75" :strike-through t))))
-                          `(org-done ((t (:foreground "586e75" :strike-through t))))))
+                          `(org-headline-done ((t (:strike-through t))))
+                          `(org-done ((t (:strike-through t))))))
 
-(provide-theme 'org-beautify)
+(provide-theme 'org-beautify-theme)
 
-;;; org-beautify.el ends here
+;;; org-beautify-theme.el ends here
