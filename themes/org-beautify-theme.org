@@ -4,7 +4,7 @@
   ;; Copyright (C) 2014 Jonathan Arkell
   
   ;; Author: Jonathan Arkell <jonnay@jonnay.net>
-  ;; package-Version: 0.1
+  ;; package-Version: 0.1.1
   ;; Created: 5 Oct 2012
   ;; Keywords: org theme
   
@@ -36,29 +36,45 @@
   Who--in her beauty, her love, and her love for beauty--has shown me
   that form can enhance function.
 
+
 * Mission
   - Make org mode headlines easy to read.  In any theme.
   - Make it look more like a published book and/or desktop app, less like angry fruit salad.
   - Make it awesome to live in an org buffer.
 
-* Road map
-
+* Changelog 
    - v0.1 :: First Release
 	 - Make the colors suck a lot less, and the buffers look a lot nicer.
+   - v0.1.1 :: [2014-01-06]
+     - Fix checkboxes
+
+
+* Road map
+
    - Future
-     - Figure out a better sub-theme infrastructure, so new themes don't bbreak. 
-     - Todo keywords currently REALLY suck.
+     - Figure out a better sub-theme infrastructure, so new themes don't break. 
+     - Work on niceifying todo keywords
 	 - Better color customizations
 	 - Look into alternate font settings
 	 - Iconficiations?
 	 - Look at making headlines span the full line, and make an org-mode pull request if required
+     - Controllable Properties Need to look into this: [[info:elisp#Specified%20Space][info:elisp#Specified Space]]
 
 
-* Controllable Properties
-[[info:elisp#Specified%20Space][info:elisp#Specified Space]]
+* Beautification
+I Like Lucia Grande, so we'll start with that for a sans-serif font, but also allow for fall-backs. 
+
+For now the beautification is:
+- Reset all headlines to the base background color
+- Add padding around Headlines between levels 1 through 3
+- Make headline level 2 and headline level 1 bigger and sans-serif.
+- Delineate the blocks nicely, and reset their foreground and background
+- Set the foreground and background color of the checkboxes and make them very checkboxy
+- strike through done keywords. 
 
 
-* Headlines etc
+* The Code
+
 #+begin_src emacs-lisp :tangle yes
   (let* ((sans-font (cond ((x-list-fonts "Lucida Grande") '(:font "Lucida Grande"))
                           ((x-family-fonts "Sans Serif") '(:family "Sans Serif"))
@@ -86,11 +102,13 @@
                             `(org-block-begin-line ((t ,org-highlights)))
                             `(org-block-end-line ((t ,org-highlights))) 
 
-                            `(org-checkbox ((t (:foreground ,background-color :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
+                            `(org-checkbox ((t (:foreground "#000000", :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
 
                             `(org-headline-done ((t (:strike-through t))))
                             `(org-done ((t (:strike-through t))))))
 #+end_src
+
+* Display Testing 
 ** 2nd level
 *** third
 **** fourth

@@ -2,7 +2,7 @@
 ;; Copyright (C) 2014 Jonathan Arkell
 
 ;; Author: Jonathan Arkell <jonnay@jonnay.net>
-;; package-Version: 0.1
+;; package-Version: 0.1.1
 ;; Created: 5 Oct 2012
 ;; Keywords: org theme
 
@@ -56,7 +56,7 @@
                           `(org-block-begin-line ((t ,org-highlights)))
                           `(org-block-end-line ((t ,org-highlights))) 
 
-                          `(org-checkbox ((t (:foreground ,background-color :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
+                          `(org-checkbox ((t (:foreground "#000000", :background "#93a1a1" :box (:line-width -3 :color "#93a1a1" :style "released-button")))))
 
                           `(org-headline-done ((t (:strike-through t))))
                           `(org-done ((t (:strike-through t))))))
