@@ -1,0 +1,75 @@
+* Project Status:
+
+  Fit for other humans to tell me it is broken, and I can fix it.  (i.e. beta)
+
+* A starter kit for magicians
+
+  I stand on the shoulders of giants to weave my own spells.  
+
+  I got tired of my old .emacs file, and poorly maintained collection
+  of extensions, that was working less and less well, the more time
+  went on and on.  So I made the Emagicians Starter Kit.  After awhile
+  I noticed that a lot of starter kits were doing the same, or similar
+  things.  So I thought to myself, why not build a package to help
+  starter kit authors?
+
+  I Love the idea of the starter kits, but I found they made too many
+  assumptions and just wasn't fit for what I needed.  I also have a
+  bit of a "not-invented-here" problem.  It's minor, and I cope pretty
+  well. However with regards to emacs: (and to to paraphrase Douglas
+  McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
+
+  #+begin_quote
+  This is my Emacs.  There are plenty like it, but this one is mine.
+  #+end_quote
+
+** Working with the Emagicians Starter Kit.
+
+   Son, there is no brogramming here.  No easy install shell file that
+   you can just run, and everything goes.  In fact, it is antithetical
+   to the whole concept of the emagicians starter-kit. The first part
+   of the starter kit (file:./Emagician.org) has just enough to start
+   bootstraping everything.  After that, you are on your own.
+
+   Well kind of.  There are other files and directories that will
+   hopefully help you out in creating your own starter kit.  Feel free
+   to copy it wholesale or steal bits and chunks.  The File
+   Emagician-Jonnay.org has my baseline casting.
+
+   But there is no reason why configurations can't be shared!  If you
+   have configurations that you want to add, then send me a pull
+   request, and I'll work out a great way to merge it.  
+
+** Installing 
+
+   Installing, customizing, and making it go is as easy as opening the
+   [[file:./Emagician-Install.org]] and then following instructions.
+   There are plenty of code blocks in there that will get you started
+   for installing and testing.  Basically, you shouldn't ever need to
+   leave the comfort of your org-mode buffer.
+
+* A note about tone
+  
+  If your primary tool, as both hobby and vocation is your text
+  editor, does it not then follow that it is one of the fundamentally
+  important things in your life?
+
+  But then, would that not put it on the same footing as ones spirituality?
+
+  What if ones spirituality is Militant Agnostic Zenarchic Discordianism?
+
+  Then you would write an Emagicians Startup Kit full of tongue in
+  cheek references to the western magickal tradition, and venerate Eris constantly.
+
+  That's what.
+
+* Dedication
+ 
+  To My Wife:  Shell Arkell.  The most important person in my life,
+  who outshines all other people, like the noon-day sun outshines the
+  stars.
+
+  I Love you.
+
+* TODO REad: http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
+
