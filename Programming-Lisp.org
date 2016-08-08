@@ -1,0 +1,78 @@
+#+title: Lisp
+
+* Editing 
+
+** COMMENT Paredit
+
+#+begin_src emacs-lisp 
+  (use-package paredit
+    :bind
+    (:paredit-mode-map
+     (("M-s" . paredit-split-sexp)))
+    :init
+    (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode)
+    (emagician/minor-in-major-mode paredit-mode scheme-mode))
+#+end_src
+
+* Individual Lisps
+** Elisp
+
+*** Editing 
+**** Indentation
+#+begin_src emacs-lisp 
+(put 'use-package 'lisp-indent-function 1)
+(put 'lexically 'lisp-indent-function 0)
+#+end_src
+
+**** Syntax Checking
+    We want to run checkdoc, but only in certain situations. 
+#+begin_src emacs-lisp 
+  (defun emagician/run-checkdoc () 
+    "run checkdoc on save if it is an elisp file"
+    (if (and (eq major-mode 'emacs-lisp-mode)
+             (not (null (file-name-nondirectory (buffer-file-name))))
+             (not (member (file-name-nondirectory (buffer-file-name)) '(".dir-locals.el" "custom.el")))
+             (not (emagician/org-src-mode-p))
+             (> (length (buffer-file-name))
+                (length package-user-dir))
+             (not (string= (concat package-user-dir "/")
+                           (substring (buffer-file-name) 0 (+ 1 (length package-user-dir))))))
+        (checkdoc)))
+
+  (add-hook 'after-save-hook 'emagician/run-checkdoc)
+#+end_src
+
+**** Package checking
+#+begin_src emacs-lisp 
+  (use-package flycheck-package
+    :config 
+    (flycheck-package-setup))
+#+end_src
+
+
+*** Environment
+    See [[./Emagician-Base.org]]
+** Scheme
+*** Editing
+#+begin_src
+;; Indenting module body code at column 0
+(defun scheme-module-indent (state indent-point normal-indent) 0)
+(put 'module 'scheme-indent-function 'scheme-module-indent)
+
+(put 'and-let* 'scheme-indent-function 1)
+(put 'parameterize 'scheme-indent-function 1)
+(put 'handle-exceptions 'scheme-indent-function 1)
+(put 'when 'scheme-indent-function 1)
+(put 'unless 'scheme-indent-function 1)
+(put 'match 'scheme-indent-function 1)
+#+end_src
+*** Interface
+**** Geiser
+
+#+begin_src emacs-lisp 
+(use-package geiser
+  :init
+  (setq geiser-active-implementations '(chicken))
+  :config 
+  (use-package ac-geiser))
+#+end_src

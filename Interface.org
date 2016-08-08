@@ -1,0 +1,650 @@
+#+Title: User Interface Elements
+* Keystrokes
+** Simple answers plz!
+#+begin_src emacs-lisp 
+(fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+** It used to be that Once in blue moon, vi keys would happen
+   That was before I really dug into Tramp mode.  
+
+   I would launch vim to edit a file on a remote server.  I know just
+   enough vi to add characters and save and get out.  In fact, I would
+   save with: ~<ESC>:w~ and then quit.
+
+   This would hose my muscle memory though.  And sometimes I would try
+   to do the same in emacs.
+
+   By setting the var ~w~ to the string, when it is evaled with ESC-:
+   the string is evaled instead.
+
+#+begin_src emacs-lisp :tangle no
+  (setq w! "uUuuuuuUUUuuuummmMMMmmmm.  This ain't vim.")
+#+end_src
+
+   Now that I can do most of everything I need through tramp, and the
+   stuff I can't do I can from within a shell inside of emacs, this
+   isn't needed anymore.
+
+   I keep it around though because it's clevar and fun.
+   
+* Display
+** Fonts
+#+begin_verse
+Unicode
+  |(^o^)/    ,(   Get all teh characters! )
+#+end_verse  
+
+
+  #+begin_src emacs-lisp 
+(emagician/expect-package 'unicode-fonts)
+(require 'pcache)
+(require 'persistent-soft)
+(unicode-fonts-setup)
+  #+end_src
+
+** Ansi Color
+   ARGH, we were so close to getting away from this until hipsters brought it all back again.
+
+   Thanks Obama
+
+#+begin_src emacs-lisp 
+(require 'ansi-color)
+#+end_src
+
+** Maximize primary window
+
+   This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup.  At least on OS X.
+
+#+begin_src emacs-lisp 
+(setq default-frame-parameters '((fullscreen . maximized)))
+(defun emagician/full-screen ()
+  "Fullscreen mode!"
+  (interactive) 
+  (modify-frame-parameters nil '((fullscreen . maximized))))
+(emagician/full-screen)
+#+end_src
+
+** Frame titles
+  Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
+
+#+begin_src emacs-lisp 
+  (setq frame-title-format
+        '("" 
+          invocation-name 
+          "  -|-+-|-  " 
+          (:eval (if (buffer-file-name)
+                     (abbreviate-file-name (buffer-file-name))
+                     "%b"))))
+#+end_src
+   
+** Modeline
+*** Basics
+#+begin_src emacs-lisp 
+(setq column-number-mode t)
+(setq line-number-mode t)
+#+end_src
+
+*** Diminish
+   Yeah, fix the mode line.
+
+#+begin_src emacs-lisp 
+(use-package diminish)
+#+end_src
+
+*** Powerline 
+#+begin_src emacs-lisp 
+  (defun emagician/powerline-theme ()
+    "Setup the default mode-line."
+    (interactive)
+    (setq-default mode-line-format
+                  '("%e"
+                    (:eval
+                     (let* ((active (powerline-selected-window-active))
+                            (mode-line (if active 'mode-line 'mode-line-inactive))
+                            (face1 (if active 'powerline-active1 'powerline-inactive1))
+                            (face2 (if active 'powerline-active2 'powerline-inactive2))
+                            (separator-left (intern (format "powerline-%s-%s"
+                                                            powerline-default-separator
+                                                            (car powerline-default-separator-dir))))
+                            (separator-right (intern (format "powerline-%s-%s"
+                                                             powerline-default-separator
+                                                             (cdr powerline-default-separator-dir))))
+                            (lhs (list (powerline-raw "%*" nil 'l)
+                                       (powerline-buffer-size nil 'l)
+                                       (powerline-raw mode-line-mule-info nil 'l)
+                                       (powerline-buffer-id nil 'l)
+                                       (when (and (boundp 'which-func-mode) which-func-mode)
+                                         (powerline-raw which-func-format nil 'l))
+                                       (powerline-raw " ")
+                                       (funcall separator-left mode-line face1)
+                                       (when (boundp 'erc-modified-channels-object)
+                                         (powerline-raw erc-modified-channels-object face1 'l))
+                                       (powerline-major-mode face1 'l)
+                                       (powerline-process face1)
+                                       (powerline-minor-modes face1 'l)
+                                       (powerline-narrow face1 'l)
+                                       (powerline-raw " " face1)
+                                       (funcall separator-left face1 face2)
+                                       (powerline-vc face2 'r)
+                                       (nyan-create)))
+                            (rhs (list (powerline-raw global-mode-string face2 'r)
+                                       (funcall separator-right face2 face1)
+                                       (powerline-raw "%4l" face1 'l)
+                                       (powerline-raw ":" face1 'l)
+                                       (powerline-raw "%3c" face1 'r)
+                                       (funcall separator-right face1 mode-line)
+                                       (powerline-raw " ")
+                                       (powerline-raw "%6p" nil 'r)
+                                       (powerline-hud face2 face1))))
+                       (concat (powerline-render lhs)
+                               (powerline-fill face2 (powerline-width rhs))
+                               (powerline-render rhs)))))))
+#+end_src
+
+#+begin_src emacs-lisp 
+  (use-package powerline
+               :config
+               (emagician/powerline-theme)
+               (setq powerline-default-separator 'zigzag)
+               (powerline-reset)
+               (powerline-default-theme))
+#+end_src
+*** Turn on column and line numbers; file size 
+#+begin_src emacs-lisp
+(column-number-mode 1)
+(line-number-mode 1)
+(size-indication-mode t) 
+#+end_src
+
+*** Smart Mode Line
+#+begin_src  emacs-lisp 
+(emagician/expect-package 'smart-mode-line)
+#+end_src
+
+
+*** TODO Nyan mode
+One day.  Powerline and nyan mode don't work.
+** Cursor Info
+   There are a few ways to change the cursor: blinking, shape and
+   color.  Basically this gives us three different dimensions of
+   information available to us.
+
+*** Dimension 1: File status
+   	- light blue :: no file or process attached
+   	- dark blue :: process attached
+   	- yellow :: read only
+    - red :: Important (SSH to production server, etc)
+   	- grey :: file visited
+
+*** Dimention 2: Funky modes
+   	- overwrite :: hollow box
+   	- 'normal' :: line
+
+*** Enhancements
+**** TODO set up a way to handle production buffers through a buffer local var.
+
+#+name: cursor-status
+#+begin_src emacs-lisp
+  ;; Change cursor color according to mode
+  (defvar emagician/set-cursor-color-color "")
+  (defvar emagician/set-cursor-color-type nil)
+  (defvar emagician/set-cursor-color-buffer "")
+  
+  (defun emagician/set-cursor-color-according-to-mode ()
+    "change cursor color according to some minor modes."
+    ;; set-cursor-color is somewhat costly, so we only call it when needed:
+    (let ((color (cond
+                  
+                  ((comint-check-proc (current-buffer)) "blue")
+                  (buffer-read-only "white")
+                  ((not (equal buffer-file-name nil)) "grey50")
+                  (t "cyan")))
+          (type (cond
+                 (overwrite-mode 'hollow)
+                 (t 'box))))
+      (unless (and
+               (string= color emagician/set-cursor-color-color)
+               (string= type emagician/set-cursor-color-type)
+               (string= (buffer-name) emagician/set-cursor-color-buffer))
+        (set-cursor-color (setq emagician/set-cursor-color-color color))
+        (setq cursor-type (setq emagician/set-cursor-color-type type))
+        (setq emagician/set-cursor-color-buffer (buffer-name)))))
+  
+  (add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
+#+end_src
+
+** Highlight Line
+#+begin_src emacs-lisp 
+(global-hl-line-mode 1)
+#+end_src
+
+** Border the 80th column
+#+begin_src emacs-lisp 
+  (use-package fill-column-indicator
+    :init
+    (setq fci-rule-width 1)
+    (setq fci-rule-column 81)
+    (setq fci-rule-color "#383838")
+    (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+    (global-fci-mode 1))
+#+end_src
+
+** Theme: Moe, Moe, Kyun!
+   This theme is my favorite so far.  It's got good color choices and it's nice and dark.
+
+   The theme needs to be loaded after powerlie to work.
+#+begin_src emacs-lisp 
+  (use-package moe-theme
+    :init
+    (setq moe-theme-mode-line-color 'yellow)
+    :config
+    (moe-dark))
+#+end_src
+
+* Editing
+** UTF-8 Enforcement
+  I've kept a version of this since 2006.
+
+#+begin_src emacs-lisp 
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+#+end_src
+
+** The Mark
+*** Transient mark mode
+
+  For now Transient Mark mode is just turned off.  I don't like
+  transients.
+
+  Seriously though, the reason why I like not having transient mark
+  mode is that I have gotten into the habit of dropping marks and
+  using the mark ring.  I also use the mark for nagivation, and having
+  transient mark mode on messes with my workflow.
+
+  If you are opposite, then let me know (file a bug report:
+  https://github.com/jonnay/emagicians-starter-kit/issues/new) and
+  I'll fix the emagicians kit so that transient mark mode can be
+  easily activated.
+
+#+name: turn-off-transient-mark
+#+begin_src emacs-lisp
+  (transient-mark-mode -1)
+#+end_src
+
+*** Show Marks   :learn-me:
+show-#+begin_src emacs-lisp 
+(emagician/expect-package 'show-marks)
+#+end_src
+
+** Multiple Cursors
+#+begin_src emacs-lisp 
+  (use-package multiple-cursors
+    :bind (("C-S-c e" . mc/edit-lines)
+           ("C-S-c n" . mc/mark-next-like-this)
+           ("C-S-c p" . mc/mark-previous-like-this)
+           ("C-S-c h" . mc/mark-all-like-this)))
+
+#+end_src
+
+** Killing and Yanking
+   Having a big kill ring is very helpful.  It's searchable by helm.
+
+#+begin_src emacs-lisp 
+(setq kill-ring-max 120)
+#+end_src
+
+   Also, the system clipboard is a must have.
+
+#+begin_src emacs-lisp
+(setq save-interprogram-paste-before-kill t)
+#+end_src
+
+   Allow Read-only killing.  Power of plain text. 
+
+#+begin_src emacs-lisp 
+(setq kill-read-only-ok t)
+#+end_src
+
+   At the beginning of the line, kill-line gets the entire line. 
+
+#+begin_src emacs-lisp 
+(setq kill-whole-line t)
+#+end_src
+
+*** Volatile Highlights
+   Shows what changed through undo, yank etc. commands
+
+#+begin_src emacs-lisp
+  (use-package volatile-highlights
+    :diminish "VHl"
+    :init
+    (volatile-highlights-mode t))
+#+end_src
+
+*** Swap
+Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
+
+#+begin_src emacs-lisp 
+(defun swap-region-with-kill (&optional arg)
+  "replace selected text with the one from kill ring"
+  (interactive "*P")
+  (backward-delete-char (- (point) (mark)))
+  (yank arg))
+#+end_src
+
+*** kill-buffer-file-name
+    I use this all the time.
+
+#+begin_src emacs-lisp
+  (defun kill-buffer-file-name () 
+    "Show current buffer's filename in the echo area and add it to the kill ring." 
+    (interactive) 
+    (let ((buffer-file-name (buffer-file-name))) 
+      (if (null buffer-file-name) 
+          (message "Buffer %s is not associated with a file." (buffer-name)) 
+        (message "%s" (kill-new buffer-file-name)))))
+#+end_src
+
+#+begin_src emacs-lisp 
+    (defun kill-buffer-file-basename ()
+      "Show the buffers base name in the echo area and add it to the kill ring."
+      (interactive)
+      (let ((bufer-file-name (buffer-file-name)))
+        (if (not (null buffer-file-name))
+            (message "%s" (kill-new (file-name-nondirectory buffer-file-name)))
+          (error "Buffer %s is not associated with a file" (buffer-name)))))
+#+end_src
+
+** Snippets
+
+   See also [[./Snippets.org]] for the actual Snippets.
+
+   Set the snippet dir.
+
+#+begin_src emacs-lisp 
+  (emagician/expect-dir "assets/snippets")
+  (use-package yasnippet
+    :diminish "yas"
+    :init
+    (setq yas-snippet-dir (expand-file-name "assets/snippets" emagician/dir))
+    (setq yas-trigger-key nil)
+    (add-hook 'text-mode-hook 'yas-minor-mode-on)
+    :config
+    (yas/reload-all))
+#+end_src
+
+   This rigamaroo might nit be needed anymore:
+
+#+begin_src emacs-lisp :tangle no
+ (defun yas/org-very-safe-expand ()
+    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+  
+  (defun yas/org-setup ()
+    ;; yasnippet (using the new org-cycle hooks)
+    (make-variable-buffer-local 'yas/trigger-key)
+    (setq yas/trigger-key [tab])
+    (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+    (define-key yas/keymap [tab] 'yas/next-field))
+  
+  ;(add-hook 'org-mode-hook #'yas/org-setup)
+ 
+#+end_src
+
+** Auto Complete
+   *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
+
+#+begin_src emacs-lisp 
+  (use-package auto-complete
+    :diminish "AC"
+    :init
+    (setq ac-auto-show-menu t)
+    (setq ac-dwim t)
+    (setq ac-use-menu-map t)
+    (setq ac-quick-help-delay 0.125)
+    (setq ac-quick-help-height 20)
+    :bind 
+    (:map ac-completing-map
+          ("C-M-n"   . ac-next)
+          ("C-M-p"   . ac-previous)
+          ("<tab>"   . ac-complete)
+          ("M-<ret>" . ac-help)
+          ("<ret>"   . nil))
+
+    :config
+    (require 'auto-complete-config)  
+    (ac-config-default)
+    (ac-flyspell-workaround)
+    (global-auto-complete-mode t)
+    (emagician/expect-dir "assets/ac-dictionaries")
+    (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
+
+#+end_src
+
+*** Auto Complete Dictionary
+#+begin_src emacs-lisp 
+#+end_src
+
+*** Auto Complete Default Sources
+#+begin_src emacs-lisp
+  (set-default 'ac-sources
+               '(ac-source-yasnippet
+                 ac-source-dictionary
+                 ac-source-words-in-buffer
+                 ac-source-words-in-same-mode-buffers))
+#+end_src
+
+** Undo
+#+begin_src emacs-lisp 
+  (use-package undo-tree
+    :diminish "Undo-Tree"
+    :init
+    (setq undo-tree-enable-undo-in-region t
+          undo-tree-visualizer-diff t
+          undo-tree-visualizer-timestamps t)
+    :config
+    (global-undo-tree-mode))
+#+end_src
+
+* Navigating
+** Scrolling
+   Keep the screen position when scrolling.  
+
+  #+begin_src emacs-lisp 
+(setq scroll-preserve-screen-position t)
+  #+end_src
+
+** Ace Jump
+#+begin_src emacs-lisp 
+(use-package ace-jump-mode
+  :bind 
+  (("C-c C-<space>" . ace-jump-mode))
+  :init
+  (setq erc-track-enable-keybindings nil)
+  :config
+  (add-hook 'org-mode-hook 
+            #'(lambda () (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode))))
+#+end_src
+** Ace window jump
+#+begin_src emacs-lisp 
+(emagician/expect-package 'ace-window)
+(require 'ace-window)
+(global-set-key (kbd "C-x o") 'ace-window)
+#+end_src
+
+*** Pretty display
+#+begin_src emacs-lisp 
+(custom-set-faces
+ '(aw-leading-char-face
+   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+#+end_src
+
+*** Limit scope to frames
+#+begin_src emacs-lisp 
+(setq aw-scope 'frame)
+#+end_src 
+
+*** Keys on the home row
+#+begin_src emacs-lisp 
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+#+end_src
+
+** Save Place 
+   Saveplace allows emacs to remember where you were in a file.  It is very handy and mostly transparent.
+#+begin_src emacs-lisp
+(require 'saveplace)
+(setq-default save-place t)
+#+end_src
+** Uniquify
+
+   Rename buffers so they are unique. 
+
+#+begin_src emacs-lisp 
+  (require 'uniquify)
+#+end_src
+
+** Searching
+*** Default to regexp Searches
+#+begin_src emacs-lisp 
+(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
+#+end_src
+
+* Saving
+** Backups
+   Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.
+
+#+begin_src emacs-lisp
+(setq auto-save-default t)
+#+end_src
+
+*** Set the backup directory to something decent
+(emagician/expect-dir "backups")
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+#+end_src
+
+* State Management
+** Recent Files
+   500 should be as enough files to handle long editing sessions at
+   work, and some weekend projects as well.
+
+#+begin_src emacs-lisp 
+  (require 'recentf)
+  (setq recentf-max-saved-items 500)
+#+end_src
+
+** Save Command History
+#+begin_src emacs-lisp
+(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring compile-command))
+(setq savehist-autosave-interval 60)
+(savehist-mode t)
+#+end_src 
+
+* Help and Discoverability
+** Find file at point, the baseline in discoverability.
+#+begin_src emacs-lisp 
+
+#+end_src
+
+** Discover My Major   :learn-me:bind:
+#+begin_src emacs-lisp 
+  (use-package discover-my-major
+    :bind
+    (("C-c C-h"   . discover-my-major)
+     ("C-c C-S-H" . discover-my-mode)))
+#+end_src
+
+** Helm
+
+#+name: helm
+#+begin_src emacs-lisp
+(emagician/expect-package 'helm)
+(require 'helm-config)
+(emagician/expect-package 'helm-ls-git)
+(require 'helm-ls-git)
+
+(global-set-key [f2] 'helm-emagician)
+#+end_src
+
+*** F2 is my super duper DWIM helper
+
+#+begin_src emacs-lisp
+  (defun helm-emagician ()
+    "Slowly going to become a super helm-dwim"
+    (interactive)
+    (require 'helm-files)
+    (unless (and helm-source-ls-git-status
+                 helm-source-ls-git)
+      (setq helm-source-ls-git-status
+            (helm-make-source "Git status" 'helm-ls-git-status-source
+              :fuzzy-match helm-ls-git-fuzzy-match)
+            helm-source-ls-git
+            (helm-make-source "Git files" 'helm-ls-git-source
+              :fuzzy-match helm-ls-git-fuzzy-match)))
+    (unless helm-source-buffers-list
+      (setq helm-source-buffers-list
+            (helm-make-source "Buffers" 'helm-source-buffers)))
+    
+      (helm-other-buffer '(helm-source-buffers-list
+                           helm-source-files-in-current-dir
+                           helm-source-ls-git-status
+                           helm-source-ls-git
+                           helm-source-mark-ring
+                           helm-source-bookmarks
+                           helm-source-recentf
+                           helm-source-gloabl-mark-ring             
+                           helm-source-buffer-not-found)
+                         "*helm mini*"))
+#+end_src
+*** Enable it
+#+begin_src emacs-lisp 
+(helm-mode 1)
+#+end_src
+
+*** Helm for M-x
+#+begin_src emacs-lisp 
+  (global-set-key (kbd "M-x")     'helm-M-x)
+#+end_src
+
+*** Buffer Selection
+#+begin_src emacs-lisp 
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+#+end_src
+
+*** Show full paths
+#+begin_src emacs-lisp
+(setq helm-ff-transformer-show-only-basename nil)
+#+end_src
+*** Extended Command, Insert, write and find files should use helm.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring)
+#+end_src
+
+*** Personal Preferences
+Make helm open a new window instead of taking over another.
+
+Make it a bit nicer too.
+#+begin_src emacs-lisp 
+(setq helm-split-window-in-side-p t)
+(setq helm-candidate-separator "──────────────────────────────")
+#+end_src
+
+* Footnotes
+
+[fn:1] http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296
+
+
+

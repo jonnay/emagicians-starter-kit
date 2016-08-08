@@ -1,0 +1,148 @@
+#+title: Meta-Development
+
+#+BEGIN_QUOTE
+Illumination
+
+Is deliberate self modification by magic and may include spells of
+Enchantment cast at oneself to repair weaknesses or increase
+strengths, and Divination and Invocation performed for inspiration and
+direction.
+
+Thus all magical operations are based on the use of will, perception
+and imagination, which is to say that they are all species of
+Enchantment or Divination. Imagination is that which occurs when will
+and perception stimulate each other.
+#+END_QUOTE
+
+--Peter Carroll
+* Testing
+** Running all ERT tests
+#+begin_src emacs-lisp 
+(defun emagician/run-all-tests ()
+  (interactive)
+  (ert "emagician/"))
+#+end_src
+
+** Test out a fresh load of Emagician  
+
+if you execute ~(setq init-file (concat (file-name-directory buffer-file-name) "init.el"))~ before actually doing ~emagician/test-initialization~ it kind of works, but you don't get a stacktrace.
+
+#+begin_src emacs-lisp
+  (defun emagician/test-initialization ()
+    (interactive)
+    (let* ((init-file (expand-file-name "init.el"
+                                        (file-name-directory (or load-file-name
+                                                                 buffer-file-name
+                                                                 (org-src-do-at-code-block (eval 'buffer-file-name))))))
+           (magick-string "emagician/magick-output")
+           (code `(condition-case err
+                      (progn
+                        (toggle-debug-on-error)
+                        (load-file ,init-file)
+                        (message "(%s 'succcess)" ,magick-string))
+                    ((error)
+                       (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
+                       (kill-emacs 1))))
+           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
+                                       invocation-directory
+                                       invocation-name
+                                       (replace-regexp-in-string "\""
+                                                                 "\\\""
+                                                                 (format "%S" code)
+                                                                 nil
+                                                                 t)))
+           (result (shell-command-to-string invocation-command))
+           (captured-result (substring result
+                                     (or (string-match (concat "(" magick-string) result)
+                                         (error "Unexpected result from child emacs %s" result))))
+           (parsed-result (read captured-result))
+           (err (assoc 'error parsed-result)))
+      (message "Result: %s\n"
+               (message "%s\n\n\n%s" (pp parsed-result) result))
+      (if err 
+          (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
+        (message "Successful!"))))
+#+end_src
+
+
+  (defun emagician/test-initialization ()      
+    (interactive)
+    (let* ((code `(condition-case err
+                      (load-file ,init-file)
+                    (message "Success")
+                    ((debug error)
+                     (progn
+                       (message "Error: %s %S" (car err) (cdr err))
+                       (message "%s" (backtrace))
+                       (exit 1)))))
+           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
+                                       invocation-directory
+                                       invocation-name
+                                       (format "%S" code)))
+           (result (shell-command-to-string invocation-command)))
+      (if (equal result "Success")
+          (message "Initialization Successful")
+        (message "argh: %s" result))))
+
+*** Working, but kinda shitty testers 
+
+#+begin_src emacs-lisp 
+  (defun emagician/test-init-through-batch ()
+    (interactive)
+    (message "Running New Emacs: %s"
+             (shell-command-to-string 
+              (concat invocation-directory invocation-name " "
+                      "--no-init-file --batch "
+                      "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                      "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                      "--eval='' "
+                      "&"))))
+#+end_src
+
+#+begin_src emacs-lisp 
+    (defun emagician/test-full-init()
+      (interactive)
+      (message (concat "Running New Emacs: "
+                       (shell-command-to-string 
+                        (concat invocation-directory invocation-name " "
+                                "--no-init-file "
+                                "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                                "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                                "&")))))
+#+end_src
+
+** Emagician Helm Source
+
+   Doesn't currently work because Helm keeps changing its interface. 
+
+   #+begin_src emacs-lisp
+  (helm-ff-directory-files emagician/dir)
+  
+  (defvar emagician/helm-c-source-files
+    `((name  . "Find Emagician Files")
+      (header-name . (lambda (_)))
+      (candidates . ,(lambda () 
+                      (when (file-accessible-directory-p emagician/dir)
+                        (directory-files emagician/dir t))))
+      (keymap . ,helm-generic-files-map)
+      (candidate-transformer . emagician/helm-ct-is-org-file)
+      (help-message . helm-generic-file-help-message)
+      (type . file)))
+  
+  (defun emagician/helm-ct-is-org-file (candidates)
+    (remove-if-not (lambda (c)
+                     (and (string= (substring c -4) ".org")
+                          (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
+                   candidates))
+  
+  
+  (defun emagician/helm-emagician-dir () 
+    "List all the org files in the Emagician dir"
+    (interactive)
+    (helm :sources emagician/helm-c-source-files
+          :candidate-number-limit 40
+          :buffer "*emagician-|-+-|-files*"))
+  
+  (global-set-key (kbd "S-<f3>") 'emagician/helm-emagician-dir)    
+#+end_src
+

@@ -1,6 +1,8 @@
 * Project Status:
 
-  Fit for other humans to tell me it is broken, and I can fix it.  (i.e. beta)
+  Fit for other humans to tell me it is broken, and I can fix it.
+
+  But Not Even Alpha.
 
 * A starter kit for magicians
 
@@ -23,7 +25,7 @@
   This is my Emacs.  There are plenty like it, but this one is mine.
   #+end_quote
 
-** Working with the Emagicians Starter Kit.
+** Working with the Emagicians Starter Kit
 
    Son, there is no brogramming here.  No easy install shell file that
    you can just run, and everything goes.  In fact, it is antithetical
@@ -70,6 +72,4 @@
   stars.
 
   I Love you.
-
-* TODO REad: http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
 

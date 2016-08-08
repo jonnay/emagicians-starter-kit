@@ -2,20 +2,21 @@
 #+begin_src emacs-lisp 
 (defconst emagician/version "0.23.1")
 #+end_src
-
-  Look, if you're here, either you're a mutant (horray!), or I have
-  done something horribly wrong. (boo!).
-
-  Frankly the defaults here should be good enough that no-one should
-  need to change them.  And by good enough I mean, really basic things
-  like bog-standard libraries required, package managers set up, and
-  helper macros defined.
+  
+  This is my emacs.  There are many like it, but this one is mine.
 
 ** Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.
 
    Snarfed this idea from https://github.com/overtone/emacs-live.
    Which goes to show: even if you use the word brogrammer you might
    still have good ideas. ;)
+
+*** Emergency override.
+    You won't need this. Right?  In case of emergency, break glass.
+
+#+begin_src emacs-lisp :tangle yes
+(setq debug-on-error t)
+#+end_src
 
 *** Super Baseline, Start with the Barest thing that could possibly work
 #+begin_src emacs-lisp
@@ -27,15 +28,21 @@
 
 *** Define Scratch Message Helper Functions
 
-
 #+begin_src emacs-lisp
-(defun emagician/set-scratch (&rest lines)
-  (setq initial-scratch-message (apply 'concat lines))
+  (defun emagician/set-scratch (&rest lines)
+    (setq initial-scratch-message (apply 'concat lines)))
 
-(defun emagician/append-scratch (&rest lines)
-  (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+  (defun emagician/append-scratch (&rest lines)
+    (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+
+  (defvar emagician/pre-scratch-links '()
+    "A list of links to append to emagician/scratch-links.
+
+  This is necessary because we may need to communicate to the user
+  before the rest of the scratch interface is built.")
+
 #+end_src
-
+    
 *** Now set it to our Baseline beautified "you're-busted" text
 
 #+begin_src emacs-lisp
@@ -44,14 +51,15 @@
     ";; You know what to do." "\n"
     ";; \n"
     ";; Emagician Starter kit Version: " emagician/version "\n"
-    ";; Emacs: " emacs-major-version "." emacs-minor-version " [" emacs-bzr-version "]" "\n"
+    ";; Emacs: " (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version) " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" "\n"
     ";; \n"
     ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
     ";;                      ;;" "\n"      
     ";; It's dangerous to go ;;" "\n"
     ";; alone! take this:    ;;" "\n"
     ";;                      ;;" "\n"
-    ";;   ♨     👷     ♨   ;;" "\n"
+    ";;   ♨     👷     ♨    ;;" "\n"
+    ";;          🔩          ;;" "\n"
     ";;                      ;;" "\n"
     ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
     "\n"
@@ -61,10 +69,17 @@
 ** Verify emagician/dir is set 
 
 #+begin_src emacs-lisp
-  (when (null? emagician/dir)
+  (when (null emagician/dir)
     (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
       (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
       (error err)))
+#+end_src
+
+#+begin_src emacs-lisp 
+  (emagician/append-scratch
+    "\n"
+    "(find-file-other-window \"" emagician/dir "\")" "\n"
+    "(find-file-other-window \"" emagician/dir "/*.org\"  t)" "\n")
 #+end_src
 
 ** Use the new improved emagician scratch.
@@ -73,14 +88,14 @@
 (setq inhibit-splash-screen t)
 #+end_src
 
-*** Add a show-scratch funciton 
+*** Add a show-scratch function 
 	This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
 #+begin_src emacs-lisp
   (defun emagician/show-scratch ()
     "Show the scratch buffer"
     (interactive)
     (set-window-buffer nil "*scratch*"))
-  
+
   (add-hook 'emacs-startup-hook 'emagician/show-scratch t)
 #+end_src
 
@@ -88,39 +103,45 @@
   We set our download dir to local-packages.  We also do the trick of
   doing package-refresh-contents if package-archive-contents is empty.
 
-  We set the archives to the big 3 plus orgmode.  MELPA, ELPA and
-  Marmalade!  Oh My!
+  We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 
   file:./assets/images/sulu-swordfight-oh-my.jpg
 
-  And the OrgMode Repo.
-
 #+begin_src emacs-lisp
-    (setq package-user-dir (concat emagician-dir "elpa"))
-    
-    (setq package-archives
-          '(("gnu"         . "http://elpa.gnu.org/packages/")
-            ("marmalade"   . "http://marmalade-repo.org/packages/")
-            ("MELPA"       . "http://melpa.milkbox.net/packages/")
-            ("org"         . "http://orgmode.org/elpa/")))
-    
-    (package-initialize)
-    
-    (unless package-archive-contents
-      (package-refresh-contents))
+  (defvar emagician/are-elpas-reachable? t "Whether or not ELPAs are reachable")
+
+  (setq package-user-dir (concat emagician/dir "elpa"))
+
+  (setq package-archives
+        '(("gnu"         . "http://elpa.gnu.org/packages/")
+          ("MELPA"       . "http://melpa.org/packages/")
+          ("org"         . "http://orgmode.org/elpa/")))
+
+  (package-initialize)
+
+  (condition-case err
+      (unless package-archive-contents (package-refresh-contents))
+    ((error)
+     (let ((scratch-msg (concat ";;; !!! Couldn't refresh package contents\n"
+                                "((package-refresh-contents)(beginning-of-line)(kill-line))")))
+       (message "Could not refresh package contents: %s %S" (car err) (cdr err))
+       (emagician/append-scratch scratch-msg)
+       (add-to-list 'emagician/pre-scratch-links scratch-msg)
+       (setq emagician/are-elpas-reachable? nil))))
 #+end_src
   
 ** Load Paths, Custom Files, etc.
 *** Standard Emagician distribution load paths
 #+begin_src emacs-lisp 
-(add-to-list 'load-path emagician-dir)
-(add-to-list 'load-path (concat emagician-dir "src"))
-(add-to-list 'load-path (concat emagician-dir "dist"))
+(add-to-list 'load-path emagician/dir)
+(add-to-list 'load-path (concat emagician/dir "src"))
+(add-to-list 'load-path (concat emagician/dir "dist"))
+(add-to-list 'custom-theme-load-path (concat emagician/dir "themes"))
 #+end_src
 
 *** Custom file shouldn't matter so much anymore, but lets stick it here anyway. 
 #+begin_src emacs-lisp 
-(setq custom-file (concat emagician-dir "custom.el"))
+(setq custom-file (concat emagician/dir "custom.el"))
 #+end_src 
 
 * Emagician/load
@@ -132,73 +153,36 @@
    If the subtree is a tag, then all subtrees with that tag are collected and loaded.
 #+name: starter-kit-load
 #+begin_src emacs-lisp
-  (defvar emagician/load-depth 0)
-  (defun emagician/load (file &optional header-or-tag)
-    "Load configuration from other .org files.
-  If the optional argument is the id of a subtree then only
-  configuration from within that subtree will be loaded.  If it is
-  not an id then it will be interpreted as a tag, and only subtrees
-  marked with the given tag will be loaded.
-  
-  For example, to load all of lisp.org simply
-  add (emagician/load \"lisp\") to your configuration."
-    (let (start-time (current-time))
-      (let ((file (expand-file-name (if (string-match ".+\.org" file)
+    (defvar emagician/load-depth 0)
+    (defun emagician/load (file &optional header-or-tag)
+      "Load configuration from other .org files."
+      (let ((start-time (current-time))
+            (file (expand-file-name (if (string-match ".+\.org" file)
                                         file
                                       (format "%s.org" file))
-                                    emagician-dir))
+                                    emagician/dir))
             (load-result nil))
         (if (file-exists-p file)
             (progn
-              (setq initial-scratch-message 
-                    (concat initial-scratch-message "\n"
-                            ";; Loading " file))
-              (setq load-result
-                    (org-babel-load-file
-                     (if header-or-tag
-                         (let* ((base (file-name-nondirectory file))
-                                (dir  (file-name-directory file))
-                                (partial-file (expand-file-name
-                                               (concat "." (file-name-sans-extension base)
-                                                       ".part." header-or-tag ".org")
-                                               dir)))
-                           (unless (file-exists-p partial-file)
-                             (with-temp-file partial-file
-                               (insert
-                                (with-temp-buffer
-                                  (insert-file-contents file)
-                                  (save-excursion
-                                    (condition-case nil ;; collect as a header
-                                        (progn
-                                          (org-link-search (concat"#"header-or-tag))
-                                          (org-narrow-to-subtree)
-                                          (buffer-string))
-                                      (error ;; collect all entries with as tags
-                                       (let (body)
-                                         (org-map-entries
-                                          (lambda ()
-                                            (save-restriction
-                                              (org-narrow-to-subtree)
-                                              (setq body (concat body "\n" (buffer-string)))))
-                                          header-or-tag)
-                                         body))))))))
-                           partial-file)
-                       file))))
-          (progn 
-            (setq initial-scratch-message
-                  (concat initial-scratch-message "\n"
-                          ";; Skipped Loading " file " It doesn't exist!"))
+              (emagician/append-scratch "\n;; "
+                                        (make-string emagician/load-depth ?-)
+                                        " Loading " file)
+              (setq load-result (org-babel-load-file file)))
+          (progn
+            (emagician/append-scratch "\n;; "
+                                      (make-string emagician/load-depth ?-)
+                                      "Skipped Loading "
+                                      file
+                                      " It doesn't exist!\n")
             (setq load-result nil)))
-        (setq initial-scratch-message 
-              (concat initial-scratch-message
-                      "...done!" "\n"))
+        (emagician/append-scratch "...done!" "\n")
         (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
                          file 
                          (if header-or-tag header-or-tag "") 
                          (float-time (time-subtract (current-time) 
                                                     start-time))))
-        load-result)))
-  
+        load-result))
+
 #+end_src
 
 * Package Management
@@ -210,13 +194,18 @@
       (package-install package)))  
 #+end_src
 
-
 ** Use-Package
 
-https://github.com/jwiegley/use-package
+   https://github.com/jwiegley/use-package
 
 #+begin_src emacs-lisp 
+(setq use-package-always-ensure emagician/are-elpas-reachable?)
 (emagician/expect-package 'use-package)
+#+end_src
+
+* Emagician Starter Kit has it's own Helper Functions
+#+begin_src emacs-lisp 
+(emagician/load "Emagician-Base.org")
 #+end_src
 
 * Assets
@@ -228,8 +217,122 @@ https://github.com/jwiegley/use-package
   In the case of #1, we want the assets directory to be destroyed and rebuilt everytime. 
   In the case of #2, it should be in source control 
 
+
+* Interface
+
+  This file handles the baseline interface for emacs, and is split into the following sections:
+
+  - Keystrokes :: Really just a small bit about an anti-vim hack
+  - Display :: anything visible, modeline, titlebar, theme, etc
+  - Editing :: about inserting and using text, including snippets and autocomplete
+  - Navigating :: Moving the mark.  This includes searching.
+  - Saving :: All about backups.
+  - State Management :: Persist state across emacs sessions.
+  - Help and Discoverability :: Getting more help with emacs, and learning commands better. 
+
+#+begin_src emacs-lisp 
+(emagician/load "Interface.org")
+#+end_src
+
+
+* Programming
+
+  This sets up some baseline programming helpers and then loads
+  individual org files for each programming mode. 
+
+#+begin_src emacs-lisp 
+(emagician/load "Programming.org")
+#+end_src
+
+* Lamp
+
+  The Lamp is a 5th magickal weapon along with the wand, sword, cup
+  and chalace.  It represents illumination and self knowledge.
+
+#+begin_src emacs-lisp 
+(emagician/load "Lamp.org")
+#+end_src
+  
+* Emagician Starter Kit has it's own Lamp
+
+  Tools to make developing the Emagician Starter kit easier.
+
+#+begin_src emacs-lisp 
+(emagician/load "Emagician-Meta.org")
+#+end_src
+
+  
+* Now load the users files
+** First the customization
+#+begin_src emacs-lisp 
+(load custom-file 'noerror)
+#+end_src
+
+** Next is the true-name-file
+#+begin_src emacs-lisp 
+(emagician/load emagician/true-name)
+#+end_src
+
+** System Type Initialization
+#+begin_src emacs-lisp 
+(emagician/load (emagician/sanitize-file-name (symbol-name system-type)))
+#+end_src  
+
+** Machine Name Initialization
+#+begin_src emacs-lisp 
+(emagician/load (emagician/sanitize-file-name system-name))
+#+end_src
+
+** Login name Initialization
+#+begin_src emacs-lisp 
+(emagician/load user-login-name)
+#+end_src
+   
+* Some Inspirational words from the book of emacs
+THE BOOK OF THE EMACS, Part I
+Liber Lisper Legis
+as (R)eceived (M)ade (S)ound [RMS]
+on this 15th day of December,
+the Year of our Editor 2007.
+Chapter 1
+
+  1. Buf! Manifestation of Chat.
+  2. All Gods Seek Her Company.
+  3. Intelligent, she watches.
+  4. Every act a function, there is no difference.
+  5. Help me o RMS, in unveiling thee before the Needy on Earth
+  6. Be thou not just my editor, but mine eyes, heart and yes, Soul.
+  7. Behold from darkness and byte code interpreter thou groweth strong.
+  8. The car is in the cdr, not the cdr in the car.
+  9. Worship then the car and behold the Maserati of all programs ever.
+  10. Thou powers known to but a few, thou public API widely advertised.
+  11. Whilst others seek bells and whistles, thou sweet hum caresseth me.
+  12. Open me up, list my buffers, be they ibuffer or buff-menu+
+  13. No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)
+	  
+M-x all-hail-emacs
+
+https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
+
+* References, Bibliography, Shout Outs, and Props.
+  - ESchultes Emacs Starter Kit :: https://github.com/eschulte/emacs-starter-kit
+  - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html
+  - Emacs Starter Kit :: https://github.com/technomancy/emacs-starter-kit
+  - Cabbage  :: https://github.com/senny/cabbage
+  - Emacs Live :: https://github.com/overtone/emacs-live (even if they are brogrammers)
+  - novoid :: https://github.com/novoid/dot-emacs
+  - ocodo :: https://github.com/ocodo/emacs.d
+  - https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el
+  - http://rix.si/blog/2015/01/05/fsem-001/
+
 * Thee End
-  So Mote it Be
+  So Mote it Be.
+
+#+begin_src emacs-lisp 
+(emagician/initiate-thee-scratch)
+#+end_src
+
+
 #+begin_src emacs-lisp 
   (provide 'emagician)
 #+end_src
