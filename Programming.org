@@ -140,6 +140,7 @@ No Physical tabs.
 (emagician/load "Programming-Lisp")
 (emagician/load "Programming-Ruby")
 (emagician/load "Programming-Web")
+(emagician/load "Programming-Sh")
 #+end_src
   
 * Quazi-related Modes

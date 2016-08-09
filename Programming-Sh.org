@@ -1,0 +1,18 @@
+#+title: Shell Based Languages
+
+* Set executable bit if required
+#+begin_src emacs-lisp
+(add-hook 'after-save-hook
+  'executable-make-buffer-file-executable-if-script-p)
+#+end_src
+
+* Flymake
+#+begin_src emacs-lisp 
+(use-package flymake-shell
+  :init
+  (add-hook 'sh-set-shell-hook 'flymake-shell-load))
+#+end_src
+
+
+
+

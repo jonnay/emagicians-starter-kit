@@ -1,0 +1,78 @@
+#+title:Eshell Magick
+
+If it is called eshell.el, it gets problematic. 
+
+* Fixes
+** Use helm for history
+
+#+begin_src emacs-lisp 
+(use-package eshell
+  :demand 
+  :bind (:map eshell-mode-map
+         ("M-S-r" . helm-eshell-history)))
+
+#+end_src
+   
+** Fix an issue with running commands remotely through tramp
+
+http://emacs.stackexchange.com/questions/2107/run-application-in-cwd-on-remote-host-from-within-eshell
+
+Maybe?
+
+#+begin_src emacs-lisp :tangle no
+(defadvice eshell-gather-process-output (before absolute-cmd (command args) act)
+  (setq command (file-truename command)))
+
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+#+end_src
+
+** Pager
+#+begin_src emacs-lisp 
+(setenv "PAGER" "cat")
+#+end_src
+
+
+* Interface 
+** Prompt
+#+begin_src emacs-lisp 
+  (defmacro with-face (str &rest properties)
+    `(propertize ,str 'face (list ,@properties)))
+
+  (defun shk-eshell-prompt ()
+    
+    (let ((header-bg (face-foreground 'default  nil 'default))
+          (header-fg (face-background 'default nil 'default)))
+      (concat
+       (with-face (concat (with-face user-login-name :foreground "blue")
+                          "@"
+                          (with-face (if (getenv "HOSTNAME")
+                                         (getenv "HOSTNAME")
+                                       "localhost") :foreground "green")
+                          (eshell/pwd) " "
+                          (or (ignore-errors (format "(%s)" (vc-responsible-backend default-directory))) "")
+                          "\n")
+                  :background header-bg
+                  :foreground header-fg
+                  :box `(:line-width 5 :color ,header-bg))
+       (if (= (user-uid) 0)
+           (with-face " #" :foreground "red")
+         " $")
+       " ")))
+    
+  (setq eshell-prompt-function 'shk-eshell-prompt)
+  (setq eshell-highlight-prompt nil)
+#+end_src
+
+** Did you mean?
+#+begin_src emacs-lisp 
+(use-package eshell-did-you-mean 
+  :demand
+  :config
+  (eshell-did-you-mean-setup))
+#+end_src
+** Show fringe
+#+begin_src emacs-lisp 
+(use-package eshell-fringe-status
+  :init
+  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
+#+end_src

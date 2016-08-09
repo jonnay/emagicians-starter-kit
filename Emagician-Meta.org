@@ -64,26 +64,6 @@ if you execute ~(setq init-file (concat (file-name-directory buffer-file-name) "
         (message "Successful!"))))
 #+end_src
 
-
-  (defun emagician/test-initialization ()      
-    (interactive)
-    (let* ((code `(condition-case err
-                      (load-file ,init-file)
-                    (message "Success")
-                    ((debug error)
-                     (progn
-                       (message "Error: %s %S" (car err) (cdr err))
-                       (message "%s" (backtrace))
-                       (exit 1)))))
-           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
-                                       invocation-directory
-                                       invocation-name
-                                       (format "%S" code)))
-           (result (shell-command-to-string invocation-command)))
-      (if (equal result "Success")
-          (message "Initialization Successful")
-        (message "argh: %s" result))))
-
 *** Working, but kinda shitty testers 
 
 #+begin_src emacs-lisp 

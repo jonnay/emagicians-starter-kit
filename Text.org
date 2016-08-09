@@ -1,0 +1,13 @@
+#+title: Text Mode
+
+** Enable spell check on text modes
+#+begin_src emacs-lisp 
+(add-hook 'text-mode-hook 'flyspell-mode)
+#+end_src
+
+** Markdown is kind of a text mode
+#+begin_src emacs-lisp 
+(use-package markdown-mode
+  :mode "\\.md\\'")
+#+end_src
+

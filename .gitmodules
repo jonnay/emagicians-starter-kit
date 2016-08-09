@@ -1,0 +1,3 @@
+[submodule "eshell-prompt-extras"]
+	path = eshell-prompt-extras
+	url = git@github.com:jonnay/eshell-prompt-extras.git

@@ -234,6 +234,14 @@
 (emagician/load "Interface.org")
 #+end_src
 
+* Text
+
+  Emacs is a text editor afteral.
+
+#+begin_src emacs-lisp 
+(emagician/load "Text.org")
+#+end_src
+
 
 * Programming
 
@@ -242,6 +250,16 @@
 
 #+begin_src emacs-lisp 
 (emagician/load "Programming.org")
+#+end_src
+
+* Shell
+
+  (Also my lovely wife)
+
+  Why would you not use Eshell?
+
+#+begin_src emacs-lisp 
+(emagician/load "Eshell-Magick.org")
 #+end_src
 
 * Lamp
