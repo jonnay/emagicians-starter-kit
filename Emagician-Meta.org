@@ -23,12 +23,10 @@ and perception stimulate each other.
   (ert "emagician/"))
 #+end_src
 
-** Test out a fresh load of Emagician  
-
-if you execute ~(setq init-file (concat (file-name-directory buffer-file-name) "init.el"))~ before actually doing ~emagician/test-initialization~ it kind of works, but you don't get a stacktrace.
+** Test out a fresh hot load of Emagician  
 
 #+begin_src emacs-lisp
-  (defun emagician/test-initialization ()
+  (defun emagician/test-initialization (&optional forms)
     (interactive)
     (let* ((init-file (expand-file-name "init.el"
                                         (file-name-directory (or load-file-name
@@ -39,6 +37,9 @@ if you execute ~(setq init-file (concat (file-name-directory buffer-file-name) "
                       (progn
                         (toggle-debug-on-error)
                         (load-file ,init-file)
+                        ,(if forms
+                             `(progn ,forms)
+                           (message "No extra forms executed"))
                         (message "(%s 'succcess)" ,magick-string))
                     ((error)
                        (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
@@ -62,6 +63,11 @@ if you execute ~(setq init-file (concat (file-name-directory buffer-file-name) "
       (if err 
           (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
         (message "Successful!"))))
+
+  (defun emagician/test-initialization-with (lisp)
+    "Test an Emacs initialization with a given chunk of lisp."
+    (interactive  "xExecute: ")
+    (emagician/test-initialization lisp))
 #+end_src
 
 *** Working, but kinda shitty testers 

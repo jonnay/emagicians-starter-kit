@@ -1,6 +1,12 @@
 #+title:Eshell Magick
 
-If it is called eshell.el, it gets problematic. 
+If this file is called ~eshell.org~, it weaves into ~eshell.el~, and
+then ~require~ gets problematic.
+
+#+begin_src emacs-lisp 
+(add-hook 'emacs-startup-hook 'eshell)
+#+end_src
+
 
 * Fixes
 ** Use helm for history
@@ -10,7 +16,6 @@ If it is called eshell.el, it gets problematic.
   :demand 
   :bind (:map eshell-mode-map
          ("M-S-r" . helm-eshell-history)))
-
 #+end_src
    
 ** Fix an issue with running commands remotely through tramp
@@ -33,36 +38,33 @@ Maybe?
 
 
 * Interface 
-** Prompt
+** Set Prompt 
 #+begin_src emacs-lisp 
-  (defmacro with-face (str &rest properties)
-    `(propertize ,str 'face (list ,@properties)))
-
-  (defun shk-eshell-prompt ()
-    
-    (let ((header-bg (face-foreground 'default  nil 'default))
-          (header-fg (face-background 'default nil 'default)))
-      (concat
-       (with-face (concat (with-face user-login-name :foreground "blue")
-                          "@"
-                          (with-face (if (getenv "HOSTNAME")
-                                         (getenv "HOSTNAME")
-                                       "localhost") :foreground "green")
-                          (eshell/pwd) " "
-                          (or (ignore-errors (format "(%s)" (vc-responsible-backend default-directory))) "")
-                          "\n")
-                  :background header-bg
-                  :foreground header-fg
-                  :box `(:line-width 5 :color ,header-bg))
-       (if (= (user-uid) 0)
-           (with-face " #" :foreground "red")
-         " $")
-       " ")))
-    
-  (setq eshell-prompt-function 'shk-eshell-prompt)
-  (setq eshell-highlight-prompt nil)
+  (defun emagician/epe-theme ()
+    "Emagician Eshell Prompt Extras theme."
+    (setq eshell-prompt-regexp "^[^#\n🐰]*[#🐰] ")
+    (concat
+     (when (epe-remote-p)
+       (epe-colorize-with-face (concat (epe-remote-user)
+                                       "@"
+                                       (epe-remote-host))
+                               'epe-remote-face))
+     (epe-colorize-with-face (eshell/pwd) 'epe-dir-face)
+     (when (epe-git-p)
+       (concat
+        (epe-colorize-with-face ":" 'epe-dir-face)
+        (epe-colorize-with-face
+         (concat (epe-git-branch)
+                 (epe-git-dirty)
+                 (epe-git-untracked)
+                 (let ((unpushed (epe-git-unpushed-number)))
+                   (unless (= unpushed 0)
+                     (concat ":" (number-to-string unpushed-number)))))
+         'epe-git-face)))
+     (epe-colorize-with-face " 🐰" 'epe-symbol-face)
+     (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
+     " "))
 #+end_src
-
 ** Did you mean?
 #+begin_src emacs-lisp 
 (use-package eshell-did-you-mean 
@@ -70,9 +72,11 @@ Maybe?
   :config
   (eshell-did-you-mean-setup))
 #+end_src
+
 ** Show fringe
 #+begin_src emacs-lisp 
 (use-package eshell-fringe-status
   :init
   (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
 #+end_src
+

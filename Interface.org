@@ -574,13 +574,13 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (emagician/expect-package 'helm-ls-git)
 (require 'helm-ls-git)
 
-(global-set-key [f2] 'helm-emagician)
+(global-set-key [f2] 'emagician/helm)
 #+end_src
 
 *** F2 is my super duper DWIM helper
 
 #+begin_src emacs-lisp
-  (defun helm-emagician ()
+  (defun emagician/helm-old ()
     "Slowly going to become a super helm-dwim"
     (interactive)
     (require 'helm-files)
@@ -600,13 +600,33 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
                            helm-source-files-in-current-dir
                            helm-source-ls-git-status
                            helm-source-ls-git
-                           helm-source-mark-ring
+                           helm-source-mark-
                            helm-source-bookmarks
                            helm-source-recentf
                            helm-source-gloabl-mark-ring             
                            helm-source-buffer-not-found)
                          "*helm mini*"))
+
 #+end_src
+
+#+begin_src emacs-lisp 
+(require 'helm-ring)
+(defun emagician/helm ()
+  "Super powered helm mode to DWIM!"
+  (interactive)
+  (helm :sources
+        '(helm-source-buffers-list
+         helm-source-files-in-current-dir
+         helm-source-ls-git-status
+         helm-source-ls-git
+         helm-source-mark-ring
+         helm-source-bookmarks
+         helm-source-recentf
+         helm-source-register         
+         helm-source-global-mark-ring
+         helm-source-buffer-not-found)))
+#+end_src
+
 *** Enable it
 #+begin_src emacs-lisp 
 (helm-mode 1)
@@ -615,6 +635,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 *** Helm for M-x
 #+begin_src emacs-lisp 
   (global-set-key (kbd "M-x")     'helm-M-x)
+  (setq helm-M-x-always-save-history t)
 #+end_src
 
 *** Buffer Selection
