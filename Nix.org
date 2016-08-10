@@ -1,0 +1,6 @@
+#+title: NixOS
+
+It's old, but this was needed to make NixOS work well with tramp.
+#+begin_src emacs-lisp 
+(add-to-list 'tramp-remote-path "/var/run/current-system/sw/bin")
+#+end_src

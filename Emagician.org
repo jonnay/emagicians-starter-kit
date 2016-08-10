@@ -217,7 +217,6 @@
   In the case of #1, we want the assets directory to be destroyed and rebuilt everytime. 
   In the case of #2, it should be in source control 
 
-
 * Interface
 
   This file handles the baseline interface for emacs, and is split into the following sections:
@@ -242,7 +241,6 @@
 (emagician/load "Text.org")
 #+end_src
 
-
 * Programming
 
   This sets up some baseline programming helpers and then loads
@@ -250,6 +248,13 @@
 
 #+begin_src emacs-lisp 
 (emagician/load "Programming.org")
+#+end_src
+
+* Org Mode
+  Deserves it's own file... ORG GRIMOIRE!
+
+#+begin_src emacs-lisp 
+(emagician/load "Org-grimoir.org")
 #+end_src
 
 * Shell
@@ -278,7 +283,6 @@
 #+begin_src emacs-lisp 
 (emagician/load "Emagician-Meta.org")
 #+end_src
-
   
 * Now load the users files
 ** First the customization

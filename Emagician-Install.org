@@ -139,7 +139,7 @@ Let there be light
     This next command is an invokation.  Even if you are going to use
     the Emagician starter kit as is, you need to run the next code
     block.  This defines a function that is used to create
-    custom code directories for you, and an index file.
+    custom files for you.
 
     The first one it creates is based on the identity you specified
     above.  After that there are other customizations based on your
@@ -165,7 +165,7 @@ Let there be light
   (emagician/invoke-custom-file emagician/true-name)
 #+end_src
 
-*** Your System-Type directory
+*** Your System-Type file
 
 If you end up using differnet OS's, you may want to have this set up.
 This would handle per-os level customization.  We use the

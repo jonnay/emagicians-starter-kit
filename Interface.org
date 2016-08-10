@@ -29,6 +29,15 @@
    I keep it around though because it's clevar and fun.
    
 * Display
+** Turn of scrollbars, toolbars, menu bars
+
+Oh my.
+
+#+begin_src emacs-lisp 
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+    (when (fboundp mode) (funcall mode -1)))
+#+end_src
+
 ** Fonts
 #+begin_verse
 Unicode
@@ -230,7 +239,8 @@ One day.  Powerline and nyan mode don't work.
     (global-fci-mode 1))
 #+end_src
 
-** Theme: Moe, Moe, Kyun!
+** Themes
+*** Base theme: Moe, Moe, Kyun!
    This theme is my favorite so far.  It's got good color choices and it's nice and dark.
 
    The theme needs to be loaded after powerlie to work.
@@ -241,6 +251,12 @@ One day.  Powerline and nyan mode don't work.
     :config
     (moe-dark))
 #+end_src
+*** Org Beautify
+    Load from our =bad self!
+#+begin_src emacs-lisp :tangle yes
+  (add-to-list 'custom-theme-load-path (expand-file-name "themes/org-beautify-theme/" emagician/dir))
+  (load-theme 'org-beautify t)
+#+end_src    
 
 * Editing
 ** UTF-8 Enforcement
@@ -319,7 +335,7 @@ show-#+begin_src emacs-lisp
 
 #+begin_src emacs-lisp
   (use-package volatile-highlights
-    :diminish "VHl"
+    :diminish ""
     :init
     (volatile-highlights-mode t))
 #+end_src
@@ -398,6 +414,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 #+begin_src emacs-lisp 
   (use-package auto-complete
+    :demand
     :diminish "AC"
     :init
     (setq ac-auto-show-menu t)
@@ -420,7 +437,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
     (global-auto-complete-mode t)
     (emagician/expect-dir "assets/ac-dictionaries")
     (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
-
 #+end_src
 
 *** Auto Complete Dictionary
@@ -439,7 +455,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 ** Undo
 #+begin_src emacs-lisp 
   (use-package undo-tree
-    :diminish "Undo-Tree"
+    :diminish ""
     :init
     (setq undo-tree-enable-undo-in-region t
           undo-tree-visualizer-diff t
@@ -557,6 +573,12 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 #+end_src
 
+** Describe Char
+   Give us all the unicode information for a glyph. 
+#+begin_src emacs-lisp 
+(setq describe-char-unidata-list '(name old-name general-category canonical-combining-class bidi-class decomposition decimal-digit-value digit-value numeric-value mirrored uppercase lowercase titlecase))
+#+end_src
+
 ** Discover My Major   :learn-me:bind:
 #+begin_src emacs-lisp 
   (use-package discover-my-major
@@ -569,12 +591,12 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 #+name: helm
 #+begin_src emacs-lisp
-(emagician/expect-package 'helm)
-(require 'helm-config)
-(emagician/expect-package 'helm-ls-git)
-(require 'helm-ls-git)
-
-(global-set-key [f2] 'emagician/helm)
+(use-package helm
+  :demand
+  :init
+  (global-set-key [f2] 'emagician/helm)
+  (require 'helm-config)
+  (use-package helm-ls-git :demand))
 #+end_src
 
 *** F2 is my super duper DWIM helper
@@ -614,17 +636,20 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (defun emagician/helm ()
   "Super powered helm mode to DWIM!"
   (interactive)
+  (unless helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source "Buffers" 'helm-source-buffers)))
   (helm :sources
         '(helm-source-buffers-list
-         helm-source-files-in-current-dir
-         helm-source-ls-git-status
-         helm-source-ls-git
-         helm-source-mark-ring
-         helm-source-bookmarks
-         helm-source-recentf
-         helm-source-register         
-         helm-source-global-mark-ring
-         helm-source-buffer-not-found)))
+          helm-source-files-in-current-dir
+          helm-source-ls-git-status
+          helm-source-ls-git
+          helm-source-mark-ring
+          helm-source-bookmarks
+          helm-source-recentf
+          helm-source-register         
+          helm-source-global-mark-ring
+          helm-source-buffer-not-found)))
 #+end_src
 
 *** Enable it

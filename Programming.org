@@ -53,8 +53,17 @@ No Physical tabs.
 #+end_src
 
 ** Check Parens
+
 #+begin_src emacs-lisp
-(add-hook 'find-file-hook 'check-parens t)
+  (defun emagician/check-parens ()
+    (condition-case err
+        (check-parens)
+      ((error) (message "Buffer has unmatched Parens or quote!"))))
+
+#+end_src
+
+#+begin_src emacs-lisp
+(add-hook 'find-file-hook 'emagician/check-parens t)
 #+end_src
 * Tools
 ** Flycheck
@@ -118,11 +127,12 @@ No Physical tabs.
     (setq magit-git-executable "git-achievements"))
   :bind 
   ("C-c m" . magit-status)
-  :config
+  :config)
+#+end_src
+
   (use-package magit-gh-pulls
     :init
-    (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)))
-#+end_src
+    (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 *** Git Gutter
 

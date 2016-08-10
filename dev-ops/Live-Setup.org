@@ -1,0 +1,6 @@
+* Setup for Ableton Live
+** nanoKontrol2
+https://forum.ableton.com/viewtopic.php?f=1&t=193316
+
+#+begin_src
+#+end_src

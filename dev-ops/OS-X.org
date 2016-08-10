@@ -1,0 +1,329 @@
+* Now is my chance
+  Literate DevOps with orgmode... WHAT WHAT
+** Basics
+*** Quicksilver
+Easy launching and control.  It's like manna from heaven.
+
+#+begin_src sh
+brew cask install quicksilver
+#+end_src
+
+#+RESULTS:
+| ==> | Downloading | http://cdn.qsapp.com/plugins/files/com.blacktree.Quicksilver__16401.dmg |                   |                                                 |                                                |        |      |
+| ==> | Symlinking  | App                                                                     | 'Quicksilver.app' | to                                              | '/Users/joarkell/Applications/Quicksilver.app' |        |      |
+| 🍺   | quicksilver | staged                                                                  | at                | '/opt/homebrew-cask/Caskroom/quicksilver/1.2.2' | (895                                           | files, | 13M) |
+
+*** Karabiner
+Mostly used 
+    
+#+name: karabiner
+    #+begin_src sh 
+brew cask install karabiner
+    #+end_src
+
+    #+RESULTS: karabiner
+
+*** FUSE and sshfs
+    #+begin_src sh
+brew install Caskroom/cask/osxfuse
+    #+end_src
+
+    #+RESULTS:
+    
+    #+begin_src  sh
+brew install Caskroom/cask/sshfs
+    #+end_src
+
+    #+RESULTS:
+
+** Media
+*** VLC
+#+name: vlc
+    #+begin_src sh 
+brew cask install vlc
+    #+end_src
+
+    #+RESULTS: vlc
+
+*** beets - to explore in a bit 
+
+** Code
+*** Mysql client
+#+name: mysql-client-only
+	#+begin_src  sh
+brew install mysql --client-only
+	#+end_src
+
+ #+RESULTS: mysql-client-only
+ | ==>                                 | Installing                                          | mysql                                                                        | dependency:            | openssl                                  |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Downloading                                         | https://homebrew.bintray.com/bottles/openssl-1.0.2d_1.yosemite.bottle.tar.gz |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Pouring                                             | openssl-1.0.2d_1.yosemite.bottle.tar.gz                                      |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Caveats                                             |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | A                                   | CA                                                  | file                                                                         | has                    | been                                     | bootstrapped                   | using         | certificates | from    | the            | system |             |      |        |           |
+ | keychain.                           | To                                                  | add                                                                          | additional             | certificates,                            | place                          | .pem          | files        | in      |                |        |             |      |        |           |
+ | /usr/local/etc/openssl/certs        |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | and                                 | run                                                 |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | /usr/local/opt/openssl/bin/c_rehash |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | This                                | formula                                             | is                                                                           | keg-only,              | which                                    | means                          | it            | was          | not     | symlinked      | into   | /usr/local. |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | OS                                  | X                                                   | already                                                                      | provides               | this                                     | software                       | and           | installing   | another | version        | in     |             |      |        |           |
+ | parallel                            | can                                                 | cause                                                                        | all                    | kinds                                    | of                             | trouble.      |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | Apple                               | has                                                 | deprecated                                                                   | use                    | of                                       | OpenSSL                        | in            | favor        | of      | its            | own    | TLS         | and  | crypto | libraries |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | Generally                           | there                                               | are                                                                          | no                     | consequences                             | of                             | this          | for          | you.    | If             | you    | build       | your |        |           |
+ | own                                 | software                                            | and                                                                          | it                     | requires                                 | this                           | formula,      | you'll       | need    | to             | add    | to          | your |        |           |
+ | build                               | variables:                                          |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | LDFLAGS:                            | -L/usr/local/opt/openssl/lib                        |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | CPPFLAGS:                           | -I/usr/local/opt/openssl/include                    |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Summary                                             |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | 🍺                                   | /usr/local/Cellar/openssl/1.0.2d_1:                 | 464                                                                          | files,                 | 18M                                      |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Installing                                          | mysql                                                                        |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Downloading                                         | https://homebrew.bintray.com/bottles/mysql-5.6.25.yosemite.bottle.tar.gz     |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Pouring                                             | mysql-5.6.25.yosemite.bottle.tar.gz                                          |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | Caveats                                             |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | A                                   | /etc/my.cnf                                         | from                                                                         | another                | install                                  | may                            | interfere     | with         | a       | Homebrew-built |        |             |      |        |           |
+ | server                              | starting                                            | up                                                                           | correctly.             |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | To                                  | connect:                                            |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | mysql                               | -uroot                                              |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ |                                     |                                                     |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | To                                  | have                                                | launchd                                                                      | start                  | mysql                                    | at                             | login:        |              |         |                |        |             |      |        |           |
+ | ln                                  | -sfv                                                | /usr/local/opt/mysql/*.plist                                                 | ~/Library/LaunchAgents |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | Then                                | to                                                  | load                                                                         | mysql                  | now:                                     |                                |               |              |         |                |        |             |      |        |           |
+ | launchctl                           | load                                                | ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist                             |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | Or,                                 | if                                                  | you                                                                          | don't                  | want/need                                | launchctl,                     | you           | can          | just    | run:           |        |             |      |        |           |
+ | mysql.server                        | start                                               |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | ==>                                 | /usr/local/Cellar/mysql/5.6.25/bin/mysql_install_db | --verbose                                                                    | --user=joarkell        | --basedir=/usr/local/Cellar/mysql/5.6.25 | --datadir=/usr/local/var/mysql | --tmpdir=/tmp |              |         |                |        |             |      |        |           |
+ | ==>                                 | Summary                                             |                                                                              |                        |                                          |                                |               |              |         |                |        |             |      |        |           |
+ | 🍺                                   | /usr/local/Cellar/mysql/5.6.25:                     | 9834                                                                         | files,                 | 339M                                     |                                |               |              |         |                |        |             |      |        |           |
+
+
+*** Node JS
+#+begin_src sh
+brew install node
+#+end-src
+
+* System configuration
+** Add myself as a sudoer to mount
+*** Edit this in /etc/sudoers.. have to use visudo.
+
+** Chef
+#+begin_src sh 
+brew cask install chefdk
+#+end_src
+
+* System utils
+** Aspell
+   Because aspell is all UTF-8 n shit
+
+#+begin_src sh
+brew install aspell
+#+end_src
+
+#+RESULTS:
+| ==>                              | Downloading                   | https://homebrew.bintray.com/bottles/node-4.1.0.yosemite.bottle.1.tar.gz |        |           |     |
+| ==>                              | Pouring                       | node-4.1.0.yosemite.bottle.1.tar.gz                                      |        |           |     |
+| ==>                              | Caveats                       |                                                                          |        |           |     |
+| Bash                             | completion                    | has                                                                      | been   | installed | to: |
+| /usr/local/etc/bash_completion.d |                               |                                                                          |        |           |     |
+| ==>                              | Summary                       |                                                                          |        |           |     |
+| 🍺                                | /usr/local/Cellar/node/4.1.0: | 2715                                                                     | files, | 35M       |     |
+
+
+#+begin_src sh
+brew cask install flux
+#+end_src
+
+** jq - For massive json munging
+   #+begin_src sh 
+brew install jq
+   #+end_src
+
+   #+RESULTS:
+   | ==> | Downloading               | https://homebrew.bintray.com/bottles/jq-1.4.yosemite.bottle.tar.gz |        |      |
+   | ==> | Pouring                   | jq-1.4.yosemite.bottle.tar.gz                                      |        |      |
+   | 🍺   | /usr/local/Cellar/jq/1.4: | 15                                                                 | files, | 720K |
+
+* Languages
+** Ruby
+*** RBEnv
+#+begin_src sh
+brew install rbenv ruby-build
+#+end_src 
+
+#+RESULTS:
+| ==> | Downloading                            | https://github.com/sstephenson/ruby-build/archive/v20150818.tar.gz |                                                                     |       |       |    |   |         |
+| ==> | Downloading                            | from                                                               | https://codeload.github.com/sstephenson/ruby-build/tar.gz/v20150818 |       |       |    |   |         |
+| ==> | ./install.sh                           |                                                                    |                                                                     |       |       |    |   |         |
+| 🍺   | /usr/local/Cellar/ruby-build/20150818: | 168                                                                | files,                                                              | 712K, | built | in | 4 | seconds |
+
+
+RBenv needs to be installed on the .profile 
+
+#+begin_src sh
+echo "eval \"$(rbenv init -)\"" >>~/.profile 
+#+end_src
+
+#+RESULTS:
+
+** Chicken Scheme
+#+begin_src sh
+brew install chicken
+#+end_src
+
+*** Setup for Geiser (emacs extension)
+#+begin_src sh :dir /sudo::
+chicken-install -s apropos chicken-doc
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sh :dir /sudo:: 
+cd `csi -p '(chicken-home)'` && curl  http://3e8.org/pub/chicken-doc/chicken-doc-repo.tgz | tar zx
+#+end_src
+
+#+RESULTS:
+
+** Node JS
+#+begin_src sh
+brew install node
+#+end_src
+
+** Coffescript
+#+begin_src sh
+npm install -g coffee-script
+#+end_src
+
+#+RESULTS:
+| /usr/local/bin/coffee | ->                   | /usr/local/lib/node_modules/coffee-script/bin/coffee |
+| /usr/local/bin/cake   | ->                   | /usr/local/lib/node_modules/coffee-script/bin/cake   |
+| /usr/local/lib        |                      |                                                      |
+| `--                   | coffee-script@1.10.0 |                                                      |
+|                       |                      |                                                      |
+
+* Aws CLI
+#+begin_src sh 
+brew install awscli
+#+end_src
+
+#+RESULTS:
+| ==>                                                                            | Downloading                              | https://homebrew.bintray.com/bottles/awscli-1.10.6.el_capitan.bottle.tar.gz |        |           |           |        |      |             |      |     |              |
+| ==>                                                                            | Pouring                                  | awscli-1.10.6.el_capitan.bottle.tar.gz                                      |        |           |           |        |      |             |      |     |              |
+| ==>                                                                            | Caveats                                  |                                                                             |        |           |           |        |      |             |      |     |              |
+| The                                                                            | examples                                 | directory                                                                   | has    | been      | installed | to:    |      |             |      |     |              |
+| /usr/local/share/awscli/examples                                               |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+|                                                                                |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| Add                                                                            | the                                      | following                                                                   | to     | ~/.bashrc | to        | enable | bash | completion: |      |     |              |
+| complete                                                                       | -C                                       | aws_completer                                                               | aws    |           |           |        |      |             |      |     |              |
+|                                                                                |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| Add                                                                            | the                                      | following                                                                   | to     | ~/.zshrc  | to        | enable | zsh  | completion: |      |     |              |
+| source                                                                         | /usr/local/share/zsh/site-functions/_aws |                                                                             |        |           |           |        |      |             |      |     |              |
+|                                                                                |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| Before                                                                         | using                                    | awscli,                                                                     | you    | need      | to        | tell   | it   | about       | your | AWS | credentials. |
+| The                                                                            | easiest                                  | way                                                                         | to     | do        | this      | is     | to   | run:        |      |     |              |
+| aws                                                                            | configure                                |                                                                             |        |           |           |        |      |             |      |     |              |
+|                                                                                |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| More                                                                           | information:                             |                                                                             |        |           |           |        |      |             |      |     |              |
+| https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+|                                                                                |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| zsh                                                                            | completion                               | has                                                                         | been   | installed | to:       |        |      |             |      |     |              |
+| /usr/local/share/zsh/site-functions                                            |                                          |                                                                             |        |           |           |        |      |             |      |     |              |
+| ==>                                                                            | Summary                                  |                                                                             |        |           |           |        |      |             |      |     |              |
+| 🍺                                                                              | /usr/local/Cellar/awscli/1.10.6:         | 2,547                                                                       | files, | 18.8M     |           |        |      |             |      |     |              |
+
+* RDBMSs
+#+begin_src sh 
+brew install postgres
+#+end_src
+
+#+RESULTS:
+| ==>                                                       | Downloading                                   | https://homebrew.bintray.com/bottles/postgresql-9.4.5.yosemite.bottle.tar.gz |                        |            |            |          |         |         |           |         |             |            |
+| ==>                                                       | Pouring                                       | postgresql-9.4.5.yosemite.bottle.tar.gz                                      |                        |            |            |          |         |         |           |         |             |            |
+| ==>                                                       | /usr/local/Cellar/postgresql/9.4.5/bin/initdb | /usr/local/var/postgres                                                      |                        |            |            |          |         |         |           |         |             |            |
+| ==>                                                       | Caveats                                       |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+| If                                                        | builds                                        | of                                                                           | PostgreSQL             | 9          | are        | failing  | and     | you     | have      | version |         8.x | installed, |
+| you                                                       | may                                           | need                                                                         | to                     | remove     | the        | previous | version | first.  | See:      |         |             |            |
+| https://github.com/Homebrew/homebrew/issues/2510          |                                               |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+|                                                           |                                               |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+| To                                                        | migrate                                       | existing                                                                     | data                   | from       | a          | previous | major   | version | (pre-9.4) | of      | PostgreSQL, | see:       |
+| https://www.postgresql.org/docs/9.4/static/upgrading.html |                                               |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+|                                                           |                                               |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+| To                                                        | have                                          | launchd                                                                      | start                  | postgresql | at         | login:   |         |         |           |         |             |            |
+| ln                                                        | -sfv                                          | /usr/local/opt/postgresql/*.plist                                            | ~/Library/LaunchAgents |            |            |          |         |         |           |         |             |            |
+| Then                                                      | to                                            | load                                                                         | postgresql             | now:       |            |          |         |         |           |         |             |            |
+| launchctl                                                 | load                                          | ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist                        |                        |            |            |          |         |         |           |         |             |            |
+| Or,                                                       | if                                            | you                                                                          | don't                  | want/need  | launchctl, | you      | can     | just    | run:      |         |             |            |
+| postgres                                                  | -D                                            | /usr/local/var/postgres                                                      |                        |            |            |          |         |         |           |         |             |            |
+| ==>                                                       | Summary                                       |                                                                              |                        |            |            |          |         |         |           |         |             |            |
+| 🍺                                                         | /usr/local/Cellar/postgresql/9.4.5:           | 3021                                                                         | files,                 | 40M        |            |          |         |         |           |         |             |            |
+
+* GPG 
+#+begin_src sh 
+brew install gpg
+#+end_src
+
+#+RESULTS:
+| ==> | Downloading                     | https://homebrew.bintray.com/bottles/gnupg-1.4.19.el_capitan.bottle.tar.gz |        |      |
+| ==> | Pouring                         | gnupg-1.4.19.el_capitan.bottle.tar.gz                                      |        |      |
+| 🍺   | /usr/local/Cellar/gnupg/1.4.19: | 53                                                                         | files, | 5.4M |
+
+* LaTeX
+#+begin_src sh
+brew cask install mactex
+#+end_src
+
+* Misc Bits
+** rtanque
+#+begin_src sh 
+brew install sdl2 --HEAD
+
+#+end_src
+
+#+RESULTS:
+| ==>                                 | Installing                         | dependencies                                                                | for                                    | sdl2:     | mercurial,                                                               | libtool      |               |          |       |          |            |     |         |
+| ==>                                 | Installing                         | sdl2                                                                        | dependency:                            | mercurial |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Downloading                        | https://homebrew.bintray.com/bottles/mercurial-3.5.1.yosemite.bottle.tar.gz |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Pouring                            | mercurial-3.5.1.yosemite.bottle.tar.gz                                      |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Caveats                            |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| Bash                                | completion                         | has                                                                         | been                                   | installed | to:                                                                      |              |               |          |       |          |            |     |         |
+| /usr/local/etc/bash_completion.d    |                                    |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+|                                     |                                    |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| zsh                                 | completion                         | has                                                                         | been                                   | installed | to:                                                                      |              |               |          |       |          |            |     |         |
+| /usr/local/share/zsh/site-functions |                                    |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+|                                     |                                    |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| Python                              | modules                            | have                                                                        | been                                   | installed | and                                                                      | Homebrew's   | site-packages | is       | not   |          |            |     |         |
+| in                                  | your                               | Python                                                                      | sys.path,                              | so        | you                                                                      | will         | not           | be       | able  | to       | import     | the | modules |
+| this                                | formula                            | installed.                                                                  | If                                     | you       | plan                                                                     | to           | develop       | with     | these | modules, |            |     |         |
+| please                              | run:                               |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| mkdir                               | -p                                 | /Users/joarkell/Library/Python/2.7/lib/python/site-packages                 |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| echo                                | 'import                            | site;                                                                       | /usr/local/lib/python2.7/site-packages | >>        | /Users/joarkell/Library/Python/2.7/lib/python/site-packages/homebrew.pth |              |               |          |       |          |            |     |         |
+| ==>                                 | Summary                            |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| 🍺                                   | /usr/local/Cellar/mercurial/3.5.1: | 372                                                                         | files,                                 | 5.2M      |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Installing                         | sdl2                                                                        | dependency:                            | libtool   |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Downloading                        | https://homebrew.bintray.com/bottles/libtool-2.4.6.yosemite.bottle.tar.gz   |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Pouring                            | libtool-2.4.6.yosemite.bottle.tar.gz                                        |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Caveats                            |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| In                                  | order                              | to                                                                          | prevent                                | conflicts | with                                                                     | Apple's      | own           | libtool  | we    | have     | prepended  | a   | g       |
+| so,                                 | you                                | have                                                                        | instead:                               | glibtool  | and                                                                      | glibtoolize. |               |          |       |          |            |     |         |
+| ==>                                 | Summary                            |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| 🍺                                   | /usr/local/Cellar/libtool/2.4.6:   | 69                                                                          | files,                                 | 3.8M      |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Installing                         | sdl2                                                                        |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | Cloning                            | http://hg.libsdl.org/SDL                                                    |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| requesting                          | all                                | changes                                                                     |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| adding                              | changesets                         |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| adding                              | manifests                          |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| adding                              | file                               | changes                                                                     |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| added                               | 9897                               | changesets                                                                  | with                                   | 41050     | changes                                                                  | to           | 4827          | files    | (+1   | heads)   |            |     |         |
+| updating                            | to                                 | branch                                                                      | default                                |           |                                                                          |              |               |          |       |          |            |     |         |
+| 1600                                | files                              | updated,                                                                    | 0                                      | files     | merged,                                                                  | 0            | files         | removed, | 0     | files    | unresolved |     |         |
+| ==>                                 | ./autogen.sh                       |                                                                             |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | ./configure                        | --prefix=/usr/local/Cellar/sdl2/HEAD                                        | --without-x                            |           |                                                                          |              |               |          |       |          |            |     |         |
+| ==>                                 | make                               | install                                                                     |                                        |           |                                                                          |              |               |          |       |          |            |     |         |
+| 🍺                                   | /usr/local/Cellar/sdl2/HEAD:       | 82                                                                          | files,                                 | 4.1M,     | built                                                                    | in           | 4.4           | minutes  |       |          |            |     |         |
+

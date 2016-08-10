@@ -1,3 +1,6 @@
 [submodule "eshell-prompt-extras"]
 	path = eshell-prompt-extras
 	url = git@github.com:jonnay/eshell-prompt-extras.git
+[submodule "themes/org-beautify-theme"]
+	path = themes/org-beautify-theme
+	url = git@github.com:jonnay/org-beautify-theme.git

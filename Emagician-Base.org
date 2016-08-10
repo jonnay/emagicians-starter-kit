@@ -183,7 +183,7 @@ If you want to add items, you can do so through the
 #+begin_src emacs-lisp 
   (defun emagician/initiate-thee-scratch ()
     (emagician/set-scratch 
-     ";;; -|-+-|- Sekrut Alien Technology -|-+-|-" "\n"
+     ";;; 🐇-|-+-|- Sekrut Alien Technology -|-+-|-🐇" "\n"
      ";;; Hail Eris.  All Hail Discordia." "\n"
      ";;;\n"
      ";;; It is with thee Quill of Echinda" "\n"
