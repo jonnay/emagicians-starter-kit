@@ -149,7 +149,9 @@ No Physical tabs.
 #+end_src
 ** Color Identifiers
 #+begin_src emacs-lisp 
-(use-package color-identifiers-mode)
+(use-package color-identifiers-mode
+  :init
+  (add-hook 'after-init-hook 'global-color-identifiers-mode))
 
 #+end_src
 
@@ -230,7 +232,6 @@ No Physical tabs.
   :init
   (setq git-gutter-fr+-side 'right-fringe))
 #+end_src
-
 
 * Languages
   Each language gets it's own file.

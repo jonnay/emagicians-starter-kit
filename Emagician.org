@@ -68,7 +68,7 @@
 
 ** Verify emagician/dir is set 
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lispe
   (when (null emagician/dir)
     (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
       (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")

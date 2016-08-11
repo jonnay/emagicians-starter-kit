@@ -1,7 +1,43 @@
 #+title: Web Programming
-
-* Web Mode
+* Modes
+** Web Mode
 #+begin_src emacs-lisp 
 (use-package web-mode
-  )
+  :diminish "🌎"
+  :mode 
+  (("\\.phtml\\'" . web-mode)
+  ("\\.tpl\\.php\\'" . web-mode)      
+  ("\\.jsp\\'" . web-mode)            
+  ("\\.as[cp]x\\'" . web-mode)        
+  ("\\.erb\\'" . web-mode)            
+  ("\\.mustache\\'" . web-mode)       
+  ("\\.djhtml\\'" . web-mode)         
+  ("\\.jst.ejs\\'" . web-mode)        
+  ("\\.html?\\'" . web-mode))
+  :init
+  (setq web-mode-enable-block-face t)
+  (setq web-mode-enable-comment-keywords t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)   
+  (setq web-mode-script-padding 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-comment-style 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2))
+#+end_src
+** Coffeescript
+#+begin_src emacs-lisp 
+(use-package coffee-mode
+  :diminish "☕"
+  :init
+  (setq coffee-tab-width 2))
+#+end_src
+
+** Apache Mode Other useful Modes
+#+begin_src emacs-lisp 
+(use-package apache-mode)
+#+end_src
+** Restclient Mode 
+#+begin_src emacs-lisp 
+(use-package restclient)
 #+end_src
