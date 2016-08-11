@@ -1,0 +1,199 @@
+#+TITLE: YASnippets 
+#+PROPERTY: padline no 
+#+results: silent
+* This is not the file you are looking for...
+  If you want to configure yasnippets for the emagicians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
+
+* Building															  :build:
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets")
+(emagician/expect-dir "./assets/snippets/js-mode")
+(emagician/expect-dir "./assets/snippets/coffeescript-mode")
+(emagician/expect-dir "./assets/snippets/org-mode")
+(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
+(emagician/expect-dir "./assets/snippets/ruby-mode")
+(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
+#+end_src
+
+** Execute this during development
+#+begin_src emacs-lisp :tangle no
+  (defun emagician/snippet-tangle-and-reload () 
+    "Helper function to automagickally tangle and reload snippets after the snippet file is saved"
+    (org-babel-tangle)
+    (yas-reload-all))
+  
+  (add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)
+#+end_src
+ 
+#+RESULTS:
+| git-gutter | flycheck-handle-save | t | emagician/snippet-tangle-and-reload |
+
+ 
+ 
+* Text modes
+** Org :org:
+*** Source blocks.  A majority of mine are elisp and snippets 
+#+begin_src text :tangle assets/snippets/org-mode/src
+  # name: source block
+  # key: src
+  # --
+  ,#+begin_src $1 $2
+  $0
+  ,#+end_src
+#+end_src
+
+#+begin_src text :tangle assets/snippets/org-mode/lisp
+  # name: emacs-lisp
+  # key: lisp
+  # --
+  ,#+begin_src emacs-lisp $1
+  $0
+  ,#+end_src
+#+end_src
+
+#+begin_src text :tangle assets/snippets/org-mode/sh
+  # name: sh
+  # key: sh
+  # --
+  ,#+begin_src sh $1
+  $0
+  ,#+end_src
+#+end_src
+
+#+begin_src text :tangle assets/snippets/org-mode/sql
+  # name: sql
+  # key: sql
+  # --
+  ,#+begin_src sql $1
+  $0
+  ,#+end_src
+#+end_src
+
+
+
+*** So meta! Such Wow!
+
+#+begin_src text :tangle assets/snippets/org-mode/yasnippet
+  # name: yasnippet
+  # key: snippet
+  # --
+  ,#+begin_src yasnippet :tangle assets/snippets/$1/$2
+  # name: $2
+  # key: $2
+  #--
+  $0
+  ,#+end_src
+#+end_src
+
+*** David Allen's Natural Project Planning model.
+
+#+begin_src text :tangle assets/snippets/org-mode/project
+# name: project
+# key: project
+# --
+,** PROJECT $1
+   - Purpose - 50K :: $2
+   - Success Looks Like - 40K  :: $3
+   - Brainstorming - 30K
+     - $4
+   - Organize the brainstorming and come up with next actions (20K) 
+,*** TODO $5
+#+end_src
+
+
+ 
+* Programming modes 
+** Javascript 
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/.yas.parents
+text-mode
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/function
+# name: function(...) { ... }
+# key: function
+# --
+function(${1:args}) {
+    $0
+} 
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/var
+# name: var (declare)
+# key: var
+# --
+var $0;
+#+end_src
+
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/var.assign
+# name: var (assign)
+# key: var
+# --
+var $1 = $0;
+#+end_src
+
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/describe
+# name: var (assign)
+# key: var
+# --
+describe("$1", function(done) {
+	$0
+});
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/js-mode/it
+# name: var (assign)
+# key: var
+# --
+it("$1", function(done) {
+	$0
+});
+#+end_src
+** Coffeescript
+#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if
+  # name: if
+  # key: if
+  # -- 
+  if $1
+    $0
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if.else
+  # name: if
+  # key: if
+  # -- 
+  if $1
+    $2
+  else v$0
+#+end_src
+
+** Lisp
+#+begin_src yasnippet :tangle assets/snippets/emacs-lisp-mode/defun
+# name: defun
+# key: defun
+#--
+(defun $1 ($2) 
+  "$3"
+  $0)
+#+end_src
+
+** Ruby
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/def
+  # name: def
+  # key: def
+  # -- 
+  def $1 $2
+    $0
+  end
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/if
+  # name: if
+  # key: if
+  # -- 
+  if ($1)
+    $0
+  end
+#+end_src

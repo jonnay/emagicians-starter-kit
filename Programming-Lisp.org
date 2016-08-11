@@ -2,22 +2,47 @@
 
 * Editing 
 
-** COMMENT Paredit
+** Paredit
 
 #+begin_src emacs-lisp 
-  (use-package paredit
-    :bind
-    (:paredit-mode-map
-     (("M-s" . paredit-split-sexp)))
-    :init
-    (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode)
-    (emagician/minor-in-major-mode paredit-mode scheme-mode))
+(use-package paredit
+  :diminish "⒫"
+  :bind
+  (:paredit-mode-map
+   (("M-s" . paredit-split-sexp)))
+  :init
+  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode)
+  (emagician/minor-in-major-mode paredit-mode scheme-mode))
 #+end_src
 
 * Individual Lisps
 ** Elisp
-
 *** Editing 
+**** Eldoc
+#+begin_src emacs-lisp 
+(use-package eldoc
+  :diminish ""
+  :config
+    (setq eldoc-idle-delay 0.2)
+    (set-face-attribute 'eldoc-highlight-function-argument nil
+                        :underline t :foreground "green"
+                        :weight 'bold))
+
+#+end_src
+
+**** Auto Complete
+#+begin_src emacs-lisp 
+(emagician/defhook emagician/ac-set-elisp-sources emacs-lisp-mode
+  (setq ac-sources
+        '(ac-source-yasnippet
+          ac-source-functions
+          ac-source-features
+          ac-source-variables
+          ac-source-symbols
+          ac-source-files-in-current-dir
+          ac-source-words-in-buffer
+          ac-source-words-in-same-mode-buffers)))
+#+end_src
 **** Indentation
 #+begin_src emacs-lisp 
 (put 'use-package 'lisp-indent-function 1)
@@ -49,11 +74,12 @@
     (flycheck-package-setup))
 #+end_src
 
-
 *** Environment
     See [[./Emagician-Base.org]]
+
 ** Scheme
 *** Editing
+**** Intenting
 #+begin_src
 ;; Indenting module body code at column 0
 (defun scheme-module-indent (state indent-point normal-indent) 0)

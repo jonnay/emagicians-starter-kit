@@ -1,0 +1,33 @@
+#+title: Darwin (OS X)
+* Fixes
+** Fix info path to work with homebrew
+
+  But this does... after going to the actual download dir and doing a ~make install-info~
+
+#+begin_src emacs-lips
+(add-to-list 'Info-directory-list "/usr/local/info")
+#+end_src
+
+** Fix broken colors on emacs for mac os x 
+#+begin_src emacs-lisp
+(when (fboundp 'ns-list-colors)
+  (setq x-colors (ns-list-colors)))
+#+end_src
+
+* Interface
+** Remap "hyper" to be meta
+#+begin_src emacs-lisp
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
+#+end_src
+
+* Integrations
+** Assuming a standard latex setup
+#+begin_src emacs-lisp
+    (setq org-latex-to-pdf-process 
+          '("/usr/texbin/pdflatex -interaction nonstopmode -output-directory %o %f"))
+#+end_src
+*** You will want to get the latest version of mactex to make this go:
+   http://www.tug.org/mactex/
+
+   

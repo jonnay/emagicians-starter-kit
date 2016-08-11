@@ -28,6 +28,16 @@
 
    I keep it around though because it's clevar and fun.
    
+** Which Key
+   More like--witch key.
+
+#+begin_src emacs-lisp 
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0.25))
+
+#+end_src
+
 * Display
 ** Turn of scrollbars, toolbars, menu bars
 
@@ -381,15 +391,15 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
    Set the snippet dir.
 
 #+begin_src emacs-lisp 
-  (emagician/expect-dir "assets/snippets")
-  (use-package yasnippet
-    :diminish "yas"
-    :init
-    (setq yas-snippet-dir (expand-file-name "assets/snippets" emagician/dir))
-    (setq yas-trigger-key nil)
-    (add-hook 'text-mode-hook 'yas-minor-mode-on)
-    :config
-    (yas/reload-all))
+(emagician/expect-dir "assets/snippets")
+(use-package yasnippet
+  :diminish ""
+  :init
+  (setq yas-snippet-dir (expand-file-name "assets/snippets" emagician/dir))
+  (setq yas-trigger-key nil)
+  (add-hook 'text-mode-hook 'yas-minor-mode-on)
+  :config
+  (yas/reload-all))
 #+end_src
 
    This rigamaroo might nit be needed anymore:
@@ -413,30 +423,37 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
    *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
 
 #+begin_src emacs-lisp 
-  (use-package auto-complete
-    :demand
-    :diminish "AC"
-    :init
-    (setq ac-auto-show-menu t)
-    (setq ac-dwim t)
-    (setq ac-use-menu-map t)
-    (setq ac-quick-help-delay 0.125)
-    (setq ac-quick-help-height 20)
-    :bind 
-    (:map ac-completing-map
-          ("C-M-n"   . ac-next)
-          ("C-M-p"   . ac-previous)
-          ("<tab>"   . ac-complete)
-          ("M-<ret>" . ac-help)
-          ("<ret>"   . nil))
+(use-package auto-complete
+  :demand
+  :diminish "AC"
+  :init
+  (setq ac-auto-show-menu t)
+  (setq ac-dwim t)
+  (setq ac-use-menu-map t)
+  (setq ac-quick-help-delay 0.250)
+  (setq ac-quick-help-height 20)
+  (set-default 'ac-sources 
+               '(ac-source-yasnippet
+                 ac-source-dictionary
+                 ac-source-filename
+                 ac-source-files-in-current-dir                 
+                 ac-source-words-in-buffer
+                 ac-source-words-in-same-mode-buffers))
+  :bind 
+  (:map ac-completing-map
+        ("C-M-n"   . ac-next)
+        ("C-M-p"   . ac-previous)
+        ("<tab>"   . ac-complete)
+        ("M-<ret>" . ac-help)
+        ("<ret>"   . nil))
 
-    :config
-    (require 'auto-complete-config)  
-    (ac-config-default)
-    (ac-flyspell-workaround)
-    (global-auto-complete-mode t)
-    (emagician/expect-dir "assets/ac-dictionaries")
-    (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
+  :config
+  (require 'auto-complete-config)  
+  (ac-config-default)
+  (ac-flyspell-workaround)
+  (global-auto-complete-mode t)
+  (emagician/expect-dir "assets/ac-dictionaries")
+  (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
 #+end_src
 
 *** Auto Complete Dictionary
@@ -593,6 +610,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp
 (use-package helm
   :demand
+  :diminish ""
   :init
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)

@@ -254,7 +254,7 @@
   Deserves it's own file... ORG GRIMOIRE!
 
 #+begin_src emacs-lisp 
-(emagician/load "Org-grimoir.org")
+(emagician/load "Org-Grimoire.org")
 #+end_src
 
 * Shell
@@ -346,7 +346,7 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
   - ocodo :: https://github.com/ocodo/emacs.d
   - https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el
   - http://rix.si/blog/2015/01/05/fsem-001/
-
+  - https://www.writequit.org/org/settings.html#sec-1-20
 * Thee End
   So Mote it Be.
 

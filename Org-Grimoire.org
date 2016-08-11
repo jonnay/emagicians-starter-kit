@@ -1,0 +1,711 @@
+#+title: Org-Grimoire
+#+PROPERTY: tangle yes
+#+begin_src emacs-lisp :tangle no
+(org-babel-load-file buffer-file-truename)
+#+end_src
+
+#+begin-src
+(require org)
+#+end_src
+
+* Introduction
+
+  Trying to keep my org-mode setup inside of the Emagicians Starter
+  Kit was getting too insane.  On top of that I declared
+  org-bankruptcy awhile ago, and haven't really recovered since.  And
+  so, here is a fresh new attempt at using org.  Along with it will be
+  a tutorial that anyone can follow along with and get themselves into
+  a better state.
+
+* How to use this Guide
+
+  Not sure yet. Wait till it is written.
+
+* Org fixing - all the small things that need tweaking
+** Saveplace
+#+begin_src emacs-lisp 
+(defun emagician-org/fix-saveplace ()
+    "Fixes a bit of brokenness with saveplace.el and org-mode"
+    (when (outline-invisible-p)
+      (save-excursion
+        (outline-previous-visible-heading 1)
+        (org-show-subtree))))
+  
+  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)
+#+end_src
+
+** Turn on flyspell
+#+begin_src emacs-lisp 
+  (add-hook 'org-mode-hook 'flyspell-mode)
+#+end_src
+
+** Turn on autocomplete
+#+begin_src emacs-lisp 
+  (add-hook 'org-mode-hook 'auto-complete-mode)
+#+end_src
+
+
+* What do I need. 
+
+  - Basic Todo Listing and entry 
+    - Grouping of tasks under a project
+	- Tasks Have states: TODO, NEXT, WAITING and DONE.
+	- Show all Next Actions 
+  - Pomodoro
+	- Timers
+  - Journaling and time management
+	- Prompt for when tasks change state
+	- show time spent on a task.
+  - Habits For Review
+  - Agendas
+  - Quick access to org files
+  - Sane attachment handling (link to, not copy)
+* Agenda Files
+#+begin_src emacs-lisp 
+(setq org-agenda-files '("~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org" "~/Dropbox/Creativity/Site3.0/Site.org"))
+#+end_src
+
+* TODOs 
+** Start with states.
+
+   Simple GTD States.  
+
+#+begin_src emacs-lisp 
+  (setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d@/!)")
+                            (sequence "PROJECT(p)" "|" "FINISHED(f)")
+                            (sequence "SOMEDAY(s)" "MAYBE(m)") 
+                            (sequence  "WAITING(w@/!)")
+                            ))
+#+end_src
+ 
+** Enable fast selection of TODO states
+
+Fast selection is good! But not on tags.
+
+#+begin_src emacs-lisp 
+(setq org-fast-tag-selection-include-todo nil)
+#+end_src
+
+** Log state changes into a drawer
+
+#+begin_src emacs-lisp 
+(setq org-log-into-drawer t)
+#+end_src
+
+** Faces
+#+begin_src emacs-lisp 
+
+  (setq org-todo-keyword-faces
+        `(("TODO" :foreground "red" 
+                  :background "red4" :weight bold :box (:line-width 2 :color "red3" :style released-button))
+          ("PROJECT" :foreground "cyan" :background "cyan4" :weight bold :box (:line-width 2 :color "cyan3" :style released-button))
+          ("HABIT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
+          ("NEXT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
+          ("STARTED" :foreground "blue" :background "blue4" :weight bold :box (:line-width 2 :color "blue3" :style released-button))
+          ("DONE" :foreground "chartreuse" 
+                  :background "chartreuse4" :weight bold :box (:line-width 2 :color "chartreuse3" :style released-button))
+          ("FINISHED" :foreground "SeaGreen1" 
+                  :background "SeaGreen4" :weight bold :box (:line-width 2 :color "SeaGreen3" :style released-button))
+          ("WAITING" :foreground "orange" 
+                     :background "orange4" :weight bold :box (:line-width 2 :color "orange3" :style released-button))
+          ("SOMEDAY" :foreground "purple1"
+                     :background "purple4" :weight bold :box (:line-width 2 :color "purple3" :style released-button))))
+
+
+#+end_src
+** Set as next action
+#+BEGIN_SRC emacs-lisp
+  (defun emagician-org/todo-to-next ()
+    "sets the todo state of the current headline to next."
+    (interactive)
+    (org-todo "NEXT")
+    (org-set-tags))
+  
+  (eval-after-load 'org
+   '(define-key org-mode-map (kbd "C-c n") 'emagician-org/todo-to-next))
+#+END_SRC
+
+** GO!
+#+begin_src emacs-lisp 
+    (defun emagician-org/go ()
+      "Launches the task at point, and starts a pomodoro if required"
+      (interactive)
+      (if (org-entry-is-todo-p)
+          (progn
+            (org-todo "STARTED")
+            (if (not (org-pomodoro-active-p))
+                (org-pomodoro-start)
+              (progn
+                (when (org-clocking-p)
+                  (org-clock-out nil t))
+                (org-pomodoro-kill))))
+        (warn "Not on a TODO task")))
+
+    (eval-after-load 'org '(define-key org-mode-map (kbd "C-c g") 'emagician-org/go))
+#+end_src
+
+* Tags
+
+** Tags are a fluid thing
+   So list em all!
+
+#+begin_src emacs-lisp 
+  (require 'dash)
+  (defun emagician/get-tag-counts ()
+    "Thanks to John Kitchin for this" 
+    (let ((all-tags '()))
+      (org-map-entries
+       (lambda ()
+         (let ((tag-string (car (last (org-heading-components)))))
+           (when tag-string   
+             (setq all-tags
+                   (append all-tags (split-string tag-string ":" t))))))
+       t
+       'agenda)
+      
+
+      ;; now get counts
+      (loop for tag in (-uniq all-tags) 
+            collect (cons tag (cl-count tag all-tags :test 'string=)))))
+#+end_src
+
+** Display
+#+begin_src emacs-lisp 
+(setq org-tags-column -100)
+(setq org-agenda-tags-column -100)
+#+end_src
+
+** Tags for contexts
+
+#+begin_src emacs-lisp :tangle no :results value code
+(emagician/get-tag-counts)
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC emacs-lisp :tangle no
+(("read" . 4)
+ ("braindead" . 29)
+ ("brainstorm" . 8)
+ ("web" . 14)
+ ("emacs" . 7)
+ ("research" . 9)
+ ("ATTACH" . 1)
+ ("gtd" . 2)
+ ("meta" . 2)
+ ("inbox" . 1)
+ ("goal" . 7)
+ ("goals" . 1)
+ ("design" . 11)
+ ("code" . 18)
+ ("write" . 12)
+ ("decide" . 3)
+ ("home" . 4)
+ ("vm" . 3)
+ ("phone" . 1)
+ ("shell" . 1)
+ ("talk" . 2)
+ ("mail" . 2)
+ ("Watch" . 1)
+ ("watch" . 2)
+ ("sohan" . 1)
+ ("ableton" . 4)
+ ("breakbeat" . 1)
+ ("max4live" . 1)
+ ("culture" . 2)
+ ("narrative" . 4)
+ ("latex" . 1)
+ ("eris" . 3)
+ ("musical" . 3)
+ ("theory" . 4)
+ ("economics" . 1)
+ ("society" . 3)
+ ("thoery" . 2)
+ ("bunny" . 3)
+ ("news" . 3)
+ ("markup" . 1)
+ ("mixing" . 2)
+ ("stereo" . 1)
+ ("propaganda" . 1)
+ ("site" . 1)
+ ("sekrut" . 1)
+ ("music" . 14)
+ ("acid" . 10)
+ ("breaks" . 1)
+ ("techno" . 7)
+ ("industrial" . 1)
+ ("mashup" . 1)
+ ("atmospheric" . 5)
+ ("dnb" . 5)
+ ("ambient" . 4)
+ ("amen" . 2)
+ ("levee" . 1)
+ ("freesound" . 2)
+ ("dub" . 1)
+ ("zen" . 1)
+ ("minimal" . 1)
+ ("mix" . 5)
+ ("liquid" . 2)
+ ("video" . 23)
+ ("introduction" . 1)
+ ("perfection" . 2)
+ ("creativity" . 5)
+ ("phineas_and_ferb" . 1)
+ ("memento_mori" . 1)
+ ("303" . 2)
+ ("fun" . 1)
+ ("kawaii" . 1)
+ ("compression" . 1)
+ ("drawsplanation" . 3)
+ ("synths" . 1)
+ ("story" . 2)
+ ("journal" . 1)
+ ("journaling" . 1)
+ ("coincidence" . 1)
+ ("syncronicity" . 1)
+ ("topx" . 1)
+ ("games" . 1)
+ ("plugins" . 1)
+ ("podcasts" . 1)
+ ("videos" . 1)
+ ("family" . 2)
+ ("archetypes" . 1)
+ ("symbolism" . 1)
+ ("learning" . 1)
+ ("breakbeats" . 1)
+ ("think" . 1)
+ ("media" . 1)
+ ("collaboration" . 2)
+ ("explodingkittens" . 1)
+ ("update9" . 1)
+ ("epicambientbattle" . 3)
+ ("copyright" . 1)
+ ("flow" . 1)
+ ("meagen" . 1)
+ ("weird" . 1)
+ ("drawspanation" . 1)
+ ("iteration" . 1)
+ ("toolmaking" . 1)
+ ("relationships" . 1)
+ ("jailfree" . 2)
+ ("seed" . 1)
+ ("art" . 37)
+ ("deviantart" . 37))
+#+END_SRC
+
+** State selection etc
+#+begin_src emacs-lisp 
+(setq org-use-fast-tag-selection t)
+#+end_src
+
+** Preset tags
+
+#+begin_src emacs-lisp 
+  (setq org-tag-alist '((:startgroup   . nil) 
+                        ("code"        . ?c)
+                        ("design"      . ?d)
+                        ("emacs"       . ?e)
+                        ("gtd"         . ?g)                          
+                        (:endgroup     . nil)
+                        
+                        (:startgroup  .   nil)                         
+                        ("decide"     .   ?a)
+                        ("phone"      .   ?p)
+                        ("read"       .   ?r)
+                        ("research"   .   ?u)
+                        ("talk"       .   ?t)
+                        ("vm"         .   ?v)
+                        ("web"        .   ?w)
+                        ("write"      .   ?x)
+                        (:endgroup    .   nil)
+                        
+                        ("backburner" .   ?b)
+                        ("braindead"  .   ?z)
+
+                        (:newline     .   nil)                    
+                        ("chaman"     .   ?C)
+                        ("charles"    .   ?H)
+                        ("paul"       .   ?P)
+                        ("sohan"      .   ?S) 
+                        ))
+#+end_src       
+
+* Categories 
+
+Work, Music, Personal.  That's it.  Everything else should be a tag.  
+
+** Icons
+#+begin_src emacs-lisp 
+
+(setq org-agenda-category-icon-alist 
+      `(("Work"  ,(list (propertize "💼")))
+        ("Music" ,(list (propertize "🎶" )))
+        ("Home"  ,(list (propertize"🏡" )))))
+#+end_src
+
+* Stuck Projects
+#+begin_src emacs-lisp 
+(setq org-stuck-projects '("TODO=\"PROJECT\""
+  ("NEXT")
+  nil ""))
+#+end_src
+
+* Habits
+#+begin_src emacs-lisp 
+(require 'org-habit)
+#+end_src
+
+
+#+begin_src emacs-lisp 
+(setq org-habit-graph-column 50)
+#+end_src
+
+
+#+begin_src emacs-lisp 
+(add-to-list 'org-todo-keywords '(sequence "HABIT(h)" "|" "DONE(d!)") t)
+#+end_src
+
+** Example of my weekly Review habit
+#+begin_src org 
+`  ** HABIT Weekly
+`     SCHEDULED: <2015-02-09 Mon 09:00 ++1w>
+`     :PROPERTIES:
+`     :STYLE:    habit
+`     :LAST_REPEAT: [2015-02-02 Mon 16:39]
+`     :END:
+`     - [X] Get Clear
+`       - [X] Clean off desk
+`       - [X] Clean Out Bag
+`       - [X] Clean off Desktop [[file:~/Desktop/]]   (~20 files per iteration)
+`       - [X] Clean Downloads file:~/Downloads/   (~20 files per iteration)
+`       - [X] Review Last weeks email
+`       - [X] Liquid Planner Timesheet good to go
+`       - [X] Clean out [[file:GTD.org::*Inbo˘x][Inbox]]
+`       - [X] Archive all finished Tasks
+`     - [-] Get Current
+`  	 - [X] Review next months calendar
+`  	 - [X] Check My upcoming work in LP
+`  	 - [ ] Fix Any Stuck Projects
+`  	 - [ ] Review Project Agenda
+`  	 - [ ] Review Next Action Agenda
+`  	 - [ ] Review Waiting Agenda
+`     - [ ] Get Creative
+`  	 - [ ] Review someday/maybe
+`  	 - [ ] Do something creative and courageous
+`  
+#+end_src 
+* Refiling
+All agenda files are valid for targeting
+#+begin_src emacs-lisp 
+(setq org-refile-targets '((org-agenda-files :maxlevel . 1)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+#+end_src
+
+* Better Linking
+** Set keybinding for links										 :keybinding:
+#+begin_src emacs-lisp
+(define-key global-map "\C-cl" 'org-store-link)
+
+(setq org-return-follows-link t)
+#+end_src
+
+** Store info pages as links
+#+begin_src emacs-lisp
+(require 'org-info)
+#+end_src
+* Capturing and Capture Templates
+#+begin_src emacs-lisp 
+(define-key global-map (kbd "C-c c") 'org-capture)
+(define-key global-map (kbd "C-c i") 'emagician-org-capture-inbox)
+#+end_src
+
+#+begin_src emacs-lisp 
+(defun emagician-org-capture-inbox ()
+  (interactive)
+  (org-capture nil "i"))
+
+(setq org-capture-templates
+  '(("i" "Inbox" entry (file+headline "~/org/GTD.org" "Inbox")
+         "** TODO %?\n  %i\n")))
+#+end_src
+
+* Pomodoro
+  
+  org-pomodoro is pretty simple, so lets start with that.
+
+  ~C-c p~ Will start a pomodoro on your current task.  Call it during a pomodoro to reset.  
+
+  #+begin_src emacs-lisp 
+(use-package org-pomodoro
+  :bind
+  ("C-c p" . org-pomodoro))
+  #+end_src
+
+  Fancy it up a little
+
+#+begin_src emacs-lisp 
+(setq org-pomodoro-format "🍅~%s")
+#+end_src
+
+* Diary
+** Set Location
+#+begin_src emacs-lisp 
+(setq diary-file "~/.emacs.d/diary")
+#+end_src
+
+*** Like actual location too, so sunrise/sunset is handled well
+51.0368334,-114.0715046,15z
+#+begin_src emacs-lisp 
+(setq calendar-longitude -114.0715046)
+(setq calendar-latitude 51.0368334)
+#+end_src
+
+
+** Include it in agenda
+#+begin_src emacs-lisp 
+(setq org-agenda-include-diary t)
+#+end_src
+
+** Now for warnings
+#+begin_src emacs-lisp 
+(appt-activate 1)
+(org-agenda-to-appt)
+#+end_src
+
+* Attachments
+#+begin_src emacs-lisp 
+  (setq org-attach-allow-inheritance t)
+  (setq org-attach-store-link-p t)
+#+end_src
+
+* Agenda
+** Basic customizations
+*** Dim Tasks 
+#+begin_src emacs-lisp 
+(setq org-agenda-dim-blocked-tasks t)
+#+end_src
+
+** Tweak the look
+#+begin_src emacs-lisp 
+(setq org-agenda-block-separator ?\═)
+#+end_src
+
+** Display a cool title
+#+begin_src emacs-lisp 
+    (defun emagician-agenda/insert-title (title)
+      "show a centered title"
+      (setq buffer-read-only nil)
+      (let ((centering-str  (make-string (/ (- (window-body-width)
+                                               (length title))
+                                            2)
+                                         ?\ )))
+        (insert (propertize (concat centering-str title centering-str "\n")
+                            'face
+                           'org-agenda-structure))))
+
+  (defun emagician-agenda/insert-separator ()
+    (insert (make-string (window-body-width) org-agenda-block-separator) "\n"))
+
+    (defun emagician-agenda/insert-headline (&rest args)
+      "Daily wisdom, Cool title, etc."
+      (setq buffer-read-only nil)
+      (emagician-agenda/insert-separator)
+      (emagician-agenda/insert-title "-|-+-|-")
+      (emagician-agenda/insert-separator)
+      (insert (concat (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines") "\n")))
+
+#+end_src
+** Display a cool subtitle with Kawaii
+
+**  Display Goals at the top of agenda
+#+begin_src emacs-lisp 
+  (defun emagician-agenda/get-goals (&rest args)
+    "Show top level goal headlines"
+    '(tags "goal" ((org-agenda-overriding-header "Goals")) "~/org/Goals.org"))
+#+end_src  
+** Display the current cycles
+*** Lunar Phase
+#+begin_src emacs-lisp 
+
+(require 'lunar)
+
+(setq lunar-phase-names 
+     '("🌚 New Moon 🌚" "🌛 First Quarter🌛" "🌝 Full Moon 🌝" "🌜Last Quarter 🌜"))
+
+(defun emagician-agenda/get-current-lunar-phase ()
+  "Get the current lunar phase.  For some reason it is out of sync by a day, so... yea"
+  (lunar-phase-name (mod (+ 1 (lunar-index (calendar-current-date)))
+					   4)))
+
+#+end_src
+*** TODO Erisian Calendar
+*** TODO 8 Wheel Spoke
+*** Cycle Display 
+#+begin_src emacs-lisp 
+
+(defun emagician-agenda/insert-cycle (&rest args)
+  (let ((buffer-read-only nil))
+    (insert (emagician-agenda/get-current-lunar-phase))
+	(insert "\n")
+    (emagician-agenda/insert-separator)))
+#+end_src
+
+** Specific agenda frame
+#+begin_src emacs-lisp 
+(setq org-agenda-window-setup 'other-frame)
+#+end_src
+
+  
+**  Display the current context
+#+begin_src emacs-lisp 
+(defvar emagician/org-context "Work")
+#+end_src
+
+
+*** TODO Get context from Location
+
+** Display based on tags
+Best is the enemy of the good.  Make this not suck later. 
+#+begin_src emacs-lisp 
+  (defun emagician-agenda/get-tag (tag title &optional include-dates) 
+    (if (not include-dates)
+      `(todo ,tag 
+                ((org-agenda-overriding-header ,(concat title "\n"))
+                 (org-agenda-todo-ignore-with-date t)))
+       `(todo ,tag 
+                ((org-agenda-overriding-header ,(concat title "\n"))))))
+#+end_src
+
+(emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
+
+
+(todo "NEXT" ((org-agenda-overriding-header "❇ Next Actions") 
+              (org-agenda-todo-ignore-with-date t)))
+
+** Find Stuck projects
+  
+#+begin_src emacs-lisp 
+(defun emagician-agenda/get-stuck-projects ()
+  "return a string showing all Stuck projects"
+  '(tags "TODO=\"PROJECT\""
+              ((org-agenda-overriding-header " 📖 Stuck Projects")
+               (org-agenda-skip-function '(org-agenda-skip-subtree-if 'regexp "NEXT")))))
+#+end_src
+
+** Finalize agenda
+*** set up a custom agenda with our sections
+
+#+begin_src emacs-lisp 
+
+        (setq org-agenda-custom-commands
+              `((" " "Agenda"
+                 ((emagician-agenda/insert-headline "")
+                  ,(emagician-agenda/get-goals "")
+                  (emagician-agenda/insert-cycle "") 
+                  (agenda "" ((org-agenda-span 1) (org-agenda-show-log nil) ))
+                  ,(emagician-agenda/get-tag "STARTED" "💥 Started" t)
+                  ,(emagician-agenda/get-tag "WAITING" "💬 Waiting" t)
+                  ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
+                  ,(emagician-agenda/get-stuck-projects))
+                 ((org-agenda-category-filter-preset '("-Home" "-Music"))))
+                ("W" "Weekly Review"
+                 ((emagician-agenda/insert-headline " Weekly Review ")
+                  (agenda "" ((org-agenda-span 7)
+                              (org-agenda-log-mode-items '(closed clock state))
+                              (org-agenda-start-day "-7d")
+                              (org-agenda-entry-type '(:timestamp :sexp :deadline :sheduled))
+                              (org-agenda-show-log t)))
+                  (tags-todo "inbox")
+                  (agenda "" ((org-agenda-span 31)))
+                  ,(emagician-agenda/get-stuck-projects)
+                  ,(emagician-agenda/get-tag "PROJECT" "📖 Projects")
+                  ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
+                  ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions")
+                  ,(emagician-agenda/get-tag "TODO" "🌱 TODO")
+                  ,(emagician-agenda/get-tag "WAITING" "💬 Waiting")
+                  ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
+                  ,(emagician-agenda/get-tag "SOMEDAY" "🌞 Someday")
+                  ,(emagician-agenda/get-tag "MAYBE" "🌠 Maybe")
+
+  ))))
+#+end_src
+***  Display the started action
+
+***  Display next actions for the context
+*** PROJECT List all next actions on a keystroke (F4)
+**** NEXT Org agenda command
+**** TODO filter to work
+
+** Make it convenient
+*** Function to show the main agenda
+#+begin_src emacs-lisp 
+  (defun emagician-org/daily-agenda () 
+    "Show the daily agenda"
+    (interactive)
+    (org-agenda nil " "))
+#+end_src
+
+*** Main agenda key
+#+begin_src emacs-lisp 
+(global-set-key (kbd "C-c a") 'emagician-org/daily-agenda)
+(global-set-key (kbd "C-c A") 'org-agenda)
+#+end_src
+
+** Display the daily agenda on load 
+#+begin_src emacs-lisp 
+(add-hook 'emacs-startup-hook 'emagician-org/daily-agenda)
+#+end_src
+
+* Exports 
+#+begin_src emacs-lisp 
+(require 'ox-beamer)
+#+end_src
+
+* Working with Code in Babel mode
+
+#+begin_src emacs-lisp 
+(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
+(setq org-edit-src-content-indentation 0)
+#+end_src
+
+** Languages
+
+#+begin_src emacs-lisp 
+(require 'ob-sh)
+(require 'ob-sql)
+(require 'ob-org)
+#+end_src
+
+* Saving and auto Commiting
+
+#+begin_src emacs-lisp 
+  (defun emagician-org/save-commit-and-push ()
+    "Do the thing automagickally"
+    (org-save-all-org-buffers)
+    (with-helm-default-directory "~/org"
+        (async-start
+         (lambda ()
+           (message "Commiting to git")
+           (shell-command "git add *" "*org autocommit*" "*org autocommit*"))
+         (lambda (result)
+           (async-start
+            (lambda ()
+              (shell-command "git commit -m\"autopmagick commit\"" "*org autocommit*" "*org autocommit*"))
+            'ignore)))))
+
+  (run-at-time t 600 'emagician-org/save-commit-and-push)
+#+end_src
+*** TODO fix this to use shell commands instead. 
+*** Mobile Org
+
+#+begin_src emacs-lisp 
+(setq org-mobile-directory "~/Dropbox/org-mobile")
+
+#+end_src
+* Prettiness
+#+begin_src emacs-lisp 
+(defun turn-on-org-show-all-inline-images ()
+  (org-display-inline-images t t))
+(add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)
+#+end_src

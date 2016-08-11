@@ -121,6 +121,20 @@ A bit of a naive version of this for now.
     (should-error (emagician/expect-dir "Emagician.org")))
 #+end_src
   
+** Def hook
+
+#+begin_src emacs-lisp
+  (defmacro emagician/defhook (name hook &rest b)
+    (let* ((docp (stringp (car b)))
+           (body (if docp (cdr b) b)))
+      `(progn 
+         (defun ,name () 
+           ,(concat (if docp (car b) "Not Documented\n") "\nEmagically defined with emagician/defhook.")
+           ,@body)
+         (add-hook (quote ,hook) (quote ,name)))))
+  (put 'emagician/defhook lisp-indent-function 2)
+#+end_src
+
 ** Minor In Major
 
   Kinda one of those things that I am surprised is not a thing.
