@@ -1,0 +1,83 @@
+#+title: Ruby
+
+** Add RBEnv  path This may not be needed
+#+begin_src emacs-lisp :tangle no
+  (emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
+#+end_src
+
+* Interface
+
+* Tools 
+** Bundler
+#+begin_src emacs-lisp 
+(use-package bundler)
+#+end_src
+** Rspec
+#+begin_src emacs-lisp 
+(use-package rspec-mode)
+#+end_src
+** Yari
+#+begin_src emacs-lisp 
+(use-package yari)
+#+end_src
+*** Making it work
+Getting hte base ruby documentation here
+#+begin_src sh 
+gem install rdoc-data
+rdoc-data --install
+#+end_src
+
+This gets all the rdoc for your installed gems
+#+begin_src sh 
+gem rdoc --all --ri
+#+end_src
+
+* Mode 
+** Ruby Block mode
+#+begin_src emacs-lisp 
+(use-package ruby-block
+  :init
+  (setq ruby-block-highlight-toggle t)
+  :config)
+#+end_src
+** Rinari
+  Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goofy Acronym Assertion!)
+
+#+begin_src emacs-lisp 
+(use-package rinari)
+#+end_src
+** Robe
+#+begin_src emacs-lisp 
+(use-package robe)
+
+#+end_src
+
+   
+   
+** Mode setup
+
+  Thanks to the emacs starter kit classic for the list of ode files list. [fn:1]
+
+#+begin_src emacs-lisp 
+(use-package ruby-mode
+  :interpreter "ruby"
+  :mode 
+  (("\\.rake$" . ruby-mode)
+   ("\\.task$" . ruby-mode)
+   ("\\.thor$" . ruby-mode)
+   ("\\.gemspec$" . ruby-mode)
+   ("\\.rb$" . ruby-mode)
+   ("\\.ru$" . ruby-mode)
+   ("Rakefile$" . ruby-mode)
+   ("Thorfile$" . ruby-mode)
+   ("Gemfile$" . ruby-mode)
+   ("Capfile$" . ruby-mode)
+   ("Vagrantfile$" . ruby-mode))
+  :config
+  (ruby-block-mode t)
+)
+#+end_src
+
+* Footnotes
+
+[fn:1] https://github.com/technomancy/emacs-starter-kit/blob/v2/modules/starter-kit-ruby.el
