@@ -100,10 +100,10 @@ No Physical tabs.
     ;; Remove '' pairing in elisp because quoting is used a ton
     (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
 
-    (sp-with-modes '(html-mode sgml-mode)
+    (sp-with-modes '(webl-mode)
       (sp-local-pair "<" ">"))
 
-    (sp-with-modes sp--lisp-modes
+    (sp-with-modes sp-lisp-modes
       (sp-local-pair "(" nil :bind "C-("))))
 
 #+end_src

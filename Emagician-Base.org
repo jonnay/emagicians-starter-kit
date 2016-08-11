@@ -158,6 +158,26 @@ A bit of a naive version of this for now.
     
 #+end_src
 
+** Add to Path
+#+begin_src emacs-lisp
+    (defun emagician/add-to-path (path &rest front)
+      "Adds PATH to the PATH env variable, eshell-path-env as well as exec-path.
+  If FRONT is non nil, then PATH will be prepended to the env and shell vars.  
+  The exec-path always will always have it prepended. "
+      (let ((shell-path (concat 
+                         (if front 
+                             path
+                           (getenv "PATH"))
+                         ":"
+                         (if front
+                             (getenv "PATH")
+                           path))))
+        (setenv "PATH" shell-path)
+        (setq eshell-path-env shell-path)
+        (setq exec-path (cons path exec-path))))
+    
+#+end_src
+** Paths in emacs can be a little wonky.  A lot wonky on OSX.  Contend with that
 ** Final Emagician Scratch
 
 When the starter it is loaded we want to display the scratch buffer
@@ -195,32 +215,36 @@ If you want to add items, you can do so through the
 **** Main Scratch Function
 
 #+begin_src emacs-lisp 
-  (defun emagician/initiate-thee-scratch ()
-    (emagician/set-scratch 
-     ";;; 🐇-|-+-|- Sekrut Alien Technology -|-+-|-🐇" "\n"
-     ";;; Hail Eris.  All Hail Discordia." "\n"
-     ";;;\n"
-     ";;; It is with thee Quill of Echinda" "\n"
-     ";;; that I scratch all upon the Beat Mesa" "\n"
-     ";;;" " \n" 
-     ";;; Emacs Vesrion: " emacs-version "\n" 
-     ";;; Emagician Starter kit Version: " emagician/version "\n"
-     ";;; " "\n"
-     (if (and after-init-time before-init-time)
-         (format ";;; Your startup took approximately %.2f seconds" 
-                 (- (float-time after-init-time)
-                    (float-time before-init-time)))
-       (format ";;; One of the start time variables was nil. (after:%s before:%s) "
-               after-init-time before)) "\n" 
-     ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
-     ";;;" "\n"
-     (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
-     ";;;" "\n"
-     (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
-     ";;; Tools For Magicks" "\n"
-     (mapconcat (lambda (link)
-                  (format "%S\n" link))
-                emagician/scratch-links
-                "")
-     ";;;" "\n"))
+(defun emagician/initiate-thee-scratch ()
+  (emagician/set-scratch 
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+   ";;; 🐇-|-+-|- Sekrut Alien Technology -|-+-|-🐇 ;;;" "\n"
+   ";;;        Hail Eris.  All Hail Discordia.       ;;;" "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+   ";;;\n"
+   ";;; It is with thee Quill of Echinda" "\n"
+   ";;; that I scratch all upon the Beat Mesa" "\n"
+   ";;;" " \n" 
+   ";;; Emacs Vesrion: " emacs-version "\n" 
+   ";;; Emagician Starter kit Version: " emagician/version "\n"
+   ";;; " "\n"
+   (if (and after-init-time before-init-time)
+       (format ";;; Your startup took approximately %.2f seconds" 
+               (- (float-time after-init-time)
+                  (float-time before-init-time)))
+     (format ";;; One of the start time variables was nil. (after:%s before:%s) "
+             after-init-time before-init-time)) "\n" 
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+   ";;; -|-+-|- Chaotic Wisdom -|-+-|-" "\n"
+   ";;;" "\n"
+   (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
+   ";;;" "\n"
+   ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
+   (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
+   ";;; Tools For Magicks" "\n"
+   (mapconcat (lambda (link)
+                (format "%S\n" link))
+              emagician/scratch-links
+              "")
+   ";;;" "\n"))
 #+end_src

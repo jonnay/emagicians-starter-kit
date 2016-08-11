@@ -403,6 +403,11 @@ All agenda files are valid for targeting
 
 * Better Linking
 ** Set keybinding for links										 :keybinding:
+#+begin_src emacs-lisp 
+(setq org-return-follows-link t)
+#+end_src
+
+
 #+begin_src emacs-lisp
 (define-key global-map "\C-cl" 'org-store-link)
 
@@ -652,8 +657,9 @@ Best is the enemy of the good.  Make this not suck later.
 #+end_src
 
 ** Display the daily agenda on load 
+Swap to other frame once loaded. 
 #+begin_src emacs-lisp 
-(add-hook 'emacs-startup-hook 'emagician-org/daily-agenda)
+(add-hook 'emacs-startup-hook #'(lambda () (emagician-org/daily-agenda)(other-frame 1)))
 #+end_src
 
 * Exports 

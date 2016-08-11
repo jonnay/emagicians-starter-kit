@@ -68,7 +68,7 @@
 
 ** Verify emagician/dir is set 
 
-#+begin_src emacs-lispe
+#+begin_src emacs-lisp
   (when (null emagician/dir)
     (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
       (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
@@ -195,8 +195,9 @@
 #+end_src
 
 ** Use-Package
-
    https://github.com/jwiegley/use-package
+
+   Is the cat's ass.  Why would you not use it?
 
 #+begin_src emacs-lisp 
 (setq use-package-always-ensure emagician/are-elpas-reachable?)
@@ -354,6 +355,9 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 (emagician/initiate-thee-scratch)
 #+end_src
 
+#+begin_src emacs-lisp :tangle yes
+(setq debug-on-error t)
+#+end_src
 
 #+begin_src emacs-lisp 
   (provide 'emagician)

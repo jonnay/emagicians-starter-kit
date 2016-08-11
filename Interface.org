@@ -109,6 +109,7 @@ Unicode
 
 #+begin_src emacs-lisp 
 (use-package diminish)
+
 #+end_src
 
 *** Powerline 
@@ -342,7 +343,7 @@ show-#+begin_src emacs-lisp
 
 *** Volatile Highlights
    Shows what changed through undo, yank etc. commands
-
+   
 #+begin_src emacs-lisp
   (use-package volatile-highlights
     :diminish ""
@@ -493,35 +494,28 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp 
 (use-package ace-jump-mode
   :bind 
-  (("C-c C-<space>" . ace-jump-mode))
+  ("C-c C-SPC" . ace-jump-mode)
+  (:map org-mode-map 
+         ("C-c C-SPC" 'ace-jump-mode))
   :init
-  (setq erc-track-enable-keybindings nil)
-  :config
-  (add-hook 'org-mode-hook 
-            #'(lambda () (define-key org-mode-map (kbd "C-c C-SPC") 'ace-jump-mode))))
+  (setq erc-track-enable-keybindings nil))
 #+end_src
 ** Ace window jump
 #+begin_src emacs-lisp 
-(emagician/expect-package 'ace-window)
-(require 'ace-window)
-(global-set-key (kbd "C-x o") 'ace-window)
+(use-package ace-window
+  :ensure
+  :init
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind
+  ("C-x o" . ace-window))
 #+end_src
-
-*** Pretty display
-#+begin_src emacs-lisp 
-(custom-set-faces
- '(aw-leading-char-face
-   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-#+end_src
-
-*** Limit scope to frames
-#+begin_src emacs-lisp 
-(setq aw-scope 'frame)
-#+end_src 
 
 *** Keys on the home row
 #+begin_src emacs-lisp 
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 #+end_src
 
 ** Save Place 
@@ -597,7 +591,10 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (use-package which-key
   :demand
   :init
-  (setq which-key-idle-delay 0.25)
+  (setq which-key-idle-delay 0.6)
+  (setq which-key-is-verbose t)
+  (setq which-key-min-display-lines 2)
+  (setq which-key-show-remaining-keys t)
   (which-key-mode))
 #+end_src
 
@@ -619,6 +616,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   :init
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)
+  (require 'helm-ring)
   (use-package helm-ls-git :demand))
 #+end_src
 
@@ -645,17 +643,16 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
                            helm-source-files-in-current-dir
                            helm-source-ls-git-status
                            helm-source-ls-git
-                           helm-source-mark-
+                           helm-source-mark-ring
                            helm-source-bookmarks
                            helm-source-recentf
-                           helm-source-gloabl-mark-ring             
+                           helm-source-global-mark-ring             
                            helm-source-buffer-not-found)
                          "*helm mini*"))
 
 #+end_src
 
 #+begin_src emacs-lisp 
-(require 'helm-ring)
 (defun emagician/helm ()
   "Super powered helm mode to DWIM!"
   (interactive)
@@ -671,7 +668,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
           helm-source-bookmarks
           helm-source-recentf
           helm-source-register         
-          helm-source-global-mark-ring
           helm-source-buffer-not-found)))
 #+end_src
 
