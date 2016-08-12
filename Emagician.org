@@ -9,7 +9,7 @@
 
    Snarfed this idea from https://github.com/overtone/emacs-live.
    Which goes to show: even if you use the word brogrammer you might
-   still have good ideas. ;)
+   still have good ideas. 😼
 
 *** Emergency override.
     You won't need this. Right?  In case of emergency, break glass.
@@ -153,35 +153,37 @@
    If the subtree is a tag, then all subtrees with that tag are collected and loaded.
 #+name: starter-kit-load
 #+begin_src emacs-lisp
-    (defvar emagician/load-depth 0)
-    (defun emagician/load (file &optional header-or-tag)
-      "Load configuration from other .org files."
-      (let ((start-time (current-time))
-            (file (expand-file-name (if (string-match ".+\.org" file)
-                                        file
-                                      (format "%s.org" file))
-                                    emagician/dir))
-            (load-result nil))
-        (if (file-exists-p file)
-            (progn
-              (emagician/append-scratch "\n;; "
-                                        (make-string emagician/load-depth ?-)
-                                        " Loading " file)
-              (setq load-result (org-babel-load-file file)))
-          (progn
-            (emagician/append-scratch "\n;; "
-                                      (make-string emagician/load-depth ?-)
-                                      "Skipped Loading "
-                                      file
-                                      " It doesn't exist!\n")
-            (setq load-result nil)))
-        (emagician/append-scratch "...done!" "\n")
-        (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
-                         file 
-                         (if header-or-tag header-or-tag "") 
-                         (float-time (time-subtract (current-time) 
-                                                    start-time))))
-        load-result))
+(defvar emagician/load-depth 0)
+(defun emagician/load (file &optional header-or-tag)
+  "Load configuration from other .org files."
+  (let ((start-time (current-time))
+        (file (expand-file-name (if (string-match ".+\.org" file)
+                                    file
+                                  (format "%s.org" file))
+                                emagician/dir))
+        (load-result nil)
+        (emagician/load-depth (1+ emagician/load-depth))
+        (org-babel-default-header-args (cons '(:comment . "links") (assq-delete-all :comment org-babel-default-header-args))))
+    (if (file-exists-p file)
+        (progn
+          (emagician/append-scratch "\n;; "
+                                    (make-string emagician/load-depth ?-)
+                                    " Loading " file)
+          (setq load-result (org-babel-load-file file t)))
+      (progn
+        (emagician/append-scratch "\n;; "
+                                  (make-string emagician/load-depth ?-)
+                                  "Skipped Loading "
+                                  file
+                                  " It doesn't exist!\n")
+        (setq load-result nil)))
+    (emagician/append-scratch "...done!" "\n")
+    (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
+                     file 
+                     (if header-or-tag header-or-tag "") 
+                     (float-time (time-subtract (current-time) 
+                                                start-time))))
+    load-result))
 
 #+end_src
 

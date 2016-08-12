@@ -493,6 +493,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 ** Ace Jump
 #+begin_src emacs-lisp 
 (use-package ace-jump-mode
+  :demand
   :bind 
   ("C-c C-SPC" . ace-jump-mode)
   (:map org-mode-map 
@@ -503,7 +504,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 ** Ace window jump
 #+begin_src emacs-lisp 
 (use-package ace-window
-  :ensure
+  :depends 
   :init
   (custom-set-faces
    '(aw-leading-char-face

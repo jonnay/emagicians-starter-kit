@@ -568,9 +568,25 @@ Discover my Mode:    C-c C-S-H
 Maybe it is time to try projectile?
 %%
 Focus on helm.  This first time by finding a tutorial.
+(browse-url "http://tuhdo.github.io/helm-intro.html")
 %%
-You have the swap.
-%%
-Rest on your laurels
+👑 Rest on your laurels. 👑
 %% 
+There is funk inside of skewer.  Learn it. 
+(find-file (find-lisp-object-file-name 'skewer-mode 'symbol-function))
+%%
+Add something to this file
+(find-file (expand-file-name "Lamp.org" emagician/dir))
+%%
+Expand this a little, so it is split in terms of:
+  - message
+  - command to mention 
+  - command to used
+%%
+emacs-howdoi
+  - install
+  - Use Minor Mode
+  - Learn key shortcut C-c C-o
+%%
 #+end_src
+^--- %%!

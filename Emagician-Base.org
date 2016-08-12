@@ -125,6 +125,7 @@ A bit of a naive version of this for now.
 
 #+begin_src emacs-lisp
   (defmacro emagician/defhook (name hook &rest b)
+    (declare (indent 2))
     (let* ((docp (stringp (car b)))
            (body (if docp (cdr b) b)))
       `(progn 
@@ -132,7 +133,6 @@ A bit of a naive version of this for now.
            ,(concat (if docp (car b) "Not Documented\n") "\nEmagically defined with emagician/defhook.")
            ,@body)
          (add-hook (quote ,hook) (quote ,name)))))
-  (put 'emagician/defhook lisp-indent-function 2)
 #+end_src
 
 ** Minor In Major
@@ -217,10 +217,10 @@ If you want to add items, you can do so through the
 #+begin_src emacs-lisp 
 (defun emagician/initiate-thee-scratch ()
   (emagician/set-scratch 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;; 🐇-|-+-|- Sekrut Alien Technology -|-+-|-🐇 ;;;" "\n"
-   ";;;        Hail Eris.  All Hail Discordia.       ;;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+   ";;;           🐰-|-+-|- Sekrut Alien Technology -|-+-|-🐰           ;;;" "\n"
+   ";;;                  Hail Eris.  All Hail Discordia.                 ;;;" "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    ";;;\n"
    ";;; It is with thee Quill of Echinda" "\n"
    ";;; that I scratch all upon the Beat Mesa" "\n"
@@ -228,6 +228,7 @@ If you want to add items, you can do so through the
    ";;; Emacs Vesrion: " emacs-version "\n" 
    ";;; Emagician Starter kit Version: " emagician/version "\n"
    ";;; " "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    (if (and after-init-time before-init-time)
        (format ";;; Your startup took approximately %.2f seconds" 
                (- (float-time after-init-time)
@@ -239,6 +240,7 @@ If you want to add items, you can do so through the
    ";;;" "\n"
    (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
    ";;;" "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
    (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
    ";;; Tools For Magicks" "\n"
@@ -246,5 +248,6 @@ If you want to add items, you can do so through the
                 (format "%S\n" link))
               emagician/scratch-links
               "")
-   ";;;" "\n"))
+   ";;;" "\n"
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"))
 #+end_src

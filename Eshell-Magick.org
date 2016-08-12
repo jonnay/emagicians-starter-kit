@@ -22,9 +22,9 @@ then ~require~ gets problematic.
 
 http://emacs.stackexchange.com/questions/2107/run-application-in-cwd-on-remote-host-from-within-eshell
 
-Maybe?
+This is apparently still an issue. 
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (defadvice eshell-gather-process-output (before absolute-cmd (command args) act)
   (setq command (file-truename command)))
 
@@ -38,11 +38,19 @@ Maybe?
 
 
 * Interface 
-** Set Prompt 
+** Set Prompt
+#+begin_src emacs-lisp 
+(use-package eshell-prompt-extras
+  :init
+  (setq eshell-highlight-prompt nil
+        eshell-prompt-function 'emagician/epe-theme))
+#+end_src
+
+** Use my own theme 
 #+begin_src emacs-lisp 
   (defun emagician/epe-theme ()
     "Emagician Eshell Prompt Extras theme."
-    (setq eshell-prompt-regexp "^[^#\n🐰]*[#🐰] ")
+    (setq eshell-prompt-regexp "^[^#\n🐰]*[#🐰]) ")
     (concat
      (when (epe-remote-p)
        (epe-colorize-with-face (concat (epe-remote-user)
@@ -58,13 +66,14 @@ Maybe?
                  (epe-git-dirty)
                  (epe-git-untracked)
                  (let ((unpushed (epe-git-unpushed-number)))
-                   (unless (= unpushed 0)
+                   (unless (= unp,ushed 0)
                      (concat ":" (number-to-string unpushed-number)))))
          'epe-git-face)))
-     (epe-colorize-with-face " 🐰" 'epe-symbol-face)
+     (epe-colorize-with-face " 🐰)" 'epe-symbol-face)
      (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
      " "))
 #+end_src
+s
 ** Did you mean?
 #+begin_src emacs-lisp 
 (use-package eshell-did-you-mean 
