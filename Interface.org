@@ -1,5 +1,5 @@
 #+Title: User Interface Elements
-* Keystrokes
+* Keystrokes and commands
 ** Simple answers plz!
 #+begin_src emacs-lisp 
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -38,6 +38,12 @@ Oh my.
     (when (fboundp mode) (funcall mode -1)))
 #+end_src
 
+** Visible Bell
+   I used to hate the visible bell, but it has sense gotten a lot better. 
+
+#+begin_src emacs-lisp 
+(setq visible-bell t)
+#+end_src
 ** Fonts
 *** Describe Char
    Give us all the unicode information for a glyph. 
@@ -423,6 +429,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 ** Auto Complete
    *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
 
+   `ac-ignore-case` is really burning me right now, so I am enabling it.
+
 #+begin_src emacs-lisp 
 (use-package auto-complete
   :demand
@@ -431,6 +439,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (setq ac-auto-show-menu t)
   (setq ac-dwim t)
   (setq ac-use-menu-map t)
+  (setq ac-ignore-case f)
   (setq ac-quick-help-delay (+ 0.125 (/ 0.125 2)))
   (setq ac-quick-help-height 20)
   (set-default 'ac-sources 
@@ -480,6 +489,18 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
           undo-tree-visualizer-timestamps t)
     :config
     (global-undo-tree-mode))
+#+end_src
+
+** Fixing Typos and Spelling
+#+begin_src emacs-lisp 
+(require "fix-muscle-memory/fix-muscle-memory.el")
+(fix-muscle-memory-load-problem-words 'foo
+                                      '(("teh" . "the")
+                                        ("comptuer" . "computer")
+                                        ("destory" . "destroy")))
+(add-hook 'text-mode-hook 'abbrev-mode)
+(add-hook 'prog-mode-hook 'abbrev-mode)
+
 #+end_src
 
 * Navigating

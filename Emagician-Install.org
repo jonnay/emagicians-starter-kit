@@ -48,7 +48,7 @@ Let there be light
    will probably relatively remain consistent across machines, user
    accounts, etc.  At the same time, will need some differentiation
    amongst emacs starter kits.  This is your "true name".  Make it
-   quasi-original.  If you are boring, a machine-readable fullname
+   quazi-original.  If you are boring, a machine-readable fullname
    will do.
 
    We'll use the true name in the naming of your branch, loading your
@@ -198,7 +198,7 @@ Then again, maybe you need to separate customizations out by user account. Why n
 (emagician/invoke-custom-file (user-login-name))
 #+end_src
 
-** Testing
+** The Testening
 
    To properly test your magicians kit, you should build the tester,
    by running the elisp below.  If you don't know Emacs Lisp, you need
@@ -227,7 +227,7 @@ Then again, maybe you need to separate customizations out by user account. Why n
 #+end_src 
 
 #+RESULTS:
-#+begin_sryc sh :results silent
+#+begin_src sh :results silent
   # run this code block to test your emacs starter kit
   /usr/local/opt/emacs-mac/Emacs.app/Contents/MacOS/Emacs --no-init-file  --load=/Users/joarkell/projects/emagicians-starter-kit/init.el &
 #+end_src
@@ -276,9 +276,6 @@ FILE="~./.emacs.d/init-backup-$NOW.el"
 mv -v ~/.emacs.d/init.el $FILE
 cp -v ./init.el ~/.emacs.d/
 #+end_src
-
-#+RESULTS:
-: ./init.el -> /Users/joarkell/.emacs.d/init.el
 
 
 * The actual Init file

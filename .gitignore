@@ -3,3 +3,4 @@
 /assets/*.lines
 /assets/snippets/
 /elpa
+*.elc
