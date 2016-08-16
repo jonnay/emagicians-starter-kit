@@ -1,3 +1,11 @@
+  
+* Identity
+#+begin_src emacs-lisp 
+(setq user-full-name "Jonathan Arkell")
+(setq user-mail-address "jonnay@jonnay.net")
+#+end_src
+
+* Keybindings
 ** Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.		 :keybinding:
 
 #+begin_src emacs-lisp

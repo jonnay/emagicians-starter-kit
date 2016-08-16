@@ -439,7 +439,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (setq ac-auto-show-menu t)
   (setq ac-dwim t)
   (setq ac-use-menu-map t)
-  (setq ac-ignore-case f)
+  (setq ac-ignore-case nil)
   (setq ac-quick-help-delay (+ 0.125 (/ 0.125 2)))
   (setq ac-quick-help-height 20)
   (set-default 'ac-sources 
@@ -493,7 +493,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 ** Fixing Typos and Spelling
 #+begin_src emacs-lisp 
-(require "fix-muscle-memory/fix-muscle-memory.el")
+(load "fix-muscle-memory/fix-muscle-memory.el")
 (fix-muscle-memory-load-problem-words 'foo
                                       '(("teh" . "the")
                                         ("comptuer" . "computer")
@@ -525,7 +525,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 ** Ace window jump
 #+begin_src emacs-lisp 
 (use-package ace-window
-  :depends 
   :init
   (custom-set-faces
    '(aw-leading-char-face
@@ -584,6 +583,13 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 * State Management
+** Server
+#+begin_src emacs-lisp 
+(unless (string-equal "root" (getenv "USER"))
+  (require 'server)
+  (unless (server-running-p) (server-start)))
+#+end_src
+
 ** Recent Files
    500 should be as enough files to handle long editing sessions at
    work, and some weekend projects as well.

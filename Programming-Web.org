@@ -42,9 +42,14 @@
 (use-package restclient)
 #+end_src
 * Interpreters
-* Skewer
+** Skewer
 #+begin_src emacs-lisp 
 (use-package skewer-mode
   :init 
   (setq httpd-port 8123))
+#+end_src
+* Documentation
+** HTTP Well
+#+begin_src emacs-lisp 
+(use-package know-your-http-well)
 #+end_src

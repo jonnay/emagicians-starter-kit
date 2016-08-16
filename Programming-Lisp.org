@@ -1,7 +1,6 @@
 #+title: Lisp
 
 * Editing 
-
 ** Paredit
 
 #+begin_src emacs-lisp 
@@ -22,6 +21,8 @@
 #+begin_src emacs-lisp 
 (use-package eldoc
   :diminish ""
+  :init 
+    (add-hook 'emacs-lisp-mode 'turn-on-eldoc-mode)
   :config
     (setq eldoc-idle-delay 0.2)
     (set-face-attribute 'eldoc-highlight-function-argument nil
@@ -100,5 +101,12 @@
   :init
   (setq geiser-active-implementations '(chicken))
   :config 
-  (use-package ac-geiser))
+  (require 'ac-geiser)
+  (emagician/defhook emagician/ac-set-scheme-sources scheme-mode
+    (setq ac-sources
+          '(ac-source-yasnippet
+            ac-source-geiser
+            ac-source-files-in-current-dir
+            ac-source-words-in-buffer
+            ac-source-words-in-same-mode-buffers))))
 #+end_src

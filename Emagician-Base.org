@@ -13,6 +13,10 @@ A baseline set of functions that are helpers for the rest of the Emagician Start
 * Emacs Lisp Evaluation Environment
 
 There are helpers funcitons and variables that just make working with Emacs Lisp that much nicer.
+** Prefer new files
+#+begin_src emacs-lisp 
+(setq load-prefer-newer t)
+#+end_src
 
 ** Lexical Evaluation
 #+begin_src emacs-lisp 
@@ -35,7 +39,6 @@ this can go away. That day isn't today.
   (require 'cl)
 #+end_src
 
-
 ** Evaluation and Printing
 
 #+begin_src emacs-lisp
@@ -51,6 +54,17 @@ this can go away. That day isn't today.
 
 #+begin_src emacs-lisp 
 (use-package async)
+#+end_src
+
+** Testing
+   ERT for testing.  Of course.
+
+   El-mock is too damn rubylike.  
+
+   fakir is cool ass, but I don't need it.  yet.
+
+#+begin_src emacs-lisp 
+(use-package noflet)
 #+end_src
 
 * Emagician Helpers
@@ -177,7 +191,6 @@ A bit of a naive version of this for now.
         (setq exec-path (cons path exec-path))))
     
 #+end_src
-** Paths in emacs can be a little wonky.  A lot wonky on OSX.  Contend with that
 ** Final Emagician Scratch
 
 When the starter it is loaded we want to display the scratch buffer

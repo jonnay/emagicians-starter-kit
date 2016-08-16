@@ -169,7 +169,7 @@
           (emagician/append-scratch "\n;; "
                                     (make-string emagician/load-depth ?-)
                                     " Loading " file)
-          (setq load-result (org-babel-load-file file t)))
+          (setq load-result (org-babel-load-file file)))
       (progn
         (emagician/append-scratch "\n;; "
                                   (make-string emagician/load-depth ?-)
