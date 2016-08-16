@@ -163,7 +163,9 @@
                                 emagician/dir))
         (load-result nil)
         (emagician/load-depth (1+ emagician/load-depth))
-        (org-babel-default-header-args (cons '(:comment . "links") (assq-delete-all :comment org-babel-default-header-args))))
+        (org-babel-default-header-args (cons '(:comment . "link") 
+                                             (assq-delete-all :comment
+                                                              org-babel-default-header-args))))
     (if (file-exists-p file)
         (progn
           (emagician/append-scratch "\n;; "

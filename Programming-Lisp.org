@@ -10,8 +10,9 @@
   (:paredit-mode-map
    (("M-s" . paredit-split-sexp)))
   :init
-  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode)
-  (emagician/minor-in-major-mode paredit-mode scheme-mode))
+  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode-hook)
+  (emagician/minor-in-major-mode paredit-mode lisp-interaction-mode-hook)
+  (emagician/minor-in-major-mode paredit-mode scheme-mode-hook))
 #+end_src
 
 * Individual Lisps
@@ -22,7 +23,7 @@
 (use-package eldoc
   :diminish ""
   :init 
-    (add-hook 'emacs-lisp-mode 'turn-on-eldoc-mode)
+    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   :config
     (setq eldoc-idle-delay 0.2)
     (set-face-attribute 'eldoc-highlight-function-argument nil

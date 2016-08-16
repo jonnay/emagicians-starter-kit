@@ -1,8 +1,10 @@
+#+HTML: <div class= "status">
 * Project Status:
 
   Fit for other humans to tell me it is broken, and I can fix it.
 
   But Not Even Alpha.
+#+HTML: </div>
 
 * A starter kit for magicians
 
@@ -10,10 +12,7 @@
 
   I got tired of my old .emacs file, and poorly maintained collection
   of extensions, that was working less and less well, the more time
-  went on and on.  So I made the Emagicians Starter Kit.  After awhile
-  I noticed that a lot of starter kits were doing the same, or similar
-  things.  So I thought to myself, why not build a package to help
-  starter kit authors?
+  went on and on.  So I made the Emagicians Starter Kit.
 
   I Love the idea of the starter kits, but I found they made too many
   assumptions and just wasn't fit for what I needed.  I also have a
@@ -29,8 +28,8 @@
 
    Son, there is no brogramming here.  No easy install shell file that
    you can just run, and everything goes.  In fact, it is antithetical
-   to the whole concept of the emagicians starter-kit.
-
+   to the whole concept of the emagicians starter-kit.  Instead this
+   starter kit has org-mode super-powers. 
 
 ** Installing 
 
@@ -42,7 +41,7 @@
 
 ** Customizing
 
-   If you need to customize the emagician starter kit, i provide you
+   If you need to customize the emagician starter kit, I provide you
    with a way to do it based on:
    
    - Your True Name

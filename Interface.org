@@ -58,8 +58,6 @@ Unicode
   |(^o^)/    ,(   Get all teh characters! )
 #+end_verse  
 
-
-
 #+begin_src emacs-lisp 
 (use-package unicode-fonts 
   :init
@@ -90,6 +88,10 @@ Unicode
 (emagician/full-screen)
 #+end_src
 
+** Soft Word Wrap / Visual Line Mode
+#+begin_src emacs-lisp 
+(global-visual-line-mode)
+#+end_src
 ** Frame titles
   Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
 
@@ -115,7 +117,6 @@ Unicode
 
 #+begin_src emacs-lisp 
 (use-package diminish)
-
 #+end_src
 
 *** Powerline 
@@ -247,13 +248,13 @@ One day.  Powerline and nyan mode don't work.
 
 ** Border the 80th column
 #+begin_src emacs-lisp 
-  (use-package fill-column-indicator
-    :init
-    (setq fci-rule-width 1)
-    (setq fci-rule-column 81)
-    (setq fci-rule-color "#383838")
-    (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-    (global-fci-mode 1))
+(use-package fill-column-indicator
+  :init
+  (setq fci-rule-width 1)
+  (setq fci-rule-column 81)
+  (setq fci-rule-color (face-attribute 'fringe :background))
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1))
 #+end_src
 
 ** Themes
@@ -274,6 +275,27 @@ One day.  Powerline and nyan mode don't work.
   (add-to-list 'custom-theme-load-path (expand-file-name "themes/org-beautify-theme/" emagician/dir))
   (load-theme 'org-beautify t)
 #+end_src    
+
+** Digit Groups
+   Group Numbers together into thousands, millions, billions.  
+
+   10000000
+
+   Looks like this:
+
+#+BEGIN_EXAMPLE
+   10000000000
+   --   ---
+#+END_EXAMPLE
+
+#+begin_src emacs-lisp 
+(use-package digit-groups
+  :demand
+  :init
+  (setq digit-groups-global-mode t)
+  (face-spec-set 'digit-groups-default-face
+     '((t (:underline (:style line))))))
+#+end_src
 
 * Editing
 ** UTF-8 Enforcement
@@ -491,18 +513,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
     (global-undo-tree-mode))
 #+end_src
 
-** Fixing Typos and Spelling
-#+begin_src emacs-lisp 
-(load "fix-muscle-memory/fix-muscle-memory.el")
-(fix-muscle-memory-load-problem-words 'foo
-                                      '(("teh" . "the")
-                                        ("comptuer" . "computer")
-                                        ("destory" . "destroy")))
-(add-hook 'text-mode-hook 'abbrev-mode)
-(add-hook 'prog-mode-hook 'abbrev-mode)
-
-#+end_src
-
 * Navigating
 ** Scrolling
    Keep the screen position when scrolling.  
@@ -523,20 +533,20 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (setq erc-track-enable-keybindings nil))
 #+end_src
 ** Ace window jump
+   - Set the keys to home-row
+   - Make the ace-jump key super visible
+   - Only apply to this frame
+
 #+begin_src emacs-lisp 
 (use-package ace-window
   :init
-  (custom-set-faces
-   '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+  (face-spec-set
+   'aw-leading-char-face
+     '((t (:inherit ace-jump-face-foreground :height 3.0))))
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind
   ("C-x o" . ace-window))
-#+end_src
-
-*** Keys on the home row
-#+begin_src emacs-lisp 
 #+end_src
 
 ** Save Place 
@@ -544,6 +554,12 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp
 (require 'saveplace)
 (setq-default save-place t)
+#+end_src
+** Goto Last Change 
+#+begin_src emacs-lisp 
+(use-package goto-last-change
+  :bind
+  ("C-x C-/" . goto-last-change))
 #+end_src
 ** Uniquify
 
@@ -645,7 +661,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)
   (require 'helm-ring)
-  (use-package helm-ls-git :demand))
+  (use-package helm-ls-git :demand)
+  (diminish 'helm-mode ""))
 #+end_src
 
 *** F2 is my super duper DWIM helper

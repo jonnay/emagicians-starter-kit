@@ -667,6 +667,11 @@ Swap to other frame once loaded.
 (require 'ox-beamer)
 #+end_src
 
+#+begin_src emacs-lisp 
+(use-package htmlize)
+#+end_src
+
+
 * Working with Code in Babel mode
 
 #+begin_src emacs-lisp 

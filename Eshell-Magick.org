@@ -52,6 +52,7 @@ This is apparently still an issue.
     "Emagician Eshell Prompt Extras theme."
     (setq eshell-prompt-regexp "^[^#\n🐰]*[#🐰]) ")
     (concat
+     "\n"
      (when (epe-remote-p)
        (epe-colorize-with-face (concat (epe-remote-user)
                                        "@"
@@ -69,7 +70,7 @@ This is apparently still an issue.
                    (unless (= unpushed 0)
                      (concat ":" (number-to-string unpushed)))))
          'epe-git-face)))
-     (epe-colorize-with-face " 🐰)" 'epe-symbol-face)
+     (epe-colorize-with-face "\n 🐰)" 'epe-symbol-face)
      (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
      " "))
 #+end_src

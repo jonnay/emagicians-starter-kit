@@ -23,7 +23,8 @@ and perception stimulate each other.
   (ert "emagician/"))
 #+end_src
 
-** Test out a fresh hot load of Emagician  
+** Test out a fresh hot load of Emagician  💩
+
 
 #+begin_src emacs-lisp
   (defun emagician/test-initialization (&optional forms)
@@ -71,6 +72,7 @@ and perception stimulate each other.
 #+end_src
 
 *** Working, but kinda shitty testers 
+    This loads the starter kit as a batch and outputs the results as a message.
 
 #+begin_src emacs-lisp 
   (defun emagician/test-init-through-batch ()
@@ -84,6 +86,8 @@ and perception stimulate each other.
                       "--eval='' "
                       "&"))))
 #+end_src
+
+This does a full GUI load, outputting any results as a message. 
 
 #+begin_src emacs-lisp 
     (defun emagician/test-full-init()
@@ -102,34 +106,28 @@ and perception stimulate each other.
    Doesn't currently work because Helm keeps changing its interface. 
 
    #+begin_src emacs-lisp :tangle no
-  (helm-ff-directory-files emagician/dir)
-  
-  (defvar emagician/helm-c-source-files
-    `((name  . "Find Emagician Files")
-      (header-name . (lambda (_)))
-      (candidates . ,(lambda () 
-                      (when (file-accessible-directory-p emagician/dir)
-                        (directory-files emagician/dir t))))
-      (keymap . ,helm-generic-files-map)
-      (candidate-transformer . emagician/helm-ct-is-org-file)
-      (help-message . helm-generic-file-help-message)
-      (type . file)))
-  
-  (defun emagician/helm-ct-is-org-file (candidates)
-    (remove-if-not (lambda (c)
-                     (and (string= (substring c -4) ".org")
-                          (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
-                   candidates))
-  
-  
-  (defun emagician/helm-emagician-dir () 
-    "List all the org files in the Emagician dir"
-    (interactive)
-    (helm :sources emagician/helm-c-source-files
-          :candidate-number-limit 40
-          :buffer "*emagician-|-+-|-files*"))
-  
-  (global-set-key (kbd "S-<f3>") 'emagician/helm-emagician-dir)    
+   (defclass emagician/files-helm-source (helm-source-sync helm-type-file)
+     ((candidates :initform (lambda () (when (file-accessible-directory-p emagician/dir)
+                                               (directory-files emagician/dir t))))
+      (keymap :initform helm-generic-files-map)
+      (filtered-candidate-transformer :initform #'emagician/helm-ct-is-org-file)
+      (action :initform 'helm-type-file-actions)
+      ))
+     
+   (defun emagician/helm-ct-is-org-file (candidates)
+     (remove-if-not (lambda (c)
+                      (and (string= (substring c -4) ".org")
+                           (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
+                    candidates))
+
+   (defun emagician/helm-emagician-dir () 
+     "List all the org files in the Emagician dir"
+     (interactive)
+     (helm :sources (helm-make-source "Files in Emagician-dir" 'emagician/files-helm-source)
+           :candidate-number-limit 40
+           :buffer "*emagician-|-+-|-files*"))
+
+   (global-set-key (kbd "S-<f3>") 'emagician/helm-emagician-dir)
 #+end_src
 
 * Building the emagician site
@@ -140,25 +138,538 @@ and perception stimulate each other.
 
 
 #+begin_src emacs-lisp 
-(defun emagician/meta/publish ()
-  (let ((org-publish-project-alist
-         `(("emagician"
-           :base-directory ,emagician/dir
-           :base-extension "org"
-           :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
-           :htmlized-source t
-           :html-html5-fancy t
-           :auto-sitemap t
-           :publishing-function org-html-publish-to-html
-           ))))
-    (org-publish "emagician" t)))
+(setq htmlize-html-charset 'utf-8)
+(setq httpd-root (expand-file-name "gh-pages" emagician/dir))
+
+(defun emagician/meta/publish (project force async)
+  (let ((org-publish-project-alist `(("emagician" :components ("emagician-assets" "emagician-org"))
+                                     ("emagician-test" :components ("emagician-assets" "emagician-org-test"))
+                                     ("emagician-assets"
+                                      :base-directory ,(expand-file-name "assets/" emagician/dir)
+                                      :recursive t
+                                      :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+                                      :publishing-directory ,(expand-file-name "gh-pages/assets" emagician/dir)            
+                                      :publishing-function org-publish-attachment)
+                                     ("emagician-org"
+                                      :base-directory ,emagician/dir
+                                      :base-extension "org"
+                                      :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
+                                      :htmlized-source t
+                                      :html-html5-fancy t
+                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
+                                      :publishing-function org-html-publish-to-html
+                                      )
+                                     ("emagician-org-test"
+                                      :base-directory ,emagician/dir
+                                      :base-extension ""
+                                      :exlcude ".*"
+                                      :include ("Index.org" "Emagician.org")
+                                      :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
+                                      :htmlized-source t
+                                      :html-html5-fancy t     
+                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
+                                      :publishing-function org-html-publish-to-html
+                                      )
+                                     )))
+    (org-publish project force async)))
+
+(defun emagician/meta/publish-all ()
+  (interactive)
+  (emagician/meta/publish "emagician" t nil))
+
+(defun emagician/meta/publish-assets ()
+  (interactive)
+  (emagician/meta/publish "emagician-assets" t nil))
+
+(defun emagician/meta/publish-test ()
+  "A small tester project"
+  (interactive)
+  (emagician/meta/publish "emagician-test" t nil))
 #+end_src
 
-(setq org-publish-project-alist `("emagician"
-           :base-directory ,emagician/dir
-           :base-extension "org"
-           :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
-           :htmlized-source t
-           :html-html5-fancy t
-           :auto-sitemap t
-           ))
+** The CSS file 
+
+The thi.ng/org-spec[fn:1] is a great basis to build off of. 
+
+#+begin_src css :noweb yes :tangle assets/style.css :padline t :comments link
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #33333f;
+}
+
+code {
+    font-family: "Inconsolata", monospace;
+    font-size: 16px;
+}
+
+p>code, li>code {
+    background-color: #eee;
+    padding: 0.25em;
+}
+
+h1, h2, h3 {
+    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    border-bottom: 1px solid hsl(0, 0%, 77%);
+    font-size: 1.75em;
+    background-color: hsl(0, 0%, 93%);
+    margin-left: -1em;
+    padding: 0.25em 1em;   
+}
+
+h3 {
+    margin-top: 2em;
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h2 code, h3 code, h4 code, h5 code, td code {
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
+
+td code {
+    font-weight: bold;
+}
+
+a:before, a:after {
+    color: hsl(0,0%,80%);
+    font-size: 120%;
+}
+
+a:before {
+    content: "[[";
+}
+
+a:after {
+    content: "]]";
+}
+
+a[name]:before {
+    content: "[[" attr(name);
+}
+
+a:link, 
+a:hover, 
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a:link {
+        
+}
+
+a:visited {
+    color: #666;
+}
+
+a:link:hover,
+a:visited:hover {
+    background: #ff0;
+}
+
+a[href^="http"]:after {
+    content: "\21B3";
+    background: white;
+    padding-left: 0.2em;
+}
+
+#meta {
+    margin-top: 2em;
+}
+
+#table-of-contents a:link,
+#table-of-contents a:visited {
+    color: black;
+    background: transparent;
+}
+
+#table-of-contents {
+    line-height: 1.2;
+}
+#table-of-contents h2 {
+    border-bottom: 0;
+}
+
+#table-of-contents ul {
+    list-style: none;
+    padding-left:0;
+    font-weight: normal;
+}
+
+#table-of-contents div>ul>li {
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+#table-of-contents .tag {
+    display: none;
+}
+
+#table-of-contents .todo,
+#table-of-contents .done {
+    font-size: 80%;
+}
+
+#table-of-contents ol>li {
+    margin-top: 1em;
+}
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #666;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #eee;
+}
+
+span.section-number-1,
+span.section-number-2,
+span.section-number-3,
+span.section-number-4,
+span.section-number-5 {
+    font-family: cursive;
+    font-size: 120%;
+    border: 1px solid hsl(0, 0%, 68%);
+    display: inline-block;
+    padding: 8px;
+    line-height: 70%;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 93%);
+}
+
+img {
+    max-width: 90%;
+}
+
+div.notice {
+    position: relative;
+    margin: 0 1.2em;
+    padding: 0.25em 1em;
+    border-left: 4px solid;
+}
+
+table + div.notice {
+    margin-top: 2em;
+}
+
+div.notice a {
+    background: transparent !important;
+    border-bottom: 1px dotted;
+}
+
+div.notice a[href^="http"]:after {
+    background: transparent !important;
+}
+
+div.notice:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25em 0.5em 0;
+    font-size: 60%;
+    border-bottom-left-radius: 0.5em;
+}
+
+.notice-warning {
+    background: #fcc;
+    color: #600;
+}
+
+.notice-example {
+    background: #def;
+    color: #069;
+}
+
+.notice-info {
+    background: #efe;
+    color: #060;
+}
+
+.notice-warning a {
+    color: #600;
+}
+
+.notice-example a {
+    color: #069;
+}
+
+.notice-info a {
+    color: #060;
+}
+
+div.notice-warning:before {
+    content: "WARNING";
+    background: #c99;
+    color: #fcc;
+}
+
+div.notice-example:before {
+    content: "EXAMPLE";
+    background: #abc;
+    color: #def;
+}
+
+div.notice-info:before {
+    content: "INFO";
+    background: #9c9;
+    color: #efe;
+}
+
+blockquote {
+    background-color: hsl(0,0%,93%);
+    margin: 0;
+    padding: 0.125em 4em;
+    border-left: 2px solid hsl(0,0%,80%);
+}
+
+pre {
+    font-family: Inconsolata;
+    border: 0;
+    box-shadow: none;
+}
+
+pre.example:before {
+    content: "Properties";
+    display: block;
+    border-bottom: 1px dotted;
+    margin-bottom: 1em;
+}
+
+pre.example {
+    background: #fec;
+    color: #666;
+    font-size: 0.85em;
+}
+
+pre {
+    background-color: #f8f8f8;
+    background-size: 8px 8px;
+    background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
+}
+
+pre.src {
+    padding: 0.5em;
+}
+
+pre.src:before {
+    display: block;
+    position: absolute;
+    background-color: #ccccd0;
+    top: 0;
+    right: 0;
+    padding: 0.25em 0.5em;
+    border-bottom-left-radius: 8px;
+    border: 0;
+    color: white;
+    font-size: 80%;
+}
+
+pre.src-sh:before {
+    content: "SH";
+}
+
+pre.src-javascript:before {
+    content: "JS";
+}
+
+pre.src-emacs-lisp:before {
+    content: "Emacs-Lisp";
+}
+
+pre.src-c:before {
+    content: "C";
+}
+
+span.org-string {
+    color: #f94;
+}
+
+span.org-keyword {
+    color: #c07;
+}
+
+span.org-variable-name {
+    color: #f04;
+}
+
+span.org-clojure-keyword {
+    color: #09f;
+}
+
+span.org-comment, span.org-comment-delimiter {
+    color: #999;
+}
+
+span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 {
+    color: #666;
+}
+
+span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 {
+    color: #888;
+}
+
+span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 {
+    color: #aaa;
+}
+
+span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
+    color: #ccc;
+}
+
+div.figure {
+    font-size: 0.85em;
+}
+
+.tag {
+    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    float: right;
+    margin-top: 1em;
+    background: transparent;
+}
+
+.tag span {
+    background: #ccc;
+    padding: 0 0.5em;
+    border-radius: 0.2em;
+    color: white;
+}
+
+.todo, .done {
+    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    padding: 0 0.25em;
+    border-radius: 0.2em;
+}
+
+.todo {
+    background: #f04;
+    color: white;
+}
+
+.done {
+    background: #5f7;
+    color: white;
+}
+
+@media screen {
+    h1.title {
+        text-align: left;
+        margin: 1em 0 0 280px;
+    }
+
+    h2 {
+        margin-top: 1em;
+    }
+
+    #table-of-contents {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 2em 0 2em 2em;
+        width: 240px;
+        height: 100vh;
+        font-size: 11px;
+        background: #eee;
+        overflow: auto;
+    }
+
+    #table-of-contents ul>li>ul>li>ul>li {
+        display: none;
+    }
+
+    #table-of-contents h2 {
+        margin-top: 0;
+    }
+
+    #table-of-contents code {
+        font-size: 12px;
+    }
+
+    div.outline-2, #footnotes {
+        margin-left: 280px;
+        max-width: 960px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    html, body {
+        font-size: 14px;
+    }
+
+    #table-of-contents {
+        display: none;
+    }
+
+    h1.title {
+        margin-left: 5%;
+    }
+
+    div.outline-2, #footnotes {
+        margin-left: 5%;
+        max-width: 90%;
+    }
+}
+
+@media print {
+
+    body {
+        color: black;
+    }
+
+    @page {
+        margin: 25mm;
+    }
+
+    h2, h3 {
+        page-break-before: always;
+        margin-top: 0;
+    }
+
+    table {
+        page-break-inside: avoid;
+    }
+
+    a:visited {
+        color: black;
+        background: #ff8;
+    }
+
+    a[href^="http"]:visited {
+        background: #bff;
+    }
+
+    div.notice:before {
+        display: none;
+    }
+}
+#+end_src
+
+* Footnotes
+
+[fn:1] https://github.com/thi-ng/org-spec
+
+​‌డ(°益°)హ

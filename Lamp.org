@@ -479,7 +479,7 @@ Our enemies are Flat.
 %%
 Grey Book Texts - III
 Our stress on SELF discipline is important, it links the internal methods of ritual to our approval and suggestion of other forms of physical discipline to complement the mental/sexual ones. Hence you will often find that Initiates of the Temple will be engaged in such outside activities as Marksmanship, Martial Arts, Swimming and so on as an extension of the theory of maintaining and improving one's focus and abilities.
-The point is not the skill in itself, though we appreciate the practical nature, in a society such as ours, of an Ability to defend oneself and be fit, but the APPLICATION, the discipl1ne itself. So one may be poor in terms of results, but excellent in terms of your genuine application to a skill that requires thought, co-ordination and a degree of dedication. A synthesis of physical action, thought, reflex and an analysis of both yourself and a target (real or metaphysical.
+The point is not the skill in itself, though we appreciate the practical nature, in a society such as ours, of an Ability to defend oneself and be fit, but the APPLICATION, the discipl1ne itself. So one may be poor in terms of results, but excellent in terms of your genuine application to a skill that requires thought, co-ordination and a degree of dedication. A synthesis of physical action, thought, reflex and an analysis of both yourself and a target (real or metaphysical).
 %%
 I must not fear.
 Fear is the mind-killer.
@@ -594,6 +594,20 @@ Know your HTTP Well!  M-x http-foo and media-types
 ^--- %%!
 * Emagician-Fix-Spell
   This was originally defined in this file, but it got moved to it's own repo.
+
+#+begin_src emacs-lisp 
+(load "fix-muscle-memory/fix-muscle-memory.el")
+(fix-muscle-memory-load-problem-words 'foo
+                                      '(("teh" . "the")
+                                        ("comptuer" . "computer")
+                                        ("destory" . "destroy")
+                                        ("occured" . "occurred")))
+(add-hook 'text-mode-hook 'abbrev-mode)
+(add-hook 'prog-mode-hook 'abbrev-mode)
+(diminish 'abbrev-mode)
+#+end_src
+
+  
 * Sierpinski ..
  ... is my jam!
 

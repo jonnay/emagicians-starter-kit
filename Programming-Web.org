@@ -25,6 +25,22 @@
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-markup-indent-offset 2))
 #+end_src
+** Stylesheets
+*** SCSS Mode 
+#+begin_src emacs-lisp 
+(use-package scss-mode
+  :init
+  (add-hook 'scss-mode-hook 'ac-css-mode-setup))
+#+end_src
+*** They should descend from prog-mode, but they don't!
+#+begin_src emacs-lisp 
+(emagician/defhook run-prog-mode-hooks css-mode-hook
+  "Runs the progmode hooks"
+  (run-hooks 'prog-mode-hook))
+
+(add-hook 'scss-mode-hook 'run-prog-mode-hooks)
+#+end_src
+
 ** Coffeescript
 #+begin_src emacs-lisp 
 (use-package coffee-mode
@@ -33,7 +49,8 @@
   (setq coffee-tab-width 2))
 #+end_src
 
-** Apache Mode Other useful Modes
+* Helpers 
+** Apache Mode
 #+begin_src emacs-lisp 
 (use-package apache-mode)
 #+end_src
@@ -47,6 +64,11 @@
 (use-package skewer-mode
   :init 
   (setq httpd-port 8123))
+
+(use-package skewer-reload-stylesheets
+  :init (add-hook 'css-mode-hook 'skewer-reload-stylesheets-start-editing)
+        (add-hook 'scss-mode-hook 'skewer-reload-stylesheets-start-editing))
+
 #+end_src
 * Documentation
 ** HTTP Well

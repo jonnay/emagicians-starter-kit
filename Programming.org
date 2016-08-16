@@ -11,7 +11,7 @@ No Physical tabs.
 ** Spell Checking on Programming Modes
 
 #+begin_src emacs-lisp 
-(emagician/minor-in-major-mode prog-mode flyspell-prog-mode)
+(emagician/minor-in-major-mode flyspell-prog-mode prog-mode)
 #+end_src
 
 ** Yanking
@@ -60,12 +60,10 @@ No Physical tabs.
                             (member (car key-command) disabled))
                           sp-smartparens-bindings)))
 
-    ;(define-key sp-keymap (kbd "C-(") 'sp-forward-barf-sexp)
-    ;(define-key sp-keymap (kbd "C-)") 'sp-forward-slurp-sexp)
+    (define-key sp-keymap (kbd "C-<left>") 'sp-backward-slurp-sexp)
+    (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
     ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
     ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
-    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
     (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
     (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
     (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
@@ -119,7 +117,6 @@ No Physical tabs.
 (which-function-mode t)
 #+end_src
 
-
 ** Check Parens
 
 #+begin_src emacs-lisp
@@ -139,13 +136,12 @@ No Physical tabs.
 (setq show-paren-delay 0)
 (show-paren-mode)
 #+end_src
-
 ** Rainbow Delimiters 
 #+begin_src emacs-lisp 
 (use-package rainbow-delimiters
   :demand
   :init
-  (emagician/minor-in-major-mode prog-mode rainbow-delimiters-mode))
+  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode))
 #+end_src
 ** Color Identifiers
 #+begin_src emacs-lisp 
@@ -163,7 +159,7 @@ No Physical tabs.
     :diminish "⾶"
     :init
     (global-flycheck-mode)
-    (emagician/minor-in-major-mode prog-mode flycheck-color-mode-line-mode))
+    (emagician/minor-in-major-mode flycheck-color-mode-line-mode prog-mode))
 #+end_src
 
 ** DZ, make it easy to run secondary services
