@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>General Programming helpers</title>
+<!-- 2016-08-16 Tue 09:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jonathan Arkell" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">General Programming helpers</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Editing</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Tabs</a></li>
+<li><a href="#sec-1-2">1.2. Spell Checking on Programming Modes</a></li>
+<li><a href="#sec-1-3">1.3. Yanking</a></li>
+<li><a href="#sec-1-4">1.4. YAS</a></li>
+<li><a href="#sec-1-5">1.5. Smart Paren Mode</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Interface elements</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Line Numbers</a></li>
+<li><a href="#sec-2-2">2.2. Which Function</a></li>
+<li><a href="#sec-2-3">2.3. Check Parens</a></li>
+<li><a href="#sec-2-4">2.4. Show Paren Mode</a></li>
+<li><a href="#sec-2-5">2.5. Rainbow Delimiters</a></li>
+<li><a href="#sec-2-6">2.6. Color Identifiers</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Tools</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Flycheck</a></li>
+<li><a href="#sec-3-2">3.2. DZ, make it easy to run secondary services</a></li>
+<li><a href="#sec-3-3">3.3. Org Source&#x2026; babel babel babel!</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Version control</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Editing</a></li>
+<li><a href="#sec-4-2">4.2. Interface</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. Magit</a></li>
+<li><a href="#sec-4-2-2">4.2.2. Git Gutter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Languages</a></li>
+<li><a href="#sec-6">6. Quazi-related Modes</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Yaml</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Editing</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Tabs</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+No Physical tabs. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq-default indent-tabs-mode nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Spell Checking on Programming Modes</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/minor-in-major-mode prog-mode flyspell-prog-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Yanking</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defadvice yank (after indent-region activate)
+  "indent the region after a yank if we're in a programming mode."
+  (if (derived-mode-p 'prog-mode)
+      (indent-region (region-beginning) (region-end) nil)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> YAS</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'yas-minor-mode-on)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Smart Paren Mode</h3>
+<div class="outline-text-3" id="text-1-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package smartparens
+  :defer t
+  :diminish "⒮"
+  :bind (("M-9" . sp-backward-sexp)
+         ("M-0" . sp-forward-sexp))
+  :init
+  (progn
+    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
+    ;; turn on showing the match for clojure and elisp
+    (add-hook 'clojure-mode-hook #'turn-on-show-smartparens-mode)
+    (add-hook 'emacs-lisp-mode-hook #'turn-on-show-smartparens-mode)
+    (add-hook 'java-mode-hook #'turn-on-show-smartparens-mode)
+    (add-hook 'c-mode-hook #'turn-on-show-smartparens-mode))
+  :config
+  (progn
+    (add-to-list 'sp-sexp-suffix '(json-mode regex ""))
+    (add-to-list 'sp-sexp-suffix '(es-mode regex ""))
+
+    (require 'smartparens-config)
+    (add-hook 'sh-mode-hook
+              (lambda ()
+                ;; Remove when https://github.com/Fuco1/smartparens/issues/257
+                ;; is fixed
+                (setq sp-autoescape-string-quote nil)))
+
+    ;; Remove the M-&lt;backspace&gt; binding that smartparens adds
+    (let ((disabled '("M-&lt;backspace&gt;")))
+      (setq sp-smartparens-bindings
+            (cl-remove-if (lambda (key-command)
+                            (member (car key-command) disabled))
+                          sp-smartparens-bindings)))
+
+    ;(define-key sp-keymap (kbd "C-(") 'sp-forward-barf-sexp)
+    ;(define-key sp-keymap (kbd "C-)") 'sp-forward-slurp-sexp)
+    ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
+    ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
+    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+    (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
+    (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
+    (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+    (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+    (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
+    (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+    (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
+    (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
+    ;; (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
+    ;; (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
+    (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
+    (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
+    (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
+    (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
+    (define-key sp-keymap (kbd "C-&lt;left_bracket&gt;") 'sp-select-previous-thing)
+    (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
+    (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
+    (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
+    (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
+    (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
+    (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
+    (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
+    (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
+    (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
+    (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
+    (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
+    (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
+
+    (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
+    ;; Remove '' pairing in elisp because quoting is used a ton
+    (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+
+    (sp-with-modes '(webl-mode)
+      (sp-local-pair "&lt;" "&gt;"))
+
+    (sp-with-modes sp-lisp-modes
+      (sp-local-pair "(" nil :bind "C-("))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Interface elements</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Line Numbers</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'linum-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Which Function</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(which-function-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Check Parens</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/check-parens ()
+  (condition-case err
+      (check-parens)
+    ((error) (message "Buffer has unmatched Parens or quote!"))))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'find-file-hook 'emagician/check-parens t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Show Paren Mode</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq show-paren-style 'mixed)
+(setq show-paren-delay 0)
+(show-paren-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Rainbow Delimiters</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package rainbow-delimiters
+  :demand
+  :init
+  (emagician/minor-in-major-mode prog-mode rainbow-delimiters-mode))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Color Identifiers</h3>
+<div class="outline-text-3" id="text-2-6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package color-identifiers-mode
+  :init
+  (add-hook 'after-init-hook 'global-color-identifiers-mode))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Tools</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Flycheck</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package flycheck
+  :diminish "⾶"
+  :init
+  (global-flycheck-mode)
+  (emagician/minor-in-major-mode prog-mode flycheck-color-mode-line-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> DZ, make it easy to run secondary services</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package dizzee)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Org Source&#x2026; babel babel babel!</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+I use org babel a lot. (duh).
+</p>
+
+<p>
+It's nice to have helpers to see if we are in org-babel mode.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/org-src-mode-p () 
+  "Test to see wehther the current mode is in org-src mode"
+  (member 'org-src-mode minor-mode-list))
+
+(ert-deftest emagician/org-src-mode-p ()
+  (let ((minor-mode-list '()))
+    (should-not (emagician/org-src-mode-p)))
+  (let ((minor-mode-list '(foo bar)))
+    (should-not (emagician/org-src-mode-p)))
+  (let ((minor-mode-list '(org-src-mode)))
+    (should (emagician/org-src-mode-p))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Version control</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Version control Gets it's own section. 
+</p>
+
+<p>
+Don't manage ancient version control backends 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq vc-handled-backends '(Git))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Editing</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Modes for editing git-specific files 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package git-commit)
+(use-package gitconfig-mode)
+(use-package gitignore-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Interface</h3>
+<div class="outline-text-3" id="text-4-2">
+</div><div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Magit</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package magit
+  :init
+  (when (locate-file "git-achievements" exec-path)
+    (setq magit-git-executable "git-achievements"))
+  :bind 
+  ("C-c m" . magit-status)
+  :config)
+</pre>
+</div>
+
+<p>
+(use-package magit-gh-pulls
+</p>
+<p>
+:init
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Git Gutter</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package git-gutter-fringe+
+  :init
+  (setq git-gutter-fr+-side 'right-fringe))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Languages</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Each language gets it's own file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Programming-Lisp")
+(emagician/load "Programming-Ruby")
+(emagician/load "Programming-Web")
+(emagician/load "Programming-Sh")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Quazi-related Modes</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Yaml</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package yaml-mode
+  :mode "\\.yml\\'")
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jonathan Arkell</p>
+<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

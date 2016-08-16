@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Installation</title>
+<!-- 2016-08-16 Tue 09:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jonathan Arkell" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Installation</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. And technomancy said</a>
+<ul>
+<li><a href="#sec-1-1">1.1. And eschulte described the light so it shall be understood and organized.</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. And thus did Jonnay expand upon for himself.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Running Code blocks</a></li>
+<li><a href="#sec-3">3. Installation</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Who the fuck are you?</a></li>
+<li><a href="#sec-3-2">3.2. Make the init files</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Step One: Where are we?</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Step Two: Making it go.</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Branching for great justice</a></li>
+<li><a href="#sec-3-4">3.4. Customizing and Configuration</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Your personal file</a></li>
+<li><a href="#sec-3-4-2">3.4.2. Your System-Type file</a></li>
+<li><a href="#sec-3-4-3">3.4.3. Your machine file(s)</a></li>
+<li><a href="#sec-3-4-4">3.4.4. Your account file</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5. The Testening</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1. No org-babel-execute function for sh?</a></li>
+<li><a href="#sec-3-5-2">3.5.2. what you should see when it works</a></li>
+<li><a href="#sec-3-5-3">3.5.3. A note about some magic&#x2026; Wait, what just happened there?</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-6">3.6. Taking the plunge</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. The actual Init file</a></li>
+<li><a href="#sec-5">5. That's All folks!</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> And technomancy said</h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+Emacs outshines all other editing software in approximately the same
+way that the noonday sun does the stars. It is not just bigger and
+brighter; it simply makes everything else vanish.
+</p>
+
+<p>
+&#x2013; Neal Stephenson, "In the Beginning was the Command Line"
+</p>
+</blockquote>
+
+<p>
+Let there be light  
+</p>
+
+<p>
+(and it was good)
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> And eschulte described the light so it shall be understood and organized.</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+(and it was awesome)
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> And thus did Jonnay expand upon for himself.</h4>
+<div class="outline-text-4" id="text-1-1-1">
+</div><ol class="org-ol"><li><a id="sec-1-1-1-1" name="sec-1-1-1-1"></a>If I have seen further, it is by standing on the shoulders of giants.<br  /><div class="outline-text-5" id="text-1-1-1-1">
+<p>
+While this quote is attributed to Sir Issac Newton, it was initially said by 
+</p>
+
+<blockquote>
+<p>
+"Bernard of Chartres used to compare us to dwarfs perched on the shoulders of giants. He pointed out that we see more and farther than our predecessors, not because we have keener vision or greater height, but because we are lifted up and borne aloft on their gigantic stature."
+</p>
+</blockquote>
+
+<p>
+Metalogicon:  John of Salisbury 1159
+</p>
+
+
+<div class="figure">
+<p><img src="./assets/images/Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg" alt="Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg" />
+</p>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Running Code blocks</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Installing this thing should be as easy as reading through the
+relevant sections to get used to how the kit works, and then
+running the code blocks inside.  Running a code-block is as easy as
+typing C-c C-c inside the relevant code block, and answering "yes"
+if it asks you whether or not you want to run said code block.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Installation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You need emacs 24. I am sure you can get it and install it, if you
+haven't already.
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Who the fuck are you?</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Who you are and the set of emacs configurations that you will want,
+will probably relatively remain consistent across machines, user
+accounts, etc.  At the same time, will need some differentiation
+amongst emacs starter kits.  This is your "true name".  Make it
+quazi-original.  If you are boring, a machine-readable fullname
+will do.
+</p>
+
+<p>
+We'll use the true name in the naming of your branch, loading your
+customizations, etc.
+</p>
+
+<p>
+Replace "jonnay" with your name!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="true-name">(defvar emagician/true-name "jonnay" 
+  "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Make the init files</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Making the init file is a two stage process.
+</p>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Step One: Where are we?</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+The first is to tell the Emagician Starter kit which directory is
+in.  Run the next code block, and watch how it writes a new one
+below.  You don't need to run the second one. 
+</p>
+
+<p>
+If there already is code below the "results:" block, then just
+delete it. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(concat "#+name: set-this-dir-as-var\n"
+        "#+begin_src emacs-lisp\n"
+        "(defvar emagician/dir\n"
+        "        \"" (file-name-directory (buffer-file-name)) "\"\n" ;BAM! 
+        "        \"Automagically generated variable where the emagicians kit is located\")\n"
+        "#+end_" "src\n")
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="set-this-dir-as-var">(defvar emagician/dir
+        "/Users/joarkell/projects/emagicians-starter-kit/"
+        "Automagically generated variable where the emagicians kit is located")
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Step Two: Making it go.</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Then this next code block creates the init.el file by running the
+next code block.  What this does is it takes the embedded elisp in
+this file (especially the parts where it determines how you are,
+and were the emagicians starer kit is) and weaves it together into
+a file called init.el.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-tangle)
+</pre>
+</div>
+
+<p>
+if you are interested, you can have a look at it:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(pop-to-buffer (find-file-other-window "./init.el"))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Branching for great justice</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+This next code block sets up a git branch.  Change the branch name
+to your own name.  hit C-C C-C on the next block for branchy git goodness.
+</p>
+
+<p>
+This also adds an entry to the .gitignore file that contains an
+entry to your private customization file.  More on this later
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(shell-command (concat "git branch " emagician/true-name))
+(shell-command (concat "git checkout " emagician/true-name))
+(shell-command (concat "echo \"" emagician/true-name "-private.org\" &gt;&gt; .gitignore"))
+</pre>
+</div>
+
+<p>
+I shouldn't have to tell you why this is a good idea.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Customizing and Configuration</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+In the original starter kit, there were 2 different kinds of custom
+files.  Emacs Magicians uses 4.
+</p>
+
+<p>
+The only file you need to create is your personal one.  All
+others are optional.
+</p>
+</div>
+
+<div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Your personal file</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+This next command is an invokation.  Even if you are going to use
+the Emagician starter kit as is, you need to run the next code
+block.  This defines a function that is used to create
+custom files for you.
+</p>
+
+<p>
+The first one it creates is based on the identity you specified
+above.  After that there are other customizations based on your
+login name, machine name and OS type.
+</p>
+
+<p>
+But you need to run this one first.
+</p>
+
+<p>
+There is also the possibility of you needing to store passwords
+and such.  The default is to do so in a directory called
+private.org in your personal directory that is already in your
+.gitignore file.
+</p>
+
+<p>
+Another option is to store them in a private.org.gpg file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/invoke-custom-file (name) 
+  "Create the customiztaion file, and load it up in emacs.
+This function is actually created when the emagician identifies themself"
+  (let ((filename (concat "./" name)))
+    (find-file-other-window (concat name ".org"))
+    (save-buffer)))
+
+(emagician/invoke-custom-file emagician/true-name)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Your System-Type file</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+If you end up using differnet OS's, you may want to have this set up.
+This would handle per-os level customization.  We use the
+"system-type" variable for determining which system type to use.  We
+do munge it a little by replacing any <code>/</code> with a <code>-</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file
+                       (replace-regexp-in-string "/" 
+                                                 "-" 
+                                                 (symbol-name system-type)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-3" class="outline-4">
+<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> Your machine file(s)</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<p>
+Different machines are not nessicarily on differnet OS's.  Different
+OS's aren't nessicarily different machines.  Now you can get more
+granular if need be.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file system-name)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-4" class="outline-4">
+<h4 id="sec-3-4-4"><span class="section-number-4">3.4.4</span> Your account file</h4>
+<div class="outline-text-4" id="text-3-4-4">
+<p>
+Then again, maybe you need to separate customizations out by user account. Why not?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file (user-login-name))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> The Testening</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+To properly test your magicians kit, you should build the tester,
+by running the elisp below.  If you don't know Emacs Lisp, you need
+to learn to become a magician.  If you know emacs lisp, but don't
+know org-babel, you are about to learn.  Be prepared for some
+high-lamp magick.  (No, not Linux Apache MySQL PHP.)
+</p>
+
+<p>
+Run the next code block.  It will emit a new code block below that
+will properly run the emacs starter kit as a shell command.  You
+can then run this new code block. 
+</p>
+
+<p>
+Note that you will need to quit the new instance of emacs, so
+control can return to this instance of emacs.
+</p>
+
+<p>
+#+source make-a-tha-test-script
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(concat "#+begin_src sh :results silent\n"
+        "  # run this code block to test your emacs starter kit\n"
+        "  "invocation-directory invocation-name " --no-init-file --load="
+        (file-name-directory (buffer-file-name))
+        "init.el" 
+        " &amp;"
+        "\n"
+        "#+end" "_src" ; don't want the parser to prematurely end here
+)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> No org-babel-execute function for sh?</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+If you get the message <code>org-babel-execute-src-block: No
+   org-babel-execute function for sh!</code> then you need to enable shell
+mode for babel.  Do that by running this code block:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'ob-sh)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> what you should see when it works</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+If it is working properly, the <code>*Messages*</code> buffer of the new emacs
+instance should read something like:
+</p>
+
+<pre class="example">
+Loading /home/jonny/emagicians-starter-kit/Emagician.el (source)...done
+loaded /home/jonny/emagicians-starter-kit/Emagician.el
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5-3" class="outline-4">
+<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> A note about some magic&#x2026; Wait, what just happened there?</h4>
+<div class="outline-text-4" id="text-3-5-3">
+<p>
+Ok, check it out, the source block just spits out a string, that gets
+inserted verbatim into the org-mode buffer.  I don't have to worry
+about where you put the starter kit it just builds itself a shell
+script.  It's kinda like macros, but cross-lingual macros.
+</p>
+
+<p>
+In fact, when the starter kit builds itself, it will use this
+cross-lingual aspect to figure out where it is.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Taking the plunge</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+One you run the next source block, you will have fully installed
+the Emagicians starter kit.
+</p>
+
+<p>
+Since we're going to over-write your .emacs.d/init file, we'll back
+it up first. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">NOW=$(date +"%Y-%m-%d_%H-%M-%S")
+FILE="~./.emacs.d/init-backup-$NOW.el"
+mv -v ~/.emacs.d/init.el $FILE
+cp -v ./init.el ~/.emacs.d/
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> The actual Init file</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+This is the init file that is tangled by the <code>org-babel-tagle</code> command, and then copied over to where you need it to be.  You don't really need to read it&#x2026; but you can if you like!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;; init.el --- Where all the magic begins
+;;
+;; Part of the Emagicians Starter Kit. 
+;;
+;; This is the first thing to get loaded.
+;; 
+;; Note, this file is automagickally summoned from Emagician-Install.org
+
+(defvar emagician/true-name "jonnay" 
+  "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
+(defvar emagician/dir
+        "/Users/joarkell/projects/emagicians-starter-kit/"
+        "Automagically generated variable where the emagicians kit is located")
+;; This sucks, but we need org mode properly running
+(setq package-user-dir (concat emagician/dir "elpa"))
+(let ((package-load-list '((org-plus-contrib t))))
+  (package-initialize))
+(require 'org-install)
+(require 'ob-tangle)
+(org-babel-load-file (expand-file-name "Emagician.org" emagician/dir))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> That's All folks!</h2>
+<div class="outline-text-2" id="text-5">
+<blockquote>
+<p>
+Emacs is the ground. We run around and act silly on top of it, and when we die, may our remnants grace its ongoing incrementation.
+&#x2013;  Thien-Thi Nguyen, comp.emacs
+</p>
+</blockquote>
+
+
+<div class="figure">
+<p><img src="./assets/images/thats-all-folks.gif" alt="thats-all-folks.gif" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jonathan Arkell</p>
+<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

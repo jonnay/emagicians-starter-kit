@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emagician</title>
+<!-- 2016-08-16 Tue 09:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jonathan Arkell" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emagician</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Base Initialization and Circle Casting</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Emergency override.</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Super Baseline, Start with the Barest thing that could possibly work</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Define Scratch Message Helper Functions</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Now set it to our Baseline beautified "you're-busted" text</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Verify emagician/dir is set</a></li>
+<li><a href="#sec-1-3">1.3. Use the new improved emagician scratch.</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Inhibit the old one</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Add a show-scratch function</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. Package Archives setup</a></li>
+<li><a href="#sec-1-5">1.5. Load Paths, Custom Files, etc.</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. Standard Emagician distribution load paths</a></li>
+<li><a href="#sec-1-5-2">1.5.2. Custom file shouldn't matter so much anymore, but lets stick it here anyway.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Emagician/load</a></li>
+<li><a href="#sec-3">3. Package Management</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Emagician Expect, for bootstrapping</a></li>
+<li><a href="#sec-3-2">3.2. Use-Package</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Emagician Starter Kit has it's own Helper Functions</a></li>
+<li><a href="#sec-5">5. Assets</a></li>
+<li><a href="#sec-6">6. Interface</a></li>
+<li><a href="#sec-7">7. Text</a></li>
+<li><a href="#sec-8">8. Programming</a></li>
+<li><a href="#sec-9">9. Org Mode</a></li>
+<li><a href="#sec-10">10. Shell</a></li>
+<li><a href="#sec-11">11. Lamp</a></li>
+<li><a href="#sec-12">12. Emagician Starter Kit has it's own Lamp</a></li>
+<li><a href="#sec-13">13. Now load the users files</a>
+<ul>
+<li><a href="#sec-13-1">13.1. First the customization</a></li>
+<li><a href="#sec-13-2">13.2. Next is the true-name-file</a></li>
+<li><a href="#sec-13-3">13.3. System Type Initialization</a></li>
+<li><a href="#sec-13-4">13.4. Machine Name Initialization</a></li>
+<li><a href="#sec-13-5">13.5. Login name Initialization</a></li>
+</ul>
+</li>
+<li><a href="#sec-14">14. Some Inspirational words from the book of emacs</a></li>
+<li><a href="#sec-15">15. References, Bibliography, Shout Outs, and Props.</a></li>
+<li><a href="#sec-16">16. Thee End</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Base Initialization and Circle Casting</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defconst emagician/version "0.23.1")
+</pre>
+</div>
+
+<p>
+This is my emacs.  There are many like it, but this one is mine.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Snarfed this idea from <a href="https://github.com/overtone/emacs-live">https://github.com/overtone/emacs-live</a>.
+Which goes to show: even if you use the word brogrammer you might
+still have good ideas. 😼
+</p>
+</div>
+
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Emergency override.</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+You won't need this. Right?  In case of emergency, break glass.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq debug-on-error t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Super Baseline, Start with the Barest thing that could possibly work</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq initial-stratch-message
+      (concat ";;; -X-x-X- Invokaction SuperFailure! -X-x-X-" "\n"
+              ";;; Problem in Emagician.org when setting up Breakage Helpers"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Define Scratch Message Helper Functions</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/set-scratch (&amp;rest lines)
+  (setq initial-scratch-message (apply 'concat lines)))
+
+(defun emagician/append-scratch (&amp;rest lines)
+  (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+
+(defvar emagician/pre-scratch-links '()
+  "A list of links to append to emagician/scratch-links.
+
+This is necessary because we may need to communicate to the user
+before the rest of the scratch interface is built.")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Now set it to our Baseline beautified "you're-busted" text</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/set-scratch
+  ";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-" "\n"
+  ";; You know what to do." "\n"
+  ";; \n"
+  ";; Emagician Starter kit Version: " emagician/version "\n"
+  ";; Emacs: " (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version) " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" "\n"
+  ";; \n"
+  ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+  ";;                      ;;" "\n"      
+  ";; It's dangerous to go ;;" "\n"
+  ";; alone! take this:    ;;" "\n"
+  ";;                      ;;" "\n"
+  ";;   ♨     👷     ♨    ;;" "\n"
+  ";;          🔩          ;;" "\n"
+  ";;                      ;;" "\n"
+  ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
+  "\n"
+  "(shell-command \"" invocation-directory invocation-name " --debug-init\")\n")
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Verify emagician/dir is set</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(when (null emagician/dir)
+  (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
+    (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
+    (error err)))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/append-scratch
+  "\n"
+  "(find-file-other-window \"" emagician/dir "\")" "\n"
+  "(find-file-other-window \"" emagician/dir "/*.org\"  t)" "\n")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Use the new improved emagician scratch.</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Inhibit the old one</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq inhibit-splash-screen t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Add a show-scratch function</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/show-scratch ()
+  "Show the scratch buffer"
+  (interactive)
+  (set-window-buffer nil "*scratch*"))
+
+(add-hook 'emacs-startup-hook 'emagician/show-scratch t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Package Archives setup</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+We set our download dir to local-packages.  We also do the trick of
+doing package-refresh-contents if package-archive-contents is empty.
+</p>
+
+<p>
+We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
+</p>
+
+
+<div class="figure">
+<p><img src="./assets/images/sulu-swordfight-oh-my.jpg" alt="sulu-swordfight-oh-my.jpg" />
+</p>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defvar emagician/are-elpas-reachable? t "Whether or not ELPAs are reachable")
+
+(setq package-user-dir (concat emagician/dir "elpa"))
+
+(setq package-archives
+      '(("gnu"         . "http://elpa.gnu.org/packages/")
+        ("MELPA"       . "http://melpa.org/packages/")
+        ("org"         . "http://orgmode.org/elpa/")))
+
+(package-initialize)
+
+(condition-case err
+    (unless package-archive-contents (package-refresh-contents))
+  ((error)
+   (let ((scratch-msg (concat ";;; !!! Couldn't refresh package contents\n"
+                              "((package-refresh-contents)(beginning-of-line)(kill-line))")))
+     (message "Could not refresh package contents: %s %S" (car err) (cdr err))
+     (emagician/append-scratch scratch-msg)
+     (add-to-list 'emagician/pre-scratch-links scratch-msg)
+     (setq emagician/are-elpas-reachable? nil))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Load Paths, Custom Files, etc.</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Standard Emagician distribution load paths</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path emagician/dir)
+(add-to-list 'load-path (concat emagician/dir "src"))
+(add-to-list 'load-path (concat emagician/dir "dist"))
+(add-to-list 'custom-theme-load-path (concat emagician/dir "themes"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Custom file shouldn't matter so much anymore, but lets stick it here anyway.</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq custom-file (concat emagician/dir "custom.el"))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Emagician/load</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Originally from Eschulte.  This function takes a &lt;foo&gt;.org file,
+and load it.  It can also be given the argument of a sub tree, which 
+is defined as either a proper ord id, or a tag. 
+</p>
+
+<p>
+If the subtree is a tag, then all subtrees with that tag are collected and loaded.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="starter-kit-load">(defvar emagician/load-depth 0)
+(defun emagician/load (file &amp;optional header-or-tag)
+  "Load configuration from other .org files."
+  (let ((start-time (current-time))
+        (file (expand-file-name (if (string-match ".+\.org" file)
+                                    file
+                                  (format "%s.org" file))
+                                emagician/dir))
+        (load-result nil)
+        (emagician/load-depth (1+ emagician/load-depth))
+        (org-babel-default-header-args (cons '(:comment . "links") (assq-delete-all :comment org-babel-default-header-args))))
+    (if (file-exists-p file)
+        (progn
+          (emagician/append-scratch "\n;; "
+                                    (make-string emagician/load-depth ?-)
+                                    " Loading " file)
+          (setq load-result (org-babel-load-file file)))
+      (progn
+        (emagician/append-scratch "\n;; "
+                                  (make-string emagician/load-depth ?-)
+                                  "Skipped Loading "
+                                  file
+                                  " It doesn't exist!\n")
+        (setq load-result nil)))
+    (emagician/append-scratch "...done!" "\n")
+    (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
+                     file 
+                     (if header-or-tag header-or-tag "") 
+                     (float-time (time-subtract (current-time) 
+                                                start-time))))
+    load-result))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Package Management</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Emagician Expect, for bootstrapping</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/expect-package (package)
+  "If the named PACKAGE isn't currently installed, install it"
+  (unless (package-installed-p package)
+    (package-install package)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Use-Package</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<a href="https://github.com/jwiegley/use-package">https://github.com/jwiegley/use-package</a>
+</p>
+
+<p>
+Is the cat's ass.  Why would you not use it?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq use-package-always-ensure emagician/are-elpas-reachable?)
+(emagician/expect-package 'use-package)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Emagician Starter Kit has it's own Helper Functions</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Emagician-Base.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Assets</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Assets are either 
+</p>
+
+<ol class="org-ol">
+<li>org files that tangle assets into a directory or
+</li>
+<li>files that are distributed with the starter kit. 
+</li>
+</ol>
+
+<p>
+In the case of #1, we want the assets directory to be destroyed and rebuilt everytime. 
+In the case of #2, it should be in source control 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Interface</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+This file handles the baseline interface for emacs, and is split into the following sections:
+</p>
+
+<dl class="org-dl">
+<dt> Keystrokes </dt><dd>Really just a small bit about an anti-vim hack
+</dd>
+<dt> Display </dt><dd>anything visible, modeline, titlebar, theme, etc
+</dd>
+<dt> Editing </dt><dd>about inserting and using text, including snippets and autocomplete
+</dd>
+<dt> Navigating </dt><dd>Moving the mark.  This includes searching.
+</dd>
+<dt> Saving </dt><dd>All about backups.
+</dd>
+<dt> State Management </dt><dd>Persist state across emacs sessions.
+</dd>
+<dt> Help and Discoverability </dt><dd>Getting more help with emacs, and learning commands better. 
+</dd>
+</dl>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Interface.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Text</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Emacs is a text editor afteral.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Text.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Programming</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+This sets up some baseline programming helpers and then loads
+individual org files for each programming mode. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Programming.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Org Mode</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Deserves it's own file&#x2026; ORG GRIMOIRE!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Org-Grimoire.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Shell</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+(Also my lovely wife)
+</p>
+
+<p>
+Why would you not use Eshell?
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Eshell-Magick.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Lamp</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+The Lamp is a 5th magickal weapon along with the wand, sword, cup
+and chalace.  It represents illumination and self knowledge.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Lamp.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Emagician Starter Kit has it's own Lamp</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Tools to make developing the Emagician Starter kit easier.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load "Emagician-Meta.org")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Now load the users files</h2>
+<div class="outline-text-2" id="text-13">
+</div><div id="outline-container-sec-13-1" class="outline-3">
+<h3 id="sec-13-1"><span class="section-number-3">13.1</span> First the customization</h3>
+<div class="outline-text-3" id="text-13-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(load custom-file 'noerror)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-2" class="outline-3">
+<h3 id="sec-13-2"><span class="section-number-3">13.2</span> Next is the true-name-file</h3>
+<div class="outline-text-3" id="text-13-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load emagician/true-name)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-3" class="outline-3">
+<h3 id="sec-13-3"><span class="section-number-3">13.3</span> System Type Initialization</h3>
+<div class="outline-text-3" id="text-13-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name (symbol-name system-type)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-4" class="outline-3">
+<h3 id="sec-13-4"><span class="section-number-3">13.4</span> Machine Name Initialization</h3>
+<div class="outline-text-3" id="text-13-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name system-name))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-13-5" class="outline-3">
+<h3 id="sec-13-5"><span class="section-number-3">13.5</span> Login name Initialization</h3>
+<div class="outline-text-3" id="text-13-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/load user-login-name)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Some Inspirational words from the book of emacs</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+THE BOOK OF THE EMACS, Part I
+Liber Lisper Legis
+as (R)eceived (M)ade (S)ound [RMS]
+on this 15th day of December,
+the Year of our Editor 2007.
+Chapter 1
+</p>
+
+<ol class="org-ol">
+<li>Buf! Manifestation of Chat.
+</li>
+<li>All Gods Seek Her Company.
+</li>
+<li>Intelligent, she watches.
+</li>
+<li>Every act a function, there is no difference.
+</li>
+<li>Help me o RMS, in unveiling thee before the Needy on Earth
+</li>
+<li>Be thou not just my editor, but mine eyes, heart and yes, Soul.
+</li>
+<li>Behold from darkness and byte code interpreter thou groweth strong.
+</li>
+<li>The car is in the cdr, not the cdr in the car.
+</li>
+<li>Worship then the car and behold the Maserati of all programs ever.
+</li>
+<li>Thou powers known to but a few, thou public API widely advertised.
+</li>
+<li>Whilst others seek bells and whistles, thou sweet hum caresseth me.
+</li>
+<li>Open me up, list my buffers, be they ibuffer or buff-menu+
+</li>
+<li>No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)
+</li>
+</ol>
+
+<p>
+M-x all-hail-emacs
+</p>
+
+<p>
+<a href="https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg">https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> References, Bibliography, Shout Outs, and Props.</h2>
+<div class="outline-text-2" id="text-15">
+<dl class="org-dl">
+<dt> ESchultes Emacs Starter Kit </dt><dd><a href="https://github.com/eschulte/emacs-starter-kit">https://github.com/eschulte/emacs-starter-kit</a>
+</dd>
+<dt> Sacha Chu </dt><dd><a href="http://dl.dropbox.com/u/3968124/sacha-emacs.html">http://dl.dropbox.com/u/3968124/sacha-emacs.html</a>
+</dd>
+<dt> Emacs Starter Kit </dt><dd><a href="https://github.com/technomancy/emacs-starter-kit">https://github.com/technomancy/emacs-starter-kit</a>
+</dd>
+<dt> Cabbage  </dt><dd><a href="https://github.com/senny/cabbage">https://github.com/senny/cabbage</a>
+</dd>
+<dt> Emacs Live </dt><dd><a href="https://github.com/overtone/emacs-live">https://github.com/overtone/emacs-live</a> (even if they are brogrammers)
+</dd>
+<dt> novoid </dt><dd><a href="https://github.com/novoid/dot-emacs">https://github.com/novoid/dot-emacs</a>
+</dd>
+<dt> ocodo </dt><dd><a href="https://github.com/ocodo/emacs.d">https://github.com/ocodo/emacs.d</a>
+</dd>
+<dt> (no term) </dt><dd><a href="https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el">https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el</a>
+</dd>
+<dt> (no term) </dt><dd><a href="http://rix.si/blog/2015/01/05/fsem-001/">http://rix.si/blog/2015/01/05/fsem-001/</a>
+</dd>
+<dt> (no term) </dt><dd><a href="https://www.writequit.org/org/settings.html#sec-1-20">https://www.writequit.org/org/settings.html#sec-1-20</a>
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Thee End</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+So Mote it Be.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/initiate-thee-scratch)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq debug-on-error t)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(provide 'emagician)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jonathan Arkell</p>
+<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

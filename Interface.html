@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>User Interface Elements</title>
+<!-- 2016-08-16 Tue 09:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jonathan Arkell" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">User Interface Elements</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Keystrokes and commands</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Simple answers plz!</a></li>
+<li><a href="#sec-1-2">1.2. It used to be that Once in blue moon, vi keys would happen</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Display</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Turn of scrollbars, toolbars, menu bars</a></li>
+<li><a href="#sec-2-2">2.2. Visible Bell</a></li>
+<li><a href="#sec-2-3">2.3. Fonts</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. Describe Char</a></li>
+<li><a href="#sec-2-3-2">2.3.2. Unicode</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. Ansi Color</a></li>
+<li><a href="#sec-2-5">2.5. Maximize primary window</a></li>
+<li><a href="#sec-2-6">2.6. Frame titles</a></li>
+<li><a href="#sec-2-7">2.7. Modeline</a>
+<ul>
+<li><a href="#sec-2-7-1">2.7.1. Basics</a></li>
+<li><a href="#sec-2-7-2">2.7.2. Diminish</a></li>
+<li><a href="#sec-2-7-3">2.7.3. Powerline</a></li>
+<li><a href="#sec-2-7-4">2.7.4. Turn on column and line numbers; file size</a></li>
+<li><a href="#sec-2-7-5">2.7.5. Smart Mode Line</a></li>
+<li><a href="#sec-2-7-6">2.7.6. <span class="todo TODO">TODO</span> Nyan mode</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-8">2.8. Cursor Info</a>
+<ul>
+<li><a href="#sec-2-8-1">2.8.1. Dimension 1: File status</a></li>
+<li><a href="#sec-2-8-2">2.8.2. Dimention 2: Funky modes</a></li>
+<li><a href="#sec-2-8-3">2.8.3. Enhancements</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-9">2.9. Highlight Line</a></li>
+<li><a href="#sec-2-10">2.10. Border the 80th column</a></li>
+<li><a href="#sec-2-11">2.11. Themes</a>
+<ul>
+<li><a href="#sec-2-11-1">2.11.1. Base theme: Moe, Moe, Kyun!</a></li>
+<li><a href="#sec-2-11-2">2.11.2. Org Beautify</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Editing</a>
+<ul>
+<li><a href="#sec-3-1">3.1. UTF-8 Enforcement</a></li>
+<li><a href="#sec-3-2">3.2. The Mark</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Transient mark mode</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Show Marks   :learn-me:</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Multiple Cursors</a></li>
+<li><a href="#sec-3-4">3.4. Killing and Yanking</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Volatile Highlights</a></li>
+<li><a href="#sec-3-4-2">3.4.2. Swap</a></li>
+<li><a href="#sec-3-4-3">3.4.3. kill-buffer-file-name</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5. Snippets</a></li>
+<li><a href="#sec-3-6">3.6. Auto Complete</a>
+<ul>
+<li><a href="#sec-3-6-1">3.6.1. Auto Complete Dictionary</a></li>
+<li><a href="#sec-3-6-2">3.6.2. Auto Complete Default Sources</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-7">3.7. Undo</a></li>
+<li><a href="#sec-3-8">3.8. Fixing Typos and Spelling</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Navigating</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Scrolling</a></li>
+<li><a href="#sec-4-2">4.2. Ace Jump</a></li>
+<li><a href="#sec-4-3">4.3. Ace window jump</a>
+<ul>
+<li><a href="#sec-4-3-1">4.3.1. Keys on the home row</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-4">4.4. Save Place</a></li>
+<li><a href="#sec-4-5">4.5. Uniquify</a></li>
+<li><a href="#sec-4-6">4.6. Searching</a>
+<ul>
+<li><a href="#sec-4-6-1">4.6.1. Default to regexp Searches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Saving</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Backups</a>
+<ul>
+<li><a href="#sec-5-1-1">5.1.1. Set the backup directory to something decent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-6">6. State Management</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Server</a></li>
+<li><a href="#sec-6-2">6.2. Recent Files</a></li>
+<li><a href="#sec-6-3">6.3. Save Command History</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Help and Discoverability</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Find file at point, the baseline in discoverability.</a></li>
+<li><a href="#sec-7-2">7.2. Which Key</a></li>
+<li><a href="#sec-7-3">7.3. Discover My Major   :learn-me:bind:</a></li>
+<li><a href="#sec-7-4">7.4. Helm</a>
+<ul>
+<li><a href="#sec-7-4-1">7.4.1. F2 is my super duper DWIM helper</a></li>
+<li><a href="#sec-7-4-2">7.4.2. Enable it</a></li>
+<li><a href="#sec-7-4-3">7.4.3. Helm for M-x</a></li>
+<li><a href="#sec-7-4-4">7.4.4. Buffer Selection</a></li>
+<li><a href="#sec-7-4-5">7.4.5. Show full paths</a></li>
+<li><a href="#sec-7-4-6">7.4.6. Extended Command, Insert, write and find files should use helm.</a></li>
+<li><a href="#sec-7-4-7">7.4.7. Personal Preferences</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Keystrokes and commands</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Simple answers plz!</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(fset 'yes-or-no-p 'y-or-n-p)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> It used to be that Once in blue moon, vi keys would happen</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+That was before I really dug into Tramp mode.  
+</p>
+
+<p>
+I would launch vim to edit a file on a remote server.  I know just
+enough vi to add characters and save and get out.  In fact, I would
+save with: <code>&lt;ESC&gt;:w</code> and then quit.
+</p>
+
+<p>
+This would hose my muscle memory though.  And sometimes I would try
+to do the same in emacs.
+</p>
+
+<p>
+By setting the var <code>w</code> to the string, when it is evaled with ESC-:
+the string is evaled instead.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq w! "uUuuuuuUUUuuuummmMMMmmmm.  This ain't vim.")
+</pre>
+</div>
+
+<p>
+Now that I can do most of everything I need through tramp, and the
+stuff I can't do I can from within a shell inside of emacs, this
+isn't needed anymore.
+</p>
+
+<p>
+I keep it around though because it's clevar and fun.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Display</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Turn of scrollbars, toolbars, menu bars</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Oh my.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+    (when (fboundp mode) (funcall mode -1)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Visible Bell</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+I used to hate the visible bell, but it has sense gotten a lot better. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq visible-bell t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Fonts</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Describe Char</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+Give us all the unicode information for a glyph. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq describe-char-unidata-list '(name old-name general-category canonical-combining-class bidi-class decomposition decimal-digit-value digit-value numeric-value mirrored uppercase lowercase titlecase))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Unicode</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p class="verse">
+Unicode<br  />
+&#xa0;&#xa0;|(<sup>o</sup>^)/    ,(   Get all teh characters! )<br  />
+</p>
+
+
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package unicode-fonts 
+  :init
+  (setq unicode-fonts-skip-fonts nil)
+  :config
+  (unicode-fonts-setup))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Ansi Color</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+ARGH, we were so close to getting away from this until hipsters brought it all back again.
+</p>
+
+<p>
+Thanks Obama
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'ansi-color)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Maximize primary window</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup.  At least on OS X.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq default-frame-parameters '((fullscreen . maximized)))
+(defun emagician/full-screen ()
+  "Fullscreen mode!"
+  (interactive) 
+  (modify-frame-parameters nil '((fullscreen . maximized))))
+(emagician/full-screen)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Frame titles</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq frame-title-format
+      '("" 
+        invocation-name 
+        "  -|-+-|-  " 
+        (:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                   "%b"))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Modeline</h3>
+<div class="outline-text-3" id="text-2-7">
+</div><div id="outline-container-sec-2-7-1" class="outline-4">
+<h4 id="sec-2-7-1"><span class="section-number-4">2.7.1</span> Basics</h4>
+<div class="outline-text-4" id="text-2-7-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq column-number-mode t)
+(setq line-number-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7-2" class="outline-4">
+<h4 id="sec-2-7-2"><span class="section-number-4">2.7.2</span> Diminish</h4>
+<div class="outline-text-4" id="text-2-7-2">
+<p>
+Yeah, fix the mode line.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package diminish)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7-3" class="outline-4">
+<h4 id="sec-2-7-3"><span class="section-number-4">2.7.3</span> Powerline</h4>
+<div class="outline-text-4" id="text-2-7-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/powerline-theme ()
+  "Setup the default mode-line."
+  (interactive)
+  (setq-default mode-line-format
+                '("%e"
+                  (:eval
+                   (let* ((active (powerline-selected-window-active))
+                          (mode-line (if active 'mode-line 'mode-line-inactive))
+                          (face1 (if active 'powerline-active1 'powerline-inactive1))
+                          (face2 (if active 'powerline-active2 'powerline-inactive2))
+                          (separator-left (intern (format "powerline-%s-%s"
+                                                          powerline-default-separator
+                                                          (car powerline-default-separator-dir))))
+                          (separator-right (intern (format "powerline-%s-%s"
+                                                           powerline-default-separator
+                                                           (cdr powerline-default-separator-dir))))
+                          (lhs (list (powerline-raw "%*" nil 'l)
+                                     (powerline-buffer-size nil 'l)
+                                     (powerline-raw mode-line-mule-info nil 'l)
+                                     (powerline-buffer-id nil 'l)
+                                     (when (and (boundp 'which-func-mode) which-func-mode)
+                                       (powerline-raw which-func-format nil 'l))
+                                     (powerline-raw " ")
+                                     (funcall separator-left mode-line face1)
+                                     (when (boundp 'erc-modified-channels-object)
+                                       (powerline-raw erc-modified-channels-object face1 'l))
+                                     (powerline-major-mode face1 'l)
+                                     (powerline-process face1)
+                                     (powerline-minor-modes face1 'l)
+                                     (powerline-narrow face1 'l)
+                                     (powerline-raw " " face1)
+                                     (funcall separator-left face1 face2)
+                                     (powerline-vc face2 'r)
+                                     (nyan-create)))
+                          (rhs (list (powerline-raw global-mode-string face2 'r)
+                                     (funcall separator-right face2 face1)
+                                     (powerline-raw "%4l" face1 'l)
+                                     (powerline-raw ":" face1 'l)
+                                     (powerline-raw "%3c" face1 'r)
+                                     (funcall separator-right face1 mode-line)
+                                     (powerline-raw " ")
+                                     (powerline-raw "%6p" nil 'r)
+                                     (powerline-hud face2 face1))))
+                     (concat (powerline-render lhs)
+                             (powerline-fill face2 (powerline-width rhs))
+                             (powerline-render rhs)))))))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package powerline
+             :config
+             (emagician/powerline-theme)
+             (setq powerline-default-separator 'zigzag)
+             (powerline-reset)
+             (powerline-default-theme))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-7-4" class="outline-4">
+<h4 id="sec-2-7-4"><span class="section-number-4">2.7.4</span> Turn on column and line numbers; file size</h4>
+<div class="outline-text-4" id="text-2-7-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(column-number-mode 1)
+(line-number-mode 1)
+(size-indication-mode t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7-5" class="outline-4">
+<h4 id="sec-2-7-5"><span class="section-number-4">2.7.5</span> Smart Mode Line</h4>
+<div class="outline-text-4" id="text-2-7-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/expect-package 'smart-mode-line)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-7-6" class="outline-4">
+<h4 id="sec-2-7-6"><span class="section-number-4">2.7.6</span> <span class="todo TODO">TODO</span> Nyan mode</h4>
+<div class="outline-text-4" id="text-2-7-6">
+<p>
+One day.  Powerline and nyan mode don't work.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Cursor Info</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+There are a few ways to change the cursor: blinking, shape and
+color.  Basically this gives us three different dimensions of
+information available to us.
+</p>
+</div>
+
+<div id="outline-container-sec-2-8-1" class="outline-4">
+<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> Dimension 1: File status</h4>
+<div class="outline-text-4" id="text-2-8-1">
+<dl class="org-dl">
+<dt> light blue </dt><dd>no file or process attached
+</dd>
+<dt> dark blue </dt><dd>process attached
+</dd>
+<dt> yellow </dt><dd>read only
+</dd>
+<dt> red </dt><dd>Important (SSH to production server, etc)
+<dl class="org-dl">
+<dt> grey </dt><dd>file visited
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8-2" class="outline-4">
+<h4 id="sec-2-8-2"><span class="section-number-4">2.8.2</span> Dimention 2: Funky modes</h4>
+<div class="outline-text-4" id="text-2-8-2">
+<dl class="org-dl">
+<dt> overwrite </dt><dd>hollow box
+</dd>
+<dt> 'normal' </dt><dd>line
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8-3" class="outline-4">
+<h4 id="sec-2-8-3"><span class="section-number-4">2.8.3</span> Enhancements</h4>
+<div class="outline-text-4" id="text-2-8-3">
+</div><ol class="org-ol"><li><a id="sec-2-8-3-1" name="sec-2-8-3-1"></a><span class="todo TODO">TODO</span> set up a way to handle production buffers through a buffer local var.<br  /><div class="outline-text-5" id="text-2-8-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="cursor-status">;; Change cursor color according to mode
+(defvar emagician/set-cursor-color-color "")
+(defvar emagician/set-cursor-color-type nil)
+(defvar emagician/set-cursor-color-buffer "")
+
+(defun emagician/set-cursor-color-according-to-mode ()
+  "change cursor color according to some minor modes."
+  ;; set-cursor-color is somewhat costly, so we only call it when needed:
+  (let ((color (cond
+
+                ((comint-check-proc (current-buffer)) "blue")
+                (buffer-read-only "white")
+                ((not (equal buffer-file-name nil)) "grey50")
+                (t "cyan")))
+        (type (cond
+               (overwrite-mode 'hollow)
+               (t 'box))))
+    (unless (and
+             (string= color emagician/set-cursor-color-color)
+             (string= type emagician/set-cursor-color-type)
+             (string= (buffer-name) emagician/set-cursor-color-buffer))
+      (set-cursor-color (setq emagician/set-cursor-color-color color))
+      (setq cursor-type (setq emagician/set-cursor-color-type type))
+      (setq emagician/set-cursor-color-buffer (buffer-name)))))
+
+(add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Highlight Line</h3>
+<div class="outline-text-3" id="text-2-9">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-hl-line-mode 1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-10" class="outline-3">
+<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Border the 80th column</h3>
+<div class="outline-text-3" id="text-2-10">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package fill-column-indicator
+  :init
+  (setq fci-rule-width 1)
+  (setq fci-rule-column 81)
+  (setq fci-rule-color "#383838")
+  (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-11" class="outline-3">
+<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Themes</h3>
+<div class="outline-text-3" id="text-2-11">
+</div><div id="outline-container-sec-2-11-1" class="outline-4">
+<h4 id="sec-2-11-1"><span class="section-number-4">2.11.1</span> Base theme: Moe, Moe, Kyun!</h4>
+<div class="outline-text-4" id="text-2-11-1">
+<p>
+This theme is my favorite so far.  It's got good color choices and it's nice and dark.
+</p>
+
+<p>
+The theme needs to be loaded after powerlie to work.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package moe-theme
+  :init
+  (setq moe-theme-mode-line-color 'yellow)
+  :config
+  (moe-dark))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-11-2" class="outline-4">
+<h4 id="sec-2-11-2"><span class="section-number-4">2.11.2</span> Org Beautify</h4>
+<div class="outline-text-4" id="text-2-11-2">
+<p>
+Load from our =bad self!
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'custom-theme-load-path (expand-file-name "themes/org-beautify-theme/" emagician/dir))
+(load-theme 'org-beautify t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Editing</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> UTF-8 Enforcement</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+I've kept a version of this since 2006.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> The Mark</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Transient mark mode</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+For now Transient Mark mode is just turned off.  I don't like
+transients.
+</p>
+
+<p>
+Seriously though, the reason why I like not having transient mark
+mode is that I have gotten into the habit of dropping marks and
+using the mark ring.  I also use the mark for nagivation, and having
+transient mark mode on messes with my workflow.
+</p>
+
+<p>
+If you are opposite, then let me know (file a bug report:
+<a href="https://github.com/jonnay/emagicians-starter-kit/issues/new">https://github.com/jonnay/emagicians-starter-kit/issues/new</a>) and
+I'll fix the emagicians kit so that transient mark mode can be
+easily activated.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="turn-off-transient-mark">(transient-mark-mode -1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Show Marks   :learn-me:</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+show-#+begin<sub>src</sub> emacs-lisp 
+(emagician/expect-package 'show-marks)
+#+end<sub>src</sub>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Multiple Cursors</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package multiple-cursors
+  :bind (("C-S-c e" . mc/edit-lines)
+         ("C-S-c n" . mc/mark-next-like-this)
+         ("C-S-c p" . mc/mark-previous-like-this)
+         ("C-S-c h" . mc/mark-all-like-this)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Killing and Yanking</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Having a big kill ring is very helpful.  It's searchable by helm.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-ring-max 120)
+</pre>
+</div>
+
+<p>
+Also, the system clipboard is a must have.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq save-interprogram-paste-before-kill t)
+</pre>
+</div>
+
+<p>
+Allow Read-only killing.  Power of plain text. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-read-only-ok t)
+</pre>
+</div>
+
+<p>
+At the beginning of the line, kill-line gets the entire line. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq kill-whole-line t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Volatile Highlights</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+Shows what changed through undo, yank etc. commands
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package volatile-highlights
+  :diminish ""
+  :init
+  (volatile-highlights-mode t))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Swap</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+Found from Stackoverflow.  Thank you jcubic and legoscia.<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun swap-region-with-kill (&amp;optional arg)
+  "replace selected text with the one from kill ring"
+  (interactive "*P")
+  (backward-delete-char (- (point) (mark)))
+  (yank arg))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-3" class="outline-4">
+<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> kill-buffer-file-name</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<p>
+I use this all the time.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun kill-buffer-file-name () 
+  "Show current buffer's filename in the echo area and add it to the kill ring." 
+  (interactive) 
+  (let ((buffer-file-name (buffer-file-name))) 
+    (if (null buffer-file-name) 
+        (message "Buffer %s is not associated with a file." (buffer-name)) 
+      (message "%s" (kill-new buffer-file-name)))))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun kill-buffer-file-basename ()
+  "Show the buffers base name in the echo area and add it to the kill ring."
+  (interactive)
+  (let ((bufer-file-name (buffer-file-name)))
+    (if (not (null buffer-file-name))
+        (message "%s" (kill-new (file-name-nondirectory buffer-file-name)))
+      (error "Buffer %s is not associated with a file" (buffer-name)))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Snippets</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+See also <a href="./Snippets.html">./Snippets.html</a> for the actual Snippets.
+</p>
+
+<p>
+Set the snippet dir.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/expect-dir "assets/snippets")
+(use-package yasnippet
+  :diminish ""
+  :init
+  (setq yas-snippet-dirs `(,(expand-file-name "assets/snippets" emagician/dir) yas-installed-snippets-dir))
+  (setq yas-trigger-key nil)
+  (add-hook 'text-mode-hook 'yas-minor-mode-on)
+  :config
+  (yas/reload-all))
+</pre>
+</div>
+
+<p>
+This rigamaroo might nit be needed anymore:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun yas/org-very-safe-expand ()
+   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+
+ (defun yas/org-setup ()
+   ;; yasnippet (using the new org-cycle hooks)
+   (make-variable-buffer-local 'yas/trigger-key)
+   (setq yas/trigger-key [tab])
+   (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+   (define-key yas/keymap [tab] 'yas/next-field))
+
+ ;(add-hook 'org-mode-hook #'yas/org-setup)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Auto Complete</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+<b>Note:</b> if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
+</p>
+
+<p>
+`ac-ignore-case` is really burning me right now, so I am enabling it.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package auto-complete
+  :demand
+  :diminish ""
+  :init
+  (setq ac-auto-show-menu t)
+  (setq ac-dwim t)
+  (setq ac-use-menu-map t)
+  (setq ac-ignore-case nil)
+  (setq ac-quick-help-delay (+ 0.125 (/ 0.125 2)))
+  (setq ac-quick-help-height 20)
+  (set-default 'ac-sources 
+               '(ac-source-yasnippet
+                 ac-source-dictionary
+                 ac-source-filename
+                 ac-source-files-in-current-dir                 
+                 ac-source-words-in-buffer
+                 ac-source-words-in-same-mode-buffers))
+  :bind 
+  (:map ac-completing-map
+        ("C-M-n"   . ac-next)
+        ("C-M-p"   . ac-previous)
+        ("&lt;tab&gt;"   . ac-complete)
+        ("M-&lt;ret&gt;" . ac-help)
+        ("&lt;ret&gt;"   . nil))
+
+  :config
+  (require 'auto-complete-config)  
+  (ac-config-default)
+  (ac-flyspell-workaround)
+  (global-auto-complete-mode t)
+  (emagician/expect-dir "assets/ac-dictionaries")
+  (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> Auto Complete Dictionary</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> Auto Complete Default Sources</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(set-default 'ac-sources
+             '(ac-source-yasnippet
+               ac-source-dictionary
+               ac-source-words-in-buffer
+               ac-source-words-in-same-mode-buffers))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Undo</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package undo-tree
+  :diminish ""
+  :init
+  (setq undo-tree-enable-undo-in-region t
+        undo-tree-visualizer-diff t
+        undo-tree-visualizer-timestamps t)
+  :config
+  (global-undo-tree-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> Fixing Typos and Spelling</h3>
+<div class="outline-text-3" id="text-3-8">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(load "fix-muscle-memory/fix-muscle-memory.el")
+(fix-muscle-memory-load-problem-words 'foo
+                                      '(("teh" . "the")
+                                        ("comptuer" . "computer")
+                                        ("destory" . "destroy")))
+(add-hook 'text-mode-hook 'abbrev-mode)
+(add-hook 'prog-mode-hook 'abbrev-mode)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Navigating</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Scrolling</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Keep the screen position when scrolling.  
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq scroll-preserve-screen-position t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Ace Jump</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ace-jump-mode
+  :demand
+  :bind 
+  ("C-c C-SPC" . ace-jump-mode)
+  (:map org-mode-map 
+         ("C-c C-SPC" 'ace-jump-mode))
+  :init
+  (setq erc-track-enable-keybindings nil))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Ace window jump</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package ace-window
+  :init
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind
+  ("C-x o" . ace-window))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Keys on the home row</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Save Place</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Saveplace allows emacs to remember where you were in a file.  It is very handy and mostly transparent.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'saveplace)
+(setq-default save-place t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Uniquify</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+Rename buffers so they are unique. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'uniquify)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-6" class="outline-3">
+<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Searching</h3>
+<div class="outline-text-3" id="text-4-6">
+</div><div id="outline-container-sec-4-6-1" class="outline-4">
+<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Default to regexp Searches</h4>
+<div class="outline-text-4" id="text-4-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Saving</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Backups</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq auto-save-default t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> Set the backup directory to something decent</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+(emagician/expect-dir "backups")
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> State Management</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Server</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(unless (string-equal "root" (getenv "USER"))
+  (require 'server)
+  (unless (server-running-p) (server-start)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Recent Files</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+500 should be as enough files to handle long editing sessions at
+work, and some weekend projects as well.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'recentf)
+(setq recentf-max-saved-items 500)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Save Command History</h3>
+<div class="outline-text-3" id="text-6-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring compile-command))
+(setq savehist-autosave-interval 60)
+(savehist-mode t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Help and Discoverability</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Find file at point, the baseline in discoverability.</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Which Key</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package which-key
+  :demand
+  :init
+  (setq which-key-idle-delay 0.6)
+  (setq which-key-is-verbose t)
+  (setq which-key-min-display-lines 2)
+  (setq which-key-show-remaining-keys t)
+  (which-key-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Discover My Major   :learn-me:bind:</h3>
+<div class="outline-text-3" id="text-7-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package discover-my-major
+  :bind
+  (("C-c C-h"   . discover-my-major)
+   ("C-c C-S-H" . discover-my-mode)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> Helm</h3>
+<div class="outline-text-3" id="text-7-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp" id="helm">(use-package helm
+  :demand
+  :diminish ""
+  :init
+  (global-set-key [f2] 'emagician/helm)
+  (require 'helm-config)
+  (require 'helm-ring)
+  (use-package helm-ls-git :demand))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-1" class="outline-4">
+<h4 id="sec-7-4-1"><span class="section-number-4">7.4.1</span> F2 is my super duper DWIM helper</h4>
+<div class="outline-text-4" id="text-7-4-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/helm-old ()
+  "Slowly going to become a super helm-dwim"
+  (interactive)
+  (require 'helm-files)
+  (unless (and helm-source-ls-git-status
+               helm-source-ls-git)
+    (setq helm-source-ls-git-status
+          (helm-make-source "Git status" 'helm-ls-git-status-source
+            :fuzzy-match helm-ls-git-fuzzy-match)
+          helm-source-ls-git
+          (helm-make-source "Git files" 'helm-ls-git-source
+            :fuzzy-match helm-ls-git-fuzzy-match)))
+  (unless helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source "Buffers" 'helm-source-buffers)))
+
+    (helm-other-buffer '(helm-source-buffers-list
+                         helm-source-files-in-current-dir
+                         helm-source-ls-git-status
+                         helm-source-ls-git
+                         helm-source-mark-ring
+                         helm-source-bookmarks
+                         helm-source-recentf
+                         helm-source-global-mark-ring             
+                         helm-source-buffer-not-found)
+                       "*helm mini*"))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician/helm ()
+  "Super powered helm mode to DWIM!"
+  (interactive)
+  (unless helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source "Buffers" 'helm-source-buffers)))
+  (helm :sources
+        '(helm-source-buffers-list
+          helm-source-files-in-current-dir
+          helm-source-ls-git-status
+          helm-source-ls-git
+          helm-source-mark-ring
+          helm-source-bookmarks
+          helm-source-recentf
+          helm-source-register         
+          helm-source-buffer-not-found)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-2" class="outline-4">
+<h4 id="sec-7-4-2"><span class="section-number-4">7.4.2</span> Enable it</h4>
+<div class="outline-text-4" id="text-7-4-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(helm-mode 1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-3" class="outline-4">
+<h4 id="sec-7-4-3"><span class="section-number-4">7.4.3</span> Helm for M-x</h4>
+<div class="outline-text-4" id="text-7-4-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "M-x")     'helm-M-x)
+(setq helm-M-x-always-save-history t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-4" class="outline-4">
+<h4 id="sec-7-4-4"><span class="section-number-4">7.4.4</span> Buffer Selection</h4>
+<div class="outline-text-4" id="text-7-4-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-x b") 'helm-buffers-list)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-5" class="outline-4">
+<h4 id="sec-7-4-5"><span class="section-number-4">7.4.5</span> Show full paths</h4>
+<div class="outline-text-4" id="text-7-4-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq helm-ff-transformer-show-only-basename nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-4-6" class="outline-4">
+<h4 id="sec-7-4-6"><span class="section-number-4">7.4.6</span> Extended Command, Insert, write and find files should use helm.</h4>
+<div class="outline-text-4" id="text-7-4-6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4-7" class="outline-4">
+<h4 id="sec-7-4-7"><span class="section-number-4">7.4.7</span> Personal Preferences</h4>
+<div class="outline-text-4" id="text-7-4-7">
+<p>
+Make helm open a new window instead of taking over another.
+</p>
+
+<p>
+Make it a bit nicer too.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq helm-split-window-in-side-p t)
+(setq helm-candidate-separator "──────────────────────────────")
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<a href="http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296">http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296</a>
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Jonathan Arkell</p>
+<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

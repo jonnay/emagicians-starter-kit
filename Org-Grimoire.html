@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Org-Grimoire</title>
+<!-- 2016-08-16 Tue 09:02 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Jonathan Arkell" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Org-Grimoire</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. How to use this Guide</a></li>
+<li><a href="#sec-3">3. Org fixing - all the small things that need tweaking</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Saveplace</a></li>
+<li><a href="#sec-3-2">3.2. Turn on flyspell</a></li>
+<li><a href="#sec-3-3">3.3. Turn on autocomplete</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. What do I need.</a></li>
+<li><a href="#sec-5">5. Agenda Files</a></li>
+<li><a href="#sec-6">6. TODOs</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Start with states.</a></li>
+<li><a href="#sec-6-2">6.2. Enable fast selection of TODO states</a></li>
+<li><a href="#sec-6-3">6.3. Log state changes into a drawer</a></li>
+<li><a href="#sec-6-4">6.4. Faces</a></li>
+<li><a href="#sec-6-5">6.5. Set as next action</a></li>
+<li><a href="#sec-6-6">6.6. GO!</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Tags</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Tags are a fluid thing</a></li>
+<li><a href="#sec-7-2">7.2. Display</a></li>
+<li><a href="#sec-7-3">7.3. Tags for contexts</a></li>
+<li><a href="#sec-7-4">7.4. State selection etc</a></li>
+<li><a href="#sec-7-5">7.5. Preset tags</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">8. Categories</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Icons</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Stuck Projects</a></li>
+<li><a href="#sec-10">10. Habits</a>
+<ul>
+<li><a href="#sec-10-1">10.1. Example of my weekly Review habit</a></li>
+</ul>
+</li>
+<li><a href="#sec-11">11. Refiling</a></li>
+<li><a href="#sec-12">12. Better Linking</a>
+<ul>
+<li><a href="#sec-12-1">12.1. Set keybinding for links&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keybinding">keybinding</span></span></a></li>
+<li><a href="#sec-12-2">12.2. Store info pages as links</a></li>
+</ul>
+</li>
+<li><a href="#sec-13">13. Capturing and Capture Templates</a></li>
+<li><a href="#sec-14">14. Pomodoro</a></li>
+<li><a href="#sec-15">15. Diary</a>
+<ul>
+<li><a href="#sec-15-1">15.1. Set Location</a>
+<ul>
+<li><a href="#sec-15-1-1">15.1.1. Like actual location too, so sunrise/sunset is handled well</a></li>
+</ul>
+</li>
+<li><a href="#sec-15-2">15.2. Include it in agenda</a></li>
+<li><a href="#sec-15-3">15.3. Now for warnings</a></li>
+</ul>
+</li>
+<li><a href="#sec-16">16. Attachments</a></li>
+<li><a href="#sec-17">17. Agenda</a>
+<ul>
+<li><a href="#sec-17-1">17.1. Basic customizations</a>
+<ul>
+<li><a href="#sec-17-1-1">17.1.1. Dim Tasks</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-2">17.2. Tweak the look</a></li>
+<li><a href="#sec-17-3">17.3. Display a cool title</a></li>
+<li><a href="#sec-17-4">17.4. Display a cool subtitle with Kawaii</a></li>
+<li><a href="#sec-17-5">17.5. Display Goals at the top of agenda</a></li>
+<li><a href="#sec-17-6">17.6. Display the current cycles</a>
+<ul>
+<li><a href="#sec-17-6-1">17.6.1. Lunar Phase</a></li>
+<li><a href="#sec-17-6-2">17.6.2. <span class="todo TODO">TODO</span> Erisian Calendar</a></li>
+<li><a href="#sec-17-6-3">17.6.3. <span class="todo TODO">TODO</span> 8 Wheel Spoke</a></li>
+<li><a href="#sec-17-6-4">17.6.4. Cycle Display</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-7">17.7. Specific agenda frame</a></li>
+<li><a href="#sec-17-8">17.8. Display the current context</a>
+<ul>
+<li><a href="#sec-17-8-1">17.8.1. <span class="todo TODO">TODO</span> Get context from Location</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-9">17.9. Display based on tags</a></li>
+<li><a href="#sec-17-10">17.10. Find Stuck projects</a></li>
+<li><a href="#sec-17-11">17.11. Finalize agenda</a>
+<ul>
+<li><a href="#sec-17-11-1">17.11.1. set up a custom agenda with our sections</a></li>
+<li><a href="#sec-17-11-2">17.11.2. Display the started action</a></li>
+<li><a href="#sec-17-11-3">17.11.3. Display next actions for the context</a></li>
+<li><a href="#sec-17-11-4">17.11.4. <span class="todo PROJECT">PROJECT</span> List all next actions on a keystroke (F4)</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-12">17.12. Make it convenient</a>
+<ul>
+<li><a href="#sec-17-12-1">17.12.1. Function to show the main agenda</a></li>
+<li><a href="#sec-17-12-2">17.12.2. Main agenda key</a></li>
+</ul>
+</li>
+<li><a href="#sec-17-13">17.13. Display the daily agenda on load</a></li>
+</ul>
+</li>
+<li><a href="#sec-18">18. Exports</a></li>
+<li><a href="#sec-19">19. Working with Code in Babel mode</a>
+<ul>
+<li><a href="#sec-19-1">19.1. Languages</a></li>
+</ul>
+</li>
+<li><a href="#sec-20">20. Saving and auto Commiting</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-20-0-1">20.0.1. <span class="todo TODO">TODO</span> fix this to use shell commands instead.</a></li>
+<li><a href="#sec-20-0-2">20.0.2. Mobile Org</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-21">21. Prettiness</a></li>
+</ul>
+</div>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(org-babel-load-file buffer-file-truename)
+</pre>
+</div>
+
+<p>
+#+begin-src
+(require org)
+#+end<sub>src</sub>
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Trying to keep my org-mode setup inside of the Emagicians Starter
+Kit was getting too insane.  On top of that I declared
+org-bankruptcy awhile ago, and haven't really recovered since.  And
+so, here is a fresh new attempt at using org.  Along with it will be
+a tutorial that anyone can follow along with and get themselves into
+a better state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> How to use this Guide</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Not sure yet. Wait till it is written.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Org fixing - all the small things that need tweaking</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Saveplace</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org/fix-saveplace ()
+    "Fixes a bit of brokenness with saveplace.el and org-mode"
+    (when (outline-invisible-p)
+      (save-excursion
+        (outline-previous-visible-heading 1)
+        (org-show-subtree))))
+
+  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Turn on flyspell</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'flyspell-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Turn on autocomplete</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'auto-complete-mode)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> What do I need.</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Basic Todo Listing and entry 
+<ul class="org-ul">
+<li>Grouping of tasks under a project
+<ul class="org-ul">
+<li>Tasks Have states: TODO, NEXT, WAITING and DONE.
+</li>
+<li>Show all Next Actions 
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pomodoro
+<ul class="org-ul">
+<li>Timers
+</li>
+</ul>
+</li>
+<li>Journaling and time management
+<ul class="org-ul">
+<li>Prompt for when tasks change state
+</li>
+<li>show time spent on a task.
+</li>
+</ul>
+</li>
+<li>Habits For Review
+</li>
+<li>Agendas
+</li>
+<li>Quick access to org files
+</li>
+<li>Sane attachment handling (link to, not copy)
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Agenda Files</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-files '("~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org" "~/Dropbox/Creativity/Site3.0/Site.org"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> TODOs</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Start with states.</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Simple GTD States.  
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d@/!)")
+                          (sequence "PROJECT(p)" "|" "FINISHED(f)")
+                          (sequence "SOMEDAY(s)" "MAYBE(m)") 
+                          (sequence  "WAITING(w@/!)")
+                          ))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Enable fast selection of TODO states</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Fast selection is good! But not on tags.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-fast-tag-selection-include-todo nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><span class="section-number-3">6.3</span> Log state changes into a drawer</h3>
+<div class="outline-text-3" id="text-6-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-log-into-drawer t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><span class="section-number-3">6.4</span> Faces</h3>
+<div class="outline-text-3" id="text-6-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-todo-keyword-faces
+      `(("TODO" :foreground "red" 
+                :background "red4" :weight bold :box (:line-width 2 :color "red3" :style released-button))
+        ("PROJECT" :foreground "cyan" :background "cyan4" :weight bold :box (:line-width 2 :color "cyan3" :style released-button))
+        ("HABIT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
+        ("NEXT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
+        ("STARTED" :foreground "blue" :background "blue4" :weight bold :box (:line-width 2 :color "blue3" :style released-button))
+        ("DONE" :foreground "chartreuse" 
+                :background "chartreuse4" :weight bold :box (:line-width 2 :color "chartreuse3" :style released-button))
+        ("FINISHED" :foreground "SeaGreen1" 
+                :background "SeaGreen4" :weight bold :box (:line-width 2 :color "SeaGreen3" :style released-button))
+        ("WAITING" :foreground "orange" 
+                   :background "orange4" :weight bold :box (:line-width 2 :color "orange3" :style released-button))
+        ("SOMEDAY" :foreground "purple1"
+                   :background "purple4" :weight bold :box (:line-width 2 :color "purple3" :style released-button))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><span class="section-number-3">6.5</span> Set as next action</h3>
+<div class="outline-text-3" id="text-6-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org/todo-to-next ()
+  "sets the todo state of the current headline to next."
+  (interactive)
+  (org-todo "NEXT")
+  (org-set-tags))
+
+(eval-after-load 'org
+ '(define-key org-mode-map (kbd "C-c n") 'emagician-org/todo-to-next))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6" class="outline-3">
+<h3 id="sec-6-6"><span class="section-number-3">6.6</span> GO!</h3>
+<div class="outline-text-3" id="text-6-6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org/go ()
+  "Launches the task at point, and starts a pomodoro if required"
+  (interactive)
+  (if (org-entry-is-todo-p)
+      (progn
+        (org-todo "STARTED")
+        (if (not (org-pomodoro-active-p))
+            (org-pomodoro-start)
+          (progn
+            (when (org-clocking-p)
+              (org-clock-out nil t))
+            (org-pomodoro-kill))))
+    (warn "Not on a TODO task")))
+
+(eval-after-load 'org '(define-key org-mode-map (kbd "C-c g") 'emagician-org/go))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Tags</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Tags are a fluid thing</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+So list em all!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'dash)
+(defun emagician/get-tag-counts ()
+  "Thanks to John Kitchin for this" 
+  (let ((all-tags '()))
+    (org-map-entries
+     (lambda ()
+       (let ((tag-string (car (last (org-heading-components)))))
+         (when tag-string   
+           (setq all-tags
+                 (append all-tags (split-string tag-string ":" t))))))
+     t
+     'agenda)
+
+
+    ;; now get counts
+    (loop for tag in (-uniq all-tags) 
+          collect (cons tag (cl-count tag all-tags :test 'string=)))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Display</h3>
+<div class="outline-text-3" id="text-7-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-tags-column -100)
+(setq org-agenda-tags-column -100)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Tags for contexts</h3>
+<div class="outline-text-3" id="text-7-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/get-tag-counts)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-4" class="outline-3">
+<h3 id="sec-7-4"><span class="section-number-3">7.4</span> State selection etc</h3>
+<div class="outline-text-3" id="text-7-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-use-fast-tag-selection t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7-5" class="outline-3">
+<h3 id="sec-7-5"><span class="section-number-3">7.5</span> Preset tags</h3>
+<div class="outline-text-3" id="text-7-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-tag-alist '((:startgroup   . nil) 
+                      ("code"        . ?c)
+                      ("design"      . ?d)
+                      ("emacs"       . ?e)
+                      ("gtd"         . ?g)                          
+                      (:endgroup     . nil)
+
+                      (:startgroup  .   nil)                         
+                      ("decide"     .   ?a)
+                      ("phone"      .   ?p)
+                      ("read"       .   ?r)
+                      ("research"   .   ?u)
+                      ("talk"       .   ?t)
+                      ("vm"         .   ?v)
+                      ("web"        .   ?w)
+                      ("write"      .   ?x)
+                      (:endgroup    .   nil)
+
+                      ("backburner" .   ?b)
+                      ("braindead"  .   ?z)
+
+                      (:newline     .   nil)                    
+                      ("chaman"     .   ?C)
+                      ("charles"    .   ?H)
+                      ("paul"       .   ?P)
+                      ("sohan"      .   ?S) 
+                      ))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Categories</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Work, Music, Personal.  That's it.  Everything else should be a tag.  
+</p>
+</div>
+
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Icons</h3>
+<div class="outline-text-3" id="text-8-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-category-icon-alist 
+      `(("Work"  ,(list (propertize "💼")))
+        ("Music" ,(list (propertize "🎶" )))
+        ("Home"  ,(list (propertize"🏡" )))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Stuck Projects</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-stuck-projects '("TODO=\"PROJECT\""
+  ("NEXT")
+  nil ""))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Habits</h2>
+<div class="outline-text-2" id="text-10">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'org-habit)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-habit-graph-column 50)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'org-todo-keywords '(sequence "HABIT(h)" "|" "DONE(d!)") t)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> Example of my weekly Review habit</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+
+<pre class="src src-org">`  ** HABIT Weekly
+`     SCHEDULED: &lt;2015-02-09 Mon 09:00 ++1w&gt;
+`     :PROPERTIES:
+`     :STYLE:    habit
+`     :LAST_REPEAT: [2015-02-02 Mon 16:39]
+`     :END:
+`     - [X] Get Clear
+`       - [X] Clean off desk
+`       - [X] Clean Out Bag
+`       - [X] Clean off Desktop [[file:~/Desktop/]]   (~20 files per iteration)
+`       - [X] Clean Downloads file:~/Downloads/   (~20 files per iteration)
+`       - [X] Review Last weeks email
+`       - [X] Liquid Planner Timesheet good to go
+`       - [X] Clean out [[file:GTD.org::*Inbo˘x][Inbox]]
+`       - [X] Archive all finished Tasks
+`     - [-] Get Current
+`        - [X] Review next months calendar
+`        - [X] Check My upcoming work in LP
+`        - [ ] Fix Any Stuck Projects
+`        - [ ] Review Project Agenda
+`        - [ ] Review Next Action Agenda
+`        - [ ] Review Waiting Agenda
+`     - [ ] Get Creative
+`        - [ ] Review someday/maybe
+`        - [ ] Do something creative and courageous
+`
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Refiling</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+All agenda files are valid for targeting
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-refile-targets '((org-agenda-files :maxlevel . 1)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Better Linking</h2>
+<div class="outline-text-2" id="text-12">
+</div><div id="outline-container-sec-12-1" class="outline-3">
+<h3 id="sec-12-1"><span class="section-number-3">12.1</span> Set keybinding for links&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keybinding">keybinding</span></span></h3>
+<div class="outline-text-3" id="text-12-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-return-follows-link t)
+</pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(define-key global-map "\C-cl" 'org-store-link)
+
+(setq org-return-follows-link t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-12-2" class="outline-3">
+<h3 id="sec-12-2"><span class="section-number-3">12.2</span> Store info pages as links</h3>
+<div class="outline-text-3" id="text-12-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'org-info)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Capturing and Capture Templates</h2>
+<div class="outline-text-2" id="text-13">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(define-key global-map (kbd "C-c c") 'org-capture)
+(define-key global-map (kbd "C-c i") 'emagician-org-capture-inbox)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org-capture-inbox ()
+  (interactive)
+  (org-capture nil "i"))
+
+(setq org-capture-templates
+  '(("i" "Inbox" entry (file+headline "~/org/GTD.org" "Inbox")
+         "** TODO %?\n  %i\n")))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Pomodoro</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+org-pomodoro is pretty simple, so lets start with that.
+</p>
+
+<p>
+<code>C-c p</code> Will start a pomodoro on your current task.  Call it during a pomodoro to reset.  
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package org-pomodoro
+  :bind
+  ("C-c p" . org-pomodoro))
+</pre>
+</div>
+
+<p>
+Fancy it up a little
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-pomodoro-format "🍅~%s")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Diary</h2>
+<div class="outline-text-2" id="text-15">
+</div><div id="outline-container-sec-15-1" class="outline-3">
+<h3 id="sec-15-1"><span class="section-number-3">15.1</span> Set Location</h3>
+<div class="outline-text-3" id="text-15-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq diary-file "~/.emacs.d/diary")
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-15-1-1" class="outline-4">
+<h4 id="sec-15-1-1"><span class="section-number-4">15.1.1</span> Like actual location too, so sunrise/sunset is handled well</h4>
+<div class="outline-text-4" id="text-15-1-1">
+<p>
+51.0368334,-114.0715046,15z
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq calendar-longitude -114.0715046)
+(setq calendar-latitude 51.0368334)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-15-2" class="outline-3">
+<h3 id="sec-15-2"><span class="section-number-3">15.2</span> Include it in agenda</h3>
+<div class="outline-text-3" id="text-15-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-include-diary t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-15-3" class="outline-3">
+<h3 id="sec-15-3"><span class="section-number-3">15.3</span> Now for warnings</h3>
+<div class="outline-text-3" id="text-15-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(appt-activate 1)
+(org-agenda-to-appt)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Attachments</h2>
+<div class="outline-text-2" id="text-16">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-attach-allow-inheritance t)
+(setq org-attach-store-link-p t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Agenda</h2>
+<div class="outline-text-2" id="text-17">
+</div><div id="outline-container-sec-17-1" class="outline-3">
+<h3 id="sec-17-1"><span class="section-number-3">17.1</span> Basic customizations</h3>
+<div class="outline-text-3" id="text-17-1">
+</div><div id="outline-container-sec-17-1-1" class="outline-4">
+<h4 id="sec-17-1-1"><span class="section-number-4">17.1.1</span> Dim Tasks</h4>
+<div class="outline-text-4" id="text-17-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-dim-blocked-tasks t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-2" class="outline-3">
+<h3 id="sec-17-2"><span class="section-number-3">17.2</span> Tweak the look</h3>
+<div class="outline-text-3" id="text-17-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-block-separator ?\═)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-3" class="outline-3">
+<h3 id="sec-17-3"><span class="section-number-3">17.3</span> Display a cool title</h3>
+<div class="outline-text-3" id="text-17-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">  (defun emagician-agenda/insert-title (title)
+    "show a centered title"
+    (setq buffer-read-only nil)
+    (let ((centering-str  (make-string (/ (- (window-body-width)
+                                             (length title))
+                                          2)
+                                       ?\ )))
+      (insert (propertize (concat centering-str title centering-str "\n")
+                          'face
+                         'org-agenda-structure))))
+
+(defun emagician-agenda/insert-separator ()
+  (insert (make-string (window-body-width) org-agenda-block-separator) "\n"))
+
+  (defun emagician-agenda/insert-headline (&amp;rest args)
+    "Daily wisdom, Cool title, etc."
+    (setq buffer-read-only nil)
+    (emagician-agenda/insert-separator)
+    (emagician-agenda/insert-title "-|-+-|-")
+    (emagician-agenda/insert-separator)
+    (insert (concat (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines") "\n")))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17-4" class="outline-3">
+<h3 id="sec-17-4"><span class="section-number-3">17.4</span> Display a cool subtitle with Kawaii</h3>
+</div>
+
+<div id="outline-container-sec-17-5" class="outline-3">
+<h3 id="sec-17-5"><span class="section-number-3">17.5</span> Display Goals at the top of agenda</h3>
+<div class="outline-text-3" id="text-17-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-agenda/get-goals (&amp;rest args)
+  "Show top level goal headlines"
+  '(tags "goal" ((org-agenda-overriding-header "Goals")) "~/org/Goals.org"))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17-6" class="outline-3">
+<h3 id="sec-17-6"><span class="section-number-3">17.6</span> Display the current cycles</h3>
+<div class="outline-text-3" id="text-17-6">
+</div><div id="outline-container-sec-17-6-1" class="outline-4">
+<h4 id="sec-17-6-1"><span class="section-number-4">17.6.1</span> Lunar Phase</h4>
+<div class="outline-text-4" id="text-17-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'lunar)
+
+(setq lunar-phase-names 
+     '("🌚 New Moon 🌚" "🌛 First Quarter🌛" "🌝 Full Moon 🌝" "🌜Last Quarter 🌜"))
+
+(defun emagician-agenda/get-current-lunar-phase ()
+  "Get the current lunar phase.  For some reason it is out of sync by a day, so... yea"
+  (lunar-phase-name (mod (+ 1 (lunar-index (calendar-current-date)))
+                                           4)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17-6-2" class="outline-4">
+<h4 id="sec-17-6-2"><span class="section-number-4">17.6.2</span> <span class="todo TODO">TODO</span> Erisian Calendar</h4>
+</div>
+<div id="outline-container-sec-17-6-3" class="outline-4">
+<h4 id="sec-17-6-3"><span class="section-number-4">17.6.3</span> <span class="todo TODO">TODO</span> 8 Wheel Spoke</h4>
+</div>
+<div id="outline-container-sec-17-6-4" class="outline-4">
+<h4 id="sec-17-6-4"><span class="section-number-4">17.6.4</span> Cycle Display</h4>
+<div class="outline-text-4" id="text-17-6-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-agenda/insert-cycle (&amp;rest args)
+  (let ((buffer-read-only nil))
+    (insert (emagician-agenda/get-current-lunar-phase))
+        (insert "\n")
+    (emagician-agenda/insert-separator)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-7" class="outline-3">
+<h3 id="sec-17-7"><span class="section-number-3">17.7</span> Specific agenda frame</h3>
+<div class="outline-text-3" id="text-17-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-window-setup 'other-frame)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-17-8" class="outline-3">
+<h3 id="sec-17-8"><span class="section-number-3">17.8</span> Display the current context</h3>
+<div class="outline-text-3" id="text-17-8">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defvar emagician/org-context "Work")
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-sec-17-8-1" class="outline-4">
+<h4 id="sec-17-8-1"><span class="section-number-4">17.8.1</span> <span class="todo TODO">TODO</span> Get context from Location</h4>
+</div>
+</div>
+
+<div id="outline-container-sec-17-9" class="outline-3">
+<h3 id="sec-17-9"><span class="section-number-3">17.9</span> Display based on tags</h3>
+<div class="outline-text-3" id="text-17-9">
+<p>
+Best is the enemy of the good.  Make this not suck later. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-agenda/get-tag (tag title &amp;optional include-dates) 
+  (if (not include-dates)
+    `(todo ,tag 
+              ((org-agenda-overriding-header ,(concat title "\n"))
+               (org-agenda-todo-ignore-with-date t)))
+     `(todo ,tag 
+              ((org-agenda-overriding-header ,(concat title "\n"))))))
+</pre>
+</div>
+
+<p>
+(emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
+</p>
+
+
+<p>
+(todo "NEXT" ((org-agenda-overriding-header "❇ Next Actions") 
+              (org-agenda-todo-ignore-with-date t)))
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-17-10" class="outline-3">
+<h3 id="sec-17-10"><span class="section-number-3">17.10</span> Find Stuck projects</h3>
+<div class="outline-text-3" id="text-17-10">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-agenda/get-stuck-projects ()
+  "return a string showing all Stuck projects"
+  '(tags "TODO=\"PROJECT\""
+              ((org-agenda-overriding-header " 📖 Stuck Projects")
+               (org-agenda-skip-function '(org-agenda-skip-subtree-if 'regexp "NEXT")))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-11" class="outline-3">
+<h3 id="sec-17-11"><span class="section-number-3">17.11</span> Finalize agenda</h3>
+<div class="outline-text-3" id="text-17-11">
+</div><div id="outline-container-sec-17-11-1" class="outline-4">
+<h4 id="sec-17-11-1"><span class="section-number-4">17.11.1</span> set up a custom agenda with our sections</h4>
+<div class="outline-text-4" id="text-17-11-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">      (setq org-agenda-custom-commands
+            `((" " "Agenda"
+               ((emagician-agenda/insert-headline "")
+                ,(emagician-agenda/get-goals "")
+                (emagician-agenda/insert-cycle "") 
+                (agenda "" ((org-agenda-span 1) (org-agenda-show-log nil) ))
+                ,(emagician-agenda/get-tag "STARTED" "💥 Started" t)
+                ,(emagician-agenda/get-tag "WAITING" "💬 Waiting" t)
+                ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
+                ,(emagician-agenda/get-stuck-projects))
+               ((org-agenda-category-filter-preset '("-Home" "-Music"))))
+              ("W" "Weekly Review"
+               ((emagician-agenda/insert-headline " Weekly Review ")
+                (agenda "" ((org-agenda-span 7)
+                            (org-agenda-log-mode-items '(closed clock state))
+                            (org-agenda-start-day "-7d")
+                            (org-agenda-entry-type '(:timestamp :sexp :deadline :sheduled))
+                            (org-agenda-show-log t)))
+                (tags-todo "inbox")
+                (agenda "" ((org-agenda-span 31)))
+                ,(emagician-agenda/get-stuck-projects)
+                ,(emagician-agenda/get-tag "PROJECT" "📖 Projects")
+                ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
+                ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions")
+                ,(emagician-agenda/get-tag "TODO" "🌱 TODO")
+                ,(emagician-agenda/get-tag "WAITING" "💬 Waiting")
+                ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
+                ,(emagician-agenda/get-tag "SOMEDAY" "🌞 Someday")
+                ,(emagician-agenda/get-tag "MAYBE" "🌠 Maybe")
+
+))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-17-11-2" class="outline-4">
+<h4 id="sec-17-11-2"><span class="section-number-4">17.11.2</span> Display the started action</h4>
+</div>
+
+<div id="outline-container-sec-17-11-3" class="outline-4">
+<h4 id="sec-17-11-3"><span class="section-number-4">17.11.3</span> Display next actions for the context</h4>
+</div>
+<div id="outline-container-sec-17-11-4" class="outline-4">
+<h4 id="sec-17-11-4"><span class="section-number-4">17.11.4</span> <span class="todo PROJECT">PROJECT</span> List all next actions on a keystroke (F4)</h4>
+<div class="outline-text-4" id="text-17-11-4">
+</div><ol class="org-ol"><li><a id="sec-17-11-4-1" name="sec-17-11-4-1"></a><span class="todo NEXT">NEXT</span> Org agenda command<br  /></li>
+<li><a id="sec-17-11-4-2" name="sec-17-11-4-2"></a><span class="todo TODO">TODO</span> filter to work<br  /></li></ol>
+</div>
+</div>
+
+<div id="outline-container-sec-17-12" class="outline-3">
+<h3 id="sec-17-12"><span class="section-number-3">17.12</span> Make it convenient</h3>
+<div class="outline-text-3" id="text-17-12">
+</div><div id="outline-container-sec-17-12-1" class="outline-4">
+<h4 id="sec-17-12-1"><span class="section-number-4">17.12.1</span> Function to show the main agenda</h4>
+<div class="outline-text-4" id="text-17-12-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org/daily-agenda () 
+  "Show the daily agenda"
+  (interactive)
+  (org-agenda nil " "))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-12-2" class="outline-4">
+<h4 id="sec-17-12-2"><span class="section-number-4">17.12.2</span> Main agenda key</h4>
+<div class="outline-text-4" id="text-17-12-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c a") 'emagician-org/daily-agenda)
+(global-set-key (kbd "C-c A") 'org-agenda)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17-13" class="outline-3">
+<h3 id="sec-17-13"><span class="section-number-3">17.13</span> Display the daily agenda on load</h3>
+<div class="outline-text-3" id="text-17-13">
+<p>
+Swap to other frame once loaded. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook #'(lambda () (emagician-org/daily-agenda)(other-frame 1)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> Exports</h2>
+<div class="outline-text-2" id="text-18">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'ox-beamer)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> Working with Code in Babel mode</h2>
+<div class="outline-text-2" id="text-19">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
+(setq org-edit-src-content-indentation 0)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-19-1" class="outline-3">
+<h3 id="sec-19-1"><span class="section-number-3">19.1</span> Languages</h3>
+<div class="outline-text-3" id="text-19-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(require 'ob-sh)
+(require 'ob-sql)
+(require 'ob-org)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> Saving and auto Commiting</h2>
+<div class="outline-text-2" id="text-20">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun emagician-org/save-commit-and-push ()
+  "Do the thing automagickally"
+  (org-save-all-org-buffers)
+  (with-helm-default-directory "~/org"
+      (async-start
+       (lambda ()
+         (message "Commiting to git")
+         (shell-command "git add *" "*org autocommit*" "*org autocommit*"))
+       (lambda (result)
+         (async-start
+          (lambda ()
+            (shell-command "git commit -m\"autopmagick commit\"" "*org autocommit*" "*org autocommit*"))
+          'ignore)))))
+
+(run-at-time t 600 'emagician-org/save-commit-and-push)
+</pre>
+</div>
+</div>
+<div id="outline-container-sec-20-0-1" class="outline-4">
+<h4 id="sec-20-0-1"><span class="section-number-4">20.0.1</span> <span class="todo TODO">TODO</span> fix this to use shell commands instead.</h4>
+</div>
+<div id="outline-container-sec-20-0-2" class="outline-4">
+<h4 id="sec-20-0-2"><span class="section-number-4">20.0.2</span> Mobile Org</h4>
+<div class="outline-text-4" id="text-20-0-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-mobile-directory "~/Dropbox/org-mobile")
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> Prettiness</h2>
+<div class="outline-text-2" id="text-21">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(defun turn-on-org-show-all-inline-images ()
+  (org-display-inline-images t t))
+(add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jonathan Arkell</p>
+<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
