@@ -133,20 +133,32 @@ and perception stimulate each other.
 #+end_src
 
 * Building the emagician site
+
  #+begin_src emacs-lisp 
  (setq org-html-htmlize-output-type 'css)
  #+end_src
 
+
 #+begin_src emacs-lisp 
 (defun emagician/meta/publish ()
   (let ((org-publish-project-alist
-         `("emagician"
+         `(("emagician"
            :base-directory ,emagician/dir
+           :base-extension "org"
            :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
            :htmlized-source t
            :html-html5-fancy t
            :auto-sitemap t
-           )))
+           :publishing-function org-html-publish-to-html
+           ))))
     (org-publish "emagician" t)))
 #+end_src
 
+(setq org-publish-project-alist `("emagician"
+           :base-directory ,emagician/dir
+           :base-extension "org"
+           :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
+           :htmlized-source t
+           :html-html5-fancy t
+           :auto-sitemap t
+           ))
