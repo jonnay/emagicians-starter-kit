@@ -66,14 +66,14 @@ This is apparently still an issue.
                  (epe-git-dirty)
                  (epe-git-untracked)
                  (let ((unpushed (epe-git-unpushed-number)))
-                   (unless (= unp,ushed 0)
-                     (concat ":" (number-to-string unpushed-number)))))
+                   (unless (= unpushed 0)
+                     (concat ":" (number-to-string unpushed)))))
          'epe-git-face)))
      (epe-colorize-with-face " 🐰)" 'epe-symbol-face)
      (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
      " "))
 #+end_src
-s
+
 ** Did you mean?
 #+begin_src emacs-lisp 
 (use-package eshell-did-you-mean 
