@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Meta-Development</title>
-<!-- 2016-08-19 Fri 09:58 -->
+<!-- 2016-08-19 Fri 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -193,9 +193,9 @@ and perception stimulate each other.
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/run-all-tests</span> ()&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (ert <span class="org-string">"emagician/"</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/run-all-tests</span> ()
+  (interactive)
+  (ert <span class="org-string">"emagician/"</span>))
 </pre>
 </div>
 </div>
@@ -206,48 +206,48 @@ and perception stimulate each other.
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization</span> (<span class="org-type">&amp;optional</span> forms)&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let*</span> ((init-file (expand-file-name <span class="org-string">"init.el"</span>&#57344;&#57345;&#57345;
-                                      (file-name-directory (or load-file-name&#57344;&#57345;&#57345;
-                                                               buffer-file-name&#57344;&#57345;&#57345;
-                                                               (org-src-do-at-code-block (eval 'buffer-file-name))))))&#57344;&#57345;
-         (magick-string <span class="org-string">"emagician/magick-output"</span>)&#57344;&#57345;&#57345;
-         (code `(<span class="org-keyword">condition-case</span> err&#57344;&#57345;&#57345;
-                    (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
-                      (toggle-debug-on-error)&#57344;&#57345;&#57345;
-                      (load-file ,init-file)&#57344;&#57345;&#57345;
-                      ,(<span class="org-keyword">if</span> forms&#57344;&#57345;&#57345;
-                           `(<span class="org-keyword">progn</span> ,forms)&#57344;&#57345;&#57345;
-                         (message <span class="org-string">"No extra forms executed"</span>))&#57344;&#57345;&#57345;
-                      (message <span class="org-string">"(%s 'succcess)"</span> ,magick-string))&#57344;&#57345;&#57345;
-                  ((<span class="org-warning">error</span>)&#57344;&#57345;&#57345;
-                     (message <span class="org-string">"(%s (error (%s %s) (backtrace \"%s\")))"</span> ,magick-string (car err) (cdr err) (<span class="org-keyword">with-output-to-string</span> (backtrace)))&#57344;&#57345;
-                     (kill-emacs 1))))&#57344;&#57345;&#57345;
-         (invocation-command (format <span class="org-string">"%s%s --no-init-file --batch --eval=\"%s\""</span>&#57344;&#57345;&#57345;
-                                     invocation-directory&#57344;&#57345;&#57345;
-                                     invocation-name&#57344;&#57345;&#57345;
-                                     (replace-regexp-in-string <span class="org-string">"\""</span>&#57344;&#57345;&#57345;
-                                                               <span class="org-string">"\\\""</span>&#57344;&#57345;&#57345;
-                                                               (format <span class="org-string">"%S"</span> code)&#57345;
-                                                               nil&#57344;&#57345;&#57345;
-                                                               t)))&#57344;&#57345;&#57345;
-         (result (shell-command-to-string invocation-command))&#57344;&#57345;&#57345;
-         (captured-result (substring result&#57344;&#57345;&#57345;
-                                   (or (string-match (concat <span class="org-string">"("</span> magick-string) result)&#57344;&#57345;
-                                       (<span class="org-warning">error</span> <span class="org-string">"Unexpected result from child emacs %s"</span> result))))&#57344;&#57345;
-         (parsed-result (read captured-result))&#57344;&#57345;&#57345;
-         (err (assoc 'error parsed-result)))&#57344;&#57345;&#57345;
-    (message <span class="org-string">"Result: %s\n"</span>&#57344;&#57345;&#57345;
-             (message <span class="org-string">"%s\n\n\n%s"</span> (pp parsed-result) result))&#57344;&#57345;&#57345;
-    (<span class="org-keyword">if</span> err &#57344;&#57345;&#57345;
-        (<span class="org-warning">error</span> <span class="org-string">"Emagician Starter Kit Load Error:  %s: %S"</span> (cadr err) (cddr err))&#57345;
-      (message <span class="org-string">"Successful!"</span>))))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization-with</span> (lisp)&#57344;&#57345;&#57345;
-  <span class="org-doc">"Test an Emacs initialization with a given chunk of lisp."</span>&#57344;&#57345;&#57345;
-  (interactive  <span class="org-string">"xExecute: "</span>)&#57344;&#57345;&#57345;
-  (emagician/test-initialization lisp))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization</span> (<span class="org-type">&amp;optional</span> forms)
+  (interactive)
+  (<span class="org-keyword">let*</span> ((init-file (expand-file-name <span class="org-string">"init.el"</span>
+                                      (file-name-directory (or load-file-name
+                                                               buffer-file-name
+                                                               (org-src-do-at-code-block (eval 'buffer-file-name))))))
+         (magick-string <span class="org-string">"emagician/magick-output"</span>)
+         (code `(<span class="org-keyword">condition-case</span> err
+                    (<span class="org-keyword">progn</span>
+                      (toggle-debug-on-error)
+                      (load-file ,init-file)
+                      ,(<span class="org-keyword">if</span> forms
+                           `(<span class="org-keyword">progn</span> ,forms)
+                         (message <span class="org-string">"No extra forms executed"</span>))
+                      (message <span class="org-string">"(%s 'succcess)"</span> ,magick-string))
+                  ((<span class="org-warning">error</span>)
+                     (message <span class="org-string">"(%s (error (%s %s) (backtrace \"%s\")))"</span> ,magick-string (car err) (cdr err) (<span class="org-keyword">with-output-to-string</span> (backtrace)))
+                     (kill-emacs 1))))
+         (invocation-command (format <span class="org-string">"%s%s --no-init-file --batch --eval=\"%s\""</span>
+                                     invocation-directory
+                                     invocation-name
+                                     (replace-regexp-in-string <span class="org-string">"\""</span>
+                                                               <span class="org-string">"\\\""</span>
+                                                               (format <span class="org-string">"%S"</span> code)
+                                                               nil
+                                                               t)))
+         (result (shell-command-to-string invocation-command))
+         (captured-result (substring result
+                                   (or (string-match (concat <span class="org-string">"("</span> magick-string) result)
+                                       (<span class="org-warning">error</span> <span class="org-string">"Unexpected result from child emacs %s"</span> result))))
+         (parsed-result (read captured-result))
+         (err (assoc 'error parsed-result)))
+    (message <span class="org-string">"Result: %s\n"</span>
+             (message <span class="org-string">"%s\n\n\n%s"</span> (pp parsed-result) result))
+    (<span class="org-keyword">if</span> err 
+        (<span class="org-warning">error</span> <span class="org-string">"Emagician Starter Kit Load Error:  %s: %S"</span> (cadr err) (cddr err))
+      (message <span class="org-string">"Successful!"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization-with</span> (lisp)
+  <span class="org-doc">"Test an Emacs initialization with a given chunk of lisp."</span>
+  (interactive  <span class="org-string">"xExecute: "</span>)
+  (emagician/test-initialization lisp))
 </pre>
 </div>
 </div>
@@ -261,16 +261,16 @@ This loads the starter kit as a batch and outputs the results as a message.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-init-through-batch</span> ()&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (message <span class="org-string">"Running New Emacs: %s"</span>&#57344;&#57345;&#57345;
-           (shell-command-to-string &#57344;&#57345;&#57345;
-            (concat invocation-directory invocation-name <span class="org-string">" "</span>&#57344;&#57345;&#57345;
-                    <span class="org-string">"--no-init-file --batch "</span>&#57344;&#57345;&#57345;
-                    <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>&#57344;&#57345;
-                    <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> &#57344;&#57345;
-                    <span class="org-string">"--eval='' "</span>&#57344;&#57345;&#57345;
-                    <span class="org-string">"&amp;"</span>))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-init-through-batch</span> ()
+  (interactive)
+  (message <span class="org-string">"Running New Emacs: %s"</span>
+           (shell-command-to-string 
+            (concat invocation-directory invocation-name <span class="org-string">" "</span>
+                    <span class="org-string">"--no-init-file --batch "</span>
+                    <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>
+                    <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> 
+                    <span class="org-string">"--eval='' "</span>
+                    <span class="org-string">"&amp;"</span>))))
 </pre>
 </div>
 
@@ -280,15 +280,15 @@ This does a full GUI load, outputting any results as a message.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-full-init</span>()&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (message (concat <span class="org-string">"Running New Emacs: "</span>&#57344;&#57345;&#57345;
-                   (shell-command-to-string &#57344;&#57345;&#57345;
-                    (concat invocation-directory invocation-name <span class="org-string">" "</span>&#57344;&#57345;&#57345;
-                            <span class="org-string">"--no-init-file "</span>&#57344;&#57345;&#57345;
-                            <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>&#57344;&#57345;
-                            <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> &#57344;&#57345;
-                            <span class="org-string">"&amp;"</span>)))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-full-init</span>()
+  (interactive)
+  (message (concat <span class="org-string">"Running New Emacs: "</span>
+                   (shell-command-to-string 
+                    (concat invocation-directory invocation-name <span class="org-string">" "</span>
+                            <span class="org-string">"--no-init-file "</span>
+                            <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>
+                            <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> 
+                            <span class="org-string">"&amp;"</span>)))))
 </pre>
 </div>
 </div>
@@ -305,28 +305,28 @@ Doesn't currently work because Helm keeps changing its interface.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defclass</span> <span class="org-type">emagician/files-helm-source</span> (helm-source-sync helm-type-file)&#57344;&#57345;&#57345;
-  ((candidates <span class="org-builtin">:initform</span> (<span class="org-keyword">lambda</span> () (<span class="org-keyword">when</span> (file-accessible-directory-p emagician/dir)&#57344;&#57345;
-                                            (directory-files emagician/dir t))))&#57344;&#57345;&#57345;
-   (keymap <span class="org-builtin">:initform</span> helm-generic-files-map)&#57344;&#57345;&#57345;
-   (filtered-candidate-transformer <span class="org-builtin">:initform</span> #'emagician/helm-ct-is-org-file)&#57344;&#57345;&#57345;
-   (action <span class="org-builtin">:initform</span> 'helm-type-file-actions)&#57344;&#57345;&#57345;
-   ))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-ct-is-org-file</span> (candidates)&#57344;&#57345;&#57345;
-  (remove-if-not (<span class="org-keyword">lambda</span> (c)&#57344;&#57345;&#57345;
-                   (and (string= (substring c -4) <span class="org-string">".org"</span>)&#57344;&#57345;&#57345;
-                        (not (string= (substring (file-name-nondirectory c) 0 2) <span class="org-string">".#"</span>))))&#57344;&#57345;
-                 candidates))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-emagician-dir</span> () &#57344;&#57345;&#57345;
-  <span class="org-doc">"List all the org files in the Emagician dir"</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (helm <span class="org-builtin">:sources</span> (helm-make-source <span class="org-string">"Files in Emagician-dir"</span> 'emagician/files-helm-source)&#57344;&#57345;
-        <span class="org-builtin">:candidate-number-limit</span> 40&#57344;&#57345;&#57345;
-        <span class="org-builtin">:buffer</span> <span class="org-string">"*emagician-|-+-|-files*"</span>))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(global-set-key (kbd <span class="org-string">"S-&lt;f3&gt;"</span>) 'emagician/helm-emagician-dir)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defclass</span> <span class="org-type">emagician/files-helm-source</span> (helm-source-sync helm-type-file)
+  ((candidates <span class="org-builtin">:initform</span> (<span class="org-keyword">lambda</span> () (<span class="org-keyword">when</span> (file-accessible-directory-p emagician/dir)
+                                            (directory-files emagician/dir t))))
+   (keymap <span class="org-builtin">:initform</span> helm-generic-files-map)
+   (filtered-candidate-transformer <span class="org-builtin">:initform</span> #'emagician/helm-ct-is-org-file)
+   (action <span class="org-builtin">:initform</span> 'helm-type-file-actions)
+   ))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-ct-is-org-file</span> (candidates)
+  (remove-if-not (<span class="org-keyword">lambda</span> (c)
+                   (and (string= (substring c -4) <span class="org-string">".org"</span>)
+                        (not (string= (substring (file-name-nondirectory c) 0 2) <span class="org-string">".#"</span>))))
+                 candidates))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-emagician-dir</span> () 
+  <span class="org-doc">"List all the org files in the Emagician dir"</span>
+  (interactive)
+  (helm <span class="org-builtin">:sources</span> (helm-make-source <span class="org-string">"Files in Emagician-dir"</span> 'emagician/files-helm-source)
+        <span class="org-builtin">:candidate-number-limit</span> 40
+        <span class="org-builtin">:buffer</span> <span class="org-string">"*emagician-|-+-|-files*"</span>))
+
+(global-set-key (kbd <span class="org-string">"S-&lt;f3&gt;"</span>) 'emagician/helm-emagician-dir)
 </pre>
 </div>
 </div>
@@ -337,59 +337,60 @@ Doesn't currently work because Helm keeps changing its interface.
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-html-htmlize-output-type 'css)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq org-html-htmlize-output-type 'css)
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq httpd-root (expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish</span> (project force async)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((org-publish-project-alist `((<span class="org-string">"emagician"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org"</span>))&#57344;&#57345;
-                                     (<span class="org-string">"emagician-test"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org-test"</span>))&#57344;&#57345;
-                                     (<span class="org-string">"emagician-assets"</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-directory</span> ,(expand-file-name <span class="org-string">"assets/"</span> emagician/dir)&#57344;&#57345;
-                                      <span class="org-builtin">:recursive</span> t&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">pdf</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">mp3</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">ogg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">swf"</span>&#57344;&#57345;
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages/assets"</span> emagician/dir)            &#57344;&#57345;
-                                      <span class="org-builtin">:publishing-function</span> org-publish-attachment)&#57344;&#57345;
-                                     (<span class="org-string">"emagician-org"</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-directory</span> ,emagician/dir&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)&#57344;&#57345;
-                                      <span class="org-builtin">:htmlized-source</span> t&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:html-html5-fancy</span> t&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>&#57344;&#57345;
-                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html&#57344;&#57345;
-                                      )&#57344;&#57345;&#57345;
-                                     (<span class="org-string">"emagician-org-test"</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-directory</span> ,emagician/dir&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:exlcude</span> <span class="org-string">".*"</span>&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:include</span> (<span class="org-string">"Index.org"</span> <span class="org-string">"Emagician.org"</span>)&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)&#57344;&#57345;
-                                      <span class="org-builtin">:htmlized-source</span> t&#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:html-html5-fancy</span> t     &#57344;&#57345;&#57345;
-                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>&#57344;&#57345;
-                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html&#57344;&#57345;
-                                      )&#57344;&#57345;&#57345;
-                                     )))&#57344;&#57345;&#57345;
-    (org-publish project force async)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-all</span> ()&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (emagician/meta/publish <span class="org-string">"emagician"</span> t nil))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-assets</span> ()&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (emagician/meta/publish <span class="org-string">"emagician-assets"</span> t nil))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-test</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"A small tester project"</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (emagician/meta/publish <span class="org-string">"emagician-test"</span> t nil))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq htmlize-html-charset 'utf-8)
+(setq httpd-root (expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish</span> (project force async)
+  (<span class="org-keyword">let</span> ((org-publish-project-alist `((<span class="org-string">"emagician"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org"</span>))
+                                     (<span class="org-string">"emagician-test"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org-test"</span>))
+                                     (<span class="org-string">"emagician-assets"</span>
+                                      <span class="org-builtin">:base-directory</span> ,(expand-file-name <span class="org-string">"assets/"</span> emagician/dir)
+                                      <span class="org-builtin">:recursive</span> t
+                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">pdf</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">mp3</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">ogg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">swf"</span>
+                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages/assets"</span> emagician/dir)            
+                                      <span class="org-builtin">:publishing-function</span> org-publish-attachment)
+                                     (<span class="org-string">"emagician-org"</span>
+                                      <span class="org-builtin">:base-directory</span> ,emagician/dir
+                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
+                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)
+                                      <span class="org-builtin">:htmlized-source</span> t
+                                      <span class="org-builtin">:html-html5-fancy</span> t
+                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>
+                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
+                                      )
+                                     (<span class="org-string">"emagician-org-test"</span>
+                                      <span class="org-builtin">:base-directory</span> ,emagician/dir
+                                      <span class="org-builtin">:base-extension</span> <span class="org-string">""</span>
+                                      <span class="org-builtin">:exlcude</span> <span class="org-string">".*"</span>
+                                      <span class="org-builtin">:include</span> (<span class="org-string">"Index.org"</span> <span class="org-string">"Emagician.org"</span>)
+                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)
+                                      <span class="org-builtin">:htmlized-source</span> t
+                                      <span class="org-builtin">:html-html5-fancy</span> t     
+                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>
+                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
+                                      )
+                                     )))
+    (org-publish project force async)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-all</span> ()
+  (interactive)
+  (emagician/meta/publish <span class="org-string">"emagician"</span> t nil))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-assets</span> ()
+  (interactive)
+  (emagician/meta/publish <span class="org-string">"emagician-assets"</span> t nil))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-test</span> ()
+  <span class="org-doc">"A small tester project"</span>
+  (interactive)
+  (emagician/meta/publish <span class="org-string">"emagician-test"</span> t nil))
 </pre>
 </div>
 </div>
@@ -403,476 +404,480 @@ The thi.ng/org-spec<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">
 
 <div class="org-src-container">
 
-<pre class="src src-css"><span class="org-css-selector">body </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: Helvetica, Arial, sans-serif;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 16px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">line-height</span>: 1.4;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #33333f;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">code </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Inconsolata"</span>, monospace;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 16px;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">p&gt;code, li&gt;code </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: #eee;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.25em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h1, h2, h3 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h2 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom</span>: 1px solid hsl(0, 0%, 77%);&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 1.75em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-left</span>: -1em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.25em 1em;   &#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h3 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 2em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 1.5em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h4 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 1.25em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h5 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 1em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">h2 code, h3 code, h4 code, h5 code, td code </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: inherit <span class="org-builtin">!important</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: inherit <span class="org-builtin">!important</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">td code </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-weight</span>: bold;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:before, a:after {&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: hsl(0,0%,80%);&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 120%;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:before {&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"[["</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:after {&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"]]"</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:link, &#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:hover, &#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:visited {&#57344;&#57345;&#57345;
-    <span class="org-css-property">text-decoration</span>: none;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: black;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:link {&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:visited {&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #666;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:link:hover,&#57344;&#57345;&#57345;
-<span class="org-css-property">a</span>:visited:hover {&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #ff0;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"\21B3"</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: white;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding-left</span>: 0.2em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#meta </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 2em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-#table-of-contents a:link,&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents a:visited </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: black;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: transparent;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">line-height</span>: 1.2;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents h2 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom</span>: 0;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents ul </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">list-style</span>: none;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding-left</span>:0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-weight</span>: normal;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents div&gt;ul&gt;li </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 1em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-weight</span>: bold;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents .tag </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">display</span>: none;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents .todo,</span>&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents .done </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 80%;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">#table-of-contents ol&gt;li </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 1em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">table </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">width</span>: 100%;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">table, th, td </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">border</span>: 1px solid #666;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">th, td </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.5em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">text-align</span>: left;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-tbody tr:nth-child(odd) {&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: #eee;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.section-number-1,</span>&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.section-number-2,</span>&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.section-number-3,</span>&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.section-number-4,</span>&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.section-number-5 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: cursive;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 120%;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border</span>: 1px solid hsl(0, 0%, 68%);&#57344;&#57345;&#57345;
-    <span class="org-css-property">display</span>: inline-block;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 8px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">line-height</span>: 70%;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-radius</span>: 10px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">img </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">max-width</span>: 90%;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">position</span>: relative;&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin</span>: 0 1.2em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.25em 1em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-left</span>: 4px solid;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">table + div.notice </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 2em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice a </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom</span>: 1px dotted;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">position</span>: absolute;&#57344;&#57345;&#57345;
-    <span class="org-css-property">top</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">right</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.25em 0.5em 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 60%;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom-left-radius</span>: 0.5em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-warning </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #fcc;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #600;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-example </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #def;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #069;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-info </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #efe;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #060;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-warning a </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #600;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-example a </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #069;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.notice-info a </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #060;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice-warning:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"WARNING"</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #c99;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #fcc;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice-example:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"EXAMPLE"</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #abc;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #def;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.notice-info:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"INFO"</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #9c9;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #efe;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">blockquote </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: hsl(0,0%,93%);&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.125em 4em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-left</span>: 2px solid hsl(0,0%,80%);&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: Inconsolata;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">box-shadow</span>: none;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.example:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"Properties"</span>;&#57344;&#57345;&#57345;
-    <span class="org-css-property">display</span>: block;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom</span>: 1px dotted;&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-bottom</span>: 1em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.example </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #fec;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #666;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 0.85em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: #f8f8f8;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-size</span>: 8px 8px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-image</span>: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));&#57344;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.5em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">display</span>: block;&#57344;&#57345;&#57345;
-    <span class="org-css-property">position</span>: absolute;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background-color</span>: #ccccd0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">top</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">right</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0.25em 0.5em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-bottom-left-radius</span>: 8px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border</span>: 0;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: white;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 80%;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src-sh:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"SH"</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src-javascript:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"JS"</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src-emacs-lisp:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"Emacs-Lisp"</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">pre.src-c:before </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">content</span>: <span class="org-string">"C"</span>;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-string </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #f94;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-keyword </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #c07;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-variable-name </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #f04;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-clojure-keyword </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #09f;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-comment, span.org-comment-delimiter </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #999;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #666;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #888;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #aaa;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: #ccc;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">div.figure </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 0.85em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.tag </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-size</span>: 11px;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-weight</span>: normal;&#57344;&#57345;&#57345;
-    <span class="org-css-property">float</span>: right;&#57344;&#57345;&#57345;
-    <span class="org-css-property">margin-top</span>: 1em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: transparent;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.tag span </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #ccc;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0 0.5em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-radius</span>: 0.2em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: white;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.todo, .done </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;&#57344;&#57345;&#57345;
-    <span class="org-css-property">font-weight</span>: normal;&#57344;&#57345;&#57345;
-    <span class="org-css-property">padding</span>: 0 0.25em;&#57344;&#57345;&#57345;
-    <span class="org-css-property">border-radius</span>: 0.2em;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.todo </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #f04;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: white;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">.done </span>{&#57344;&#57345;&#57345;
-    <span class="org-css-property">background</span>: #5f7;&#57344;&#57345;&#57345;
-    <span class="org-css-property">color</span>: white;&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-builtin">@media</span> screen {&#57344;&#57345;&#57345;
-<span class="org-css-selector">    h1.title </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">text-align</span>: left;&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin</span>: 1em 0 0 280px;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    h2 </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-top</span>: 1em;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    #table-of-contents </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">position</span>: fixed;&#57344;&#57345;&#57345;
-        <span class="org-css-property">top</span>: 0;&#57344;&#57345;&#57345;
-        <span class="org-css-property">left</span>: 0;&#57344;&#57345;&#57345;
-        <span class="org-css-property">padding</span>: 2em 0 2em 2em;&#57344;&#57345;&#57345;
-        <span class="org-css-property">width</span>: 240px;&#57344;&#57345;&#57345;
-        <span class="org-css-property">height</span>: 100vh;&#57344;&#57345;&#57345;
-        <span class="org-css-property">font-size</span>: 11px;&#57344;&#57345;&#57345;
-        <span class="org-css-property">background</span>: #eee;&#57344;&#57345;&#57345;
-        <span class="org-css-property">overflow</span>: auto;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    #table-of-contents ul&gt;li&gt;ul&gt;li&gt;ul&gt;li </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">display</span>: none;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    #table-of-contents h2 </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-top</span>: 0;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    #table-of-contents code </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">font-size</span>: 12px;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    div.outline-2, #footnotes </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-left</span>: 280px;&#57344;&#57345;&#57345;
-        <span class="org-css-property">max-width</span>: 960px;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-builtin">@media</span> screen and (max-width: 1024px) {&#57344;&#57345;&#57345;
-<span class="org-css-selector">    html, body </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">font-size</span>: 14px;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    #table-of-contents </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">display</span>: none;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    h1.title </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-left</span>: 5%;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    div.outline-2, #footnotes </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-left</span>: 5%;&#57344;&#57345;&#57345;
-        <span class="org-css-property">max-width</span>: 90%;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-builtin">@media</span> print {&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    body </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">color</span>: black;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    </span><span class="org-css-selector"><span class="org-builtin">@page</span></span><span class="org-css-selector"> </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin</span>: 25mm;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    h2, h3 </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">page-break-before</span>: always;&#57344;&#57345;&#57345;
-        <span class="org-css-property">margin-top</span>: 0;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    table </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">page-break-inside</span>: avoid;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    a:visited </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">color</span>: black;&#57344;&#57345;&#57345;
-        <span class="org-css-property">background</span>: #ff8;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:visited </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">background</span>: #bff;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-css-selector">    div.notice:before </span>{&#57344;&#57345;&#57345;
-        <span class="org-css-property">display</span>: none;&#57344;&#57345;&#57345;
-    }&#57344;&#57345;&#57345;
-}&#57344;&#57345;&#57345;
+<pre class="src src-css"><span class="org-css-selector">body </span>{
+    <span class="org-css-property">font-family</span>: Helvetica, Arial, sans-serif;
+    <span class="org-css-property">font-size</span>: 16px;
+    <span class="org-css-property">line-height</span>: 1.4;
+    <span class="org-css-property">color</span>: #33333f;
+}
+
+<span class="org-css-selector">code </span>{
+    <span class="org-css-property">font-family</span>: <span class="org-string">"Inconsolata"</span>, monospace;
+    <span class="org-css-property">font-size</span>: 16px;
+}
+
+<span class="org-css-selector">p&gt;code, li&gt;code </span>{
+    <span class="org-css-property">background-color</span>: #eee;
+    <span class="org-css-property">padding</span>: 0.25em;
+}
+
+<span class="org-css-selector">h1, h2, h3 </span>{
+    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
+}
+
+<span class="org-css-selector">h2 </span>{
+    <span class="org-css-property">border-bottom</span>: 1px solid hsl(0, 0%, 77%);
+    <span class="org-css-property">font-size</span>: 1.75em;
+    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);
+    <span class="org-css-property">margin-left</span>: -1em;
+    <span class="org-css-property">padding</span>: 0.25em 1em;   
+}
+
+<span class="org-css-selector">h3 </span>{
+    <span class="org-css-property">margin-top</span>: 2em;
+    <span class="org-css-property">font-size</span>: 1.5em;
+}
+
+<span class="org-css-selector">h4 </span>{
+    <span class="org-css-property">font-size</span>: 1.25em;
+}
+
+<span class="org-css-selector">h5 </span>{
+    <span class="org-css-property">font-size</span>: 1em;
+}
+
+<span class="org-css-selector">h2 code, h3 code, h4 code, h5 code, td code </span>{
+    <span class="org-css-property">font-family</span>: inherit <span class="org-builtin">!important</span>;
+    <span class="org-css-property">font-size</span>: inherit <span class="org-builtin">!important</span>;
+}
+
+<span class="org-css-selector">td code </span>{
+    <span class="org-css-property">font-weight</span>: bold;
+}
+
+<span class="org-css-property">a</span>:before, a:after {
+    <span class="org-css-property">color</span>: hsl(0,0%,80%);
+    <span class="org-css-property">font-size</span>: 120%;
+}
+
+<span class="org-css-property">a</span>:before {
+    <span class="org-css-property">content</span>: <span class="org-string">"[["</span>;
+}
+
+<span class="org-css-property">a</span>:after {
+    <span class="org-css-property">content</span>: <span class="org-string">"]]"</span>;
+}
+
+<span class="org-css-selector">a[name]:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"[["</span> attr(name);
+}
+
+<span class="org-css-property">a</span>:link, 
+<span class="org-css-property">a</span>:hover, 
+<span class="org-css-property">a</span>:visited {
+    <span class="org-css-property">text-decoration</span>: none;
+    <span class="org-css-property">color</span>: black;
+}
+
+<span class="org-css-property">a</span>:link {
+
+}
+
+<span class="org-css-property">a</span>:visited {
+    <span class="org-css-property">color</span>: #666;
+}
+
+<span class="org-css-property">a</span>:link:hover,
+<span class="org-css-property">a</span>:visited:hover {
+    <span class="org-css-property">background</span>: #ff0;
+}
+
+<span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"\21B3"</span>;
+    <span class="org-css-property">background</span>: white;
+    <span class="org-css-property">padding-left</span>: 0.2em;
+}
+
+<span class="org-css-selector">#meta </span>{
+    <span class="org-css-property">margin-top</span>: 2em;
+}
+
+#table-of-contents a:link,
+<span class="org-css-selector">#table-of-contents a:visited </span>{
+    <span class="org-css-property">color</span>: black;
+    <span class="org-css-property">background</span>: transparent;
+}
+
+<span class="org-css-selector">#table-of-contents </span>{
+    <span class="org-css-property">line-height</span>: 1.2;
+}
+<span class="org-css-selector">#table-of-contents h2 </span>{
+    <span class="org-css-property">border-bottom</span>: 0;
+}
+
+<span class="org-css-selector">#table-of-contents ul </span>{
+    <span class="org-css-property">list-style</span>: none;
+    <span class="org-css-property">padding-left</span>:0;
+    <span class="org-css-property">font-weight</span>: normal;
+}
+
+<span class="org-css-selector">#table-of-contents div&gt;ul&gt;li </span>{
+    <span class="org-css-property">margin-top</span>: 1em;
+    <span class="org-css-property">font-weight</span>: bold;
+}
+
+<span class="org-css-selector">#table-of-contents .tag </span>{
+    <span class="org-css-property">display</span>: none;
+}
+
+<span class="org-css-selector">#table-of-contents .todo,</span>
+<span class="org-css-selector">#table-of-contents .done </span>{
+    <span class="org-css-property">font-size</span>: 80%;
+}
+
+<span class="org-css-selector">#table-of-contents ol&gt;li </span>{
+    <span class="org-css-property">margin-top</span>: 1em;
+}
+
+<span class="org-css-selector">table </span>{
+    <span class="org-css-property">width</span>: 100%;
+}
+
+<span class="org-css-selector">table, th, td </span>{
+    <span class="org-css-property">border</span>: 1px solid #666;
+}
+
+<span class="org-css-selector">th, td </span>{
+    <span class="org-css-property">padding</span>: 0.5em;
+    <span class="org-css-property">text-align</span>: left;
+}
+
+tbody tr:nth-child(odd) {
+    <span class="org-css-property">background-color</span>: #eee;
+}
+
+<span class="org-css-selector">span.section-number-1,</span>
+<span class="org-css-selector">span.section-number-2,</span>
+<span class="org-css-selector">span.section-number-3,</span>
+<span class="org-css-selector">span.section-number-4,</span>
+<span class="org-css-selector">span.section-number-5 </span>{
+    <span class="org-css-property">font-family</span>: cursive;
+    <span class="org-css-property">font-size</span>: 120%;
+    <span class="org-css-property">border</span>: 1px solid hsl(0, 0%, 68%);
+    <span class="org-css-property">display</span>: inline-block;
+    <span class="org-css-property">padding</span>: 8px;
+    <span class="org-css-property">line-height</span>: 70%;
+    <span class="org-css-property">border-radius</span>: 10px;
+    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);
+}
+
+<span class="org-css-selector">img </span>{
+    <span class="org-css-property">max-width</span>: 90%;
+}
+
+<span class="org-css-selector">div.notice </span>{
+    <span class="org-css-property">position</span>: relative;
+    <span class="org-css-property">margin</span>: 0 1.2em;
+    <span class="org-css-property">padding</span>: 0.25em 1em;
+    <span class="org-css-property">border-left</span>: 4px solid;
+}
+
+<span class="org-css-selector">table + div.notice </span>{
+    <span class="org-css-property">margin-top</span>: 2em;
+}
+
+<span class="org-css-selector">div.notice a </span>{
+    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;
+    <span class="org-css-property">border-bottom</span>: 1px dotted;
+}
+
+<span class="org-css-selector">div.notice a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{
+    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;
+}
+
+<span class="org-css-selector">div.notice:before </span>{
+    <span class="org-css-property">position</span>: absolute;
+    <span class="org-css-property">top</span>: 0;
+    <span class="org-css-property">right</span>: 0;
+    <span class="org-css-property">padding</span>: 0.25em 0.5em 0;
+    <span class="org-css-property">font-size</span>: 60%;
+    <span class="org-css-property">border-bottom-left-radius</span>: 0.5em;
+}
+
+<span class="org-css-selector">.notice-warning </span>{
+    <span class="org-css-property">background</span>: #fcc;
+    <span class="org-css-property">color</span>: #600;
+}
+
+<span class="org-css-selector">.notice-example </span>{
+    <span class="org-css-property">background</span>: #def;
+    <span class="org-css-property">color</span>: #069;
+}
+
+<span class="org-css-selector">.notice-info </span>{
+    <span class="org-css-property">background</span>: #efe;
+    <span class="org-css-property">color</span>: #060;
+}
+
+<span class="org-css-selector">.notice-warning a </span>{
+    <span class="org-css-property">color</span>: #600;
+}
+
+<span class="org-css-selector">.notice-example a </span>{
+    <span class="org-css-property">color</span>: #069;
+}
+
+<span class="org-css-selector">.notice-info a </span>{
+    <span class="org-css-property">color</span>: #060;
+}
+
+<span class="org-css-selector">div.notice-warning:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"WARNING"</span>;
+    <span class="org-css-property">background</span>: #c99;
+    <span class="org-css-property">color</span>: #fcc;
+}
+
+<span class="org-css-selector">div.notice-example:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"EXAMPLE"</span>;
+    <span class="org-css-property">background</span>: #abc;
+    <span class="org-css-property">color</span>: #def;
+}
+
+<span class="org-css-selector">div.notice-info:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"INFO"</span>;
+    <span class="org-css-property">background</span>: #9c9;
+    <span class="org-css-property">color</span>: #efe;
+}
+
+<span class="org-css-selector">blockquote </span>{
+    <span class="org-css-property">background-color</span>: hsl(0,0%,93%);
+    <span class="org-css-property">margin</span>: 0;
+    <span class="org-css-property">padding</span>: 0.125em 4em;
+    <span class="org-css-property">border-left</span>: 2px solid hsl(0,0%,80%);
+}
+
+<span class="org-css-selector">pre </span>{
+    <span class="org-css-property">font-family</span>: Inconsolata;
+    <span class="org-css-property">border</span>: 0;
+    <span class="org-css-property">box-shadow</span>: none;
+}
+
+<span class="org-css-selector">pre.example:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"Properties"</span>;
+    <span class="org-css-property">display</span>: block;
+    <span class="org-css-property">border-bottom</span>: 1px dotted;
+    <span class="org-css-property">margin-bottom</span>: 1em;
+}
+
+<span class="org-css-selector">pre.example </span>{
+    <span class="org-css-property">background</span>: #fec;
+    <span class="org-css-property">color</span>: #666;
+    <span class="org-css-property">font-size</span>: 0.85em;
+}
+
+<span class="org-css-selector">pre </span>{
+    <span class="org-css-property">background-color</span>: #f8f8f8;
+    <span class="org-css-property">background-size</span>: 8px 8px;
+    <span class="org-css-property">background-image</span>: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
+}
+
+<span class="org-css-selector">pre.src </span>{
+    <span class="org-css-property">padding</span>: 0.5em;
+}
+
+<span class="org-css-selector">pre.src:before </span>{
+    <span class="org-css-property">display</span>: block;
+    <span class="org-css-property">position</span>: absolute;
+    <span class="org-css-property">background-color</span>: #ccccd0;
+    <span class="org-css-property">top</span>: 0;
+    <span class="org-css-property">right</span>: 0;
+    <span class="org-css-property">padding</span>: 0.25em 0.5em;
+    <span class="org-css-property">border-bottom-left-radius</span>: 8px;
+    <span class="org-css-property">border</span>: 0;
+    <span class="org-css-property">color</span>: white;
+    <span class="org-css-property">font-size</span>: 80%;
+}
+
+<span class="org-css-selector">pre.src-sh:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"SH"</span>;
+}
+
+<span class="org-css-selector">pre.src-javascript:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"JS"</span>;
+}
+
+<span class="org-css-selector">pre.src-emacs-lisp:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"Emacs-Lisp"</span>;
+}
+
+<span class="org-css-selector">pre.src-c:before </span>{
+    <span class="org-css-property">content</span>: <span class="org-string">"C"</span>;
+}
+
+<span class="org-css-selector">span.org-string </span>{
+    <span class="org-css-property">color</span>: #f94;
+}
+
+<span class="org-css-selector">span.org-keyword </span>{
+    <span class="org-css-property">color</span>: #c07;
+}
+
+<span class="org-css-selector">span.org-variable-name </span>{
+    <span class="org-css-property">color</span>: #f04;
+}
+
+<span class="org-css-selector">span.org-clojure-keyword </span>{
+    <span class="org-css-property">color</span>: #09f;
+}
+
+<span class="org-css-selector">span.org-comment, span.org-comment-delimiter </span>{
+    <span class="org-css-property">color</span>: #999;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 </span>{
+    <span class="org-css-property">color</span>: #666;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 </span>{
+    <span class="org-css-property">color</span>: #888;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 </span>{
+    <span class="org-css-property">color</span>: #aaa;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 </span>{
+    <span class="org-css-property">color</span>: #ccc;
+}
+
+<span class="org-css-selector">div.figure </span>{
+    <span class="org-css-property">font-size</span>: 0.85em;
+}
+
+<span class="org-css-selector">.tag </span>{
+    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
+    <span class="org-css-property">font-size</span>: 11px;
+    <span class="org-css-property">font-weight</span>: normal;
+    <span class="org-css-property">float</span>: right;
+    <span class="org-css-property">margin-top</span>: 1em;
+    <span class="org-css-property">background</span>: transparent;
+}
+
+<span class="org-css-selector">.tag span </span>{
+    <span class="org-css-property">background</span>: #ccc;
+    <span class="org-css-property">padding</span>: 0 0.5em;
+    <span class="org-css-property">border-radius</span>: 0.2em;
+    <span class="org-css-property">color</span>: white;
+}
+
+<span class="org-css-selector">.todo, .done </span>{
+    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
+    <span class="org-css-property">font-weight</span>: normal;
+    <span class="org-css-property">padding</span>: 0 0.25em;
+    <span class="org-css-property">border-radius</span>: 0.2em;
+}
+
+<span class="org-css-selector">.todo </span>{
+    <span class="org-css-property">background</span>: #f04;
+    <span class="org-css-property">color</span>: white;
+}
+
+<span class="org-css-selector">.done </span>{
+    <span class="org-css-property">background</span>: #5f7;
+    <span class="org-css-property">color</span>: white;
+}
+
+<span class="org-builtin">@media</span> screen {
+<span class="org-css-selector">    h1.title </span>{
+        <span class="org-css-property">text-align</span>: left;
+        <span class="org-css-property">margin</span>: 1em 0 0 280px;
+    }
+
+<span class="org-css-selector">    h2 </span>{
+        <span class="org-css-property">margin-top</span>: 1em;
+    }
+
+<span class="org-css-selector">    #table-of-contents </span>{
+        <span class="org-css-property">position</span>: fixed;
+        <span class="org-css-property">top</span>: 0;
+        <span class="org-css-property">left</span>: 0;
+        <span class="org-css-property">padding</span>: 2em 0 2em 2em;
+        <span class="org-css-property">width</span>: 240px;
+        <span class="org-css-property">height</span>: 100vh;
+        <span class="org-css-property">font-size</span>: 11px;
+        <span class="org-css-property">background</span>: #eee;
+        <span class="org-css-property">overflow</span>: auto;
+    }
+
+<span class="org-css-selector">    #table-of-contents ul&gt;li&gt;ul&gt;li&gt;ul&gt;li </span>{
+        <span class="org-css-property">display</span>: none;
+    }
+
+<span class="org-css-selector">    #table-of-contents h2 </span>{
+        <span class="org-css-property">margin-top</span>: 0;
+    }
+
+<span class="org-css-selector">    #table-of-contents code </span>{
+        <span class="org-css-property">font-size</span>: 12px;
+    }
+
+<span class="org-css-selector">    div.outline-2, #footnotes </span>{
+        <span class="org-css-property">margin-left</span>: 280px;
+        <span class="org-css-property">max-width</span>: 960px;
+    }
+}
+
+<span class="org-builtin">@media</span> screen and (max-width: 1024px) {
+<span class="org-css-selector">    html, body </span>{
+        <span class="org-css-property">font-size</span>: 14px;
+    }
+
+<span class="org-css-selector">    #table-of-contents </span>{
+        <span class="org-css-property">display</span>: none;
+    }
+
+<span class="org-css-selector">    h1.title </span>{
+        <span class="org-css-property">margin-left</span>: 5%;
+    }
+
+<span class="org-css-selector">    div.outline-2, #footnotes </span>{
+        <span class="org-css-property">margin-left</span>: 5%;
+        <span class="org-css-property">max-width</span>: 90%;
+    }
+}
+
+<span class="org-builtin">@media</span> print {
+
+<span class="org-css-selector">    body </span>{
+        <span class="org-css-property">color</span>: black;
+    }
+
+<span class="org-css-selector">    </span><span class="org-css-selector"><span class="org-builtin">@page</span></span><span class="org-css-selector"> </span>{
+        <span class="org-css-property">margin</span>: 25mm;
+    }
+
+<span class="org-css-selector">    h2, h3 </span>{
+        <span class="org-css-property">page-break-before</span>: always;
+        <span class="org-css-property">margin-top</span>: 0;
+    }
+
+<span class="org-css-selector">    table </span>{
+        <span class="org-css-property">page-break-inside</span>: avoid;
+    }
+
+<span class="org-css-selector">    a:visited </span>{
+        <span class="org-css-property">color</span>: black;
+        <span class="org-css-property">background</span>: #ff8;
+    }
+
+<span class="org-css-selector">    a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:visited </span>{
+        <span class="org-css-property">background</span>: #bff;
+    }
+
+<span class="org-css-selector">    div.notice:before </span>{
+        <span class="org-css-property">display</span>: none;
+    }
+}
 </pre>
 </div>
 </div>
@@ -895,7 +900,7 @@ tbody tr:nth-child(odd) {&#57344;&#57345;&#57345;
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:58</p>
+<p class="date">Created: 2016-08-19 Fri 13:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

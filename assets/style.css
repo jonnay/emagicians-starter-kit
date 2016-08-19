@@ -65,6 +65,10 @@ a:after {
     content: "]]";
 }
 
+a[name]:before {
+    content: "[[" attr(name);
+}
+
 a:link, 
 a:hover, 
 a:visited {

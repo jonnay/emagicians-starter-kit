@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>YASnippets</title>
-<!-- 2016-08-19 Fri 09:57 -->
+<!-- 2016-08-19 Fri 13:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -185,13 +185,13 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/expect-dir <span class="org-string">"./assets/snippets"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/js-mode"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/coffeescript-mode"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/org-mode"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/ruby-mode"</span>)&#57344;&#57345;&#57345;
-(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/expect-dir <span class="org-string">"./assets/snippets"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/js-mode"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/coffeescript-mode"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/org-mode"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/ruby-mode"</span>)
+(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
 </pre>
 </div>
 </div>
@@ -201,12 +201,12 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/snippet-tangle-and-reload</span> () &#57344;&#57345;&#57345;
-  <span class="org-doc">"Helper function to automagickally tangle and reload snippets after the snippet file is saved"</span>&#57344;&#57345;
-  (org-babel-tangle)&#57344;&#57345;&#57345;
-  (yas-reload-all))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/snippet-tangle-and-reload</span> () 
+  <span class="org-doc">"Helper function to automagickally tangle and reload snippets after the snippet file is saved"</span>
+  (org-babel-tangle)
+  (yas-reload-all))
+
+(add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)
 </pre>
 </div>
 </div>
@@ -226,45 +226,45 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 
-<pre class="src src-text"># name: source block&#57344;&#57345;&#57345;
-# key: src&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-#+begin_src $1 $2&#57344;&#57345;&#57345;
-$0&#57344;&#57345;&#57345;
-#+end_src&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: source block
+# key: src
+# --
+#+begin_src $1 $2
+$0
+#+end_src
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-text"># name: emacs-lisp&#57344;&#57345;&#57345;
-# key: lisp&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-#+begin_src emacs-lisp $1&#57344;&#57345;&#57345;
-$0&#57344;&#57345;&#57345;
-#+end_src&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: emacs-lisp
+# key: lisp
+# --
+#+begin_src emacs-lisp $1
+$0
+#+end_src
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-text"># name: sh&#57344;&#57345;&#57345;
-# key: sh&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-#+begin_src sh $1&#57344;&#57345;&#57345;
-$0&#57344;&#57345;&#57345;
-#+end_src&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: sh
+# key: sh
+# --
+#+begin_src sh $1
+$0
+#+end_src
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-text"># name: sql&#57344;&#57345;&#57345;
-# key: sql&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-#+begin_src sql $1&#57344;&#57345;&#57345;
-$0&#57344;&#57345;&#57345;
-#+end_src&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: sql
+# key: sql
+# --
+#+begin_src sql $1
+$0
+#+end_src
 </pre>
 </div>
 </div>
@@ -277,15 +277,15 @@ $0&#57344;&#57345;&#57345;
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 
-<pre class="src src-text"># name: yasnippet&#57344;&#57345;&#57345;
-# key: snippet&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-#+begin_src yasnippet :tangle assets/snippets/$1/$2&#57344;&#57345;&#57345;
-# name: $2&#57344;&#57345;&#57345;
-# key: $2&#57344;&#57345;&#57345;
-#--&#57344;&#57345;&#57345;
-$0&#57344;&#57345;&#57345;
-#+end_src&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: yasnippet
+# key: snippet
+# --
+#+begin_src yasnippet :tangle assets/snippets/$1/$2
+# name: $2
+# key: $2
+#--
+$0
+#+end_src
 </pre>
 </div>
 </div>
@@ -296,16 +296,16 @@ $0&#57344;&#57345;&#57345;
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
 
-<pre class="src src-text"># name: project&#57344;&#57345;&#57345;
-# key: project&#57344;&#57345;&#57345;
-# --&#57344;&#57345;&#57345;
-** PROJECT $1&#57344;&#57345;&#57345;
-   - Purpose - 50K :: $2&#57344;&#57345;&#57345;
-   - Success Looks Like - 40K  :: $3&#57344;&#57345;&#57345;
-   - Brainstorming - 30K&#57344;&#57345;&#57345;
-     - $4&#57344;&#57345;&#57345;
-   - Organize the brainstorming and come up with next actions (20K) &#57344;&#57345;&#57345;
-*** TODO $5&#57344;&#57345;&#57345;
+<pre class="src src-text"># name: project
+# key: project
+# --
+** PROJECT $1
+   - Purpose - 50K :: $2
+   - Success Looks Like - 40K  :: $3
+   - Brainstorming - 30K
+     - $4
+   - Organize the brainstorming and come up with next actions (20K) 
+*** TODO $5
 </pre>
 </div>
 </div>
@@ -453,7 +453,7 @@ end
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:57</p>
+<p class="date">Created: 2016-08-19 Fri 13:56</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

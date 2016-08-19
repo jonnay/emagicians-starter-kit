@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Web Programming</title>
-<!-- 2016-08-19 Fri 09:57 -->
+<!-- 2016-08-19 Fri 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -182,28 +182,28 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">web-mode</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">"&#127758;"</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:mode</span> &#57344;&#57345;&#57345;
-  ((<span class="org-string">"\\.phtml\\'"</span> . web-mode)&#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.tpl\\.php\\'"</span> . web-mode)      &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.jsp\\'"</span> . web-mode)            &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.as[cp]x\\'"</span> . web-mode)        &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.erb\\'"</span> . web-mode)            &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.mustache\\'"</span> . web-mode)       &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.djhtml\\'"</span> . web-mode)         &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.jst.ejs\\'"</span> . web-mode)        &#57344;&#57345;&#57345;
-  (<span class="org-string">"\\.html?\\'"</span> . web-mode))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq web-mode-enable-block-face t)&#57344;&#57345;&#57345;
-  (setq web-mode-enable-comment-keywords t)&#57344;&#57345;&#57345;
-  (setq web-mode-enable-current-element-highlight t)&#57344;&#57345;&#57345;
-  (setq web-mode-enable-current-column-highlight t)   &#57344;&#57345;&#57345;
-  (setq web-mode-script-padding 2)&#57344;&#57345;&#57345;
-  (setq web-mode-style-padding 2)&#57344;&#57345;&#57345;
-  (setq web-mode-comment-style 2)&#57344;&#57345;&#57345;
-  (setq web-mode-code-indent-offset 2)&#57344;&#57345;&#57345;
-  (setq web-mode-markup-indent-offset 2))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">web-mode</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#127758;"</span>
+  <span class="org-builtin">:mode</span> 
+  ((<span class="org-string">"\\.phtml\\'"</span> . web-mode)
+  (<span class="org-string">"\\.tpl\\.php\\'"</span> . web-mode)      
+  (<span class="org-string">"\\.jsp\\'"</span> . web-mode)            
+  (<span class="org-string">"\\.as[cp]x\\'"</span> . web-mode)        
+  (<span class="org-string">"\\.erb\\'"</span> . web-mode)            
+  (<span class="org-string">"\\.mustache\\'"</span> . web-mode)       
+  (<span class="org-string">"\\.djhtml\\'"</span> . web-mode)         
+  (<span class="org-string">"\\.jst.ejs\\'"</span> . web-mode)        
+  (<span class="org-string">"\\.html?\\'"</span> . web-mode))
+  <span class="org-builtin">:init</span>
+  (setq web-mode-enable-block-face t)
+  (setq web-mode-enable-comment-keywords t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)   
+  (setq web-mode-script-padding 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-comment-style 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2))
 </pre>
 </div>
 </div>
@@ -216,9 +216,9 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">scss-mode</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (add-hook 'scss-mode-hook 'ac-css-mode-setup))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">scss-mode</span>
+  <span class="org-builtin">:init</span>
+  (add-hook 'scss-mode-hook 'ac-css-mode-setup))
 </pre>
 </div>
 </div>
@@ -228,11 +228,11 @@ for the JavaScript code in this tag.
 <div class="outline-text-4" id="text-1-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/defhook run-prog-mode-hooks css-mode-hook&#57344;&#57345;&#57345;
-  <span class="org-string">"Runs the progmode hooks"</span>&#57344;&#57345;&#57345;
-  (run-hooks 'prog-mode-hook))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(add-hook 'scss-mode-hook 'run-prog-mode-hooks)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/defhook run-prog-mode-hooks css-mode-hook
+  <span class="org-string">"Runs the progmode hooks"</span>
+  (run-hooks 'prog-mode-hook))
+
+(add-hook 'scss-mode-hook 'run-prog-mode-hooks)
 </pre>
 </div>
 </div>
@@ -244,10 +244,10 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">coffee-mode</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9749;"</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq coffee-tab-width 2))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">coffee-mode</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9749;"</span>
+  <span class="org-builtin">:init</span>
+  (setq coffee-tab-width 2))
 </pre>
 </div>
 </div>
@@ -262,7 +262,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">apache-mode</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">apache-mode</span>)
 </pre>
 </div>
 </div>
@@ -272,7 +272,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">restclient</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">restclient</span>)
 </pre>
 </div>
 </div>
@@ -286,13 +286,13 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-mode</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span> &#57344;&#57345;&#57345;
-  (setq httpd-port 8123))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-reload-stylesheets</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span> (add-hook 'css-mode-hook 'skewer-reload-stylesheets-start-editing)&#57344;&#57345;&#57345;
-        (add-hook 'scss-mode-hook 'skewer-reload-stylesheets-start-editing))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-mode</span>
+  <span class="org-builtin">:init</span> 
+  (setq httpd-port 8123))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-reload-stylesheets</span>
+  <span class="org-builtin">:init</span> (add-hook 'css-mode-hook 'skewer-reload-stylesheets-start-editing)
+        (add-hook 'scss-mode-hook 'skewer-reload-stylesheets-start-editing))
 </pre>
 </div>
 </div>
@@ -306,7 +306,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">know-your-http-well</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">know-your-http-well</span>)
 </pre>
 </div>
 </div>
@@ -315,7 +315,7 @@ for the JavaScript code in this tag.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:57</p>
+<p class="date">Created: 2016-08-19 Fri 13:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

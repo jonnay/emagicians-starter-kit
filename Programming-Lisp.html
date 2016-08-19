@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Lisp</title>
-<!-- 2016-08-19 Fri 09:57 -->
+<!-- 2016-08-19 Fri 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -176,15 +176,15 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">paredit</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9387;"</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span>&#57344;&#57345;&#57345;
-  (<span class="org-builtin">:paredit-mode-map</span>&#57344;&#57345;&#57345;
-   ((<span class="org-string">"M-s"</span> . paredit-split-sexp)))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode-hook)&#57344;&#57345;&#57345;
-  (emagician/minor-in-major-mode paredit-mode lisp-interaction-mode-hook)&#57344;&#57345;&#57345;
-  (emagician/minor-in-major-mode paredit-mode scheme-mode-hook))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">paredit</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9387;"</span>
+  <span class="org-builtin">:bind</span>
+  (<span class="org-builtin">:paredit-mode-map</span>
+   ((<span class="org-string">"M-s"</span> . paredit-split-sexp)))
+  <span class="org-builtin">:init</span>
+  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode-hook)
+  (emagician/minor-in-major-mode paredit-mode lisp-interaction-mode-hook)
+  (emagician/minor-in-major-mode paredit-mode scheme-mode-hook))
 </pre>
 </div>
 </div>
@@ -203,15 +203,15 @@ for the JavaScript code in this tag.
 </div><ol class="org-ol"><li><a id="sec-2-1-1-1" name="sec-2-1-1-1"></a>Eldoc<br  /><div class="outline-text-5" id="text-2-1-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eldoc</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span> &#57344;&#57345;&#57345;
-    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-    (setq eldoc-idle-delay 0.2)&#57344;&#57345;&#57345;
-    (set-face-attribute 'eldoc-highlight-function-argument nil&#57344;&#57345;&#57345;
-                        <span class="org-builtin">:underline</span> t <span class="org-builtin">:foreground</span> <span class="org-string">"green"</span>&#57344;&#57345;&#57345;
-                        <span class="org-builtin">:weight</span> 'bold))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eldoc</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span> 
+    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  <span class="org-builtin">:config</span>
+    (setq eldoc-idle-delay 0.2)
+    (set-face-attribute 'eldoc-highlight-function-argument nil
+                        <span class="org-builtin">:underline</span> t <span class="org-builtin">:foreground</span> <span class="org-string">"green"</span>
+                        <span class="org-builtin">:weight</span> 'bold))
 </pre>
 </div>
 </div>
@@ -220,16 +220,16 @@ for the JavaScript code in this tag.
 <li><a id="sec-2-1-1-2" name="sec-2-1-1-2"></a>Auto Complete<br  /><div class="outline-text-5" id="text-2-1-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/defhook emagician/ac-set-elisp-sources emacs-lisp-mode&#57344;&#57345;&#57345;
-  (setq ac-sources&#57344;&#57345;&#57345;
-        '(ac-source-yasnippet&#57344;&#57345;&#57345;
-          ac-source-functions&#57344;&#57345;&#57345;
-          ac-source-features&#57344;&#57345;&#57345;
-          ac-source-variables&#57344;&#57345;&#57345;
-          ac-source-symbols&#57344;&#57345;&#57345;
-          ac-source-files-in-current-dir&#57344;&#57345;&#57345;
-          ac-source-words-in-buffer&#57344;&#57345;&#57345;
-          ac-source-words-in-same-mode-buffers)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/defhook emagician/ac-set-elisp-sources emacs-lisp-mode
+  (setq ac-sources
+        '(ac-source-yasnippet
+          ac-source-functions
+          ac-source-features
+          ac-source-variables
+          ac-source-symbols
+          ac-source-files-in-current-dir
+          ac-source-words-in-buffer
+          ac-source-words-in-same-mode-buffers)))
 </pre>
 </div>
 </div>
@@ -237,8 +237,8 @@ for the JavaScript code in this tag.
 <li><a id="sec-2-1-1-3" name="sec-2-1-1-3"></a>Indentation<br  /><div class="outline-text-5" id="text-2-1-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(put 'use-package 'lisp-indent-function 1)&#57344;&#57345;&#57345;
-(put 'lexically 'lisp-indent-function 0)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(put 'use-package 'lisp-indent-function 1)
+(put 'lexically 'lisp-indent-function 0)
 </pre>
 </div>
 </div>
@@ -250,19 +250,19 @@ We want to run checkdoc, but only in certain situations.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/run-checkdoc</span> () &#57344;&#57345;&#57345;
-  <span class="org-doc">"run checkdoc on save if it is an elisp file"</span>&#57344;&#57345;&#57345;
-  (<span class="org-keyword">if</span> (and (eq major-mode 'emacs-lisp-mode)&#57344;&#57345;&#57345;
-           (not (null (file-name-nondirectory (buffer-file-name))))&#57344;&#57345;&#57345;
-           (not (member (file-name-nondirectory (buffer-file-name)) '(<span class="org-string">".dir-locals.el"</span> <span class="org-string">"custom.el"</span>)))&#57344;&#57345;
-           (not (emagician/org-src-mode-p))&#57344;&#57345;&#57345;
-           (&gt; (length (buffer-file-name))&#57344;&#57345;&#57345;
-              (length package-user-dir))&#57344;&#57345;&#57345;
-           (not (string= (concat package-user-dir <span class="org-string">"/"</span>)&#57344;&#57345;&#57345;
-                         (substring (buffer-file-name) 0 (+ 1 (length package-user-dir))))))&#57344;&#57345;
-      (checkdoc)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(add-hook 'after-save-hook 'emagician/run-checkdoc)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/run-checkdoc</span> () 
+  <span class="org-doc">"run checkdoc on save if it is an elisp file"</span>
+  (<span class="org-keyword">if</span> (and (eq major-mode 'emacs-lisp-mode)
+           (not (null (file-name-nondirectory (buffer-file-name))))
+           (not (member (file-name-nondirectory (buffer-file-name)) '(<span class="org-string">".dir-locals.el"</span> <span class="org-string">"custom.el"</span>)))
+           (not (emagician/org-src-mode-p))
+           (&gt; (length (buffer-file-name))
+              (length package-user-dir))
+           (not (string= (concat package-user-dir <span class="org-string">"/"</span>)
+                         (substring (buffer-file-name) 0 (+ 1 (length package-user-dir))))))
+      (checkdoc)))
+
+(add-hook 'after-save-hook 'emagician/run-checkdoc)
 </pre>
 </div>
 </div>
@@ -271,9 +271,9 @@ We want to run checkdoc, but only in certain situations.
 <li><a id="sec-2-1-1-5" name="sec-2-1-1-5"></a>Package checking<br  /><div class="outline-text-5" id="text-2-1-1-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">flycheck-package</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span> &#57344;&#57345;&#57345;
-  (flycheck-package-setup))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">flycheck-package</span>
+  <span class="org-builtin">:config</span> 
+  (flycheck-package-setup))
 </pre>
 </div>
 </div>
@@ -318,18 +318,18 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 </div><ol class="org-ol"><li><a id="sec-2-2-2-1" name="sec-2-2-2-1"></a>Geiser<br  /><div class="outline-text-5" id="text-2-2-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">geiser</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq geiser-active-implementations '(chicken))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span> &#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">ac-geiser</span>)&#57344;&#57345;&#57345;
-  (emagician/defhook emagician/ac-set-scheme-sources scheme-mode&#57344;&#57345;&#57345;
-    (setq ac-sources&#57344;&#57345;&#57345;
-          '(ac-source-yasnippet&#57344;&#57345;&#57345;
-            ac-source-geiser&#57344;&#57345;&#57345;
-            ac-source-files-in-current-dir&#57344;&#57345;&#57345;
-            ac-source-words-in-buffer&#57344;&#57345;&#57345;
-            ac-source-words-in-same-mode-buffers))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">geiser</span>
+  <span class="org-builtin">:init</span>
+  (setq geiser-active-implementations '(chicken))
+  <span class="org-builtin">:config</span> 
+  (<span class="org-keyword">require</span> '<span class="org-constant">ac-geiser</span>)
+  (emagician/defhook emagician/ac-set-scheme-sources scheme-mode
+    (setq ac-sources
+          '(ac-source-yasnippet
+            ac-source-geiser
+            ac-source-files-in-current-dir
+            ac-source-words-in-buffer
+            ac-source-words-in-same-mode-buffers))))
 </pre>
 </div>
 </div>
@@ -340,7 +340,7 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:57</p>
+<p class="date">Created: 2016-08-19 Fri 13:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

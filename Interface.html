@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>User Interface Elements</title>
-<!-- 2016-08-19 Fri 09:57 -->
+<!-- 2016-08-19 Fri 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -161,33 +161,34 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-2-4">2.4. Ansi Color</a></li>
 <li><a href="#sec-2-5">2.5. Maximize primary window</a></li>
-<li><a href="#sec-2-6">2.6. Frame titles</a></li>
-<li><a href="#sec-2-7">2.7. Modeline</a>
+<li><a href="#sec-2-6">2.6. Soft Word Wrap / Visual Line Mode</a></li>
+<li><a href="#sec-2-7">2.7. Frame titles</a></li>
+<li><a href="#sec-2-8">2.8. Modeline</a>
 <ul>
-<li><a href="#sec-2-7-1">2.7.1. Basics</a></li>
-<li><a href="#sec-2-7-2">2.7.2. Diminish</a></li>
-<li><a href="#sec-2-7-3">2.7.3. Powerline</a></li>
-<li><a href="#sec-2-7-4">2.7.4. Turn on column and line numbers; file size</a></li>
-<li><a href="#sec-2-7-5">2.7.5. Smart Mode Line</a></li>
-<li><a href="#sec-2-7-6">2.7.6. <span class="todo TODO">TODO</span> Nyan mode</a></li>
+<li><a href="#sec-2-8-1">2.8.1. Basics</a></li>
+<li><a href="#sec-2-8-2">2.8.2. Diminish</a></li>
+<li><a href="#sec-2-8-3">2.8.3. Powerline</a></li>
+<li><a href="#sec-2-8-4">2.8.4. Turn on column and line numbers; file size</a></li>
+<li><a href="#sec-2-8-5">2.8.5. Smart Mode Line</a></li>
+<li><a href="#sec-2-8-6">2.8.6. <span class="todo TODO">TODO</span> Nyan mode</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-8">2.8. Cursor Info</a>
+<li><a href="#sec-2-9">2.9. Cursor Info</a>
 <ul>
-<li><a href="#sec-2-8-1">2.8.1. Dimension 1: File status</a></li>
-<li><a href="#sec-2-8-2">2.8.2. Dimention 2: Funky modes</a></li>
-<li><a href="#sec-2-8-3">2.8.3. Enhancements</a></li>
+<li><a href="#sec-2-9-1">2.9.1. Dimension 1: File status</a></li>
+<li><a href="#sec-2-9-2">2.9.2. Dimention 2: Funky modes</a></li>
+<li><a href="#sec-2-9-3">2.9.3. Enhancements</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-9">2.9. Highlight Line</a></li>
-<li><a href="#sec-2-10">2.10. Border the 80th column</a></li>
-<li><a href="#sec-2-11">2.11. Themes</a>
+<li><a href="#sec-2-10">2.10. Highlight Line</a></li>
+<li><a href="#sec-2-11">2.11. Border the 80th column</a></li>
+<li><a href="#sec-2-12">2.12. Themes</a>
 <ul>
-<li><a href="#sec-2-11-1">2.11.1. Base theme: Moe, Moe, Kyun!</a></li>
-<li><a href="#sec-2-11-2">2.11.2. Org Beautify</a></li>
+<li><a href="#sec-2-12-1">2.12.1. Base theme: Moe, Moe, Kyun!</a></li>
+<li><a href="#sec-2-12-2">2.12.2. Org Beautify</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-12">2.12. Digit Groups</a></li>
+<li><a href="#sec-2-13">2.13. Digit Groups</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3. Editing</a>
@@ -221,11 +222,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-4-1">4.1. Scrolling</a></li>
 <li><a href="#sec-4-2">4.2. Ace Jump</a></li>
-<li><a href="#sec-4-3">4.3. Ace window jump</a>
-<ul>
-<li><a href="#sec-4-3-1">4.3.1. Keys on the home row</a></li>
-</ul>
-</li>
+<li><a href="#sec-4-3">4.3. Ace window jump</a></li>
 <li><a href="#sec-4-4">4.4. Save Place</a></li>
 <li><a href="#sec-4-5">4.5. Goto Last Change</a></li>
 <li><a href="#sec-4-6">4.6. Uniquify</a></li>
@@ -281,7 +278,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(fset 'yes-or-no-p 'y-or-n-p)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(fset 'yes-or-no-p 'y-or-n-p)
 </pre>
 </div>
 </div>
@@ -312,7 +309,7 @@ the string is evaled instead.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq w! <span class="org-string">"uUuuuuuUUUuuuummmMMMmmmm.  This ain't vim."</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq w! <span class="org-string">"uUuuuuuUUUuuuummmMMMmmmm.  This ain't vim."</span>)
 </pre>
 </div>
 
@@ -341,8 +338,8 @@ Oh my.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">dolist</span> (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))&#57344;&#57345;&#57345;
-    (<span class="org-keyword">when</span> (fboundp mode) (funcall mode -1)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">dolist</span> (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+    (<span class="org-keyword">when</span> (fboundp mode) (funcall mode -1)))
 </pre>
 </div>
 </div>
@@ -357,7 +354,7 @@ I used to hate the visible bell, but it has sense gotten a lot better.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq visible-bell t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq visible-bell t)
 </pre>
 </div>
 </div>
@@ -373,7 +370,7 @@ Give us all the unicode information for a glyph.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq describe-char-unidata-list '(name old-name general-category canonical-combining-class bidi-class decomposition decimal-digit-value digit-value numeric-value mirrored uppercase lowercase titlecase))&#57344;&#57345;
+<pre class="src src-emacs-lisp">(setq describe-char-unidata-list '(name old-name general-category canonical-combining-class bidi-class decomposition decimal-digit-value digit-value numeric-value mirrored uppercase lowercase titlecase))
 </pre>
 </div>
 </div>
@@ -389,11 +386,11 @@ Unicode<br  />
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">unicode-fonts</span> &#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq unicode-fonts-skip-fonts nil)&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-  (unicode-fonts-setup))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">unicode-fonts</span> 
+  <span class="org-builtin">:init</span>
+  (setq unicode-fonts-skip-fonts nil)
+  <span class="org-builtin">:config</span>
+  (unicode-fonts-setup))
 </pre>
 </div>
 </div>
@@ -413,7 +410,7 @@ Thanks Obama
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ansi-color</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ansi-color</span>)
 </pre>
 </div>
 </div>
@@ -428,171 +425,181 @@ This seems to be the best way to get emacs to be maximized on the primary displa
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq default-frame-parameters '((fullscreen . maximized)))&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/full-screen</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Fullscreen mode!"</span>&#57344;&#57345;&#57345;
-  (interactive) &#57344;&#57345;&#57345;
-  (modify-frame-parameters nil '((fullscreen . maximized))))&#57344;&#57345;&#57345;
-(emagician/full-screen)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq default-frame-parameters '((fullscreen . maximized)))
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/full-screen</span> ()
+  <span class="org-doc">"Fullscreen mode!"</span>
+  (interactive) 
+  (modify-frame-parameters nil '((fullscreen . maximized))))
+(emagician/full-screen)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Frame titles</h3>
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Soft Word Wrap / Visual Line Mode</h3>
 <div class="outline-text-3" id="text-2-6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-visual-line-mode)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Frame titles</h3>
+<div class="outline-text-3" id="text-2-7">
 <p>
 Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq frame-title-format&#57344;&#57345;&#57345;
-      '(<span class="org-string">""</span> &#57344;&#57345;&#57345;
-        invocation-name &#57344;&#57345;&#57345;
-        <span class="org-string">"  -|-+-|-  "</span> &#57344;&#57345;&#57345;
-        (<span class="org-builtin">:eval</span> (<span class="org-keyword">if</span> (buffer-file-name)&#57344;&#57345;&#57345;
-                   (abbreviate-file-name (buffer-file-name))&#57344;&#57345;&#57345;
-                   <span class="org-string">"%b"</span>))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq frame-title-format
+      '(<span class="org-string">""</span> 
+        invocation-name 
+        <span class="org-string">"  -|-+-|-  "</span> 
+        (<span class="org-builtin">:eval</span> (<span class="org-keyword">if</span> (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                   <span class="org-string">"%b"</span>))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Modeline</h3>
-<div class="outline-text-3" id="text-2-7">
-</div><div id="outline-container-sec-2-7-1" class="outline-4">
-<h4 id="sec-2-7-1"><span class="section-number-4">2.7.1</span> Basics</h4>
-<div class="outline-text-4" id="text-2-7-1">
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Modeline</h3>
+<div class="outline-text-3" id="text-2-8">
+</div><div id="outline-container-sec-2-8-1" class="outline-4">
+<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> Basics</h4>
+<div class="outline-text-4" id="text-2-8-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq column-number-mode t)&#57344;&#57345;&#57345;
-(setq line-number-mode t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq column-number-mode t)
+(setq line-number-mode t)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-2" class="outline-4">
-<h4 id="sec-2-7-2"><span class="section-number-4">2.7.2</span> Diminish</h4>
-<div class="outline-text-4" id="text-2-7-2">
+<div id="outline-container-sec-2-8-2" class="outline-4">
+<h4 id="sec-2-8-2"><span class="section-number-4">2.8.2</span> Diminish</h4>
+<div class="outline-text-4" id="text-2-8-2">
 <p>
 Yeah, fix the mode line.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">diminish</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">diminish</span>)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-3" class="outline-4">
-<h4 id="sec-2-7-3"><span class="section-number-4">2.7.3</span> Powerline</h4>
-<div class="outline-text-4" id="text-2-7-3">
+<div id="outline-container-sec-2-8-3" class="outline-4">
+<h4 id="sec-2-8-3"><span class="section-number-4">2.8.3</span> Powerline</h4>
+<div class="outline-text-4" id="text-2-8-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/powerline-theme</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Setup the default mode-line."</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (setq-default mode-line-format&#57344;&#57345;&#57345;
-                '(<span class="org-string">"%e"</span>&#57344;&#57345;&#57345;
-                  (<span class="org-builtin">:eval</span>&#57344;&#57345;&#57345;
-                   (<span class="org-keyword">let*</span> ((active (powerline-selected-window-active))&#57344;&#57345;&#57345;
-                          (mode-line (<span class="org-keyword">if</span> active 'mode-line 'mode-line-inactive))&#57344;&#57345;&#57345;
-                          (face1 (<span class="org-keyword">if</span> active 'powerline-active1 'powerline-inactive1))&#57344;&#57345;
-                          (face2 (<span class="org-keyword">if</span> active 'powerline-active2 'powerline-inactive2))&#57344;&#57345;
-                          (separator-left (intern (format <span class="org-string">"powerline-%s-%s"</span>&#57344;&#57345;&#57345;
-                                                          powerline-default-separator&#57344;&#57345;
-                                                          (car powerline-default-separator-dir))))&#57344;&#57345;
-                          (separator-right (intern (format <span class="org-string">"powerline-%s-%s"</span>&#57344;&#57345;&#57345;
-                                                           powerline-default-separator&#57344;&#57345;
-                                                           (cdr powerline-default-separator-dir))))&#57344;&#57345;
-                          (lhs (list (powerline-raw <span class="org-string">"%*"</span> nil 'l)&#57344;&#57345;&#57345;
-                                     (powerline-buffer-size nil 'l)&#57344;&#57345;&#57345;
-                                     (powerline-raw mode-line-mule-info nil 'l)&#57344;&#57345;&#57345;
-                                     (powerline-buffer-id nil 'l)&#57344;&#57345;&#57345;
-                                     (<span class="org-keyword">when</span> (and (boundp 'which-func-mode) which-func-mode)&#57344;&#57345;
-                                       (powerline-raw which-func-format nil 'l))&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">" "</span>)&#57344;&#57345;&#57345;
-                                     (funcall separator-left mode-line face1)&#57344;&#57345;&#57345;
-                                     (<span class="org-keyword">when</span> (boundp 'erc-modified-channels-object)&#57345;
-                                       (powerline-raw erc-modified-channels-object face1 'l))&#57344;&#57345;
-                                     (powerline-major-mode face1 'l)&#57344;&#57345;&#57345;
-                                     (powerline-process face1)&#57344;&#57345;&#57345;
-                                     (powerline-minor-modes face1 'l)&#57344;&#57345;&#57345;
-                                     (powerline-narrow face1 'l)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">" "</span> face1)&#57344;&#57345;&#57345;
-                                     (funcall separator-left face1 face2)&#57344;&#57345;&#57345;
-                                     (powerline-vc face2 'r)&#57344;&#57345;&#57345;
-                                     (nyan-create)))&#57344;&#57345;&#57345;
-                          (rhs (list (powerline-raw global-mode-string face2 'r)&#57344;&#57345;&#57345;
-                                     (funcall separator-right face2 face1)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">"%4l"</span> face1 'l)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">":"</span> face1 'l)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">"%3c"</span> face1 'r)&#57344;&#57345;&#57345;
-                                     (funcall separator-right face1 mode-line)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">" "</span>)&#57344;&#57345;&#57345;
-                                     (powerline-raw <span class="org-string">"%6p"</span> nil 'r)&#57344;&#57345;&#57345;
-                                     (powerline-hud face2 face1))))&#57344;&#57345;&#57345;
-                     (concat (powerline-render lhs)&#57344;&#57345;&#57345;
-                             (powerline-fill face2 (powerline-width rhs))&#57344;&#57345;&#57345;
-                             (powerline-render rhs)))))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/powerline-theme</span> ()
+  <span class="org-doc">"Setup the default mode-line."</span>
+  (interactive)
+  (setq-default mode-line-format
+                '(<span class="org-string">"%e"</span>
+                  (<span class="org-builtin">:eval</span>
+                   (<span class="org-keyword">let*</span> ((active (powerline-selected-window-active))
+                          (mode-line (<span class="org-keyword">if</span> active 'mode-line 'mode-line-inactive))
+                          (face1 (<span class="org-keyword">if</span> active 'powerline-active1 'powerline-inactive1))
+                          (face2 (<span class="org-keyword">if</span> active 'powerline-active2 'powerline-inactive2))
+                          (separator-left (intern (format <span class="org-string">"powerline-%s-%s"</span>
+                                                          powerline-default-separator
+                                                          (car powerline-default-separator-dir))))
+                          (separator-right (intern (format <span class="org-string">"powerline-%s-%s"</span>
+                                                           powerline-default-separator
+                                                           (cdr powerline-default-separator-dir))))
+                          (lhs (list (powerline-raw <span class="org-string">"%*"</span> nil 'l)
+                                     (powerline-buffer-size nil 'l)
+                                     (powerline-raw mode-line-mule-info nil 'l)
+                                     (powerline-buffer-id nil 'l)
+                                     (<span class="org-keyword">when</span> (and (boundp 'which-func-mode) which-func-mode)
+                                       (powerline-raw which-func-format nil 'l))
+                                     (powerline-raw <span class="org-string">" "</span>)
+                                     (funcall separator-left mode-line face1)
+                                     (<span class="org-keyword">when</span> (boundp 'erc-modified-channels-object)
+                                       (powerline-raw erc-modified-channels-object face1 'l))
+                                     (powerline-major-mode face1 'l)
+                                     (powerline-process face1)
+                                     (powerline-minor-modes face1 'l)
+                                     (powerline-narrow face1 'l)
+                                     (powerline-raw <span class="org-string">" "</span> face1)
+                                     (funcall separator-left face1 face2)
+                                     (powerline-vc face2 'r)
+                                     (nyan-create)))
+                          (rhs (list (powerline-raw global-mode-string face2 'r)
+                                     (funcall separator-right face2 face1)
+                                     (powerline-raw <span class="org-string">"%4l"</span> face1 'l)
+                                     (powerline-raw <span class="org-string">":"</span> face1 'l)
+                                     (powerline-raw <span class="org-string">"%3c"</span> face1 'r)
+                                     (funcall separator-right face1 mode-line)
+                                     (powerline-raw <span class="org-string">" "</span>)
+                                     (powerline-raw <span class="org-string">"%6p"</span> nil 'r)
+                                     (powerline-hud face2 face1))))
+                     (concat (powerline-render lhs)
+                             (powerline-fill face2 (powerline-width rhs))
+                             (powerline-render rhs)))))))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">powerline</span>&#57344;&#57345;&#57345;
-             <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-             (emagician/powerline-theme)&#57344;&#57345;&#57345;
-             (setq powerline-default-separator 'zigzag)&#57344;&#57345;&#57345;
-             (powerline-reset)&#57344;&#57345;&#57345;
-             (powerline-default-theme))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">powerline</span>
+             <span class="org-builtin">:config</span>
+             (emagician/powerline-theme)
+             (setq powerline-default-separator 'zigzag)
+             (powerline-reset)
+             (powerline-default-theme))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-7-4" class="outline-4">
-<h4 id="sec-2-7-4"><span class="section-number-4">2.7.4</span> Turn on column and line numbers; file size</h4>
-<div class="outline-text-4" id="text-2-7-4">
+<div id="outline-container-sec-2-8-4" class="outline-4">
+<h4 id="sec-2-8-4"><span class="section-number-4">2.8.4</span> Turn on column and line numbers; file size</h4>
+<div class="outline-text-4" id="text-2-8-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(column-number-mode 1)&#57344;&#57345;&#57345;
-(line-number-mode 1)&#57344;&#57345;&#57345;
-(size-indication-mode t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(column-number-mode 1)
+(line-number-mode 1)
+(size-indication-mode t)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-7-5" class="outline-4">
-<h4 id="sec-2-7-5"><span class="section-number-4">2.7.5</span> Smart Mode Line</h4>
-<div class="outline-text-4" id="text-2-7-5">
+<div id="outline-container-sec-2-8-5" class="outline-4">
+<h4 id="sec-2-8-5"><span class="section-number-4">2.8.5</span> Smart Mode Line</h4>
+<div class="outline-text-4" id="text-2-8-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/expect-package 'smart-mode-line)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/expect-package 'smart-mode-line)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-sec-2-7-6" class="outline-4">
-<h4 id="sec-2-7-6"><span class="section-number-4">2.7.6</span> <span class="todo TODO">TODO</span> Nyan mode</h4>
-<div class="outline-text-4" id="text-2-7-6">
+<div id="outline-container-sec-2-8-6" class="outline-4">
+<h4 id="sec-2-8-6"><span class="section-number-4">2.8.6</span> <span class="todo TODO">TODO</span> Nyan mode</h4>
+<div class="outline-text-4" id="text-2-8-6">
 <p>
 One day.  Powerline and nyan mode don't work.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Cursor Info</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-sec-2-9" class="outline-3">
+<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Cursor Info</h3>
+<div class="outline-text-3" id="text-2-9">
 <p>
 There are a few ways to change the cursor: blinking, shape and
 color.  Basically this gives us three different dimensions of
@@ -600,9 +607,9 @@ information available to us.
 </p>
 </div>
 
-<div id="outline-container-sec-2-8-1" class="outline-4">
-<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> Dimension 1: File status</h4>
-<div class="outline-text-4" id="text-2-8-1">
+<div id="outline-container-sec-2-9-1" class="outline-4">
+<h4 id="sec-2-9-1"><span class="section-number-4">2.9.1</span> Dimension 1: File status</h4>
+<div class="outline-text-4" id="text-2-9-1">
 <dl class="org-dl">
 <dt> light blue </dt><dd>no file or process attached
 </dd>
@@ -620,9 +627,9 @@ information available to us.
 </div>
 </div>
 
-<div id="outline-container-sec-2-8-2" class="outline-4">
-<h4 id="sec-2-8-2"><span class="section-number-4">2.8.2</span> Dimention 2: Funky modes</h4>
-<div class="outline-text-4" id="text-2-8-2">
+<div id="outline-container-sec-2-9-2" class="outline-4">
+<h4 id="sec-2-9-2"><span class="section-number-4">2.9.2</span> Dimention 2: Funky modes</h4>
+<div class="outline-text-4" id="text-2-9-2">
 <dl class="org-dl">
 <dt> overwrite </dt><dd>hollow box
 </dd>
@@ -632,38 +639,38 @@ information available to us.
 </div>
 </div>
 
-<div id="outline-container-sec-2-8-3" class="outline-4">
-<h4 id="sec-2-8-3"><span class="section-number-4">2.8.3</span> Enhancements</h4>
-<div class="outline-text-4" id="text-2-8-3">
-</div><ol class="org-ol"><li><a id="sec-2-8-3-1" name="sec-2-8-3-1"></a><span class="todo TODO">TODO</span> set up a way to handle production buffers through a buffer local var.<br  /><div class="outline-text-5" id="text-2-8-3-1">
+<div id="outline-container-sec-2-9-3" class="outline-4">
+<h4 id="sec-2-9-3"><span class="section-number-4">2.9.3</span> Enhancements</h4>
+<div class="outline-text-4" id="text-2-9-3">
+</div><ol class="org-ol"><li><a id="sec-2-9-3-1" name="sec-2-9-3-1"></a><span class="todo TODO">TODO</span> set up a way to handle production buffers through a buffer local var.<br  /><div class="outline-text-5" id="text-2-9-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="cursor-status"><span class="org-comment-delimiter">;; </span><span class="org-comment">Change cursor color according to mode</span>&#57344;&#57345;&#57345;
-(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-color</span> <span class="org-string">""</span>)&#57344;&#57345;&#57345;
-(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-type</span> nil)&#57344;&#57345;&#57345;
-(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-buffer</span> <span class="org-string">""</span>)&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/set-cursor-color-according-to-mode</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"change cursor color according to some minor modes."</span>&#57344;&#57345;&#57345;
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">set-cursor-color is somewhat costly, so we only call it when needed:</span>&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((color (<span class="org-keyword">cond</span>&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-                ((comint-check-proc (current-buffer)) <span class="org-string">"blue"</span>)&#57344;&#57345;&#57345;
-                (buffer-read-only <span class="org-string">"white"</span>)&#57344;&#57345;&#57345;
-                ((not (equal buffer-file-name nil)) <span class="org-string">"grey50"</span>)&#57344;&#57345;&#57345;
-                (t <span class="org-string">"cyan"</span>)))&#57344;&#57345;&#57345;
-        (type (<span class="org-keyword">cond</span>&#57344;&#57345;&#57345;
-               (overwrite-mode 'hollow)&#57344;&#57345;&#57345;
-               (t 'box))))&#57344;&#57345;&#57345;
-    (<span class="org-keyword">unless</span> (and&#57344;&#57345;&#57345;
-             (string= color emagician/set-cursor-color-color)&#57344;&#57345;&#57345;
-             (string= type emagician/set-cursor-color-type)&#57344;&#57345;&#57345;
-             (string= (buffer-name) emagician/set-cursor-color-buffer))&#57344;&#57345;&#57345;
-      (set-cursor-color (setq emagician/set-cursor-color-color color))&#57344;&#57345;&#57345;
-      (setq cursor-type (setq emagician/set-cursor-color-type type))&#57344;&#57345;&#57345;
-      (setq emagician/set-cursor-color-buffer (buffer-name)))))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp" id="cursor-status"><span class="org-comment-delimiter">;; </span><span class="org-comment">Change cursor color according to mode</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-color</span> <span class="org-string">""</span>)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-type</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/set-cursor-color-buffer</span> <span class="org-string">""</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/set-cursor-color-according-to-mode</span> ()
+  <span class="org-doc">"change cursor color according to some minor modes."</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">set-cursor-color is somewhat costly, so we only call it when needed:</span>
+  (<span class="org-keyword">let</span> ((color (<span class="org-keyword">cond</span>
+
+                ((comint-check-proc (current-buffer)) <span class="org-string">"blue"</span>)
+                (buffer-read-only <span class="org-string">"white"</span>)
+                ((not (equal buffer-file-name nil)) <span class="org-string">"grey50"</span>)
+                (t <span class="org-string">"cyan"</span>)))
+        (type (<span class="org-keyword">cond</span>
+               (overwrite-mode 'hollow)
+               (t 'box))))
+    (<span class="org-keyword">unless</span> (and
+             (string= color emagician/set-cursor-color-color)
+             (string= type emagician/set-cursor-color-type)
+             (string= (buffer-name) emagician/set-cursor-color-buffer))
+      (set-cursor-color (setq emagician/set-cursor-color-color color))
+      (setq cursor-type (setq emagician/set-cursor-color-type type))
+      (setq emagician/set-cursor-color-buffer (buffer-name)))))
+
+(add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
 </pre>
 </div>
 </div>
@@ -671,40 +678,40 @@ information available to us.
 </div>
 </div>
 
-<div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Highlight Line</h3>
-<div class="outline-text-3" id="text-2-9">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(global-hl-line-mode 1)&#57344;&#57345;&#57345;
-</pre>
-</div>
-</div>
-</div>
-
 <div id="outline-container-sec-2-10" class="outline-3">
-<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Border the 80th column</h3>
+<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Highlight Line</h3>
 <div class="outline-text-3" id="text-2-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">fill-column-indicator</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq fci-rule-width 1)&#57344;&#57345;&#57345;
-  (setq fci-rule-column 81)&#57344;&#57345;&#57345;
-  (setq fci-rule-color (face-attribute 'fringe <span class="org-builtin">:background</span>))&#57344;&#57345;&#57345;
-  (<span class="org-keyword">define-globalized-minor-mode</span> <span class="org-function-name">global-fci-mode</span> fci-mode (<span class="org-keyword">lambda</span> () (fci-mode 1)))&#57344;&#57345;
-  (global-fci-mode 1))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(global-hl-line-mode 1)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-2-11" class="outline-3">
-<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Themes</h3>
+<h3 id="sec-2-11"><span class="section-number-3">2.11</span> Border the 80th column</h3>
 <div class="outline-text-3" id="text-2-11">
-</div><div id="outline-container-sec-2-11-1" class="outline-4">
-<h4 id="sec-2-11-1"><span class="section-number-4">2.11.1</span> Base theme: Moe, Moe, Kyun!</h4>
-<div class="outline-text-4" id="text-2-11-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">fill-column-indicator</span>
+  <span class="org-builtin">:init</span>
+  (setq fci-rule-width 1)
+  (setq fci-rule-column 81)
+  (setq fci-rule-color (face-attribute 'fringe <span class="org-builtin">:background</span>))
+  (<span class="org-keyword">define-globalized-minor-mode</span> <span class="org-function-name">global-fci-mode</span> fci-mode (<span class="org-keyword">lambda</span> () (fci-mode 1)))
+  (global-fci-mode 1))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-12" class="outline-3">
+<h3 id="sec-2-12"><span class="section-number-3">2.12</span> Themes</h3>
+<div class="outline-text-3" id="text-2-12">
+</div><div id="outline-container-sec-2-12-1" class="outline-4">
+<h4 id="sec-2-12-1"><span class="section-number-4">2.12.1</span> Base theme: Moe, Moe, Kyun!</h4>
+<div class="outline-text-4" id="text-2-12-1">
 <p>
 This theme is my favorite so far.  It's got good color choices and it's nice and dark.
 </p>
@@ -714,36 +721,40 @@ The theme needs to be loaded after powerlie to work.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">moe-theme</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq moe-theme-mode-line-color 'yellow)&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-  (moe-dark))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">moe-theme</span>
+  <span class="org-builtin">:init</span>
+  (setq moe-theme-mode-line-color 'yellow)
+  <span class="org-builtin">:config</span>
+  (moe-dark))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-11-2" class="outline-4">
-<h4 id="sec-2-11-2"><span class="section-number-4">2.11.2</span> Org Beautify</h4>
-<div class="outline-text-4" id="text-2-11-2">
+<div id="outline-container-sec-2-12-2" class="outline-4">
+<h4 id="sec-2-12-2"><span class="section-number-4">2.12.2</span> Org Beautify</h4>
+<div class="outline-text-4" id="text-2-12-2">
 <p>
 Load from our =bad self!
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'custom-theme-load-path (expand-file-name <span class="org-string">"themes/org-beautify-theme/"</span> emagician/dir))&#57344;&#57345;
-(load-theme 'org-beautify t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(add-to-list 'custom-theme-load-path (expand-file-name <span class="org-string">"themes/org-beautify-theme/"</span> emagician/dir))
+(load-theme 'org-beautify t)
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-12" class="outline-3">
-<h3 id="sec-2-12"><span class="section-number-3">2.12</span> Digit Groups</h3>
-<div class="outline-text-3" id="text-2-12">
+<div id="outline-container-sec-2-13" class="outline-3">
+<h3 id="sec-2-13"><span class="section-number-3">2.13</span> Digit Groups</h3>
+<div class="outline-text-3" id="text-2-13">
 <p>
 Group Numbers together into thousands, millions, billions.  
+</p>
+
+<p>
+10000000
 </p>
 
 <p>
@@ -757,18 +768,18 @@ Looks like this:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">digit-groups</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq digit-groups-global-mode t)&#57344;&#57345;&#57345;
-  (custom-set-faces&#57344;&#57345;&#57345;
-   '(digit-groups-default-face&#57344;&#57345;&#57345;
-     ((t (<span class="org-builtin">:underline</span> (<span class="org-builtin">:style</span> line)))))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">digit-groups</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:init</span>
+  (setq digit-groups-global-mode t)
+  (face-spec-set 'digit-groups-default-face
+     '((t (<span class="org-builtin">:underline</span> (<span class="org-builtin">:style</span> line))))))
 </pre>
 </div>
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> Editing</h2>
 <div class="outline-text-2" id="text-3">
@@ -781,10 +792,10 @@ I've kept a version of this since 2006.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(prefer-coding-system 'utf-8)&#57344;&#57345;&#57345;
-(set-default-coding-systems 'utf-8)&#57344;&#57345;&#57345;
-(set-terminal-coding-system 'utf-8)&#57344;&#57345;&#57345;
-(set-keyboard-coding-system 'utf-8)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 </pre>
 </div>
 </div>
@@ -817,7 +828,7 @@ easily activated.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="turn-off-transient-mark">(transient-mark-mode -1)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp" id="turn-off-transient-mark">(transient-mark-mode -1)
 </pre>
 </div>
 </div>
@@ -840,11 +851,11 @@ show-#+begin<sub>src</sub> emacs-lisp
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">multiple-cursors</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-S-c e"</span> . mc/edit-lines)&#57344;&#57345;&#57345;
-         (<span class="org-string">"C-S-c n"</span> . mc/mark-next-like-this)&#57344;&#57345;&#57345;
-         (<span class="org-string">"C-S-c p"</span> . mc/mark-previous-like-this)&#57344;&#57345;&#57345;
-         (<span class="org-string">"C-S-c h"</span> . mc/mark-all-like-this)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">multiple-cursors</span>
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-S-c e"</span> . mc/edit-lines)
+         (<span class="org-string">"C-S-c n"</span> . mc/mark-next-like-this)
+         (<span class="org-string">"C-S-c p"</span> . mc/mark-previous-like-this)
+         (<span class="org-string">"C-S-c h"</span> . mc/mark-all-like-this)))
 </pre>
 </div>
 </div>
@@ -859,7 +870,7 @@ Having a big kill ring is very helpful.  It's searchable by helm.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-ring-max 120)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq kill-ring-max 120)
 </pre>
 </div>
 
@@ -869,7 +880,7 @@ Also, the system clipboard is a must have.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq save-interprogram-paste-before-kill t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq save-interprogram-paste-before-kill t)
 </pre>
 </div>
 
@@ -879,7 +890,7 @@ Allow Read-only killing.  Power of plain text.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-read-only-ok t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq kill-read-only-ok t)
 </pre>
 </div>
 
@@ -889,7 +900,7 @@ At the beginning of the line, kill-line gets the entire line.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq kill-whole-line t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq kill-whole-line t)
 </pre>
 </div>
 </div>
@@ -903,10 +914,10 @@ Shows what changed through undo, yank etc. commands
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">volatile-highlights</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (volatile-highlights-mode t))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">volatile-highlights</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span>
+  (volatile-highlights-mode t))
 </pre>
 </div>
 </div>
@@ -921,11 +932,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.<sup><a id="fnr.1" name
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">swap-region-with-kill</span> (<span class="org-type">&amp;optional</span> arg)&#57344;&#57345;&#57345;
-  <span class="org-doc">"replace selected text with the one from kill ring"</span>&#57344;&#57345;&#57345;
-  (interactive <span class="org-string">"*P"</span>)&#57344;&#57345;&#57345;
-  (backward-delete-char (- (point) (mark)))&#57344;&#57345;&#57345;
-  (yank arg))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">swap-region-with-kill</span> (<span class="org-type">&amp;optional</span> arg)
+  <span class="org-doc">"replace selected text with the one from kill ring"</span>
+  (interactive <span class="org-string">"*P"</span>)
+  (backward-delete-char (- (point) (mark)))
+  (yank arg))
 </pre>
 </div>
 </div>
@@ -940,25 +951,25 @@ I use this all the time.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">kill-buffer-file-name</span> () &#57344;&#57345;&#57345;
-  <span class="org-doc">"Show current buffer's filename in the echo area and add it to the kill ring."</span> &#57345;
-  (interactive) &#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((buffer-file-name (buffer-file-name))) &#57344;&#57345;&#57345;
-    (<span class="org-keyword">if</span> (null buffer-file-name) &#57344;&#57345;&#57345;
-        (message <span class="org-string">"Buffer %s is not associated with a file."</span> (buffer-name)) &#57344;&#57345;&#57345;
-      (message <span class="org-string">"%s"</span> (kill-new buffer-file-name)))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">kill-buffer-file-name</span> () 
+  <span class="org-doc">"Show current buffer's filename in the echo area and add it to the kill ring."</span> 
+  (interactive) 
+  (<span class="org-keyword">let</span> ((buffer-file-name (buffer-file-name))) 
+    (<span class="org-keyword">if</span> (null buffer-file-name) 
+        (message <span class="org-string">"Buffer %s is not associated with a file."</span> (buffer-name)) 
+      (message <span class="org-string">"%s"</span> (kill-new buffer-file-name)))))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">kill-buffer-file-basename</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Show the buffers base name in the echo area and add it to the kill ring."</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((bufer-file-name (buffer-file-name)))&#57344;&#57345;&#57345;
-    (<span class="org-keyword">if</span> (not (null buffer-file-name))&#57344;&#57345;&#57345;
-        (message <span class="org-string">"%s"</span> (kill-new (file-name-nondirectory buffer-file-name)))&#57344;&#57345;&#57345;
-      (<span class="org-warning">error</span> <span class="org-string">"Buffer %s is not associated with a file"</span> (buffer-name)))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">kill-buffer-file-basename</span> ()
+  <span class="org-doc">"Show the buffers base name in the echo area and add it to the kill ring."</span>
+  (interactive)
+  (<span class="org-keyword">let</span> ((bufer-file-name (buffer-file-name)))
+    (<span class="org-keyword">if</span> (not (null buffer-file-name))
+        (message <span class="org-string">"%s"</span> (kill-new (file-name-nondirectory buffer-file-name)))
+      (<span class="org-warning">error</span> <span class="org-string">"Buffer %s is not associated with a file"</span> (buffer-name)))))
 </pre>
 </div>
 </div>
@@ -978,15 +989,15 @@ Set the snippet dir.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/expect-dir <span class="org-string">"assets/snippets"</span>)&#57344;&#57345;&#57345;
-(<span class="org-keyword">use-package</span> <span class="org-constant">yasnippet</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq yas-snippet-dirs `(,(expand-file-name <span class="org-string">"assets/snippets"</span> emagician/dir) yas-installed-snippets-dir))&#57344;&#57345;
-  (setq yas-trigger-key nil)&#57344;&#57345;&#57345;
-  (add-hook 'text-mode-hook 'yas-minor-mode-on)&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-  (yas/reload-all))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/expect-dir <span class="org-string">"assets/snippets"</span>)
+(<span class="org-keyword">use-package</span> <span class="org-constant">yasnippet</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span>
+  (setq yas-snippet-dirs `(,(expand-file-name <span class="org-string">"assets/snippets"</span> emagician/dir) yas-installed-snippets-dir))
+  (setq yas-trigger-key nil)
+  (add-hook 'text-mode-hook 'yas-minor-mode-on)
+  <span class="org-builtin">:config</span>
+  (yas/reload-all))
 </pre>
 </div>
 
@@ -996,17 +1007,17 @@ This rigamaroo might nit be needed anymore:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">yas/org-very-safe-expand</span> ()&#57344;&#57345;&#57345;
-   (<span class="org-keyword">let</span> ((yas/fallback-behavior 'return-nil)) (yas/expand)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
- (<span class="org-keyword">defun</span> <span class="org-function-name">yas/org-setup</span> ()&#57344;&#57345;&#57345;
-   <span class="org-comment-delimiter">;; </span><span class="org-comment">yasnippet (using the new org-cycle hooks)</span>&#57344;&#57345;&#57345;
-   (make-variable-buffer-local 'yas/trigger-key)&#57344;&#57345;&#57345;
-   (setq yas/trigger-key [tab])&#57344;&#57345;&#57345;
-   (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)&#57344;&#57345;&#57345;
-   (define-key yas/keymap [tab] 'yas/next-field))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
- <span class="org-comment-delimiter">;</span><span class="org-comment">(add-hook 'org-mode-hook #'yas/org-setup)</span>&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">yas/org-very-safe-expand</span> ()
+   (<span class="org-keyword">let</span> ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+
+ (<span class="org-keyword">defun</span> <span class="org-function-name">yas/org-setup</span> ()
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">yasnippet (using the new org-cycle hooks)</span>
+   (make-variable-buffer-local 'yas/trigger-key)
+   (setq yas/trigger-key [tab])
+   (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+   (define-key yas/keymap [tab] 'yas/next-field))
+
+ <span class="org-comment-delimiter">;</span><span class="org-comment">(add-hook 'org-mode-hook #'yas/org-setup)</span>
 </pre>
 </div>
 </div>
@@ -1025,38 +1036,38 @@ This rigamaroo might nit be needed anymore:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">auto-complete</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq ac-auto-show-menu t)&#57344;&#57345;&#57345;
-  (setq ac-dwim t)&#57344;&#57345;&#57345;
-  (setq ac-use-menu-map t)&#57344;&#57345;&#57345;
-  (setq ac-ignore-case nil)&#57344;&#57345;&#57345;
-  (setq ac-quick-help-delay (+ 0.125 (/ 0.125 2)))&#57344;&#57345;&#57345;
-  (setq ac-quick-help-height 20)&#57344;&#57345;&#57345;
-  (set-default 'ac-sources &#57344;&#57345;&#57345;
-               '(ac-source-yasnippet&#57344;&#57345;&#57345;
-                 ac-source-dictionary&#57344;&#57345;&#57345;
-                 ac-source-filename&#57344;&#57345;&#57345;
-                 ac-source-files-in-current-dir                 &#57344;&#57345;&#57345;
-                 ac-source-words-in-buffer&#57344;&#57345;&#57345;
-                 ac-source-words-in-same-mode-buffers))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span> &#57344;&#57345;&#57345;
-  (<span class="org-builtin">:map</span> ac-completing-map&#57344;&#57345;&#57345;
-        (<span class="org-string">"C-M-n"</span>   . ac-next)&#57344;&#57345;&#57345;
-        (<span class="org-string">"C-M-p"</span>   . ac-previous)&#57344;&#57345;&#57345;
-        (<span class="org-string">"&lt;tab&gt;"</span>   . ac-complete)&#57344;&#57345;&#57345;
-        (<span class="org-string">"M-&lt;ret&gt;"</span> . ac-help)&#57344;&#57345;&#57345;
-        (<span class="org-string">"&lt;ret&gt;"</span>   . nil))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">auto-complete-config</span>)  &#57344;&#57345;&#57345;
-  (ac-config-default)&#57344;&#57345;&#57345;
-  (ac-flyspell-workaround)&#57344;&#57345;&#57345;
-  (global-auto-complete-mode t)&#57344;&#57345;&#57345;
-  (emagician/expect-dir <span class="org-string">"assets/ac-dictionaries"</span>)&#57344;&#57345;&#57345;
-  (add-to-list 'ac-dictionary-directories (expand-file-name <span class="org-string">"assets/ac-dictionaries"</span> emagician/dir)))&#57344;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">auto-complete</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span>
+  (setq ac-auto-show-menu t)
+  (setq ac-dwim t)
+  (setq ac-use-menu-map t)
+  (setq ac-ignore-case nil)
+  (setq ac-quick-help-delay (+ 0.125 (/ 0.125 2)))
+  (setq ac-quick-help-height 20)
+  (set-default 'ac-sources 
+               '(ac-source-yasnippet
+                 ac-source-dictionary
+                 ac-source-filename
+                 ac-source-files-in-current-dir                 
+                 ac-source-words-in-buffer
+                 ac-source-words-in-same-mode-buffers))
+  <span class="org-builtin">:bind</span> 
+  (<span class="org-builtin">:map</span> ac-completing-map
+        (<span class="org-string">"C-M-n"</span>   . ac-next)
+        (<span class="org-string">"C-M-p"</span>   . ac-previous)
+        (<span class="org-string">"&lt;tab&gt;"</span>   . ac-complete)
+        (<span class="org-string">"M-&lt;ret&gt;"</span> . ac-help)
+        (<span class="org-string">"&lt;ret&gt;"</span>   . nil))
+
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">require</span> '<span class="org-constant">auto-complete-config</span>)  
+  (ac-config-default)
+  (ac-flyspell-workaround)
+  (global-auto-complete-mode t)
+  (emagician/expect-dir <span class="org-string">"assets/ac-dictionaries"</span>)
+  (add-to-list 'ac-dictionary-directories (expand-file-name <span class="org-string">"assets/ac-dictionaries"</span> emagician/dir)))
 </pre>
 </div>
 </div>
@@ -1076,11 +1087,11 @@ This rigamaroo might nit be needed anymore:
 <div class="outline-text-4" id="text-3-6-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(set-default 'ac-sources&#57344;&#57345;&#57345;
-             '(ac-source-yasnippet&#57344;&#57345;&#57345;
-               ac-source-dictionary&#57344;&#57345;&#57345;
-               ac-source-words-in-buffer&#57344;&#57345;&#57345;
-               ac-source-words-in-same-mode-buffers))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(set-default 'ac-sources
+             '(ac-source-yasnippet
+               ac-source-dictionary
+               ac-source-words-in-buffer
+               ac-source-words-in-same-mode-buffers))
 </pre>
 </div>
 </div>
@@ -1092,14 +1103,14 @@ This rigamaroo might nit be needed anymore:
 <div class="outline-text-3" id="text-3-7">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">undo-tree</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq undo-tree-enable-undo-in-region t&#57344;&#57345;&#57345;
-        undo-tree-visualizer-diff t&#57344;&#57345;&#57345;
-        undo-tree-visualizer-timestamps t)&#57344;&#57345;&#57345;
-  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
-  (global-undo-tree-mode))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">undo-tree</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span>
+  (setq undo-tree-enable-undo-in-region t
+        undo-tree-visualizer-diff t
+        undo-tree-visualizer-timestamps t)
+  <span class="org-builtin">:config</span>
+  (global-undo-tree-mode))
 </pre>
 </div>
 </div>
@@ -1118,7 +1129,7 @@ Keep the screen position when scrolling.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq scroll-preserve-screen-position t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq scroll-preserve-screen-position t)
 </pre>
 </div>
 </div>
@@ -1129,14 +1140,14 @@ Keep the screen position when scrolling.
 <div class="outline-text-3" id="text-4-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ace-jump-mode</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span> &#57344;&#57345;&#57345;
-  (<span class="org-string">"C-c C-SPC"</span> . ace-jump-mode)&#57344;&#57345;&#57345;
-  (<span class="org-builtin">:map</span> org-mode-map &#57344;&#57345;&#57345;
-         (<span class="org-string">"C-c C-SPC"</span> 'ace-jump-mode))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq erc-track-enable-keybindings nil))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ace-jump-mode</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:bind</span> 
+  (<span class="org-string">"C-c C-SPC"</span> . ace-jump-mode)
+  (<span class="org-builtin">:map</span> org-mode-map 
+         (<span class="org-string">"C-c C-SPC"</span> 'ace-jump-mode))
+  <span class="org-builtin">:init</span>
+  (setq erc-track-enable-keybindings nil))
 </pre>
 </div>
 </div>
@@ -1144,28 +1155,27 @@ Keep the screen position when scrolling.
 <div id="outline-container-sec-4-3" class="outline-3">
 <h3 id="sec-4-3"><span class="section-number-3">4.3</span> Ace window jump</h3>
 <div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>Set the keys to home-row
+</li>
+<li>Make the ace-jump key super visible
+</li>
+<li>Only apply to this frame
+</li>
+</ul>
+
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ace-window</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (custom-set-faces&#57344;&#57345;&#57345;
-   '(aw-leading-char-face&#57344;&#57345;&#57345;
-     ((t (<span class="org-builtin">:inherit</span> ace-jump-face-foreground <span class="org-builtin">:height</span> 3.0)))))&#57344;&#57345;&#57345;
-  (setq aw-scope 'frame)&#57344;&#57345;&#57345;
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span>&#57344;&#57345;&#57345;
-  (<span class="org-string">"C-x o"</span> . ace-window))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ace-window</span>
+  <span class="org-builtin">:init</span>
+  (face-spec-set
+   'aw-leading-char-face
+     '((t (<span class="org-builtin">:inherit</span> ace-jump-face-foreground <span class="org-builtin">:height</span> 3.0))))
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  <span class="org-builtin">:bind</span>
+  (<span class="org-string">"C-x o"</span> . ace-window))
 </pre>
-</div>
-</div>
-
-<div id="outline-container-sec-4-3-1" class="outline-4">
-<h4 id="sec-4-3-1"><span class="section-number-4">4.3.1</span> Keys on the home row</h4>
-<div class="outline-text-4" id="text-4-3-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"></pre>
-</div>
 </div>
 </div>
 </div>
@@ -1178,8 +1188,8 @@ Saveplace allows emacs to remember where you were in a file.  It is very handy a
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">saveplace</span>)&#57344;&#57345;&#57345;
-(setq-default save-place t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">saveplace</span>)
+(setq-default save-place t)
 </pre>
 </div>
 </div>
@@ -1189,9 +1199,9 @@ Saveplace allows emacs to remember where you were in a file.  It is very handy a
 <div class="outline-text-3" id="text-4-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">goto-last-change</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span>&#57344;&#57345;&#57345;
-  (<span class="org-string">"C-x C-/"</span> . goto-last-change))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">goto-last-change</span>
+  <span class="org-builtin">:bind</span>
+  (<span class="org-string">"C-x C-/"</span> . goto-last-change))
 </pre>
 </div>
 </div>
@@ -1205,7 +1215,7 @@ Rename buffers so they are unique.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">uniquify</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">uniquify</span>)
 </pre>
 </div>
 </div>
@@ -1219,8 +1229,8 @@ Rename buffers so they are unique.
 <div class="outline-text-4" id="text-4-7-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key [(control s)] 'isearch-forward-regexp)&#57344;&#57345;&#57345;
-(global-set-key [(control r)] 'isearch-backward-regexp)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(global-set-key [(control s)] 'isearch-forward-regexp)
+(global-set-key [(control r)] 'isearch-backward-regexp)
 </pre>
 </div>
 </div>
@@ -1240,7 +1250,7 @@ Disabling backups was a monumentally stupidly bad idea.  I shall never do it aga
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq auto-save-default t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq auto-save-default t)
 </pre>
 </div>
 </div>
@@ -1254,14 +1264,14 @@ Disabling backups was a monumentally stupidly bad idea.  I shall never do it aga
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq backup-directory-alist&#57344;&#57345;&#57345;
-      `((<span class="org-string">"."</span> . ,(expand-file-name&#57344;&#57345;&#57345;
-                 (concat user-emacs-directory <span class="org-string">"backups"</span>)))))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(setq tramp-backup-directory-alist backup-directory-alist)&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Make backups of files, even when they're in version control</span>&#57344;&#57345;&#57345;
-(setq vc-make-backup-files t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq backup-directory-alist
+      `((<span class="org-string">"."</span> . ,(expand-file-name
+                 (concat user-emacs-directory <span class="org-string">"backups"</span>)))))
+
+(setq tramp-backup-directory-alist backup-directory-alist)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make backups of files, even when they're in version control</span>
+(setq vc-make-backup-files t)
 </pre>
 </div>
 </div>
@@ -1277,9 +1287,9 @@ Disabling backups was a monumentally stupidly bad idea.  I shall never do it aga
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">unless</span> (string-equal <span class="org-string">"root"</span> (getenv <span class="org-string">"USER"</span>))&#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">server</span>)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">unless</span> (server-running-p) (server-start)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">unless</span> (string-equal <span class="org-string">"root"</span> (getenv <span class="org-string">"USER"</span>))
+  (<span class="org-keyword">require</span> '<span class="org-constant">server</span>)
+  (<span class="org-keyword">unless</span> (server-running-p) (server-start)))
 </pre>
 </div>
 </div>
@@ -1295,8 +1305,8 @@ work, and some weekend projects as well.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">recentf</span>)&#57344;&#57345;&#57345;
-(setq recentf-max-saved-items 500)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">recentf</span>)
+(setq recentf-max-saved-items 500)
 </pre>
 </div>
 </div>
@@ -1307,9 +1317,9 @@ work, and some weekend projects as well.
 <div class="outline-text-3" id="text-6-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring compile-command))&#57344;&#57345;
-(setq savehist-autosave-interval 60)&#57344;&#57345;&#57345;
-(savehist-mode t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring compile-command))
+(setq savehist-autosave-interval 60)
+(savehist-mode t)
 </pre>
 </div>
 </div>
@@ -1338,14 +1348,14 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">which-key</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (setq which-key-idle-delay 0.6)&#57344;&#57345;&#57345;
-  (setq which-key-is-verbose t)&#57344;&#57345;&#57345;
-  (setq which-key-min-display-lines 2)&#57344;&#57345;&#57345;
-  (setq which-key-show-remaining-keys t)&#57344;&#57345;&#57345;
-  (which-key-mode))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">which-key</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:init</span>
+  (setq which-key-idle-delay 0.6)
+  (setq which-key-is-verbose t)
+  (setq which-key-min-display-lines 2)
+  (setq which-key-show-remaining-keys t)
+  (which-key-mode))
 </pre>
 </div>
 </div>
@@ -1356,10 +1366,10 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-3" id="text-7-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">discover-my-major</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:bind</span>&#57344;&#57345;&#57345;
-  ((<span class="org-string">"C-c C-h"</span>   . discover-my-major)&#57344;&#57345;&#57345;
-   (<span class="org-string">"C-c C-S-H"</span> . discover-my-mode)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">discover-my-major</span>
+  <span class="org-builtin">:bind</span>
+  ((<span class="org-string">"C-c C-h"</span>   . discover-my-major)
+   (<span class="org-string">"C-c C-S-H"</span> . discover-my-mode)))
 </pre>
 </div>
 </div>
@@ -1370,15 +1380,15 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-3" id="text-7-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="helm">(<span class="org-keyword">use-package</span> <span class="org-constant">helm</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>&#57344;&#57345;&#57345;
-  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
-  (global-set-key [f2] 'emagician/helm)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">helm-config</span>)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">helm-ring</span>)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">use-package</span> <span class="org-constant">helm-ls-git</span> <span class="org-builtin">:demand</span>)&#57344;&#57345;&#57345;
-  (diminish 'helm-mode <span class="org-string">""</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp" id="helm">(<span class="org-keyword">use-package</span> <span class="org-constant">helm</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span>
+  (global-set-key [f2] 'emagician/helm)
+  (<span class="org-keyword">require</span> '<span class="org-constant">helm-config</span>)
+  (<span class="org-keyword">require</span> '<span class="org-constant">helm-ring</span>)
+  (<span class="org-keyword">use-package</span> <span class="org-constant">helm-ls-git</span> <span class="org-builtin">:demand</span>)
+  (diminish 'helm-mode <span class="org-string">""</span>))
 </pre>
 </div>
 </div>
@@ -1388,53 +1398,53 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-old</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Slowly going to become a super helm-dwim"</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">require</span> '<span class="org-constant">helm-files</span>)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">unless</span> (and helm-source-ls-git-status&#57344;&#57345;&#57345;
-               helm-source-ls-git)&#57344;&#57345;&#57345;
-    (setq helm-source-ls-git-status&#57344;&#57345;&#57345;
-          (helm-make-source <span class="org-string">"Git status"</span> 'helm-ls-git-status-source&#57344;&#57345;&#57345;
-            <span class="org-builtin">:fuzzy-match</span> helm-ls-git-fuzzy-match)&#57344;&#57345;&#57345;
-          helm-source-ls-git&#57344;&#57345;&#57345;
-          (helm-make-source <span class="org-string">"Git files"</span> 'helm-ls-git-source&#57344;&#57345;&#57345;
-            <span class="org-builtin">:fuzzy-match</span> helm-ls-git-fuzzy-match)))&#57344;&#57345;&#57345;
-  (<span class="org-keyword">unless</span> helm-source-buffers-list&#57344;&#57345;&#57345;
-    (setq helm-source-buffers-list&#57344;&#57345;&#57345;
-          (helm-make-source <span class="org-string">"Buffers"</span> 'helm-source-buffers)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-    (helm-other-buffer '(helm-source-buffers-list&#57344;&#57345;&#57345;
-                         helm-source-files-in-current-dir&#57344;&#57345;&#57345;
-                         helm-source-ls-git-status&#57344;&#57345;&#57345;
-                         helm-source-ls-git&#57344;&#57345;&#57345;
-                         helm-source-mark-ring&#57344;&#57345;&#57345;
-                         helm-source-bookmarks&#57344;&#57345;&#57345;
-                         helm-source-recentf&#57344;&#57345;&#57345;
-                         helm-source-global-mark-ring             &#57344;&#57345;&#57345;
-                         helm-source-buffer-not-found)&#57344;&#57345;&#57345;
-                       <span class="org-string">"*helm mini*"</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-old</span> ()
+  <span class="org-doc">"Slowly going to become a super helm-dwim"</span>
+  (interactive)
+  (<span class="org-keyword">require</span> '<span class="org-constant">helm-files</span>)
+  (<span class="org-keyword">unless</span> (and helm-source-ls-git-status
+               helm-source-ls-git)
+    (setq helm-source-ls-git-status
+          (helm-make-source <span class="org-string">"Git status"</span> 'helm-ls-git-status-source
+            <span class="org-builtin">:fuzzy-match</span> helm-ls-git-fuzzy-match)
+          helm-source-ls-git
+          (helm-make-source <span class="org-string">"Git files"</span> 'helm-ls-git-source
+            <span class="org-builtin">:fuzzy-match</span> helm-ls-git-fuzzy-match)))
+  (<span class="org-keyword">unless</span> helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source <span class="org-string">"Buffers"</span> 'helm-source-buffers)))
+
+    (helm-other-buffer '(helm-source-buffers-list
+                         helm-source-files-in-current-dir
+                         helm-source-ls-git-status
+                         helm-source-ls-git
+                         helm-source-mark-ring
+                         helm-source-bookmarks
+                         helm-source-recentf
+                         helm-source-global-mark-ring             
+                         helm-source-buffer-not-found)
+                       <span class="org-string">"*helm mini*"</span>))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Super powered helm mode to DWIM!"</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">unless</span> helm-source-buffers-list&#57344;&#57345;&#57345;
-    (setq helm-source-buffers-list&#57344;&#57345;&#57345;
-          (helm-make-source <span class="org-string">"Buffers"</span> 'helm-source-buffers)))&#57344;&#57345;&#57345;
-  (helm <span class="org-builtin">:sources</span>&#57344;&#57345;&#57345;
-        '(helm-source-buffers-list&#57344;&#57345;&#57345;
-          helm-source-files-in-current-dir&#57344;&#57345;&#57345;
-          helm-source-ls-git-status&#57344;&#57345;&#57345;
-          helm-source-ls-git&#57344;&#57345;&#57345;
-          helm-source-mark-ring&#57344;&#57345;&#57345;
-          helm-source-bookmarks&#57344;&#57345;&#57345;
-          helm-source-recentf&#57344;&#57345;&#57345;
-          helm-source-register         &#57344;&#57345;&#57345;
-          helm-source-buffer-not-found)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm</span> ()
+  <span class="org-doc">"Super powered helm mode to DWIM!"</span>
+  (interactive)
+  (<span class="org-keyword">unless</span> helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source <span class="org-string">"Buffers"</span> 'helm-source-buffers)))
+  (helm <span class="org-builtin">:sources</span>
+        '(helm-source-buffers-list
+          helm-source-files-in-current-dir
+          helm-source-ls-git-status
+          helm-source-ls-git
+          helm-source-mark-ring
+          helm-source-bookmarks
+          helm-source-recentf
+          helm-source-register         
+          helm-source-buffer-not-found)))
 </pre>
 </div>
 </div>
@@ -1445,7 +1455,7 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(helm-mode 1)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(helm-mode 1)
 </pre>
 </div>
 </div>
@@ -1456,8 +1466,8 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"M-x"</span>)     'helm-M-x)&#57344;&#57345;&#57345;
-(setq helm-M-x-always-save-history t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"M-x"</span>)     'helm-M-x)
+(setq helm-M-x-always-save-history t)
 </pre>
 </div>
 </div>
@@ -1468,7 +1478,7 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-x b"</span>) 'helm-buffers-list)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-x b"</span>) 'helm-buffers-list)
 </pre>
 </div>
 </div>
@@ -1479,7 +1489,7 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq helm-ff-transformer-show-only-basename nil)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq helm-ff-transformer-show-only-basename nil)
 </pre>
 </div>
 </div>
@@ -1489,8 +1499,8 @@ More like&#x2013;witch key.  Which-key is the ultimate in discoverability.
 <div class="outline-text-4" id="text-7-4-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-x C-f"</span>) 'helm-find-files)&#57344;&#57345;&#57345;
-(global-set-key (kbd <span class="org-string">"M-y"</span>)     'helm-show-kill-ring)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-x C-f"</span>) 'helm-find-files)
+(global-set-key (kbd <span class="org-string">"M-y"</span>)     'helm-show-kill-ring)
 </pre>
 </div>
 </div>
@@ -1508,8 +1518,8 @@ Make it a bit nicer too.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq helm-split-window-in-side-p t)&#57344;&#57345;&#57345;
-(setq helm-candidate-separator <span class="org-string">"&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq helm-split-window-in-side-p t)
+(setq helm-candidate-separator <span class="org-string">"&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;"</span>)
 </pre>
 </div>
 </div>
@@ -1529,7 +1539,7 @@ Make it a bit nicer too.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:57</p>
+<p class="date">Created: 2016-08-19 Fri 13:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

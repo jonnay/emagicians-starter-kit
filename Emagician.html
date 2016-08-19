@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emagician</title>
-<!-- 2016-08-19 Fri 09:58 -->
+<!-- 2016-08-19 Fri 13:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -205,7 +205,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defconst</span> <span class="org-variable-name">emagician/version</span> <span class="org-string">"0.23.1"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defconst</span> <span class="org-variable-name">emagician/version</span> <span class="org-string">"0.23.1"</span>)
 </pre>
 </div>
 
@@ -233,7 +233,7 @@ You won't need this. Right?  In case of emergency, break glass.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq debug-on-error t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq debug-on-error t)
 </pre>
 </div>
 </div>
@@ -244,9 +244,9 @@ You won't need this. Right?  In case of emergency, break glass.
 <div class="outline-text-4" id="text-1-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq initial-stratch-message&#57344;&#57345;&#57345;
-      (concat <span class="org-string">";;; -X-x-X- Invokaction SuperFailure! -X-x-X-"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-              <span class="org-string">";;; Problem in Emagician.org when setting up Breakage Helpers"</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq initial-stratch-message
+      (concat <span class="org-string">";;; -X-x-X- Invokaction SuperFailure! -X-x-X-"</span> <span class="org-string">"\n"</span>
+              <span class="org-string">";;; Problem in Emagician.org when setting up Breakage Helpers"</span>))
 </pre>
 </div>
 </div>
@@ -257,17 +257,17 @@ You won't need this. Right?  In case of emergency, break glass.
 <div class="outline-text-4" id="text-1-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/set-scratch</span> (<span class="org-type">&amp;rest</span> lines)&#57344;&#57345;&#57345;
-  (setq initial-scratch-message (apply 'concat lines)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/append-scratch</span> (<span class="org-type">&amp;rest</span> lines)&#57344;&#57345;&#57345;
-  (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/pre-scratch-links</span> '()&#57344;&#57345;&#57345;
-  <span class="org-doc">"A list of links to append to emagician/scratch-links.</span>&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-<span class="org-doc">This is necessary because we may need to communicate to the user</span>&#57344;&#57345;&#57345;
-<span class="org-doc">before the rest of the scratch interface is built."</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/set-scratch</span> (<span class="org-type">&amp;rest</span> lines)
+  (setq initial-scratch-message (apply 'concat lines)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/append-scratch</span> (<span class="org-type">&amp;rest</span> lines)
+  (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/pre-scratch-links</span> '()
+  <span class="org-doc">"A list of links to append to emagician/scratch-links.</span>
+
+<span class="org-doc">This is necessary because we may need to communicate to the user</span>
+<span class="org-doc">before the rest of the scratch interface is built."</span>)
 </pre>
 </div>
 </div>
@@ -278,24 +278,24 @@ You won't need this. Right?  In case of emergency, break glass.
 <div class="outline-text-4" id="text-1-1-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/set-scratch&#57344;&#57345;&#57345;
-  <span class="org-string">";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";; You know what to do."</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";; \n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";; Emagician Starter kit Version: "</span> emagician/version <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";; Emacs: "</span> (number-to-string emacs-major-version) <span class="org-string">"."</span> (number-to-string emacs-minor-version) <span class="org-string">" ["</span> (<span class="org-keyword">when</span> emacs-repository-version (number-to-string emacs-repository-version)) <span class="org-string">"]"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
-  <span class="org-string">";; \n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>      &#57344;&#57345;&#57345;
-  <span class="org-string">";; It's dangerous to go ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";; alone! take this:    ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;   &#9832;     &#128119;     &#9832;    ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;          &#128297;          ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">";;;;;;;;;;;;  ;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">"(shell-command \""</span> invocation-directory invocation-name <span class="org-string">" --debug-init\")\n"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/set-scratch
+  <span class="org-string">";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; You know what to do."</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; \n"</span>
+  <span class="org-string">";; Emagician Starter kit Version: "</span> emagician/version <span class="org-string">"\n"</span>
+  <span class="org-string">";; Emacs: "</span> (number-to-string emacs-major-version) <span class="org-string">"."</span> (number-to-string emacs-minor-version) <span class="org-string">" ["</span> (<span class="org-keyword">when</span> emacs-repository-version (number-to-string emacs-repository-version)) <span class="org-string">"]"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; \n"</span>
+  <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>      
+  <span class="org-string">";; It's dangerous to go ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; alone! take this:    ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;   &#9832;     &#128119;     &#9832;    ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;          &#128297;          ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;;;;;;;;;;;  ;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">"\n"</span>
+  <span class="org-string">"(shell-command \""</span> invocation-directory invocation-name <span class="org-string">" --debug-init\")\n"</span>)
 </pre>
 </div>
 </div>
@@ -307,19 +307,19 @@ You won't need this. Right?  In case of emergency, break glass.
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">when</span> (null emagician/dir)&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((err (concat <span class="org-string">"Variable emagician/dir is not set!  This is important and should be set in "</span> user-init-file)))&#57344;&#57345;
-    (emagician/append-scratch <span class="org-string">";;; "</span> err <span class="org-string">"\n"</span> <span class="org-string">";;; Check the file Emagician-Install.org for more details."</span>)&#57344;&#57345;
-    (<span class="org-warning">error</span> err)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">when</span> (null emagician/dir)
+  (<span class="org-keyword">let</span> ((err (concat <span class="org-string">"Variable emagician/dir is not set!  This is important and should be set in "</span> user-init-file)))
+    (emagician/append-scratch <span class="org-string">";;; "</span> err <span class="org-string">"\n"</span> <span class="org-string">";;; Check the file Emagician-Install.org for more details."</span>)
+    (<span class="org-warning">error</span> err)))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/append-scratch&#57344;&#57345;&#57345;
-  <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"\")"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
-  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"/*.org\"  t)"</span> <span class="org-string">"\n"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/append-scratch
+  <span class="org-string">"\n"</span>
+  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"\")"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"/*.org\"  t)"</span> <span class="org-string">"\n"</span>)
 </pre>
 </div>
 </div>
@@ -333,7 +333,7 @@ You won't need this. Right?  In case of emergency, break glass.
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq inhibit-splash-screen t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq inhibit-splash-screen t)
 </pre>
 </div>
 </div>
@@ -347,12 +347,12 @@ This is generally useful anyway.  We could also use initial buffer, but that has
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/show-scratch</span> ()&#57344;&#57345;&#57345;
-  <span class="org-doc">"Show the scratch buffer"</span>&#57344;&#57345;&#57345;
-  (interactive)&#57344;&#57345;&#57345;
-  (set-window-buffer nil <span class="org-string">"*scratch*"</span>))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(add-hook 'emacs-startup-hook 'emagician/show-scratch t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/show-scratch</span> ()
+  <span class="org-doc">"Show the scratch buffer"</span>
+  (interactive)
+  (set-window-buffer nil <span class="org-string">"*scratch*"</span>))
+
+(add-hook 'emacs-startup-hook 'emagician/show-scratch t)
 </pre>
 </div>
 </div>
@@ -379,26 +379,26 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/are-elpas-reachable?</span> t <span class="org-doc">"Whether or not ELPAs are reachable"</span>)&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(setq package-user-dir (concat emagician/dir <span class="org-string">"elpa"</span>))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(setq package-archives&#57344;&#57345;&#57345;
-      '((<span class="org-string">"gnu"</span>         . <span class="org-string">"http://elpa.gnu.org/packages/"</span>)&#57344;&#57345;&#57345;
-        (<span class="org-string">"MELPA"</span>       . <span class="org-string">"http://melpa.org/packages/"</span>)&#57344;&#57345;&#57345;
-        (<span class="org-string">"org"</span>         . <span class="org-string">"http://orgmode.org/elpa/"</span>)))&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(package-initialize)&#57344;&#57345;&#57345;
-&#57344;&#57345;&#57345;
-(<span class="org-keyword">condition-case</span> err&#57344;&#57345;&#57345;
-    (<span class="org-keyword">unless</span> package-archive-contents (package-refresh-contents))&#57344;&#57345;&#57345;
-  ((<span class="org-warning">error</span>)&#57344;&#57345;&#57345;
-   (<span class="org-keyword">let</span> ((scratch-msg (concat <span class="org-string">";;; !!! Couldn't refresh package contents\n"</span>&#57344;&#57345;&#57345;
-                              <span class="org-string">"((package-refresh-contents)(beginning-of-line)(kill-line))"</span>)))&#57344;&#57345;
-     (message <span class="org-string">"Could not refresh package contents: %s %S"</span> (car err) (cdr err))&#57344;&#57345;&#57345;
-     (emagician/append-scratch scratch-msg)&#57344;&#57345;&#57345;
-     (add-to-list 'emagician/pre-scratch-links scratch-msg)&#57344;&#57345;&#57345;
-     (setq emagician/are-elpas-reachable? nil))))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/are-elpas-reachable?</span> t <span class="org-doc">"Whether or not ELPAs are reachable"</span>)
+
+(setq package-user-dir (concat emagician/dir <span class="org-string">"elpa"</span>))
+
+(setq package-archives
+      '((<span class="org-string">"gnu"</span>         . <span class="org-string">"http://elpa.gnu.org/packages/"</span>)
+        (<span class="org-string">"MELPA"</span>       . <span class="org-string">"http://melpa.org/packages/"</span>)
+        (<span class="org-string">"org"</span>         . <span class="org-string">"http://orgmode.org/elpa/"</span>)))
+
+(package-initialize)
+
+(<span class="org-keyword">condition-case</span> err
+    (<span class="org-keyword">unless</span> package-archive-contents (package-refresh-contents))
+  ((<span class="org-warning">error</span>)
+   (<span class="org-keyword">let</span> ((scratch-msg (concat <span class="org-string">";;; !!! Couldn't refresh package contents\n"</span>
+                              <span class="org-string">"((package-refresh-contents)(beginning-of-line)(kill-line))"</span>)))
+     (message <span class="org-string">"Could not refresh package contents: %s %S"</span> (car err) (cdr err))
+     (emagician/append-scratch scratch-msg)
+     (add-to-list 'emagician/pre-scratch-links scratch-msg)
+     (setq emagician/are-elpas-reachable? nil))))
 </pre>
 </div>
 </div>
@@ -412,10 +412,10 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 <div class="outline-text-4" id="text-1-5-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'load-path emagician/dir)&#57344;&#57345;&#57345;
-(add-to-list 'load-path (concat emagician/dir <span class="org-string">"src"</span>))&#57344;&#57345;&#57345;
-(add-to-list 'load-path (concat emagician/dir <span class="org-string">"dist"</span>))&#57344;&#57345;&#57345;
-(add-to-list 'custom-theme-load-path (concat emagician/dir <span class="org-string">"themes"</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(add-to-list 'load-path emagician/dir)
+(add-to-list 'load-path (concat emagician/dir <span class="org-string">"src"</span>))
+(add-to-list 'load-path (concat emagician/dir <span class="org-string">"dist"</span>))
+(add-to-list 'custom-theme-load-path (concat emagician/dir <span class="org-string">"themes"</span>))
 </pre>
 </div>
 </div>
@@ -426,7 +426,7 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 <div class="outline-text-4" id="text-1-5-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq custom-file (concat emagician/dir <span class="org-string">"custom.el"</span>))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq custom-file (concat emagician/dir <span class="org-string">"custom.el"</span>))
 </pre>
 </div>
 </div>
@@ -448,39 +448,39 @@ If the subtree is a tag, then all subtrees with that tag are collected and loade
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="starter-kit-load">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/load-depth</span> 0)&#57344;&#57345;&#57345;
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/load</span> (file <span class="org-type">&amp;optional</span> header-or-tag)&#57344;&#57345;&#57345;
-  <span class="org-doc">"Load configuration from other .org files."</span>&#57344;&#57345;&#57345;
-  (<span class="org-keyword">let</span> ((start-time (current-time))&#57344;&#57345;&#57345;
-        (file (expand-file-name (<span class="org-keyword">if</span> (string-match <span class="org-string">".+\.org"</span> file)&#57344;&#57345;&#57345;
-                                    file&#57344;&#57345;&#57345;
-                                  (format <span class="org-string">"%s.org"</span> file))&#57344;&#57345;&#57345;
-                                emagician/dir))&#57344;&#57345;&#57345;
-        (load-result nil)&#57344;&#57345;&#57345;
-        (emagician/load-depth (1+ emagician/load-depth))&#57344;&#57345;&#57345;
-        (org-babel-default-header-args (cons '(<span class="org-builtin">:comment</span> . <span class="org-string">"link"</span>) &#57344;&#57345;&#57345;
-                                             (assq-delete-all <span class="org-builtin">:comment</span>&#57344;&#57345;&#57345;
-                                                              org-babel-default-header-args))))&#57344;&#57345;
-    (<span class="org-keyword">if</span> (file-exists-p file)&#57344;&#57345;&#57345;
-        (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
-          (emagician/append-scratch <span class="org-string">"\n;; "</span>&#57344;&#57345;&#57345;
-                                    (make-string emagician/load-depth ?-)&#57344;&#57345;&#57345;
-                                    <span class="org-string">" Loading "</span> file)&#57344;&#57345;&#57345;
-          (setq load-result (org-babel-load-file file)))&#57344;&#57345;&#57345;
-      (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
-        (emagician/append-scratch <span class="org-string">"\n;; "</span>&#57344;&#57345;&#57345;
-                                  (make-string emagician/load-depth ?-)&#57344;&#57345;&#57345;
-                                  <span class="org-string">"Skipped Loading "</span>&#57344;&#57345;&#57345;
-                                  file&#57344;&#57345;&#57345;
-                                  <span class="org-string">" It doesn't exist!\n"</span>)&#57344;&#57345;&#57345;
-        (setq load-result nil)))&#57344;&#57345;&#57345;
-    (emagician/append-scratch <span class="org-string">"...done!"</span> <span class="org-string">"\n"</span>)&#57344;&#57345;&#57345;
-    (message (format <span class="org-string">"Emagician/Loaded %s %s %.3fs elapsed"</span> &#57344;&#57345;&#57345;
-                     file &#57344;&#57345;&#57345;
-                     (<span class="org-keyword">if</span> header-or-tag header-or-tag <span class="org-string">""</span>) &#57344;&#57345;&#57345;
-                     (float-time (time-subtract (current-time) &#57344;&#57345;&#57345;
-                                                start-time))))&#57344;&#57345;&#57345;
-    load-result))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp" id="starter-kit-load">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/load-depth</span> 0)
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/load</span> (file <span class="org-type">&amp;optional</span> header-or-tag)
+  <span class="org-doc">"Load configuration from other .org files."</span>
+  (<span class="org-keyword">let</span> ((start-time (current-time))
+        (file (expand-file-name (<span class="org-keyword">if</span> (string-match <span class="org-string">".+\.org"</span> file)
+                                    file
+                                  (format <span class="org-string">"%s.org"</span> file))
+                                emagician/dir))
+        (load-result nil)
+        (emagician/load-depth (1+ emagician/load-depth))
+        (org-babel-default-header-args (cons '(<span class="org-builtin">:comment</span> . <span class="org-string">"link"</span>) 
+                                             (assq-delete-all <span class="org-builtin">:comment</span>
+                                                              org-babel-default-header-args))))
+    (<span class="org-keyword">if</span> (file-exists-p file)
+        (<span class="org-keyword">progn</span>
+          (emagician/append-scratch <span class="org-string">"\n;; "</span>
+                                    (make-string emagician/load-depth ?-)
+                                    <span class="org-string">" Loading "</span> file)
+          (setq load-result (org-babel-load-file file)))
+      (<span class="org-keyword">progn</span>
+        (emagician/append-scratch <span class="org-string">"\n;; "</span>
+                                  (make-string emagician/load-depth ?-)
+                                  <span class="org-string">"Skipped Loading "</span>
+                                  file
+                                  <span class="org-string">" It doesn't exist!\n"</span>)
+        (setq load-result nil)))
+    (emagician/append-scratch <span class="org-string">"...done!"</span> <span class="org-string">"\n"</span>)
+    (message (format <span class="org-string">"Emagician/Loaded %s %s %.3fs elapsed"</span> 
+                     file 
+                     (<span class="org-keyword">if</span> header-or-tag header-or-tag <span class="org-string">""</span>) 
+                     (float-time (time-subtract (current-time) 
+                                                start-time))))
+    load-result))
 </pre>
 </div>
 </div>
@@ -494,10 +494,10 @@ If the subtree is a tag, then all subtrees with that tag are collected and loade
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/expect-package</span> (package)&#57344;&#57345;&#57345;
-  <span class="org-doc">"If the named PACKAGE isn't currently installed, install it"</span>&#57344;&#57345;&#57345;
-  (<span class="org-keyword">unless</span> (package-installed-p package)&#57344;&#57345;&#57345;
-    (package-install package)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/expect-package</span> (package)
+  <span class="org-doc">"If the named PACKAGE isn't currently installed, install it"</span>
+  (<span class="org-keyword">unless</span> (package-installed-p package)
+    (package-install package)))
 </pre>
 </div>
 </div>
@@ -516,8 +516,8 @@ Is the cat's ass.  Why would you not use it?
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq use-package-always-ensure emagician/are-elpas-reachable?)&#57344;&#57345;&#57345;
-(emagician/expect-package 'use-package)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq use-package-always-ensure emagician/are-elpas-reachable?)
+(emagician/expect-package 'use-package)
 </pre>
 </div>
 </div>
@@ -529,7 +529,7 @@ Is the cat's ass.  Why would you not use it?
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Emagician-Base.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Emagician-Base.org"</span>)
 </pre>
 </div>
 </div>
@@ -582,7 +582,7 @@ This file handles the baseline interface for emacs, and is split into the follow
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Interface.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Interface.org"</span>)
 </pre>
 </div>
 </div>
@@ -597,7 +597,7 @@ Emacs is a text editor afteral.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Text.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Text.org"</span>)
 </pre>
 </div>
 </div>
@@ -613,7 +613,7 @@ individual org files for each programming mode.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Programming.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Programming.org"</span>)
 </pre>
 </div>
 </div>
@@ -628,7 +628,7 @@ Deserves it's own file&#x2026; ORG GRIMOIRE!
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Org-Grimoire.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Org-Grimoire.org"</span>)
 </pre>
 </div>
 </div>
@@ -647,7 +647,7 @@ Why would you not use Eshell?
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Eshell-Magick.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Eshell-Magick.org"</span>)
 </pre>
 </div>
 </div>
@@ -663,7 +663,7 @@ and chalace.  It represents illumination and self knowledge.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Lamp.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Lamp.org"</span>)
 </pre>
 </div>
 </div>
@@ -678,7 +678,7 @@ Tools to make developing the Emagician Starter kit easier.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Emagician-Meta.org"</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Emagician-Meta.org"</span>)
 </pre>
 </div>
 </div>
@@ -692,7 +692,7 @@ Tools to make developing the Emagician Starter kit easier.
 <div class="outline-text-3" id="text-13-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(load custom-file 'noerror)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(load custom-file 'noerror)
 </pre>
 </div>
 </div>
@@ -703,7 +703,7 @@ Tools to make developing the Emagician Starter kit easier.
 <div class="outline-text-3" id="text-13-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load emagician/true-name)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load emagician/true-name)
 </pre>
 </div>
 </div>
@@ -714,7 +714,7 @@ Tools to make developing the Emagician Starter kit easier.
 <div class="outline-text-3" id="text-13-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name (symbol-name system-type)))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name (symbol-name system-type)))
 </pre>
 </div>
 </div>
@@ -725,7 +725,7 @@ Tools to make developing the Emagician Starter kit easier.
 <div class="outline-text-3" id="text-13-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name system-name))&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load (emagician/sanitize-file-name system-name))
 </pre>
 </div>
 </div>
@@ -736,7 +736,7 @@ Tools to make developing the Emagician Starter kit easier.
 <div class="outline-text-3" id="text-13-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load user-login-name)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/load user-login-name)
 </pre>
 </div>
 </div>
@@ -830,19 +830,19 @@ So Mote it Be.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/initiate-thee-scratch)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(emagician/initiate-thee-scratch)
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq debug-on-error t)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(setq debug-on-error t)
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">provide</span> '<span class="org-constant">emagician</span>)&#57344;&#57345;&#57345;
+<pre class="src src-emacs-lisp">(<span class="org-keyword">provide</span> '<span class="org-constant">emagician</span>)
 </pre>
 </div>
 </div>
@@ -850,7 +850,7 @@ So Mote it Be.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 09:58</p>
+<p class="date">Created: 2016-08-19 Fri 13:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
