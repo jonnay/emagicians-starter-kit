@@ -10,3 +10,6 @@
 [submodule "fix-muscle-memory"]
 	path = fix-muscle-memory
 	url = git@github.com:jonnay/fix-muscle-memory.git
+[submodule "gh-pages"]
+	path = gh-pages
+	url = ./gh-pages
