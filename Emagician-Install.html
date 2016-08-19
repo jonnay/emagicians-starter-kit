@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Installation</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:58 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -290,8 +291,8 @@ Replace "jonnay" with your name!
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="true-name">(defvar emagician/true-name "jonnay" 
-  "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
+<pre class="src src-emacs-lisp" id="true-name">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/true-name</span> <span class="org-string">"jonnay"</span> &#57344;&#57345;&#57345;
+  <span class="org-doc">"  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  "</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -321,20 +322,20 @@ delete it.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(concat "#+name: set-this-dir-as-var\n"
-        "#+begin_src emacs-lisp\n"
-        "(defvar emagician/dir\n"
-        "        \"" (file-name-directory (buffer-file-name)) "\"\n" ;BAM! 
-        "        \"Automagically generated variable where the emagicians kit is located\")\n"
-        "#+end_" "src\n")
+<pre class="src src-emacs-lisp">(concat <span class="org-string">"#+name: set-this-dir-as-var\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"#+begin_src emacs-lisp\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"(defvar emagician/dir\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"        \""</span> (file-name-directory (buffer-file-name)) <span class="org-string">"\"\n"</span> <span class="org-comment-delimiter">;</span><span class="org-comment">BAM! </span>&#57344;&#57345;&#57345;
+        <span class="org-string">"        \"Automagically generated variable where the emagicians kit is located\")\n"</span>&#57344;&#57345;
+        <span class="org-string">"#+end_"</span> <span class="org-string">"src\n"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="set-this-dir-as-var">(defvar emagician/dir
-        "/Users/joarkell/projects/emagicians-starter-kit/"
-        "Automagically generated variable where the emagicians kit is located")
+<pre class="src src-emacs-lisp" id="set-this-dir-as-var">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/dir</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"/Users/joarkell/projects/emagicians-starter-kit/"</span>&#57344;&#57345;&#57345;
+        <span class="org-doc">"Automagically generated variable where the emagicians kit is located"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -355,7 +356,7 @@ a file called init.el.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(org-babel-tangle)
+<pre class="src src-emacs-lisp">(org-babel-tangle)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -365,7 +366,7 @@ if you are interested, you can have a look at it:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(pop-to-buffer (find-file-other-window "./init.el"))
+<pre class="src src-emacs-lisp">(pop-to-buffer (find-file-other-window <span class="org-string">"./init.el"</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -387,9 +388,9 @@ entry to your private customization file.  More on this later
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(shell-command (concat "git branch " emagician/true-name))
-(shell-command (concat "git checkout " emagician/true-name))
-(shell-command (concat "echo \"" emagician/true-name "-private.org\" &gt;&gt; .gitignore"))
+<pre class="src src-emacs-lisp">(shell-command (concat <span class="org-string">"git branch "</span> emagician/true-name))&#57344;&#57345;&#57345;
+(shell-command (concat <span class="org-string">"git checkout "</span> emagician/true-name))&#57344;&#57345;&#57345;
+(shell-command (concat <span class="org-string">"echo \""</span> emagician/true-name <span class="org-string">"-private.org\" &gt;&gt; .gitignore"</span>))&#57344;&#57345;
 </pre>
 </div>
 
@@ -446,14 +447,14 @@ Another option is to store them in a private.org.gpg file.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/invoke-custom-file (name) 
-  "Create the customiztaion file, and load it up in emacs.
-This function is actually created when the emagician identifies themself"
-  (let ((filename (concat "./" name)))
-    (find-file-other-window (concat name ".org"))
-    (save-buffer)))
-
-(emagician/invoke-custom-file emagician/true-name)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/invoke-custom-file</span> (name) &#57344;&#57345;&#57345;
+  <span class="org-doc">"Create the customiztaion file, and load it up in emacs.</span>&#57344;&#57345;&#57345;
+<span class="org-doc">This function is actually created when the emagician identifies themself"</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((filename (concat <span class="org-string">"./"</span> name)))&#57344;&#57345;&#57345;
+    (find-file-other-window (concat name <span class="org-string">".org"</span>))&#57344;&#57345;&#57345;
+    (save-buffer)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(emagician/invoke-custom-file emagician/true-name)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -471,10 +472,10 @@ do munge it a little by replacing any <code>/</code> with a <code>-</code>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file
-                       (replace-regexp-in-string "/" 
-                                                 "-" 
-                                                 (symbol-name system-type)))
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file&#57344;&#57345;&#57345;
+                       (replace-regexp-in-string <span class="org-string">"/"</span> &#57344;&#57345;&#57345;
+                                                 <span class="org-string">"-"</span> &#57344;&#57345;&#57345;
+                                                 (symbol-name system-type)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -492,7 +493,7 @@ granular if need be.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file system-name)
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file system-name)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -507,7 +508,7 @@ Then again, maybe you need to separate customizations out by user account. Why n
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file (user-login-name))
+<pre class="src src-emacs-lisp">(emagician/invoke-custom-file (user-login-name))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -541,15 +542,15 @@ control can return to this instance of emacs.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(concat "#+begin_src sh :results silent\n"
-        "  # run this code block to test your emacs starter kit\n"
-        "  "invocation-directory invocation-name " --no-init-file --load="
-        (file-name-directory (buffer-file-name))
-        "init.el" 
-        " &amp;"
-        "\n"
-        "#+end" "_src" ; don't want the parser to prematurely end here
-)
+<pre class="src src-emacs-lisp">(concat <span class="org-string">"#+begin_src sh :results silent\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"  # run this code block to test your emacs starter kit\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"  "</span>invocation-directory invocation-name <span class="org-string">" --no-init-file --load="</span>&#57344;&#57345;&#57345;
+        (file-name-directory (buffer-file-name))&#57344;&#57345;&#57345;
+        <span class="org-string">"init.el"</span> &#57344;&#57345;&#57345;
+        <span class="org-string">" &amp;"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"#+end"</span> <span class="org-string">"_src"</span> <span class="org-comment-delimiter">; </span><span class="org-comment">don't want the parser to prematurely end here</span>&#57344;&#57345;&#57345;
+)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -565,7 +566,7 @@ mode for babel.  Do that by running this code block:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'ob-sh)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ob-sh</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -619,10 +620,10 @@ it up first.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">NOW=$(date +"%Y-%m-%d_%H-%M-%S")
-FILE="~./.emacs.d/init-backup-$NOW.el"
-mv -v ~/.emacs.d/init.el $FILE
-cp -v ./init.el ~/.emacs.d/
+<pre class="src src-sh"><span class="org-variable-name">NOW</span>=$(<span class="org-sh-quoted-exec">date</span> +<span class="org-string">"%Y-%m-%d_%H-%M-%S"</span>)&#57344;&#57345;&#57345;
+<span class="org-variable-name">FILE</span>=<span class="org-string">"~./.emacs.d/init-backup-$NOW.el"</span>&#57344;&#57345;&#57345;
+mv -v ~/.emacs.d/init.el $<span class="org-variable-name">FILE</span>&#57344;&#57345;&#57345;
+cp -v ./init.el ~/.emacs.d/&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -639,26 +640,26 @@ This is the init file that is tangled by the <code>org-babel-tagle</code> comman
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">;;; init.el --- Where all the magic begins
-;;
-;; Part of the Emagicians Starter Kit. 
-;;
-;; This is the first thing to get loaded.
-;; 
-;; Note, this file is automagickally summoned from Emagician-Install.org
-
-(defvar emagician/true-name "jonnay" 
-  "  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  ")
-(defvar emagician/dir
-        "/Users/joarkell/projects/emagicians-starter-kit/"
-        "Automagically generated variable where the emagicians kit is located")
-;; This sucks, but we need org mode properly running
-(setq package-user-dir (concat emagician/dir "elpa"))
-(let ((package-load-list '((org-plus-contrib t))))
-  (package-initialize))
-(require 'org-install)
-(require 'ob-tangle)
-(org-babel-load-file (expand-file-name "Emagician.org" emagician/dir))
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">init.el --- Where all the magic begins</span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;;</span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Part of the Emagicians Starter Kit. </span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;;</span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This is the first thing to get loaded.</span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;; </span>&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Note, this file is automagickally summoned from Emagician-Install.org</span>&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/true-name</span> <span class="org-string">"jonnay"</span> &#57344;&#57345;&#57345;
+  <span class="org-doc">"  -|-+-|-  The Magician using these tools upon this altar.  -|-+-|-  "</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/dir</span>&#57344;&#57345;&#57345;
+        <span class="org-string">"/Users/joarkell/projects/emagicians-starter-kit/"</span>&#57344;&#57345;&#57345;
+        <span class="org-doc">"Automagically generated variable where the emagicians kit is located"</span>)&#57344;&#57345;&#57345;
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This sucks, but we need org mode properly running</span>&#57344;&#57345;&#57345;
+(setq package-user-dir (concat emagician/dir <span class="org-string">"elpa"</span>))&#57344;&#57345;&#57345;
+(<span class="org-keyword">let</span> ((package-load-list '((org-plus-contrib t))))&#57344;&#57345;&#57345;
+  (package-initialize))&#57344;&#57345;&#57345;
+(<span class="org-keyword">require</span> '<span class="org-constant">org-install</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">require</span> '<span class="org-constant">ob-tangle</span>)&#57344;&#57345;&#57345;
+(org-babel-load-file (expand-file-name <span class="org-string">"Emagician.org"</span> emagician/dir))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -684,7 +685,7 @@ Emacs is the ground. We run around and act silly on top of it, and when we die, 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:58</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

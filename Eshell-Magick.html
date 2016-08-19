@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Eshell Magick</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -167,7 +168,7 @@ then <code>require</code> gets problematic.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook 'eshell)
+<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook 'eshell)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -180,10 +181,10 @@ then <code>require</code> gets problematic.
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package eshell
-  :demand 
-  :bind (:map eshell-mode-map
-         ("M-S-r" . helm-eshell-history)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:demand</span> &#57344;&#57345;&#57345;
+  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> eshell-mode-map&#57344;&#57345;&#57345;
+         (<span class="org-string">"M-S-r"</span> . helm-eshell-history)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -202,10 +203,10 @@ This is apparently still an issue.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defadvice eshell-gather-process-output (before absolute-cmd (command args) act)
-  (setq command (file-truename command)))
-
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span> <span class="org-function-name">eshell-gather-process-output</span> (before absolute-cmd (command args) act)&#57344;&#57345;&#57345;
+  (setq command (file-truename command)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -216,7 +217,7 @@ This is apparently still an issue.
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setenv "PAGER" "cat")
+<pre class="src src-emacs-lisp">(setenv <span class="org-string">"PAGER"</span> <span class="org-string">"cat"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -232,10 +233,10 @@ This is apparently still an issue.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package eshell-prompt-extras
-  :init
-  (setq eshell-highlight-prompt nil
-        eshell-prompt-function 'emagician/epe-theme))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-prompt-extras</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (setq eshell-highlight-prompt nil&#57344;&#57345;&#57345;
+        eshell-prompt-function 'emagician/epe-theme))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -246,46 +247,45 @@ This is apparently still an issue.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/epe-theme ()
-  "Emagician Eshell Prompt Extras theme."
-  (setq eshell-prompt-regexp "^[^#\n🐰]*[#🐰]) ")
-  (concat
-   (when (epe-remote-p)
-     (epe-colorize-with-face (concat (epe-remote-user)
-                                     "@"
-                                     (epe-remote-host))
-                             'epe-remote-face))
-   (epe-colorize-with-face (eshell/pwd) 'epe-dir-face)
-   (when (epe-git-p)
-     (concat
-      (epe-colorize-with-face ":" 'epe-dir-face)
-      (epe-colorize-with-face
-       (concat (epe-git-branch)
-               (epe-git-dirty)
-               (epe-git-untracked)
-               (let ((unpushed (epe-git-unpushed-number)))
-                 (unless (= unp,ushed 0)
-                   (concat ":" (number-to-string unpushed-number)))))
-       'epe-git-face)))
-   (epe-colorize-with-face " 🐰)" 'epe-symbol-face)
-   (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
-   " "))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/epe-theme</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Emagician Eshell Prompt Extras theme."</span>&#57344;&#57345;&#57345;
+  (setq eshell-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#\n&#128048;]*[#&#128048;]) "</span>)&#57344;&#57345;&#57345;
+  (concat&#57344;&#57345;&#57345;
+   <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   (<span class="org-keyword">when</span> (epe-remote-p)&#57344;&#57345;&#57345;
+     (epe-colorize-with-face (concat (epe-remote-user)&#57344;&#57345;&#57345;
+                                     <span class="org-string">"@"</span>&#57344;&#57345;&#57345;
+                                     (epe-remote-host))&#57344;&#57345;&#57345;
+                             'epe-remote-face))&#57344;&#57345;&#57345;
+   (epe-colorize-with-face (eshell/pwd) 'epe-dir-face)&#57344;&#57345;&#57345;
+   (<span class="org-keyword">when</span> (epe-git-p)&#57344;&#57345;&#57345;
+     (concat&#57344;&#57345;&#57345;
+      (epe-colorize-with-face <span class="org-string">":"</span> 'epe-dir-face)&#57344;&#57345;&#57345;
+      (epe-colorize-with-face&#57344;&#57345;&#57345;
+       (concat (epe-git-branch)&#57344;&#57345;&#57345;
+               (epe-git-dirty)&#57344;&#57345;&#57345;
+               (epe-git-untracked)&#57344;&#57345;&#57345;
+               (<span class="org-keyword">let</span> ((unpushed (epe-git-unpushed-number)))&#57344;&#57345;&#57345;
+                 (<span class="org-keyword">unless</span> (= unpushed 0)&#57344;&#57345;&#57345;
+                   (concat <span class="org-string">":"</span> (number-to-string unpushed)))))&#57344;&#57345;&#57345;
+       'epe-git-face)))&#57344;&#57345;&#57345;
+   (epe-colorize-with-face <span class="org-string">"\n &#128048;)"</span> 'epe-symbol-face)&#57344;&#57345;&#57345;
+   (epe-colorize-with-face (<span class="org-keyword">if</span> (= (user-uid) 0) <span class="org-string">"#"</span> <span class="org-string">""</span>) 'epe-sudo-symbol-face)&#57344;&#57345;&#57345;
+   <span class="org-string">" "</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
-<p>
-s
-</p>
 </div>
 </div>
+
 <div id="outline-container-sec-2-3" class="outline-3">
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> Did you mean?</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package eshell-did-you-mean 
-  :demand
-  :config
-  (eshell-did-you-mean-setup))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-did-you-mean</span> &#57344;&#57345;&#57345;
+  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
+  (eshell-did-you-mean-setup))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -296,9 +296,9 @@ s
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package eshell-fringe-status
-  :init
-  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-fringe-status</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -307,7 +307,7 @@ s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emagician-Base</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:58 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -180,12 +181,11 @@ Just enough to make editing in a broken environment not a pain,
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'ffap)  ; Will be superceeded, but important when stuff gets broke.
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ffap</span>)  <span class="org-comment-delimiter">; </span><span class="org-comment">Will be superceeded, but important when stuff gets broke.</span>&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><span class="section-number-2">2</span> Emacs Lisp Evaluation Environment</h2>
@@ -199,7 +199,7 @@ There are helpers funcitons and variables that just make working with Emacs Lisp
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq load-prefer-newer t)
+<pre class="src src-emacs-lisp">(setq load-prefer-newer t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -210,16 +210,16 @@ There are helpers funcitons and variables that just make working with Emacs Lisp
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defmacro lexically (&amp;rest forms)
-  "Lexically execute forms"
-  `(eval '(progn ,@forms) t))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defmacro</span> <span class="org-function-name">lexically</span> (<span class="org-type">&amp;rest</span> forms)&#57344;&#57345;&#57345;
+  <span class="org-doc">"Lexically execute forms"</span>&#57344;&#57345;&#57345;
+  `(eval '(<span class="org-keyword">progn</span> ,@forms) t))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(ert-deftest lexially () 
-  (should (equal (macroexpand '(lexically t t t)) '(eval (quote (progn t t t)) t))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">lexially</span> () &#57344;&#57345;&#57345;
+  (should (equal (macroexpand '(lexically t t t)) '(eval (quote (<span class="org-keyword">progn</span> t t t)) t))))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -235,7 +235,7 @@ this can go away. That day isn't today.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'cl)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">cl</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -246,10 +246,10 @@ this can go away. That day isn't today.
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq eval-expression-print-length 9000
-      print-length 90000
-      eval-expression-print-level 20
-      print-level 900)
+<pre class="src src-emacs-lisp">(setq eval-expression-print-length 9000&#57344;&#57345;&#57345;
+      print-length 90000&#57344;&#57345;&#57345;
+      eval-expression-print-level 20&#57344;&#57345;&#57345;
+      print-level 900)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -264,7 +264,7 @@ Run commands asyncronously.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package async)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">async</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -287,7 +287,7 @@ fakir is cool ass, but I don't need it.  yet.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package noflet)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">noflet</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -314,18 +314,18 @@ This function snarfs the backtrace when called and returns it as a list.   This 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/snarf-backtrace ()
-  "Snarfs the backtrace as a list"
-  (let ((num 3)
-        (frames (cons (backtrace-frame 3) nil)))
-    (while (car frames)
-      (when (&gt; num 50) (error "Too many frames %S" (pp frames)))
-      (setq num (1+ num))
-      (setq frames (cons (backtrace-frame (+ 3 num)) frames)))
-    (cdr frames)))
-
-(ert-deftest emagician/snarf-backtrace ()
-  (should (equal '(t emagician/snarf-backtrace) (car (last (emagician/snarf-backtrace))))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/snarf-backtrace</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Snarfs the backtrace as a list"</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((num 3)&#57344;&#57345;&#57345;
+        (frames (cons (backtrace-frame 3) nil)))&#57344;&#57345;&#57345;
+    (<span class="org-keyword">while</span> (car frames)&#57344;&#57345;&#57345;
+      (<span class="org-keyword">when</span> (&gt; num 50) (<span class="org-warning">error</span> <span class="org-string">"Too many frames %S"</span> (pp frames)))&#57344;&#57345;&#57345;
+      (setq num (1+ num))&#57344;&#57345;&#57345;
+      (setq frames (cons (backtrace-frame (+ 3 num)) frames)))&#57344;&#57345;&#57345;
+    (cdr frames)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/snarf-backtrace</span> ()&#57344;&#57345;&#57345;
+  (should (equal '(t emagician/snarf-backtrace) (car (last (emagician/snarf-backtrace))))))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -340,18 +340,18 @@ A bit of a naive version of this for now.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/sanitize-file-name (str)
-  (replace-regexp-in-string "[/~\000]" "-" str))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/sanitize-file-name</span> (str)&#57344;&#57345;&#57345;
+  (replace-regexp-in-string <span class="org-string">"[/~\000]"</span> <span class="org-string">"-"</span> str))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(ert-deftest emagician/sanitize-file-name ()
-  (should (equal "" (emagician/sanitize-file-name "")))
-  (should (equal "foo" (emagician/sanitize-file-name "foo")))
-  (should (equal "-foo" (emagician/sanitize-file-name "/foo")))
-  (should (equal "-foo" (emagician/sanitize-file-name "~foo"))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/sanitize-file-name</span> ()&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">""</span> (emagician/sanitize-file-name <span class="org-string">""</span>)))&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">"foo"</span> (emagician/sanitize-file-name <span class="org-string">"foo"</span>)))&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">"-foo"</span> (emagician/sanitize-file-name <span class="org-string">"/foo"</span>)))&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">"-foo"</span> (emagician/sanitize-file-name <span class="org-string">"~foo"</span>))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -366,27 +366,27 @@ Make sure a dirs exist.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/expect-dir (dir) 
-  "Ensures that the named directory exists."
-  (let ((path (expand-file-name dir emagician/dir)))
-    (when (not (file-directory-p path))
-      (when (file-exists-p path)
-        (error "Cannot Create %s, it already exists and is a file." path))
-      (make-directory path nil))
-    path))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/expect-dir</span> (dir) &#57344;&#57345;&#57345;
+  <span class="org-doc">"Ensures that the named directory exists."</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((path (expand-file-name dir emagician/dir)))&#57344;&#57345;&#57345;
+    (<span class="org-keyword">when</span> (not (file-directory-p path))&#57344;&#57345;&#57345;
+      (<span class="org-keyword">when</span> (file-exists-p path)&#57344;&#57345;&#57345;
+        (<span class="org-warning">error</span> <span class="org-string">"Cannot Create %s, it already exists and is a file."</span> path))&#57344;&#57345;&#57345;
+      (make-directory path nil))&#57344;&#57345;&#57345;
+    path))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(ert-deftest emagician/expect-dir ()
-  (let ((tdir "emagician-expect-dir-dummy-test-dir"))   
-    (should (not (file-directory-p tdir)))
-    (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
-    (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
-    (should (progn (delete-directory tdir) (not (file-directory-p tdir))))
-    (should-error (emagician/expect-dir "foo/bar/baz/notexisting")))
-  (should-error (emagician/expect-dir "Emagician.org")))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/expect-dir</span> ()&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((tdir <span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>))   &#57344;&#57345;&#57345;
+    (should (not (file-directory-p tdir)))&#57344;&#57345;&#57345;
+    (should (file-directory-p (emagician/expect-dir <span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))&#57344;&#57345;
+    (should (file-directory-p (emagician/expect-dir <span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))&#57344;&#57345;
+    (should (<span class="org-keyword">progn</span> (delete-directory tdir) (not (file-directory-p tdir))))&#57344;&#57345;&#57345;
+    (should-error (emagician/expect-dir <span class="org-string">"foo/bar/baz/notexisting"</span>)))&#57344;&#57345;&#57345;
+  (should-error (emagician/expect-dir <span class="org-string">"Emagician.org"</span>)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -397,20 +397,19 @@ Make sure a dirs exist.
 <div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defmacro emagician/defhook (name hook &amp;rest b)
-  (declare (indent 2))
-  (let* ((docp (stringp (car b)))
-         (body (if docp (cdr b) b)))
-    `(progn 
-       (defun ,name () 
-         ,(concat (if docp (car b) "Not Documented\n") "\nEmagically defined with emagician/defhook.")
-         ,@body)
-       (add-hook (quote ,hook) (quote ,name)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defmacro</span> <span class="org-function-name">emagician/defhook</span> (name hook <span class="org-type">&amp;rest</span> b)&#57344;&#57345;&#57345;
+  (<span class="org-keyword">declare</span> (indent 2))&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let*</span> ((docp (stringp (car b)))&#57344;&#57345;&#57345;
+         (body (<span class="org-keyword">if</span> docp (cdr b) b)))&#57344;&#57345;&#57345;
+    `(<span class="org-keyword">progn</span> &#57344;&#57345;&#57345;
+       (<span class="org-keyword">defun</span> ,name () &#57344;&#57345;&#57345;
+         ,(concat (<span class="org-keyword">if</span> docp (car b) <span class="org-string">"Not Documented\n"</span>) <span class="org-string">"\nEmagically defined with emagician/defhook."</span>)&#57344;&#57345;
+         ,@body)&#57344;&#57345;&#57345;
+       (add-hook (quote ,hook) (quote ,name)))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-3-5" class="outline-3">
 <h3 id="sec-3-5"><span class="section-number-3">3.5</span> Minor In Major</h3>
 <div class="outline-text-3" id="text-3-5">
@@ -420,21 +419,21 @@ Kinda one of those things that I am surprised is not a thing.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (defmacro emagician/minor-in-major-mode (major-mode minor-mode)
-    (let ((turn-on-symbol (intern (concat "turn-on-" (symbol-name minor-mode)))))
-      (list
-       'progn 
-       (when (not (fboundp turn-on-symbol))
-         `(defun ,turn-on-symbol ()
-            "Automagickally generated by emagicians starter kit."
-            (,minor-mode +1)))
-       `(add-hook (quote ,major-mode) (quote ,turn-on-symbol)))))
-
-(ert-deftest emagician/test-minor-in-major-mode ()
-  "emagician-minor-in-major macro test"
-  (should (equal (macroexpand '(emagician/minor-in-major-mode elisp-mode paredit-mode))
-                 '(progn (defun turn-on-paredit-mode nil "Automagickally generated by emagicians starter kit." (paredit-mode +1))
-                         (add-hook elisp-mode paredit-mode)))))
+<pre class="src src-emacs-lisp">  (<span class="org-keyword">defmacro</span> <span class="org-function-name">emagician/minor-in-major-mode</span> (minor-mode major-mode)&#57344;&#57345;&#57345;
+    (<span class="org-keyword">let</span> ((turn-on-symbol (intern (concat <span class="org-string">"turn-on-"</span> (symbol-name minor-mode)))))&#57345;
+      (list&#57344;&#57345;&#57345;
+       'progn &#57344;&#57345;&#57345;
+       (<span class="org-keyword">when</span> (not (fboundp turn-on-symbol))&#57344;&#57345;&#57345;
+         `(<span class="org-keyword">defun</span> ,turn-on-symbol ()&#57344;&#57345;&#57345;
+            <span class="org-doc">"Automagickally generated by emagicians starter kit."</span>&#57344;&#57345;&#57345;
+            (,minor-mode +1)))&#57344;&#57345;&#57345;
+       `(add-hook (quote ,major-mode) (quote ,turn-on-symbol)))))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/test-minor-in-major-mode</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"emagician-minor-in-major macro test"</span>&#57344;&#57345;&#57345;
+  (should (equal (macroexpand '(emagician/minor-in-major-mode paredit-mode elisp-mode))&#57344;&#57345;
+                 '(<span class="org-keyword">progn</span> (<span class="org-keyword">defun</span> <span class="org-function-name">turn-on-paredit-mode</span> () <span class="org-doc">"Automagickally generated by emagicians starter kit."</span> (paredit-mode +1))&#57344;&#57345;
+                         (add-hook 'elisp-mode 'turn-on-paredit-mode)))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -445,21 +444,21 @@ Kinda one of those things that I am surprised is not a thing.
 <div class="outline-text-3" id="text-3-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (defun emagician/add-to-path (path &amp;rest front)
-    "Adds PATH to the PATH env variable, eshell-path-env as well as exec-path.
-If FRONT is non nil, then PATH will be prepended to the env and shell vars.  
-The exec-path always will always have it prepended. "
-    (let ((shell-path (concat 
-                       (if front 
-                           path
-                         (getenv "PATH"))
-                       ":"
-                       (if front
-                           (getenv "PATH")
-                         path))))
-      (setenv "PATH" shell-path)
-      (setq eshell-path-env shell-path)
-      (setq exec-path (cons path exec-path))))
+<pre class="src src-emacs-lisp">  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician/add-to-path</span> (path <span class="org-type">&amp;rest</span> front)&#57344;&#57345;&#57345;
+    <span class="org-doc">"Adds PATH to the PATH env variable, eshell-path-env as well as exec-path.</span>&#57344;&#57345;&#57345;
+<span class="org-doc">If FRONT is non nil, then PATH will be prepended to the env and shell vars.  </span>&#57344;&#57345;&#57345;
+<span class="org-doc">The exec-path always will always have it prepended. "</span>&#57344;&#57345;&#57345;
+    (<span class="org-keyword">let</span> ((shell-path (concat &#57344;&#57345;&#57345;
+                       (<span class="org-keyword">if</span> front &#57344;&#57345;&#57345;
+                           path&#57344;&#57345;&#57345;
+                         (getenv <span class="org-string">"PATH"</span>))&#57344;&#57345;&#57345;
+                       <span class="org-string">":"</span>&#57344;&#57345;&#57345;
+                       (<span class="org-keyword">if</span> front&#57344;&#57345;&#57345;
+                           (getenv <span class="org-string">"PATH"</span>)&#57344;&#57345;&#57345;
+                         path))))&#57344;&#57345;&#57345;
+      (setenv <span class="org-string">"PATH"</span> shell-path)&#57344;&#57345;&#57345;
+      (setq eshell-path-env shell-path)&#57344;&#57345;&#57345;
+      (setq exec-path (cons path exec-path))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -489,8 +488,8 @@ If you want to add items, you can do so through the
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defvar emagician/scratch-links `((magit-status ,emagician/dir))
-  "A list of elisp that is inserted in the scratch buffer at startup.")
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/scratch-links</span> `((magit-status ,emagician/dir))&#57344;&#57345;&#57345;
+  <span class="org-doc">"A list of elisp that is inserted in the scratch buffer at startup."</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -498,20 +497,20 @@ If you want to add items, you can do so through the
 <ol class="org-ol"><li><a id="sec-3-7-0-1" name="sec-3-7-0-1"></a>Scratchify<br  /><div class="outline-text-5" id="text-3-7-0-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/scratchify-text (text)
-  "Takes a chunk of text, and at the newline boundary inserts ;;;"
-  (mapconcat (lambda (line)
-               (format ";;; %s\n" line))
-             (split-string text "\n")
-             ""))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/scratchify-text</span> (text)&#57344;&#57345;&#57345;
+  <span class="org-doc">"Takes a chunk of text, and at the newline boundary inserts ;;;"</span>&#57344;&#57345;&#57345;
+  (mapconcat (<span class="org-keyword">lambda</span> (line)&#57344;&#57345;&#57345;
+               (format <span class="org-string">";;; %s\n"</span> line))&#57344;&#57345;&#57345;
+             (split-string text <span class="org-string">"\n"</span>)&#57344;&#57345;&#57345;
+             <span class="org-string">""</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(ert-deftest emagician/scratchify-text ()
-  (should (equal ";;; foo\n" (emagician/scratchify-text "foo")))
-  (should (equal ";;; Topes\n;;; \n" (emagician/scratchify-text "Topes\n"))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-text</span> ()&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">";;; foo\n"</span> (emagician/scratchify-text <span class="org-string">"foo"</span>)))&#57344;&#57345;&#57345;
+  (should (equal <span class="org-string">";;; Topes\n;;; \n"</span> (emagician/scratchify-text <span class="org-string">"Topes\n"</span>))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -519,41 +518,41 @@ If you want to add items, you can do so through the
 <li><a id="sec-3-7-0-2" name="sec-3-7-0-2"></a>Main Scratch Function<br  /><div class="outline-text-5" id="text-3-7-0-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/initiate-thee-scratch ()
-  (emagician/set-scratch 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;;           🐰-|-+-|- Sekrut Alien Technology -|-+-|-🐰           ;;;" "\n"
-   ";;;                  Hail Eris.  All Hail Discordia.                 ;;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;;\n"
-   ";;; It is with thee Quill of Echinda" "\n"
-   ";;; that I scratch all upon the Beat Mesa" "\n"
-   ";;;" " \n" 
-   ";;; Emacs Vesrion: " emacs-version "\n" 
-   ";;; Emagician Starter kit Version: " emagician/version "\n"
-   ";;; " "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   (if (and after-init-time before-init-time)
-       (format ";;; Your startup took approximately %.2f seconds" 
-               (- (float-time after-init-time)
-                  (float-time before-init-time)))
-     (format ";;; One of the start time variables was nil. (after:%s before:%s) "
-             after-init-time before-init-time)) "\n" 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;; -|-+-|- Chaotic Wisdom -|-+-|-" "\n"
-   ";;;" "\n"
-   (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
-   ";;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
-   (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
-   ";;; Tools For Magicks" "\n"
-   (mapconcat (lambda (link)
-                (format "%S\n" link))
-              emagician/scratch-links
-              "")
-   ";;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/initiate-thee-scratch</span> ()&#57344;&#57345;&#57345;
+  (emagician/set-scratch &#57344;&#57345;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
+   <span class="org-string">";;;           &#128048;-|-+-|- Sekrut Alien Technology -|-+-|-&#128048;           ;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;                  Hail Eris.  All Hail Discordia.                 ;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
+   <span class="org-string">";;;\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;; It is with thee Quill of Echinda"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;; that I scratch all upon the Beat Mesa"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;"</span> <span class="org-string">" \n"</span> &#57344;&#57345;&#57345;
+   <span class="org-string">";;; Emacs Vesrion: "</span> emacs-version <span class="org-string">"\n"</span> &#57344;&#57345;&#57345;
+   <span class="org-string">";;; Emagician Starter kit Version: "</span> emagician/version <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;; "</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
+   (<span class="org-keyword">if</span> (and after-init-time before-init-time)&#57344;&#57345;&#57345;
+       (format <span class="org-string">";;; Your startup took approximately %.2f seconds"</span> &#57344;&#57345;&#57345;
+               (- (float-time after-init-time)&#57344;&#57345;&#57345;
+                  (float-time before-init-time)))&#57344;&#57345;&#57345;
+     (format <span class="org-string">";;; One of the start time variables was nil. (after:%s before:%s) "</span>&#57345;
+             after-init-time before-init-time)) <span class="org-string">"\n"</span> &#57344;&#57345;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;; -|-+-|- Chaotic Wisdom -|-+-|-"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   (emagician/scratchify-text (emagician/cookie-from-file <span class="org-string">"assets/collected-works-ov-chaos.lines"</span>))&#57344;&#57345;
+   <span class="org-string">";;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;
+   <span class="org-string">";;; -|-+-|- Minor Lamp Invocation -|-+-|-"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   (emagician/scratchify-text (emagician/cookie-from-file <span class="org-string">"assets/minor-lamp-invocation.lines"</span>))&#57344;&#57345;
+   <span class="org-string">";;; Tools For Magicks"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   (mapconcat (<span class="org-keyword">lambda</span> (link)&#57344;&#57345;&#57345;
+                (format <span class="org-string">"%S\n"</span> link))&#57344;&#57345;&#57345;
+              emagician/scratch-links&#57344;&#57345;&#57345;
+              <span class="org-string">""</span>)&#57344;&#57345;&#57345;
+   <span class="org-string">";;;"</span> <span class="org-string">"\n"</span>&#57344;&#57345;&#57345;
+   <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -563,7 +562,7 @@ If you want to add items, you can do so through the
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:58</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

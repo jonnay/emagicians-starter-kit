@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Org-Grimoire</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -270,7 +271,7 @@ for the JavaScript code in this tag.
 </div>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(org-babel-load-file buffer-file-truename)
+<pre class="src src-emacs-lisp">(org-babel-load-file buffer-file-truename)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -311,14 +312,14 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org/fix-saveplace ()
-    "Fixes a bit of brokenness with saveplace.el and org-mode"
-    (when (outline-invisible-p)
-      (save-excursion
-        (outline-previous-visible-heading 1)
-        (org-show-subtree))))
-
-  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/fix-saveplace</span> ()&#57344;&#57345;&#57345;
+    <span class="org-doc">"Fixes a bit of brokenness with saveplace.el and org-mode"</span>&#57344;&#57345;&#57345;
+    (<span class="org-keyword">when</span> (outline-invisible-p)&#57344;&#57345;&#57345;
+      (<span class="org-keyword">save-excursion</span>&#57344;&#57345;&#57345;
+        (outline-previous-visible-heading 1)&#57344;&#57345;&#57345;
+        (org-show-subtree))))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -329,7 +330,7 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'flyspell-mode)
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'flyspell-mode)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -340,7 +341,7 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'auto-complete-mode)
+<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'auto-complete-mode)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -394,7 +395,7 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-files '("~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org" "~/Dropbox/Creativity/Site3.0/Site.org"))
+<pre class="src src-emacs-lisp">(setq org-agenda-files '(<span class="org-string">"~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org"</span> <span class="org-string">"~/Dropbox/Creativity/Site3.0/Site.org"</span>))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -412,11 +413,11 @@ Simple GTD States.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "STARTED(g)" "|" "DONE(d@/!)")
-                          (sequence "PROJECT(p)" "|" "FINISHED(f)")
-                          (sequence "SOMEDAY(s)" "MAYBE(m)") 
-                          (sequence  "WAITING(w@/!)")
-                          ))
+<pre class="src src-emacs-lisp">(setq org-todo-keywords '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"STARTED(g)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d@/!)"</span>)&#57344;&#57345;
+                          (sequence <span class="org-string">"PROJECT(p)"</span> <span class="org-string">"|"</span> <span class="org-string">"FINISHED(f)"</span>)&#57344;&#57345;&#57345;
+                          (sequence <span class="org-string">"SOMEDAY(s)"</span> <span class="org-string">"MAYBE(m)"</span>) &#57344;&#57345;&#57345;
+                          (sequence  <span class="org-string">"WAITING(w@/!)"</span>)&#57344;&#57345;&#57345;
+                          ))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -431,7 +432,7 @@ Fast selection is good! But not on tags.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-fast-tag-selection-include-todo nil)
+<pre class="src src-emacs-lisp">(setq org-fast-tag-selection-include-todo nil)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -442,7 +443,7 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-log-into-drawer t)
+<pre class="src src-emacs-lisp">(setq org-log-into-drawer t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -453,21 +454,21 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-todo-keyword-faces
-      `(("TODO" :foreground "red" 
-                :background "red4" :weight bold :box (:line-width 2 :color "red3" :style released-button))
-        ("PROJECT" :foreground "cyan" :background "cyan4" :weight bold :box (:line-width 2 :color "cyan3" :style released-button))
-        ("HABIT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
-        ("NEXT" :foreground "DodgerBlue4" :background "DodgerBlue2" :weight bold :box (:line-width 2 :color "DodgerBlue2" :style released-button))
-        ("STARTED" :foreground "blue" :background "blue4" :weight bold :box (:line-width 2 :color "blue3" :style released-button))
-        ("DONE" :foreground "chartreuse" 
-                :background "chartreuse4" :weight bold :box (:line-width 2 :color "chartreuse3" :style released-button))
-        ("FINISHED" :foreground "SeaGreen1" 
-                :background "SeaGreen4" :weight bold :box (:line-width 2 :color "SeaGreen3" :style released-button))
-        ("WAITING" :foreground "orange" 
-                   :background "orange4" :weight bold :box (:line-width 2 :color "orange3" :style released-button))
-        ("SOMEDAY" :foreground "purple1"
-                   :background "purple4" :weight bold :box (:line-width 2 :color "purple3" :style released-button))))
+<pre class="src src-emacs-lisp">(setq org-todo-keyword-faces&#57344;&#57345;&#57345;
+      `((<span class="org-string">"TODO"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"red"</span> &#57344;&#57345;&#57345;
+                <span class="org-builtin">:background</span> <span class="org-string">"red4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"red3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"PROJECT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"cyan"</span> <span class="org-builtin">:background</span> <span class="org-string">"cyan4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"cyan3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"HABIT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"DodgerBlue4"</span> <span class="org-builtin">:background</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"NEXT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"DodgerBlue4"</span> <span class="org-builtin">:background</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"STARTED"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"blue"</span> <span class="org-builtin">:background</span> <span class="org-string">"blue4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"blue3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"DONE"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"chartreuse"</span> &#57344;&#57345;&#57345;
+                <span class="org-builtin">:background</span> <span class="org-string">"chartreuse4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"chartreuse3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"FINISHED"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"SeaGreen1"</span> &#57344;&#57345;&#57345;
+                <span class="org-builtin">:background</span> <span class="org-string">"SeaGreen4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"SeaGreen3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"WAITING"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"orange"</span> &#57344;&#57345;&#57345;
+                   <span class="org-builtin">:background</span> <span class="org-string">"orange4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"orange3"</span> <span class="org-builtin">:style</span> released-button))&#57344;&#57345;
+        (<span class="org-string">"SOMEDAY"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"purple1"</span>&#57344;&#57345;&#57345;
+                   <span class="org-builtin">:background</span> <span class="org-string">"purple4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"purple3"</span> <span class="org-builtin">:style</span> released-button))))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -477,14 +478,14 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org/todo-to-next ()
-  "sets the todo state of the current headline to next."
-  (interactive)
-  (org-todo "NEXT")
-  (org-set-tags))
-
-(eval-after-load 'org
- '(define-key org-mode-map (kbd "C-c n") 'emagician-org/todo-to-next))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/todo-to-next</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"sets the todo state of the current headline to next."</span>&#57344;&#57345;&#57345;
+  (interactive)&#57344;&#57345;&#57345;
+  (org-todo <span class="org-string">"NEXT"</span>)&#57344;&#57345;&#57345;
+  (org-set-tags))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(eval-after-load 'org&#57344;&#57345;&#57345;
+ '(define-key org-mode-map (kbd <span class="org-string">"C-c n"</span>) 'emagician-org/todo-to-next))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -495,21 +496,21 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org/go ()
-  "Launches the task at point, and starts a pomodoro if required"
-  (interactive)
-  (if (org-entry-is-todo-p)
-      (progn
-        (org-todo "STARTED")
-        (if (not (org-pomodoro-active-p))
-            (org-pomodoro-start)
-          (progn
-            (when (org-clocking-p)
-              (org-clock-out nil t))
-            (org-pomodoro-kill))))
-    (warn "Not on a TODO task")))
-
-(eval-after-load 'org '(define-key org-mode-map (kbd "C-c g") 'emagician-org/go))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/go</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Launches the task at point, and starts a pomodoro if required"</span>&#57344;&#57345;&#57345;
+  (interactive)&#57344;&#57345;&#57345;
+  (<span class="org-keyword">if</span> (org-entry-is-todo-p)&#57344;&#57345;&#57345;
+      (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
+        (org-todo <span class="org-string">"STARTED"</span>)&#57344;&#57345;&#57345;
+        (<span class="org-keyword">if</span> (not (org-pomodoro-active-p))&#57344;&#57345;&#57345;
+            (org-pomodoro-start)&#57344;&#57345;&#57345;
+          (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
+            (<span class="org-keyword">when</span> (org-clocking-p)&#57344;&#57345;&#57345;
+              (org-clock-out nil t))&#57344;&#57345;&#57345;
+            (org-pomodoro-kill))))&#57344;&#57345;&#57345;
+    (<span class="org-warning">warn</span> <span class="org-string">"Not on a TODO task"</span>)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(eval-after-load 'org '(define-key org-mode-map (kbd <span class="org-string">"C-c g"</span>) 'emagician-org/go))&#57345;
 </pre>
 </div>
 </div>
@@ -528,23 +529,23 @@ So list em all!
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'dash)
-(defun emagician/get-tag-counts ()
-  "Thanks to John Kitchin for this" 
-  (let ((all-tags '()))
-    (org-map-entries
-     (lambda ()
-       (let ((tag-string (car (last (org-heading-components)))))
-         (when tag-string   
-           (setq all-tags
-                 (append all-tags (split-string tag-string ":" t))))))
-     t
-     'agenda)
-
-
-    ;; now get counts
-    (loop for tag in (-uniq all-tags) 
-          collect (cons tag (cl-count tag all-tags :test 'string=)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">dash</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/get-tag-counts</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Thanks to John Kitchin for this"</span> &#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((all-tags '()))&#57344;&#57345;&#57345;
+    (org-map-entries&#57344;&#57345;&#57345;
+     (<span class="org-keyword">lambda</span> ()&#57344;&#57345;&#57345;
+       (<span class="org-keyword">let</span> ((tag-string (car (last (org-heading-components)))))&#57344;&#57345;&#57345;
+         (<span class="org-keyword">when</span> tag-string   &#57344;&#57345;&#57345;
+           (setq all-tags&#57344;&#57345;&#57345;
+                 (append all-tags (split-string tag-string <span class="org-string">":"</span> t))))))&#57344;&#57345;&#57345;
+     t&#57344;&#57345;&#57345;
+     'agenda)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">now get counts</span>&#57344;&#57345;&#57345;
+    (loop for tag in (-uniq all-tags) &#57344;&#57345;&#57345;
+          collect (cons tag (cl-count tag all-tags <span class="org-builtin">:test</span> 'string=)))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -555,8 +556,8 @@ So list em all!
 <div class="outline-text-3" id="text-7-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-tags-column -100)
-(setq org-agenda-tags-column -100)
+<pre class="src src-emacs-lisp">(setq org-tags-column -100)&#57344;&#57345;&#57345;
+(setq org-agenda-tags-column -100)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -567,7 +568,7 @@ So list em all!
 <div class="outline-text-3" id="text-7-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/get-tag-counts)
+<pre class="src src-emacs-lisp">(emagician/get-tag-counts)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -578,7 +579,7 @@ So list em all!
 <div class="outline-text-3" id="text-7-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-use-fast-tag-selection t)
+<pre class="src src-emacs-lisp">(setq org-use-fast-tag-selection t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -589,33 +590,33 @@ So list em all!
 <div class="outline-text-3" id="text-7-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-tag-alist '((:startgroup   . nil) 
-                      ("code"        . ?c)
-                      ("design"      . ?d)
-                      ("emacs"       . ?e)
-                      ("gtd"         . ?g)                          
-                      (:endgroup     . nil)
-
-                      (:startgroup  .   nil)                         
-                      ("decide"     .   ?a)
-                      ("phone"      .   ?p)
-                      ("read"       .   ?r)
-                      ("research"   .   ?u)
-                      ("talk"       .   ?t)
-                      ("vm"         .   ?v)
-                      ("web"        .   ?w)
-                      ("write"      .   ?x)
-                      (:endgroup    .   nil)
-
-                      ("backburner" .   ?b)
-                      ("braindead"  .   ?z)
-
-                      (:newline     .   nil)                    
-                      ("chaman"     .   ?C)
-                      ("charles"    .   ?H)
-                      ("paul"       .   ?P)
-                      ("sohan"      .   ?S) 
-                      ))
+<pre class="src src-emacs-lisp">(setq org-tag-alist '((<span class="org-builtin">:startgroup</span>   . nil) &#57344;&#57345;&#57345;
+                      (<span class="org-string">"code"</span>        . ?c)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"design"</span>      . ?d)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"emacs"</span>       . ?e)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"gtd"</span>         . ?g)                          &#57344;&#57345;&#57345;
+                      (<span class="org-builtin">:endgroup</span>     . nil)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+                      (<span class="org-builtin">:startgroup</span>  .   nil)                         &#57344;&#57345;&#57345;
+                      (<span class="org-string">"decide"</span>     .   ?a)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"phone"</span>      .   ?p)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"read"</span>       .   ?r)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"research"</span>   .   ?u)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"talk"</span>       .   ?t)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"vm"</span>         .   ?v)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"web"</span>        .   ?w)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"write"</span>      .   ?x)&#57344;&#57345;&#57345;
+                      (<span class="org-builtin">:endgroup</span>    .   nil)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+                      (<span class="org-string">"backburner"</span> .   ?b)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"braindead"</span>  .   ?z)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+                      (<span class="org-builtin">:newline</span>     .   nil)                    &#57344;&#57345;&#57345;
+                      (<span class="org-string">"chaman"</span>     .   ?C)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"charles"</span>    .   ?H)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"paul"</span>       .   ?P)&#57344;&#57345;&#57345;
+                      (<span class="org-string">"sohan"</span>      .   ?S) &#57344;&#57345;&#57345;
+                      ))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -635,10 +636,10 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-category-icon-alist 
-      `(("Work"  ,(list (propertize "💼")))
-        ("Music" ,(list (propertize "🎶" )))
-        ("Home"  ,(list (propertize"🏡" )))))
+<pre class="src src-emacs-lisp">(setq org-agenda-category-icon-alist &#57344;&#57345;&#57345;
+      `((<span class="org-string">"Work"</span>  ,(list (propertize <span class="org-string">"&#128188;"</span>)))&#57344;&#57345;&#57345;
+        (<span class="org-string">"Music"</span> ,(list (propertize <span class="org-string">"&#127926;"</span> )))&#57344;&#57345;&#57345;
+        (<span class="org-string">"Home"</span>  ,(list (propertize<span class="org-string">"&#127969;"</span> )))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -650,9 +651,9 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-stuck-projects '("TODO=\"PROJECT\""
-  ("NEXT")
-  nil ""))
+<pre class="src src-emacs-lisp">(setq org-stuck-projects '(<span class="org-string">"TODO=\"PROJECT\""</span>&#57344;&#57345;&#57345;
+  (<span class="org-string">"NEXT"</span>)&#57344;&#57345;&#57345;
+  nil <span class="org-string">""</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -663,21 +664,21 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'org-habit)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">org-habit</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-habit-graph-column 50)
+<pre class="src src-emacs-lisp">(setq org-habit-graph-column 50)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'org-todo-keywords '(sequence "HABIT(h)" "|" "DONE(d!)") t)
+<pre class="src src-emacs-lisp">(add-to-list 'org-todo-keywords '(sequence <span class="org-string">"HABIT(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d!)"</span>) t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -687,32 +688,32 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-3" id="text-10-1">
 <div class="org-src-container">
 
-<pre class="src src-org">`  ** HABIT Weekly
-`     SCHEDULED: &lt;2015-02-09 Mon 09:00 ++1w&gt;
-`     :PROPERTIES:
-`     :STYLE:    habit
-`     :LAST_REPEAT: [2015-02-02 Mon 16:39]
-`     :END:
-`     - [X] Get Clear
-`       - [X] Clean off desk
-`       - [X] Clean Out Bag
-`       - [X] Clean off Desktop [[file:~/Desktop/]]   (~20 files per iteration)
-`       - [X] Clean Downloads file:~/Downloads/   (~20 files per iteration)
-`       - [X] Review Last weeks email
-`       - [X] Liquid Planner Timesheet good to go
-`       - [X] Clean out [[file:GTD.org::*Inbo˘x][Inbox]]
-`       - [X] Archive all finished Tasks
-`     - [-] Get Current
-`        - [X] Review next months calendar
-`        - [X] Check My upcoming work in LP
-`        - [ ] Fix Any Stuck Projects
-`        - [ ] Review Project Agenda
-`        - [ ] Review Next Action Agenda
-`        - [ ] Review Waiting Agenda
-`     - [ ] Get Creative
-`        - [ ] Review someday/maybe
-`        - [ ] Do something creative and courageous
-`
+<pre class="src src-org">`  ** HABIT Weekly&#57344;&#57345;&#57345;
+`     <span class="org-org-special-keyword">SCHEDULED:</span> <span class="org-org-date">&lt;2015-02-09 Mon 09:00 ++1w&gt;</span>&#57344;&#57345;&#57345;
+`     :PROPERTIES:&#57344;&#57345;&#57345;
+`     :STYLE:    habit&#57344;&#57345;&#57345;
+`     :LAST_REPEAT: <span class="org-org-date">[2015-02-02 Mon 16:39]</span>&#57344;&#57345;&#57345;
+`     :END:&#57344;&#57345;&#57345;
+`     - [X] Get Clear&#57344;&#57345;&#57345;
+`       - [X] Clean off desk&#57344;&#57345;&#57345;
+`       - [X] Clean Out Bag&#57344;&#57345;&#57345;
+`       - [X] Clean off Desktop <span class="org-org-link"><a href="file:~/Desktop/">file:~/Desktop/</a></span>   (~20 files per iteration)&#57344;&#57345;&#57345;
+`       - [X] Clean Downloads <span class="org-org-link"><a href="file:~/Downloads/">file:~/Downloads/</a></span>   (~20 files per iteration)&#57344;&#57345;&#57345;
+`       - [X] Review Last weeks email&#57344;&#57345;&#57345;
+`       - [X] Liquid Planner Timesheet good to go&#57344;&#57345;&#57345;
+`       - [X] Clean out <span class="org-org-link"><a href="file:GTD.org::*Inbo&#728;x">Inbox</a></span>&#57344;&#57345;&#57345;
+`       - [X] Archive all finished Tasks&#57344;&#57345;&#57345;
+`     - [-] Get Current&#57344;&#57345;&#57345;
+`        - [X] Review next months calendar&#57344;&#57345;&#57345;
+`        - [X] Check My upcoming work in LP&#57344;&#57345;&#57345;
+`        - [ ] Fix Any Stuck Projects&#57344;&#57345;&#57345;
+`        - [ ] Review Project Agenda&#57344;&#57345;&#57345;
+`        - [ ] Review Next Action Agenda&#57344;&#57345;&#57345;
+`        - [ ] Review Waiting Agenda&#57344;&#57345;&#57345;
+`     - [ ] Get Creative&#57344;&#57345;&#57345;
+`        - [ ] Review someday/maybe&#57344;&#57345;&#57345;
+`        - [ ] Do something creative and courageous&#57344;&#57345;&#57345;
+`&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -726,9 +727,9 @@ All agenda files are valid for targeting
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-refile-targets '((org-agenda-files :maxlevel . 1)))
-(setq org-refile-use-outline-path 'file)
-(setq org-outline-path-complete-in-steps nil)
+<pre class="src src-emacs-lisp">(setq org-refile-targets '((org-agenda-files <span class="org-builtin">:maxlevel</span> . 1)))&#57344;&#57345;&#57345;
+(setq org-refile-use-outline-path 'file)&#57344;&#57345;&#57345;
+(setq org-outline-path-complete-in-steps nil)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -742,16 +743,16 @@ All agenda files are valid for targeting
 <div class="outline-text-3" id="text-12-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-return-follows-link t)
+<pre class="src src-emacs-lisp">(setq org-return-follows-link t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key global-map "\C-cl" 'org-store-link)
-
-(setq org-return-follows-link t)
+<pre class="src src-emacs-lisp">(define-key global-map <span class="org-string">"\C-cl"</span> 'org-store-link)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(setq org-return-follows-link t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -762,7 +763,7 @@ All agenda files are valid for targeting
 <div class="outline-text-3" id="text-12-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'org-info)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">org-info</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -773,20 +774,20 @@ All agenda files are valid for targeting
 <div class="outline-text-2" id="text-13">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key global-map (kbd "C-c c") 'org-capture)
-(define-key global-map (kbd "C-c i") 'emagician-org-capture-inbox)
+<pre class="src src-emacs-lisp">(define-key global-map (kbd <span class="org-string">"C-c c"</span>) 'org-capture)&#57344;&#57345;&#57345;
+(define-key global-map (kbd <span class="org-string">"C-c i"</span>) 'emagician-org-capture-inbox)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org-capture-inbox ()
-  (interactive)
-  (org-capture nil "i"))
-
-(setq org-capture-templates
-  '(("i" "Inbox" entry (file+headline "~/org/GTD.org" "Inbox")
-         "** TODO %?\n  %i\n")))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org-capture-inbox</span> ()&#57344;&#57345;&#57345;
+  (interactive)&#57344;&#57345;&#57345;
+  (org-capture nil <span class="org-string">"i"</span>))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(setq org-capture-templates&#57344;&#57345;&#57345;
+  '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry (file+headline <span class="org-string">"~/org/GTD.org"</span> <span class="org-string">"Inbox"</span>)&#57344;&#57345;&#57345;
+         <span class="org-string">"** TODO %?\n  %i\n"</span>)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -805,9 +806,9 @@ org-pomodoro is pretty simple, so lets start with that.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package org-pomodoro
-  :bind
-  ("C-c p" . org-pomodoro))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">org-pomodoro</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:bind</span>&#57344;&#57345;&#57345;
+  (<span class="org-string">"C-c p"</span> . org-pomodoro))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -817,7 +818,7 @@ Fancy it up a little
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-pomodoro-format "🍅~%s")
+<pre class="src src-emacs-lisp">(setq org-pomodoro-format <span class="org-string">"&#127813;~%s"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -831,7 +832,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq diary-file "~/.emacs.d/diary")
+<pre class="src src-emacs-lisp">(setq diary-file <span class="org-string">"~/.emacs.d/diary"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -844,8 +845,8 @@ Fancy it up a little
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq calendar-longitude -114.0715046)
-(setq calendar-latitude 51.0368334)
+<pre class="src src-emacs-lisp">(setq calendar-longitude -114.0715046)&#57344;&#57345;&#57345;
+(setq calendar-latitude 51.0368334)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -858,7 +859,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-include-diary t)
+<pre class="src src-emacs-lisp">(setq org-agenda-include-diary t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -869,8 +870,8 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(appt-activate 1)
-(org-agenda-to-appt)
+<pre class="src src-emacs-lisp">(appt-activate 1)&#57344;&#57345;&#57345;
+(org-agenda-to-appt)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -882,8 +883,8 @@ Fancy it up a little
 <div class="outline-text-2" id="text-16">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-attach-allow-inheritance t)
-(setq org-attach-store-link-p t)
+<pre class="src src-emacs-lisp">(setq org-attach-allow-inheritance t)&#57344;&#57345;&#57345;
+(setq org-attach-store-link-p t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -900,7 +901,7 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-dim-blocked-tasks t)
+<pre class="src src-emacs-lisp">(setq org-agenda-dim-blocked-tasks t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -912,7 +913,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-block-separator ?\═)
+<pre class="src src-emacs-lisp">(setq org-agenda-block-separator ?\&#9552;)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -923,27 +924,27 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (defun emagician-agenda/insert-title (title)
-    "show a centered title"
-    (setq buffer-read-only nil)
-    (let ((centering-str  (make-string (/ (- (window-body-width)
-                                             (length title))
-                                          2)
-                                       ?\ )))
-      (insert (propertize (concat centering-str title centering-str "\n")
-                          'face
-                         'org-agenda-structure))))
-
-(defun emagician-agenda/insert-separator ()
-  (insert (make-string (window-body-width) org-agenda-block-separator) "\n"))
-
-  (defun emagician-agenda/insert-headline (&amp;rest args)
-    "Daily wisdom, Cool title, etc."
-    (setq buffer-read-only nil)
-    (emagician-agenda/insert-separator)
-    (emagician-agenda/insert-title "-|-+-|-")
-    (emagician-agenda/insert-separator)
-    (insert (concat (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines") "\n")))
+<pre class="src src-emacs-lisp">  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-title</span> (title)&#57344;&#57345;&#57345;
+    <span class="org-doc">"show a centered title"</span>&#57344;&#57345;&#57345;
+    (setq buffer-read-only nil)&#57344;&#57345;&#57345;
+    (<span class="org-keyword">let</span> ((centering-str  (make-string (/ (- (window-body-width)&#57344;&#57345;&#57345;
+                                             (length title))&#57344;&#57345;&#57345;
+                                          2)&#57344;&#57345;&#57345;
+                                       ?\ )))&#57344;&#57345;&#57345;
+      (insert (propertize (concat centering-str title centering-str <span class="org-string">"\n"</span>)&#57344;&#57345;&#57345;
+                          'face&#57344;&#57345;&#57345;
+                         'org-agenda-structure))))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-separator</span> ()&#57344;&#57345;&#57345;
+  (insert (make-string (window-body-width) org-agenda-block-separator) <span class="org-string">"\n"</span>))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-headline</span> (<span class="org-type">&amp;rest</span> args)&#57344;&#57345;&#57345;
+    <span class="org-doc">"Daily wisdom, Cool title, etc."</span>&#57344;&#57345;&#57345;
+    (setq buffer-read-only nil)&#57344;&#57345;&#57345;
+    (emagician-agenda/insert-separator)&#57344;&#57345;&#57345;
+    (emagician-agenda/insert-title <span class="org-string">"-|-+-|-"</span>)&#57344;&#57345;&#57345;
+    (emagician-agenda/insert-separator)&#57344;&#57345;&#57345;
+    (insert (concat (emagician/cookie-from-file <span class="org-string">"assets/collected-works-ov-chaos.lines"</span>) <span class="org-string">"\n"</span>)))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -957,9 +958,9 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-agenda/get-goals (&amp;rest args)
-  "Show top level goal headlines"
-  '(tags "goal" ((org-agenda-overriding-header "Goals")) "~/org/Goals.org"))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-goals</span> (<span class="org-type">&amp;rest</span> args)&#57344;&#57345;&#57345;
+  <span class="org-doc">"Show top level goal headlines"</span>&#57344;&#57345;&#57345;
+  '(tags <span class="org-string">"goal"</span> ((org-agenda-overriding-header <span class="org-string">"Goals"</span>)) <span class="org-string">"~/org/Goals.org"</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -972,15 +973,15 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-6-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'lunar)
-
-(setq lunar-phase-names 
-     '("🌚 New Moon 🌚" "🌛 First Quarter🌛" "🌝 Full Moon 🌝" "🌜Last Quarter 🌜"))
-
-(defun emagician-agenda/get-current-lunar-phase ()
-  "Get the current lunar phase.  For some reason it is out of sync by a day, so... yea"
-  (lunar-phase-name (mod (+ 1 (lunar-index (calendar-current-date)))
-                                           4)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">lunar</span>)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(setq lunar-phase-names &#57344;&#57345;&#57345;
+     '(<span class="org-string">"&#127770; New Moon &#127770;"</span> <span class="org-string">"&#127771; First Quarter&#127771;"</span> <span class="org-string">"&#127773; Full Moon &#127773;"</span> <span class="org-string">"&#127772;Last Quarter &#127772;"</span>))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-current-lunar-phase</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Get the current lunar phase.  For some reason it is out of sync by a day, so... yea"</span>&#57344;&#57345;
+  (lunar-phase-name (mod (+ 1 (lunar-index (calendar-current-date)))&#57344;&#57345;&#57345;
+                                           4)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -996,11 +997,11 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-6-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-agenda/insert-cycle (&amp;rest args)
-  (let ((buffer-read-only nil))
-    (insert (emagician-agenda/get-current-lunar-phase))
-        (insert "\n")
-    (emagician-agenda/insert-separator)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-cycle</span> (<span class="org-type">&amp;rest</span> args)&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((buffer-read-only nil))&#57344;&#57345;&#57345;
+    (insert (emagician-agenda/get-current-lunar-phase))&#57344;&#57345;&#57345;
+        (insert <span class="org-string">"\n"</span>)&#57344;&#57345;&#57345;
+    (emagician-agenda/insert-separator)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1012,7 +1013,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-7">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-window-setup 'other-frame)
+<pre class="src src-emacs-lisp">(setq org-agenda-window-setup 'other-frame)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1024,7 +1025,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-8">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defvar emagician/org-context "Work")
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/org-context</span> <span class="org-string">"Work"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1043,13 +1044,13 @@ Best is the enemy of the good.  Make this not suck later.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-agenda/get-tag (tag title &amp;optional include-dates) 
-  (if (not include-dates)
-    `(todo ,tag 
-              ((org-agenda-overriding-header ,(concat title "\n"))
-               (org-agenda-todo-ignore-with-date t)))
-     `(todo ,tag 
-              ((org-agenda-overriding-header ,(concat title "\n"))))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-tag</span> (tag title <span class="org-type">&amp;optional</span> include-dates) &#57344;&#57345;&#57345;
+  (<span class="org-keyword">if</span> (not include-dates)&#57344;&#57345;&#57345;
+    `(todo ,tag &#57344;&#57345;&#57345;
+              ((org-agenda-overriding-header ,(concat title <span class="org-string">"\n"</span>))&#57344;&#57345;&#57345;
+               (org-agenda-todo-ignore-with-date t)))&#57344;&#57345;&#57345;
+     `(todo ,tag &#57344;&#57345;&#57345;
+              ((org-agenda-overriding-header ,(concat title <span class="org-string">"\n"</span>))))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -1070,11 +1071,11 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-3" id="text-17-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-agenda/get-stuck-projects ()
-  "return a string showing all Stuck projects"
-  '(tags "TODO=\"PROJECT\""
-              ((org-agenda-overriding-header " 📖 Stuck Projects")
-               (org-agenda-skip-function '(org-agenda-skip-subtree-if 'regexp "NEXT")))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-stuck-projects</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"return a string showing all Stuck projects"</span>&#57344;&#57345;&#57345;
+  '(tags <span class="org-string">"TODO=\"PROJECT\""</span>&#57344;&#57345;&#57345;
+              ((org-agenda-overriding-header <span class="org-string">" &#128214; Stuck Projects"</span>)&#57344;&#57345;&#57345;
+               (org-agenda-skip-function '(org-agenda-skip-subtree-if 'regexp <span class="org-string">"NEXT"</span>)))))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -1088,37 +1089,37 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-11-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">      (setq org-agenda-custom-commands
-            `((" " "Agenda"
-               ((emagician-agenda/insert-headline "")
-                ,(emagician-agenda/get-goals "")
-                (emagician-agenda/insert-cycle "") 
-                (agenda "" ((org-agenda-span 1) (org-agenda-show-log nil) ))
-                ,(emagician-agenda/get-tag "STARTED" "💥 Started" t)
-                ,(emagician-agenda/get-tag "WAITING" "💬 Waiting" t)
-                ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
-                ,(emagician-agenda/get-stuck-projects))
-               ((org-agenda-category-filter-preset '("-Home" "-Music"))))
-              ("W" "Weekly Review"
-               ((emagician-agenda/insert-headline " Weekly Review ")
-                (agenda "" ((org-agenda-span 7)
-                            (org-agenda-log-mode-items '(closed clock state))
-                            (org-agenda-start-day "-7d")
-                            (org-agenda-entry-type '(:timestamp :sexp :deadline :sheduled))
-                            (org-agenda-show-log t)))
-                (tags-todo "inbox")
-                (agenda "" ((org-agenda-span 31)))
-                ,(emagician-agenda/get-stuck-projects)
-                ,(emagician-agenda/get-tag "PROJECT" "📖 Projects")
-                ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
-                ,(emagician-agenda/get-tag "NEXT" "❇ Next Actions")
-                ,(emagician-agenda/get-tag "TODO" "🌱 TODO")
-                ,(emagician-agenda/get-tag "WAITING" "💬 Waiting")
-                ,(emagician-agenda/get-tag "FINISHED" "📘 Finished  ($ to archive)")
-                ,(emagician-agenda/get-tag "SOMEDAY" "🌞 Someday")
-                ,(emagician-agenda/get-tag "MAYBE" "🌠 Maybe")
-
-))))
+<pre class="src src-emacs-lisp">      (setq org-agenda-custom-commands&#57344;&#57345;&#57345;
+            `((<span class="org-string">" "</span> <span class="org-string">"Agenda"</span>&#57344;&#57345;&#57345;
+               ((emagician-agenda/insert-headline <span class="org-string">""</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-goals <span class="org-string">""</span>)&#57344;&#57345;&#57345;
+                (emagician-agenda/insert-cycle <span class="org-string">""</span>) &#57344;&#57345;&#57345;
+                (agenda <span class="org-string">""</span> ((org-agenda-span 1) (org-agenda-show-log nil) ))&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"STARTED"</span> <span class="org-string">"&#128165; Started"</span> t)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"WAITING"</span> <span class="org-string">"&#128172; Waiting"</span> t)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"NEXT"</span> <span class="org-string">"&#10055; Next Actions"</span> t)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-stuck-projects))&#57344;&#57345;&#57345;
+               ((org-agenda-category-filter-preset '(<span class="org-string">"-Home"</span> <span class="org-string">"-Music"</span>))))&#57344;&#57345;&#57345;
+              (<span class="org-string">"W"</span> <span class="org-string">"Weekly Review"</span>&#57344;&#57345;&#57345;
+               ((emagician-agenda/insert-headline <span class="org-string">" Weekly Review "</span>)&#57344;&#57345;&#57345;
+                (agenda <span class="org-string">""</span> ((org-agenda-span 7)&#57344;&#57345;&#57345;
+                            (org-agenda-log-mode-items '(closed clock state))&#57344;&#57345;&#57345;
+                            (org-agenda-start-day <span class="org-string">"-7d"</span>)&#57344;&#57345;&#57345;
+                            (org-agenda-entry-type '(<span class="org-builtin">:timestamp</span> <span class="org-builtin">:sexp</span> <span class="org-builtin">:deadline</span> <span class="org-builtin">:sheduled</span>))&#57344;&#57345;
+                            (org-agenda-show-log t)))&#57344;&#57345;&#57345;
+                (tags-todo <span class="org-string">"inbox"</span>)&#57344;&#57345;&#57345;
+                (agenda <span class="org-string">""</span> ((org-agenda-span 31)))&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-stuck-projects)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"PROJECT"</span> <span class="org-string">"&#128214; Projects"</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"FINISHED"</span> <span class="org-string">"&#128216; Finished  ($ to archive)"</span>)&#57344;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"NEXT"</span> <span class="org-string">"&#10055; Next Actions"</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"TODO"</span> <span class="org-string">"&#127793; TODO"</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"WAITING"</span> <span class="org-string">"&#128172; Waiting"</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"FINISHED"</span> <span class="org-string">"&#128216; Finished  ($ to archive)"</span>)&#57344;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"SOMEDAY"</span> <span class="org-string">"&#127774; Someday"</span>)&#57344;&#57345;&#57345;
+                ,(emagician-agenda/get-tag <span class="org-string">"MAYBE"</span> <span class="org-string">"&#127776; Maybe"</span>)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1146,10 +1147,10 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-12-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org/daily-agenda () 
-  "Show the daily agenda"
-  (interactive)
-  (org-agenda nil " "))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/daily-agenda</span> () &#57344;&#57345;&#57345;
+  <span class="org-doc">"Show the daily agenda"</span>&#57344;&#57345;&#57345;
+  (interactive)&#57344;&#57345;&#57345;
+  (org-agenda nil <span class="org-string">" "</span>))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1160,8 +1161,8 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-12-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd "C-c a") 'emagician-org/daily-agenda)
-(global-set-key (kbd "C-c A") 'org-agenda)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-c a"</span>) 'emagician-org/daily-agenda)&#57344;&#57345;&#57345;
+(global-set-key (kbd <span class="org-string">"C-c A"</span>) 'org-agenda)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1176,7 +1177,7 @@ Swap to other frame once loaded.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook #'(lambda () (emagician-org/daily-agenda)(other-frame 1)))
+<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook #'(<span class="org-keyword">lambda</span> () (emagician-org/daily-agenda)(other-frame 1)))&#57344;&#57345;
 </pre>
 </div>
 </div>
@@ -1188,20 +1189,27 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-18">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'ox-beamer)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ox-beamer</span>)&#57344;&#57345;&#57345;
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">htmlize</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-sec-19" class="outline-2">
 <h2 id="sec-19"><span class="section-number-2">19</span> Working with Code in Babel mode</h2>
 <div class="outline-text-2" id="text-19">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-src-tab-acts-natively t)
-(setq org-src-fontify-natively t)
-(setq org-edit-src-content-indentation 0)
+<pre class="src src-emacs-lisp">(setq org-src-tab-acts-natively t)&#57344;&#57345;&#57345;
+(setq org-src-fontify-natively t)&#57344;&#57345;&#57345;
+(setq org-edit-src-content-indentation 0)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1211,9 +1219,9 @@ Swap to other frame once loaded.
 <div class="outline-text-3" id="text-19-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(require 'ob-sh)
-(require 'ob-sql)
-(require 'ob-org)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ob-sh</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">require</span> '<span class="org-constant">ob-sql</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">require</span> '<span class="org-constant">ob-org</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1225,21 +1233,21 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-20">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician-org/save-commit-and-push ()
-  "Do the thing automagickally"
-  (org-save-all-org-buffers)
-  (with-helm-default-directory "~/org"
-      (async-start
-       (lambda ()
-         (message "Commiting to git")
-         (shell-command "git add *" "*org autocommit*" "*org autocommit*"))
-       (lambda (result)
-         (async-start
-          (lambda ()
-            (shell-command "git commit -m\"autopmagick commit\"" "*org autocommit*" "*org autocommit*"))
-          'ignore)))))
-
-(run-at-time t 600 'emagician-org/save-commit-and-push)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/save-commit-and-push</span> ()&#57344;&#57345;&#57345;
+  <span class="org-doc">"Do the thing automagickally"</span>&#57344;&#57345;&#57345;
+  (org-save-all-org-buffers)&#57344;&#57345;&#57345;
+  (<span class="org-keyword">with-helm-default-directory</span> <span class="org-string">"~/org"</span>&#57344;&#57345;&#57345;
+      (async-start&#57344;&#57345;&#57345;
+       (<span class="org-keyword">lambda</span> ()&#57344;&#57345;&#57345;
+         (message <span class="org-string">"Commiting to git"</span>)&#57344;&#57345;&#57345;
+         (shell-command <span class="org-string">"git add *"</span> <span class="org-string">"*org autocommit*"</span> <span class="org-string">"*org autocommit*"</span>))&#57344;&#57345;&#57345;
+       (<span class="org-keyword">lambda</span> (result)&#57344;&#57345;&#57345;
+         (async-start&#57344;&#57345;&#57345;
+          (<span class="org-keyword">lambda</span> ()&#57344;&#57345;&#57345;
+            (shell-command <span class="org-string">"git commit -m\"autopmagick commit\""</span> <span class="org-string">"*org autocommit*"</span> <span class="org-string">"*org autocommit*"</span>))&#57344;&#57345;
+          'ignore)))))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(run-at-time t 600 'emagician-org/save-commit-and-push)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1251,7 +1259,7 @@ Swap to other frame once loaded.
 <div class="outline-text-4" id="text-20-0-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-mobile-directory "~/Dropbox/org-mobile")
+<pre class="src src-emacs-lisp">(setq org-mobile-directory <span class="org-string">"~/Dropbox/org-mobile"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1262,9 +1270,9 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-21">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun turn-on-org-show-all-inline-images ()
-  (org-display-inline-images t t))
-(add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">turn-on-org-show-all-inline-images</span> ()&#57344;&#57345;&#57345;
+  (org-display-inline-images t t))&#57344;&#57345;&#57345;
+(add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -1272,7 +1280,7 @@ Swap to other frame once loaded.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

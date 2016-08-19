@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Thee Lamp</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -212,13 +213,13 @@ Note the Final <code>%%</code>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/cookie-from-file (file) 
-  "return a piece of wisdom from the collected works of chaos"
-  (let ((cookie-delimiter "\n%%\n")
-        (file (expand-file-name file emagician/dir)))
-    (cookie file
-            "Loading Chaotic Wisdom..."
-            "Loaded!")))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/cookie-from-file</span> (file) &#57344;&#57345;&#57345;
+  <span class="org-doc">"return a piece of wisdom from the collected works of chaos"</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((cookie-delimiter <span class="org-string">"\n%%\n"</span>)&#57344;&#57345;&#57345;
+        (file (expand-file-name file emagician/dir)))&#57344;&#57345;&#57345;
+    (cookie file&#57344;&#57345;&#57345;
+            <span class="org-string">"Loading Chaotic Wisdom..."</span>&#57344;&#57345;&#57345;
+            <span class="org-string">"Loaded!"</span>)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -678,7 +679,7 @@ Our enemies are Flat.
 %%
 Grey Book Texts - III
 Our stress on SELF discipline is important, it links the internal methods of ritual to our approval and suggestion of other forms of physical discipline to complement the mental/sexual ones. Hence you will often find that Initiates of the Temple will be engaged in such outside activities as Marksmanship, Martial Arts, Swimming and so on as an extension of the theory of maintaining and improving one's focus and abilities.
-The point is not the skill in itself, though we appreciate the practical nature, in a society such as ours, of an Ability to defend oneself and be fit, but the APPLICATION, the discipl1ne itself. So one may be poor in terms of results, but excellent in terms of your genuine application to a skill that requires thought, co-ordination and a degree of dedication. A synthesis of physical action, thought, reflex and an analysis of both yourself and a target (real or metaphysical.
+The point is not the skill in itself, though we appreciate the practical nature, in a society such as ours, of an Ability to defend oneself and be fit, but the APPLICATION, the discipl1ne itself. So one may be poor in terms of results, but excellent in terms of your genuine application to a skill that requires thought, co-ordination and a degree of dedication. A synthesis of physical action, thought, reflex and an analysis of both yourself and a target (real or metaphysical).
 %%
 I must not fear.
 Fear is the mind-killer.
@@ -810,8 +811,24 @@ Know your HTTP Well!  M-x http-foo and media-types
 <p>
 This was originally defined in this file, but it got moved to it's own repo.
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(load <span class="org-string">"fix-muscle-memory/fix-muscle-memory.el"</span>)&#57344;&#57345;&#57345;
+(fix-muscle-memory-load-problem-words 'foo&#57344;&#57345;&#57345;
+                                      '((<span class="org-string">"teh"</span> . <span class="org-string">"the"</span>)&#57344;&#57345;&#57345;
+                                        (<span class="org-string">"comptuer"</span> . <span class="org-string">"computer"</span>)&#57344;&#57345;&#57345;
+                                        (<span class="org-string">"destory"</span> . <span class="org-string">"destroy"</span>)&#57344;&#57345;&#57345;
+                                        (<span class="org-string">"occured"</span> . <span class="org-string">"occurred"</span>)))&#57344;&#57345;&#57345;
+(add-hook 'text-mode-hook 'abbrev-mode)&#57344;&#57345;&#57345;
+(add-hook 'prog-mode-hook 'abbrev-mode)&#57344;&#57345;&#57345;
+(diminish 'abbrev-mode)&#57344;&#57345;&#57345;
+</pre>
 </div>
 </div>
+</div>
+
+
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> Sierpinski ..</h2>
 <div class="outline-text-2" id="text-3">
@@ -821,16 +838,16 @@ This was originally defined in this file, but it got moved to it's own repo.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun sierpinski (s)
-  (pop-to-buffer (get-buffer-create "*sierpinski*"))
-  (fundamental-mode) (erase-buffer)
-  (labels ((fill-p (x y)
-                   (cond ((or (zerop x) (zerop y)) "0")
-                         ((and (= 1 (mod x 3)) (= 1 (mod y 3))) "1")
-                         (t (fill-p (/ x 3) (/ y 3))))))
-    (insert (format "P1\n%d %d\n" s s))
-    (dotimes (y s) (dotimes (x s) (insert (fill-p x y) " "))))
-  (image-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">sierpinski</span> (s)&#57344;&#57345;&#57345;
+  (pop-to-buffer (get-buffer-create <span class="org-string">"*sierpinski*"</span>))&#57344;&#57345;&#57345;
+  (fundamental-mode) (erase-buffer)&#57344;&#57345;&#57345;
+  (labels ((fill-p (x y)&#57344;&#57345;&#57345;
+                   (<span class="org-keyword">cond</span> ((or (zerop x) (zerop y)) <span class="org-string">"0"</span>)&#57344;&#57345;&#57345;
+                         ((and (= 1 (mod x 3)) (= 1 (mod y 3))) <span class="org-string">"1"</span>)&#57344;&#57345;&#57345;
+                         (t (fill-p (/ x 3) (/ y 3))))))&#57344;&#57345;&#57345;
+    (insert (format <span class="org-string">"P1\n%d %d\n"</span> s s))&#57344;&#57345;&#57345;
+    (<span class="org-keyword">dotimes</span> (y s) (<span class="org-keyword">dotimes</span> (x s) (insert (fill-p x y) <span class="org-string">" "</span>))))&#57344;&#57345;&#57345;
+  (image-mode))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -838,7 +855,7 @@ This was originally defined in this file, but it got moved to it's own repo.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

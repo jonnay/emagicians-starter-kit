@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>General Programming helpers</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -201,7 +202,7 @@ No Physical tabs.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default indent-tabs-mode nil)
+<pre class="src src-emacs-lisp">(setq-default indent-tabs-mode nil)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -212,7 +213,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/minor-in-major-mode prog-mode flyspell-prog-mode)
+<pre class="src src-emacs-lisp">(emagician/minor-in-major-mode flyspell-prog-mode prog-mode)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -223,10 +224,10 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defadvice yank (after indent-region activate)
-  "indent the region after a yank if we're in a programming mode."
-  (if (derived-mode-p 'prog-mode)
-      (indent-region (region-beginning) (region-end) nil)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span> <span class="org-function-name">yank</span> (after indent-region activate)&#57344;&#57345;&#57345;
+  <span class="org-doc">"indent the region after a yank if we're in a programming mode."</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">if</span> (derived-mode-p 'prog-mode)&#57344;&#57345;&#57345;
+      (indent-region (region-beginning) (region-end) nil)))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -236,7 +237,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'yas-minor-mode-on)
+<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'yas-minor-mode-on)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -247,83 +248,81 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package smartparens
-  :defer t
-  :diminish "⒮"
-  :bind (("M-9" . sp-backward-sexp)
-         ("M-0" . sp-forward-sexp))
-  :init
-  (progn
-    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
-    ;; turn on showing the match for clojure and elisp
-    (add-hook 'clojure-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'java-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'c-mode-hook #'turn-on-show-smartparens-mode))
-  :config
-  (progn
-    (add-to-list 'sp-sexp-suffix '(json-mode regex ""))
-    (add-to-list 'sp-sexp-suffix '(es-mode regex ""))
-
-    (require 'smartparens-config)
-    (add-hook 'sh-mode-hook
-              (lambda ()
-                ;; Remove when https://github.com/Fuco1/smartparens/issues/257
-                ;; is fixed
-                (setq sp-autoescape-string-quote nil)))
-
-    ;; Remove the M-&lt;backspace&gt; binding that smartparens adds
-    (let ((disabled '("M-&lt;backspace&gt;")))
-      (setq sp-smartparens-bindings
-            (cl-remove-if (lambda (key-command)
-                            (member (car key-command) disabled))
-                          sp-smartparens-bindings)))
-
-    ;(define-key sp-keymap (kbd "C-(") 'sp-forward-barf-sexp)
-    ;(define-key sp-keymap (kbd "C-)") 'sp-forward-slurp-sexp)
-    ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
-    ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
-    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
-    (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-    (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
-    (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
-    (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
-    (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-    (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-    (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
-    (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
-    (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
-    (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
-    ;; (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
-    ;; (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
-    (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
-    (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
-    (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
-    (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
-    (define-key sp-keymap (kbd "C-&lt;left_bracket&gt;") 'sp-select-previous-thing)
-    (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
-    (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
-    (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
-    (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
-    (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
-    (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
-    (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
-    (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
-    (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
-    (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
-    (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
-    (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
-
-    (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-    ;; Remove '' pairing in elisp because quoting is used a ton
-    (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-
-    (sp-with-modes '(webl-mode)
-      (sp-local-pair "&lt;" "&gt;"))
-
-    (sp-with-modes sp-lisp-modes
-      (sp-local-pair "(" nil :bind "C-("))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">smartparens</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:defer</span> t&#57344;&#57345;&#57345;
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9390;"</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"M-9"</span> . sp-backward-sexp)&#57344;&#57345;&#57345;
+         (<span class="org-string">"M-0"</span> . sp-forward-sexp))&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
+    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">turn on showing the match for clojure and elisp</span>&#57344;&#57345;&#57345;
+    (add-hook 'clojure-mode-hook #'turn-on-show-smartparens-mode)&#57344;&#57345;&#57345;
+    (add-hook 'emacs-lisp-mode-hook #'turn-on-show-smartparens-mode)&#57344;&#57345;&#57345;
+    (add-hook 'java-mode-hook #'turn-on-show-smartparens-mode)&#57344;&#57345;&#57345;
+    (add-hook 'c-mode-hook #'turn-on-show-smartparens-mode))&#57344;&#57345;&#57345;
+  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">progn</span>&#57344;&#57345;&#57345;
+    (add-to-list 'sp-sexp-suffix '(json-mode regex <span class="org-string">""</span>))&#57344;&#57345;&#57345;
+    (add-to-list 'sp-sexp-suffix '(es-mode regex <span class="org-string">""</span>))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    (<span class="org-keyword">require</span> '<span class="org-constant">smartparens-config</span>)&#57344;&#57345;&#57345;
+    (add-hook 'sh-mode-hook&#57344;&#57345;&#57345;
+              (<span class="org-keyword">lambda</span> ()&#57344;&#57345;&#57345;
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove when https://github.com/Fuco1/smartparens/issues/257</span>&#57344;&#57345;&#57345;
+                <span class="org-comment-delimiter">;; </span><span class="org-comment">is fixed</span>&#57344;&#57345;&#57345;
+                (setq sp-autoescape-string-quote nil)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove the M-&lt;backspace&gt; binding that smartparens adds</span>&#57344;&#57345;&#57345;
+    (<span class="org-keyword">let</span> ((disabled '(<span class="org-string">"M-&lt;backspace&gt;"</span>)))&#57344;&#57345;&#57345;
+      (setq sp-smartparens-bindings&#57344;&#57345;&#57345;
+            (cl-remove-if (<span class="org-keyword">lambda</span> (key-command)&#57344;&#57345;&#57345;
+                            (member (car key-command) disabled))&#57344;&#57345;&#57345;
+                          sp-smartparens-bindings)))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;left&gt;"</span>) 'sp-backward-slurp-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;right&gt;"</span>) 'sp-forward-slurp-sexp)&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;</span><span class="org-comment">(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)</span>&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;</span><span class="org-comment">(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)</span>&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-f"</span>) 'sp-forward-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-b"</span>) 'sp-backward-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-d"</span>) 'sp-down-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-a"</span>) 'sp-backward-down-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-S-a"</span>) 'sp-beginning-of-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-S-d"</span>) 'sp-end-of-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-e"</span>) 'sp-up-sexp)&#57344;&#57345;&#57345;
+    (define-key emacs-lisp-mode-map (kbd <span class="org-string">")"</span>) 'sp-up-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-u"</span>) 'sp-backward-up-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-t"</span>) 'sp-transpose-sexp)&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)</span>&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)</span>&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-k"</span>) 'sp-kill-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-w"</span>) 'sp-copy-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"M-D"</span>) 'sp-splice-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-]"</span>) 'sp-select-next-thing-exchange)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;left_bracket&gt;"</span>) 'sp-select-previous-thing)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"C-M-]"</span>) 'sp-select-next-thing)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"M-F"</span>) 'sp-forward-symbol)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"M-B"</span>) 'sp-backward-symbol)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-t"</span>) 'sp-prefix-tag-object)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-p"</span>) 'sp-prefix-pair-object)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s c"</span>) 'sp-convolute-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s a"</span>) 'sp-absorb-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s e"</span>) 'sp-emit-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s p"</span>) 'sp-add-to-previous-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s n"</span>) 'sp-add-to-next-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s j"</span>) 'sp-join-sexp)&#57344;&#57345;&#57345;
+    (define-key sp-keymap (kbd <span class="org-string">"H-s s"</span>) 'sp-split-sexp)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    (sp-local-pair 'minibuffer-inactive-mode <span class="org-string">"'"</span> nil <span class="org-builtin">:actions</span> nil)&#57344;&#57345;&#57345;
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove '' pairing in elisp because quoting is used a ton</span>&#57344;&#57345;&#57345;
+    (sp-local-pair 'emacs-lisp-mode <span class="org-string">"'"</span> nil <span class="org-builtin">:actions</span> nil)&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    (<span class="org-keyword">sp-with-modes</span> '(webl-mode)&#57344;&#57345;&#57345;
+      (sp-local-pair <span class="org-string">"&lt;"</span> <span class="org-string">"&gt;"</span>))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+    (<span class="org-keyword">sp-with-modes</span> sp-lisp-modes&#57344;&#57345;&#57345;
+      (sp-local-pair <span class="org-string">"("</span> nil <span class="org-builtin">:bind</span> <span class="org-string">"C-("</span>))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -338,7 +337,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'linum-mode)
+<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'linum-mode)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -349,28 +348,27 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(which-function-mode t)
+<pre class="src src-emacs-lisp">(which-function-mode t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-sec-2-3" class="outline-3">
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> Check Parens</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/check-parens ()
-  (condition-case err
-      (check-parens)
-    ((error) (message "Buffer has unmatched Parens or quote!"))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/check-parens</span> ()&#57344;&#57345;&#57345;
+  (<span class="org-keyword">condition-case</span> err&#57344;&#57345;&#57345;
+      (check-parens)&#57344;&#57345;&#57345;
+    ((<span class="org-warning">error</span>) (message <span class="org-string">"Buffer has unmatched Parens or quote!"</span>))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'find-file-hook 'emagician/check-parens t)
+<pre class="src src-emacs-lisp">(add-hook 'find-file-hook 'emagician/check-parens t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -380,23 +378,22 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq show-paren-style 'mixed)
-(setq show-paren-delay 0)
-(show-paren-mode)
+<pre class="src src-emacs-lisp">(setq show-paren-style 'mixed)&#57344;&#57345;&#57345;
+(setq show-paren-delay 0)&#57344;&#57345;&#57345;
+(show-paren-mode)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-2-5" class="outline-3">
 <h3 id="sec-2-5"><span class="section-number-3">2.5</span> Rainbow Delimiters</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package rainbow-delimiters
-  :demand
-  :init
-  (emagician/minor-in-major-mode prog-mode rainbow-delimiters-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">rainbow-delimiters</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:demand</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -406,9 +403,9 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package color-identifiers-mode
-  :init
-  (add-hook 'after-init-hook 'global-color-identifiers-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">color-identifiers-mode</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (add-hook 'after-init-hook 'global-color-identifiers-mode))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -423,11 +420,11 @@ No Physical tabs.
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package flycheck
-  :diminish "⾶"
-  :init
-  (global-flycheck-mode)
-  (emagician/minor-in-major-mode prog-mode flycheck-color-mode-line-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">flycheck</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#12214;"</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (global-flycheck-mode)&#57344;&#57345;&#57345;
+  (emagician/minor-in-major-mode flycheck-color-mode-line-mode prog-mode))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -438,7 +435,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package dizzee)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">dizzee</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -457,17 +454,17 @@ It's nice to have helpers to see if we are in org-babel mode.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(defun emagician/org-src-mode-p () 
-  "Test to see wehther the current mode is in org-src mode"
-  (member 'org-src-mode minor-mode-list))
-
-(ert-deftest emagician/org-src-mode-p ()
-  (let ((minor-mode-list '()))
-    (should-not (emagician/org-src-mode-p)))
-  (let ((minor-mode-list '(foo bar)))
-    (should-not (emagician/org-src-mode-p)))
-  (let ((minor-mode-list '(org-src-mode)))
-    (should (emagician/org-src-mode-p))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/org-src-mode-p</span> () &#57344;&#57345;&#57345;
+  <span class="org-doc">"Test to see wehther the current mode is in org-src mode"</span>&#57344;&#57345;&#57345;
+  (member 'org-src-mode minor-mode-list))&#57344;&#57345;&#57345;
+&#57344;&#57345;&#57345;
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/org-src-mode-p</span> ()&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((minor-mode-list '()))&#57344;&#57345;&#57345;
+    (should-not (emagician/org-src-mode-p)))&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((minor-mode-list '(foo bar)))&#57344;&#57345;&#57345;
+    (should-not (emagician/org-src-mode-p)))&#57344;&#57345;&#57345;
+  (<span class="org-keyword">let</span> ((minor-mode-list '(org-src-mode)))&#57344;&#57345;&#57345;
+    (should (emagician/org-src-mode-p))))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -486,7 +483,7 @@ Don't manage ancient version control backends
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq vc-handled-backends '(Git))
+<pre class="src src-emacs-lisp">(setq vc-handled-backends '(Git))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -500,9 +497,9 @@ Modes for editing git-specific files
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package git-commit)
-(use-package gitconfig-mode)
-(use-package gitignore-mode)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">git-commit</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">use-package</span> <span class="org-constant">gitconfig-mode</span>)&#57344;&#57345;&#57345;
+(<span class="org-keyword">use-package</span> <span class="org-constant">gitignore-mode</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -516,13 +513,13 @@ Modes for editing git-specific files
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package magit
-  :init
-  (when (locate-file "git-achievements" exec-path)
-    (setq magit-git-executable "git-achievements"))
-  :bind 
-  ("C-c m" . magit-status)
-  :config)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">magit</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (<span class="org-keyword">when</span> (locate-file <span class="org-string">"git-achievements"</span> exec-path)&#57344;&#57345;&#57345;
+    (setq magit-git-executable <span class="org-string">"git-achievements"</span>))&#57344;&#57345;&#57345;
+  <span class="org-builtin">:bind</span> &#57344;&#57345;&#57345;
+  (<span class="org-string">"C-c m"</span> . magit-status)&#57344;&#57345;&#57345;
+  <span class="org-builtin">:config</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -541,9 +538,9 @@ Modes for editing git-specific files
 <div class="outline-text-4" id="text-4-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package git-gutter-fringe+
-  :init
-  (setq git-gutter-fr+-side 'right-fringe))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">git-gutter-fringe+</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (setq git-gutter-fr+-side 'right-fringe))&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -560,10 +557,10 @@ Each language gets it's own file.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load "Programming-Lisp")
-(emagician/load "Programming-Ruby")
-(emagician/load "Programming-Web")
-(emagician/load "Programming-Sh")
+<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Programming-Lisp"</span>)&#57344;&#57345;&#57345;
+(emagician/load <span class="org-string">"Programming-Ruby"</span>)&#57344;&#57345;&#57345;
+(emagician/load <span class="org-string">"Programming-Web"</span>)&#57344;&#57345;&#57345;
+(emagician/load <span class="org-string">"Programming-Sh"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -577,8 +574,8 @@ Each language gets it's own file.
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package yaml-mode
-  :mode "\\.yml\\'")
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">yaml-mode</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:mode</span> <span class="org-string">"\\.yml\\'"</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -587,7 +584,7 @@ Each language gets it's own file.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

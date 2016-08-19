@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Ruby</title>
-<!-- 2016-08-16 Tue 09:02 -->
+<!-- 2016-08-19 Fri 09:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -172,7 +173,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-0-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
+<pre class="src src-emacs-lisp">(emagician/add-to-path (concat (getenv <span class="org-string">"HOME"</span>) <span class="org-string">"/.rbenv/shims"</span>) t)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -190,7 +191,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package bundler)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">bundler</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -200,7 +201,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package rspec-mode)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">rspec-mode</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -210,7 +211,7 @@ for the JavaScript code in this tag.
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package yari)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">yari</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -222,8 +223,8 @@ Getting hte base ruby documentation here
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">gem install rdoc-data
-rdoc-data --install
+<pre class="src src-sh">gem install rdoc-data&#57344;&#57345;&#57345;
+rdoc-data --install&#57344;&#57345;&#57345;
 </pre>
 </div>
 
@@ -232,7 +233,7 @@ This gets all the rdoc for your installed gems
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">gem rdoc --all --ri
+<pre class="src src-sh">gem rdoc --all --ri&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -248,10 +249,10 @@ This gets all the rdoc for your installed gems
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package ruby-block
-  :init
-  (setq ruby-block-highlight-toggle t)
-  :config)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ruby-block</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:init</span>&#57344;&#57345;&#57345;
+  (setq ruby-block-highlight-toggle t)&#57344;&#57345;&#57345;
+  <span class="org-builtin">:config</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -265,7 +266,7 @@ Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goo
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package rinari)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">rinari</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -275,7 +276,7 @@ Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goo
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package robe)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">robe</span>)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -292,23 +293,23 @@ Thanks to the emacs starter kit classic for the list of ode files list. <sup><a 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(use-package ruby-mode
-  :interpreter "ruby"
-  :mode 
-  (("\\.rake$" . ruby-mode)
-   ("\\.task$" . ruby-mode)
-   ("\\.thor$" . ruby-mode)
-   ("\\.gemspec$" . ruby-mode)
-   ("\\.rb$" . ruby-mode)
-   ("\\.ru$" . ruby-mode)
-   ("Rakefile$" . ruby-mode)
-   ("Thorfile$" . ruby-mode)
-   ("Gemfile$" . ruby-mode)
-   ("Capfile$" . ruby-mode)
-   ("Vagrantfile$" . ruby-mode))
-  :config
-  (ruby-block-mode t)
-)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">ruby-mode</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:interpreter</span> <span class="org-string">"ruby"</span>&#57344;&#57345;&#57345;
+  <span class="org-builtin">:mode</span> &#57344;&#57345;&#57345;
+  ((<span class="org-string">"\\.rake$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"\\.task$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"\\.thor$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"\\.gemspec$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"\\.rb$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"\\.ru$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"Rakefile$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"Thorfile$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"Gemfile$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"Capfile$"</span> . ruby-mode)&#57344;&#57345;&#57345;
+   (<span class="org-string">"Vagrantfile$"</span> . ruby-mode))&#57344;&#57345;&#57345;
+  <span class="org-builtin">:config</span>&#57344;&#57345;&#57345;
+  (ruby-block-mode t)&#57344;&#57345;&#57345;
+)&#57344;&#57345;&#57345;
 </pre>
 </div>
 </div>
@@ -327,7 +328,7 @@ Thanks to the emacs starter kit classic for the list of ode files list. <sup><a 
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-16 Tue 09:02</p>
+<p class="date">Created: 2016-08-19 Fri 09:57</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
