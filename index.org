@@ -1,0 +1,47 @@
+* Introduction 
+
+  #+INCLUDE: Readme.org :minlevel 2
+
+* Topical Index
+** Installing 
+- [[./Emagician-Install.org]] :: Contains all the install instructions you need 
+
+** Core Emagician 
+- [[./Emagician.org]] :: The Baseline emagician file.  Does initial setup and defines a few functions to facilitate the loading of the rest of the starter kit.
+- [[./Emagician-Base.org]] :: Secondary base.  It's turtles all the way down baybee.  This provides a bunch of helper functions.
+- [[./Emagician-Meta.org]] :: Tertiary base.  It's tertiary turtles all the way down baybee.  This provides a bunch of helper functions in the development of the emagicians starter kit.
+
+#+BEGIN_QUOTE
+(It's turtles all the way down baybee)-🐢
+#+END_QUOTE
+
+** The Actual Funk
+- [[./Interface.org]] :: Primary file containing all interface related functionality, including look and feel, editing commands, etc.
+- [[./Lamp.org]] :: Code and customizations to help make me a better typer, writer, developer and person.
+
+** Mode Specifics 
+- [[./Eshell-Magick.org]] :: Making eshell RULE.
+- [[./Org-Grimoire.org]] :: Org-mode customizations to make org-mode rule
+- [[./Text.org]] :: Make Text-mode better
+- [[./Programming.org]] :: Generalized additions to programming modes
+
+*** Programming modes
+
+- [[./Programming-Lisp.org]] :: Sekrut Fucking Alien Technology.
+- [[./Programming-Ruby.org]] :: (It's a living.)-🐦
+- [[./Programming-Sh.org]] :: Shhhhhhh.
+- [[./Programming-Web.org]] :: Making Indra My Bitch!
+
+** OS customizations
+- [[./Nix.org]] :: I don't use this much, but the customization was too valuable to lose.
+- [[./darwin.org]] :: Minor customizations to make OS-X play nicer with everything. 
+
+** Misc
+- [[./jonnay.org]] :: My own customization file.
+
+** Assets
+- [[./Snippets.org]] :: Yasnippets Snippets
+
+* Alphabetical Index
+
+#+INCLUDE: sitemap.org 
