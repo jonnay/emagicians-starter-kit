@@ -58,18 +58,28 @@ Unicode
   |(^o^)/    ,(   Get all teh characters! )
 #+end_verse  
 
+You'll need a number of fonts to make this work:
+- Symbola :: http://users.teilar.gr/~g1951d/Symbola.zip
+- Quivira :: http://www.quivira-font.com/files/Quivira.ttf
+- Dejavu Sans :: http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2
+- Noto Sans https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true
+- Noto Sans Symbols https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true
+
+
 #+begin_src emacs-lisp 
-(use-package unicode-fonts 
+(use-package unicode-fonts
+  :demand
   :init
-  (setq unicode-fonts-skip-fonts nil)
+  (setq unicode-fonts-skip-fonts)
+  (use-package persistent-soft :demand)
   :config
   (unicode-fonts-setup))
-  #+end_src
+#+end_src
 
 ** Ansi Color
    ARGH, we were so close to getting away from this until hipsters brought it all back again.
 
-   Thanks Obama
+   Thanks Obama.
 
 #+begin_src emacs-lisp 
 (require 'ansi-color)
@@ -246,13 +256,19 @@ One day.  Powerline and nyan mode don't work.
 (global-hl-line-mode 1)
 #+end_src
 
-** Border the 80th column
-#+begin_src emacs-lisp 
+
+** Show Whitespace with fill-column-indicator                                            :deactived:
+   I was initially using fill-column-indicator, but that turned out to
+   be kinda buggy.   It looks  It would hose org exports and also whack
+   visual-line-mode.
+
+   See [[file:Programming.org::*Show%20whitespace][Show whitespace in Programming.org]]
+
+#+begin_src emacs-lisp :tangle no
 (use-package fill-column-indicator
   :init
   (setq fci-rule-width 1)
   (setq fci-rule-column 81)
-  (setq fci-rule-color (face-attribute 'fringe :background))
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1))
 #+end_src
@@ -263,11 +279,11 @@ One day.  Powerline and nyan mode don't work.
 
    The theme needs to be loaded after powerlie to work.
 #+begin_src emacs-lisp 
-  (use-package moe-theme
-    :init
-    (setq moe-theme-mode-line-color 'yellow)
-    :config
-    (moe-dark))
+(use-package moe-theme
+  :init
+  (setq moe-theme-mode-line-color 'yellow)
+  :config
+  (moe-dark))
 #+end_src
 *** Org Beautify
     Load from our =bad self!
@@ -334,14 +350,28 @@ show-#+begin_src emacs-lisp
 (emagician/expect-package 'show-marks)
 #+end_src
 
-** Multiple Cursors
-#+begin_src emacs-lisp 
-  (use-package multiple-cursors
-    :bind (("C-S-c e" . mc/edit-lines)
-           ("C-S-c n" . mc/mark-next-like-this)
-           ("C-S-c p" . mc/mark-previous-like-this)
-           ("C-S-c h" . mc/mark-all-like-this)))
+** Multiple Cursors                                                                           :bind:
 
+   Note that this is a great example of building your own custom
+   keymap and using it with use-package.[fn:2]
+
+#+begin_src emacs-lisp 
+(use-package multiple-cursors
+  :init
+  (define-prefix-command 'emagician/mc-keymap)
+  :bind-keymap (("C-S-c" . emagician/mc-keymap))
+  :bind (:map emagician/mc-keymap
+              ("e" . mc/edit-lines)
+              ("n" . mc/mark-next-like-this)
+              ("p" . mc/ark-previous-like-this)
+              (")" . mc/mark-next-symbol-like-this)
+              ("(" . mc/mark-prev-symbol-like-this)
+              ("h" . mc/mark-all-like-this)
+              ("s" . mc/mark-all-in-region)
+              ("f" . mc/unmark-next-like-this)
+              ("F" . mc/skip-to-next-like-this)
+              ("b" . mc/unmark-previous-like-this)
+              ("B" . mc/skip-to-previous-like-this)))
 #+end_src
 
 ** Killing and Yanking
@@ -363,10 +393,10 @@ show-#+begin_src emacs-lisp
 (setq kill-read-only-ok t)
 #+end_src
 
-   At the beginning of the line, kill-line gets the entire line. 
+   I am up in the air about this one
 
 #+begin_src emacs-lisp 
-(setq kill-whole-line t)
+(setq kill-whole-line nil)
 #+end_src
 
 *** Volatile Highlights
@@ -755,6 +785,8 @@ Make it a bit nicer too.
 * Footnotes
 
 [fn:1] http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296
+
+[fn:2] Thanks habamax and jwiegley. https://github.com/jwiegley/use-package/issues/366
 
 
 

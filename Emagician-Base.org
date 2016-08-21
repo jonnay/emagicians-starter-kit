@@ -47,6 +47,11 @@ this can go away. That day isn't today.
         print-level 900)
 #+end_src
 
+** Anaphoric Goodness
+#+begin_src emacs-lisp 
+(use-package anaphora)
+#+end_src
+
 ** Asyc
 
    Run commands asyncronously. 
@@ -60,10 +65,55 @@ this can go away. That day isn't today.
 
    El-mock is too damn rubylike.  
 
-   fakir is cool ass, but I don't need it.  yet.
+   Fakir is cool ass, but I don't need it.  yet.  Also, a great name
 
 #+begin_src emacs-lisp 
 (use-package noflet)
+#+end_src
+
+* emagick-🐰 Extensions to Emacs Lisp
+** Test suite
+#+begin_src emacs-lisp 
+(defun emagician/meta/run-all-emagick-tests ()
+  "Run all tests for emagick-🐰" 
+  (interactive)
+  (ert-run-tests-interactively "emagick"))
+#+end_src
+
+** alist-set: Change element in list
+#+begin_src emacs-lisp 
+(defun emagick-🐰/alist-set (key value alist &optional use-proper-list)
+  "Sets or adds KEY with VALUE on ALIST, and return the list.
+If USE-PROPER-LIST is true then instead of a (dotted . list) a
+(proper list) is constructed insted."
+  (let ((list-frag (funcall (if use-proper-list #'list #'cons)
+                            key
+                            value)))
+    (if (not (null alist))
+        (cons list-frag
+              (assq-delete-all key alist))
+      (list list-frag))))
+
+(ert-deftest emagick-🐰/alist-set-on-empty-list ()
+  ""
+  (should (equal (emagick-🐰/alist-set 'foo 'bar '())
+                 '((foo . bar))))
+  (should (equal (emagick-🐰/alist-set 'foo 'bar '() t)
+                 '((foo bar)))))
+
+(ert-deftest emagick-🐰/alist-set-on-list-with-element ()
+  ""
+  (should (equal (emagick-🐰/alist-set 'baz 'blarg '((foo . bar)))
+                 '((baz . blarg)(foo . bar))))
+  (should (equal (emagick-🐰/alist-set 'baz 'blarg '((foo bar)) t)
+                 '((baz blarg)(foo bar)))))
+
+(ert-deftest emagick-🐰/alist-set-on-list-without-element ()
+  ""
+  (should (equal (emagick-🐰/alist-set 'foo 'bar '((foo . baz)))
+                 '((foo . bar))))
+  (should (equal (emagick-🐰/alist-set 'foo 'bar '((foo baz)) t)
+                 '((foo bar)))))
 #+end_src
 
 * Emagician Helpers

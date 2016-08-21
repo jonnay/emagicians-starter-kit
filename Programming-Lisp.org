@@ -1,8 +1,25 @@
 #+title: Lisp
+#+LINK_UP: Programming.html 
+
+* Set up a generalized Lisp mode hook
+#+begin_src emacs-lisp
+(defvar generic-lisp-mode-hook '()
+  "Generic lisp hooks to run")
+#+end_src
+
+#+begin_src emacs-lisp 
+(defun run-lisp-mode-hooks ()
+  "Run standard lisp mode hooks"
+  (run-hooks 'generic-lisp-mode-hook))
+#+end_src
+
+#+begin_src emacs-lisp 
+(dolist (hook '(scheme-mode-hook clojure-mode-hook lisp-mode-hook emacs-lisp-mode-hook))
+  (add-hook hook 'run-lisp-mode-hooks))
+#+end_src
 
 * Editing 
 ** Paredit
-
 #+begin_src emacs-lisp 
 (use-package paredit
   :diminish "⒫"
@@ -10,10 +27,16 @@
   (:paredit-mode-map
    (("M-s" . paredit-split-sexp)))
   :init
-  (emagician/minor-in-major-mode paredit-mode emacs-lisp-mode-hook)
-  (emagician/minor-in-major-mode paredit-mode lisp-interaction-mode-hook)
-  (emagician/minor-in-major-mode paredit-mode scheme-mode-hook))
+  (emagician/minor-in-major-mode paredit-mode generic-lisp-mode-hook))
 #+end_src
+
+** Smart Parens
+   Turn this shit off on lisps
+
+#+begin_src emacs-lisp 
+(add-hook 'generic-lisp-mode-hook #'turn-off-smartparens-mode t)
+#+end_src
+
 
 * Individual Lisps
 ** Elisp

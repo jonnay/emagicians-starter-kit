@@ -44,6 +44,23 @@
   (add-hook 'org-mode-hook 'auto-complete-mode)
 #+end_src
 
+** Fix YAS
+     The latest version of yasnippet doesn't play well with Org mode.
+     If the above code does not fix the conflict, start by defining the
+     following function:
+#+begin_src emacs-lisp 
+(defun yas/org-very-safe-expand ()
+  (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+#+end_src
+
+     Then, tell Org mode what to do with the new function:
+#+begin_src emacs-lisp 
+(emagician/defhook fix-yasnippet-for-org org-mode-hook
+  (make-variable-buffer-local 'yas/trigger-key)
+  (setq yas/trigger-key [tab])
+  (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+  (define-key yas/keymap [tab] 'yas/next-field))
+#+end_src
 
 * What do I need. 
 
@@ -62,7 +79,7 @@
   - Sane attachment handling (link to, not copy)
 * Agenda Files
 #+begin_src emacs-lisp 
-(setq org-agenda-files '("~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org" "~/Dropbox/Creativity/Site3.0/Site.org"))
+(setq org-agenda-files '("~/org/" "~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org" "~/Dropbox/Creativity/Site3.0/Site.org"))
 #+end_src
 
 * TODOs 
@@ -93,8 +110,9 @@ Fast selection is good! But not on tags.
 #+end_src
 
 ** Faces
-#+begin_src emacs-lisp 
+A better looking org mode looks better.
 
+#+begin_src emacs-lisp 
   (setq org-todo-keyword-faces
         `(("TODO" :foreground "red" 
                   :background "red4" :weight bold :box (:line-width 2 :color "red3" :style released-button))
@@ -145,7 +163,6 @@ Fast selection is good! But not on tags.
 #+end_src
 
 * Tags
-
 ** Tags are a fluid thing
    So list em all!
 
@@ -162,13 +179,11 @@ Fast selection is good! But not on tags.
                    (append all-tags (split-string tag-string ":" t))))))
        t
        'agenda)
-      
-
       ;; now get counts
       (loop for tag in (-uniq all-tags) 
             collect (cons tag (cl-count tag all-tags :test 'string=)))))
 #+end_src
-
+   
 ** Display
 #+begin_src emacs-lisp 
 (setq org-tags-column -100)
@@ -667,10 +682,10 @@ Swap to other frame once loaded.
 (require 'ox-beamer)
 #+end_src
 
+** Htmlize 
 #+begin_src emacs-lisp 
 (use-package htmlize)
 #+end_src
-
 
 * Working with Code in Babel mode
 

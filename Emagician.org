@@ -1,7 +1,7 @@
 * Base Initialization and Circle Casting
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (defconst emagician/version "0.23.1")
-#+end_src
+#+END_SRC
   
   This is my emacs.  There are many like it, but this one is mine.
 
@@ -11,93 +11,96 @@
    Which goes to show: even if you use the word brogrammer you might
    still have good ideas. 😼
 
-*** Emergency override.
-    You won't need this. Right?  In case of emergency, break glass.
+#+begin_example
+​‌డ(°益°)హ ,( Bro, Even if you're swol, it doesn't mean you're a bro, bro. )
+#+end_example
 
-#+begin_src emacs-lisp :tangle yes
+   Debug Errors.  
+
+#+BEGIN_SRC emacs-lisp
 (setq debug-on-error t)
-#+end_src
+#+END_SRC
 
 *** Super Baseline, Start with the Barest thing that could possibly work
-#+begin_src emacs-lisp
-      (setq initial-stratch-message
-            (concat ";;; -X-x-X- Invokaction SuperFailure! -X-x-X-" "\n"
-                    ";;; Problem in Emagician.org when setting up Breakage Helpers"))
-  
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(setq initial-stratch-message
+      (concat ";;; -X-x-X- Invokaction SuperFailure! -X-x-X-" "\n"
+              ";;; Problem in Emagician.org when setting up Breakage Helpers"))
+
+#+END_SRC
 
 *** Define Scratch Message Helper Functions
 
-#+begin_src emacs-lisp
-  (defun emagician/set-scratch (&rest lines)
-    (setq initial-scratch-message (apply 'concat lines)))
+#+BEGIN_SRC emacs-lisp
+(defun emagician/set-scratch (&rest lines)
+  (setq initial-scratch-message (apply 'concat lines)))
 
-  (defun emagician/append-scratch (&rest lines)
-    (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+(defun emagician/append-scratch (&rest lines)
+  (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
 
-  (defvar emagician/pre-scratch-links '()
-    "A list of links to append to emagician/scratch-links.
+(defvar emagician/pre-scratch-links '()
+  "A list of links to append to emagician/scratch-links.
 
-  This is necessary because we may need to communicate to the user
-  before the rest of the scratch interface is built.")
+This is necessary because we may need to communicate to the user
+before the rest of the scratch interface is built.")
 
-#+end_src
+#+END_SRC
     
 *** Now set it to our Baseline beautified "you're-busted" text
 
-#+begin_src emacs-lisp
-  (emagician/set-scratch
-    ";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-" "\n"
-    ";; You know what to do." "\n"
-    ";; \n"
-    ";; Emagician Starter kit Version: " emagician/version "\n"
-    ";; Emacs: " (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version) " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" "\n"
-    ";; \n"
-    ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-    ";;                      ;;" "\n"      
-    ";; It's dangerous to go ;;" "\n"
-    ";; alone! take this:    ;;" "\n"
-    ";;                      ;;" "\n"
-    ";;   ♨     👷     ♨    ;;" "\n"
-    ";;          🔩          ;;" "\n"
-    ";;                      ;;" "\n"
-    ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
-    "\n"
-    "(shell-command \"" invocation-directory invocation-name " --debug-init\")\n")
-#+end_src 
+#+BEGIN_SRC emacs-lisp
+(emagician/set-scratch
+  ";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-" "\n"
+  ";; You know what to do." "\n"
+  ";; \n"
+  ";; Emagician Starter kit Version: " emagician/version "\n"
+  ";; Emacs: " (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version) " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" "\n"
+  ";; \n"
+  ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+  ";;                      ;;" "\n"      
+  ";; It's dangerous to go ;;" "\n"
+  ";; alone! take this:    ;;" "\n"
+  ";;                      ;;" "\n"
+  ";;   ♨     👷     ♨    ;;" "\n"
+  ";;          🔩          ;;" "\n"
+  ";;                      ;;" "\n"
+  ";;;;;;;;;;;;  ;;;;;;;;;;;;" "\n"
+  "\n"
+  "(shell-command \"" invocation-directory invocation-name " --debug-init\")\n")
+#+END_SRC
 
 ** Verify emagician/dir is set 
 
-#+begin_src emacs-lisp
-  (when (null emagician/dir)
-    (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
-      (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
-      (error err)))
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(when (null emagician/dir)
+  (let ((err (concat "Variable emagician/dir is not set!  This is important and should be set in " user-init-file)))
+    (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
+    (error err)))
+#+END_SRC
 
-#+begin_src emacs-lisp 
-  (emagician/append-scratch
-    "\n"
-    "(find-file-other-window \"" emagician/dir "\")" "\n"
-    "(find-file-other-window \"" emagician/dir "/*.org\"  t)" "\n")
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(emagician/append-scratch
+  "\n"
+  "(find-file-other-window \"" emagician/dir "\")" "\n"
+  "(find-file-other-window \"" emagician/dir "/*.org\"  t)" "\n")
+#+END_SRC
 
 ** Use the new improved emagician scratch.
 *** Inhibit the old one
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq inhibit-splash-screen t)
-#+end_src
+#+END_SRC
 
 *** Add a show-scratch function 
 	This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
-#+begin_src emacs-lisp
-  (defun emagician/show-scratch ()
-    "Show the scratch buffer"
-    (interactive)
-    (set-window-buffer nil "*scratch*"))
+#+BEGIN_SRC emacs-lisp
+(defun emagician/show-scratch ()
+  "Show the scratch buffer"
+  (interactive)
+  (set-window-buffer nil "*scratch*"))
 
-  (add-hook 'emacs-startup-hook 'emagician/show-scratch t)
-#+end_src
+(add-hook 'emacs-startup-hook 'emagician/show-scratch t)
+#+END_SRC
 
 ** Package Archives setup
   We set our download dir to local-packages.  We also do the trick of
@@ -107,42 +110,42 @@
 
   file:./assets/images/sulu-swordfight-oh-my.jpg
 
-#+begin_src emacs-lisp
-  (defvar emagician/are-elpas-reachable? t "Whether or not ELPAs are reachable")
+#+BEGIN_SRC emacs-lisp
+(defvar emagician/are-elpas-reachable? t "Whether or not ELPAs are reachable")
 
-  (setq package-user-dir (concat emagician/dir "elpa"))
+(setq package-user-dir (concat emagician/dir "elpa"))
 
-  (setq package-archives
-        '(("gnu"         . "http://elpa.gnu.org/packages/")
-          ("MELPA"       . "http://melpa.org/packages/")
-          ("org"         . "http://orgmode.org/elpa/")))
+(setq package-archives
+      '(("gnu"         . "http://elpa.gnu.org/packages/")
+        ("MELPA"       . "http://melpa.org/packages/")
+        ("org"         . "http://orgmode.org/elpa/")))
 
-  (package-initialize)
+(package-initialize)
 
-  (condition-case err
-      (unless package-archive-contents (package-refresh-contents))
-    ((error)
-     (let ((scratch-msg (concat ";;; !!! Couldn't refresh package contents\n"
-                                "((package-refresh-contents)(beginning-of-line)(kill-line))")))
-       (message "Could not refresh package contents: %s %S" (car err) (cdr err))
-       (emagician/append-scratch scratch-msg)
-       (add-to-list 'emagician/pre-scratch-links scratch-msg)
-       (setq emagician/are-elpas-reachable? nil))))
-#+end_src
+(condition-case err
+    (unless package-archive-contents (package-refresh-contents))
+  ((error)
+   (let ((scratch-msg (concat ";;; !!! Couldn't refresh package contents\n"
+                              "((package-refresh-contents)(beginning-of-line)(kill-line))")))
+     (message "Could not refresh package contents: %s %S" (car err) (cdr err))
+     (emagician/append-scratch scratch-msg)
+     (add-to-list 'emagician/pre-scratch-links scratch-msg)
+     (setq emagician/are-elpas-reachable? nil))))
+#+END_SRC
   
 ** Load Paths, Custom Files, etc.
 *** Standard Emagician distribution load paths
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path emagician/dir)
 (add-to-list 'load-path (concat emagician/dir "src"))
 (add-to-list 'load-path (concat emagician/dir "dist"))
 (add-to-list 'custom-theme-load-path (concat emagician/dir "themes"))
-#+end_src
+#+END_SRC
 
 *** Custom file shouldn't matter so much anymore, but lets stick it here anyway. 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (setq custom-file (concat emagician/dir "custom.el"))
-#+end_src 
+#+END_SRC
 
 * Emagician/load
 
@@ -152,7 +155,7 @@
 
    If the subtree is a tag, then all subtrees with that tag are collected and loaded.
 #+name: starter-kit-load
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defvar emagician/load-depth 0)
 (defun emagician/load (file &optional header-or-tag)
   "Load configuration from other .org files."
@@ -187,31 +190,31 @@
                                                 start-time))))
     load-result))
 
-#+end_src
+#+END_SRC
 
 * Package Management
 ** Emagician Expect, for bootstrapping
-#+begin_src emacs-lisp
-  (defun emagician/expect-package (package)
-    "If the named PACKAGE isn't currently installed, install it"
-    (unless (package-installed-p package)
-      (package-install package)))  
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(defun emagician/expect-package (package)
+  "If the named PACKAGE isn't currently installed, install it"
+  (unless (package-installed-p package)
+    (package-install package)))  
+#+END_SRC
 
 ** Use-Package
    https://github.com/jwiegley/use-package
 
    Is the cat's ass.  Why would you not use it?
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (setq use-package-always-ensure emagician/are-elpas-reachable?)
 (emagician/expect-package 'use-package)
-#+end_src
+#+END_SRC
 
 * Emagician Starter Kit has it's own Helper Functions
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Emagician-Base.org")
-#+end_src
+#+END_SRC
 
 * Assets
   Assets are either 
@@ -234,33 +237,33 @@
   - State Management :: Persist state across emacs sessions.
   - Help and Discoverability :: Getting more help with emacs, and learning commands better. 
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Interface.org")
-#+end_src
+#+END_SRC
 
 * Text
 
   Emacs is a text editor afteral.
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Text.org")
-#+end_src
+#+END_SRC
 
 * Programming
 
   This sets up some baseline programming helpers and then loads
   individual org files for each programming mode. 
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Programming.org")
-#+end_src
+#+END_SRC
 
 * Org Mode
   Deserves it's own file... ORG GRIMOIRE!
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Org-Grimoire.org")
-#+end_src
+#+END_SRC
 
 * Shell
 
@@ -268,52 +271,52 @@
 
   Why would you not use Eshell?
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Eshell-Magick.org")
-#+end_src
+#+END_SRC
 
 * Lamp
 
   The Lamp is a 5th magickal weapon along with the wand, sword, cup
   and chalace.  It represents illumination and self knowledge.
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Lamp.org")
-#+end_src
+#+END_SRC
   
 * Emagician Starter Kit has it's own Lamp
 
   Tools to make developing the Emagician Starter kit easier.
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load "Emagician-Meta.org")
-#+end_src
+#+END_SRC
   
 * Now load the users files
 ** First the customization
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (load custom-file 'noerror)
-#+end_src
+#+END_SRC
 
 ** Next is the true-name-file
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load emagician/true-name)
-#+end_src
+#+END_SRC
 
 ** System Type Initialization
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load (emagician/sanitize-file-name (symbol-name system-type)))
-#+end_src  
+#+END_SRC
 
 ** Machine Name Initialization
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load (emagician/sanitize-file-name system-name))
-#+end_src
+#+END_SRC
 
 ** Login name Initialization
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/load user-login-name)
-#+end_src
+#+END_SRC
    
 * Some Inspirational words from the book of emacs
 THE BOOK OF THE EMACS, Part I
@@ -346,23 +349,30 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
   - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html
   - Emacs Starter Kit :: https://github.com/technomancy/emacs-starter-kit
   - Cabbage  :: https://github.com/senny/cabbage
-  - Emacs Live :: https://github.com/overtone/emacs-live (even if they are brogrammers)
+  - Emacs Live :: https://github.com/overtone/emacs-live
   - novoid :: https://github.com/novoid/dot-emacs
   - ocodo :: https://github.com/ocodo/emacs.d
   - https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el
   - http://rix.si/blog/2015/01/05/fsem-001/
   - https://www.writequit.org/org/settings.html#sec-1-20
 * Thee End
-  So Mote it Be.
+*** Initiate thee scratch
+[[file:assets/images/Troll_Scratch.gif]]
 
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (emagician/initiate-thee-scratch)
-#+end_src
+#+END_SRC
 
-#+begin_src emacs-lisp :tangle yes
-(setq debug-on-error t)
-#+end_src
+*** Turn off debugging
 
-#+begin_src emacs-lisp 
-  (provide 'emagician)
-#+end_src
+  We're Almost Done. 
+
+#+BEGIN_SRC emacs-lisp
+(setq debug-on-error nil)
+#+END_SRC
+
+*** So Mote it Be.
+
+#+BEGIN_SRC emacs-lisp
+(provide 'emagician)
+#+END_SRC

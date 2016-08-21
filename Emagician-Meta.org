@@ -1,7 +1,6 @@
 #+title: Meta-Development
-
+* On Illumination…
 #+BEGIN_QUOTE
-Illumination
 
 Is deliberate self modification by magic and may include spells of
 Enchantment cast at oneself to repair weaknesses or increase
@@ -15,6 +14,16 @@ and perception stimulate each other.
 #+END_QUOTE
 
 --Peter Carroll
+
+* F3 Prefix Key for Emagician Meta Development
+#+begin_src emacs-lisp 
+(define-prefix-command 'emagician/meta-keymap)
+(bind-keys :prefix-map emagician/meta-keymap
+           :prefix "<f3>"
+           ("<f4>" . emagician/meta/run-all-emagick-tests)
+           ("<f5>" . emagician/meta/run-all-tests))
+#+end_src
+
 * Testing
 ** Running all ERT tests
 #+begin_src emacs-lisp 
@@ -155,6 +164,9 @@ This does a full GUI load, outputting any results as a message.
                                       :base-extension "org"
                                       :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
                                       :htmlized-source t
+                                      :makeindex t
+                                      :auto-sitemap t
+                                      :sitemap-ignore-case t
                                       :html-html5-fancy t
                                       :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
                                       :publishing-function org-html-publish-to-html
@@ -191,12 +203,14 @@ This does a full GUI load, outputting any results as a message.
 
 The thi.ng/org-spec[fn:1] is a great basis to build off of. 
 
-#+begin_src css :noweb yes :tangle assets/style.css :padline t :comments link
+#+begin_src css :noweb yes :tangle gh-pages/assets/style.css :padline t :comments link
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.4;
     color: #33333f;
+    padding: 0;
+    margin: 0;
 }
 
 code {
@@ -281,8 +295,7 @@ a:visited:hover {
 }
 
 a[href^="http"]:after {
-    content: "\21B3";
-    background: white;
+    content: "\21F4]]";
     padding-left: 0.2em;
 }
 
@@ -327,6 +340,13 @@ a[href^="http"]:after {
     margin-top: 1em;
 }
 
+#org-div-home-and-up {
+    text-align: right;
+    white-space: nowrap;
+    background-color: hsl(0, 0%, 90%);
+    padding: 0.5ex 1em 1ex;
+}
+
 table {
     width: 100%;
 }
@@ -357,6 +377,10 @@ span.section-number-5 {
     line-height: 70%;
     border-radius: 10px;
     background-color: hsl(0, 0%, 93%);
+}
+
+.outline-3, .outline-4, .outline-5, .outline-6 {
+    margin-left: 15px;
 }
 
 img {
@@ -467,6 +491,7 @@ pre {
     background-color: #f8f8f8;
     background-size: 8px 8px;
     background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
+    overflow: auto;
 }
 
 pre.src {
@@ -575,6 +600,12 @@ div.figure {
     color: white;
 }
 
+#postamble {
+    margin-top: 3em;
+    background-color: hsl(0,0%,95%);
+    padding: 1ex 2em 2ex;
+}
+
 @media screen {
     h1.title {
         text-align: left;
@@ -589,7 +620,7 @@ div.figure {
         position: fixed;
         top: 0;
         left: 0;
-        padding: 2em 0 2em 2em;
+        padding: 1ex 0 2em 2em;
         width: 240px;
         height: 100vh;
         font-size: 11px;
@@ -612,6 +643,9 @@ div.figure {
     div.outline-2, #footnotes {
         margin-left: 280px;
         max-width: 960px;
+    }
+    #postamble {
+        margin-left: 262px;
     }
 }
 
@@ -671,5 +705,3 @@ div.figure {
 * Footnotes
 
 [fn:1] https://github.com/thi-ng/org-spec
-
-​‌డ(°益°)హ

@@ -36,9 +36,8 @@ No Physical tabs.
   :init
   (progn
     (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
+    (remove-hook 'emacs-lisp-mode-hook #'turn-on-smartparens-mode)
     ;; turn on showing the match for clojure and elisp
-    (add-hook 'clojure-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'turn-on-show-smartparens-mode)
     (add-hook 'java-mode-hook #'turn-on-show-smartparens-mode)
     (add-hook 'c-mode-hook #'turn-on-show-smartparens-mode))
   :config
@@ -149,6 +148,12 @@ No Physical tabs.
   :init
   (add-hook 'after-init-hook 'global-color-identifiers-mode))
 
+#+end_src
+
+** Show whitespace
+
+#+begin_src emacs-lisp 
+(setq whitespace-style '(spaces tabs newline space-mark tab-mark newline-mark))
 #+end_src
 
 * Tools

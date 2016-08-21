@@ -1,4 +1,6 @@
 #+title: Web Programming
+#+LINK_UP: Programming.html 
+
 * Modes
 ** Web Mode
 #+begin_src emacs-lisp 
