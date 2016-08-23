@@ -554,12 +554,30 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
  
 #+end_src
 
-** Auto Complete
+** Completion  :completion:
+*** Company Mode
+
+#+begin_src emacs-lisp 
+(use-package company
+  :init
+  (global-company-mode)
+  
+  (use-package company-quickhelp
+    :init
+    (setq company-quickhelp-idle-delay 0.25)))
+#+end_src
+
+
+*** Auto Complete
+
+    It's time to switch.  AC hasn't really changed that much, and it is starting to look awful.
+
+
    *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.  
 
    `ac-ignore-case` is really burning me right now, so I am enabling it.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle no 
 (use-package auto-complete
   :demand
   :diminish ""
@@ -594,11 +612,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (add-to-list 'ac-dictionary-directories (expand-file-name "assets/ac-dictionaries" emagician/dir)))
 #+end_src
 
-*** Auto Complete Dictionary
-#+begin_src emacs-lisp 
-#+end_src
-
-*** Auto Complete Default Sources
+**** Auto Complete Default Sources :tangle no
 #+begin_src emacs-lisp
   (set-default 'ac-sources
                '(ac-source-yasnippet

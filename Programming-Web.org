@@ -1,6 +1,14 @@
 #+title: Web Programming
 #+LINK_UP: Programming.html 
 
+* Interface 
+** Completion    :completion:
+#+begin_src emacs-lisp 
+(use-package company-web)
+(use-package ac-html-bootstrap)
+#+end_src
+
+
 * Modes
 ** Web Mode
 #+begin_src emacs-lisp 
@@ -56,9 +64,11 @@
 #+begin_src emacs-lisp 
 (use-package apache-mode)
 #+end_src
-** Restclient Mode 
+** Restclient Mode   :completion:
 #+begin_src emacs-lisp 
-(use-package restclient)
+(use-package restclient
+  :init
+  (use-package company-restclient))
 #+end_src
 * Interpreters
 ** Skewer

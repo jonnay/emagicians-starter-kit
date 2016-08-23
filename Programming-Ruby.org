@@ -1,6 +1,10 @@
 #+title: Ruby
 #+LINK_UP: Programming.html 
 * Interface
+** Completion
+#+begin_src emacs-lisp 
+(use-package company-inf-ruby)
+#+end_src
 
 * Tools 
 ** Bundler
@@ -68,8 +72,7 @@ gem rdoc --all --ri
    ("Capfile$" . ruby-mode)
    ("Vagrantfile$" . ruby-mode))
   :config
-  (ruby-block-mode t)
-)
+  (ruby-block-mode t))
 #+end_src
 
 * Environment
