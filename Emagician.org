@@ -184,7 +184,7 @@ before the rest of the scratch interface is built.")
                                   " It doesn't exist!\n")
         (setq load-result nil)))
     (emagician/append-scratch "...done!" "\n")
-    (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
+    (message (format "Emagician/Loaded %s %.3fs elapsed" 
                      file 
                      (float-time (time-subtract (current-time) 
                                                 start-time))))
