@@ -1,6 +1,5 @@
 #+title: Thee Lamp
 
-http://www.verona.se/thoughts/2015/08/emacs-gamification/index.html
 
 * MOAR YOW
 
@@ -593,10 +592,12 @@ Know your HTTP Well!  M-x http-foo and media-types
 #+end_src
 ^--- %%!
 * Emagician-Fix-Spell
+
   This was originally defined in this file, but it got moved to it's own repo.
 
 #+begin_src emacs-lisp 
 (load "fix-muscle-memory/fix-muscle-memory.el")
+(setq fix-muscle-memory-use-emoji t)
 (fix-muscle-memory-load-problem-words 'foo
                                       '(("teh" . "the")
                                         ("comptuer" . "computer")
@@ -604,12 +605,16 @@ Know your HTTP Well!  M-x http-foo and media-types
                                         ("occured" . "occurred")))
 (add-hook 'text-mode-hook 'abbrev-mode)
 (add-hook 'prog-mode-hook 'abbrev-mode)
+
+(turn-on-fix-muscle-memory-on-extended-command)
+
 (diminish 'abbrev-mode)
 #+end_src
 
-  
-* Sierpinski ..
- ... is my jam!
+* TODO Emacs Gamification
+** this: http://www.verona.se/thoughts/2015/08/emacs-gamification/index.html
+** Sierpinski
+ ... is my jam! [fn:1]
 
 #+begin_src emacs-lisp 
 (defun sierpinski (s)
@@ -623,3 +628,130 @@ Know your HTTP Well!  M-x http-foo and media-types
     (dotimes (y s) (dotimes (x s) (insert (fill-p x y) " "))))
   (image-mode))
 #+end_src
+
+* Alchemical Symbols
+  No self respecting Emagicians Starter Kit would be without em!
+
+| Dec      | Hex  | Name                                                 | S |
++----------+-------+-----------------------------------------------------+---+
+|  128768  | 1F700 | ALCHEMICAL SYMBOL FOR QUINTESSENCE                  | 🜀 |       
+|  128769  | 1F701 | ALCHEMICAL SYMBOL FOR AIR                           | 🜁 |       
+|  128770  | 1F702 | ALCHEMICAL SYMBOL FOR FIRE                          | 🜂 |       
+|  128771  | 1F703 | ALCHEMICAL SYMBOL FOR EARTH                         | 🜃 |       
+|  128772  | 1F704 | ALCHEMICAL SYMBOL FOR WATER                         | 🜄 |       
+|  128773  | 1F705 | ALCHEMICAL SYMBOL FOR AQUAFORTIS                    | 🜅 |       
+|  128774  | 1F706 | ALCHEMICAL SYMBOL FOR AQUA REGIA                    | 🜆 |       
+|  128775  | 1F707 | ALCHEMICAL SYMBOL FOR AQUA REGIA-2                  | 🜇 |       
+|  128776  | 1F708 | ALCHEMICAL SYMBOL FOR AQUA VITAE                    | 🜈 |       
+|  128777  | 1F709 | ALCHEMICAL SYMBOL FOR AQUA VITAE-2                  | 🜉 |       
+|  128778  | 1F70A | ALCHEMICAL SYMBOL FOR VINEGAR                       | 🜊 |       
+|  128779  | 1F70B | ALCHEMICAL SYMBOL FOR VINEGAR-2                     | 🜋 |       
+|  128780  | 1F70C | ALCHEMICAL SYMBOL FOR VINEGAR-3                     | 🜌 |       
+|  128781  | 1F70D | ALCHEMICAL SYMBOL FOR SULFUR                        | 🜍 |       
+|  128782  | 1F70E | ALCHEMICAL SYMBOL FOR PHILOSOPHERS SULFUR           | 🜎 |       
+|  128783  | 1F70F | ALCHEMICAL SYMBOL FOR BLACK SULFUR                  | 🜏 |       
+|  128784  | 1F710 | ALCHEMICAL SYMBOL FOR MERCURY SUBLIMATE             | 🜐 |       
+|  128785  | 1F711 | ALCHEMICAL SYMBOL FOR MERCURY SUBLIMATE-2           | 🜑 |       
+|  128786  | 1F712 | ALCHEMICAL SYMBOL FOR MERCURY SUBLIMATE-3           | 🜒 |       
+|  128787  | 1F713 | ALCHEMICAL SYMBOL FOR CINNABAR                      | 🜓 |       
+|  128788  | 1F714 | ALCHEMICAL SYMBOL FOR SALT                          | 🜔 |       
+|  128789  | 1F715 | ALCHEMICAL SYMBOL FOR NITRE                         | 🜕 |       
+|  128790  | 1F716 | ALCHEMICAL SYMBOL FOR VITRIOL                       | 🜖 |       
+|  128791  | 1F717 | ALCHEMICAL SYMBOL FOR VITRIOL-2                     | 🜗 |       
+|  128792  | 1F718 | ALCHEMICAL SYMBOL FOR ROCK SALT                     | 🜘 |       
+|  128793  | 1F719 | ALCHEMICAL SYMBOL FOR ROCK SALT-2                   | 🜙 |       
+|  128794  | 1F71A | ALCHEMICAL SYMBOL FOR GOLD                          | 🜚 |       
+|  128795  | 1F71B | ALCHEMICAL SYMBOL FOR SILVER                        | 🜛 |       
+|  128796  | 1F71C | ALCHEMICAL SYMBOL FOR IRON ORE                      | 🜜 |       
+|  128797  | 1F71D | ALCHEMICAL SYMBOL FOR IRON ORE-2                    | 🜝 |       
+|  128798  | 1F71E | ALCHEMICAL SYMBOL FOR CROCUS OF IRON                | 🜞 |       
+|  128799  | 1F71F | ALCHEMICAL SYMBOL FOR REGULUS OF IRON               | 🜟 |       
+|  128800  | 1F720 | ALCHEMICAL SYMBOL FOR COPPER ORE                    | 🜠 |       
+|  128801  | 1F721 | ALCHEMICAL SYMBOL FOR IRON-COPPER ORE               | 🜡 |       
+|  128802  | 1F722 | ALCHEMICAL SYMBOL FOR SUBLIMATE OF COPPER           | 🜢 |       
+|  128803  | 1F723 | ALCHEMICAL SYMBOL FOR CROCUS OF COPPER              | 🜣 |       
+|  128804  | 1F724 | ALCHEMICAL SYMBOL FOR CROCUS OF COPPER-2            | 🜤 |       
+|  128805  | 1F725 | ALCHEMICAL SYMBOL FOR COPPER ANTIMONIATE            | 🜥 |       
+|  128806  | 1F726 | ALCHEMICAL SYMBOL FOR SALT OF COPPER ANTIMONIATE    | 🜦 |       
+|  128807  | 1F727 | ALCHEMICAL SYMBOL FOR SUBLIMATE OF SALT OF COPPER   | 🜧 |       
+|  128808  | 1F728 | ALCHEMICAL SYMBOL FOR VERDIGRIS                     | 🜨 |       
+|  128809  | 1F729 | ALCHEMICAL SYMBOL FOR TIN ORE                       | 🜩 |       
+|  128810  | 1F72A | ALCHEMICAL SYMBOL FOR LEAD ORE                      | 🜪 |       
+|  128811  | 1F72B | ALCHEMICAL SYMBOL FOR ANTIMONY ORE                  | 🜫 |       
+|  128812  | 1F72C | ALCHEMICAL SYMBOL FOR SUBLIMATE OF ANTIMONY         | 🜬 |       
+|  128813  | 1F72D | ALCHEMICAL SYMBOL FOR SALT OF ANTIMONY              | 🜭 |       
+|  128814  | 1F72E | ALCHEMICAL SYMBOL FOR SUBLIMATE OF SALT OF ANTIMONY | 🜮 |       
+|  128815  | 1F72F | ALCHEMICAL SYMBOL FOR VINEGAR OF ANTIMONY           | 🜯 |       
+|  128816  | 1F730 | ALCHEMICAL SYMBOL FOR REGULUS OF ANTIMONY           | 🜰 |       
+|  128817  | 1F731 | ALCHEMICAL SYMBOL FOR REGULUS OF ANTIMONY-2         | 🜱 |       
+|  128818  | 1F732 | ALCHEMICAL SYMBOL FOR REGULUS                       | 🜲 |       
+|  128819  | 1F733 | ALCHEMICAL SYMBOL FOR REGULUS-2                     | 🜳 |       
+|  128820  | 1F734 | ALCHEMICAL SYMBOL FOR REGULUS-3                     | 🜴 |       
+|  128821  | 1F735 | ALCHEMICAL SYMBOL FOR REGULUS-4                     | 🜵 |       
+|  128822  | 1F736 | ALCHEMICAL SYMBOL FOR ALKALI                        | 🜶 |       
+|  128823  | 1F737 | ALCHEMICAL SYMBOL FOR ALKALI-2                      | 🜷 |       
+|  128824  | 1F738 | ALCHEMICAL SYMBOL FOR MARCASITE                     | 🜸 |       
+|  128825  | 1F739 | ALCHEMICAL SYMBOL FOR SAL-AMMONIAC                  | 🜹 |       
+|  128826  | 1F73A | ALCHEMICAL SYMBOL FOR ARSENIC                       | 🜺 |       
+|  128827  | 1F73B | ALCHEMICAL SYMBOL FOR REALGAR                       | 🜻 |       
+|  128828  | 1F73C | ALCHEMICAL SYMBOL FOR REALGAR-2                     | 🜼 |       
+|  128829  | 1F73D | ALCHEMICAL SYMBOL FOR AURIPIGMENT                   | 🜽 |       
+|  128830  | 1F73E | ALCHEMICAL SYMBOL FOR BISMUTH ORE                   | 🜾 |       
+|  128831  | 1F73F | ALCHEMICAL SYMBOL FOR TARTAR                        | 🜿 |       
+|  128832  | 1F740 | ALCHEMICAL SYMBOL FOR TARTAR-2                      | 🝀 |       
+|  128833  | 1F741 | ALCHEMICAL SYMBOL FOR QUICK LIME                    | 🝁 |       
+|  128834  | 1F742 | ALCHEMICAL SYMBOL FOR BORAX                         | 🝂 |       
+|  128835  | 1F743 | ALCHEMICAL SYMBOL FOR BORAX-2                       | 🝃 |       
+|  128836  | 1F744 | ALCHEMICAL SYMBOL FOR BORAX-3                       | 🝄 |       
+|  128837  | 1F745 | ALCHEMICAL SYMBOL FOR ALUM                          | 🝅 |       
+|  128838  | 1F746 | ALCHEMICAL SYMBOL FOR OIL                           | 🝆 |       
+|  128839  | 1F747 | ALCHEMICAL SYMBOL FOR SPIRIT                        | 🝇 |       
+|  128840  | 1F748 | ALCHEMICAL SYMBOL FOR TINCTURE                      | 🝈 |       
+|  128841  | 1F749 | ALCHEMICAL SYMBOL FOR GUM                           | 🝉 |       
+|  128842  | 1F74A | ALCHEMICAL SYMBOL FOR WAX                           | 🝊 |       
+|  128843  | 1F74B | ALCHEMICAL SYMBOL FOR POWDER                        | 🝋 |       
+|  128844  | 1F74C | ALCHEMICAL SYMBOL FOR CALX                          | 🝌 |       
+|  128845  | 1F74D | ALCHEMICAL SYMBOL FOR TUTTY                         | 🝍 |       
+|  128846  | 1F74E | ALCHEMICAL SYMBOL FOR CAPUT MORTUUM                 | 🝎 |       
+|  128847  | 1F74F | ALCHEMICAL SYMBOL FOR SCEPTER OF JOVE               | 🝏 |       
+|  128848  | 1F750 | ALCHEMICAL SYMBOL FOR CADUCEUS                      | 🝐 |       
+|  128849  | 1F751 | ALCHEMICAL SYMBOL FOR TRIDENT                       | 🝑 |       
+|  128850  | 1F752 | ALCHEMICAL SYMBOL FOR STARRED TRIDENT               | 🝒 |       
+|  128851  | 1F753 | ALCHEMICAL SYMBOL FOR LODESTONE                     | 🝓 |       
+|  128852  | 1F754 | ALCHEMICAL SYMBOL FOR SOAP                          | 🝔 |       
+|  128853  | 1F755 | ALCHEMICAL SYMBOL FOR URINE                         | 🝕 |       
+|  128854  | 1F756 | ALCHEMICAL SYMBOL FOR HORSE DUNG                    | 🝖 |       
+|  128855  | 1F757 | ALCHEMICAL SYMBOL FOR ASHES                         | 🝗 |       
+|  128856  | 1F758 | ALCHEMICAL SYMBOL FOR POT ASHES                     | 🝘 |       
+|  128857  | 1F759 | ALCHEMICAL SYMBOL FOR BRICK                         | 🝙 |       
+|  128858  | 1F75A | ALCHEMICAL SYMBOL FOR POWDERED BRICK                | 🝚 |       
+|  128859  | 1F75B | ALCHEMICAL SYMBOL FOR AMALGAM                       | 🝛 |       
+|  128860  | 1F75C | ALCHEMICAL SYMBOL FOR STRATUM SUPER STRATUM         | 🝜 |       
+|  128861  | 1F75D | ALCHEMICAL SYMBOL FOR STRATUM SUPER STRATUM-2       | 🝝 |       
+|  128862  | 1F75E | ALCHEMICAL SYMBOL FOR SUBLIMATION                   | 🝞 |       
+|  128863  | 1F75F | ALCHEMICAL SYMBOL FOR PRECIPITATE                   | 🝟 |       
+|  128864  | 1F760 | ALCHEMICAL SYMBOL FOR DISTILL                       | 🝠 |       
+|  128865  | 1F761 | ALCHEMICAL SYMBOL FOR DISSOLVE                      | 🝡 |       
+|  128866  | 1F762 | ALCHEMICAL SYMBOL FOR DISSOLVE-2                    | 🝢 |       
+|  128867  | 1F763 | ALCHEMICAL SYMBOL FOR PURIFY                        | 🝣 |       
+|  128868  | 1F764 | ALCHEMICAL SYMBOL FOR PUTREFACTION                  | 🝤 |       
+|  128869  | 1F765 | ALCHEMICAL SYMBOL FOR CRUCIBLE                      | 🝥 |       
+|  128870  | 1F766 | ALCHEMICAL SYMBOL FOR CRUCIBLE-2                    | 🝦 |       
+|  128871  | 1F767 | ALCHEMICAL SYMBOL FOR CRUCIBLE-3                    | 🝧 |       
+|  128872  | 1F768 | ALCHEMICAL SYMBOL FOR CRUCIBLE-4                    | 🝨 |       
+|  128873  | 1F769 | ALCHEMICAL SYMBOL FOR CRUCIBLE-5                    | 🝩 |       
+|  128874  | 1F76A | ALCHEMICAL SYMBOL FOR ALEMBIC                       | 🝪 |       
+|  128875  | 1F76B | ALCHEMICAL SYMBOL FOR BATH OF MARY                  | 🝫 |       
+|  128876  | 1F76C | ALCHEMICAL SYMBOL FOR BATH OF VAPOURS               | 🝬 |       
+|  128877  | 1F76D | ALCHEMICAL SYMBOL FOR RETORT                        | 🝭 |       
+|  128878  | 1F76E | ALCHEMICAL SYMBOL FOR HOUR                          | 🝮 |       
+|  128879  | 1F76F | ALCHEMICAL SYMBOL FOR NIGHT                         | 🝯 |       
+|  128880  | 1F770 | ALCHEMICAL SYMBOL FOR DAY-NIGHT                     | 🝰 |       
+|  128881  | 1F771 | ALCHEMICAL SYMBOL FOR MONTH                         | 🝱 |       
+|  128882  | 1F772 | ALCHEMICAL SYMBOL FOR HALF DRAM                     | 🝲 |       
+|  128883  | 1F773 | ALCHEMICAL SYMBOL FOR HALF OUNCE                    | 🝳 |       
+
+* Footnotes
+
+[fn:1] http://nullprogram.com/blog/2012/09/14/
+

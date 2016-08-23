@@ -28,6 +28,18 @@
 
    I keep it around though because it's clevar and fun.
    
+* Automated things
+** Midnight
+   Clean some buffers at midnight. 
+
+#+begin_src emacs-lisp 
+(use-package midnight
+  :init
+  (setq clean-buffer-list-kill-never-buffer-names '("*httpd*"))
+  :config 
+  (midnight-delay-set 'midnight-delay "4:30am"))
+#+end_src
+
 * Display
 ** Turn of scrollbars, toolbars, menu bars
 
@@ -38,8 +50,14 @@ Oh my.
     (when (fboundp mode) (funcall mode -1)))
 #+end_src
 
-** Visible Bell
-   I used to hate the visible bell, but it has sense gotten a lot better. 
+** 🛎 Bell 🔔
+   When emacs emits C-g (bell) to the user, it is to signal an error, warning or some other alert.
+
+   When the user types C-g to emacs, it is to signal an error, or a need to quit.
+
+   I rather enjoy that kind of poetry.
+
+   I used to hate the visible bell when it flashed the whole screen, but it has sense gotten a lot better. 
 
 #+begin_src emacs-lisp 
 (setq visible-bell t)
@@ -52,10 +70,9 @@ Oh my.
 #+end_src
 
 *** Unicode
-
 #+begin_verse
 Unicode
-  |(^o^)/    ,(   Get all teh characters! )
+  |(⁀ₒ⁀)/    ,(   Get all teh characters! )
 #+end_verse  
 
 You'll need a number of fonts to make this work:
@@ -65,12 +82,18 @@ You'll need a number of fonts to make this work:
 - Noto Sans https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true
 - Noto Sans Symbols https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true
 
+The real secret sauce to making sure to get all the emoji is (setq unicode-fonts-ignore-overrides)
+
+#+begin_verse
+  👯 ,( Get all teh Emoji! )
+#+end_verse
 
 #+begin_src emacs-lisp 
 (use-package unicode-fonts
   :demand
   :init
   (setq unicode-fonts-skip-fonts)
+  (setq unicode-fonts-ignore-overrides t)
   (use-package persistent-soft :demand)
   :config
   (unicode-fonts-setup))
@@ -126,7 +149,10 @@ You'll need a number of fonts to make this work:
    Yeah, fix the mode line.
 
 #+begin_src emacs-lisp 
-(use-package diminish)
+(use-package diminish
+  :init
+  (diminish 'auto-revert-mode "🔂 ")
+  (diminish 'visual-line-mode "↩ "))
 #+end_src
 
 *** Powerline 
@@ -257,6 +283,11 @@ One day.  Powerline and nyan mode don't work.
 #+end_src
 
 
+** Show Empty lines
+#+begin_src emacs-lisp 
+(setq indicate-empty-lines t)
+#+end_src
+
 ** Show Whitespace with fill-column-indicator                                            :deactived:
    I was initially using fill-column-indicator, but that turned out to
    be kinda buggy.   It looks  It would hose org exports and also whack
@@ -277,12 +308,54 @@ One day.  Powerline and nyan mode don't work.
 *** Base theme: Moe, Moe, Kyun!
    This theme is my favorite so far.  It's got good color choices and it's nice and dark.
 
+**** Set up different colors for different days
+
+     The colors are:
+
+     | Day       | apsect      | Color   | P |
+     |-----------+-------------+---------+---|
+     | Sunday    | Benevolence | yellow  | 🌞 |
+     | Monday    | Reverence   | blue    | 🌚 |
+     | Tuesday   | Courage     | red     | ♂ |
+     | Wednesday | Honesty     | cyan    | ☿ |
+     | Thursday  | Rectitude   | green   | ♃ |
+     | Friday    | Honour      | magenta | ♀ |
+     | Saturday  | Loyalty     | b/w     | ♄ |
+
+#+begin_src emacs-lisp 
+(defun emagician/get-moe-color-for-day (&optional day)
+  (when (null day)
+    (setq day (nth 6 (decode-time))))
+  (case day
+    ((0) 'yellow)
+    ((1) 'blue)
+    ((2) 'red)
+    ((3) 'cyan)
+    ((4) 'green)
+    ((5) 'magenta)
+    ((6) 'w/b)))
+
+(ert-deftest emagician/color-check ()
+  (should (equal (emagician/get-moe-color-for-day 1)
+                 'blue))
+  (should (equal (emagician/get-moe-color-for-day 5)
+                 'magenta))
+  (should (member (emagician/get-moe-color-for-day)
+                  '(yellow blue red cyan green magenta w/b))))
+#+end_src
+
+
+**** Main setup
+
    The theme needs to be loaded after powerlie to work.
 #+begin_src emacs-lisp 
 (use-package moe-theme
   :init
-  (setq moe-theme-mode-line-color 'yellow)
+  (setq moe-theme-highlight-buffer-id t)
   :config
+  (emagician/defhook update-moe-color midnight-hook
+    (moe-theme-set-color (emagician/get-moe-color-for-day)))
+  (moe-theme-set-color (emagician/get-moe-color-for-day))
   (moe-dark))
 #+end_src
 *** Org Beautify
@@ -363,7 +436,7 @@ show-#+begin_src emacs-lisp
   :bind (:map emagician/mc-keymap
               ("e" . mc/edit-lines)
               ("n" . mc/mark-next-like-this)
-              ("p" . mc/ark-previous-like-this)
+              ("p" . mc/mark-previous-like-this)
               (")" . mc/mark-next-symbol-like-this)
               ("(" . mc/mark-prev-symbol-like-this)
               ("h" . mc/mark-all-like-this)
@@ -449,8 +522,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
    Set the snippet dir.
 
-#+begin_src emacs-lisp 
 (emagician/expect-dir "assets/snippets")
+#+begin_src emacs-lisp 
 (use-package yasnippet
   :diminish ""
   :init
@@ -458,6 +531,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (setq yas-trigger-key nil)
   (add-hook 'text-mode-hook 'yas-minor-mode-on)
   :config
+  (diminish 'yas-minor-mode "")
   (yas/reload-all))
 #+end_src
 
@@ -543,6 +617,10 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
     (global-undo-tree-mode))
 #+end_src
 
+** Spell Checking
+(use-package flyspell
+  :diminish ""
+  :init)
 * Navigating
 ** Scrolling
    Keep the screen position when scrolling.  
@@ -659,15 +737,18 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Which Key
-   More like--witch key.  Which-key is the ultimate in discoverability.
+   More like—witch key.  Which-key is the ultimate in discoverability.
 
 #+begin_src emacs-lisp 
 (use-package which-key
   :demand
+  :diminish ""
   :init
   (setq which-key-idle-delay 0.6)
   (setq which-key-is-verbose t)
-  (setq which-key-min-display-lines 2)
+  (setq which-key-min-display-lines 3)
+  (setq which-key-sort-order 'which-key-local-then-key-order)
+  (setq which-key-max-description-length 50)
   (setq which-key-show-remaining-keys t)
   (which-key-mode))
 #+end_src
@@ -686,17 +767,17 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp
 (use-package helm
   :demand
-  :diminish ""
+  :diminish ('helm-minor-mode . "")
   :init
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)
   (require 'helm-ring)
   (use-package helm-ls-git :demand)
   (diminish 'helm-mode ""))
+
 #+end_src
 
 *** F2 is my super duper DWIM helper
-
 #+begin_src emacs-lisp
   (defun emagician/helm-old ()
     "Slowly going to become a super helm-dwim"
@@ -756,6 +837,47 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (global-set-key (kbd "M-x")     'helm-M-x)
   (setq helm-M-x-always-save-history t)
 #+end_src
+
+**** Key binding muscle memory
+
+Serious magick to force the user to use 
+delete me soon
+#+begin_src emacs-lisp :tangle no
+(defun emagician/make-muscle-memory (the-problem the-solution)
+  "The user creation funtion
+
+This function adds a feature to the user user so that indead of
+using the extended command `THE-PROBLEM'.they learn to use the
+keybinding (as a vector) `THE-SOLUTION' by typing it 3 times."
+  (beep)
+  (let* ((required-corrections 3)
+         (attempts 0)
+         (last-k-error " "))
+    (while (< attempts required-corrections)
+      (when (< attempts -6) (error "Too many failed attempts! 😿"))
+      (pcase (read-key-sequence
+              (format "🐰💭Learning is fun!  Execute '%s' with '%s' %s(%d/%d): "
+                      the-problem
+                      the-solution
+                      last-k-error
+                      attempts
+                      required-corrections))
+        ((pred (equal (kbd the-solution)))
+         (setq last-k-error "✅")
+         (setq attempts (1+ attempts)))
+        ((pred (equal (kbd "C-g")))
+         (setq attemps required-corrections)
+         (message "Okay, Giving up."))
+        (k-error
+         (beep)
+         (setq last-k-error (format "❌ %s " k-error))
+         (setq attempts (1- attempts)))))))
+
+(eval-after-load 'helm-command
+  '(add-function :after (symbol-function 'helm-M-x) #'emagician/helm-M-x/suggest-keybinding))
+
+#+end_src
+
 
 *** Buffer Selection
 #+begin_src emacs-lisp 

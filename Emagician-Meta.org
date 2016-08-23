@@ -15,138 +15,12 @@ and perception stimulate each other.
 
 --Peter Carroll
 
-* F3 Prefix Key for Emagician Meta Development
-#+begin_src emacs-lisp 
-(define-prefix-command 'emagician/meta-keymap)
-(bind-keys :prefix-map emagician/meta-keymap
-           :prefix "<f3>"
-           ("<f4>" . emagician/meta/run-all-emagick-tests)
-           ("<f5>" . emagician/meta/run-all-tests))
-#+end_src
-
-* Testing
-** Running all ERT tests
-#+begin_src emacs-lisp 
-(defun emagician/run-all-tests ()
-  (interactive)
-  (ert "emagician/"))
-#+end_src
-
-** Test out a fresh hot load of Emagician  💩
-
-
-#+begin_src emacs-lisp
-  (defun emagician/test-initialization (&optional forms)
-    (interactive)
-    (let* ((init-file (expand-file-name "init.el"
-                                        (file-name-directory (or load-file-name
-                                                                 buffer-file-name
-                                                                 (org-src-do-at-code-block (eval 'buffer-file-name))))))
-           (magick-string "emagician/magick-output")
-           (code `(condition-case err
-                      (progn
-                        (toggle-debug-on-error)
-                        (load-file ,init-file)
-                        ,(if forms
-                             `(progn ,forms)
-                           (message "No extra forms executed"))
-                        (message "(%s 'succcess)" ,magick-string))
-                    ((error)
-                       (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
-                       (kill-emacs 1))))
-           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
-                                       invocation-directory
-                                       invocation-name
-                                       (replace-regexp-in-string "\""
-                                                                 "\\\""
-                                                                 (format "%S" code)
-                                                                 nil
-                                                                 t)))
-           (result (shell-command-to-string invocation-command))
-           (captured-result (substring result
-                                     (or (string-match (concat "(" magick-string) result)
-                                         (error "Unexpected result from child emacs %s" result))))
-           (parsed-result (read captured-result))
-           (err (assoc 'error parsed-result)))
-      (message "Result: %s\n"
-               (message "%s\n\n\n%s" (pp parsed-result) result))
-      (if err 
-          (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
-        (message "Successful!"))))
-
-  (defun emagician/test-initialization-with (lisp)
-    "Test an Emacs initialization with a given chunk of lisp."
-    (interactive  "xExecute: ")
-    (emagician/test-initialization lisp))
-#+end_src
-
-*** Working, but kinda shitty testers 
-    This loads the starter kit as a batch and outputs the results as a message.
-
-#+begin_src emacs-lisp 
-  (defun emagician/test-init-through-batch ()
-    (interactive)
-    (message "Running New Emacs: %s"
-             (shell-command-to-string 
-              (concat invocation-directory invocation-name " "
-                      "--no-init-file --batch "
-                      "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                      "--load=" (file-name-directory (buffer-file-name)) "init.el " 
-                      "--eval='' "
-                      "&"))))
-#+end_src
-
-This does a full GUI load, outputting any results as a message. 
-
-#+begin_src emacs-lisp 
-    (defun emagician/test-full-init()
-      (interactive)
-      (message (concat "Running New Emacs: "
-                       (shell-command-to-string 
-                        (concat invocation-directory invocation-name " "
-                                "--no-init-file "
-                                "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                                "--load=" (file-name-directory (buffer-file-name)) "init.el " 
-                                "&")))))
-#+end_src
-
-* Emagician Helm Source
-
-   Doesn't currently work because Helm keeps changing its interface. 
-
-   #+begin_src emacs-lisp :tangle no
-   (defclass emagician/files-helm-source (helm-source-sync helm-type-file)
-     ((candidates :initform (lambda () (when (file-accessible-directory-p emagician/dir)
-                                               (directory-files emagician/dir t))))
-      (keymap :initform helm-generic-files-map)
-      (filtered-candidate-transformer :initform #'emagician/helm-ct-is-org-file)
-      (action :initform 'helm-type-file-actions)
-      ))
-     
-   (defun emagician/helm-ct-is-org-file (candidates)
-     (remove-if-not (lambda (c)
-                      (and (string= (substring c -4) ".org")
-                           (not (string= (substring (file-name-nondirectory c) 0 2) ".#"))))
-                    candidates))
-
-   (defun emagician/helm-emagician-dir () 
-     "List all the org files in the Emagician dir"
-     (interactive)
-     (helm :sources (helm-make-source "Files in Emagician-dir" 'emagician/files-helm-source)
-           :candidate-number-limit 40
-           :buffer "*emagician-|-+-|-files*"))
-
-   (global-set-key (kbd "S-<f3>") 'emagician/helm-emagician-dir)
-#+end_src
+* TODO sort this file
 
 * Building the emagician site
-
- #+begin_src emacs-lisp 
- (setq org-html-htmlize-output-type 'css)
- #+end_src
-
-
+** Publishing functions
 #+begin_src emacs-lisp 
+(setq org-html-htmlize-output-type 'css)
 (setq htmlize-html-charset 'utf-8)
 (setq httpd-root (expand-file-name "gh-pages" emagician/dir))
 
@@ -169,6 +43,7 @@ This does a full GUI load, outputting any results as a message.
                                       :sitemap-ignore-case t
                                       :html-html5-fancy t
                                       :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
+                                      :html-link-home "index"
                                       :publishing-function org-html-publish-to-html
                                       )
                                      ("emagician-org-test"
@@ -185,18 +60,18 @@ This does a full GUI load, outputting any results as a message.
                                      )))
     (org-publish project force async)))
 
-(defun emagician/meta/publish-all ()
+(defun emagician/meta/publish-changed ()
   (interactive)
   (emagician/meta/publish "emagician" t nil))
+
+(defun emagician/meta/publish-all ()
+  (interactive)
+  (emagician/meta/publish "emagician" nil nil))
 
 (defun emagician/meta/publish-assets ()
   (interactive)
   (emagician/meta/publish "emagician-assets" t nil))
 
-(defun emagician/meta/publish-test ()
-  "A small tester project"
-  (interactive)
-  (emagician/meta/publish "emagician-test" t nil))
 #+end_src
 
 ** The CSS file 
@@ -272,6 +147,10 @@ a:after {
 
 a[name]:before {
     content: "[[" attr(name);
+}
+
+a[name] {
+    font-size: 9px;
 }
 
 a:link, 
@@ -700,6 +579,179 @@ div.figure {
         display: none;
     }
 }
+#+end_src
+
+* Testing
+** Running all ERT tests
+#+begin_src emacs-lisp 
+(defun emagician/run-all-tests ()
+  (interactive)
+  (ert "emagician/"))
+#+end_src
+
+** Test out a fresh hot load of Emagician  💩
+
+
+#+begin_src emacs-lisp
+  (defun emagician/test-initialization (&optional forms)
+    (interactive)
+    (let* ((init-file (expand-file-name "init.el"
+                                        (file-name-directory (or load-file-name
+                                                                 buffer-file-name
+                                                                 (org-src-do-at-code-block (eval 'buffer-file-name))))))
+           (magick-string "emagician/magick-output")
+           (code `(condition-case err
+                      (progn
+                        (toggle-debug-on-error)
+                        (load-file ,init-file)
+                        ,(if forms
+                             `(progn ,forms)
+                           (message "No extra forms executed"))
+                        (message "(%s 'succcess)" ,magick-string))
+                    ((error)
+                       (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
+                       (kill-emacs 1))))
+           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
+                                       invocation-directory
+                                       invocation-name
+                                       (replace-regexp-in-string "\""
+                                                                 "\\\""
+                                                                 (format "%S" code)
+                                                                 nil
+                                                                 t)))
+           (result (shell-command-to-string invocation-command))
+           (captured-result (substring result
+                                     (or (string-match (concat "(" magick-string) result)
+                                         (error "Unexpected result from child emacs %s" result))))
+           (parsed-result (read captured-result))
+           (err (assoc 'error parsed-result)))
+      (message "Result: %s\n"
+               (message "%s\n\n\n%s" (pp parsed-result) result))
+      (if err 
+          (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
+        (message "Successful!"))))
+
+  (defun emagician/test-initialization-with (lisp)
+    "Test an Emacs initialization with a given chunk of lisp."
+    (interactive  "xExecute: ")
+    (emagician/test-initialization lisp))
+#+end_src
+
+*** Working, but kinda shitty testers 
+    This loads the starter kit as a batch and outputs the results as a message.
+
+#+begin_src emacs-lisp 
+  (defun emagician/test-init-through-batch ()
+    (interactive)
+    (message "Running New Emacs: %s"
+             (shell-command-to-string 
+              (concat invocation-directory invocation-name " "
+                      "--no-init-file --batch "
+                      "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                      "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                      "--eval='' "
+                      "&"))))
+#+end_src
+
+This does a full GUI load, outputting any results as a message. 
+
+#+begin_src emacs-lisp 
+    (defun emagician/test-full-init()
+      (interactive)
+      (message (concat "Running New Emacs: "
+                       (shell-command-to-string 
+                        (concat invocation-directory invocation-name " "
+                                "--no-init-file "
+                                "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                                "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                                "&")))))
+#+end_src
+* Emagician Helm Source
+
+   Helm keeps changing its interface.  For such an awesome package this is the one way in which it falls down for me.  Anything used to be so easy to configure.
+
+   #+begin_src emacs-lisp :tangle yes
+   (defclass emagician/files-helm-source (helm-source-sync helm-type-file)
+     ((candidates :initform (lambda () (when (file-accessible-directory-p emagician/dir)
+                                               (directory-files emagician/dir t))))
+      (keymap :initform helm-generic-files-map)
+      (filtered-candidate-transformer :initform #'emagician/helm-ct-is-org-file)
+      (action :initform 'helm-type-file-actions)
+      ))
+     
+   (defun emagician/helm-ct-is-org-file (candidates src)
+     (remove-if-not
+      (lambda (c)
+        (let ((file (cdr c)))      
+          (and (string= (substring file -4) ".org")
+               (not (string= (substring (file-name-nondirectory file)
+                                        0
+                                        2) ".#")))))
+      candidates))
+
+   (defun emagician/helm-emagician-dir () 
+     "List all the org files in the Emagician dir"
+     (interactive)
+     (helm :sources (helm-make-source "Files in Emagician-dir" 'emagician/files-helm-source)
+           :candidate-number-limit 40
+           :buffer "*emagician-|-+-|-files*"))
+#+end_src
+* Inserting text chunks
+   In 2016 I participated in GISHWHES (The Greatest International Scavenger Hunt the World Has Ever Seen).  One of the items was to make an animation on a Commodore-64.
+
+   I think I ended up getting inspired by the keyboard.
+
+   [[file:assets/images/Commodore.gif]]
+
+** Symbol Getter
+#+begin_src emacs-lisp 
+(defun emagician/meta/get-insert-symbol (text)
+  "Returns a insert-symbol for the chunk of text"
+  (intern (format "emagician/insert/%s" text)))
+#+end_src
+
+** Make some Magickal Keys
+
+   The next chunk makes a keymap and starts defining and binding insert functions on it. 
+
+#+begin_src emacs-lisp 
+(define-prefix-command 'emagician/magick-keymap)
+(mapcar (lambda (pair)
+          (fset (emagician/meta/get-insert-symbol (cdr pair))
+                (eval `(lambda () (interactive) (insert ,(cdr pair)))))
+          (define-key emagician/magick-keymap
+            (car pair)
+            (emagician/meta/get-insert-symbol (cdr pair))))
+        '(("b" . "🐰")
+          ("p" . "-|-+-|-")
+          ("m" . "🍄")
+          ("e" . "💊")        ; Hah, it's a joke son.
+          ("s" . "💩")
+          ("a" . "a")
+          ("t" . "🚽")))
+#+end_src
+
+* F3 Prefix Key for Emagician Meta Development
+
+  The idea here is that ~f3~ can be pressed whenever I need to do
+  anything specifically with the Starter Kit.
+
+  With [[file:Interface.org::*Which%20Key][Which Key]] it means ~f3~ becomes a visual menu until I really
+  start to learn the keystrokes.
+
+** Meta Keys and Prefixes
+   - i     :: insert magickal key.  (p-crosses and poops and bunnies, oh my!)
+   - shift :: Do the thing, but in debug. 
+
+#+begin_src emacs-lisp 
+(bind-keys :prefix-map emagician/meta-keymap
+           :prefix "<f3>"
+           ("<f3>"    . emagician/helm-emagician-dir)
+           ("<f4>"    . emagician/meta/run-all-emagick-tests)
+           ("<f5>"    . emagician/meta/run-all-tests)
+           ("<f12>"   . emagician/meta/publish-changed)
+           ("S-<f12>" . emagician/meta/publish-all)
+           ("i"       . emagician/magick-keymap))
 #+end_src
 
 * Footnotes

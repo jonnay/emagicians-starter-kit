@@ -1,11 +1,16 @@
-#+HTML: <div class= "status">
-* Project Status:
+#+HTML: <div class= "notice notice-info">
+  Project Status:
 
   Fit for other humans to tell me it is broken, and I can fix it.
 
   But Not Even Alpha.
 #+HTML: </div>
 
+🐰,(hello!)
+
+#+HTML: <div class="notice notice-warning">
+  What is here is not on the master branch, but is instead in the v2 branch. 
+#+HTML: </div>
 * A starter kit for magicians
 
   I stand on the shoulders of giants to weave my own spells.  
@@ -71,5 +76,5 @@
   who outshines all other people, like the noon-day sun outshines the
   stars.
 
-  I Love you.
+  🌞 I Love you. 🌞
 
