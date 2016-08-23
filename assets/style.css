@@ -6,6 +6,8 @@ body {
     font-size: 16px;
     line-height: 1.4;
     color: #33333f;
+    padding: 0;
+    margin: 0;
 }
 
 code {
@@ -69,6 +71,10 @@ a[name]:before {
     content: "[[" attr(name);
 }
 
+a[name] {
+    font-size: 9px;
+}
+
 a:link, 
 a:hover, 
 a:visited {
@@ -90,8 +96,7 @@ a:visited:hover {
 }
 
 a[href^="http"]:after {
-    content: "\21B3";
-    background: white;
+    content: "\21F4]]";
     padding-left: 0.2em;
 }
 
@@ -136,6 +141,13 @@ a[href^="http"]:after {
     margin-top: 1em;
 }
 
+#org-div-home-and-up {
+    text-align: right;
+    white-space: nowrap;
+    background-color: hsl(0, 0%, 90%);
+    padding: 0.5ex 1em 1ex;
+}
+
 table {
     width: 100%;
 }
@@ -166,6 +178,10 @@ span.section-number-5 {
     line-height: 70%;
     border-radius: 10px;
     background-color: hsl(0, 0%, 93%);
+}
+
+.outline-3, .outline-4, .outline-5, .outline-6 {
+    margin-left: 15px;
 }
 
 img {
@@ -276,6 +292,7 @@ pre {
     background-color: #f8f8f8;
     background-size: 8px 8px;
     background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
+    overflow: auto;
 }
 
 pre.src {
@@ -384,6 +401,12 @@ div.figure {
     color: white;
 }
 
+#postamble {
+    margin-top: 3em;
+    padding: 1ex 2em 2ex;
+    background-color: hsl(0, 0%, 93%);
+}
+
 @media screen {
     h1.title {
         text-align: left;
@@ -398,7 +421,7 @@ div.figure {
         position: fixed;
         top: 0;
         left: 0;
-        padding: 2em 0 2em 2em;
+        padding: 1ex 0 2em 2em;
         width: 240px;
         height: 100vh;
         font-size: 11px;
@@ -421,6 +444,9 @@ div.figure {
     div.outline-2, #footnotes {
         margin-left: 280px;
         max-width: 960px;
+    }
+    #postamble {
+        margin-left: 262px;
     }
 }
 

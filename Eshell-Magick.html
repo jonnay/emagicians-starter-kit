@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Eshell Magick</title>
-<!-- 2016-08-19 Fri 13:57 -->
+<!-- 2016-08-22 Mon 23:47 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -137,30 +137,43 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index"> HOME </a>
+</div><div id="content">
 <h1 class="title">Eshell Magick</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Fixes</a>
+<li><a href="#sec-1">1. About the name&#x2026;</a></li>
+<li><a href="#sec-2">2. Fixes</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Use helm for history</a></li>
-<li><a href="#sec-1-2">1.2. Fix an issue with running commands remotely through tramp</a></li>
-<li><a href="#sec-1-3">1.3. Pager</a></li>
+<li><a href="#sec-2-1">2.1. Use helm for history</a></li>
+<li><a href="#sec-2-2">2.2. Fix an issue with running commands remotely through tramp</a></li>
+<li><a href="#sec-2-3">2.3. Pager 😻</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2. Interface</a>
+<li><a href="#sec-3">3. Interface</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Set Prompt</a></li>
-<li><a href="#sec-2-2">2.2. Use my own theme</a></li>
-<li><a href="#sec-2-3">2.3. Did you mean?</a></li>
-<li><a href="#sec-2-4">2.4. Show fringe</a></li>
+<li><a href="#sec-3-1">3.1. Set Prompt</a></li>
+<li><a href="#sec-3-2">3.2. Use my own theme</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. <span class="todo TODO">TODO</span> don't show hostname twice.</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Did you mean?</a></li>
+<li><a href="#sec-3-4">3.4. Show fringe</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> About the name&#x2026;</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 If this file is called <code>eshell.org</code>, it weaves into <code>eshell.el</code>, and
 then <code>require</code> gets problematic.
@@ -168,31 +181,32 @@ then <code>require</code> gets problematic.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook 'eshell)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emacs-startup-hook<span class="org-unicode-whitespace-subdued-space"> </span>'eshell)
 </pre>
 </div>
+</div>
+</div>
 
-
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Fixes</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Use helm for history</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Fixes</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Use helm for history</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell</span>
-  <span class="org-builtin">:demand</span> 
-  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> eshell-mode-map
-         (<span class="org-string">"M-S-r"</span> . helm-eshell-history)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eshell</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:map</span><span class="org-unicode-whitespace-subdued-space"> </span>eshell-mode-map
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"M-S-r"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>helm-eshell-history)))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Fix an issue with running commands remotely through tramp</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Fix an issue with running commands remotely through tramp</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 <a href="http://emacs.stackexchange.com/questions/2107/run-application-in-cwd-on-remote-host-from-within-eshell">http://emacs.stackexchange.com/questions/2107/run-application-in-cwd-on-remote-host-from-within-eshell</a>
 </p>
@@ -203,102 +217,110 @@ This is apparently still an issue.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span> <span class="org-function-name">eshell-gather-process-output</span> (before absolute-cmd (command args) act)
-  (setq command (file-truename command)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">eshell-gather-process-output</span><span class="org-unicode-whitespace-subdued-space"> </span>(before<span class="org-unicode-whitespace-subdued-space"> </span>absolute-cmd<span class="org-unicode-whitespace-subdued-space"> </span>(command<span class="org-unicode-whitespace-subdued-space"> </span>args)<span class="org-unicode-whitespace-subdued-space"> </span>act)
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>command<span class="org-unicode-whitespace-subdued-space"> </span>(file-truename<span class="org-unicode-whitespace-subdued-space"> </span>command)))
 
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Pager</h3>
-<div class="outline-text-3" id="text-1-3">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setenv <span class="org-string">"PAGER"</span> <span class="org-string">"cat"</span>)
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Interface</h2>
-<div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Set Prompt</h3>
-<div class="outline-text-3" id="text-2-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-prompt-extras</span>
-  <span class="org-builtin">:init</span>
-  (setq eshell-highlight-prompt nil
-        eshell-prompt-function 'emagician/epe-theme))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Use my own theme</h3>
-<div class="outline-text-3" id="text-2-2">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/epe-theme</span> ()
-  <span class="org-doc">"Emagician Eshell Prompt Extras theme."</span>
-  (setq eshell-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#\n&#128048;]*[#&#128048;]) "</span>)
-  (concat
-   <span class="org-string">"\n"</span>
-   (<span class="org-keyword">when</span> (epe-remote-p)
-     (epe-colorize-with-face (concat (epe-remote-user)
-                                     <span class="org-string">"@"</span>
-                                     (epe-remote-host))
-                             'epe-remote-face))
-   (epe-colorize-with-face (eshell/pwd) 'epe-dir-face)
-   (<span class="org-keyword">when</span> (epe-git-p)
-     (concat
-      (epe-colorize-with-face <span class="org-string">":"</span> 'epe-dir-face)
-      (epe-colorize-with-face
-       (concat (epe-git-branch)
-               (epe-git-dirty)
-               (epe-git-untracked)
-               (<span class="org-keyword">let</span> ((unpushed (epe-git-unpushed-number)))
-                 (<span class="org-keyword">unless</span> (= unpushed 0)
-                   (concat <span class="org-string">":"</span> (number-to-string unpushed)))))
-       'epe-git-face)))
-   (epe-colorize-with-face <span class="org-string">"\n &#128048;)"</span> 'epe-symbol-face)
-   (epe-colorize-with-face (<span class="org-keyword">if</span> (= (user-uid) 0) <span class="org-string">"#"</span> <span class="org-string">""</span>) 'epe-sudo-symbol-face)
-   <span class="org-string">" "</span>))
+(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'tramp-remote-path<span class="org-unicode-whitespace-subdued-space"> </span>'tramp-own-remote-path)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Did you mean?</h3>
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Pager 😻</h3>
 <div class="outline-text-3" id="text-2-3">
+<p>
+Use cat as a pager.  Fixes all kinds of things.
+</p>
+
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-did-you-mean</span> 
-  <span class="org-builtin">:demand</span>
-  <span class="org-builtin">:config</span>
-  (eshell-did-you-mean-setup))
+<pre class="src src-emacs-lisp">(setenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PAGER"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"cat"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Interface</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Set Prompt</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eshell-prompt-extras</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>eshell-highlight-prompt<span class="org-unicode-whitespace-subdued-space"> </span>nil
+<span class="org-unicode-whitespace-subdued-space">        </span>eshell-prompt-function<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/epe-theme))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Show fringe</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Use my own theme</h3>
+<div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-fringe-status</span>
-  <span class="org-builtin">:init</span>
-  (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/epe-theme</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Eshell</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Prompt</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Extras</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">theme."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>eshell-prompt-regexp<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#\n&#128048;]*[#&#128048;])</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(concat
+<span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">"\n"</span>
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(epe-remote-p)
+<span class="org-unicode-whitespace-subdued-space">     </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(epe-remote-user)
+<span class="org-unicode-whitespace-subdued-space">                                     </span><span class="org-string">"@"</span>
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(epe-remote-host))
+<span class="org-unicode-whitespace-subdued-space">                             </span>'epe-remote-face))
+<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span>(eshell/pwd)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(epe-git-p)
+<span class="org-unicode-whitespace-subdued-space">     </span>(concat
+<span class="org-unicode-whitespace-subdued-space">      </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
+<span class="org-unicode-whitespace-subdued-space">      </span>(epe-colorize-with-face
+<span class="org-unicode-whitespace-subdued-space">       </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(epe-git-branch)
+<span class="org-unicode-whitespace-subdued-space">               </span>(epe-git-dirty)
+<span class="org-unicode-whitespace-subdued-space">               </span>(epe-git-untracked)
+<span class="org-unicode-whitespace-subdued-space">               </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((unpushed<span class="org-unicode-whitespace-subdued-space"> </span>(epe-git-unpushed-number)))
+<span class="org-unicode-whitespace-subdued-space">                 </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>unpushed<span class="org-unicode-whitespace-subdued-space"> </span>0)
+<span class="org-unicode-whitespace-subdued-space">                   </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>unpushed)))))
+<span class="org-unicode-whitespace-subdued-space">       </span>'epe-git-face)))
+<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128048;)"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-symbol-face)
+<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>(user-uid)<span class="org-unicode-whitespace-subdued-space"> </span>0)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-sudo-symbol-face)
+<span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> <span class="todo TODO">TODO</span> don't show hostname twice.</h4>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Did you mean?</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eshell-did-you-mean</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(eshell-did-you-mean-setup))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Show fringe</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eshell-fringe-status</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'eshell-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'eshell-fringe-status-mode))
 </pre>
 </div>
 </div>
@@ -307,7 +329,7 @@ This is apparently still an issue.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 13:57</p>
+<p class="date">Created: 2016-08-22 Mon 23:47</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

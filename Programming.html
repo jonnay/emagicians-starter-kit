@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>General Programming helpers</title>
-<!-- 2016-08-19 Fri 13:56 -->
+<!-- 2016-08-22 Mon 23:47 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -137,7 +137,11 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index"> HOME </a>
+</div><div id="content">
 <h1 class="title">General Programming helpers</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -160,6 +164,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-4">2.4. Show Paren Mode</a></li>
 <li><a href="#sec-2-5">2.5. Rainbow Delimiters</a></li>
 <li><a href="#sec-2-6">2.6. Color Identifiers</a></li>
+<li><a href="#sec-2-7">2.7. Show whitespace</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3. Tools</a>
@@ -202,7 +207,7 @@ No Physical tabs.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq-default indent-tabs-mode nil)
+<pre class="src src-emacs-lisp">(setq-default<span class="org-unicode-whitespace-subdued-space"> </span>indent-tabs-mode<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
 </div>
@@ -213,7 +218,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/minor-in-major-mode flyspell-prog-mode prog-mode)
+<pre class="src src-emacs-lisp">(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>flyspell-prog-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode)
 </pre>
 </div>
 </div>
@@ -224,10 +229,10 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span> <span class="org-function-name">yank</span> (after indent-region activate)
-  <span class="org-doc">"indent the region after a yank if we're in a programming mode."</span>
-  (<span class="org-keyword">if</span> (derived-mode-p 'prog-mode)
-      (indent-region (region-beginning) (region-end) nil)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yank</span><span class="org-unicode-whitespace-subdued-space"> </span>(after<span class="org-unicode-whitespace-subdued-space"> </span>indent-region<span class="org-unicode-whitespace-subdued-space"> </span>activate)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"indent</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">region</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">after</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">yank</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">if</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">we're</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">programming</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(derived-mode-p<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode)
+<span class="org-unicode-whitespace-subdued-space">      </span>(indent-region<span class="org-unicode-whitespace-subdued-space"> </span>(region-beginning)<span class="org-unicode-whitespace-subdued-space"> </span>(region-end)<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
 </pre>
 </div>
 </div>
@@ -237,7 +242,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'yas-minor-mode-on)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'yas-minor-mode-on)
 </pre>
 </div>
 </div>
@@ -248,81 +253,73 @@ No Physical tabs.
 <div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">smartparens</span>
-  <span class="org-builtin">:defer</span> t
-  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9390;"</span>
-  <span class="org-builtin">:bind</span> ((<span class="org-string">"M-9"</span> . sp-backward-sexp)
-         (<span class="org-string">"M-0"</span> . sp-forward-sexp))
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">progn</span>
-    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">turn on showing the match for clojure and elisp</span>
-    (add-hook 'clojure-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'java-mode-hook #'turn-on-show-smartparens-mode)
-    (add-hook 'c-mode-hook #'turn-on-show-smartparens-mode))
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">progn</span>
-    (add-to-list 'sp-sexp-suffix '(json-mode regex <span class="org-string">""</span>))
-    (add-to-list 'sp-sexp-suffix '(es-mode regex <span class="org-string">""</span>))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">smartparens</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:defer</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9390;"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-space"> </span>((<span class="org-string">"M-9"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-backward-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"M-0"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-forward-sexp))
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'turn-on-smartparens-mode)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'sp-sexp-suffix<span class="org-unicode-whitespace-subdued-space"> </span>'(json-mode<span class="org-unicode-whitespace-subdued-space"> </span>regex<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'sp-sexp-suffix<span class="org-unicode-whitespace-subdued-space"> </span>'(es-mode<span class="org-unicode-whitespace-subdued-space"> </span>regex<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))
 
-    (<span class="org-keyword">require</span> '<span class="org-constant">smartparens-config</span>)
-    (add-hook 'sh-mode-hook
-              (<span class="org-keyword">lambda</span> ()
-                <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove when https://github.com/Fuco1/smartparens/issues/257</span>
-                <span class="org-comment-delimiter">;; </span><span class="org-comment">is fixed</span>
-                (setq sp-autoescape-string-quote nil)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">smartparens-config</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'sh-mode-hook
+<span class="org-unicode-whitespace-subdued-space">            </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">https://github.com/Fuco1/smartparens/issues/257</span>
+<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">fixed</span>
+<span class="org-unicode-whitespace-subdued-space">              </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>sp-autoescape-string-quote<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
 
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove the M-&lt;backspace&gt; binding that smartparens adds</span>
-    (<span class="org-keyword">let</span> ((disabled '(<span class="org-string">"M-&lt;backspace&gt;"</span>)))
-      (setq sp-smartparens-bindings
-            (cl-remove-if (<span class="org-keyword">lambda</span> (key-command)
-                            (member (car key-command) disabled))
-                          sp-smartparens-bindings)))
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">M-&lt;backspace&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">binding</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">smartparens</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">adds</span>
 
-    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;left&gt;"</span>) 'sp-backward-slurp-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;right&gt;"</span>) 'sp-forward-slurp-sexp)
-    <span class="org-comment-delimiter">;</span><span class="org-comment">(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)</span>
-    <span class="org-comment-delimiter">;</span><span class="org-comment">(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)</span>
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-f"</span>) 'sp-forward-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-b"</span>) 'sp-backward-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-d"</span>) 'sp-down-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-a"</span>) 'sp-backward-down-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-S-a"</span>) 'sp-beginning-of-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-S-d"</span>) 'sp-end-of-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-e"</span>) 'sp-up-sexp)
-    (define-key emacs-lisp-mode-map (kbd <span class="org-string">")"</span>) 'sp-up-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-u"</span>) 'sp-backward-up-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-t"</span>) 'sp-transpose-sexp)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)</span>
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)</span>
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-k"</span>) 'sp-kill-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-w"</span>) 'sp-copy-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"M-D"</span>) 'sp-splice-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"C-]"</span>) 'sp-select-next-thing-exchange)
-    (define-key sp-keymap (kbd <span class="org-string">"C-&lt;left_bracket&gt;"</span>) 'sp-select-previous-thing)
-    (define-key sp-keymap (kbd <span class="org-string">"C-M-]"</span>) 'sp-select-next-thing)
-    (define-key sp-keymap (kbd <span class="org-string">"M-F"</span>) 'sp-forward-symbol)
-    (define-key sp-keymap (kbd <span class="org-string">"M-B"</span>) 'sp-backward-symbol)
-    (define-key sp-keymap (kbd <span class="org-string">"H-t"</span>) 'sp-prefix-tag-object)
-    (define-key sp-keymap (kbd <span class="org-string">"H-p"</span>) 'sp-prefix-pair-object)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s c"</span>) 'sp-convolute-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s a"</span>) 'sp-absorb-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s e"</span>) 'sp-emit-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s p"</span>) 'sp-add-to-previous-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s n"</span>) 'sp-add-to-next-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s j"</span>) 'sp-join-sexp)
-    (define-key sp-keymap (kbd <span class="org-string">"H-s s"</span>) 'sp-split-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((disabled<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"M-&lt;backspace&gt;"</span>)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>sp-smartparens-bindings
+<span class="org-unicode-whitespace-subdued-space">          </span>(cl-remove-if<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(key-command)
+<span class="org-unicode-whitespace-subdued-space">                          </span>(member<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>key-command)<span class="org-unicode-whitespace-subdued-space"> </span>disabled))
+<span class="org-unicode-whitespace-subdued-space">                        </span>sp-smartparens-bindings)))
 
-    (sp-local-pair 'minibuffer-inactive-mode <span class="org-string">"'"</span> nil <span class="org-builtin">:actions</span> nil)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove '' pairing in elisp because quoting is used a ton</span>
-    (sp-local-pair 'emacs-lisp-mode <span class="org-string">"'"</span> nil <span class="org-builtin">:actions</span> nil)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;left&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-barf-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;right&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-slurp-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-&lt;left&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-slurp-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-&lt;right&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-barf-sexp)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;</span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"M-(")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-forward-barf-sexp)</span>
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;</span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"M-)")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-forward-slurp-sexp)</span>
 
-    (<span class="org-keyword">sp-with-modes</span> '(webl-mode)
-      (sp-local-pair <span class="org-string">"&lt;"</span> <span class="org-string">"&gt;"</span>))
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-f"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-b"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-d"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-down-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-down-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-S-a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-beginning-of-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-S-d"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-end-of-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-e"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-up-sexp)
 
-    (<span class="org-keyword">sp-with-modes</span> sp-lisp-modes
-      (sp-local-pair <span class="org-string">"("</span> nil <span class="org-builtin">:bind</span> <span class="org-string">"C-("</span>))))
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-u"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-up-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-t"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-transpose-sexp)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"C-M-n")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-next-sexp)</span>
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"C-M-p")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-previous-sexp)</span>
+
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-k"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-kill-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-w"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-copy-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-D"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-splice-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-]"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-next-thing-exchange)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;left_bracket&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-previous-thing)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-]"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-next-thing)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-F"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-symbol)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-B"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-symbol)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-t"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-prefix-tag-object)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-p"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-prefix-pair-object)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">c"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-convolute-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-absorb-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">e"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-emit-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">p"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-add-to-previous-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">n"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-add-to-next-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">j"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-join-sexp)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">s"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-split-sexp)
+
+<span class="org-unicode-whitespace-subdued-space">  </span>(sp-local-pair<span class="org-unicode-whitespace-subdued-space"> </span>'minibuffer-inactive-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"'"</span><span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:actions</span><span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">''</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">pairing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">elisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">quoting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">used</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">ton</span>
+)
 </pre>
 </div>
 </div>
@@ -337,7 +334,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'prog-mode-hook 'linum-mode)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'linum-mode)
 </pre>
 </div>
 </div>
@@ -348,7 +345,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(which-function-mode t)
+<pre class="src src-emacs-lisp">(which-function-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -359,16 +356,16 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/check-parens</span> ()
-  (<span class="org-keyword">condition-case</span> err
-      (check-parens)
-    ((<span class="org-warning">error</span>) (message <span class="org-string">"Buffer has unmatched Parens or quote!"</span>))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/check-parens</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">condition-case</span><span class="org-unicode-whitespace-subdued-space"> </span>err
+<span class="org-unicode-whitespace-subdued-space">      </span>(check-parens)
+<span class="org-unicode-whitespace-subdued-space">    </span>((<span class="org-warning">error</span>)<span class="org-unicode-whitespace-subdued-space"> </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">has</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">unmatched</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Parens</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">or</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">quote!"</span>))))
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'find-file-hook 'emagician/check-parens t)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'find-file-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/check-parens<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -378,8 +375,8 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq show-paren-style 'mixed)
-(setq show-paren-delay 0)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>show-paren-style<span class="org-unicode-whitespace-subdued-space"> </span>'expression)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>show-paren-delay<span class="org-unicode-whitespace-subdued-space"> </span>0)
 (show-paren-mode)
 </pre>
 </div>
@@ -390,22 +387,43 @@ No Physical tabs.
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">rainbow-delimiters</span>
-  <span class="org-builtin">:demand</span>
-  <span class="org-builtin">:init</span>
-  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">rainbow-delimiters</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>rainbow-delimiters-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode))
 </pre>
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-2-6" class="outline-3">
 <h3 id="sec-2-6"><span class="section-number-3">2.6</span> Color Identifiers</h3>
 <div class="outline-text-3" id="text-2-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">color-identifiers-mode</span>
-  <span class="org-builtin">:init</span>
-  (add-hook 'after-init-hook 'global-color-identifiers-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">color-identifiers-mode</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'after-init-hook<span class="org-unicode-whitespace-subdued-space"> </span>'global-color-identifiers-mode))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Show whitespace</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+Whitespace unicode does good stuff with whitespace.  Use that.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">whitespace</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'whitespace-mode)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">unicode-whitespace</span>
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-builtin">:config</span>
+<span class="org-unicode-whitespace-subdued-space">    </span>(unicode-whitespace-setup<span class="org-unicode-whitespace-subdued-space"> </span>'subdued-faces)))
 </pre>
 </div>
 </div>
@@ -420,11 +438,11 @@ No Physical tabs.
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">flycheck</span>
-  <span class="org-builtin">:diminish</span> <span class="org-string">"&#12214;"</span>
-  <span class="org-builtin">:init</span>
-  (global-flycheck-mode)
-  (emagician/minor-in-major-mode flycheck-color-mode-line-mode prog-mode))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flycheck</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128027;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(global-flycheck-mode)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>flycheck-color-mode-line-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode))
 </pre>
 </div>
 </div>
@@ -435,7 +453,7 @@ No Physical tabs.
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">dizzee</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">dizzee</span>)
 </pre>
 </div>
 </div>
@@ -454,17 +472,17 @@ It's nice to have helpers to see if we are in org-babel mode.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/org-src-mode-p</span> () 
-  <span class="org-doc">"Test to see wehther the current mode is in org-src mode"</span>
-  (member 'org-src-mode minor-mode-list))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/org-src-mode-p</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">see</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">wehther</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">current</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">org-src</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(member<span class="org-unicode-whitespace-subdued-space"> </span>'org-src-mode<span class="org-unicode-whitespace-subdued-space"> </span>minor-mode-list))
 
-(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/org-src-mode-p</span> ()
-  (<span class="org-keyword">let</span> ((minor-mode-list '()))
-    (should-not (emagician/org-src-mode-p)))
-  (<span class="org-keyword">let</span> ((minor-mode-list '(foo bar)))
-    (should-not (emagician/org-src-mode-p)))
-  (<span class="org-keyword">let</span> ((minor-mode-list '(org-src-mode)))
-    (should (emagician/org-src-mode-p))))
+(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/org-src-mode-p</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'()))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should-not<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'(foo<span class="org-unicode-whitespace-subdued-space"> </span>bar)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should-not<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'(org-src-mode)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p))))
 </pre>
 </div>
 </div>
@@ -483,7 +501,7 @@ Don't manage ancient version control backends
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq vc-handled-backends '(Git))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>vc-handled-backends<span class="org-unicode-whitespace-subdued-space"> </span>'(Git))
 </pre>
 </div>
 </div>
@@ -497,9 +515,9 @@ Modes for editing git-specific files
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">git-commit</span>)
-(<span class="org-keyword">use-package</span> <span class="org-constant">gitconfig-mode</span>)
-(<span class="org-keyword">use-package</span> <span class="org-constant">gitignore-mode</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">git-commit</span>)
+(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">gitconfig-mode</span>)
+(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">gitignore-mode</span>)
 </pre>
 </div>
 </div>
@@ -513,13 +531,13 @@ Modes for editing git-specific files
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">magit</span>
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">when</span> (locate-file <span class="org-string">"git-achievements"</span> exec-path)
-    (setq magit-git-executable <span class="org-string">"git-achievements"</span>))
-  <span class="org-builtin">:bind</span> 
-  (<span class="org-string">"C-c m"</span> . magit-status)
-  <span class="org-builtin">:config</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">magit</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(locate-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span><span class="org-unicode-whitespace-subdued-space"> </span>exec-path)
+<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>magit-git-executable<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span>))
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">m"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>magit-status)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>)
 </pre>
 </div>
 
@@ -538,9 +556,9 @@ Modes for editing git-specific files
 <div class="outline-text-4" id="text-4-2-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">git-gutter-fringe+</span>
-  <span class="org-builtin">:init</span>
-  (setq git-gutter-fr+-side 'right-fringe))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">git-gutter-fringe+</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>git-gutter-fr+-side<span class="org-unicode-whitespace-subdued-space"> </span>'right-fringe))
 </pre>
 </div>
 </div>
@@ -557,10 +575,10 @@ Each language gets it's own file.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/load <span class="org-string">"Programming-Lisp"</span>)
-(emagician/load <span class="org-string">"Programming-Ruby"</span>)
-(emagician/load <span class="org-string">"Programming-Web"</span>)
-(emagician/load <span class="org-string">"Programming-Sh"</span>)
+<pre class="src src-emacs-lisp">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Programming-Lisp"</span>)
+(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Programming-Ruby"</span>)
+(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Programming-Web"</span>)
+(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Programming-Sh"</span>)
 </pre>
 </div>
 </div>
@@ -574,8 +592,8 @@ Each language gets it's own file.
 <div class="outline-text-3" id="text-6-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">yaml-mode</span>
-  <span class="org-builtin">:mode</span> <span class="org-string">"\\.yml\\'"</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yaml-mode</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\.yml\\'"</span>)
 </pre>
 </div>
 </div>
@@ -584,7 +602,7 @@ Each language gets it's own file.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 13:56</p>
+<p class="date">Created: 2016-08-22 Mon 23:47</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

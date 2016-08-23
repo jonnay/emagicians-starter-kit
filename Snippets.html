@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>YASnippets</title>
-<!-- 2016-08-19 Fri 13:56 -->
+<!-- 2016-08-22 Mon 22:03 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -137,7 +137,11 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index"> HOME </a>
+</div><div id="content">
 <h1 class="title">YASnippets</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -185,13 +189,13 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/expect-dir <span class="org-string">"./assets/snippets"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/js-mode"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/coffeescript-mode"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/org-mode"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/ruby-mode"</span>)
-(emagician/expect-dir <span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
+<pre class="src src-emacs-lisp">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/js-mode"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/coffeescript-mode"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/org-mode"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/ruby-mode"</span>)
+(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
 </pre>
 </div>
 </div>
@@ -201,12 +205,12 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/snippet-tangle-and-reload</span> () 
-  <span class="org-doc">"Helper function to automagickally tangle and reload snippets after the snippet file is saved"</span>
-  (org-babel-tangle)
-  (yas-reload-all))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/snippet-tangle-and-reload</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Helper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">tangle</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">reload</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">snippets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">after</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">snippet</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">saved"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-babel-tangle)
+<span class="org-unicode-whitespace-subdued-space">  </span>(yas-reload-all))
 
-(add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)
+(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'after-save-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/snippet-tangle-and-reload<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -453,7 +457,7 @@ end
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 13:56</p>
+<p class="date">Created: 2016-08-22 Mon 22:03</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

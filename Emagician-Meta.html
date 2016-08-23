@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Meta-Development</title>
-<!-- 2016-08-19 Fri 13:57 -->
+<!-- 2016-08-22 Mon 23:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -137,34 +137,55 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index"> HOME </a>
+</div><div id="content">
 <h1 class="title">Meta-Development</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Testing</a>
-<ul>
-<li><a href="#sec-1-1">1.1. Running all ERT tests</a></li>
-<li><a href="#sec-1-2">1.2. Test out a fresh hot load of Emagician  💩</a>
-<ul>
-<li><a href="#sec-1-2-1">1.2.1. Working, but kinda shitty testers</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#sec-2">2. Emagician Helm Source</a></li>
+<li><a href="#sec-1">1. On Illumination…</a></li>
+<li><a href="#sec-2">2. <span class="todo TODO">TODO</span> sort this file</a></li>
 <li><a href="#sec-3">3. Building the emagician site</a>
 <ul>
-<li><a href="#sec-3-1">3.1. The CSS file</a></li>
+<li><a href="#sec-3-1">3.1. Publishing functions</a></li>
+<li><a href="#sec-3-2">3.2. The CSS file</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Testing</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Running all ERT tests</a></li>
+<li><a href="#sec-4-2">4.2. Test out a fresh hot load of Emagician  💩</a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. Working, but kinda shitty testers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Emagician Helm Source</a></li>
+<li><a href="#sec-6">6. Inserting text chunks</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Symbol Getter</a></li>
+<li><a href="#sec-6-2">6.2. Make some Magickal Keys</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. F3 Prefix Key for Emagician Meta Development</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Meta Keys and Prefixes</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> On Illumination…</h2>
+<div class="outline-text-2" id="text-1">
 <blockquote>
 <p>
-Illumination
+
 </p>
 
 <p>
@@ -185,92 +206,680 @@ and perception stimulate each other.
 <p>
 &#x2013;Peter Carroll
 </p>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Testing</h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Running all ERT tests</h3>
-<div class="outline-text-3" id="text-1-1">
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> <span class="todo TODO">TODO</span> sort this file</h2>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Building the emagician site</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Publishing functions</h3>
+<div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/run-all-tests</span> ()
-  (interactive)
-  (ert <span class="org-string">"emagician/"</span>))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-html-htmlize-output-type<span class="org-unicode-whitespace-subdued-space"> </span>'css)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>htmlize-html-charset<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>httpd-root<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"gh-pages"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))
+
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/publish</span><span class="org-unicode-whitespace-subdued-space"> </span>(project<span class="org-unicode-whitespace-subdued-space"> </span>force<span class="org-unicode-whitespace-subdued-space"> </span>async)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((org-publish-project-alist<span class="org-unicode-whitespace-subdued-space"> </span>`((<span class="org-string">"emagician"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:components</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-string">"emagician-assets"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-org"</span>))
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(<span class="org-string">"emagician-test"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:components</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-string">"emagician-assets"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-org-test"</span>))
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(<span class="org-string">"emagician-assets"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:recursive</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-extension</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">pdf</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">mp3</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">ogg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">swf"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"gh-pages/assets"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)<span class="org-unicode-whitespace-subdued-trailing">            </span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-function</span><span class="org-unicode-whitespace-subdued-space"> </span>org-publish-attachment)
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(<span class="org-string">"emagician-org"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,emagician/dir
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-extension</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"org"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"gh-pages"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:htmlized-source</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:makeindex</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:auto-sitemap</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:sitemap-ignore-case</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:html-html5-fancy</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:html-head-extra</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;link</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">rel=\"stylesheet\"&gt;&lt;link</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">href=\"./assets/style.css\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">rel=\"stylesheet\"&gt;"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:html-link-home</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"index"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-function</span><span class="org-unicode-whitespace-subdued-space"> </span>org-html-publish-to-html
+<span class="org-unicode-whitespace-subdued-space">                                      </span>)
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(<span class="org-string">"emagician-org-test"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,emagician/dir
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:base-extension</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:exlcude</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">".*"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:include</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-string">"Index.org"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician.org"</span>)
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-directory</span><span class="org-unicode-whitespace-subdued-space"> </span>,(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"gh-pages"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:htmlized-source</span><span class="org-unicode-whitespace-subdued-space"> </span>t
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:html-html5-fancy</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-trailing">     </span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:html-head-extra</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;link</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">rel=\"stylesheet\"&gt;&lt;link</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">href=\"./assets/style.css\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">rel=\"stylesheet\"&gt;"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span><span class="org-builtin">:publishing-function</span><span class="org-unicode-whitespace-subdued-space"> </span>org-html-publish-to-html
+<span class="org-unicode-whitespace-subdued-space">                                      </span>)
+<span class="org-unicode-whitespace-subdued-space">                                     </span>)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(org-publish<span class="org-unicode-whitespace-subdued-space"> </span>project<span class="org-unicode-whitespace-subdued-space"> </span>force<span class="org-unicode-whitespace-subdued-space"> </span>async)))
+
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/publish-changed</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/meta/publish<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician"</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>nil))
+
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/publish-all</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/meta/publish<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician"</span><span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span>nil))
+
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/publish-assets</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/meta/publish<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-assets"</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>nil))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Test out a fresh hot load of Emagician  💩</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> The CSS file</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The thi.ng/org-spec<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> is a great basis to build off of. 
+</p>
+
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization</span> (<span class="org-type">&amp;optional</span> forms)
-  (interactive)
-  (<span class="org-keyword">let*</span> ((init-file (expand-file-name <span class="org-string">"init.el"</span>
-                                      (file-name-directory (or load-file-name
-                                                               buffer-file-name
-                                                               (org-src-do-at-code-block (eval 'buffer-file-name))))))
-         (magick-string <span class="org-string">"emagician/magick-output"</span>)
-         (code `(<span class="org-keyword">condition-case</span> err
-                    (<span class="org-keyword">progn</span>
-                      (toggle-debug-on-error)
-                      (load-file ,init-file)
-                      ,(<span class="org-keyword">if</span> forms
-                           `(<span class="org-keyword">progn</span> ,forms)
-                         (message <span class="org-string">"No extra forms executed"</span>))
-                      (message <span class="org-string">"(%s 'succcess)"</span> ,magick-string))
-                  ((<span class="org-warning">error</span>)
-                     (message <span class="org-string">"(%s (error (%s %s) (backtrace \"%s\")))"</span> ,magick-string (car err) (cdr err) (<span class="org-keyword">with-output-to-string</span> (backtrace)))
-                     (kill-emacs 1))))
-         (invocation-command (format <span class="org-string">"%s%s --no-init-file --batch --eval=\"%s\""</span>
-                                     invocation-directory
-                                     invocation-name
-                                     (replace-regexp-in-string <span class="org-string">"\""</span>
-                                                               <span class="org-string">"\\\""</span>
-                                                               (format <span class="org-string">"%S"</span> code)
-                                                               nil
-                                                               t)))
-         (result (shell-command-to-string invocation-command))
-         (captured-result (substring result
-                                   (or (string-match (concat <span class="org-string">"("</span> magick-string) result)
-                                       (<span class="org-warning">error</span> <span class="org-string">"Unexpected result from child emacs %s"</span> result))))
-         (parsed-result (read captured-result))
-         (err (assoc 'error parsed-result)))
-    (message <span class="org-string">"Result: %s\n"</span>
-             (message <span class="org-string">"%s\n\n\n%s"</span> (pp parsed-result) result))
-    (<span class="org-keyword">if</span> err 
-        (<span class="org-warning">error</span> <span class="org-string">"Emagician Starter Kit Load Error:  %s: %S"</span> (cadr err) (cddr err))
-      (message <span class="org-string">"Successful!"</span>))))
+<pre class="src src-css"><span class="org-css-selector">body</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span>Helvetica,<span class="org-unicode-whitespace-subdued-space"> </span>Arial,<span class="org-unicode-whitespace-subdued-space"> </span>sans-serif;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>16px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">line-height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.4;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#33333f;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+}
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-initialization-with</span> (lisp)
-  <span class="org-doc">"Test an Emacs initialization with a given chunk of lisp."</span>
-  (interactive  <span class="org-string">"xExecute: "</span>)
-  (emagician/test-initialization lisp))
+<span class="org-css-selector">code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Inconsolata"</span>,<span class="org-unicode-whitespace-subdued-space"> </span>monospace;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>16px;
+}
+
+<span class="org-css-selector">p&gt;code,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">li&gt;code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#eee;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.25em;
+}
+
+<span class="org-css-selector">h1,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h2,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h3</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Roboto</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Slab"</span>,<span class="org-unicode-whitespace-subdued-space"> </span>Helvetica,<span class="org-unicode-whitespace-subdued-space"> </span>Arial,<span class="org-unicode-whitespace-subdued-space"> </span>sans-serif;
+}
+
+<span class="org-css-selector">h2</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>solid<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>77%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.75em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>93%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>-1em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.25em<span class="org-unicode-whitespace-subdued-space"> </span>1em;<span class="org-unicode-whitespace-subdued-trailing">   </span>
+}
+
+<span class="org-css-selector">h3</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>2em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.5em;
+}
+
+<span class="org-css-selector">h4</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.25em;
+}
+
+<span class="org-css-selector">h5</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+}
+
+<span class="org-css-selector">h2</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h3</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h4</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h5</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">td</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span>inherit<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">!important</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>inherit<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">!important</span>;
+}
+
+<span class="org-css-selector">td</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>bold;
+}
+
+<span class="org-css-property">a</span>:before,<span class="org-unicode-whitespace-subdued-space"> </span>a:after<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,0%,80%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>120%;
+}
+
+<span class="org-css-property">a</span>:before<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"[["</span>;
+}
+
+<span class="org-css-property">a</span>:after<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"]]"</span>;
+}
+
+
+<span class="org-css-selector">a[name]:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#"</span><span class="org-unicode-whitespace-subdued-space"> </span>attr(name);
+}
+
+<span class="org-css-selector">a[name]:after</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>;
+}
+
+<span class="org-css-property">a</span>:link,<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-css-property">a</span>:hover,<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-css-property">a</span>:visited<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">text-decoration</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>black;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:3px;
+}
+
+<span class="org-css-property">a</span>:link<span class="org-unicode-whitespace-subdued-space"> </span>{
+
+}
+
+<span class="org-css-property">a</span>:visited<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#666;
+}
+
+<span class="org-css-property">a</span>:link:hover,
+<span class="org-css-property">a</span>:visited:hover<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>62%);
+}
+
+<span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\21F4]]"</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.2em;
+}
+
+<span class="org-css-selector">#meta</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>2em;
+}
+
+#table-of-contents<span class="org-unicode-whitespace-subdued-space"> </span>a:link,
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a:visited</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>black;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>transparent;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">line-height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.2;
+}
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h2</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">ul</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">list-style</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding-left</span>:0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>normal;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">div&gt;ul&gt;li</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>bold;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.tag</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.todo,</span>
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.done</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>80%;
+}
+
+<span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">ol&gt;li</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+}
+
+<span class="org-css-selector">#org-div-home-and-up</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">text-align</span>:<span class="org-unicode-whitespace-subdued-space"> </span>right;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">white-space</span>:<span class="org-unicode-whitespace-subdued-space"> </span>nowrap;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>90%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.5ex<span class="org-unicode-whitespace-subdued-space"> </span>1em<span class="org-unicode-whitespace-subdued-space"> </span>1ex;
+}
+
+<span class="org-css-selector">table</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>100%;
+}
+
+<span class="org-css-selector">table,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">th,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">td</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>solid<span class="org-unicode-whitespace-subdued-space"> </span>#666;
+}
+
+<span class="org-css-selector">th,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">td</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.5em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">text-align</span>:<span class="org-unicode-whitespace-subdued-space"> </span>left;
+}
+
+tbody<span class="org-unicode-whitespace-subdued-space"> </span>tr:nth-child(odd)<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#eee;
+}
+
+<span class="org-css-selector">span.section-number-1,</span>
+<span class="org-css-selector">span.section-number-2,</span>
+<span class="org-css-selector">span.section-number-3,</span>
+<span class="org-css-selector">span.section-number-4,</span>
+<span class="org-css-selector">span.section-number-5</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span>cursive;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>120%;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>solid<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>68%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>inline-block;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>8px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">line-height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>70%;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>10px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>93%);
+}
+
+<span class="org-css-selector">.outline-3,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.outline-4,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.outline-5,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.outline-6</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>15px;
+}
+
+<span class="org-css-selector">img</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">max-width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>90%;
+}
+
+<span class="org-css-selector">div.notice</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">position</span>:<span class="org-unicode-whitespace-subdued-space"> </span>relative;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>1.2em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.25em<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>4px<span class="org-unicode-whitespace-subdued-space"> </span>solid;
+}
+
+<span class="org-css-selector">table</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">+</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">div.notice</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>2em;
+}
+
+<span class="org-css-selector">div.notice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>transparent<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">!important</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>dotted;
+}
+
+<span class="org-css-selector">div.notice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>transparent<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">!important</span>;
+}
+
+<span class="org-css-selector">div.notice:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">position</span>:<span class="org-unicode-whitespace-subdued-space"> </span>absolute;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">right</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.25em<span class="org-unicode-whitespace-subdued-space"> </span>0.5em<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>60%;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom-left-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.5em;
+}
+
+<span class="org-css-selector">.notice-warning</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#fcc;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#600;
+}
+
+<span class="org-css-selector">.notice-example</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#def;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#069;
+}
+
+<span class="org-css-selector">.notice-info</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#efe;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#060;
+}
+
+<span class="org-css-selector">.notice-warning</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#600;
+}
+
+<span class="org-css-selector">.notice-example</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#069;
+}
+
+<span class="org-css-selector">.notice-info</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">a</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#060;
+}
+
+<span class="org-css-selector">div.notice-warning:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"WARNING"</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#c99;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#fcc;
+}
+
+<span class="org-css-selector">div.notice-example:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"EXAMPLE"</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#abc;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#def;
+}
+
+<span class="org-css-selector">div.notice-info:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"INFO"</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#9c9;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#efe;
+}
+
+<span class="org-css-selector">blockquote</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,0%,93%);
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.125em<span class="org-unicode-whitespace-subdued-space"> </span>4em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>2px<span class="org-unicode-whitespace-subdued-space"> </span>solid<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,0%,80%);
+}
+
+<span class="org-css-selector">pre</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span>Inconsolata;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">box-shadow</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+}
+
+<span class="org-css-selector">pre.example:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Example"</span>;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>block;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>dotted;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+}
+
+<span class="org-css-selector">pre.example</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#fec;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#666;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.85em;
+}
+
+<span class="org-css-selector">pre</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#f8f8f8;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>8px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-image</span>:<span class="org-unicode-whitespace-subdued-space"> </span>linear-gradient(135deg,<span class="org-unicode-whitespace-subdued-space"> </span>transparent<span class="org-unicode-whitespace-subdued-space"> </span>25%,<span class="org-unicode-whitespace-subdued-space"> </span>rgba(0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0.02)<span class="org-unicode-whitespace-subdued-space"> </span>25%,<span class="org-unicode-whitespace-subdued-space"> </span>rgba(0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0.02)<span class="org-unicode-whitespace-subdued-space"> </span>50%,<span class="org-unicode-whitespace-subdued-space"> </span>transparent<span class="org-unicode-whitespace-subdued-space"> </span>50%,<span class="org-unicode-whitespace-subdued-space"> </span>transparent<span class="org-unicode-whitespace-subdued-space"> </span>75%,<span class="org-unicode-whitespace-subdued-space"> </span>rgba(0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0.02)<span class="org-unicode-whitespace-subdued-space"> </span>75%,<span class="org-unicode-whitespace-subdued-space"> </span>rgba(0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0,<span class="org-unicode-whitespace-subdued-space"> </span>0.02));
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">overflow</span>:<span class="org-unicode-whitespace-subdued-space"> </span>auto<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">!important</span>;
+}
+
+<span class="org-css-selector">pre.src</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.5em;
+}
+
+<span class="org-css-selector">pre.src:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>block;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">position</span>:<span class="org-unicode-whitespace-subdued-space"> </span>absolute;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#ccccd0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">right</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.25em<span class="org-unicode-whitespace-subdued-space"> </span>0.5em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-bottom-left-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>8px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>white;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>80%;
+}
+
+<span class="org-css-selector">pre.src-sh:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SH"</span>;
+}
+
+<span class="org-css-selector">pre.src-javascript:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"JS"</span>;
+}
+
+<span class="org-css-selector">pre.src-emacs-lisp:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emacs-Lisp"</span>;
+}
+
+<span class="org-css-selector">pre.src-c:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C"</span>;
+}
+
+<span class="org-css-selector">span.org-string</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#f94;
+}
+
+<span class="org-css-selector">span.org-keyword</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#c07;
+}
+
+<span class="org-css-selector">span.org-variable-name</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#f04;
+}
+
+<span class="org-css-selector">span.org-clojure-keyword</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#09f;
+}
+
+<span class="org-css-selector">span.org-comment,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span.org-comment-delimiter</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#999;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-1,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span.org-rainbow-delimiters-depth-5</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#666;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-2,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span.org-rainbow-delimiters-depth-6</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#888;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-3,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span.org-rainbow-delimiters-depth-7</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#aaa;
+}
+
+<span class="org-css-selector">span.org-rainbow-delimiters-depth-4,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span.org-rainbow-delimiters-depth-8</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#ccc;
+}
+
+<span class="org-css-selector">div.figure</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.85em;
+}
+
+<span class="org-css-selector">.tag</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Roboto</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Slab"</span>,<span class="org-unicode-whitespace-subdued-space"> </span>Helvetica,<span class="org-unicode-whitespace-subdued-space"> </span>Arial,<span class="org-unicode-whitespace-subdued-space"> </span>sans-serif;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>11px;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>normal;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">float</span>:<span class="org-unicode-whitespace-subdued-space"> </span>right;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>transparent;
+}
+
+<span class="org-css-selector">.tag</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#ccc;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>0.5em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.2em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>white;
+}
+
+<span class="org-css-selector">.todo,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">.done</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Roboto</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Slab"</span>,<span class="org-unicode-whitespace-subdued-space"> </span>Helvetica,<span class="org-unicode-whitespace-subdued-space"> </span>Arial,<span class="org-unicode-whitespace-subdued-space"> </span>sans-serif;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>normal;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>0.25em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">border-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.2em;
+}
+
+<span class="org-css-selector">.todo</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#f04;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>white;
+}
+
+<span class="org-css-selector">.done</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#5f7;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>white;
+}
+
+<span class="org-css-selector">#postamble</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>3em;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1ex<span class="org-unicode-whitespace-subdued-space"> </span>2em<span class="org-unicode-whitespace-subdued-space"> </span>2ex;
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">background-color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>93%);
+}
+
+<span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>screen<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h1.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">text-align</span>:<span class="org-unicode-whitespace-subdued-space"> </span>left;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>280px;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h2</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1em;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">position</span>:<span class="org-unicode-whitespace-subdued-space"> </span>fixed;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1ex<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>2em<span class="org-unicode-whitespace-subdued-space"> </span>2em;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>240px;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>100vh;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>11px;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#eee;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">overflow</span>:<span class="org-unicode-whitespace-subdued-space"> </span>auto;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">ul&gt;li&gt;ul&gt;li&gt;ul&gt;li</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h2</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>12px;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">div.outline-2,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">#footnotes</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>280px;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">max-width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>960px;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#postamble</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>262px;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+}
+
+<span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>screen<span class="org-unicode-whitespace-subdued-space"> </span>and<span class="org-unicode-whitespace-subdued-space"> </span>(max-width:<span class="org-unicode-whitespace-subdued-space"> </span>1024px)<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">html,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">body</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>14px;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">#table-of-contents</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h1.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>5%;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">div.outline-2,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">#footnotes</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>5%;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">max-width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>90%;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+}
+
+<span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>print<span class="org-unicode-whitespace-subdued-space"> </span>{
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">body</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>black;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector"><span class="org-builtin">@page</span></span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin</span>:<span class="org-unicode-whitespace-subdued-space"> </span>25mm;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h2,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">h3</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">page-break-before</span>:<span class="org-unicode-whitespace-subdued-space"> </span>always;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">table</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">page-break-inside</span>:<span class="org-unicode-whitespace-subdued-space"> </span>avoid;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">a:visited</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>black;
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>62%);
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:visited</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">background</span>:<span class="org-unicode-whitespace-subdued-space"> </span>hsl(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>62%);
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">div.notice:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+<span class="org-unicode-whitespace-subdued-space">    </span>}
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Testing</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Running all ERT tests</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/run-all-tests</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(ert<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician/"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Test out a fresh hot load of Emagician  💩</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/test-initialization</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>forms)
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((init-file<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"init.el"</span>
+<span class="org-unicode-whitespace-subdued-space">                                      </span>(file-name-directory<span class="org-unicode-whitespace-subdued-space"> </span>(or<span class="org-unicode-whitespace-subdued-space"> </span>load-file-name
+<span class="org-unicode-whitespace-subdued-space">                                                               </span>buffer-file-name
+<span class="org-unicode-whitespace-subdued-space">                                                               </span>(org-src-do-at-code-block<span class="org-unicode-whitespace-subdued-space"> </span>(eval<span class="org-unicode-whitespace-subdued-space"> </span>'buffer-file-name))))))
+<span class="org-unicode-whitespace-subdued-space">         </span>(magick-string<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician/magick-output"</span>)
+<span class="org-unicode-whitespace-subdued-space">         </span>(code<span class="org-unicode-whitespace-subdued-space"> </span>`(<span class="org-keyword">condition-case</span><span class="org-unicode-whitespace-subdued-space"> </span>err
+<span class="org-unicode-whitespace-subdued-space">                    </span>(<span class="org-keyword">progn</span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>(toggle-debug-on-error)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(load-file<span class="org-unicode-whitespace-subdued-space"> </span>,init-file)
+<span class="org-unicode-whitespace-subdued-space">                      </span>,(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>forms
+<span class="org-unicode-whitespace-subdued-space">                           </span>`(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>,forms)
+<span class="org-unicode-whitespace-subdued-space">                         </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"No</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">extra</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">forms</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">executed"</span>))
+<span class="org-unicode-whitespace-subdued-space">                      </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"(%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">'succcess)"</span><span class="org-unicode-whitespace-subdued-space"> </span>,magick-string))
+<span class="org-unicode-whitespace-subdued-space">                  </span>((<span class="org-warning">error</span>)
+<span class="org-unicode-whitespace-subdued-space">                     </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"(%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s)</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(backtrace</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\"%s\")))"</span><span class="org-unicode-whitespace-subdued-space"> </span>,magick-string<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>err)<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>err)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">with-output-to-string</span><span class="org-unicode-whitespace-subdued-space"> </span>(backtrace)))
+<span class="org-unicode-whitespace-subdued-space">                     </span>(kill-emacs<span class="org-unicode-whitespace-subdued-space"> </span>1))))
+<span class="org-unicode-whitespace-subdued-space">         </span>(invocation-command<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%s%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--no-init-file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--batch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--eval=\"%s\""</span>
+<span class="org-unicode-whitespace-subdued-space">                                     </span>invocation-directory
+<span class="org-unicode-whitespace-subdued-space">                                     </span>invocation-name
+<span class="org-unicode-whitespace-subdued-space">                                     </span>(replace-regexp-in-string<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\""</span>
+<span class="org-unicode-whitespace-subdued-space">                                                               </span><span class="org-string">"\\\""</span>
+<span class="org-unicode-whitespace-subdued-space">                                                               </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%S"</span><span class="org-unicode-whitespace-subdued-space"> </span>code)
+<span class="org-unicode-whitespace-subdued-space">                                                               </span>nil
+<span class="org-unicode-whitespace-subdued-space">                                                               </span>t)))
+<span class="org-unicode-whitespace-subdued-space">         </span>(result<span class="org-unicode-whitespace-subdued-space"> </span>(shell-command-to-string<span class="org-unicode-whitespace-subdued-space"> </span>invocation-command))
+<span class="org-unicode-whitespace-subdued-space">         </span>(captured-result<span class="org-unicode-whitespace-subdued-space"> </span>(substring<span class="org-unicode-whitespace-subdued-space"> </span>result
+<span class="org-unicode-whitespace-subdued-space">                                   </span>(or<span class="org-unicode-whitespace-subdued-space"> </span>(string-match<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"("</span><span class="org-unicode-whitespace-subdued-space"> </span>magick-string)<span class="org-unicode-whitespace-subdued-space"> </span>result)
+<span class="org-unicode-whitespace-subdued-space">                                       </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Unexpected</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">result</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">child</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emacs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>result))))
+<span class="org-unicode-whitespace-subdued-space">         </span>(parsed-result<span class="org-unicode-whitespace-subdued-space"> </span>(read<span class="org-unicode-whitespace-subdued-space"> </span>captured-result))
+<span class="org-unicode-whitespace-subdued-space">         </span>(err<span class="org-unicode-whitespace-subdued-space"> </span>(assoc<span class="org-unicode-whitespace-subdued-space"> </span>'error<span class="org-unicode-whitespace-subdued-space"> </span>parsed-result)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Result:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s\n"</span>
+<span class="org-unicode-whitespace-subdued-space">             </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%s\n\n\n%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>(pp<span class="org-unicode-whitespace-subdued-space"> </span>parsed-result)<span class="org-unicode-whitespace-subdued-space"> </span>result))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>err<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Load</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Error:</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">%s:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%S"</span><span class="org-unicode-whitespace-subdued-space"> </span>(cadr<span class="org-unicode-whitespace-subdued-space"> </span>err)<span class="org-unicode-whitespace-subdued-space"> </span>(cddr<span class="org-unicode-whitespace-subdued-space"> </span>err))
+<span class="org-unicode-whitespace-subdued-space">      </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Successful!"</span>))))
+
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/test-initialization-with</span><span class="org-unicode-whitespace-subdued-space"> </span>(lisp)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">an</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Emacs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">initialization</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">given</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chunk</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">lisp."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"xExecute:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/test-initialization<span class="org-unicode-whitespace-subdued-space"> </span>lisp))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-sec-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Working, but kinda shitty testers</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Working, but kinda shitty testers</h4>
+<div class="outline-text-4" id="text-4-2-1">
 <p>
 This loads the starter kit as a batch and outputs the results as a message.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-init-through-batch</span> ()
-  (interactive)
-  (message <span class="org-string">"Running New Emacs: %s"</span>
-           (shell-command-to-string 
-            (concat invocation-directory invocation-name <span class="org-string">" "</span>
-                    <span class="org-string">"--no-init-file --batch "</span>
-                    <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>
-                    <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> 
-                    <span class="org-string">"--eval='' "</span>
-                    <span class="org-string">"&amp;"</span>))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/test-init-through-batch</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Running</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">New</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emacs:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s"</span>
+<span class="org-unicode-whitespace-subdued-space">           </span>(shell-command-to-string<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">            </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>invocation-directory<span class="org-unicode-whitespace-subdued-space"> </span>invocation-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                    </span><span class="org-string">"--no-init-file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--batch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                    </span><span class="org-string">"--eval='(progn</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(setq</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">debug-on-error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">t)</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(setq</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/self-test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">t))'</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                    </span><span class="org-string">"--load="</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-name-directory<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"init.el</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                    </span><span class="org-string">"--eval=''</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                    </span><span class="org-string">"&amp;"</span>))))
 </pre>
 </div>
 
@@ -280,604 +889,152 @@ This does a full GUI load, outputting any results as a message.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/test-full-init</span>()
-  (interactive)
-  (message (concat <span class="org-string">"Running New Emacs: "</span>
-                   (shell-command-to-string 
-                    (concat invocation-directory invocation-name <span class="org-string">" "</span>
-                            <span class="org-string">"--no-init-file "</span>
-                            <span class="org-string">"--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "</span>
-                            <span class="org-string">"--load="</span> (file-name-directory (buffer-file-name)) <span class="org-string">"init.el "</span> 
-                            <span class="org-string">"&amp;"</span>)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/test-full-init</span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(message<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Running</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">New</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emacs:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                   </span>(shell-command-to-string<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                    </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>invocation-directory<span class="org-unicode-whitespace-subdued-space"> </span>invocation-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                            </span><span class="org-string">"--no-init-file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                            </span><span class="org-string">"--eval='(progn</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(setq</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">debug-on-error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">t)</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">(setq</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/self-test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">t))'</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">                            </span><span class="org-string">"--load="</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-name-directory<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"init.el</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                            </span><span class="org-string">"&amp;"</span>)))))
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Emagician Helm Source</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Emagician Helm Source</h2>
+<div class="outline-text-2" id="text-5">
 <p>
-Doesn't currently work because Helm keeps changing its interface. 
+Helm keeps changing its interface.  For such an awesome package this is the one way in which it falls down for me.  Anything used to be so easy to configure.
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defclass</span> <span class="org-type">emagician/files-helm-source</span> (helm-source-sync helm-type-file)
-  ((candidates <span class="org-builtin">:initform</span> (<span class="org-keyword">lambda</span> () (<span class="org-keyword">when</span> (file-accessible-directory-p emagician/dir)
-                                            (directory-files emagician/dir t))))
-   (keymap <span class="org-builtin">:initform</span> helm-generic-files-map)
-   (filtered-candidate-transformer <span class="org-builtin">:initform</span> #'emagician/helm-ct-is-org-file)
-   (action <span class="org-builtin">:initform</span> 'helm-type-file-actions)
-   ))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defclass</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">emagician/files-helm-source</span><span class="org-unicode-whitespace-subdued-space"> </span>(helm-source-sync<span class="org-unicode-whitespace-subdued-space"> </span>helm-type-file)
+<span class="org-unicode-whitespace-subdued-space">  </span>((candidates<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:initform</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-accessible-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
+<span class="org-unicode-whitespace-subdued-space">                                            </span>(directory-files<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span>t))))
+<span class="org-unicode-whitespace-subdued-space">   </span>(keymap<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:initform</span><span class="org-unicode-whitespace-subdued-space"> </span>helm-generic-files-map)
+<span class="org-unicode-whitespace-subdued-space">   </span>(filtered-candidate-transformer<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:initform</span><span class="org-unicode-whitespace-subdued-space"> </span>#'emagician/helm-ct-is-org-file)
+<span class="org-unicode-whitespace-subdued-space">   </span>(action<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:initform</span><span class="org-unicode-whitespace-subdued-space"> </span>'helm-type-file-actions)
+<span class="org-unicode-whitespace-subdued-space">   </span>))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-ct-is-org-file</span> (candidates)
-  (remove-if-not (<span class="org-keyword">lambda</span> (c)
-                   (and (string= (substring c -4) <span class="org-string">".org"</span>)
-                        (not (string= (substring (file-name-nondirectory c) 0 2) <span class="org-string">".#"</span>))))
-                 candidates))
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/helm-ct-is-org-file</span><span class="org-unicode-whitespace-subdued-space"> </span>(candidates<span class="org-unicode-whitespace-subdued-space"> </span>src)
+<span class="org-unicode-whitespace-subdued-space">  </span>(remove-if-not
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(c)
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((file<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>c)))<span class="org-unicode-whitespace-subdued-trailing">      </span>
+<span class="org-unicode-whitespace-subdued-space">       </span>(and<span class="org-unicode-whitespace-subdued-space"> </span>(string=<span class="org-unicode-whitespace-subdued-space"> </span>(substring<span class="org-unicode-whitespace-subdued-space"> </span>file<span class="org-unicode-whitespace-subdued-space"> </span>-4)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">".org"</span>)
+<span class="org-unicode-whitespace-subdued-space">            </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(string=<span class="org-unicode-whitespace-subdued-space"> </span>(substring<span class="org-unicode-whitespace-subdued-space"> </span>(file-name-nondirectory<span class="org-unicode-whitespace-subdued-space"> </span>file)
+<span class="org-unicode-whitespace-subdued-space">                                     </span>0
+<span class="org-unicode-whitespace-subdued-space">                                     </span>2)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">".#"</span>)))))
+<span class="org-unicode-whitespace-subdued-space">   </span>candidates))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/helm-emagician-dir</span> () 
-  <span class="org-doc">"List all the org files in the Emagician dir"</span>
-  (interactive)
-  (helm <span class="org-builtin">:sources</span> (helm-make-source <span class="org-string">"Files in Emagician-dir"</span> 'emagician/files-helm-source)
-        <span class="org-builtin">:candidate-number-limit</span> 40
-        <span class="org-builtin">:buffer</span> <span class="org-string">"*emagician-|-+-|-files*"</span>))
-
-(global-set-key (kbd <span class="org-string">"S-&lt;f3&gt;"</span>) 'emagician/helm-emagician-dir)
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/helm-emagician-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"List</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">files</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">dir"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(helm<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:sources</span><span class="org-unicode-whitespace-subdued-space"> </span>(helm-make-source<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Files</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician-dir"</span><span class="org-unicode-whitespace-subdued-space"> </span>'emagician/files-helm-source)
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-builtin">:candidate-number-limit</span><span class="org-unicode-whitespace-subdued-space"> </span>40
+<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-builtin">:buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*emagician-|-+-|-files*"</span>))
 </pre>
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Building the emagician site</h2>
-<div class="outline-text-2" id="text-3">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq org-html-htmlize-output-type 'css)
-</pre>
-</div>
-
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq htmlize-html-charset 'utf-8)
-(setq httpd-root (expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish</span> (project force async)
-  (<span class="org-keyword">let</span> ((org-publish-project-alist `((<span class="org-string">"emagician"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org"</span>))
-                                     (<span class="org-string">"emagician-test"</span> <span class="org-builtin">:components</span> (<span class="org-string">"emagician-assets"</span> <span class="org-string">"emagician-org-test"</span>))
-                                     (<span class="org-string">"emagician-assets"</span>
-                                      <span class="org-builtin">:base-directory</span> ,(expand-file-name <span class="org-string">"assets/"</span> emagician/dir)
-                                      <span class="org-builtin">:recursive</span> t
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"css</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">js</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">png</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">jpg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">gif</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">pdf</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">mp3</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">ogg</span><span class="org-string"><span class="org-regexp-grouping-backslash">\\</span></span><span class="org-string"><span class="org-regexp-grouping-construct">|</span></span><span class="org-string">swf"</span>
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages/assets"</span> emagician/dir)            
-                                      <span class="org-builtin">:publishing-function</span> org-publish-attachment)
-                                     (<span class="org-string">"emagician-org"</span>
-                                      <span class="org-builtin">:base-directory</span> ,emagician/dir
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">"org"</span>
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)
-                                      <span class="org-builtin">:htmlized-source</span> t
-                                      <span class="org-builtin">:html-html5-fancy</span> t
-                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>
-                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
-                                      )
-                                     (<span class="org-string">"emagician-org-test"</span>
-                                      <span class="org-builtin">:base-directory</span> ,emagician/dir
-                                      <span class="org-builtin">:base-extension</span> <span class="org-string">""</span>
-                                      <span class="org-builtin">:exlcude</span> <span class="org-string">".*"</span>
-                                      <span class="org-builtin">:include</span> (<span class="org-string">"Index.org"</span> <span class="org-string">"Emagician.org"</span>)
-                                      <span class="org-builtin">:publishing-directory</span> ,(expand-file-name <span class="org-string">"gh-pages"</span> emagician/dir)
-                                      <span class="org-builtin">:htmlized-source</span> t
-                                      <span class="org-builtin">:html-html5-fancy</span> t     
-                                      <span class="org-builtin">:html-head-extra</span> <span class="org-string">"&lt;link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"&gt;&lt;link href=\"./assets/style.css\" rel=\"stylesheet\"&gt;"</span>
-                                      <span class="org-builtin">:publishing-function</span> org-html-publish-to-html
-                                      )
-                                     )))
-    (org-publish project force async)))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-all</span> ()
-  (interactive)
-  (emagician/meta/publish <span class="org-string">"emagician"</span> t nil))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-assets</span> ()
-  (interactive)
-  (emagician/meta/publish <span class="org-string">"emagician-assets"</span> t nil))
-
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/publish-test</span> ()
-  <span class="org-doc">"A small tester project"</span>
-  (interactive)
-  (emagician/meta/publish <span class="org-string">"emagician-test"</span> t nil))
-</pre>
-</div>
-</div>
-
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> The CSS file</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Inserting text chunks</h2>
+<div class="outline-text-2" id="text-6">
 <p>
-The thi.ng/org-spec<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> is a great basis to build off of. 
+In 2016 I participated in GISHWHES (The Greatest International Scavenger Hunt the World Has Ever Seen).  One of the items was to make an animation on a Commodore-64.
+</p>
+
+<p>
+I think I ended up getting inspired by the keyboard.
+</p>
+
+
+<div class="figure">
+<p><img src="assets/images/Commodore.gif" alt="Commodore.gif" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Symbol Getter</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/get-insert-symbol</span><span class="org-unicode-whitespace-subdued-space"> </span>(text)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Returns</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">insert-symbol</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chunk</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">text"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician/insert/%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>text)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Make some Magickal Keys</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+The next chunk makes a keymap and starts defining and binding insert functions on it. 
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-css"><span class="org-css-selector">body </span>{
-    <span class="org-css-property">font-family</span>: Helvetica, Arial, sans-serif;
-    <span class="org-css-property">font-size</span>: 16px;
-    <span class="org-css-property">line-height</span>: 1.4;
-    <span class="org-css-property">color</span>: #33333f;
-}
-
-<span class="org-css-selector">code </span>{
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Inconsolata"</span>, monospace;
-    <span class="org-css-property">font-size</span>: 16px;
-}
-
-<span class="org-css-selector">p&gt;code, li&gt;code </span>{
-    <span class="org-css-property">background-color</span>: #eee;
-    <span class="org-css-property">padding</span>: 0.25em;
-}
-
-<span class="org-css-selector">h1, h2, h3 </span>{
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
-}
-
-<span class="org-css-selector">h2 </span>{
-    <span class="org-css-property">border-bottom</span>: 1px solid hsl(0, 0%, 77%);
-    <span class="org-css-property">font-size</span>: 1.75em;
-    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);
-    <span class="org-css-property">margin-left</span>: -1em;
-    <span class="org-css-property">padding</span>: 0.25em 1em;   
-}
-
-<span class="org-css-selector">h3 </span>{
-    <span class="org-css-property">margin-top</span>: 2em;
-    <span class="org-css-property">font-size</span>: 1.5em;
-}
-
-<span class="org-css-selector">h4 </span>{
-    <span class="org-css-property">font-size</span>: 1.25em;
-}
-
-<span class="org-css-selector">h5 </span>{
-    <span class="org-css-property">font-size</span>: 1em;
-}
-
-<span class="org-css-selector">h2 code, h3 code, h4 code, h5 code, td code </span>{
-    <span class="org-css-property">font-family</span>: inherit <span class="org-builtin">!important</span>;
-    <span class="org-css-property">font-size</span>: inherit <span class="org-builtin">!important</span>;
-}
-
-<span class="org-css-selector">td code </span>{
-    <span class="org-css-property">font-weight</span>: bold;
-}
-
-<span class="org-css-property">a</span>:before, a:after {
-    <span class="org-css-property">color</span>: hsl(0,0%,80%);
-    <span class="org-css-property">font-size</span>: 120%;
-}
-
-<span class="org-css-property">a</span>:before {
-    <span class="org-css-property">content</span>: <span class="org-string">"[["</span>;
-}
-
-<span class="org-css-property">a</span>:after {
-    <span class="org-css-property">content</span>: <span class="org-string">"]]"</span>;
-}
-
-<span class="org-css-selector">a[name]:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"[["</span> attr(name);
-}
-
-<span class="org-css-property">a</span>:link, 
-<span class="org-css-property">a</span>:hover, 
-<span class="org-css-property">a</span>:visited {
-    <span class="org-css-property">text-decoration</span>: none;
-    <span class="org-css-property">color</span>: black;
-}
-
-<span class="org-css-property">a</span>:link {
-
-}
-
-<span class="org-css-property">a</span>:visited {
-    <span class="org-css-property">color</span>: #666;
-}
-
-<span class="org-css-property">a</span>:link:hover,
-<span class="org-css-property">a</span>:visited:hover {
-    <span class="org-css-property">background</span>: #ff0;
-}
-
-<span class="org-css-selector">a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"\21B3"</span>;
-    <span class="org-css-property">background</span>: white;
-    <span class="org-css-property">padding-left</span>: 0.2em;
-}
-
-<span class="org-css-selector">#meta </span>{
-    <span class="org-css-property">margin-top</span>: 2em;
-}
-
-#table-of-contents a:link,
-<span class="org-css-selector">#table-of-contents a:visited </span>{
-    <span class="org-css-property">color</span>: black;
-    <span class="org-css-property">background</span>: transparent;
-}
-
-<span class="org-css-selector">#table-of-contents </span>{
-    <span class="org-css-property">line-height</span>: 1.2;
-}
-<span class="org-css-selector">#table-of-contents h2 </span>{
-    <span class="org-css-property">border-bottom</span>: 0;
-}
-
-<span class="org-css-selector">#table-of-contents ul </span>{
-    <span class="org-css-property">list-style</span>: none;
-    <span class="org-css-property">padding-left</span>:0;
-    <span class="org-css-property">font-weight</span>: normal;
-}
-
-<span class="org-css-selector">#table-of-contents div&gt;ul&gt;li </span>{
-    <span class="org-css-property">margin-top</span>: 1em;
-    <span class="org-css-property">font-weight</span>: bold;
-}
-
-<span class="org-css-selector">#table-of-contents .tag </span>{
-    <span class="org-css-property">display</span>: none;
-}
-
-<span class="org-css-selector">#table-of-contents .todo,</span>
-<span class="org-css-selector">#table-of-contents .done </span>{
-    <span class="org-css-property">font-size</span>: 80%;
-}
-
-<span class="org-css-selector">#table-of-contents ol&gt;li </span>{
-    <span class="org-css-property">margin-top</span>: 1em;
-}
-
-<span class="org-css-selector">table </span>{
-    <span class="org-css-property">width</span>: 100%;
-}
-
-<span class="org-css-selector">table, th, td </span>{
-    <span class="org-css-property">border</span>: 1px solid #666;
-}
-
-<span class="org-css-selector">th, td </span>{
-    <span class="org-css-property">padding</span>: 0.5em;
-    <span class="org-css-property">text-align</span>: left;
-}
-
-tbody tr:nth-child(odd) {
-    <span class="org-css-property">background-color</span>: #eee;
-}
-
-<span class="org-css-selector">span.section-number-1,</span>
-<span class="org-css-selector">span.section-number-2,</span>
-<span class="org-css-selector">span.section-number-3,</span>
-<span class="org-css-selector">span.section-number-4,</span>
-<span class="org-css-selector">span.section-number-5 </span>{
-    <span class="org-css-property">font-family</span>: cursive;
-    <span class="org-css-property">font-size</span>: 120%;
-    <span class="org-css-property">border</span>: 1px solid hsl(0, 0%, 68%);
-    <span class="org-css-property">display</span>: inline-block;
-    <span class="org-css-property">padding</span>: 8px;
-    <span class="org-css-property">line-height</span>: 70%;
-    <span class="org-css-property">border-radius</span>: 10px;
-    <span class="org-css-property">background-color</span>: hsl(0, 0%, 93%);
-}
-
-<span class="org-css-selector">img </span>{
-    <span class="org-css-property">max-width</span>: 90%;
-}
-
-<span class="org-css-selector">div.notice </span>{
-    <span class="org-css-property">position</span>: relative;
-    <span class="org-css-property">margin</span>: 0 1.2em;
-    <span class="org-css-property">padding</span>: 0.25em 1em;
-    <span class="org-css-property">border-left</span>: 4px solid;
-}
-
-<span class="org-css-selector">table + div.notice </span>{
-    <span class="org-css-property">margin-top</span>: 2em;
-}
-
-<span class="org-css-selector">div.notice a </span>{
-    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;
-    <span class="org-css-property">border-bottom</span>: 1px dotted;
-}
-
-<span class="org-css-selector">div.notice a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:after </span>{
-    <span class="org-css-property">background</span>: transparent <span class="org-builtin">!important</span>;
-}
-
-<span class="org-css-selector">div.notice:before </span>{
-    <span class="org-css-property">position</span>: absolute;
-    <span class="org-css-property">top</span>: 0;
-    <span class="org-css-property">right</span>: 0;
-    <span class="org-css-property">padding</span>: 0.25em 0.5em 0;
-    <span class="org-css-property">font-size</span>: 60%;
-    <span class="org-css-property">border-bottom-left-radius</span>: 0.5em;
-}
-
-<span class="org-css-selector">.notice-warning </span>{
-    <span class="org-css-property">background</span>: #fcc;
-    <span class="org-css-property">color</span>: #600;
-}
-
-<span class="org-css-selector">.notice-example </span>{
-    <span class="org-css-property">background</span>: #def;
-    <span class="org-css-property">color</span>: #069;
-}
-
-<span class="org-css-selector">.notice-info </span>{
-    <span class="org-css-property">background</span>: #efe;
-    <span class="org-css-property">color</span>: #060;
-}
-
-<span class="org-css-selector">.notice-warning a </span>{
-    <span class="org-css-property">color</span>: #600;
-}
-
-<span class="org-css-selector">.notice-example a </span>{
-    <span class="org-css-property">color</span>: #069;
-}
-
-<span class="org-css-selector">.notice-info a </span>{
-    <span class="org-css-property">color</span>: #060;
-}
-
-<span class="org-css-selector">div.notice-warning:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"WARNING"</span>;
-    <span class="org-css-property">background</span>: #c99;
-    <span class="org-css-property">color</span>: #fcc;
-}
-
-<span class="org-css-selector">div.notice-example:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"EXAMPLE"</span>;
-    <span class="org-css-property">background</span>: #abc;
-    <span class="org-css-property">color</span>: #def;
-}
-
-<span class="org-css-selector">div.notice-info:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"INFO"</span>;
-    <span class="org-css-property">background</span>: #9c9;
-    <span class="org-css-property">color</span>: #efe;
-}
-
-<span class="org-css-selector">blockquote </span>{
-    <span class="org-css-property">background-color</span>: hsl(0,0%,93%);
-    <span class="org-css-property">margin</span>: 0;
-    <span class="org-css-property">padding</span>: 0.125em 4em;
-    <span class="org-css-property">border-left</span>: 2px solid hsl(0,0%,80%);
-}
-
-<span class="org-css-selector">pre </span>{
-    <span class="org-css-property">font-family</span>: Inconsolata;
-    <span class="org-css-property">border</span>: 0;
-    <span class="org-css-property">box-shadow</span>: none;
-}
-
-<span class="org-css-selector">pre.example:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"Properties"</span>;
-    <span class="org-css-property">display</span>: block;
-    <span class="org-css-property">border-bottom</span>: 1px dotted;
-    <span class="org-css-property">margin-bottom</span>: 1em;
-}
-
-<span class="org-css-selector">pre.example </span>{
-    <span class="org-css-property">background</span>: #fec;
-    <span class="org-css-property">color</span>: #666;
-    <span class="org-css-property">font-size</span>: 0.85em;
-}
-
-<span class="org-css-selector">pre </span>{
-    <span class="org-css-property">background-color</span>: #f8f8f8;
-    <span class="org-css-property">background-size</span>: 8px 8px;
-    <span class="org-css-property">background-image</span>: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
-}
-
-<span class="org-css-selector">pre.src </span>{
-    <span class="org-css-property">padding</span>: 0.5em;
-}
-
-<span class="org-css-selector">pre.src:before </span>{
-    <span class="org-css-property">display</span>: block;
-    <span class="org-css-property">position</span>: absolute;
-    <span class="org-css-property">background-color</span>: #ccccd0;
-    <span class="org-css-property">top</span>: 0;
-    <span class="org-css-property">right</span>: 0;
-    <span class="org-css-property">padding</span>: 0.25em 0.5em;
-    <span class="org-css-property">border-bottom-left-radius</span>: 8px;
-    <span class="org-css-property">border</span>: 0;
-    <span class="org-css-property">color</span>: white;
-    <span class="org-css-property">font-size</span>: 80%;
-}
-
-<span class="org-css-selector">pre.src-sh:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"SH"</span>;
-}
-
-<span class="org-css-selector">pre.src-javascript:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"JS"</span>;
-}
-
-<span class="org-css-selector">pre.src-emacs-lisp:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"Emacs-Lisp"</span>;
-}
-
-<span class="org-css-selector">pre.src-c:before </span>{
-    <span class="org-css-property">content</span>: <span class="org-string">"C"</span>;
-}
-
-<span class="org-css-selector">span.org-string </span>{
-    <span class="org-css-property">color</span>: #f94;
-}
-
-<span class="org-css-selector">span.org-keyword </span>{
-    <span class="org-css-property">color</span>: #c07;
-}
-
-<span class="org-css-selector">span.org-variable-name </span>{
-    <span class="org-css-property">color</span>: #f04;
-}
-
-<span class="org-css-selector">span.org-clojure-keyword </span>{
-    <span class="org-css-property">color</span>: #09f;
-}
-
-<span class="org-css-selector">span.org-comment, span.org-comment-delimiter </span>{
-    <span class="org-css-property">color</span>: #999;
-}
-
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 </span>{
-    <span class="org-css-property">color</span>: #666;
-}
-
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 </span>{
-    <span class="org-css-property">color</span>: #888;
-}
-
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 </span>{
-    <span class="org-css-property">color</span>: #aaa;
-}
-
-<span class="org-css-selector">span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 </span>{
-    <span class="org-css-property">color</span>: #ccc;
-}
-
-<span class="org-css-selector">div.figure </span>{
-    <span class="org-css-property">font-size</span>: 0.85em;
-}
-
-<span class="org-css-selector">.tag </span>{
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
-    <span class="org-css-property">font-size</span>: 11px;
-    <span class="org-css-property">font-weight</span>: normal;
-    <span class="org-css-property">float</span>: right;
-    <span class="org-css-property">margin-top</span>: 1em;
-    <span class="org-css-property">background</span>: transparent;
-}
-
-<span class="org-css-selector">.tag span </span>{
-    <span class="org-css-property">background</span>: #ccc;
-    <span class="org-css-property">padding</span>: 0 0.5em;
-    <span class="org-css-property">border-radius</span>: 0.2em;
-    <span class="org-css-property">color</span>: white;
-}
-
-<span class="org-css-selector">.todo, .done </span>{
-    <span class="org-css-property">font-family</span>: <span class="org-string">"Roboto Slab"</span>, Helvetica, Arial, sans-serif;
-    <span class="org-css-property">font-weight</span>: normal;
-    <span class="org-css-property">padding</span>: 0 0.25em;
-    <span class="org-css-property">border-radius</span>: 0.2em;
-}
-
-<span class="org-css-selector">.todo </span>{
-    <span class="org-css-property">background</span>: #f04;
-    <span class="org-css-property">color</span>: white;
-}
-
-<span class="org-css-selector">.done </span>{
-    <span class="org-css-property">background</span>: #5f7;
-    <span class="org-css-property">color</span>: white;
-}
-
-<span class="org-builtin">@media</span> screen {
-<span class="org-css-selector">    h1.title </span>{
-        <span class="org-css-property">text-align</span>: left;
-        <span class="org-css-property">margin</span>: 1em 0 0 280px;
-    }
-
-<span class="org-css-selector">    h2 </span>{
-        <span class="org-css-property">margin-top</span>: 1em;
-    }
-
-<span class="org-css-selector">    #table-of-contents </span>{
-        <span class="org-css-property">position</span>: fixed;
-        <span class="org-css-property">top</span>: 0;
-        <span class="org-css-property">left</span>: 0;
-        <span class="org-css-property">padding</span>: 2em 0 2em 2em;
-        <span class="org-css-property">width</span>: 240px;
-        <span class="org-css-property">height</span>: 100vh;
-        <span class="org-css-property">font-size</span>: 11px;
-        <span class="org-css-property">background</span>: #eee;
-        <span class="org-css-property">overflow</span>: auto;
-    }
-
-<span class="org-css-selector">    #table-of-contents ul&gt;li&gt;ul&gt;li&gt;ul&gt;li </span>{
-        <span class="org-css-property">display</span>: none;
-    }
-
-<span class="org-css-selector">    #table-of-contents h2 </span>{
-        <span class="org-css-property">margin-top</span>: 0;
-    }
-
-<span class="org-css-selector">    #table-of-contents code </span>{
-        <span class="org-css-property">font-size</span>: 12px;
-    }
-
-<span class="org-css-selector">    div.outline-2, #footnotes </span>{
-        <span class="org-css-property">margin-left</span>: 280px;
-        <span class="org-css-property">max-width</span>: 960px;
-    }
-}
-
-<span class="org-builtin">@media</span> screen and (max-width: 1024px) {
-<span class="org-css-selector">    html, body </span>{
-        <span class="org-css-property">font-size</span>: 14px;
-    }
-
-<span class="org-css-selector">    #table-of-contents </span>{
-        <span class="org-css-property">display</span>: none;
-    }
-
-<span class="org-css-selector">    h1.title </span>{
-        <span class="org-css-property">margin-left</span>: 5%;
-    }
-
-<span class="org-css-selector">    div.outline-2, #footnotes </span>{
-        <span class="org-css-property">margin-left</span>: 5%;
-        <span class="org-css-property">max-width</span>: 90%;
-    }
-}
-
-<span class="org-builtin">@media</span> print {
-
-<span class="org-css-selector">    body </span>{
-        <span class="org-css-property">color</span>: black;
-    }
-
-<span class="org-css-selector">    </span><span class="org-css-selector"><span class="org-builtin">@page</span></span><span class="org-css-selector"> </span>{
-        <span class="org-css-property">margin</span>: 25mm;
-    }
-
-<span class="org-css-selector">    h2, h3 </span>{
-        <span class="org-css-property">page-break-before</span>: always;
-        <span class="org-css-property">margin-top</span>: 0;
-    }
-
-<span class="org-css-selector">    table </span>{
-        <span class="org-css-property">page-break-inside</span>: avoid;
-    }
-
-<span class="org-css-selector">    a:visited </span>{
-        <span class="org-css-property">color</span>: black;
-        <span class="org-css-property">background</span>: #ff8;
-    }
-
-<span class="org-css-selector">    a[href^=</span><span class="org-css-selector"><span class="org-string">"http"</span></span><span class="org-css-selector">]:visited </span>{
-        <span class="org-css-property">background</span>: #bff;
-    }
-
-<span class="org-css-selector">    div.notice:before </span>{
-        <span class="org-css-property">display</span>: none;
-    }
-}
+<pre class="src src-emacs-lisp">(define-prefix-command<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/magick-keymap)
+(mapcar<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(pair)
+<span class="org-unicode-whitespace-subdued-space">          </span>(fset<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/meta/get-insert-symbol<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>pair))
+<span class="org-unicode-whitespace-subdued-space">                </span>(eval<span class="org-unicode-whitespace-subdued-space"> </span>`(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-space"> </span>(interactive)<span class="org-unicode-whitespace-subdued-space"> </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>,(cdr<span class="org-unicode-whitespace-subdued-space"> </span>pair)))))
+<span class="org-unicode-whitespace-subdued-space">          </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>emagician/magick-keymap
+<span class="org-unicode-whitespace-subdued-space">            </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>pair)
+<span class="org-unicode-whitespace-subdued-space">            </span>(emagician/meta/get-insert-symbol<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>pair))))
+<span class="org-unicode-whitespace-subdued-space">        </span>'((<span class="org-string">"b"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128048;"</span>)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"p"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-|-+-|-"</span>)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"m"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127812;"</span>)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"e"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128138;"</span>)<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-comment-delimiter">;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Hah,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it's</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">joke</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">son.</span>
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"s"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128169;"</span>)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"a"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"a"</span>)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-string">"t"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128701;"</span>)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> F3 Prefix Key for Emagician Meta Development</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+The idea here is that <code>f3</code> can be pressed whenever I need to do
+anything specifically with the Starter Kit.
+</p>
+
+<p>
+With <a href="Interface.html">Which Key</a> it means <code>f3</code> becomes a visual menu until I really
+start to learn the keystrokes.
+</p>
+</div>
+
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Meta Keys and Prefixes</h3>
+<div class="outline-text-3" id="text-7-1">
+<dl class="org-dl">
+<dt> i     </dt><dd>insert magickal key.  (p-crosses and poops and bunnies, oh my!)
+</dd>
+<dt> shift </dt><dd>Do the thing, but in debug. 
+</dd>
+</dl>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(bind-keys<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:prefix-map</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta-keymap
+<span class="org-unicode-whitespace-subdued-space">           </span><span class="org-builtin">:prefix</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;f3&gt;"</span>
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"&lt;f3&gt;"</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/helm-emagician-dir)
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"&lt;f4&gt;"</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta/run-all-emagick-tests)
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"&lt;f5&gt;"</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta/run-all-tests)
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"&lt;f12&gt;"</span><span class="org-unicode-whitespace-subdued-space">   </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta/publish-changed)
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"S-&lt;f12&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta/publish-all)
+<span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"i"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/magick-keymap))
 </pre>
 </div>
 </div>
@@ -889,10 +1046,6 @@ tbody tr:nth-child(odd) {
 
 <div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
 <a href="https://github.com/thi-ng/org-spec">https://github.com/thi-ng/org-spec</a>
-</p>
-
-<p class="footpara">
-​‌డ(°益°)హ
 </p></div>
 
 
@@ -900,7 +1053,7 @@ tbody tr:nth-child(odd) {
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 13:57</p>
+<p class="date">Created: 2016-08-22 Mon 23:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

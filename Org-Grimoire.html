@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Org-Grimoire</title>
-<!-- 2016-08-19 Fri 13:57 -->
+<!-- 2016-08-22 Mon 23:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -137,7 +137,11 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index"> HOME </a>
+</div><div id="content">
 <h1 class="title">Org-Grimoire</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -150,6 +154,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-1">3.1. Saveplace</a></li>
 <li><a href="#sec-3-2">3.2. Turn on flyspell</a></li>
 <li><a href="#sec-3-3">3.3. Turn on autocomplete</a></li>
+<li><a href="#sec-3-4">3.4. Fix YAS</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4. What do I need.</a></li>
@@ -251,11 +256,7 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-18">18. Exports</a>
 <ul>
-<li><a href="#sec-18-1">18.1. Htmlize</a>
-<ul>
-<li><a href="#sec-18-1-1">18.1.1. Fix FCI (fill column indicator) in org-mod/htmlize</a></li>
-</ul>
-</li>
+<li><a href="#sec-18-1">18.1. Htmlize</a></li>
 </ul>
 </li>
 <li><a href="#sec-19">19. Working with Code in Babel mode</a>
@@ -277,17 +278,6 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(org-babel-load-file buffer-file-truename)
-</pre>
-</div>
-
-<p>
-#+begin-src
-(require org)
-#+end<sub>src</sub>
-</p>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
@@ -320,14 +310,14 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/fix-saveplace</span> ()
-    <span class="org-doc">"Fixes a bit of brokenness with saveplace.el and org-mode"</span>
-    (<span class="org-keyword">when</span> (outline-invisible-p)
-      (<span class="org-keyword">save-excursion</span>
-        (outline-previous-visible-heading 1)
-        (org-show-subtree))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/fix-saveplace</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Fixes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">bit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">brokenness</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">saveplace.el</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">org-mode"</span>
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(outline-invisible-p)
+<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">save-excursion</span>
+<span class="org-unicode-whitespace-subdued-space">        </span>(outline-previous-visible-heading<span class="org-unicode-whitespace-subdued-space"> </span>1)
+<span class="org-unicode-whitespace-subdued-space">        </span>(org-show-subtree))))
 
-  (add-hook 'org-mode-hook 'emagician-org/fix-saveplace)
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'org-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/fix-saveplace)
 </pre>
 </div>
 </div>
@@ -338,7 +328,7 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'flyspell-mode)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'org-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'flyspell-mode)
 </pre>
 </div>
 </div>
@@ -349,13 +339,42 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'org-mode-hook 'auto-complete-mode)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'org-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'auto-complete-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Fix YAS</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+The latest version of yasnippet doesn't play well with Org mode.
+If the above code does not fix the conflict, start by defining the
+following function:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yas/org-very-safe-expand</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((yas/fallback-behavior<span class="org-unicode-whitespace-subdued-space"> </span>'return-nil))<span class="org-unicode-whitespace-subdued-space"> </span>(yas/expand)))
+</pre>
+</div>
+
+<p>
+Then, tell Org mode what to do with the new function:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>fix-yasnippet-for-org<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-hook
+<span class="org-unicode-whitespace-subdued-space">  </span>(make-variable-buffer-local<span class="org-unicode-whitespace-subdued-space"> </span>'yas/trigger-key)
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>yas/trigger-key<span class="org-unicode-whitespace-subdued-space"> </span>[tab])
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'org-tab-first-hook<span class="org-unicode-whitespace-subdued-space"> </span>'yas/org-very-safe-expand)
+<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>yas/keymap<span class="org-unicode-whitespace-subdued-space"> </span>[tab]<span class="org-unicode-whitespace-subdued-space"> </span>'yas/next-field))
 </pre>
 </div>
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> What do I need.</h2>
@@ -403,7 +422,7 @@ Not sure yet. Wait till it is written.
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-files '(<span class="org-string">"~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org"</span> <span class="org-string">"~/Dropbox/Creativity/Site3.0/Site.org"</span>))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-files<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"~/org/"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/Dropbox/arduino/BunnyCyborg/BunnyCyborg.org"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/Dropbox/Creativity/Site3.0/Site.org"</span>))
 </pre>
 </div>
 </div>
@@ -421,11 +440,11 @@ Simple GTD States.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-todo-keywords '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"STARTED(g)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d@/!)"</span>)
-                          (sequence <span class="org-string">"PROJECT(p)"</span> <span class="org-string">"|"</span> <span class="org-string">"FINISHED(f)"</span>)
-                          (sequence <span class="org-string">"SOMEDAY(s)"</span> <span class="org-string">"MAYBE(m)"</span>) 
-                          (sequence  <span class="org-string">"WAITING(w@/!)"</span>)
-                          ))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-todo-keywords<span class="org-unicode-whitespace-subdued-space"> </span>'((sequence<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"TODO(t)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"NEXT(n)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"STARTED(g)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"|"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DONE(d@/!)"</span>)
+<span class="org-unicode-whitespace-subdued-space">                          </span>(sequence<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PROJECT(p)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"|"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"FINISHED(f)"</span>)
+<span class="org-unicode-whitespace-subdued-space">                          </span>(sequence<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SOMEDAY(s)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"MAYBE(m)"</span>)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                          </span>(sequence<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"WAITING(w@/!)"</span>)
+<span class="org-unicode-whitespace-subdued-space">                          </span>))
 </pre>
 </div>
 </div>
@@ -440,7 +459,7 @@ Fast selection is good! But not on tags.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-fast-tag-selection-include-todo nil)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-fast-tag-selection-include-todo<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
 </div>
@@ -451,7 +470,7 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-log-into-drawer t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-log-into-drawer<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -460,23 +479,27 @@ Fast selection is good! But not on tags.
 <div id="outline-container-sec-6-4" class="outline-3">
 <h3 id="sec-6-4"><span class="section-number-3">6.4</span> Faces</h3>
 <div class="outline-text-3" id="text-6-4">
+<p>
+A better looking org mode looks better.
+</p>
+
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-todo-keyword-faces
-      `((<span class="org-string">"TODO"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"red"</span> 
-                <span class="org-builtin">:background</span> <span class="org-string">"red4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"red3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"PROJECT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"cyan"</span> <span class="org-builtin">:background</span> <span class="org-string">"cyan4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"cyan3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"HABIT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"DodgerBlue4"</span> <span class="org-builtin">:background</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"NEXT"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"DodgerBlue4"</span> <span class="org-builtin">:background</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"DodgerBlue2"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"STARTED"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"blue"</span> <span class="org-builtin">:background</span> <span class="org-string">"blue4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"blue3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"DONE"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"chartreuse"</span> 
-                <span class="org-builtin">:background</span> <span class="org-string">"chartreuse4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"chartreuse3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"FINISHED"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"SeaGreen1"</span> 
-                <span class="org-builtin">:background</span> <span class="org-string">"SeaGreen4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"SeaGreen3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"WAITING"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"orange"</span> 
-                   <span class="org-builtin">:background</span> <span class="org-string">"orange4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"orange3"</span> <span class="org-builtin">:style</span> released-button))
-        (<span class="org-string">"SOMEDAY"</span> <span class="org-builtin">:foreground</span> <span class="org-string">"purple1"</span>
-                   <span class="org-builtin">:background</span> <span class="org-string">"purple4"</span> <span class="org-builtin">:weight</span> bold <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> 2 <span class="org-builtin">:color</span> <span class="org-string">"purple3"</span> <span class="org-builtin">:style</span> released-button))))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-todo-keyword-faces
+<span class="org-unicode-whitespace-subdued-space">      </span>`((<span class="org-string">"TODO"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"red"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"red4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"red3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"PROJECT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"cyan"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"cyan4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"cyan3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"HABIT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue2"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue2"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"NEXT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue2"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DodgerBlue2"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"STARTED"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"blue"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"blue4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"blue3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"DONE"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"chartreuse"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"chartreuse4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"chartreuse3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"FINISHED"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SeaGreen1"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SeaGreen4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SeaGreen3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"WAITING"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"orange"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                   </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"orange4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"orange3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"SOMEDAY"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"purple1"</span>
+<span class="org-unicode-whitespace-subdued-space">                   </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"purple4"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>bold<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:box</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:line-width</span><span class="org-unicode-whitespace-subdued-space"> </span>2<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"purple3"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:style</span><span class="org-unicode-whitespace-subdued-space"> </span>released-button))))
 </pre>
 </div>
 </div>
@@ -486,14 +509,14 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/todo-to-next</span> ()
-  <span class="org-doc">"sets the todo state of the current headline to next."</span>
-  (interactive)
-  (org-todo <span class="org-string">"NEXT"</span>)
-  (org-set-tags))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/todo-to-next</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"sets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">todo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">state</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">current</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">headline</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">next."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-todo<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"NEXT"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-set-tags))
 
-(eval-after-load 'org
- '(define-key org-mode-map (kbd <span class="org-string">"C-c n"</span>) 'emagician-org/todo-to-next))
+(eval-after-load<span class="org-unicode-whitespace-subdued-space"> </span>'org
+<span class="org-unicode-whitespace-subdued-space"> </span>'(define-key<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-map<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">n"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/todo-to-next))
 </pre>
 </div>
 </div>
@@ -504,21 +527,21 @@ Fast selection is good! But not on tags.
 <div class="outline-text-3" id="text-6-6">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/go</span> ()
-  <span class="org-doc">"Launches the task at point, and starts a pomodoro if required"</span>
-  (interactive)
-  (<span class="org-keyword">if</span> (org-entry-is-todo-p)
-      (<span class="org-keyword">progn</span>
-        (org-todo <span class="org-string">"STARTED"</span>)
-        (<span class="org-keyword">if</span> (not (org-pomodoro-active-p))
-            (org-pomodoro-start)
-          (<span class="org-keyword">progn</span>
-            (<span class="org-keyword">when</span> (org-clocking-p)
-              (org-clock-out nil t))
-            (org-pomodoro-kill))))
-    (<span class="org-warning">warn</span> <span class="org-string">"Not on a TODO task"</span>)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/go</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Launches</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">task</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">point,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">starts</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">pomodoro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">if</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">required"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(org-entry-is-todo-p)
+<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">progn</span>
+<span class="org-unicode-whitespace-subdued-space">        </span>(org-todo<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"STARTED"</span>)
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(org-pomodoro-active-p))
+<span class="org-unicode-whitespace-subdued-space">            </span>(org-pomodoro-start)
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-keyword">progn</span>
+<span class="org-unicode-whitespace-subdued-space">            </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(org-clocking-p)
+<span class="org-unicode-whitespace-subdued-space">              </span>(org-clock-out<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span>t))
+<span class="org-unicode-whitespace-subdued-space">            </span>(org-pomodoro-kill))))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-warning">warn</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">on</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">TODO</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">task"</span>)))
 
-(eval-after-load 'org '(define-key org-mode-map (kbd <span class="org-string">"C-c g"</span>) 'emagician-org/go))
+(eval-after-load<span class="org-unicode-whitespace-subdued-space"> </span>'org<span class="org-unicode-whitespace-subdued-space"> </span>'(define-key<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-map<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">g"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/go))
 </pre>
 </div>
 </div>
@@ -537,23 +560,21 @@ So list em all!
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">dash</span>)
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/get-tag-counts</span> ()
-  <span class="org-doc">"Thanks to John Kitchin for this"</span> 
-  (<span class="org-keyword">let</span> ((all-tags '()))
-    (org-map-entries
-     (<span class="org-keyword">lambda</span> ()
-       (<span class="org-keyword">let</span> ((tag-string (car (last (org-heading-components)))))
-         (<span class="org-keyword">when</span> tag-string   
-           (setq all-tags
-                 (append all-tags (split-string tag-string <span class="org-string">":"</span> t))))))
-     t
-     'agenda)
-
-
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">now get counts</span>
-    (loop for tag in (-uniq all-tags) 
-          collect (cons tag (cl-count tag all-tags <span class="org-builtin">:test</span> 'string=)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">dash</span>)
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/get-tag-counts</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Thanks</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">John</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Kitchin</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">this"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((all-tags<span class="org-unicode-whitespace-subdued-space"> </span>'()))
+<span class="org-unicode-whitespace-subdued-space">    </span>(org-map-entries
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((tag-string<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(last<span class="org-unicode-whitespace-subdued-space"> </span>(org-heading-components)))))
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>tag-string<span class="org-unicode-whitespace-subdued-trailing">   </span>
+<span class="org-unicode-whitespace-subdued-space">           </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>all-tags
+<span class="org-unicode-whitespace-subdued-space">                 </span>(append<span class="org-unicode-whitespace-subdued-space"> </span>all-tags<span class="org-unicode-whitespace-subdued-space"> </span>(split-string<span class="org-unicode-whitespace-subdued-space"> </span>tag-string<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>t))))))
+<span class="org-unicode-whitespace-subdued-space">     </span>t
+<span class="org-unicode-whitespace-subdued-space">     </span>'agenda)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">now</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">get</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">counts</span>
+<span class="org-unicode-whitespace-subdued-space">    </span>(loop<span class="org-unicode-whitespace-subdued-space"> </span>for<span class="org-unicode-whitespace-subdued-space"> </span>tag<span class="org-unicode-whitespace-subdued-space"> </span>in<span class="org-unicode-whitespace-subdued-space"> </span>(-uniq<span class="org-unicode-whitespace-subdued-space"> </span>all-tags)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">          </span>collect<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>tag<span class="org-unicode-whitespace-subdued-space"> </span>(cl-count<span class="org-unicode-whitespace-subdued-space"> </span>tag<span class="org-unicode-whitespace-subdued-space"> </span>all-tags<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:test</span><span class="org-unicode-whitespace-subdued-space"> </span>'string=)))))
 </pre>
 </div>
 </div>
@@ -564,8 +585,8 @@ So list em all!
 <div class="outline-text-3" id="text-7-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-tags-column -100)
-(setq org-agenda-tags-column -100)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-tags-column<span class="org-unicode-whitespace-subdued-space"> </span>-100)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-tags-column<span class="org-unicode-whitespace-subdued-space"> </span>-100)
 </pre>
 </div>
 </div>
@@ -587,7 +608,7 @@ So list em all!
 <div class="outline-text-3" id="text-7-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-use-fast-tag-selection t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-use-fast-tag-selection<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -598,33 +619,33 @@ So list em all!
 <div class="outline-text-3" id="text-7-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-tag-alist '((<span class="org-builtin">:startgroup</span>   . nil) 
-                      (<span class="org-string">"code"</span>        . ?c)
-                      (<span class="org-string">"design"</span>      . ?d)
-                      (<span class="org-string">"emacs"</span>       . ?e)
-                      (<span class="org-string">"gtd"</span>         . ?g)                          
-                      (<span class="org-builtin">:endgroup</span>     . nil)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-tag-alist<span class="org-unicode-whitespace-subdued-space"> </span>'((<span class="org-builtin">:startgroup</span><span class="org-unicode-whitespace-subdued-space">   </span>.<span class="org-unicode-whitespace-subdued-space"> </span>nil)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"code"</span><span class="org-unicode-whitespace-subdued-space">        </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?c)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"design"</span><span class="org-unicode-whitespace-subdued-space">      </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?d)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"emacs"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?e)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"gtd"</span><span class="org-unicode-whitespace-subdued-space">         </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?g)<span class="org-unicode-whitespace-subdued-trailing">                          </span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-builtin">:endgroup</span><span class="org-unicode-whitespace-subdued-space">     </span>.<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 
-                      (<span class="org-builtin">:startgroup</span>  .   nil)                         
-                      (<span class="org-string">"decide"</span>     .   ?a)
-                      (<span class="org-string">"phone"</span>      .   ?p)
-                      (<span class="org-string">"read"</span>       .   ?r)
-                      (<span class="org-string">"research"</span>   .   ?u)
-                      (<span class="org-string">"talk"</span>       .   ?t)
-                      (<span class="org-string">"vm"</span>         .   ?v)
-                      (<span class="org-string">"web"</span>        .   ?w)
-                      (<span class="org-string">"write"</span>      .   ?x)
-                      (<span class="org-builtin">:endgroup</span>    .   nil)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-builtin">:startgroup</span><span class="org-unicode-whitespace-subdued-space">  </span>.<span class="org-unicode-whitespace-subdued-space">   </span>nil)<span class="org-unicode-whitespace-subdued-trailing">                         </span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"decide"</span><span class="org-unicode-whitespace-subdued-space">     </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?a)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"phone"</span><span class="org-unicode-whitespace-subdued-space">      </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?p)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"read"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?r)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"research"</span><span class="org-unicode-whitespace-subdued-space">   </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?u)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"talk"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?t)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"vm"</span><span class="org-unicode-whitespace-subdued-space">         </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?v)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"web"</span><span class="org-unicode-whitespace-subdued-space">        </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?w)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"write"</span><span class="org-unicode-whitespace-subdued-space">      </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?x)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-builtin">:endgroup</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space">   </span>nil)
 
-                      (<span class="org-string">"backburner"</span> .   ?b)
-                      (<span class="org-string">"braindead"</span>  .   ?z)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"backburner"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?b)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"braindead"</span><span class="org-unicode-whitespace-subdued-space">  </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?z)
 
-                      (<span class="org-builtin">:newline</span>     .   nil)                    
-                      (<span class="org-string">"chaman"</span>     .   ?C)
-                      (<span class="org-string">"charles"</span>    .   ?H)
-                      (<span class="org-string">"paul"</span>       .   ?P)
-                      (<span class="org-string">"sohan"</span>      .   ?S) 
-                      ))
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-builtin">:newline</span><span class="org-unicode-whitespace-subdued-space">     </span>.<span class="org-unicode-whitespace-subdued-space">   </span>nil)<span class="org-unicode-whitespace-subdued-trailing">                    </span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"chaman"</span><span class="org-unicode-whitespace-subdued-space">     </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?C)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"charles"</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?H)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"paul"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?P)
+<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-string">"sohan"</span><span class="org-unicode-whitespace-subdued-space">      </span>.<span class="org-unicode-whitespace-subdued-space">   </span>?S)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                      </span>))
 </pre>
 </div>
 </div>
@@ -644,10 +665,10 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-3" id="text-8-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-category-icon-alist 
-      `((<span class="org-string">"Work"</span>  ,(list (propertize <span class="org-string">"&#128188;"</span>)))
-        (<span class="org-string">"Music"</span> ,(list (propertize <span class="org-string">"&#127926;"</span> )))
-        (<span class="org-string">"Home"</span>  ,(list (propertize<span class="org-string">"&#127969;"</span> )))))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-category-icon-alist<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">      </span>`((<span class="org-string">"Work"</span><span class="org-unicode-whitespace-subdued-space">  </span>,(list<span class="org-unicode-whitespace-subdued-space"> </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128188;"</span>)))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"Music"</span><span class="org-unicode-whitespace-subdued-space"> </span>,(list<span class="org-unicode-whitespace-subdued-space"> </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127926;"</span><span class="org-unicode-whitespace-subdued-space"> </span>)))
+<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"Home"</span><span class="org-unicode-whitespace-subdued-space">  </span>,(list<span class="org-unicode-whitespace-subdued-space"> </span>(propertize<span class="org-string">"&#127969;"</span><span class="org-unicode-whitespace-subdued-space"> </span>)))))
 </pre>
 </div>
 </div>
@@ -659,9 +680,9 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-stuck-projects '(<span class="org-string">"TODO=\"PROJECT\""</span>
-  (<span class="org-string">"NEXT"</span>)
-  nil <span class="org-string">""</span>))
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-stuck-projects<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"TODO=\"PROJECT\""</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"NEXT"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))
 </pre>
 </div>
 </div>
@@ -672,21 +693,21 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <div class="outline-text-2" id="text-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">org-habit</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org-habit</span>)
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-habit-graph-column 50)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-habit-graph-column<span class="org-unicode-whitespace-subdued-space"> </span>50)
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'org-todo-keywords '(sequence <span class="org-string">"HABIT(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d!)"</span>) t)
+<pre class="src src-emacs-lisp">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'org-todo-keywords<span class="org-unicode-whitespace-subdued-space"> </span>'(sequence<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"HABIT(h)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"|"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DONE(d!)"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -735,9 +756,9 @@ All agenda files are valid for targeting
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-refile-targets '((org-agenda-files <span class="org-builtin">:maxlevel</span> . 1)))
-(setq org-refile-use-outline-path 'file)
-(setq org-outline-path-complete-in-steps nil)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-refile-targets<span class="org-unicode-whitespace-subdued-space"> </span>'((org-agenda-files<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:maxlevel</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>1)))
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-refile-use-outline-path<span class="org-unicode-whitespace-subdued-space"> </span>'file)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-outline-path-complete-in-steps<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
 </div>
@@ -751,16 +772,16 @@ All agenda files are valid for targeting
 <div class="outline-text-3" id="text-12-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-return-follows-link t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-return-follows-link<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key global-map <span class="org-string">"\C-cl"</span> 'org-store-link)
+<pre class="src src-emacs-lisp">(define-key<span class="org-unicode-whitespace-subdued-space"> </span>global-map<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\C-cl"</span><span class="org-unicode-whitespace-subdued-space"> </span>'org-store-link)
 
-(setq org-return-follows-link t)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-return-follows-link<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -771,7 +792,7 @@ All agenda files are valid for targeting
 <div class="outline-text-3" id="text-12-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">org-info</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org-info</span>)
 </pre>
 </div>
 </div>
@@ -782,20 +803,20 @@ All agenda files are valid for targeting
 <div class="outline-text-2" id="text-13">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key global-map (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
-(define-key global-map (kbd <span class="org-string">"C-c i"</span>) 'emagician-org-capture-inbox)
+<pre class="src src-emacs-lisp">(define-key<span class="org-unicode-whitespace-subdued-space"> </span>global-map<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">c"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'org-capture)
+(define-key<span class="org-unicode-whitespace-subdued-space"> </span>global-map<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">i"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org-capture-inbox)
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org-capture-inbox</span> ()
-  (interactive)
-  (org-capture nil <span class="org-string">"i"</span>))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org-capture-inbox</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-capture<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"i"</span>))
 
-(setq org-capture-templates
-  '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry (file+headline <span class="org-string">"~/org/GTD.org"</span> <span class="org-string">"Inbox"</span>)
-         <span class="org-string">"** TODO %?\n  %i\n"</span>)))
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-capture-templates
+<span class="org-unicode-whitespace-subdued-space">  </span>'((<span class="org-string">"i"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Inbox"</span><span class="org-unicode-whitespace-subdued-space"> </span>entry<span class="org-unicode-whitespace-subdued-space"> </span>(file+headline<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/org/GTD.org"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Inbox"</span>)
+<span class="org-unicode-whitespace-subdued-space">         </span><span class="org-string">"**</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">TODO</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%?\n</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">%i\n"</span>)))
 </pre>
 </div>
 </div>
@@ -814,9 +835,9 @@ org-pomodoro is pretty simple, so lets start with that.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">org-pomodoro</span>
-  <span class="org-builtin">:bind</span>
-  (<span class="org-string">"C-c p"</span> . org-pomodoro))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">org-pomodoro</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">p"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>org-pomodoro))
 </pre>
 </div>
 
@@ -826,7 +847,7 @@ Fancy it up a little
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-pomodoro-format <span class="org-string">"&#127813;~%s"</span>)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-pomodoro-format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127813;~%s"</span>)
 </pre>
 </div>
 </div>
@@ -840,7 +861,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq diary-file <span class="org-string">"~/.emacs.d/diary"</span>)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>diary-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/.emacs.d/diary"</span>)
 </pre>
 </div>
 </div>
@@ -853,8 +874,8 @@ Fancy it up a little
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq calendar-longitude -114.0715046)
-(setq calendar-latitude 51.0368334)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>calendar-longitude<span class="org-unicode-whitespace-subdued-space"> </span>-114.0715046)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>calendar-latitude<span class="org-unicode-whitespace-subdued-space"> </span>51.0368334)
 </pre>
 </div>
 </div>
@@ -867,7 +888,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-include-diary t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-include-diary<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -878,7 +899,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-15-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(appt-activate 1)
+<pre class="src src-emacs-lisp">(appt-activate<span class="org-unicode-whitespace-subdued-space"> </span>1)
 (org-agenda-to-appt)
 </pre>
 </div>
@@ -891,8 +912,8 @@ Fancy it up a little
 <div class="outline-text-2" id="text-16">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-attach-allow-inheritance t)
-(setq org-attach-store-link-p t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-attach-allow-inheritance<span class="org-unicode-whitespace-subdued-space"> </span>t)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-attach-store-link-p<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -909,7 +930,7 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-dim-blocked-tasks t)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-dim-blocked-tasks<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -921,7 +942,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-block-separator ?\&#9552;)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-block-separator<span class="org-unicode-whitespace-subdued-space"> </span>?\&#9552;)
 </pre>
 </div>
 </div>
@@ -932,27 +953,27 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-title</span> (title)
-    <span class="org-doc">"show a centered title"</span>
-    (setq buffer-read-only nil)
-    (<span class="org-keyword">let</span> ((centering-str  (make-string (/ (- (window-body-width)
-                                             (length title))
-                                          2)
-                                       ?\ )))
-      (insert (propertize (concat centering-str title centering-str <span class="org-string">"\n"</span>)
-                          'face
-                         'org-agenda-structure))))
+<pre class="src src-emacs-lisp"><span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/insert-title</span><span class="org-unicode-whitespace-subdued-space"> </span>(title)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">centered</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">title"</span>
+<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>buffer-read-only<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((centering-str<span class="org-unicode-whitespace-subdued-space">  </span>(make-string<span class="org-unicode-whitespace-subdued-space"> </span>(/<span class="org-unicode-whitespace-subdued-space"> </span>(-<span class="org-unicode-whitespace-subdued-space"> </span>(window-body-width)
+<span class="org-unicode-whitespace-subdued-space">                                             </span>(length<span class="org-unicode-whitespace-subdued-space"> </span>title))
+<span class="org-unicode-whitespace-subdued-space">                                          </span>2)
+<span class="org-unicode-whitespace-subdued-space">                                       </span>?\<span class="org-unicode-whitespace-subdued-space"> </span>)))
+<span class="org-unicode-whitespace-subdued-space">      </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>centering-str<span class="org-unicode-whitespace-subdued-space"> </span>title<span class="org-unicode-whitespace-subdued-space"> </span>centering-str<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
+<span class="org-unicode-whitespace-subdued-space">                          </span>'face
+<span class="org-unicode-whitespace-subdued-space">                         </span>'org-agenda-structure))))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-separator</span> ()
-  (insert (make-string (window-body-width) org-agenda-block-separator) <span class="org-string">"\n"</span>))
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/insert-separator</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(make-string<span class="org-unicode-whitespace-subdued-space"> </span>(window-body-width)<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-block-separator)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>))
 
-  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-headline</span> (<span class="org-type">&amp;rest</span> args)
-    <span class="org-doc">"Daily wisdom, Cool title, etc."</span>
-    (setq buffer-read-only nil)
-    (emagician-agenda/insert-separator)
-    (emagician-agenda/insert-title <span class="org-string">"-|-+-|-"</span>)
-    (emagician-agenda/insert-separator)
-    (insert (concat (emagician/cookie-from-file <span class="org-string">"assets/collected-works-ov-chaos.lines"</span>) <span class="org-string">"\n"</span>)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/insert-headline</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>args)
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Daily</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">wisdom,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Cool</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">title,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">etc."</span>
+<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>buffer-read-only<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<span class="org-unicode-whitespace-subdued-space">    </span>(emagician-agenda/insert-separator)
+<span class="org-unicode-whitespace-subdued-space">    </span>(emagician-agenda/insert-title<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-|-+-|-"</span>)
+<span class="org-unicode-whitespace-subdued-space">    </span>(emagician-agenda/insert-separator)
+<span class="org-unicode-whitespace-subdued-space">    </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/cookie-from-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/collected-works-ov-chaos.lines"</span>)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)))
 </pre>
 </div>
 </div>
@@ -966,9 +987,9 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-5">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-goals</span> (<span class="org-type">&amp;rest</span> args)
-  <span class="org-doc">"Show top level goal headlines"</span>
-  '(tags <span class="org-string">"goal"</span> ((org-agenda-overriding-header <span class="org-string">"Goals"</span>)) <span class="org-string">"~/org/Goals.org"</span>))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/get-goals</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>args)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">top</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">level</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">goal</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">headlines"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>'(tags<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"goal"</span><span class="org-unicode-whitespace-subdued-space"> </span>((org-agenda-overriding-header<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Goals"</span>))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/org/Goals.org"</span>))
 </pre>
 </div>
 </div>
@@ -981,15 +1002,15 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-6-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">lunar</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">lunar</span>)
 
-(setq lunar-phase-names 
-     '(<span class="org-string">"&#127770; New Moon &#127770;"</span> <span class="org-string">"&#127771; First Quarter&#127771;"</span> <span class="org-string">"&#127773; Full Moon &#127773;"</span> <span class="org-string">"&#127772;Last Quarter &#127772;"</span>))
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>lunar-phase-names<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">     </span>'(<span class="org-string">"&#127770;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">New</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Moon</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#127770;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127771;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">First</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Quarter&#127771;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127773;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Full</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Moon</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#127773;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127772;Last</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Quarter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#127772;"</span>))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-current-lunar-phase</span> ()
-  <span class="org-doc">"Get the current lunar phase.  For some reason it is out of sync by a day, so... yea"</span>
-  (lunar-phase-name (mod (+ 1 (lunar-index (calendar-current-date)))
-                                           4)))
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/get-current-lunar-phase</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Get</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">current</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">lunar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">phase.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">For</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">some</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">reason</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">out</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sync</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">by</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">day,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">so...</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">yea"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(lunar-phase-name<span class="org-unicode-whitespace-subdued-space"> </span>(mod<span class="org-unicode-whitespace-subdued-space"> </span>(+<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>(lunar-index<span class="org-unicode-whitespace-subdued-space"> </span>(calendar-current-date)))
+<span class="org-unicode-whitespace-subdued-space">                                           </span>4)))
 </pre>
 </div>
 </div>
@@ -1005,11 +1026,11 @@ Fancy it up a little
 <div class="outline-text-4" id="text-17-6-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/insert-cycle</span> (<span class="org-type">&amp;rest</span> args)
-  (<span class="org-keyword">let</span> ((buffer-read-only nil))
-    (insert (emagician-agenda/get-current-lunar-phase))
-        (insert <span class="org-string">"\n"</span>)
-    (emagician-agenda/insert-separator)))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/insert-cycle</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>args)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((buffer-read-only<span class="org-unicode-whitespace-subdued-space"> </span>nil))
+<span class="org-unicode-whitespace-subdued-space">    </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(emagician-agenda/get-current-lunar-phase))
+<span class="org-unicode-whitespace-subdued-space">        </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
+<span class="org-unicode-whitespace-subdued-space">    </span>(emagician-agenda/insert-separator)))
 </pre>
 </div>
 </div>
@@ -1021,7 +1042,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-7">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-agenda-window-setup 'other-frame)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-window-setup<span class="org-unicode-whitespace-subdued-space"> </span>'other-frame)
 </pre>
 </div>
 </div>
@@ -1033,7 +1054,7 @@ Fancy it up a little
 <div class="outline-text-3" id="text-17-8">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/org-context</span> <span class="org-string">"Work"</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/org-context</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Work"</span>)
 </pre>
 </div>
 </div>
@@ -1052,13 +1073,13 @@ Best is the enemy of the good.  Make this not suck later.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-tag</span> (tag title <span class="org-type">&amp;optional</span> include-dates) 
-  (<span class="org-keyword">if</span> (not include-dates)
-    `(todo ,tag 
-              ((org-agenda-overriding-header ,(concat title <span class="org-string">"\n"</span>))
-               (org-agenda-todo-ignore-with-date t)))
-     `(todo ,tag 
-              ((org-agenda-overriding-header ,(concat title <span class="org-string">"\n"</span>))))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/get-tag</span><span class="org-unicode-whitespace-subdued-space"> </span>(tag<span class="org-unicode-whitespace-subdued-space"> </span>title<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>include-dates)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>include-dates)
+<span class="org-unicode-whitespace-subdued-space">    </span>`(todo<span class="org-unicode-whitespace-subdued-space"> </span>,tag<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">              </span>((org-agenda-overriding-header<span class="org-unicode-whitespace-subdued-space"> </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span>title<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>))
+<span class="org-unicode-whitespace-subdued-space">               </span>(org-agenda-todo-ignore-with-date<span class="org-unicode-whitespace-subdued-space"> </span>t)))
+<span class="org-unicode-whitespace-subdued-space">     </span>`(todo<span class="org-unicode-whitespace-subdued-space"> </span>,tag<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">              </span>((org-agenda-overriding-header<span class="org-unicode-whitespace-subdued-space"> </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span>title<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>))))))
 </pre>
 </div>
 
@@ -1079,11 +1100,11 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-3" id="text-17-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-agenda/get-stuck-projects</span> ()
-  <span class="org-doc">"return a string showing all Stuck projects"</span>
-  '(tags <span class="org-string">"TODO=\"PROJECT\""</span>
-              ((org-agenda-overriding-header <span class="org-string">" &#128214; Stuck Projects"</span>)
-               (org-agenda-skip-function '(org-agenda-skip-subtree-if 'regexp <span class="org-string">"NEXT"</span>)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/get-stuck-projects</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"return</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">string</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">showing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Stuck</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">projects"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>'(tags<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"TODO=\"PROJECT\""</span>
+<span class="org-unicode-whitespace-subdued-space">              </span>((org-agenda-overriding-header<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128214;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Stuck</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Projects"</span>)
+<span class="org-unicode-whitespace-subdued-space">               </span>(org-agenda-skip-function<span class="org-unicode-whitespace-subdued-space"> </span>'(org-agenda-skip-subtree-if<span class="org-unicode-whitespace-subdued-space"> </span>'regexp<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"NEXT"</span>)))))
 </pre>
 </div>
 </div>
@@ -1097,35 +1118,35 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-11-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">      (setq org-agenda-custom-commands
-            `((<span class="org-string">" "</span> <span class="org-string">"Agenda"</span>
-               ((emagician-agenda/insert-headline <span class="org-string">""</span>)
-                ,(emagician-agenda/get-goals <span class="org-string">""</span>)
-                (emagician-agenda/insert-cycle <span class="org-string">""</span>) 
-                (agenda <span class="org-string">""</span> ((org-agenda-span 1) (org-agenda-show-log nil) ))
-                ,(emagician-agenda/get-tag <span class="org-string">"STARTED"</span> <span class="org-string">"&#128165; Started"</span> t)
-                ,(emagician-agenda/get-tag <span class="org-string">"WAITING"</span> <span class="org-string">"&#128172; Waiting"</span> t)
-                ,(emagician-agenda/get-tag <span class="org-string">"NEXT"</span> <span class="org-string">"&#10055; Next Actions"</span> t)
-                ,(emagician-agenda/get-stuck-projects))
-               ((org-agenda-category-filter-preset '(<span class="org-string">"-Home"</span> <span class="org-string">"-Music"</span>))))
-              (<span class="org-string">"W"</span> <span class="org-string">"Weekly Review"</span>
-               ((emagician-agenda/insert-headline <span class="org-string">" Weekly Review "</span>)
-                (agenda <span class="org-string">""</span> ((org-agenda-span 7)
-                            (org-agenda-log-mode-items '(closed clock state))
-                            (org-agenda-start-day <span class="org-string">"-7d"</span>)
-                            (org-agenda-entry-type '(<span class="org-builtin">:timestamp</span> <span class="org-builtin">:sexp</span> <span class="org-builtin">:deadline</span> <span class="org-builtin">:sheduled</span>))
-                            (org-agenda-show-log t)))
-                (tags-todo <span class="org-string">"inbox"</span>)
-                (agenda <span class="org-string">""</span> ((org-agenda-span 31)))
-                ,(emagician-agenda/get-stuck-projects)
-                ,(emagician-agenda/get-tag <span class="org-string">"PROJECT"</span> <span class="org-string">"&#128214; Projects"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"FINISHED"</span> <span class="org-string">"&#128216; Finished  ($ to archive)"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"NEXT"</span> <span class="org-string">"&#10055; Next Actions"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"TODO"</span> <span class="org-string">"&#127793; TODO"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"WAITING"</span> <span class="org-string">"&#128172; Waiting"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"FINISHED"</span> <span class="org-string">"&#128216; Finished  ($ to archive)"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"SOMEDAY"</span> <span class="org-string">"&#127774; Someday"</span>)
-                ,(emagician-agenda/get-tag <span class="org-string">"MAYBE"</span> <span class="org-string">"&#127776; Maybe"</span>)
+<pre class="src src-emacs-lisp"><span class="org-unicode-whitespace-subdued-space">      </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-agenda-custom-commands
+<span class="org-unicode-whitespace-subdued-space">            </span>`((<span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Agenda"</span>
+<span class="org-unicode-whitespace-subdued-space">               </span>((emagician-agenda/insert-headline<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-goals<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>(emagician-agenda/insert-cycle<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                </span>(agenda<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span><span class="org-unicode-whitespace-subdued-space"> </span>((org-agenda-span<span class="org-unicode-whitespace-subdued-space"> </span>1)<span class="org-unicode-whitespace-subdued-space"> </span>(org-agenda-show-log<span class="org-unicode-whitespace-subdued-space"> </span>nil)<span class="org-unicode-whitespace-subdued-space"> </span>))
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"STARTED"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128165;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Started"</span><span class="org-unicode-whitespace-subdued-space"> </span>t)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"WAITING"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128172;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Waiting"</span><span class="org-unicode-whitespace-subdued-space"> </span>t)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"NEXT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#10055;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Next</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Actions"</span><span class="org-unicode-whitespace-subdued-space"> </span>t)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-stuck-projects))
+<span class="org-unicode-whitespace-subdued-space">               </span>((org-agenda-category-filter-preset<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"-Home"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-Music"</span>))))
+<span class="org-unicode-whitespace-subdued-space">              </span>(<span class="org-string">"W"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Weekly</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Review"</span>
+<span class="org-unicode-whitespace-subdued-space">               </span>((emagician-agenda/insert-headline<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Weekly</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Review</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>(agenda<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span><span class="org-unicode-whitespace-subdued-space"> </span>((org-agenda-span<span class="org-unicode-whitespace-subdued-space"> </span>7)
+<span class="org-unicode-whitespace-subdued-space">                            </span>(org-agenda-log-mode-items<span class="org-unicode-whitespace-subdued-space"> </span>'(closed<span class="org-unicode-whitespace-subdued-space"> </span>clock<span class="org-unicode-whitespace-subdued-space"> </span>state))
+<span class="org-unicode-whitespace-subdued-space">                            </span>(org-agenda-start-day<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-7d"</span>)
+<span class="org-unicode-whitespace-subdued-space">                            </span>(org-agenda-entry-type<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:timestamp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:sexp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:deadline</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:sheduled</span>))
+<span class="org-unicode-whitespace-subdued-space">                            </span>(org-agenda-show-log<span class="org-unicode-whitespace-subdued-space"> </span>t)))
+<span class="org-unicode-whitespace-subdued-space">                </span>(tags-todo<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"inbox"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>(agenda<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span><span class="org-unicode-whitespace-subdued-space"> </span>((org-agenda-span<span class="org-unicode-whitespace-subdued-space"> </span>31)))
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-stuck-projects)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PROJECT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128214;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Projects"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"FINISHED"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128216;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Finished</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">($</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">archive)"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"NEXT"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#10055;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Next</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Actions"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"TODO"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127793;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">TODO"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"WAITING"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128172;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Waiting"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"FINISHED"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128216;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Finished</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">($</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">archive)"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"SOMEDAY"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127774;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Someday"</span>)
+<span class="org-unicode-whitespace-subdued-space">                </span>,(emagician-agenda/get-tag<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"MAYBE"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127776;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Maybe"</span>)
 
 ))))
 </pre>
@@ -1155,10 +1176,10 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-12-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/daily-agenda</span> () 
-  <span class="org-doc">"Show the daily agenda"</span>
-  (interactive)
-  (org-agenda nil <span class="org-string">" "</span>))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/daily-agenda</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">daily</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">agenda"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-agenda<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>))
 </pre>
 </div>
 </div>
@@ -1169,8 +1190,8 @@ Best is the enemy of the good.  Make this not suck later.
 <div class="outline-text-4" id="text-17-12-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span class="org-string">"C-c a"</span>) 'emagician-org/daily-agenda)
-(global-set-key (kbd <span class="org-string">"C-c A"</span>) 'org-agenda)
+<pre class="src src-emacs-lisp">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/daily-agenda)
+(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">A"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'org-agenda)
 </pre>
 </div>
 </div>
@@ -1185,7 +1206,7 @@ Swap to other frame once loaded.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook 'emacs-startup-hook #'(<span class="org-keyword">lambda</span> () (emagician-org/daily-agenda)(other-frame 1)))
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emacs-startup-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-space"> </span>(emagician-org/daily-agenda)(other-frame<span class="org-unicode-whitespace-subdued-space"> </span>1)))
 </pre>
 </div>
 </div>
@@ -1197,7 +1218,7 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-18">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ox-beamer</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ox-beamer</span>)
 </pre>
 </div>
 </div>
@@ -1207,27 +1228,8 @@ Swap to other frame once loaded.
 <div class="outline-text-3" id="text-18-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">htmlize</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">htmlize</span>)
 </pre>
-</div>
-</div>
-
-<div id="outline-container-sec-18-1-1" class="outline-4">
-<h4 id="sec-18-1-1"><span class="section-number-4">18.1.1</span> Fix FCI (fill column indicator) in org-mod/htmlize</h4>
-<div class="outline-text-4" id="text-18-1-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(emagician/defhook emagician/turn-off-fci org-publish-before-export-hook
-  (global-fci-mode -1))
-</pre>
-</div>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(emagician/defhook emagician/turn-on-fci org-publish-after-export-hook
-  (global-fci-mode 1))
-</pre>
-</div>
 </div>
 </div>
 </div>
@@ -1238,9 +1240,9 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-19">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-src-tab-acts-natively t)
-(setq org-src-fontify-natively t)
-(setq org-edit-src-content-indentation 0)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-src-tab-acts-natively<span class="org-unicode-whitespace-subdued-space"> </span>t)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-src-fontify-natively<span class="org-unicode-whitespace-subdued-space"> </span>t)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-edit-src-content-indentation<span class="org-unicode-whitespace-subdued-space"> </span>0)
 </pre>
 </div>
 </div>
@@ -1250,9 +1252,9 @@ Swap to other frame once loaded.
 <div class="outline-text-3" id="text-19-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">ob-sh</span>)
-(<span class="org-keyword">require</span> '<span class="org-constant">ob-sql</span>)
-(<span class="org-keyword">require</span> '<span class="org-constant">ob-org</span>)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-sh</span>)
+(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-sql</span>)
+(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-org</span>)
 </pre>
 </div>
 </div>
@@ -1264,21 +1266,21 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-20">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">emagician-org/save-commit-and-push</span> ()
-  <span class="org-doc">"Do the thing automagickally"</span>
-  (org-save-all-org-buffers)
-  (<span class="org-keyword">with-helm-default-directory</span> <span class="org-string">"~/org"</span>
-      (async-start
-       (<span class="org-keyword">lambda</span> ()
-         (message <span class="org-string">"Commiting to git"</span>)
-         (shell-command <span class="org-string">"git add *"</span> <span class="org-string">"*org autocommit*"</span> <span class="org-string">"*org autocommit*"</span>))
-       (<span class="org-keyword">lambda</span> (result)
-         (async-start
-          (<span class="org-keyword">lambda</span> ()
-            (shell-command <span class="org-string">"git commit -m\"autopmagick commit\""</span> <span class="org-string">"*org autocommit*"</span> <span class="org-string">"*org autocommit*"</span>))
-          'ignore)))))
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/save-commit-and-push</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Do</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">thing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">automagickally"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-save-all-org-buffers)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">with-helm-default-directory</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/org"</span>
+<span class="org-unicode-whitespace-subdued-space">      </span>(async-start
+<span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">         </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Commiting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">git"</span>)
+<span class="org-unicode-whitespace-subdued-space">         </span>(shell-command<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">add</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">*"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span>))
+<span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(result)
+<span class="org-unicode-whitespace-subdued-space">         </span>(async-start
+<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">            </span>(shell-command<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-m\"autopmagick</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit\""</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span>))
+<span class="org-unicode-whitespace-subdued-space">          </span>'ignore)))))
 
-(run-at-time t 600 'emagician-org/save-commit-and-push)
+(run-at-time<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>600<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/save-commit-and-push)
 </pre>
 </div>
 </div>
@@ -1290,7 +1292,7 @@ Swap to other frame once loaded.
 <div class="outline-text-4" id="text-20-0-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq org-mobile-directory <span class="org-string">"~/Dropbox/org-mobile"</span>)
+<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-mobile-directory<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/Dropbox/org-mobile"</span>)
 </pre>
 </div>
 </div>
@@ -1301,9 +1303,9 @@ Swap to other frame once loaded.
 <div class="outline-text-2" id="text-21">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">turn-on-org-show-all-inline-images</span> ()
-  (org-display-inline-images t t))
-(add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">turn-on-org-show-all-inline-images</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-display-inline-images<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t))
+(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'org-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-org-show-all-inline-images)
 </pre>
 </div>
 </div>
@@ -1311,7 +1313,7 @@ Swap to other frame once loaded.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-19 Fri 13:57</p>
+<p class="date">Created: 2016-08-22 Mon 23:46</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
