@@ -1,11 +1,5 @@
 #+title: Ruby
 #+LINK_UP: Programming.html 
-
-** Add RBEnv  path This may not be needed
-#+begin_src emacs-lisp :tangle no
-  (emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
-#+end_src
-
 * Interface
 
 * Tools 
@@ -53,8 +47,7 @@ gem rdoc --all --ri
 
 #+end_src
 
-   
-   
+      
 ** Mode setup
 
   Thanks to the emacs starter kit classic for the list of ode files list. [fn:1]
@@ -77,6 +70,13 @@ gem rdoc --all --ri
   :config
   (ruby-block-mode t)
 )
+#+end_src
+
+* Environment
+** Add RBEnv path 
+This may not be needed
+#+begin_src emacs-lisp :tangle no
+  (emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
 #+end_src
 
 * Footnotes

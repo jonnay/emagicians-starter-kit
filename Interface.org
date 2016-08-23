@@ -79,8 +79,8 @@ You'll need a number of fonts to make this work:
 - Symbola :: http://users.teilar.gr/~g1951d/Symbola.zip
 - Quivira :: http://www.quivira-font.com/files/Quivira.ttf
 - Dejavu Sans :: http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2
-- Noto Sans https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true
-- Noto Sans Symbols https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true
+- Noto Sans :: https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true
+- Noto Sans Symbols :: https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true
 
 The real secret sauce to making sure to get all the emoji is (setq unicode-fonts-ignore-overrides)
 
@@ -312,7 +312,7 @@ One day.  Powerline and nyan mode don't work.
 
      The colors are:
 
-     | Day       | apsect      | Color   | P |
+     | Day       | apsect      | Color   | ☰  |
      |-----------+-------------+---------+---|
      | Sunday    | Benevolence | yellow  | 🌞 |
      | Monday    | Reverence   | blue    | 🌚 |
@@ -347,7 +347,7 @@ One day.  Powerline and nyan mode don't work.
 
 **** Main setup
 
-   The theme needs to be loaded after powerlie to work.
+   The theme needs to be loaded after powerline to work.
 #+begin_src emacs-lisp 
 (use-package moe-theme
   :init
@@ -419,8 +419,8 @@ One day.  Powerline and nyan mode don't work.
 #+end_src
 
 *** Show Marks   :learn-me:
-show-#+begin_src emacs-lisp 
-(emagician/expect-package 'show-marks)
+#+begin_src emacs-lisp 
+(use-package show-marks)
 #+end_src
 
 ** Multiple Cursors                                                                           :bind:
@@ -460,13 +460,15 @@ show-#+begin_src emacs-lisp
 (setq save-interprogram-paste-before-kill t)
 #+end_src
 
-   Allow Read-only killing.  Power of plain text. 
+   Allow Read-only killing.  Being able to throw chunks of a read-only buffer is so powerful.  It's one of the things I love about emacs.
+
+The Power of plain text. 
 
 #+begin_src emacs-lisp 
 (setq kill-read-only-ok t)
 #+end_src
 
-   I am up in the air about this one
+Kill-whole-line just blew chunks for me.  REALLY blew chunks.
 
 #+begin_src emacs-lisp 
 (setq kill-whole-line nil)
@@ -731,11 +733,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src 
 
 * Help and Discoverability
-** Find file at point, the baseline in discoverability.
-#+begin_src emacs-lisp 
-
-#+end_src
-
 ** Which Key
    More like—witch key.  Which-key is the ultimate in discoverability.
 
@@ -839,46 +836,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 **** Key binding muscle memory
-
-Serious magick to force the user to use 
-delete me soon
-#+begin_src emacs-lisp :tangle no
-(defun emagician/make-muscle-memory (the-problem the-solution)
-  "The user creation funtion
-
-This function adds a feature to the user user so that indead of
-using the extended command `THE-PROBLEM'.they learn to use the
-keybinding (as a vector) `THE-SOLUTION' by typing it 3 times."
-  (beep)
-  (let* ((required-corrections 3)
-         (attempts 0)
-         (last-k-error " "))
-    (while (< attempts required-corrections)
-      (when (< attempts -6) (error "Too many failed attempts! 😿"))
-      (pcase (read-key-sequence
-              (format "🐰💭Learning is fun!  Execute '%s' with '%s' %s(%d/%d): "
-                      the-problem
-                      the-solution
-                      last-k-error
-                      attempts
-                      required-corrections))
-        ((pred (equal (kbd the-solution)))
-         (setq last-k-error "✅")
-         (setq attempts (1+ attempts)))
-        ((pred (equal (kbd "C-g")))
-         (setq attemps required-corrections)
-         (message "Okay, Giving up."))
-        (k-error
-         (beep)
-         (setq last-k-error (format "❌ %s " k-error))
-         (setq attempts (1- attempts)))))))
-
-(eval-after-load 'helm-command
-  '(add-function :after (symbol-function 'helm-M-x) #'emagician/helm-M-x/suggest-keybinding))
-
-#+end_src
-
-
+     See [[file:Lamp.org::*Fix-Muscle-Memory%20(was%20Emagician-Fix-Spell)][Fix-Muscle-Memory (was Emagician-Fix-Spell)]]
 *** Buffer Selection
 #+begin_src emacs-lisp 
 (global-set-key (kbd "C-x b") 'helm-buffers-list)

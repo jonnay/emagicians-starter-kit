@@ -1,12 +1,13 @@
 #+title:Eshell Magick
 
+* About the name...
+
 If this file is called ~eshell.org~, it weaves into ~eshell.el~, and
 then ~require~ gets problematic.
 
 #+begin_src emacs-lisp 
 (add-hook 'emacs-startup-hook 'eshell)
 #+end_src
-
 
 * Fixes
 ** Use helm for history
@@ -31,7 +32,9 @@ This is apparently still an issue.
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 #+end_src
 
-** Pager
+** Pager 😻
+Use cat as a pager.  Fixes all kinds of things.
+
 #+begin_src emacs-lisp 
 (setenv "PAGER" "cat")
 #+end_src
@@ -74,6 +77,8 @@ This is apparently still an issue.
      (epe-colorize-with-face (if (= (user-uid) 0) "#" "") 'epe-sudo-symbol-face)
      " "))
 #+end_src
+
+*** TODO don't show hostname twice. 
 
 ** Did you mean?
 #+begin_src emacs-lisp 

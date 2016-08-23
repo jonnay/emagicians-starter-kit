@@ -1,6 +1,13 @@
 #+title: Emagician-Base
 
-A baseline set of functions that are helpers for the rest of the Emagician Starter Kit
+* Bassline / Baseline
+
+  A baseline set of functions that are helpers for the rest of the Emagician Starter Kit.
+
+  - Basic helpers in case there is a problem loading
+  - Extend emacs lisp evaluation environment 
+  - emagick-🐰 functions to furhter extend emacs lisp 
+  - Emagician helpers to make configuration much easier.
 
 * Basic helpers
   Just enough to make editing in a broken environment not a pain,
@@ -311,3 +318,4 @@ If you want to add items, you can do so through the
    ";;;" "\n"
    ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"))
 #+end_src
+

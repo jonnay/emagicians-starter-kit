@@ -150,14 +150,15 @@ before the rest of the scratch interface is built.")
 * Emagician/load
 
    Originally from Eschulte.  This function takes a <foo>.org file,
-   and load it.  It can also be given the argument of a sub tree, which 
-   is defined as either a proper ord id, or a tag. 
+   and load it.  
 
-   If the subtree is a tag, then all subtrees with that tag are collected and loaded.
+   This doesn't try to load from a tag or a header arg.  That got crufty for my needs.
+
+
 #+name: starter-kit-load
 #+BEGIN_SRC emacs-lisp
 (defvar emagician/load-depth 0)
-(defun emagician/load (file &optional header-or-tag)
+(defun emagician/load (file)
   "Load configuration from other .org files."
   (let ((start-time (current-time))
         (file (expand-file-name (if (string-match ".+\.org" file)
@@ -185,7 +186,6 @@ before the rest of the scratch interface is built.")
     (emagician/append-scratch "...done!" "\n")
     (message (format "Emagician/Loaded %s %s %.3fs elapsed" 
                      file 
-                     (if header-or-tag header-or-tag "") 
                      (float-time (time-subtract (current-time) 
                                                 start-time))))
     load-result))
@@ -201,7 +201,7 @@ before the rest of the scratch interface is built.")
     (package-install package)))  
 #+END_SRC
 
-** Use-Package
+** 😻 Use-Package 😻
    https://github.com/jwiegley/use-package
 
    Is the cat's ass.  Why would you not use it?

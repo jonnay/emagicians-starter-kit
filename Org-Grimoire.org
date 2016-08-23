@@ -1,12 +1,5 @@
 #+title: Org-Grimoire
 #+PROPERTY: tangle yes
-#+begin_src emacs-lisp :tangle no
-(org-babel-load-file buffer-file-truename)
-#+end_src
-
-#+begin-src
-(require org)
-#+end_src
 
 * Introduction
 
