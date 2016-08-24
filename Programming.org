@@ -157,6 +157,69 @@ No Physical tabs.
     (unicode-whitespace-setup 'subdued-faces)))
 #+end_src
 
+** Prettify Symbols
+
+#+begin_src emacs-lisp 
+(global-prettify-symbols-mode 1)
+#+end_src
+
+*** Prettify Symbols List
+
+Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCode. 
+
+#+begin_src emacs-lisp :tangle no
+(defvar emagician/prettify-list
+  '(("lambda" . 955)
+    ("<=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≤))
+    (">=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≥))
+    ("->" . ?⟶)
+    ("=>" . ?⟹)
+    ("//" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?⫽))
+    ("!=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≠))
+    ("->>" .  (?\s (Br . Bl) ?\s (Br . Bl) ?\s
+                   (Bl . Bl) ?- (Bc . Br) ?- (Bc . Bc) ?>
+                   (Bc . Bl) ?- (Br . Br) ?>))))
+
+(emagician/defhook emagician-prettify-code prog-mode-hook
+  (setq prettify-symbols-alist emagician/prettify-list))
+#+end_src
+
+| You enter | Displayed |
+|-----------+-----------|
+| ~lambda~  | λ         |
+|-----------+-----------|
+| ~<=~      | ≤         |
+| ~>=~      | ≥         |
+| ~->~      | ⟶         |
+| ~=>~      | ⟹         |
+| ~//~      | ⫽         |
+| ~!=~      | ≠         |
+
+Using http://unicode-table.com/ helped a LOT
+
+**** How does this jiggery-pokery work?
+Prettify is basically a call to compose region, it automagickally sets
+start and end, and the second arg of the a-list is ~components~
+
+So for ~("lambda" . 955)~, "lambda" just gets turned into char 955, or λ.
+
+But for ~("<=" . (?\s (Br . Bl) ?\s (Bc . Bc) ?≥))~?
+ 
+#+begin_quote
+If it is a vector or list, it is a sequence of alternate characters and
+composition rules, where (2N)th elements are characters and (2N+1)th
+elements are composition rules to specify how to compose (2N+2)th
+elements with previously composed N glyphs.
+
+A composition rule is a cons of global and new glyph reference point
+symbols.  See the documentation of  [[help:reference-point-alist]] for more
+details.
+#+end_quote
+
+Rrrriiiiggghhhhht.  
+
+I don't entirely understand this yet. 
+
 * Tools
 ** Flycheck
 
@@ -270,3 +333,6 @@ No Physical tabs.
 (use-package yaml-mode
   :mode "\\.yml\\'")
 #+end_src
+
+
+[fn:3] http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html
