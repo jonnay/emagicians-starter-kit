@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>General Programming helpers</title>
-<!-- 2016-08-22 Mon 23:47 -->
+<!-- 2016-08-23 Tue 22:24 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -165,6 +165,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-5">2.5. Rainbow Delimiters</a></li>
 <li><a href="#sec-2-6">2.6. Color Identifiers</a></li>
 <li><a href="#sec-2-7">2.7. Show whitespace</a></li>
+<li><a href="#sec-2-8">2.8. Prettify Symbols</a>
+<ul>
+<li><a href="#sec-2-8-1">2.8.1. Prettify Symbols List</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#sec-3">3. Tools</a>
@@ -172,6 +177,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-1">3.1. Flycheck</a></li>
 <li><a href="#sec-3-2">3.2. DZ, make it easy to run secondary services</a></li>
 <li><a href="#sec-3-3">3.3. Org Source&#x2026; babel babel babel!</a></li>
+<li><a href="#sec-3-4">3.4. Jenkins</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4. Version control</a>
@@ -428,6 +434,99 @@ Whitespace unicode does good stuff with whitespace.  Use that.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Prettify Symbols</h3>
+<div class="outline-text-3" id="text-2-8">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-prettify-symbols-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8-1" class="outline-4">
+<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> Prettify Symbols List</h4>
+<div class="outline-text-4" id="text-2-8-1">
+<p>
+Thanks to Artur Malabarba <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>, Inspired by:  <a href="https://github.com/tonsky/FiraCode">https://github.com/tonsky/FiraCode</a>. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/prettify-list</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>'((<span class="org-string">"lambda"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>955)
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"&lt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8804;))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"&gt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8805;))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10230;)
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10233;)
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"//"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#11005;))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))))
+
+(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">You enter</th>
+<th scope="col" class="left">Displayed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>lambda</code></td>
+<td class="left">λ</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>&lt;=</code></td>
+<td class="left">≤</td>
+</tr>
+
+<tr>
+<td class="left"><code>&gt;=</code></td>
+<td class="left">≥</td>
+</tr>
+
+<tr>
+<td class="left"><code>-&gt;</code></td>
+<td class="left">⟶</td>
+</tr>
+
+<tr>
+<td class="left"><code>=&gt;</code></td>
+<td class="left">⟹</td>
+</tr>
+
+<tr>
+<td class="left"><code>//</code></td>
+<td class="left">⫽</td>
+</tr>
+
+<tr>
+<td class="left"><code>!=</code></td>
+<td class="left">≠</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Using <a href="http://unicode-table.com/">http://unicode-table.com/</a> helped a LOT
+</p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
@@ -487,6 +586,17 @@ It's nice to have helpers to see if we are in org-babel mode.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Jenkins</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">jenkins</span>)
+</pre>
+</div>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
@@ -540,16 +650,33 @@ Modes for editing git-specific files
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>)
 </pre>
 </div>
+</div>
 
-<p>
-(use-package magit-gh-pulls
-</p>
-<p>
-:init
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
-</p>
+<ol class="org-ol"><li><a id="sec-4-2-1-1" name="sec-4-2-1-1"></a>Interact with github<br  /><div class="outline-text-5" id="text-4-2-1-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">magit-gh-pulls</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'magit-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-magit-gh-pulls))
+</pre>
 </div>
 </div>
+</li>
+
+<li><a id="sec-4-2-1-2" name="sec-4-2-1-2"></a>Add a function for automagickally setting the config<br  /><div class="outline-text-5" id="text-4-2-1-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-github-gh-pull-config</span><span class="org-unicode-whitespace-subdued-space"> </span>(user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">proper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">gh-pulls."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(interactive<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"sUser/Org:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\nsRepo:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(magit-git-command-topdir<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">magit.gh-pulls-repo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s/%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
+<span class="org-unicode-whitespace-subdued-space">                            </span>(magit-toplevel)))
+</pre>
+</div>
+</div>
+</li></ol>
+</div>
+
 
 <div id="outline-container-sec-4-2-2" class="outline-4">
 <h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Git Gutter</h4>
@@ -599,10 +726,18 @@ Each language gets it's own file.
 </div>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p>DEFINITION NOT FOUND.</p></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-22 Mon 23:47</p>
+<p class="date">Created: 2016-08-23 Tue 22:24</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
