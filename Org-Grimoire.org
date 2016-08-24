@@ -32,11 +32,6 @@
   (add-hook 'org-mode-hook 'flyspell-mode)
 #+end_src
 
-** Turn on autocomplete
-#+begin_src emacs-lisp 
-  (add-hook 'org-mode-hook 'auto-complete-mode)
-#+end_src
-
 ** Fix YAS
      The latest version of yasnippet doesn't play well with Org mode.
      If the above code does not fix the conflict, start by defining the
@@ -715,6 +710,7 @@ Swap to other frame once loaded.
 
   (run-at-time t 600 'emagician-org/save-commit-and-push)
 #+end_src
+
 *** TODO fix this to use shell commands instead. 
 *** Mobile Org
 
@@ -722,7 +718,9 @@ Swap to other frame once loaded.
 (setq org-mobile-directory "~/Dropbox/org-mobile")
 
 #+end_src
+
 * Prettiness
+
 #+begin_src emacs-lisp 
 (defun turn-on-org-show-all-inline-images ()
   (org-display-inline-images t t))

@@ -1,5 +1,5 @@
-  
 * Identity
+
 #+begin_src emacs-lisp 
 (setq user-full-name "Jonathan Arkell")
 (setq user-mail-address "jonnay@jonnay.net")
@@ -7,7 +7,6 @@
 
 * Keybindings
 ** Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.		 :keybinding:
-
 #+begin_src emacs-lisp
 (global-unset-key [(control z)])
 (global-unset-key (kbd "C-x C-z"))

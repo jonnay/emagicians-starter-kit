@@ -192,6 +192,11 @@ No Physical tabs.
       (should (emagician/org-src-mode-p))))
 #+end_src
 
+** Jenkins
+#+begin_src emacs-lisp 
+(use-package jenkins) 
+#+end_src
+
 * Version control
 
   Version control Gets it's own section. 
@@ -223,9 +228,23 @@ No Physical tabs.
   :config)
 #+end_src
 
+**** Interact with github 
+
+#+begin_src emacs-lisp 
   (use-package magit-gh-pulls
     :init
     (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+#+end_src
+
+**** Add a function for automagickally setting the config
+#+begin_src emacs-lisp 
+(defun emagician/set-github-gh-pull-config (user repo)
+  "Set the proper config for gh-pulls."
+  (interactive "sUser/Org: \nsRepo: ")
+  (magit-git-command-topdir (format "config magit.gh-pulls-repo %s/%s" user repo)
+                            (magit-toplevel)))
+#+end_src
+
 
 *** Git Gutter
 

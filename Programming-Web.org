@@ -70,6 +70,16 @@
   :init
   (use-package company-restclient))
 #+end_src
+** Fontawesome mode  :maybe:
+   Insert fontawesome icons.  Note this currently doesn't play well with unicode mode.
+
+   But at least it is a list. 
+
+#+begin_src emacs-lisp 
+(use-package fontawesome)
+#+end_src
+
+
 * Interpreters
 ** Skewer
 #+begin_src emacs-lisp 

@@ -282,7 +282,6 @@ One day.  Powerline and nyan mode don't work.
 (global-hl-line-mode 1)
 #+end_src
 
-
 ** Show Empty lines
 #+begin_src emacs-lisp 
 (setq indicate-empty-lines t)
@@ -385,6 +384,38 @@ One day.  Powerline and nyan mode don't work.
   (face-spec-set 'digit-groups-default-face
      '((t (:underline (:style line))))))
 #+end_src
+
+** Prettify Symbols
+
+#+begin_src emacs-lisp 
+(global-prettify-symbols-mode 1)
+#+end_src
+
+*** TODO Prettify Symbols List
+
+See: http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html
+
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'endless/clojure-prettify-alist
+             '("<=" . (?· (Br . Bl) ?≤)))
+(add-to-list 'endless/clojure-prettify-alist
+             '(">=" . (?· (Br . Bl) ?≥)))
+#+end_src
+
+
+It'd be nice to to something with https://github.com/tonsky/FiraCode. 
+
+But it has some problems. 
+
+These are the characters I'd change:
+
+#+BEGIN_example
+= != === !== 
+
+-> =>
+
+>= <=
+#+END_example
 
 * Editing
 ** UTF-8 Enforcement
@@ -645,16 +676,16 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (setq scroll-preserve-screen-position t)
   #+end_src
 
-** Ace Jump
+
+** Avy
+   Basically Acejump++.
+
 #+begin_src emacs-lisp 
-(use-package ace-jump-mode
-  :demand
-  :bind 
-  ("C-c C-SPC" . ace-jump-mode)
-  (:map org-mode-map 
-         ("C-c C-SPC" 'ace-jump-mode))
-  :init
-  (setq erc-track-enable-keybindings nil))
+(use-package avy
+  :bind
+  (("M-g f" . avy-goto-line)
+    ("M-g h" . avy-goto-char-2)
+    ("M-g i" . avy-goto-char))
 #+end_src
 ** Ace window jump
    - Set the keys to home-row
@@ -666,7 +697,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   :init
   (face-spec-set
    'aw-leading-char-face
-     '((t (:inherit ace-jump-face-foreground :height 3.0))))
+     '((t (:inherit avy-lead-face :height 3.0))))
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind

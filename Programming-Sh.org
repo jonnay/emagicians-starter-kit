@@ -1,5 +1,10 @@
 #+title: Shell Based Languages
 #+LINK_UP: Programming.html 
+* Company
+#+begin_src emacs-lisp 
+(use-package company-shell)
+#+end_src
+
 * Set executable bit if required
 #+begin_src emacs-lisp
 (add-hook 'after-save-hook
