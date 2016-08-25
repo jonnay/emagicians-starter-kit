@@ -8,9 +8,9 @@
 (use-package ac-html-bootstrap)
 #+end_src
 
-
 * Modes
 ** Web Mode
+*** Mode setup
 #+begin_src emacs-lisp 
 (use-package web-mode
   :diminish "🌎"
@@ -70,15 +70,24 @@
   :init
   (use-package company-restclient))
 #+end_src
-** Fontawesome mode  :maybe:
-   Insert fontawesome icons.  Note this currently doesn't play well with unicode mode.
-
-   But at least it is a list. 
+** Fontawesome mode 
+   Insert fontawesome icons.
 
 #+begin_src emacs-lisp 
 (use-package fontawesome)
 #+end_src
 
+*** Prettify Fontawesome
+Take fontawesome-alist, append fa- to the name, and use that as the list for prettify-mode
+#+begin_src emacs-lisp 
+(emagician/defhook emagician-prettify-fontawesome web-mode-hook
+  (setq prettify-symbols-alist (mapcar (lambda (fa-cons)
+                                         (cons (concat "fa-" (car fa-cons))
+                                               (aref (cdr fa-cons) 0)))
+                                       fontawesome-alist)))
+#+end_src
+
+Now you can type out ~<i icon="fa fa-tree">~ and it comes out ~<i icon="fa ">~
 
 * Interpreters
 ** Skewer

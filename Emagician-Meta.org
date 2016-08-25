@@ -18,6 +18,8 @@ and perception stimulate each other.
 * TODO sort this file
 
 * Building the emagician site
+** Skewer!
+   Use the bookmarklet to connect and you're off to the races!
 ** Publishing functions
 #+begin_src emacs-lisp 
 (setq org-html-htmlize-output-type 'css)
@@ -42,7 +44,7 @@ and perception stimulate each other.
                                       :auto-sitemap t
                                       :sitemap-ignore-case t
                                       :html-html5-fancy t
-                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
+                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\"><script src=\"https://use.fontawesome.com/432a2f463b.js\"></script>"
                                       :html-link-home "index"
                                       :publishing-function org-html-publish-to-html
                                       )
@@ -62,11 +64,11 @@ and perception stimulate each other.
 
 (defun emagician/meta/publish-changed ()
   (interactive)
-  (emagician/meta/publish "emagician" t nil))
+  (emagician/meta/publish "emagician" nil nil))
 
 (defun emagician/meta/publish-all ()
   (interactive)
-  (emagician/meta/publish "emagician" nil nil))
+  (emagician/meta/publish "emagician" t nil))
 
 (defun emagician/meta/publish-assets ()
   (interactive)
@@ -102,12 +104,12 @@ h1, h2, h3 {
     font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
 }
 
+h1 {
+    font-family: cursive;
+}
+
 h2 {
-    border-bottom: 1px solid hsl(0, 0%, 77%);
     font-size: 1.75em;
-    background-color: hsl(0, 0%, 93%);
-    margin-left: -1em;
-    padding: 0.25em 1em;   
 }
 
 h3 {
@@ -490,11 +492,23 @@ div.figure {
 @media screen {
     h1.title {
         text-align: left;
-        margin: 1em 0 0 280px;
+        margin: 0 3em 0 260px;
+        border: 1px solid #aaa;
+        border-top: 0;
+        padding: 1em;
+        background-color: #f8f8f8;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 3px 3px hsla(0,0%,0%,0.1);
     }
 
     h2 {
-        margin-top: 1em;
+        border: 1px solid hsl(0, 0%, 77%);
+        background-color: hsl(0, 0%, 93%);
+        margin-left: -21px;
+        margin-right: -20px;
+        border-bottom-right-radius: 10px;
+        padding: 0.25em 1em;
+        margin-top: 0;
     }
 
     #table-of-contents {
@@ -502,6 +516,8 @@ div.figure {
         top: 0;
         left: 0;
         padding: 1ex 0 2em 2em;
+        border-right: 1px solid #bbb;
+        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
         width: 240px;
         height: 100vh;
         font-size: 11px;
@@ -510,23 +526,35 @@ div.figure {
     }
 
     #table-of-contents ul>li>ul>li>ul>li {
-        display: none;
+        font-size: 80%;
+        display: block;
     }
 
     #table-of-contents h2 {
         margin-top: 0;
+        border: 0;
+        box-shadow: 0;
     }
 
     #table-of-contents code {
         font-size: 12px;
     }
 
-    div.outline-2, #footnotes {
+    #footnotes {
         margin-left: 280px;
         max-width: 960px;
     }
     #postamble {
         margin-left: 262px;
+        margin-top: 0;
+        padding-top: 30px;
+        box-shadow: 0 -2px 3px hsla(0,0%,0%,0.1);
+    }
+    div.outline-2 {
+        margin: 0 0 0 263px;
+        padding: 0 20px 20px;
+        max-width: 960px;
+        background-image: linear-gradient( 0deg, hsl(0, 0%, 98%), hsl(0, 0%, 100%));
     }
 }
 
@@ -753,7 +781,19 @@ This does a full GUI load, outputting any results as a message.
            ("<f5>"    . emagician/meta/run-all-tests)
            ("<f12>"   . emagician/meta/publish-changed)
            ("S-<f12>" . emagician/meta/publish-all)
-           ("i"       . emagician/magick-keymap))
+           ("i"       . emagician/magick-keymap)
+           ("t"       . emagician/meta/show-todo))
+#+end_src
+
+* Find Todo Items in these files
+#+begin_src emacs-lisp 
+(defun emagician/meta/show-todo ()
+  "Show a list of TODO actions that are on Emagicians Starter Kit."
+  (interactive)
+  (let ((org-directory emagician/dir)
+        (org-agenda-files (list emagician/dir))
+        (org-agenda-file-regexp "[^.].+\.org$"))
+    (org-agenda nil "t" nil)))
 #+end_src
 
 * Footnotes

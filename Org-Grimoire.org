@@ -691,6 +691,8 @@ Swap to other frame once loaded.
 (require 'ob-org)
 #+end_src
 
+
+
 * Saving and auto Commiting
 
 #+begin_src emacs-lisp 

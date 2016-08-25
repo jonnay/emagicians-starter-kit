@@ -37,7 +37,6 @@
 (add-hook 'generic-lisp-mode-hook #'turn-off-smartparens-mode t)
 #+end_src
 
-
 * Individual Lisps
 ** Elisp
 *** Editing 
@@ -74,30 +73,22 @@
 (put 'lexically 'lisp-indent-function 0)
 #+end_src
 
-**** Syntax Checking
-    We want to run checkdoc, but only in certain situations. 
-#+begin_src emacs-lisp 
-  (defun emagician/run-checkdoc () 
-    "run checkdoc on save if it is an elisp file"
-    (if (and (eq major-mode 'emacs-lisp-mode)
-             (not (null (file-name-nondirectory (buffer-file-name))))
-             (not (member (file-name-nondirectory (buffer-file-name)) '(".dir-locals.el" "custom.el")))
-             (not (emagician/org-src-mode-p))
-             (> (length (buffer-file-name))
-                (length package-user-dir))
-             (not (string= (concat package-user-dir "/")
-                           (substring (buffer-file-name) 0 (+ 1 (length package-user-dir))))))
-        (checkdoc)))
-
-  (add-hook 'after-save-hook 'emagician/run-checkdoc)
-#+end_src
-
 **** Package checking
 #+begin_src emacs-lisp 
   (use-package flycheck-package
     :config 
     (flycheck-package-setup))
 #+end_src
+
+***** Turn off in orc-src buffers
+Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
+
+#+begin_src emacs-lisp 
+(emagician/defhook turn-off-flycheck-in-emacs-lisp org-src-mode-hook
+  (when (equal mode-name "Emacs-Lisp")
+    (flycheck-mode -1)))
+#+end_src
+
 
 *** Environment
     See [[./Emagician-Base.org]]

@@ -298,7 +298,7 @@ If you want to add items, you can do so through the
    ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    (if (and after-init-time before-init-time)
        (format ";;; Your startup took approximately %.2f seconds" 
-               (- (float-time after-init-time)
+               (- (float-time)
                   (float-time before-init-time)))
      (format ";;; One of the start time variables was nil. (after:%s before:%s) "
              after-init-time before-init-time)) "\n" 
