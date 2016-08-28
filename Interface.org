@@ -62,6 +62,7 @@ Oh my.
 #+begin_src emacs-lisp 
 (setq visible-bell t)
 #+end_src
+
 ** Fonts
 *** Describe Char
    Give us all the unicode information for a glyph. 
@@ -125,6 +126,13 @@ The real secret sauce to making sure to get all the emoji is (setq unicode-fonts
 #+begin_src emacs-lisp 
 (global-visual-line-mode)
 #+end_src
+
+Indicators Plz!
+
+#+begin_src emacs-lisp 
+(setq visual-line-fringe-indicators t)
+#+end_src
+
 ** Frame titles
   Shamelessly snarfed from batsov.  Shows either the full file path, or the buffer name.
 
@@ -149,60 +157,72 @@ The real secret sauce to making sure to get all the emoji is (setq unicode-fonts
    Yeah, fix the mode line.
 
 #+begin_src emacs-lisp 
-(use-package diminish
+(use-package diminish)
+(diminish 'auto-revert-mode "🔂 ")
+(diminish 'visual-line-mode "↩ ")
+#+end_src
+   
+*** Nyan mode
+One day.  Powerline and nyan mode don't work.
+#+begin_src emacs-lisp 
+(use-package nyan-mode
   :init
-  (diminish 'auto-revert-mode "🔂 ")
-  (diminish 'visual-line-mode "↩ "))
+  (setq nyan-wavy-trail t)
+  (setq nyan-bar-length 10)
+  (setq nyan-animate-nyancat t))
 #+end_src
 
 *** Powerline 
 #+begin_src emacs-lisp 
-  (defun emagician/powerline-theme ()
-    "Setup the default mode-line."
-    (interactive)
-    (setq-default mode-line-format
-                  '("%e"
-                    (:eval
-                     (let* ((active (powerline-selected-window-active))
-                            (mode-line (if active 'mode-line 'mode-line-inactive))
-                            (face1 (if active 'powerline-active1 'powerline-inactive1))
-                            (face2 (if active 'powerline-active2 'powerline-inactive2))
-                            (separator-left (intern (format "powerline-%s-%s"
-                                                            powerline-default-separator
-                                                            (car powerline-default-separator-dir))))
-                            (separator-right (intern (format "powerline-%s-%s"
-                                                             powerline-default-separator
-                                                             (cdr powerline-default-separator-dir))))
-                            (lhs (list (powerline-raw "%*" nil 'l)
-                                       (powerline-buffer-size nil 'l)
-                                       (powerline-raw mode-line-mule-info nil 'l)
-                                       (powerline-buffer-id nil 'l)
-                                       (when (and (boundp 'which-func-mode) which-func-mode)
-                                         (powerline-raw which-func-format nil 'l))
-                                       (powerline-raw " ")
-                                       (funcall separator-left mode-line face1)
-                                       (when (boundp 'erc-modified-channels-object)
-                                         (powerline-raw erc-modified-channels-object face1 'l))
-                                       (powerline-major-mode face1 'l)
-                                       (powerline-process face1)
-                                       (powerline-minor-modes face1 'l)
-                                       (powerline-narrow face1 'l)
-                                       (powerline-raw " " face1)
-                                       (funcall separator-left face1 face2)
-                                       (powerline-vc face2 'r)
-                                       (nyan-create)))
-                            (rhs (list (powerline-raw global-mode-string face2 'r)
-                                       (funcall separator-right face2 face1)
-                                       (powerline-raw "%4l" face1 'l)
-                                       (powerline-raw ":" face1 'l)
-                                       (powerline-raw "%3c" face1 'r)
-                                       (funcall separator-right face1 mode-line)
-                                       (powerline-raw " ")
-                                       (powerline-raw "%6p" nil 'r)
-                                       (powerline-hud face2 face1))))
-                       (concat (powerline-render lhs)
-                               (powerline-fill face2 (powerline-width rhs))
-                               (powerline-render rhs)))))))
+(defun emagician/powerline-theme ()
+  "Setup the default mode-line."
+  (interactive)
+  (setq-default mode-line-format
+                '("%e"
+                  (:eval
+                   (let* ((active (powerline-selected-window-active))
+                          (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
+                          (mode-line (if active 'mode-line 'mode-line-inactive))
+                          (face1 (if active 'powerline-active1 'powerline-inactive1))
+                          (face2 (if active 'powerline-active2 'powerline-inactive2))
+                          (separator-left (intern (format "powerline-%s-%s"
+                                                          (powerline-current-separator)
+                                                          (car powerline-default-separator-dir))))
+                          (separator-right (intern (format "powerline-%s-%s"
+                                                           (powerline-current-separator)
+                                                           (cdr powerline-default-separator-dir))))
+                          (lhs (list (powerline-raw "%*" mode-line 'l)
+                                     (powerline-buffer-size mode-line 'l)
+                                     (powerline-buffer-id mode-line-buffer-id 'l)
+                                     (powerline-raw " ")
+                                     (funcall separator-left mode-line face1)
+                                     (powerline-narrow face1 'l)
+                                     (powerline-vc face1)))
+                          (rhs (list (powerline-raw global-mode-string face1 'r)
+                                     (powerline-raw "%4l" face1 'r)
+                                     (powerline-raw ":" face1)
+                                     (powerline-raw "%3c" face1 'r)
+                                     (funcall separator-right face1 mode-line)
+                                     (powerline-raw " ")
+                                     (powerline-raw "%6p" mode-line 'r)
+                                     (powerline-hud face2 face1)))
+                          (center (list (powerline-raw " " face1)
+                                        (funcall separator-left face1 face2)
+                                        (when (and (boundp 'erc-track-minor-mode) erc-track-minor-mode)
+                                          (powerline-raw erc-modified-channels-object face2 'l))
+                                        (powerline-major-mode face2 'l)
+                                        (powerline-process face2)
+                                        (powerline-raw " :" face2)
+                                        (powerline-minor-modes face2 'l)
+                                        (powerline-raw " " face2)
+                                        (nyan-create)
+                                        (powerline-raw " " face2)
+                                        (funcall separator-right face2 face1))))
+                     (concat (powerline-render lhs)
+                             (powerline-fill-center face1 (/ (powerline-width center) 2.0))
+                             (powerline-render center)
+                             (powerline-fill face1 (powerline-width rhs))
+                             (powerline-render rhs)))))))
 #+end_src
 
 #+begin_src emacs-lisp 
@@ -213,6 +233,7 @@ The real secret sauce to making sure to get all the emoji is (setq unicode-fonts
                (powerline-reset)
                (powerline-default-theme))
 #+end_src
+
 *** Turn on column and line numbers; file size 
 #+begin_src emacs-lisp
 (column-number-mode 1)
@@ -226,8 +247,6 @@ The real secret sauce to making sure to get all the emoji is (setq unicode-fonts
 #+end_src
 
 
-*** TODO Nyan mode
-One day.  Powerline and nyan mode don't work.
 ** Cursor Info
    There are a few ways to change the cursor: blinking, shape and
    color.  Basically this gives us three different dimensions of
@@ -643,7 +662,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (setq scroll-preserve-screen-position t)
   #+end_src
 
-
 ** Avy
    Basically Acejump++.
 
@@ -677,12 +695,14 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (require 'saveplace)
 (setq-default save-place t)
 #+end_src
+
 ** Goto Last Change 
 #+begin_src emacs-lisp 
 (use-package goto-last-change
   :bind
   ("C-x C-/" . goto-last-change))
 #+end_src
+
 ** Uniquify
 
    Rename buffers so they are unique. 
@@ -745,6 +765,15 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src 
 
 * Help and Discoverability
+** Achievements
+#+begin_src emacs-lisp 
+(use-package achievements
+  :demand
+  :diminish "A "
+  :init
+  (setq achievements-idle-time 300))
+#+end_src
+
 ** Which Key
    More like—witch key.  Which-key is the ultimate in discoverability.
 
@@ -768,6 +797,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
     :bind
     (("C-c C-h"   . discover-my-major)
      ("C-c C-S-H" . discover-my-mode)))
+#+end_src
+
+** Gamification
+#+begin_src emacs-lisp 
+
 #+end_src
 
 ** Helm

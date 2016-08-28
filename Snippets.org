@@ -13,6 +13,7 @@
 (emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
 (emagician/expect-dir "./assets/snippets/ruby-mode")
 (emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
+(emagician/expect-dir "./assets/snippets/sql-mode")
 #+end_src
 
 ** Execute this during development
@@ -26,7 +27,7 @@
 #+end_src
  
 #+RESULTS:
-| git-gutter | flycheck-handle-save | t | emagician/snippet-tangle-and-reload |
+| flycheck-handle-save | t | emagician/snippet-tangle-and-reload |
 
  
  
@@ -197,3 +198,12 @@ it("$1", function(done) {
     $0
   end
 #+end_src
+
+** SQL
+#+begin_src yasnippet :tangle assets/snippets/sql-mode/select
+# name: select
+# key: select
+#--
+select $1 from $2 as $3 ${4:left join $5 as $6 on $3.$7 = $6.${7:id} } where $8 
+#+end_src
+

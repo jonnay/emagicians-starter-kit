@@ -601,6 +601,7 @@ Know your HTTP Well!  M-x http-foo and media-types
 (fix-muscle-memory-load-problem-words 'foo
                                       '(("teh" . "the")
                                         ("comptuer" . "computer")
+                                        ("wehre" . "where")
                                         ("destory" . "destroy")
                                         ("occured" . "occurred")
                                         ("Prevelence" . "Prevalence")))

@@ -120,7 +120,7 @@ No Physical tabs.
 #+end_src
 
 #+begin_src emacs-lisp
-(add-hook 'find-file-hook 'emagician/check-parens t)
+(add-hook 'prog-mode-hook 'emagician/check-parens t)
 #+end_src
 ** Show Paren Mode
 #+begin_src emacs-lisp 
@@ -158,7 +158,6 @@ No Physical tabs.
 #+end_src
 
 ** Prettify Symbols
-
 #+begin_src emacs-lisp 
 (global-prettify-symbols-mode 1)
 #+end_src
@@ -167,7 +166,7 @@ No Physical tabs.
 
 Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCode. 
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (defvar emagician/prettify-list
   '(("lambda" . 955)
     ("<=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≤))
@@ -260,6 +259,12 @@ I don't entirely understand this yet.
 (use-package jenkins) 
 #+end_src
 
+** Helm Dash for manuals
+#+begin_src emacs-lisp 
+(use-package helm-dash
+)
+#+end_src
+(setq helm-dash-browser-func 'eww)
 * Version control
 
   Version control Gets it's own section. 

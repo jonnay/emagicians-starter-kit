@@ -718,7 +718,6 @@ Swap to other frame once loaded.
 
 #+begin_src emacs-lisp 
 (setq org-mobile-directory "~/Dropbox/org-mobile")
-
 #+end_src
 
 * Prettiness

@@ -204,6 +204,7 @@ A bit of a naive version of this for now.
            ,@body)
          (add-hook (quote ,hook) (quote ,name)))))
 #+end_src
+
 ** Minor In Major
 
   Kinda one of those things that I am surprised is not a thing.
@@ -245,6 +246,7 @@ A bit of a naive version of this for now.
         (setq exec-path (cons path exec-path))))
     
 #+end_src
+
 ** Final Emagician Scratch
 
 When the starter it is loaded we want to display the scratch buffer
@@ -294,15 +296,15 @@ If you want to add items, you can do so through the
    ";;;" " \n" 
    ";;; Emacs Vesrion: " emacs-version "\n" 
    ";;; Emagician Starter kit Version: " emagician/version "\n"
-   ";;; " "\n"
+   ";;;" "\n"
    ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   (if (and after-init-time before-init-time)
+   (if before-init-time
        (format ";;; Your startup took approximately %.2f seconds" 
                (- (float-time)
                   (float-time before-init-time)))
-     (format ";;; One of the start time variables was nil. (after:%s before:%s) "
-             after-init-time before-init-time)) "\n" 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
+     (format ";;; One of the start time variables was nil. (current:%s before:%s)"
+             (float-time) before-init-time)) "\n" 
+   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    ";;; -|-+-|- Chaotic Wisdom -|-+-|-" "\n"
    ";;;" "\n"
    (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
@@ -310,6 +312,7 @@ If you want to add items, you can do so through the
    ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
    ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
    (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
+   ";;;" "\n"
    ";;; Tools For Magicks" "\n"
    (mapconcat (lambda (link)
                 (format "%S\n" link))
