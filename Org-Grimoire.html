@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Org-Grimoire</title>
-<!-- 2016-08-23 Tue 22:24 -->
+<!-- 2016-08-29 Mon 23:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,7 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -223,9 +223,10 @@ for the JavaScript code in this tag.
 <li><a href="#sec-17-6">17.6. Display the current cycles</a>
 <ul>
 <li><a href="#sec-17-6-1">17.6.1. Lunar Phase</a></li>
-<li><a href="#sec-17-6-2">17.6.2. <span class="todo TODO">TODO</span> Erisian Calendar</a></li>
-<li><a href="#sec-17-6-3">17.6.3. <span class="todo TODO">TODO</span> 8 Wheel Spoke</a></li>
-<li><a href="#sec-17-6-4">17.6.4. Cycle Display</a></li>
+<li><a href="#sec-17-6-2">17.6.2. Solar Calendar</a></li>
+<li><a href="#sec-17-6-3">17.6.3. <span class="todo TODO">TODO</span> Erisian Calendar</a></li>
+<li><a href="#sec-17-6-4">17.6.4. <span class="todo TODO">TODO</span> 8 Wheel Spoke</a></li>
+<li><a href="#sec-17-6-5">17.6.5. Cycle Display</a></li>
 </ul>
 </li>
 <li><a href="#sec-17-7">17.7. Specific agenda frame</a></li>
@@ -1004,14 +1005,34 @@ Fancy it up a little
 </div>
 </div>
 <div id="outline-container-sec-17-6-2" class="outline-4">
-<h4 id="sec-17-6-2"><span class="section-number-4">17.6.2</span> <span class="todo TODO">TODO</span> Erisian Calendar</h4>
+<h4 id="sec-17-6-2"><span class="section-number-4">17.6.2</span> Solar Calendar</h4>
+<div class="outline-text-4" id="text-17-6-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">solar</span>)
+
+<span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Half</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">works.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-comment">Kinda.</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">diary-equinoxes-solstices</span><span class="org-unicode-whitespace-subdued-space"> </span>(date)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Equinox</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">solstice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">diary</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">entry."</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((displayed-month<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>date))
+<span class="org-unicode-whitespace-subdued-space">         </span>(displayed-year<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>date))))
+<span class="org-unicode-whitespace-subdued-space">         </span>(equinox<span class="org-unicode-whitespace-subdued-space"> </span>(solar-equinoxes-solstices)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(calendar-date-equal<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>equinox))<span class="org-unicode-whitespace-subdued-space"> </span>date)
+<span class="org-unicode-whitespace-subdued-space">        </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>equinox))))))
+</pre>
 </div>
+</div>
+</div>
+
 <div id="outline-container-sec-17-6-3" class="outline-4">
-<h4 id="sec-17-6-3"><span class="section-number-4">17.6.3</span> <span class="todo TODO">TODO</span> 8 Wheel Spoke</h4>
+<h4 id="sec-17-6-3"><span class="section-number-4">17.6.3</span> <span class="todo TODO">TODO</span> Erisian Calendar</h4>
 </div>
 <div id="outline-container-sec-17-6-4" class="outline-4">
-<h4 id="sec-17-6-4"><span class="section-number-4">17.6.4</span> Cycle Display</h4>
-<div class="outline-text-4" id="text-17-6-4">
+<h4 id="sec-17-6-4"><span class="section-number-4">17.6.4</span> <span class="todo TODO">TODO</span> 8 Wheel Spoke</h4>
+</div>
+<div id="outline-container-sec-17-6-5" class="outline-4">
+<h4 id="sec-17-6-5"><span class="section-number-4">17.6.5</span> Cycle Display</h4>
+<div class="outline-text-4" id="text-17-6-5">
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/insert-cycle</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>args)
@@ -1249,6 +1270,8 @@ Swap to other frame once loaded.
 </div>
 </div>
 
+
+
 <div id="outline-container-sec-20" class="outline-2">
 <h2 id="sec-20"><span class="section-number-2">20</span> Saving and auto Commiting</h2>
 <div class="outline-text-2" id="text-20">
@@ -1303,7 +1326,7 @@ Swap to other frame once loaded.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-23 Tue 22:24</p>
+<p class="date">Created: 2016-08-29 Mon 23:02</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

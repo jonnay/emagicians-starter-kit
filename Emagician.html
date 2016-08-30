@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emagician</title>
-<!-- 2016-08-23 Tue 22:24 -->
+<!-- 2016-08-29 Mon 23:03 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,7 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -219,6 +219,7 @@ for the JavaScript code in this tag.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">defconst</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/version</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"0.23.1"</span>)
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>debug-on-error<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 
@@ -302,8 +303,8 @@ Debug Errors.
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">It's</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">dangerous</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">go</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">alone!</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">take</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">this:</span><span class="org-unicode-whitespace-subdued-space">    </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">&#9832;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#128119;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#9832;</span><span class="org-unicode-whitespace-subdued-space">    </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">&#128297;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">&#128293;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#128119;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#128293;</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">&#128302;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;;;;;;;;;;;</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">;;;;;;;;;;;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"\n"</span>
@@ -462,6 +463,7 @@ This doesn't try to load from a tag or a header arg.  That got crufty for my nee
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp" id="starter-kit-load">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/load-depth</span><span class="org-unicode-whitespace-subdued-space"> </span>0)
+(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/long-loaders</span><span class="org-unicode-whitespace-subdued-space"> </span>'())
 (<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/load</span><span class="org-unicode-whitespace-subdued-space"> </span>(file)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Load</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">configuration</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">other</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">files."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((start-time<span class="org-unicode-whitespace-subdued-space"> </span>(current-time))
@@ -487,11 +489,14 @@ This doesn't try to load from a tag or a header arg.  That got crufty for my nee
 <span class="org-unicode-whitespace-subdued-space">                                  </span>file
 <span class="org-unicode-whitespace-subdued-space">                                  </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">It</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">doesn't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">exist!\n"</span>)
 <span class="org-unicode-whitespace-subdued-space">        </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>load-result<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((elapsed<span class="org-unicode-whitespace-subdued-space"> </span>(float-time<span class="org-unicode-whitespace-subdued-space"> </span>(time-subtract<span class="org-unicode-whitespace-subdued-space"> </span>(current-time)
+<span class="org-unicode-whitespace-subdued-space">                                              </span>start-time))))
+<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(&gt;<span class="org-unicode-whitespace-subdued-space"> </span>elapsed<span class="org-unicode-whitespace-subdued-space"> </span>3.2)
+<span class="org-unicode-whitespace-subdued-space">        </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/long-loaders<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>file<span class="org-unicode-whitespace-subdued-space"> </span>elapsed)))
+<span class="org-unicode-whitespace-subdued-space">      </span>(message<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician/Loaded</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%.3fs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">elapsed"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">                       </span>file
+<span class="org-unicode-whitespace-subdued-space">                       </span>elapsed)))
 <span class="org-unicode-whitespace-subdued-space">    </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"...done!"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">    </span>(message<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician/Loaded</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%.3fs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">elapsed"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                     </span>file<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                     </span>(float-time<span class="org-unicode-whitespace-subdued-space"> </span>(time-subtract<span class="org-unicode-whitespace-subdued-space"> </span>(current-time)<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                                                </span>start-time))))
 <span class="org-unicode-whitespace-subdued-space">    </span>load-result))
 </pre>
 </div>
@@ -882,7 +887,7 @@ We're Almost Done.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-23 Tue 22:24</p>
+<p class="date">Created: 2016-08-29 Mon 23:03</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

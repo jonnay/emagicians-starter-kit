@@ -24,12 +24,12 @@ h1, h2, h3 {
     font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
 }
 
+h1 {
+    font-family: cursive;
+}
+
 h2 {
-    border-bottom: 1px solid hsl(0, 0%, 77%);
     font-size: 1.75em;
-    background-color: hsl(0, 0%, 93%);
-    margin-left: -1em;
-    padding: 0.25em 1em;   
 }
 
 h3 {
@@ -67,12 +67,13 @@ a:after {
     content: "]]";
 }
 
+
 a[name]:before {
-    content: "[[" attr(name);
+    content: "#" attr(name);
 }
 
-a[name] {
-    font-size: 9px;
+a[name]:after {
+    content: "";
 }
 
 a:link, 
@@ -80,10 +81,11 @@ a:hover,
 a:visited {
     text-decoration: none;
     color: black;
+    padding:3px;
 }
 
 a:link {
-        
+
 }
 
 a:visited {
@@ -92,7 +94,7 @@ a:visited {
 
 a:link:hover,
 a:visited:hover {
-    background: #ff0;
+    background: hsl(0, 0%, 62%);
 }
 
 a[href^="http"]:after {
@@ -276,7 +278,7 @@ pre {
 }
 
 pre.example:before {
-    content: "Properties";
+    content: "Example";
     display: block;
     border-bottom: 1px dotted;
     margin-bottom: 1em;
@@ -292,7 +294,7 @@ pre {
     background-color: #f8f8f8;
     background-size: 8px 8px;
     background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
-    overflow: auto;
+    overflow: auto !important;
 }
 
 pre.src {
@@ -410,11 +412,23 @@ div.figure {
 @media screen {
     h1.title {
         text-align: left;
-        margin: 1em 0 0 280px;
+        margin: 0 1em 0 260px;
+        border: 1px solid #aaa;
+        border-top: 0;
+        padding: 1em;
+        background-color: #f8f8f8;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 3px 3px hsla(0,0%,0%,0.1);
     }
 
     h2 {
-        margin-top: 1em;
+        border: 1px solid hsl(0, 0%, 77%);
+        background-color: hsl(0, 0%, 93%);
+        margin-left: -21px;
+        margin-right: 0;
+        border-bottom-right-radius: 10px;
+        padding: 0.25em 1em;
+        margin-top: 0;
     }
 
     #table-of-contents {
@@ -422,6 +436,8 @@ div.figure {
         top: 0;
         left: 0;
         padding: 1ex 0 2em 2em;
+        border-right: 1px solid #bbb;
+        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
         width: 240px;
         height: 100vh;
         font-size: 11px;
@@ -430,23 +446,35 @@ div.figure {
     }
 
     #table-of-contents ul>li>ul>li>ul>li {
-        display: none;
+        font-size: 80%;
+        display: block;
     }
 
     #table-of-contents h2 {
         margin-top: 0;
+        border: 0;
+        box-shadow: 0;
     }
 
     #table-of-contents code {
         font-size: 12px;
     }
 
-    div.outline-2, #footnotes {
+    #footnotes {
         margin-left: 280px;
         max-width: 960px;
     }
     #postamble {
         margin-left: 262px;
+        margin-top: 0;
+        padding-top: 30px;
+        box-shadow: 0 -2px 3px hsla(0,0%,0%,0.1);
+    }
+    div.outline-2 {
+        margin: 0 0 0 263px;
+        padding: 0 20px 20px;
+        max-width: 960px;
+        background-image: linear-gradient( 0deg, hsl(0, 0%, 98%), hsl(0, 0%, 100%));
     }
 }
 
@@ -490,11 +518,11 @@ div.figure {
 
     a:visited {
         color: black;
-        background: #ff8;
+        background: hsl(0, 0%, 62%);
     }
 
     a[href^="http"]:visited {
-        background: #bff;
+        background: hsl(0, 0%, 62%);
     }
 
     div.notice:before {

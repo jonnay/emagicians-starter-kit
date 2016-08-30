@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>General Programming helpers</title>
-<!-- 2016-08-23 Tue 22:24 -->
+<!-- 2016-08-29 Mon 23:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -88,7 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -178,6 +178,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-2">3.2. DZ, make it easy to run secondary services</a></li>
 <li><a href="#sec-3-3">3.3. Org Source&#x2026; babel babel babel!</a></li>
 <li><a href="#sec-3-4">3.4. Jenkins</a></li>
+<li><a href="#sec-3-5">3.5. Helm Dash for manuals</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4. Version control</a>
@@ -371,7 +372,7 @@ No Physical tabs.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'find-file-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/check-parens<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="src src-emacs-lisp">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/check-parens<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
@@ -408,6 +409,7 @@ No Physical tabs.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">color-identifiers-mode</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span>(color-identifiers-mode<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127912;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'after-init-hook<span class="org-unicode-whitespace-subdued-space"> </span>'global-color-identifiers-mode))
 </pre>
@@ -425,6 +427,7 @@ Whitespace unicode does good stuff with whitespace.  Use that.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">whitespace</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#183;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'whitespace-mode)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">unicode-whitespace</span>
@@ -461,9 +464,12 @@ Thanks to Artur Malabarba <sup><a id="fnr.1" name="fnr.1" class="footref" href="
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10230;)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10233;)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"//"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#11005;))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space">  </span>(?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s
+<span class="org-unicode-whitespace-subdued-space">                   </span>(Bl<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;
+<span class="org-unicode-whitespace-subdued-space">                   </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;))))
 
-(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook
+(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
 </pre>
 </div>
@@ -525,6 +531,45 @@ Thanks to Artur Malabarba <sup><a id="fnr.1" name="fnr.1" class="footref" href="
 Using <a href="http://unicode-table.com/">http://unicode-table.com/</a> helped a LOT
 </p>
 </div>
+
+<ol class="org-ol"><li><a id="sec-2-8-1-1" name="sec-2-8-1-1"></a>How does this jiggery-pokery work?<br  /><div class="outline-text-5" id="text-2-8-1-1">
+<p>
+Prettify is basically a call to compose region, it automagickally sets
+start and end, and the second arg of the a-list is <code>components</code>
+</p>
+
+<p>
+So for <code>("lambda" . 955)</code>, "lambda" just gets turned into char 955, or λ.
+</p>
+
+<p>
+But for <code>("&lt;=" . (?\s (Br . Bl) ?\s (Bc . Bc) ?≥))</code>?
+</p>
+
+<blockquote>
+<p>
+If it is a vector or list, it is a sequence of alternate characters and
+composition rules, where (2N)th elements are characters and (2N+1)th
+elements are composition rules to specify how to compose (2N+2)th
+elements with previously composed N glyphs.
+</p>
+
+<p>
+A composition rule is a cons of global and new glyph reference point
+symbols.  See the documentation of  <i>help:reference-point-alist</i> for more
+details.
+</p>
+</blockquote>
+
+<p>
+Rrrriiiiggghhhhht.  
+</p>
+
+<p>
+I don't entirely understand this yet. 
+</p>
+</div>
+</li></ol>
 </div>
 </div>
 </div>
@@ -597,8 +642,22 @@ It's nice to have helpers to see if we are in org-babel mode.
 </div>
 </div>
 </div>
-</div>
 
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Helm Dash for manuals</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">helm-dash</span>
+)
+</pre>
+</div>
+<p>
+(setq helm-dash-browser-func 'eww)
+</p>
+</div>
+</div>
+</div>
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> Version control</h2>
 <div class="outline-text-2" id="text-4">
@@ -730,14 +789,16 @@ Each language gets it's own file.
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p>DEFINITION NOT FOUND.</p></div>
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<a href="http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html">http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html</a>
+</p></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-23 Tue 22:24</p>
+<p class="date">Created: 2016-08-29 Mon 23:02</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
