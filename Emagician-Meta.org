@@ -1,5 +1,5 @@
 #+title: Meta-Development
-* On Illumination…
+* Illumination…
 #+BEGIN_QUOTE
 
 Is deliberate self modification by magic and may include spells of
@@ -656,7 +656,7 @@ div.figure {
 @media screen {
     h1.title {
         text-align: left;
-        margin: 0 3em 0 260px;
+        margin: 0 1em 0 260px;
         border: 1px solid #aaa;
         border-top: 0;
         padding: 1em;
@@ -669,7 +669,7 @@ div.figure {
         border: 1px solid hsl(0, 0%, 77%);
         background-color: hsl(0, 0%, 93%);
         margin-left: -21px;
-        margin-right: -20px;
+        margin-right: 0;
         border-bottom-right-radius: 10px;
         padding: 0.25em 1em;
         margin-top: 0;
