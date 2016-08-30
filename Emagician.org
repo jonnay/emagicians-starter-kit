@@ -1,6 +1,7 @@
 * Base Initialization and Circle Casting
 #+BEGIN_SRC emacs-lisp
 (defconst emagician/version "0.23.1")
+(setq debug-on-error t)
 #+END_SRC
   
   This is my emacs.  There are many like it, but this one is mine.
@@ -158,6 +159,7 @@ before the rest of the scratch interface is built.")
 #+name: starter-kit-load
 #+BEGIN_SRC emacs-lisp
 (defvar emagician/load-depth 0)
+(defvar emagician/long-loaders '())
 (defun emagician/load (file)
   "Load configuration from other .org files."
   (let ((start-time (current-time))
@@ -183,11 +185,14 @@ before the rest of the scratch interface is built.")
                                   file
                                   " It doesn't exist!\n")
         (setq load-result nil)))
+    (let ((elapsed (float-time (time-subtract (current-time)
+                                              start-time))))
+      (when (> elapsed 3.2)
+        (add-to-list 'emagician/long-loaders (cons file elapsed)))
+      (message (format "Emagician/Loaded %s %.3fs elapsed" 
+                       file
+                       elapsed)))
     (emagician/append-scratch "...done!" "\n")
-    (message (format "Emagician/Loaded %s %.3fs elapsed" 
-                     file 
-                     (float-time (time-subtract (current-time) 
-                                                start-time))))
     load-result))
 
 #+END_SRC
@@ -245,7 +250,7 @@ before the rest of the scratch interface is built.")
 
   Emacs is a text editor afteral.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp 
 (emagician/load "Text.org")
 #+END_SRC
 
@@ -376,3 +381,4 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 #+BEGIN_SRC emacs-lisp
 (provide 'emagician)
 #+END_SRC
+

@@ -35,6 +35,7 @@ gem rdoc --all --ri
 ** Ruby Block mode
 #+begin_src emacs-lisp 
 (use-package ruby-block
+  :diminish "[R] "
   :init
   (setq ruby-block-highlight-toggle t)
   :config)
@@ -43,7 +44,8 @@ gem rdoc --all --ri
   Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goofy Acronym Assertion!)
 
 #+begin_src emacs-lisp 
-(use-package rinari)
+(use-package rinari
+  :diminish "🚅 ")
 #+end_src
 ** Robe
 #+begin_src emacs-lisp 

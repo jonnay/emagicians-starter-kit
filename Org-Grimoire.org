@@ -546,6 +546,20 @@ All agenda files are valid for targeting
 					   4)))
 
 #+end_src
+*** Solar Calendar
+#+begin_src emacs-lisp 
+(require 'solar)
+
+;; Half works.  Kinda. 
+(defun diary-equinoxes-solstices (date)
+  "Equinox and solstice diary entry."
+  (let* ((displayed-month (car date))
+	 (displayed-year (car (cdr (cdr date))))
+	 (equinox (solar-equinoxes-solstices)))
+    (if (calendar-date-equal (car (car equinox)) date)
+	(car (cdr (car equinox))))))
+#+end_src
+
 *** TODO Erisian Calendar
 *** TODO 8 Wheel Spoke
 *** Cycle Display 

@@ -51,11 +51,10 @@
     (set-face-attribute 'eldoc-highlight-function-argument nil
                         :underline t :foreground "green"
                         :weight 'bold))
-
 #+end_src
 
 **** Auto Complete
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle no 
 (emagician/defhook emagician/ac-set-elisp-sources emacs-lisp-mode
   (setq ac-sources
         '(ac-source-yasnippet

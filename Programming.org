@@ -139,6 +139,7 @@ No Physical tabs.
 ** Color Identifiers
 #+begin_src emacs-lisp 
 (use-package color-identifiers-mode
+  :diminish (color-identifiers-mode . "🎨 ")
   :init
   (add-hook 'after-init-hook 'global-color-identifiers-mode))
 
@@ -150,6 +151,7 @@ No Physical tabs.
 
 #+begin_src emacs-lisp 
 (use-package whitespace
+  :diminish "· "
   :init
   (add-hook 'prog-mode-hook 'whitespace-mode)
   (use-package unicode-whitespace
