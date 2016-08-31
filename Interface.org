@@ -893,6 +893,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp 
 (use-package helm
   :demand
+  :diminish ""
   :init
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)

@@ -25,9 +25,9 @@ and perception stimulate each other.
 
 ** Meta Keys and Prefixes
    - i     :: insert magickal key.  (p-crosses and poops and bunnies, oh my!)
-   - shift :: Do the thing, but in debug. 
+   - shift :: Do the thing, but in debug.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (bind-keys :prefix-map emagician/meta-keymap
            :prefix "<f3>"
            ("<f3>"    . emagician/helm-emagician-dir)
@@ -39,7 +39,7 @@ and perception stimulate each other.
            ("i"       . emagician/magick-keymap)
            ("t"       . emagician/meta/show-todo))
 #+end_src
-* Developing 
+* Developing
 ** Emagician Helm Source
 
    Helm keeps changing its interface.  For such an awesome package this is the one way in which it falls down for me.  Anything used to be so easy to configure.
@@ -52,18 +52,18 @@ and perception stimulate each other.
       (filtered-candidate-transformer :initform #'emagician/helm-ct-is-org-file)
       (action :initform 'helm-type-file-actions)
       ))
-     
+
    (defun emagician/helm-ct-is-org-file (candidates src)
      (remove-if-not
       (lambda (c)
-        (let ((file (cdr c)))      
+        (let ((file (cdr c)))
           (and (string= (substring file -4) ".org")
                (not (string= (substring (file-name-nondirectory file)
                                         0
                                         2) ".#")))))
       candidates))
 
-   (defun emagician/helm-emagician-dir () 
+   (defun emagician/helm-emagician-dir ()
      "List all the org files in the Emagician dir"
      (interactive)
      (helm :sources (helm-make-source "Files in Emagician-dir" 'emagician/files-helm-source)
@@ -73,7 +73,7 @@ and perception stimulate each other.
 
 ** Testing
 ** Running all ERT tests
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun emagician/run-all-tests ()
   (interactive)
   (ert "emagician/"))
@@ -117,7 +117,7 @@ and perception stimulate each other.
            (err (assoc 'error parsed-result)))
       (message "Result: %s\n"
                (message "%s\n\n\n%s" (pp parsed-result) result))
-      (if err 
+      (if err
           (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
         (message "Successful!"))))
 
@@ -127,39 +127,39 @@ and perception stimulate each other.
     (emagician/test-initialization lisp))
 #+end_src
 
-*** Working, but kinda shitty testers 
+*** Working, but kinda shitty testers
     This loads the starter kit as a batch and outputs the results as a message.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (defun emagician/test-init-through-batch ()
     (interactive)
     (message "Running New Emacs: %s"
-             (shell-command-to-string 
+             (shell-command-to-string
               (concat invocation-directory invocation-name " "
                       "--no-init-file --batch "
                       "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                      "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                      "--load=" (file-name-directory (buffer-file-name)) "init.el "
                       "--eval='' "
                       "&"))))
 #+end_src
 
-This does a full GUI load, outputting any results as a message. 
+This does a full GUI load, outputting any results as a message.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
     (defun emagician/test-full-init()
       (interactive)
       (message (concat "Running New Emacs: "
-                       (shell-command-to-string 
+                       (shell-command-to-string
                         (concat invocation-directory invocation-name " "
                                 "--no-init-file "
                                 "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                                "--load=" (file-name-directory (buffer-file-name)) "init.el " 
+                                "--load=" (file-name-directory (buffer-file-name)) "init.el "
                                 "&")))))
 #+end_src
 ** Peering into the kit, the Emagician Agenda
    Note, this has 2 strikes.  The third agenda related strike requires a refactoring
 *** General agenda
-  #+begin_src emacs-lisp 
+  #+begin_src emacs-lisp
   (defun emagician/meta/agenda ()
     "Run agenda commands on the starter kit."
     (interactive)
@@ -170,7 +170,7 @@ This does a full GUI load, outputting any results as a message.
   #+end_src
 
 *** Find Todo Items in these files
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun emagician/meta/show-todo ()
   "Show a list of TODO actions that are on Emagicians Starter Kit."
   (interactive)
@@ -185,7 +185,7 @@ This does a full GUI load, outputting any results as a message.
 *** Skewer!
     Use the bookmarklet to connect and you're off to the races!
 *** Publishing functions
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (setq org-html-htmlize-output-type 'css)
 (setq htmlize-html-charset 'utf-8)
 (setq httpd-root (expand-file-name "gh-pages" emagician/dir))
@@ -197,7 +197,7 @@ This does a full GUI load, outputting any results as a message.
                                       :base-directory ,(expand-file-name "assets/" emagician/dir)
                                       :recursive t
                                       :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-                                      :publishing-directory ,(expand-file-name "gh-pages/assets" emagician/dir)            
+                                      :publishing-directory ,(expand-file-name "gh-pages/assets" emagician/dir)
                                       :publishing-function org-publish-attachment)
                                      ("emagician-org"
                                       :base-directory ,emagician/dir
@@ -219,7 +219,7 @@ This does a full GUI load, outputting any results as a message.
                                       :include ("Index.org" "Emagician.org")
                                       :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
                                       :htmlized-source t
-                                      :html-html5-fancy t     
+                                      :html-html5-fancy t
                                       :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
                                       :publishing-function org-html-publish-to-html
                                       )
@@ -240,9 +240,9 @@ This does a full GUI load, outputting any results as a message.
 
 #+end_src
 
-*** The CSS file 
+*** The CSS file
 
-The thi.ng/org-spec[fn:1] is a great basis to build off of. 
+The thi.ng/org-spec[fn:1] is a great basis to build off of.
 
 #+begin_src css :noweb yes :tangle gh-pages/assets/style.css :padline t :comments link
 body {
@@ -320,8 +320,8 @@ a[name]:after {
     content: "";
 }
 
-a:link, 
-a:hover, 
+a:link,
+a:hover,
 a:visited {
     text-decoration: none;
     color: black;
@@ -782,7 +782,7 @@ div.figure {
    [[file:assets/images/Commodore.gif]]
 
 ** Symbol Getter
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (defun emagician/meta/get-insert-symbol (text)
   "Returns a insert-symbol for the chunk of text"
   (intern (format "emagician/insert/%s" text)))
@@ -790,9 +790,9 @@ div.figure {
 
 ** Make some Magickal Keys
 
-   The next chunk makes a keymap and starts defining and binding insert functions on it. 
+   The next chunk makes a keymap and starts defining and binding insert functions on it.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (define-prefix-command 'emagician/magick-keymap)
 (mapcar (lambda (pair)
           (fset (emagician/meta/get-insert-symbol (cdr pair))
@@ -807,6 +807,41 @@ div.figure {
           ("s" . "💩")
           ("a" . "a")
           ("t" . "🚽")))
+#+end_src
+** Random bunny
+#+begin_src emacs-lisp 
+(defun emagician/random-bunny ()
+  (let ((bunnies '(
+           "／(･ × ･)＼"
+           "／(^ x ^)＼"
+           "／(^ x ^=)＼"
+           "／(=๏ x ๏=)＼"
+           "／(=´x`=)＼"
+           "／(=∵=)＼"
+           "／(=⌒x⌒=)＼"
+           "／(=✪ x ✪=)＼"
+           "／(≡・ x ・≡)＼"
+           "／(≧ x ≦)＼"
+           "／(v x v)＼"
+           "／(=∵=)＼"
+           "／(≡・ x ・≡)＼"
+           "/ (,,๏ ⋏ ๏,,)＼"
+           "／(￫ x ◕=)＼"
+           "／(◕ x < )＼"
+           "／(◕ x ≦ )＼"
+           "/ (ㅇㅅㅇ❀)＼"
+           "/ (•ㅅ•)＼"
+           "/ (´･×･`)＼"
+           "/ (,,Ő ｘ Ő,,)＼"
+           "/ (⁎˃ᆺ˂)＼"
+           "/ (´・×・｀)＼"
+           "/ (╹ૅ×╹ૅ)＼"
+           "/ ( ÒㅅÓ)＼"
+           "/ (⁎˃ᆺ˂)＼"
+           "/ ( ´•̥×•̥` )＼")))
+    (nth (random (length bunnies))
+         bunnies)))
+
 #+end_src
 
 * Footnotes

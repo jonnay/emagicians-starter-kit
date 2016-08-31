@@ -159,7 +159,7 @@ before the rest of the scratch interface is built.")
 #+name: starter-kit-load
 #+BEGIN_SRC emacs-lisp
 (defvar emagician/load-depth 0)
-(defvar emagician/long-loaders '())
+(defvar emagician/slow-loaders '())
 (defun emagician/load (file)
   "Load configuration from other .org files."
   (let ((start-time (current-time))
@@ -188,7 +188,7 @@ before the rest of the scratch interface is built.")
     (let ((elapsed (float-time (time-subtract (current-time)
                                               start-time))))
       (when (> elapsed 3.2)
-        (add-to-list 'emagician/long-loaders (cons file elapsed)))
+        (add-to-list 'emagician/slow-loaders (cons file elapsed)))
       (message (format "Emagician/Loaded %s %.3fs elapsed" 
                        file
                        elapsed)))
@@ -300,7 +300,7 @@ before the rest of the scratch interface is built.")
 * Now load the users files
 ** First the customization
 #+BEGIN_SRC emacs-lisp
-(load custom-file 'noerror)
+(load custom-file)
 #+END_SRC
 
 ** Next is the true-name-file

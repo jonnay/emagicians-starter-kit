@@ -163,7 +163,7 @@ If USE-PROPER-LIST is true then instead of a (dotted . list) a
                  (not (member (quote ,name) ,hook)))
          (add-hook (quote ,hook) (quote ,name))))))
 #+end_src
-**** TODO unit tests
+**** Unit tests
 #+begin_src emacs-lisp 
 (ert-deftest emagician/defhook-defines-hook-and-adds-it ()
   "Basic test to make sure it defines the hook function and adds it."
@@ -174,7 +174,7 @@ If USE-PROPER-LIST is true then instead of a (dotted . list) a
     (run-hooks 'hook)
     (should (fboundp 'test-hook))
     (should executed)
-    (fmakeunbound 'test-hook))))
+    (fmakeunbound 'test-hook)))
 
 (ert-deftest emagician/defhook-redefines-when-bound ()
   (let ((hook '())
@@ -307,59 +307,110 @@ If you want to add items, you can do so through the
     "A list of elisp that is inserted in the scratch buffer at startup.")
 #+end_src
 
-**** Scratchify
+*** Scratchify
 #+begin_src emacs-lisp 
-  (defun emagician/scratchify-text (text)
-    "Takes a chunk of text, and at the newline boundary inserts ;;;"
-    (mapconcat (lambda (line)
-                 (format ";;; %s\n" line))
-               (split-string text "\n")
-               ""))
+  (defun emagician/scratchify-text (text-or-list)
+    "Takes a chunk of text, and at the newline boundary inserts ;;;
+If it's a list, then scratchify the list members."
+    (cond
+     ((null text-or-list) nil)
+     ((and (stringp text-or-list) (equal "" text-or-list))
+      ";;;\n")
+     ((listp text-or-list)
+      (mapconcat 'emagician/scratchify-text text-or-list ""))
+     ((stringp text-or-list)
+      (mapconcat (lambda (line)
+                   (format ";;; %s\n" line))
+                 (split-string text-or-list "\n")
+                 ""))))
 #+end_src
 
 #+begin_src emacs-lisp 
-  (ert-deftest emagician/scratchify-text ()
-    (should (equal ";;; foo\n" (emagician/scratchify-text "foo")))
-    (should (equal ";;; Topes\n;;; \n" (emagician/scratchify-text "Topes\n"))))
-#+end_src
-**** Main Scratch Function
+(ert-deftest emagician/scratchify-text-props ()
+  (should (equal ";;; foo\n" (emagician/scratchify-text (propertize "foo" 'face (:foreground "red"))))))
 
+(ert-deftest emagician/scratchify-text ()
+  (should (equal ";;; foo\n" (emagician/scratchify-text "foo")))
+  (should (equal ";;; Topes\n;;; \n" (emagician/scratchify-text "Topes\n"))))
+
+(ert-deftest emagician/scratchify-list ()
+  (should (equal ";;; foo\n" (emagician/scratchify-text '("foo"))))
+  (should (equal ";;; foo\n;;; bar\n" (emagician/scratchify-text '("foo" "bar")))))
+
+(ert-deftest emagician/scratchify-list-in-list ()
+  (should (equal ";;; foo\n;;; bar\n" (emagician/scratchify-text '("foo" ("bar"))))))
+
+(ert-deftest emagician/scratchify-empty ()
+  (should (equal ";;;\n" (emagician/scratchify-text ""))))
+#+end_src
+
+*** Reset Scratch
+#+begin_src emacs-lisp 
+(defun emagician/reset-scratch (str)
+  (with-current-buffer "*scratch*"
+    (erase-buffer)
+    (insert str)))
+#+end_src
+
+*** Main Scratch Initiation
 #+begin_src emacs-lisp 
 (defun emagician/initiate-thee-scratch ()
-  (emagician/set-scratch 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;;           🐰-|-+-|- Sekrut Alien Technology -|-+-|-🐰           ;;;" "\n"
-   ";;;                  Hail Eris.  All Hail Discordia.                 ;;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;;\n"
-   ";;; It is with thee Quill of Echinda" "\n"
-   ";;; that I scratch all upon the Beat Mesa" "\n"
-   ";;;" "\n" 
-   ";;; Emacs Vesrion: " emacs-version "\n" 
-   ";;; Emagician Starter kit Version: " emagician/version "\n"
-   ";;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   (if before-init-time
-       (format ";;; Your startup took approximately %.2f seconds" 
-               (- (float-time)
-                  (float-time before-init-time)))
-     (format ";;; One of the start time variables was nil. (current:%s before:%s)"
-             (float-time) before-init-time)) "\n" 
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;; -|-+-|- Chaotic Wisdom -|-+-|-" "\n"
-   ";;;" "\n"
-   (emagician/scratchify-text (emagician/cookie-from-file "assets/collected-works-ov-chaos.lines"))
-   ";;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
-   ";;; -|-+-|- Minor Lamp Invocation -|-+-|-" "\n"
-   (emagician/scratchify-text (emagician/cookie-from-file "assets/minor-lamp-invocation.lines"))
-   ";;;" "\n"
-   ";;; Tools For Magicks" "\n"
-   (mapconcat (lambda (link)
-                (format "%S\n" link))
-              emagician/scratch-links
-              "")
-   ";;;" "\n"
-   ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"))
+  (flet ((with-bg-fg (str bg fg)
+           (propertize str
+                       'font-lock-face
+                       (list :background bg :foreground fg)))
+         (with-fg (str fg)
+           (propertize str
+                       'font-lock-face
+                       (list :foreground fg))))
+    (let* ((banner-color "DarkViolet")
+           (info-label "DeepSkyBlue")
+           (info-value "cyan" )
+           (banner-line (with-fg (make-string 72 ?█) banner-color))
+           (header
+            `(,banner-line
+              ,(with-bg-fg "████            🐰-|-+-|- Sekrut Alien Technology -|-+-|-🐰         ███" info-label banner-color)
+              ,banner-line
+              ""
+              "     It is with the Quill of Echinda I scratch upon the beat mesa."
+              ""
+              ,banner-line
+              ,(concat (with-fg "Emacs Version:     " info-label)
+                       (with-fg emacs-version info-value))
+              ,(concat (with-fg "Emagician Verison: " info-label)
+                       (with-fg emagician/version info-value))))
+           (startup-time
+            `(,banner-line
+              ,(if before-init-time
+                   (concat (with-fg "🕚 Startup Time:   " info-label)
+                           (with-fg (format "%.2f" (- (float-time)
+                                                      (float-time before-init-time)))
+                                    info-value))
+                 (propertize "⁇ before-init-time is null!" :face 'error-face))
+              ,(mapcar (lambda (s) (format "  %65s %.2f" (car s) (cdr s)))
+                       emagician/slow-loaders)))
+           (chaotic-wisdom
+            `(,banner-line
+              ,(emagician/cookie-from-file "assets/collected-works-ov-chaos.lines")))
+           (minor-lamp-invocation
+            `(,banner-line
+              ,(emagician/cookie-from-file "assets/minor-lamp-invocation.lines")))
+           (tools
+            (mapconcat (lambda (link )
+                         (format "%S\n" link))
+                       emagician/scratch-links
+                       "")))
+      (emagician/reset-scratch
+       (concat (emagician/scratchify-text
+                (list header
+                      startup-time
+                      chaotic-wisdom
+                      minor-lamp-invocation
+                      banner-line))
+               "\n"
+               tools
+               "\n"
+               (emagician/scratchify-text banner-line))))))
 #+end_src
+(emagician/initiate-thee-scratch)
 

@@ -290,6 +290,7 @@ I don't entirely understand this yet.
 *** Magit
 #+begin_src emacs-lisp 
 (use-package magit
+  :diminish "🔮 "
   :init
   (when (locate-file "git-achievements" exec-path)
     (setq magit-git-executable "git-achievements"))
@@ -302,6 +303,7 @@ I don't entirely understand this yet.
 
 #+begin_src emacs-lisp 
   (use-package magit-gh-pulls
+    :diminish "🆙 "
     :init
     (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 #+end_src
@@ -320,8 +322,11 @@ I don't entirely understand this yet.
 
 #+begin_src emacs-lisp 
 (use-package git-gutter-fringe+
+  :diminish (git-gutter+-mode . "")
   :init
-  (setq git-gutter-fr+-side 'right-fringe))
+  (setq git-gutter-fr+-side 'right-fringe)
+  (add-hook 'text-mode-hook 'git-gutter+-mode)
+  (add-hook 'prog-mode-hook 'git-gutter+-mode))
 #+end_src
 
 * Languages

@@ -707,7 +707,7 @@ Swap to other frame once loaded.
 
 
 
-* Saving and auto Commiting
+* Saving and auto Copmmiting
 
 #+begin_src emacs-lisp 
   (defun emagician-org/save-commit-and-push ()
