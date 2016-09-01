@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>General Programming helpers</title>
-<!-- 2016-08-29 Mon 23:02 -->
+<!-- 2016-09-01 Thu 09:33 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
@@ -192,10 +192,15 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Languages</a></li>
-<li><a href="#sec-6">6. Quazi-related Modes</a>
+<li><a href="#sec-5">5. Project Management</a>
 <ul>
-<li><a href="#sec-6-1">6.1. Yaml</a></li>
+<li><a href="#sec-5-1">5.1. Projectile</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Languages</a></li>
+<li><a href="#sec-7">7. Quazi-related Modes</a>
+<ul>
+<li><a href="#sec-7-1">7.1. Yaml</a></li>
 </ul>
 </li>
 </ul>
@@ -463,6 +468,7 @@ Thanks to Artur Malabarba <sup><a id="fnr.1" name="fnr.1" class="footref" href="
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"&gt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8805;))
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10230;)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10233;)
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10869;)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"//"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#11005;))
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space">  </span>(?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s
@@ -524,6 +530,11 @@ Thanks to Artur Malabarba <sup><a id="fnr.1" name="fnr.1" class="footref" href="
 <td class="left"><code>!=</code></td>
 <td class="left">≠</td>
 </tr>
+
+<tr>
+<td class="left"><code>==</code></td>
+<td class="left">⩵</td>
+</tr>
 </tbody>
 </table>
 
@@ -556,7 +567,7 @@ elements with previously composed N glyphs.
 
 <p>
 A composition rule is a cons of global and new glyph reference point
-symbols.  See the documentation of  <i>help:reference-point-alist</i> for more
+symbols.  See the documentation of <i>help:reference-point-alist</i> for more
 details.
 </p>
 </blockquote>
@@ -583,7 +594,7 @@ I don't entirely understand this yet.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flycheck</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128027;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#129419;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(global-flycheck-mode)
 <span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>flycheck-color-mode-line-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode))
@@ -701,6 +712,7 @@ Modes for editing git-specific files
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">magit</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128302;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(locate-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span><span class="org-unicode-whitespace-subdued-space"> </span>exec-path)
 <span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>magit-git-executable<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span>))
@@ -715,6 +727,7 @@ Modes for editing git-specific files
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">magit-gh-pulls</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127385;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'magit-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-magit-gh-pulls))
 </pre>
@@ -743,8 +756,11 @@ Modes for editing git-specific files
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">git-gutter-fringe+</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span>(git-gutter+-mode<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>git-gutter-fr+-side<span class="org-unicode-whitespace-subdued-space"> </span>'right-fringe))
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>git-gutter-fr+-side<span class="org-unicode-whitespace-subdued-space"> </span>'right-fringe)
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'text-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'git-gutter+-mode)
+<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'git-gutter+-mode))
 </pre>
 </div>
 </div>
@@ -753,8 +769,36 @@ Modes for editing git-specific files
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Languages</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> Project Management</h2>
 <div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Projectile</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+The last time I used projectile it was not what I needed at all.
+</p>
+
+<p>
+But that was a long time ago.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">projectile</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>projectile-mode-line<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:eval</span><span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128194;[%s]"</span><span class="org-unicode-whitespace-subdued-space"> </span>(projectile-project-name))))
+<span class="org-unicode-whitespace-subdued-space">  </span>(projectile-global-mode))
+
+(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">helm-projectile</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Languages</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Each language gets it's own file.
 </p>
@@ -770,12 +814,12 @@ Each language gets it's own file.
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Quazi-related Modes</h2>
-<div class="outline-text-2" id="text-6">
-</div><div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Yaml</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Quazi-related Modes</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Yaml</h3>
+<div class="outline-text-3" id="text-7-1">
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yaml-mode</span>
@@ -798,7 +842,7 @@ Each language gets it's own file.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-08-29 Mon 23:02</p>
+<p class="date">Created: 2016-09-01 Thu 09:33</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
