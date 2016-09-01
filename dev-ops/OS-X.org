@@ -150,6 +150,20 @@ brew install jq
    | ==> | Pouring                   | jq-1.4.yosemite.bottle.tar.gz                                      |        |      |
    | 🍺   | /usr/local/Cellar/jq/1.4: | 15                                                                 | files, | 720K |
 
+** Silver Searcher
+#+begin_src sh
+brew install the_silver_searcher
+#+end_src
+
+#+RESULTS:
+| ==>                              | Downloading                                   | https://homebrew.bintray.com/bottles/the_silver_searcher-0.32.0.el_capitan.bottle.tar.gz |        |           |     |
+| ==>                              | Pouring                                       | the_silver_searcher-0.32.0.el_capitan.bottle.tar.gz                                      |        |           |     |
+| ==>                              | Caveats                                       |                                                                                          |        |           |     |
+| Bash                             | completion                                    | has                                                                                      | been   | installed | to: |
+| /usr/local/etc/bash_completion.d |                                               |                                                                                          |        |           |     |
+| ==>                              | Summary                                       |                                                                                          |        |           |     |
+| 🍺                                | /usr/local/Cellar/the_silver_searcher/0.32.0: | 8                                                                                        | files, | 101K      |     |
+
 * Languages
 ** Ruby
 *** RBEnv

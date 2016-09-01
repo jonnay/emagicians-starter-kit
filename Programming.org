@@ -331,6 +331,21 @@ I don't entirely understand this yet.
   (add-hook 'prog-mode-hook 'git-gutter+-mode))
 #+end_src
 
+* Project Management
+** Projectile
+   The last time I used projectile it was not what I needed at all.
+
+   But that was a long time ago.
+
+#+begin_src emacs-lisp 
+(use-package projectile
+  :init
+  (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
+  (projectile-global-mode))
+
+(use-package helm-projectile)
+#+end_src
+
 * Languages
   Each language gets it's own file.
 

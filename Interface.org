@@ -32,7 +32,9 @@
 
 * Automated things
 ** Midnight  :automation:
-   Clean some buffers at midnight.
+   It's very silent in the background, and just kind of does the right thing.  Clears out old buffers not in use.  I also use it as a next-day scheduler.
+ 
+   I have seen some other Emagicians state that they didn't know why they had this package. See also [[*Diminish][Diminish]].
 
 #+begin_src emacs-lisp 
 (use-package midnight
@@ -52,7 +54,7 @@ I eat delicious food, not soylent.
 
 I drink excellent beer, not MGD. 
 
-Aesthetics are important.
+ÆＳＴＨＥＴＩＣ is important.
 
 ** Turn of scrollbars, toolbars, menu bars
 
@@ -85,7 +87,9 @@ Scrollbars, Toolbars and Menu Bars. Oh my.
 
 ** Fonts
 
-   Font choice is very important aesthetically speaking.  I am however failing at this somewaht. 
+   Font choice is very important aesthetically speaking.  I am however failing at my main font choice.
+
+   My unicode game is pretty solid though.
 
 *** Describe Char
    Give us all the unicode information for a glyph.
@@ -138,7 +142,9 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 
 ** Maximize primary window
 
-   This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup.  At least on OS X.
+   This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup on OS X.  I want emacs maximized on a single monitor, and not to create it's own OS X screen.
+
+   You'd think that as an old Amiga head I'd enjoy the screen handling of OS X, but it just seems really clunky.  It doesn't have the same charm as the Other Raster Port.
 
 #+begin_src emacs-lisp 
 (setq default-frame-parameters '((fullscreen . maximized)))
@@ -153,6 +159,9 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 
    "Visual Line Mode" is probably the worst name ever.  
 
+   I prefer movement and killing via logical lines, not visual lines. 
+
+   Also, Indicators Plz!
 #+begin_src emacs-lisp 
 (emagician/defhook unmap-visual-line-mode-keys global-visual-line-mode-hook
   (unbind-key "<remap> <kill-visual-line>" visual-line-mode-map)
@@ -162,16 +171,8 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 (global-visual-line-mode 1)
 #+end_src
 
-Indicators Plz!
-
-#+begin_src emacs-lisp :tangle no
-
-#+end_src
-
-*** Movement commands 
-
 ** Frame titles
-   Shamelessly snarfed from batsov.
+   Shamelessly snarfed from bbatsov.
 
    Shows either the full file path or buffer name, and the name of the process when available.  
 
@@ -188,7 +189,7 @@ Indicators Plz!
 #+end_src
 
 ** Modeline
-The modeline should show as much information as required, in as small a space as possible.
+The modeline should show as much information as required, in as small a space as possible.  I am a too-much-info kinda guy.  It's a sickness.
 
 *** Basics
 #+begin_src emacs-lisp 
@@ -238,7 +239,7 @@ So yeah.  It's a great mode to have around, but there's that too.
 #+end_src
 
 *** Nyan mode
-One day.  Powerline and nyan mode don't work.
+Nyan mode conveys information.  It's also Cute AF. 
 #+begin_src emacs-lisp 
 (use-package nyan-mode
   :init
@@ -257,6 +258,8 @@ One day.  Powerline and nyan mode don't work.
 *** Powerline
 **** The EMagician powerline theme
 Inludes Nyan cat powers.
+
+This theme is a beast.  I don't like it.  I love how it looks visually, but I hate how it looks in code. 
 #+begin_src emacs-lisp 
 (defun emagician/powerline-theme ()
   "Setup the default mode-line."
@@ -321,8 +324,9 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
                (setq powerline-default-separator 'rounded)
                (emagician/powerline-theme))
 #+end_src
-*** Smart Mode Line
-#+begin_src  emacs-lisp 
+*** Smart Mode Line                                                                       :disabled:
+    Not sure that this adds anything
+#+begin_src  emacs-lisp :tangle no
 (emagician/expect-package 'smart-mode-line)
 #+end_src
 
@@ -332,47 +336,50 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
    information available to us.
 
 *** Dimension 1: File status
-   	- light blue :: no file or process attached
-   	- dark blue :: process attached
-   	- yellow :: read only
-    - red :: Important (SSH to production server, etc)
-   	- grey :: file visited
+  - light blue :: no file or process attached
+  - dark blue :: process attached
+  - yellow :: read only
+  - red :: Important (SSH to production server, etc)
+  - grey :: file visited
 
-*** Dimention 2: Funky modes
+*** Dimention 2: Modal Editing
    	- overwrite :: hollow box
    	- 'normal' :: line
+        - god mode :: Horizontal cursor
 
 *** Enhancements
 **** TODO set up a way to handle production buffers through a buffer local var.
 
 #+name: cursor-status
 #+begin_src emacs-lisp 
-  ;; Change cursor color according to mode
-  (defvar emagician/set-cursor-color-color "")
-  (defvar emagician/set-cursor-color-type nil)
-  (defvar emagician/set-cursor-color-buffer "")
+;; Change cursor color according to mode
+(defvar emagician/set-cursor-color-color "")
+(defvar emagician/set-cursor-color-type nil)
+(defvar emagician/set-cursor-color-buffer "")
+(defvar-local emagician/dangerous-buffer nil)
 
-  (defun emagician/set-cursor-color-according-to-mode ()
-    "change cursor color according to some minor modes."
-    ;; set-cursor-color is somewhat costly, so we only call it when needed:
-    (let ((color (cond
-
-                  ((comint-check-proc (current-buffer)) "blue")
-                  (buffer-read-only "white")
-                  ((not (equal buffer-file-name nil)) "grey50")
-                  (t "cyan")))
-          (type (cond
-                 (overwrite-mode 'hollow)
-                 (t 'box))))
-      (unless (and
-               (string= color emagician/set-cursor-color-color)
-               (string= type emagician/set-cursor-color-type)
-               (string= (buffer-name) emagician/set-cursor-color-buffer))
-        (set-cursor-color (setq emagician/set-cursor-color-color color))
-        (setq cursor-type (setq emagician/set-cursor-color-type type))
-        (setq emagician/set-cursor-color-buffer (buffer-name)))))
-
-  (add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
+(defun emagician/set-cursor-color-according-to-mode ()
+  "change cursor color according to some minor modes."
+  ;; set-cursor-color is somewhat costly, so we only call it when needed:
+  (let ((color (cond
+                (emagician/dangerous-buffer "red")
+                ((comint-check-proc (current-buffer)) "blue")
+                (buffer-read-only "white")
+                ((not (equal buffer-file-name nil)) "grey50")
+                (t "cyan")))
+        (type (cond
+               ((member 'god-mode minor-mode-list) '(hbar . 3))
+               ((member overwrite-mode minor-mode-list) 'hollow)
+               (t '(bar . 2)))))
+    (unless (and
+             (string= color emagician/set-cursor-color-color)
+             (equal type emagician/set-cursor-color-type)
+             (string= (buffer-name) emagician/set-cursor-color-buffer))
+      (set-cursor-color (setq emagician/set-cursor-color-color color))
+      (setq cursor-type (setq emagician/set-cursor-color-type type))
+      (setq emagician/set-cursor-color-buffer (buffer-name)))))
+(setq emagician/dangerous-buffer t)
+(add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
 #+end_src
 
 ** Highlight Line
@@ -853,6 +860,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 * Help and Discoverability                                                                    :help:
 ** Achievements
+   Achievements are fun!  There is nothing at all wrong with exploring them.
 #+begin_src emacs-lisp  :tangle no
 (use-package achievements
   :demand
@@ -862,7 +870,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Which Key
-   More like—witch key.  Which-key is the ultimate in discoverability.
+   More like—witch key.  Which-key is the ultimate in discoverability.  I really enjoy this package and for-stalled my install of ~god-mode~ until I was sure they could play well together.
 
 #+begin_src emacs-lisp
 (use-package which-key
@@ -880,6 +888,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Discover My Major   :learn-me:bind:
+   I don't use this mode enough. 
+
 #+begin_src emacs-lisp
   (use-package discover-my-major
     :bind
@@ -887,8 +897,13 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
      ("C-c C-S-H" . discover-my-mode)))
 #+end_src
 
-
 ** Helm
+   I have a complicated relationship with helm.  
+
+   - ⛥ :: On the one hand its completion mechanism just does what I expect.  Little to no fuss nor muss.
+   - ⛥ :: On the other hand it's a bitch to extend and seems to have gotten very far from it's easy-to-extend Anything roots.  Case-in-point: ~M-x~ used to not only show commands, but give you actions to provide documentation for them, their source location, as well as a whole host of other things.  I miss that.
+
+   It's still a demand package though. 
 #+name: helm
 #+begin_src emacs-lisp 
 (use-package helm
@@ -898,44 +913,25 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)
   (require 'helm-ring)
-  (use-package helm-ls-git :demand))
+  (use-package helm-ls-git :demand)
+  (helm-mode 1))
 #+end_src
 
 *** F2 is my super duper DWIM helper
-#+begin_src emacs-lisp
-  (defun emagician/helm-old ()
-    "Slowly going to become a super helm-dwim"
-    (interactive)
-    (require 'helm-files)
-    (unless (and helm-source-ls-git-status
-                 helm-source-ls-git)
-      (setq helm-source-ls-git-status
-            (helm-make-source "Git status" 'helm-ls-git-status-source
-              :fuzzy-match helm-ls-git-fuzzy-match)
-            helm-source-ls-git
-            (helm-make-source "Git files" 'helm-ls-git-source
-              :fuzzy-match helm-ls-git-fuzzy-match)))
-    (unless helm-source-buffers-list
-      (setq helm-source-buffers-list
-            (helm-make-source "Buffers" 'helm-source-buffers)))
-
-      (helm-other-buffer '(helm-source-buffers-list
-                           helm-source-files-in-current-dir
-                           helm-source-ls-git-status
-                           helm-source-ls-git
-                           helm-source-mark-ring
-                           helm-source-bookmarks
-                           helm-source-recentf
-                           helm-source-global-mark-ring
-                           helm-source-buffer-not-found)
-                         "*helm mini*"))
-
-#+end_src
+    F2 means "I wanna do something, get somewhere."  So show me a list of everything.
 
 #+begin_src emacs-lisp 
 (defun emagician/helm ()
   "Super powered helm mode to DWIM!"
   (interactive)
+  (unless (and helm-source-ls-git-status
+               helm-source-ls-git)
+    (setq helm-source-ls-git-status
+          (helm-make-source "Git status" 'helm-ls-git-status-source
+            :fuzzy-match helm-ls-git-fuzzy-match)
+          helm-source-ls-git
+          (helm-make-source "Git files" 'helm-ls-git-source
+            :fuzzy-match helm-ls-git-fuzzy-match)))
   (unless helm-source-buffers-list
     (setq helm-source-buffers-list
           (helm-make-source "Buffers" 'helm-source-buffers)))
@@ -951,11 +947,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
           helm-source-buffer-not-found)))
 #+end_src
 
-*** Enable it
-#+begin_src emacs-lisp 
-(helm-mode 1)
-#+end_src
-
 *** Helm for M-x
 #+begin_src emacs-lisp 
   (global-set-key (kbd "M-x")     'helm-M-x)
@@ -963,6 +954,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 **** Key binding muscle memory
+     The Fix-Muscle Memory keybinding setting re-enables the "You can run the command ~foo~ with ~bar~". This is one of the annoyances with ~Helm-M-x~ for me.  
+
      See [[file:Lamp.org::*Fix-Muscle-Memory%20(was%20Emagician-Fix-Spell)][Fix-Muscle-Memory (was Emagician-Fix-Spell)]]
 *** Buffer Selection
 #+begin_src emacs-lisp 
@@ -987,6 +980,24 @@ Make it a bit nicer too.
 #+begin_src emacs-lisp 
 (setq helm-split-window-in-side-p t)
 (setq helm-candidate-separator "──────────────────────────────")
+#+end_src
+
+* God Mode
+  Just starting to use god mode, not sure about it yet.
+
+#+begin_src emacs-lisp 
+(use-package god-mode
+  :bind (("<escape>" . god-local-mode))
+  :diminish "🐰 "
+  :init
+  (emagician/defhook god-mode-cursor-update god-mode-enabled-hook
+    (setq cursor-type '(hbar . 3)))
+  (emagician/defhook god-mode-cursor-backtrack god-mode-disabled-hook
+    (setq cursor-type 'box))
+  :config
+  (which-key-enable-god-mode-support))
+
+
 #+end_src
 
 * Footnotes
