@@ -154,7 +154,7 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
    "Visual Line Mode" is probably the worst name ever.  
 
 #+begin_src emacs-lisp 
-(emagician/defhook unmap-visual-line-mode-keys visual-line-mode-hook  
+(emagician/defhook unmap-visual-line-mode-keys global-visual-line-mode-hook
   (unbind-key "<remap> <kill-visual-line>" visual-line-mode-map)
   (unbind-key "<remap> <beginning-visual-line>" visual-line-mode-map)
   (unbind-key "<remap> <end-of-visual-line>" visual-line-mode-map))
@@ -183,8 +183,8 @@ Indicators Plz!
         (:eval (if (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))
-        (:eval (when (process-buffer (current-buffer))
-                 (format "[%s}" (process-name (process-buffer (current-buffer))))))))
+        (:eval (when (get-buffer-process (current-buffer))
+                 (format "[%s]" (process-name (get-buffer-process (current-buffer))))))))
 #+end_src
 
 ** Modeline
@@ -231,7 +231,7 @@ So yeah.  It's a great mode to have around, but there's that too.
 
 #+begin_src emacs-lisp 
 (use-package diminish)
-(diminish 'visual-line-mode "↩ ")
+(diminish 'visual-line-mode "↩️ ")
 
 (use-package autorevert
   :diminish (auto-revert-mode . "🔂 "))
@@ -893,16 +893,12 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp 
 (use-package helm
   :demand
-  :diminish ""
+  :diminish (helm-mode . "")
   :init
   (global-set-key [f2] 'emagician/helm)
   (require 'helm-config)
   (require 'helm-ring)
-  (use-package helm-ls-git :demand)
-  :config
-  (diminish 'helm-mode "")
-  (diminish 'helm-minor-mode ""))
-
+  (use-package helm-ls-git :demand))
 #+end_src
 
 *** F2 is my super duper DWIM helper

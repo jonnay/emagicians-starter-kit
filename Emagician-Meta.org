@@ -841,8 +841,19 @@ div.figure {
            "/ ( ´•̥×•̥` )＼")))
     (nth (random (length bunnies))
          bunnies)))
-
 #+end_src
+
+*** Insert a random bunny  ／(≡・ x ・≡)＼
+#+begin_src emacs-lisp 
+(defun emagician/insert-random-bunny ()
+  (interactive)
+  "Insert a random bunny."
+  (insert (emagician/random-bunny)))
+
+(bind-key "B" 'emagician/insert-random-bunny emagician/meta-keymap)
+    
+#+end_src
+
 
 * Footnotes
 

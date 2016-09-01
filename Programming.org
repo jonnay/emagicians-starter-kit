@@ -175,6 +175,7 @@ Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCo
     (">=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≥))
     ("->" . ?⟶)
     ("=>" . ?⟹)
+    ("==" . ?⩵)
     ("//" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?⫽))
     ("!=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≠))
     ("->>" .  (?\s (Br . Bl) ?\s (Br . Bl) ?\s
@@ -195,6 +196,7 @@ Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCo
 | ~=>~      | ⟹         |
 | ~//~      | ⫽         |
 | ~!=~      | ≠         |
+| ~==~      | ⩵         |
 
 Using http://unicode-table.com/ helped a LOT
 
@@ -213,7 +215,7 @@ elements are composition rules to specify how to compose (2N+2)th
 elements with previously composed N glyphs.
 
 A composition rule is a cons of global and new glyph reference point
-symbols.  See the documentation of  [[help:reference-point-alist]] for more
+symbols.  See the documentation of [[help:reference-point-alist]] for more
 details.
 #+end_quote
 
@@ -226,7 +228,7 @@ I don't entirely understand this yet.
 
 #+begin_src emacs-lisp 
   (use-package flycheck
-    :diminish "🐛 "
+    :diminish "🦋 "
     :init
     (global-flycheck-mode)
     (emagician/minor-in-major-mode flycheck-color-mode-line-mode prog-mode))

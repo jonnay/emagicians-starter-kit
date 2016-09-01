@@ -577,7 +577,6 @@ All agenda files are valid for targeting
 (setq org-agenda-window-setup 'other-frame)
 #+end_src
 
-  
 **  Display the current context
 #+begin_src emacs-lisp 
 (defvar emagician/org-context "Work")
@@ -674,9 +673,12 @@ Best is the enemy of the good.  Make this not suck later.
 #+end_src
 
 ** Display the daily agenda on load 
-Swap to other frame once loaded. 
-#+begin_src emacs-lisp 
-(add-hook 'emacs-startup-hook #'(lambda () (emagician-org/daily-agenda)(other-frame 1)))
+This is temporarily deactivated.  Loading my agenda currently takes a long time. 
+
+#+begin_src emacs-lisp :tangle no
+(emagician/defhook open-agenda-and-swap-to-other-frame emacs-startup-hook 
+  (emagician-org/daily-agenda)
+  (other-frame 1))
 #+end_src
 
 * Exports 
@@ -706,8 +708,7 @@ Swap to other frame once loaded.
 #+end_src
 
 
-
-* Saving and auto Copmmiting
+* Saving and auto Commiting
 
 #+begin_src emacs-lisp 
   (defun emagician-org/save-commit-and-push ()
