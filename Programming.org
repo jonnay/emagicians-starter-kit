@@ -2,7 +2,14 @@
 
 * Editing
 ** Tabs
-No Physical tabs. 
+
+Probably one of the most disputed things when "growing up" as a programmer.  It's seemed to have settled town to a tab stop of 2, with no physical ~Control I~ tabs.
+
+Or maybe that's just age.  I used to really want 4-space, physical tabs. 
+
+Now, not so much.  Explicit spaces are probably the easiest for everyone involved.
+
+In short, it's fucking moot.  Go with the project, and find peace.  If it's really brutal, make computers format it for you incoming, and reformat it for everyone else outgoing.
 
 #+begin_src emacs-lisp 
   (setq-default indent-tabs-mode nil)
@@ -10,11 +17,18 @@ No Physical tabs.
 
 ** Spell Checking on Programming Modes
 
+   Gah. So bad at this.  
+
+   ~emagician/minor-in-major-mode~ doesn't work because flyspell-prog-mode doesn't take an argument. 
+
 #+begin_src emacs-lisp 
-(emagician/minor-in-major-mode flyspell-prog-mode prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 #+end_src
 
 ** Yanking
+
+   This is such a handy piece of functionality.  It just works. 
+
 #+begin_src emacs-lisp
   (defadvice yank (after indent-region activate)
     "indent the region after a yank if we're in a programming mode."
@@ -22,11 +36,17 @@ No Physical tabs.
         (indent-region (region-beginning) (region-end) nil)))
 #+end_src
 ** YAS  
+The more boilerplate your language requires, the more abstractions it can afford the user.
+
+There is always a little bit of boiler-plate that is required.
+
 #+begin_src emacs-lisp 
 (add-hook 'prog-mode-hook 'yas-minor-mode-on)
 #+end_src
 
 ** Smart Paren Mode
+   I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed from another config somewhere. 
+
 #+begin_src emacs-lisp 
 (use-package smartparens
   :defer t
@@ -100,22 +120,34 @@ No Physical tabs.
 
 * Interface elements
 ** Line Numbers
+   I spend anywhere between 10%-90% of my week pair programming.
+
+   On a projector.
+
+   Being able to point to a line and give it a name like ~45~ is important.
+
 #+begin_src emacs-lisp 
 (add-hook 'prog-mode-hook 'linum-mode)
 #+end_src
 
 ** Which Function
+   Display the function on the mode line.
+
+   Only because I am an info-junkie.  Not because it is particularly useful from a UI perspective.
+
 #+begin_src emacs-lisp 
 (which-function-mode t)
 #+end_src
 
 ** Check Parens
+   Enforce checking of parens in programming modes.  Not 100% sure about this yet.  But 90% sure.
 
 #+begin_src emacs-lisp
-  (defun emagician/check-parens ()
+(defun emagician/check-parens ()
+  (when after-init-time   ; Don't check parens if we're initializing. 
     (condition-case err
         (check-parens)
-      ((error) (message "Buffer has unmatched Parens or quote!"))))
+      ((error) (message "Buffer has unmatched Parens or quote!")))))
 
 #+end_src
 
@@ -123,20 +155,44 @@ No Physical tabs.
 (add-hook 'prog-mode-hook 'emagician/check-parens t)
 #+end_src
 ** Show Paren Mode
+   This config could use tweaking. 
+
 #+begin_src emacs-lisp 
-(setq show-paren-style 'expression)
+(setq show-paren-style 'mixed)
 (setq show-paren-delay 0)
 (show-paren-mode)
 #+end_src
+
 ** Rainbow Delimiters 
+   Not 100% sure about this yet.
+
+   Rainbow Delimiters are static.  It's always the same color regardless of where the point is.
+
 #+begin_src emacs-lisp 
 (use-package rainbow-delimiters
   :demand
   :init
-  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode))
+  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode-hook)
+  :config
+  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "grey35")
+  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "grey40")
+  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "grey45")
+  (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "grey50")
+  (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "grey55")
+  (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "grey60")
+  (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "grey65")
+  (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "grey70")
+  (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "grey75"))
+
+
 #+end_src
 
 ** Color Identifiers
+
+   Like manna from heaven.
+
+   This is one of the coolest modes so far.  Yeah, it's slightly angry fruit salad, but it is also just... wow.  It doesn't NEED a mode lighter, but it deserves it.
+
 #+begin_src emacs-lisp 
 (use-package color-identifiers-mode
   :diminish (color-identifiers-mode . "🎨 ")
@@ -149,6 +205,8 @@ No Physical tabs.
 
    Whitespace unicode does good stuff with whitespace.  Use that.
 
+   With unicode setup, it is much better. 
+
 #+begin_src emacs-lisp 
 (use-package whitespace
   :diminish "· "
@@ -160,6 +218,11 @@ No Physical tabs.
 #+end_src
 
 ** Prettify Symbols
+
+   Oh man, with the unicode pretty symbols, this is sweet.  I have been considering making the jump to FiraCode, but there is so many weird little things about it I am unsure of.
+
+   Prettify Symbols is 80% there, and looks freaking hawt.
+
 #+begin_src emacs-lisp 
 (global-prettify-symbols-mode 1)
 #+end_src
@@ -226,15 +289,27 @@ I don't entirely understand this yet.
 * Tools
 ** Flycheck
 
+   Flycheck is good, but not great.
+
+   SACRE-BLEU!  How could I say such a thing?
+
+   But it doesn't work over tramp.  Fine if you are editing a file remotely, less fine if it's just a VM. 
+
 #+begin_src emacs-lisp 
-  (use-package flycheck
-    :diminish "🦋 "
-    :init
-    (global-flycheck-mode)
-    (emagician/minor-in-major-mode flycheck-color-mode-line-mode prog-mode))
+(use-package flycheck
+  :diminish "🦋 "
+  :init
+  (global-flycheck-mode))
 #+end_src
 
+(remove-hook 'prog-mode-hook 'turn-on-flycheck-color-mode-line-mode)
+
 ** DZ, make it easy to run secondary services
+
+   This is one of those packages that hasn't updated in forever.
+
+   And doesn't need to.
+
 #+begin_src emacs-lisp
 (use-package dizzee)
 #+end_src
@@ -259,28 +334,43 @@ I don't entirely understand this yet.
 #+end_src
 
 ** Jenkins
+
+   So far so good. 
+
 #+begin_src emacs-lisp 
 (use-package jenkins) 
 #+end_src
 
+*** My wishlist
+**** TODO Get the raw console output of a build
+**** TODO Add an idle refresh timer
+**** TODO Check to make sure it's async.  If not, make it.
+
 ** Helm Dash for manuals
+
+   God I wish this worked.
+
 #+begin_src emacs-lisp 
 (use-package helm-dash
-)
+  :init
+  (setq helm-dash-browser-func 'eww))
 #+end_src
-(setq helm-dash-browser-func 'eww)
+
+*** TODO fix this and make it work. 
+*** TODO bugfix for the shell-command-to-string bug
+
 * Version control
 
   Version control Gets it's own section. 
 
-   Don't manage ancient version control backends 
+  Don't manage ancient version control backends.
 #+begin_src emacs-lisp 
 (setq vc-handled-backends '(Git))
 #+end_src
 
 ** Editing
    
-   Modes for editing git-specific files 
+   Modes for editing git-specific files. 
 
 #+begin_src emacs-lisp 
   (use-package git-commit)
@@ -290,6 +380,11 @@ I don't entirely understand this yet.
 
 ** Interface 
 *** Magit
+
+    Magit is like manna from heaven.
+
+    It is seriously one of the coolest Emacs packages out there.
+
 #+begin_src emacs-lisp 
 (use-package magit
   :diminish "🔮 "
@@ -302,6 +397,10 @@ I don't entirely understand this yet.
 #+end_src
 
 **** Interact with github 
+
+     I haven't given up on this yet, but I am getting close.  :/
+
+     It doesn't quite work.
 
 #+begin_src emacs-lisp 
   (use-package magit-gh-pulls
@@ -321,6 +420,8 @@ I don't entirely understand this yet.
 
 
 *** Git Gutter
+
+    So pleasant. 
 
 #+begin_src emacs-lisp 
 (use-package git-gutter-fringe+

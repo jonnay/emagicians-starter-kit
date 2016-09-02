@@ -54,7 +54,7 @@ I eat delicious food, not soylent.
 
 I drink excellent beer, not MGD. 
 
-ÆＳＴＨＥＴＩＣ is important.
+ÆＳÞＥTＩC is important.
 
 ** Turn of scrollbars, toolbars, menu bars
 
@@ -90,6 +90,27 @@ Scrollbars, Toolbars and Menu Bars. Oh my.
    Font choice is very important aesthetically speaking.  I am however failing at my main font choice.
 
    My unicode game is pretty solid though.
+
+*** Stepping up my font game
+**** Inconsolata
+https://fonts.google.com/specimen/Inconsolata
+
+This was my usual jam in the older days. 
+
+#+begin_src emacs-lisp :tangle no
+(set-face-attribute 'default nil :family "Inconsolata" :height 140)
+#+end_src
+
+**** Anonymous Pro
+http://www.marksimonson.com/fonts/view/anonymous-pro
+
+It's a very wide font.  Very wide.  It comes highly regarded, but I am not sure about its ÆＳꝤＥＴＩＣ yet.
+
+It is however, very easy to read, but it does look a little awkward. 
+
+#+begin_src emacs-lisp :tangle yes
+(set-face-attribute 'default nil :family "Anonymous Pro" :height 140)
+#+end_src
 
 *** Describe Char
    Give us all the unicode information for a glyph.

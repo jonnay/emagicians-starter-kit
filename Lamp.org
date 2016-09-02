@@ -1,5 +1,10 @@
 #+title: Thee Lamp
 
+* Thee Lamp?
+
+  Using Emacs to become a better individual.  See also [[file:Emagician-Meta.org][Emagician Meta Development]].  
+
+  Thee Lamp provides Thee Illumination.
 
 * MOAR YOW
 
@@ -565,7 +570,7 @@ Expand this a little, so it is split in terms of:
   - message
   - command to mention
   - command to used
-%%q
+%%
 emacs-howdoi
   - install
   - Use Minor Mode

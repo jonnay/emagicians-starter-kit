@@ -800,12 +800,12 @@ div.figure {
           (define-key emagician/magick-keymap
             (car pair)
             (emagician/meta/get-insert-symbol (cdr pair))))
-        '(("b" . "🐰")
+        '(("a" . "ÆＳÞＥTＩC")
+          ("b" . "🐰")
           ("p" . "-|-+-|-")
           ("m" . "🍄")
           ("e" . "💊")        ; Hah, it's a joke son.
           ("s" . "💩")
-          ("a" . "a")
           ("t" . "🚽")))
 #+end_src
 ** Random bunny
