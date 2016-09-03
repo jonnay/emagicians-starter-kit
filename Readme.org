@@ -1,6 +1,7 @@
-* Hello!
+#+title: Read Me
+* Hello! 
 
-#+HTML: <div class= "notice notice-info">
+#+HTML: <div class= "notice notice-info tiny-box">
   Project Status:
 
   Fit for other humans to tell me it is broken, and I can fix it.
@@ -8,58 +9,60 @@
   But Not Even Alpha.
 #+HTML: </div>
 
-🐰,(hello!)
+🐰-(hello!)
 
-#+HTML: <div class="notice notice-warning">
+#+HTML: <div class="notice notice-warning tiny-box">
   What is here is not on the master branch, but is instead in the v2 branch. 
 #+HTML: </div>
-* A starter kit for magicians
-  I got tired of my old .emacs file, and poorly maintained collection
-  of extensions, that was working less and less well, the more time
-  went on and on.  So I made the Emagicians Starter Kit.
+**  Five 'W's and 2 'Y's. 
+*** Who am I?
+    I'm Jonnay!
 
-  I Love the idea of the starter kits, but I found they made too many
-  assumptions and just wasn't fit for what I needed.  I also have a
-  bit of a "not-invented-here" problem.  It's minor and I cope pretty
-  well. However with regards to emacs: (and to to paraphrase Douglas
-  McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
+    I've been using Emacs since 2007.  I make [[http://www.jonnay.net][Music, Art and Video
+    Blogs]].  I'm a front-end narwhal (a Canadian coder who can do UX
+    and design as well).  Professionally I have used many
+    languages—including P/LB—but my favorite is Scheme.
 
-  #+begin_quote
-  This is my Emacs.  There are plenty like it, but this one is mine.
-  #+end_quote
+*** What is this? A starter kit for magicians.
+   The Emagicians Starter Kit is a set of org-mode files that are
+   automagikally tangled into Emacs Lisp on startup.
 
-  The Emagicians Starter Kit is a set of org-mode files that are
-  automagikally tangled into Emacs Lisp on startup.
+   I got tired of my old .emacs file and poorly maintained collection
+   of extensions. It was working less and less well the more and more
+   time went on and on.  So In an airplane across the Atlantic I made
+   the very first version of the Emagicians Starter Kit.
 
-  This is mostly for my own use, but others are welcome to snarf bits
-  and pieces, use the whole thing, or even contribute.
+*** Why?
 
-** Working with the Emagicians Starter Kit
+   I Love the idea of the starter kits, but I found they made too many
+   assumptions and just wasn't fit for what I needed.  I also have a
+   bit of a "not-invented-here" problem.  It's minor and I cope pretty
+   well. However with regards to emacs: (and to to paraphrase Douglas
+   McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
 
-   Son, there is no brogramming here.  No easy install shell file that
-   you can just run, and everything goes.  In fact, it is antithetical
-   to the whole concept of the emagicians starter-kit.  Instead this
-   starter kit has org-mode super-powers. 
+   #+begin_quote
+   This is my Emacs.  There are plenty like it, but this one is mine.
+   #+end_quote
 
-** Installing 
+   Additionally, there is real value in people explaining their emacs
+   setup, especially in easily digestible forms.
 
-   Installing, customizing, and making it go is as easy as opening the
-   [[file:./Emagician-Install.org]] and then following instructions.
-   There are plenty of code blocks in there that will get you started
-   for installing and testing.  Basically, you shouldn't ever need to
-   leave the comfort of your org-mode buffer.
+*** How 
 
-** Customizing
+    Everything is in Org-Mode.  If you want to join in all the fun,
+    there is an [[file:./Emagician-Install.org]] file that you can follow
+    along with.  It will get you moving into basic configurations, all
+    the way through testing the result before making the emagician
+    starter kit your actual init file.
+    
+*** When
 
-   If you need to customize the emagician starter kit, I provide you
-   with a way to do it based on:
-   
-   - Your True Name
-   - Machine Name
-   - Login Name
+    March 2012.  It got commited to a git repo later that year.
 
-   Most of the instructions are on the Install File. 
-   
+*** Where
+
+    It started in an airplane.
+    
 * A note about tone
   
   If your primary tool, as both hobby and vocation is your text

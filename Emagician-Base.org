@@ -19,6 +19,13 @@
 * Emacs Lisp Evaluation Environment
 
 There are helpers funcitons and variables that just make working with Emacs Lisp that much nicer.
+
+** Garbage Collection
+50 Megs, or 10 percent of the heap.  Seems legit.  It's original value is 800000.  Which seems like a lot, but its' really only 800 K.
+#+begin_src emacs-lisp 
+(setq gc-cons-threshold 50000000)
+#+end_src
+
 ** Prefer new files
 #+begin_src emacs-lisp 
 (setq load-prefer-newer t)
@@ -348,6 +355,9 @@ If it's a list, then scratchify the list members."
 #+begin_src emacs-lisp 
 (defun emagician/reset-scratch (str)
   (with-current-buffer "*scratch*"
+    (lisp-interaction-mode)
+    (font-lock-mode -1)
+    (whitespace-mode -1)
     (erase-buffer)
     (insert str)))
 #+end_src
@@ -357,11 +367,11 @@ If it's a list, then scratchify the list members."
 (defun emagician/initiate-thee-scratch ()
   (flet ((with-bg-fg (str bg fg)
            (propertize str
-                       'font-lock-face
+                       'face
                        (list :background bg :foreground fg)))
          (with-fg (str fg)
            (propertize str
-                       'font-lock-face
+                       'face
                        (list :foreground fg))))
     (let* ((banner-color "DarkViolet")
            (info-label "DeepSkyBlue")
@@ -412,6 +422,8 @@ If it's a list, then scratchify the list members."
                "\n"
                (emagician/scratchify-text banner-line))))))
 #+end_src
-(emagician/initiate-thee-scratch)
+
+#+RESULTS:
+: emagician/initiate-thee-scratch
 
 **** TODO make the scratch use color again.

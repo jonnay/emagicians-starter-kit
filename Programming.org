@@ -162,6 +162,9 @@ There is always a little bit of boiler-plate that is required.
 (setq show-paren-delay 0)
 (show-paren-mode)
 #+end_src
+*** TODO  Snarf the smartparens from interface and barf here instead
+*** TODO Update my config to be sane, check https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens
+
 
 ** Rainbow Delimiters                                                                     :disabled:
    Not 100% sure about this yet.
@@ -356,6 +359,13 @@ I don't entirely understand this yet.
       (should (emagician/org-src-mode-p))))
 #+end_src
 
+** Ediff
+Tweak Ediff to be better 
+#+begin_src emacs-lisp 
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
+#+end_src
+
 ** Jenkins
 
    So far so good. 
@@ -367,7 +377,6 @@ I don't entirely understand this yet.
 
 *** My wishlist
 **** TODO Refresh PR accepted
-**** TODO console PR accepted
 **** TODO Add an idle refresh timer
 **** TODO Check to make sure it's async.  If not, make it.
 

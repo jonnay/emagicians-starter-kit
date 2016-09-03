@@ -40,14 +40,20 @@
 * Individual Lisps
 ** Elisp
 *** Editing 
+**** Highlighting
+#+begin_src emacs-lisp 
+(with-eval-after-load 'dash
+  (dash-enable-font-lock))
+#+end_src
+
 **** Eldoc
 #+begin_src emacs-lisp 
 (use-package eldoc
   :diminish ""
   :init 
+    (setq eldoc-idle-delay 0.1)
     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   :config
-    (setq eldoc-idle-delay 0.2)
     (set-face-attribute 'eldoc-highlight-function-argument nil
                         :underline t :foreground "green"
                         :weight 'bold))
@@ -88,14 +94,14 @@ Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
     (flycheck-mode -1)))
 #+end_src
 
-
 *** Environment
     See [[./Emagician-Base.org]]
 
 ** Scheme
+
 *** Editing
 **** Intenting
-#+begin_src
+#+begin_src emacs-lisp
 ;; Indenting module body code at column 0
 (defun scheme-module-indent (state indent-point normal-indent) 0)
 (put 'module 'scheme-indent-function 'scheme-module-indent)
@@ -108,7 +114,7 @@ Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
 (put 'match 'scheme-indent-function 1)
 #+end_src
 *** Interface
-**** Geiser
+**** Geiser REPL
 
 #+begin_src emacs-lisp 
 (use-package geiser

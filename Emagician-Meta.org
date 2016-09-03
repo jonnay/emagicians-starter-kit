@@ -238,9 +238,20 @@ This does a full GUI load, outputting any results as a message.
 
 #+end_src
 
-*** The CSS file
+*** ÆＳÞＥTＩC
 
-The thi.ng/org-spec[fn:1] is a great basis to build off of.
+    The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want 
+
+**** TODO Look at the Edward Tufte CSS and Org Export
+
+     While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skill. 
+
+https://github.com/dakrone/ox-tufte - recipe coming soon
+https://github.com/melpa/melpa/pull/4201
+https://edwardtufte.github.io/tufte-css/
+**** The CSS file
+
+The thi.ng/org-spec[fn:1] is a good basis to build off of.  This is step 1 .
 
 #+begin_src css :noweb yes :tangle gh-pages/assets/style.css :padline t :comments link
 body {
@@ -806,6 +817,7 @@ div.figure {
           ("s" . "💩")
           ("t" . "🚽")))
 #+end_src
+
 ** Random bunny
 #+begin_src emacs-lisp 
 (defun emagician/random-bunny ()
@@ -851,7 +863,6 @@ div.figure {
 (bind-key "B" 'emagician/insert-random-bunny emagician/meta-keymap)
     
 #+end_src
-
 
 * Footnotes
 

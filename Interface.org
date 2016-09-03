@@ -30,6 +30,11 @@
 
    I keep it around (but don't load it) because it's clevar and fun.
 
+** Enable all Disabled commands
+#+begin_src emacs-lisp 
+(setq disabled-command-function nil)
+#+end_src
+
 * Automated things
 ** Midnight  :automation:
    It's very silent in the background, and just kind of does the right thing.  Clears out old buffers not in use.  I also use it as a next-day scheduler.
@@ -183,11 +188,10 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
    I prefer movement and killing via logical lines, not visual lines. 
 
    Also, Indicators Plz!
+
+   Thanks to Wasamasa[fn:3] for the funk of using ~(setcdr)~ on the map.  Brilliant.
 #+begin_src emacs-lisp 
-(emagician/defhook unmap-visual-line-mode-keys global-visual-line-mode-hook
-  (unbind-key "<remap> <kill-visual-line>" visual-line-mode-map)
-  (unbind-key "<remap> <beginning-visual-line>" visual-line-mode-map)
-  (unbind-key "<remap> <end-of-visual-line>" visual-line-mode-map))
+(setcdr visual-line-mode-map nil)
 (setq visual-line-fringe-indicators t)
 (global-visual-line-mode 1)
 #+end_src
@@ -1010,11 +1014,6 @@ Make it a bit nicer too.
 (use-package god-mode
   :bind (("<escape>" . god-local-mode))
   :diminish "🐰 "
-  :init
-  (emagician/defhook god-mode-cursor-update god-mode-enabled-hook
-    (setq cursor-type '(hbar . 3)))
-  (emagician/defhook god-mode-cursor-backtrack god-mode-disabled-hook
-    (setq cursor-type 'box))
   :config
   (which-key-enable-god-mode-support))
 
@@ -1026,3 +1025,5 @@ Make it a bit nicer too.
 [fn:1] http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296
 
 [fn:2] Thanks habamax and jwiegley. https://github.com/jwiegley/use-package/issues/366
+
+[fn:3] https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode
