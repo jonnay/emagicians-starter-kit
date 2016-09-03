@@ -50,9 +50,9 @@ There is an argument that Emacs doesn't need to look pretty.  That all we're rea
 
 I call bullshit.  All of us already live in a prison of existential crisis.  Why would we make our text editor any more of a prison?
 
-I eat delicious food, not soylent.
+I eat delicious food, not Soylent.
 
-I drink excellent beer, not MGD. 
+I drink excellent beer, not AGD. 
 
 ÆＳÞＥTＩC is important.
 

@@ -414,3 +414,4 @@ If it's a list, then scratchify the list members."
 #+end_src
 (emagician/initiate-thee-scratch)
 
+**** TODO make the scratch use color again.

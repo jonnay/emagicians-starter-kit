@@ -52,7 +52,6 @@ gem rdoc --all --ri
 (use-package robe)
 
 #+end_src
-
       
 ** Mode setup
 
@@ -73,6 +72,9 @@ gem rdoc --all --ri
    ("Gemfile$" . ruby-mode)
    ("Capfile$" . ruby-mode)
    ("Vagrantfile$" . ruby-mode))
+  :init
+  (use-package ruby-tools)
+  (emagician/minor-in-major-mode ruby-tools-mode ruby-mode-hook)
   :config
   (ruby-block-mode t))
 #+end_src

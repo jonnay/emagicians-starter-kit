@@ -40,7 +40,8 @@
 #+begin_src emacs-lisp 
 (use-package scss-mode
   :init
-  (add-hook 'scss-mode-hook 'ac-css-mode-setup))
+  (add-hook 'scss-mode-hook 'ac-css-mode-setup)
+  (setq scss-compile-at-save nil))
 #+end_src
 *** They should descend from prog-mode, but they don't!
 #+begin_src emacs-lisp 

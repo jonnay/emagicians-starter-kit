@@ -163,20 +163,20 @@ There is always a little bit of boiler-plate that is required.
 (show-paren-mode)
 #+end_src
 
-** Rainbow Delimiters 
+** Rainbow Delimiters                                                                     :disabled:
    Not 100% sure about this yet.
 
    Rainbow Delimiters are static.  It's always the same color regardless of where the point is.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp :tangle no
 (use-package rainbow-delimiters
   :demand
   :init
   (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode-hook)
   :config
-  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "grey35")
-  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "grey40")
-  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "grey45")
+  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "grey43")
+  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "grey45")
+  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "grey47")
   (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "grey50")
   (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "grey55")
   (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "grey60")
@@ -184,8 +184,31 @@ There is always a little bit of boiler-plate that is required.
   (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "grey70")
   (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "grey75"))
 
+(remove-hook 'prog-mode-hook 'turn-on-rainbow-blocks-mode)
 
 #+end_src
+
+** Rainbow Blocks 
+   Trying an experiment.  Syntax highlight blocks based on overline. 
+
+#+begin_src emacs-lisp 
+(use-package rainbow-blocks
+  :demand
+  :init
+  (emagician/minor-in-major-mode rainbow-blocks-mode prog-mode-hook)
+  :config
+  (face-spec-set 'rainbow-blocks-depth-1-face '((t (:overline "grey10"))))
+  (face-spec-set 'rainbow-blocks-depth-2-face '((t (:overline "grey20"))))
+  (face-spec-set 'rainbow-blocks-depth-3-face '((t (:overline "grey30"))))
+  (face-spec-set 'rainbow-blocks-depth-4-face '((t (:overline "grey40"))))
+  (face-spec-set 'rainbow-blocks-depth-5-face '((t (:overline "grey50"))))
+  (face-spec-set 'rainbow-blocks-depth-6-face '((t (:overline "grey60"))))
+  (face-spec-set 'rainbow-blocks-depth-7-face '((t (:overline "grey70"))))
+  (face-spec-set 'rainbow-blocks-depth-8-face '((t (:overline "grey80"))))
+  (face-spec-set 'rainbow-blocks-depth-9-face '((t (:overline "grey90")))))
+#+end_src
+
+(foo (bar (baz BLag) (bar baz (foo bar (foo bar ) baz blarg (foo  BLag) (bar baz (foo bar (foo bar ) baz blarg (foo ) ) far ) b00) barg ) blarg ) foo foo) 
 
 ** Color Identifiers
 
@@ -338,17 +361,19 @@ I don't entirely understand this yet.
    So far so good. 
 
 #+begin_src emacs-lisp 
-(use-package jenkins) 
+(use-package jenkins
+  :load-path "~/projects/emacs/jenkins.el/") 
 #+end_src
 
 *** My wishlist
-**** TODO Get the raw console output of a build
+**** TODO Refresh PR accepted
+**** TODO console PR accepted
 **** TODO Add an idle refresh timer
 **** TODO Check to make sure it's async.  If not, make it.
 
 ** Helm Dash for manuals
 
-   God I wish this worked.
+   The secret sauce here is activating the doc set. 
 
 #+begin_src emacs-lisp 
 (use-package helm-dash

@@ -81,53 +81,50 @@ and perception stimulate each other.
 
 ** Test out a fresh hot load of Emagician  💩
 
-
 #+begin_src emacs-lisp
-  (defun emagician/test-initialization (&optional forms)
-    (interactive)
-    (let* ((init-file (expand-file-name "init.el"
-                                        (file-name-directory (or load-file-name
-                                                                 buffer-file-name
-                                                                 (org-src-do-at-code-block (eval 'buffer-file-name))))))
-           (magick-string "emagician/magick-output")
-           (code `(condition-case err
-                      (progn
-                        (toggle-debug-on-error)
-                        (load-file ,init-file)
-                        ,(if forms
-                             `(progn ,forms)
-                           (message "No extra forms executed"))
-                        (message "(%s 'succcess)" ,magick-string))
-                    ((error)
-                       (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
-                       (kill-emacs 1))))
-           (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
-                                       invocation-directory
-                                       invocation-name
-                                       (replace-regexp-in-string "\""
-                                                                 "\\\""
-                                                                 (format "%S" code)
-                                                                 nil
-                                                                 t)))
-           (result (shell-command-to-string invocation-command))
-           (captured-result (substring result
-                                     (or (string-match (concat "(" magick-string) result)
-                                         (error "Unexpected result from child emacs %s" result))))
-           (parsed-result (read captured-result))
-           (err (assoc 'error parsed-result)))
-      (message "Result: %s\n"
-               (message "%s\n\n\n%s" (pp parsed-result) result))
-      (if err
-          (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
-        (message "Successful!"))))
+(defun emagician/test-initialization (&optional forms)
+  (interactive)
+  (let* ((init-file (expand-file-name "init.el"
+                                      emagician/dir))
+         (magick-string "emagician/magick-output")
+         (code `(condition-case err
+                    (progn
+                      (toggle-debug-on-error)
+                      (load-file ,init-file)
+                      ,(if forms
+                           `(progn ,forms)
+                         (message "No extra forms executed"))
+                      (message "(%s 'succcess)" ,magick-string))
+                  ((error)
+                     (message "(%s (error (%s %s) (backtrace \"%s\")))" ,magick-string (car err) (cdr err) (with-output-to-string (backtrace)))
+                     (kill-emacs 1))))
+         (invocation-command (format "%s%s --no-init-file --batch --eval=\"%s\""
+                                     invocation-directory
+                                     invocation-name
+                                     (replace-regexp-in-string "\""
+                                                               "\\\""
+                                                               (format "%S" code)
+                                                               nil
+                                                               t)))
+         (result (shell-command-to-string invocation-command))
+         (captured-result (substring result
+                                   (or (string-match (concat "(" magick-string) result)
+                                       (error "Unexpected result from child emacs %s" result))))
+         (parsed-result (read captured-result))
+         (err (assoc 'error parsed-result)))
+    (message "Result: %s\n"
+             (message "%s\n\n\n%s" (pp parsed-result) result))
+    (if err
+        (error "Emagician Starter Kit Load Error:  %s: %S" (cadr err) (cddr err))
+      (message "Successful!"))))
 
-  (defun emagician/test-initialization-with (lisp)
-    "Test an Emacs initialization with a given chunk of lisp."
-    (interactive  "xExecute: ")
-    (emagician/test-initialization lisp))
+(defun emagician/test-initialization-with (lisp)
+  "Test an Emacs initialization with a given chunk of lisp."
+  (interactive  "xExecute: ")
+  (emagician/test-initialization lisp))
 #+end_src
 
-*** Working, but kinda shitty testers
+
     This loads the starter kit as a batch and outputs the results as a message.
 
 #+begin_src emacs-lisp
@@ -138,7 +135,7 @@ and perception stimulate each other.
               (concat invocation-directory invocation-name " "
                       "--no-init-file --batch "
                       "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                      "--load=" (file-name-directory (buffer-file-name)) "init.el "
+                      "--load=" (expand-file-name "init.el " emagician/dir)
                       "--eval='' "
                       "&"))))
 #+end_src
@@ -146,15 +143,15 @@ and perception stimulate each other.
 This does a full GUI load, outputting any results as a message.
 
 #+begin_src emacs-lisp
-    (defun emagician/test-full-init()
-      (interactive)
-      (message (concat "Running New Emacs: "
-                       (shell-command-to-string
-                        (concat invocation-directory invocation-name " "
-                                "--no-init-file "
-                                "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                                "--load=" (file-name-directory (buffer-file-name)) "init.el "
-                                "&")))))
+(defun emagician/test-full-init()
+  (interactive)
+  (message (concat "Running New Emacs: "
+                   (shell-command-to-string
+                    (concat invocation-directory invocation-name " "
+                            "--no-init-file "
+                            "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                            "--load=" (expand-file-name "init.el " emagician/dir)
+                            "&")))))
 #+end_src
 ** Peering into the kit, the Emagician Agenda
    Note, this has 2 strikes.  The third agenda related strike requires a refactoring
@@ -176,7 +173,8 @@ This does a full GUI load, outputting any results as a message.
   (interactive)
   (let ((org-directory emagician/dir)
         (org-agenda-files (list emagician/dir))
-        (org-agenda-file-regexp "[^.].+\.org$"))
+        (org-agenda-file-regexp "[^.].+\.org$")
+        (org-agenda-overriding-header "-|-+-|- 🐰 META 🐰 -|-+-|-"))
     (org-agenda nil "t" nil)))
 #+end_src
 

@@ -14,9 +14,6 @@
   What is here is not on the master branch, but is instead in the v2 branch. 
 #+HTML: </div>
 * A starter kit for magicians
-
-  I stand on the shoulders of giants to weave my own spells.  
-
   I got tired of my old .emacs file, and poorly maintained collection
   of extensions, that was working less and less well, the more time
   went on and on.  So I made the Emagicians Starter Kit.
@@ -30,6 +27,12 @@
   #+begin_quote
   This is my Emacs.  There are plenty like it, but this one is mine.
   #+end_quote
+
+  The Emagicians Starter Kit is a set of org-mode files that are
+  automagikally tangled into Emacs Lisp on startup.
+
+  This is mostly for my own use, but others are welcome to snarf bits
+  and pieces, use the whole thing, or even contribute.
 
 ** Working with the Emagicians Starter Kit
 
