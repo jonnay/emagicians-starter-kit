@@ -13,3 +13,6 @@
 [submodule "gh-pages"]
 	path = gh-pages
 	url = ./gh-pages
+[submodule "assets/tufte-css"]
+	path = assets/tufte-css
+	url = https://github.com/edwardtufte/tufte-css
