@@ -3,23 +3,30 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Installation</title>
-<!-- 2016-09-01 Thu 09:33 -->
+<!-- 2016-09-04 Sun 18:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Installation</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -58,15 +65,14 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -88,7 +94,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -147,53 +153,54 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. And technomancy said</a>
+<li><a href="#orgheadline4">1. And technomancy said</a>
 <ul>
-<li><a href="#sec-1-1">1.1. And eschulte described the light so it shall be understood and organized.</a>
+<li><a href="#orgheadline3">1.1. And eschulte described the light so it shall be understood and organized.</a>
 <ul>
-<li><a href="#sec-1-1-1">1.1.1. And thus did Jonnay expand upon for himself.</a></li>
+<li><a href="#orgheadline2">1.1.1. And thus did Jonnay expand upon for himself.</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-2">2. Running Code blocks</a></li>
-<li><a href="#sec-3">3. Installation</a>
+<li><a href="#orgheadline5">2. Running Code blocks</a></li>
+<li><a href="#orgheadline21">3. Installation</a>
 <ul>
-<li><a href="#sec-3-1">3.1. Who the fuck are you?</a></li>
-<li><a href="#sec-3-2">3.2. Make the init files</a>
+<li><a href="#orgheadline6">3.1. Who the fuck are you?</a></li>
+<li><a href="#orgheadline9">3.2. Make the init files</a>
 <ul>
-<li><a href="#sec-3-2-1">3.2.1. Step One: Where are we?</a></li>
-<li><a href="#sec-3-2-2">3.2.2. Step Two: Making it go.</a></li>
+<li><a href="#orgheadline7">3.2.1. Step One: Where are we?</a></li>
+<li><a href="#orgheadline8">3.2.2. Step Two: Making it go.</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-3">3.3. Branching for great justice</a></li>
-<li><a href="#sec-3-4">3.4. Customizing and Configuration</a>
+<li><a href="#orgheadline10">3.3. Branching for great justice</a></li>
+<li><a href="#orgheadline15">3.4. Customizing and Configuration</a>
 <ul>
-<li><a href="#sec-3-4-1">3.4.1. Your personal file</a></li>
-<li><a href="#sec-3-4-2">3.4.2. Your System-Type file</a></li>
-<li><a href="#sec-3-4-3">3.4.3. Your machine file(s)</a></li>
-<li><a href="#sec-3-4-4">3.4.4. Your account file</a></li>
+<li><a href="#orgheadline11">3.4.1. Your personal file</a></li>
+<li><a href="#orgheadline12">3.4.2. Your System-Type file</a></li>
+<li><a href="#orgheadline13">3.4.3. Your machine file(s)</a></li>
+<li><a href="#orgheadline14">3.4.4. Your account file</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-5">3.5. The Testening</a>
+<li><a href="#orgheadline19">3.5. The Testening</a>
 <ul>
-<li><a href="#sec-3-5-1">3.5.1. No org-babel-execute function for sh?</a></li>
-<li><a href="#sec-3-5-2">3.5.2. what you should see when it works</a></li>
-<li><a href="#sec-3-5-3">3.5.3. A note about some magic&#x2026; Wait, what just happened there?</a></li>
+<li><a href="#orgheadline16">3.5.1. No org-babel-execute function for sh?</a></li>
+<li><a href="#orgheadline17">3.5.2. what you should see when it works</a></li>
+<li><a href="#orgheadline18">3.5.3. A note about some magic&#x2026; Wait, what just happened there?</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-6">3.6. Taking the plunge</a></li>
+<li><a href="#orgheadline20">3.6. Taking the plunge</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4. The actual Init file</a></li>
-<li><a href="#sec-5">5. That's All folks!</a></li>
+<li><a href="#orgheadline22">4. The actual Init file</a></li>
+<li><a href="#orgheadline23">5. That's All folks!</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> And technomancy said</h2>
+
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">1</span> And technomancy said</h2>
 <div class="outline-text-2" id="text-1">
-<blockquote>
+<div class="epigraph"><blockquote>
 <p>
 Emacs outshines all other editing software in approximately the same
 way that the noonday sun does the stars. It is not just bigger and
@@ -203,7 +210,8 @@ brighter; it simply makes everything else vanish.
 <p>
 &#x2013; Neal Stephenson, "In the Beginning was the Command Line"
 </p>
-</blockquote>
+
+</blockquote></div>
 
 <p>
 Let there be light  
@@ -214,27 +222,28 @@ Let there be light
 </p>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> And eschulte described the light so it shall be understood and organized.</h3>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">1.1</span> And eschulte described the light so it shall be understood and organized.</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 (and it was awesome)
 </p>
 </div>
 
-<div id="outline-container-sec-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> And thus did Jonnay expand upon for himself.</h4>
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2"><span class="section-number-4">1.1.1</span> And thus did Jonnay expand upon for himself.</h4>
 <div class="outline-text-4" id="text-1-1-1">
-</div><ol class="org-ol"><li><a id="sec-1-1-1-1" name="sec-1-1-1-1"></a>If I have seen further, it is by standing on the shoulders of giants.<br  /><div class="outline-text-5" id="text-1-1-1-1">
+</div><ol class="org-ol"><li><a id="orgheadline1"></a>If I have seen further, it is by standing on the shoulders of giants.<br  /><div class="outline-text-5" id="text-1-1-1-1">
 <p>
 While this quote is attributed to Sir Issac Newton, it was initially said by 
 </p>
 
-<blockquote>
+<div class="epigraph"><blockquote>
 <p>
 "Bernard of Chartres used to compare us to dwarfs perched on the shoulders of giants. He pointed out that we see more and farther than our predecessors, not because we have keener vision or greater height, but because we are lifted up and borne aloft on their gigantic stature."
 </p>
-</blockquote>
+
+</blockquote></div>
 
 <p>
 Metalogicon:  John of Salisbury 1159
@@ -245,13 +254,13 @@ Metalogicon:  John of Salisbury 1159
 <p><img src="./assets/images/Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg" alt="Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg" />
 </p>
 </div>
-</div>
-</li></ol>
-</div>
+</div></li></ol>
 </div>
 </div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Running Code blocks</h2>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">2</span> Running Code blocks</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Installing this thing should be as easy as reading through the
@@ -260,11 +269,18 @@ running the code blocks inside.  Running a code-block is as easy as
 typing C-c C-c inside the relevant code block, and answering "yes"
 if it asks you whether or not you want to run said code block.
 </p>
+
+<p>
+If you can't run the shell blocks, try executing this:
+</p>
+
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-sh</span>)
+</pre>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Installation</h2>
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21"><span class="section-number-2">3</span> Installation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 You need emacs 24. I am sure you can get it and install it, if you
@@ -272,8 +288,8 @@ haven't already.
 </p>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Who the fuck are you?</h3>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">3.1</span> Who the fuck are you?</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Who you are and the set of emacs configurations that you will want,
@@ -293,25 +309,22 @@ customizations, etc.
 Replace "jonnay" with your name!
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp" id="true-name">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/true-name</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"jonnay"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/true-name</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"jonnay"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">-|-+-|-</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">The</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Magician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">using</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">these</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">tools</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">upon</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">this</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">altar.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">-|-+-|-</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"</span>)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Make the init files</h3>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">3.2</span> Make the init files</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Making the init file is a two stage process.
 </p>
 </div>
 
-<div id="outline-container-sec-3-2-1" class="outline-4">
-<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Step One: Where are we?</h4>
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">3.2.1</span> Step One: Where are we?</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 The first is to tell the Emagician Starter kit which directory is
@@ -324,31 +337,23 @@ If there already is code below the "results:" block, then just
 delete it. 
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#+name:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set-this-dir-as-var\n"</span>
+<pre class="code">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#+name:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set-this-dir-as-var\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"#+begin_src</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emacs-lisp\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"(defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/dir\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">\""</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-name-directory<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\"\n"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment-delimiter">;</span><span class="org-comment">BAM!</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">\"Automagically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">located\")\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"#+end_"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"src\n"</span>)
 </pre>
-</div>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp" id="set-this-dir-as-var">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/dir</span>
+<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/dir</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"/Users/joarkell/projects/emagicians-starter-kit/"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-doc">"Automagically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">located"</span>)
 </pre>
 </div>
 </div>
-</div>
 
-
-
-<div id="outline-container-sec-3-2-2" class="outline-4">
-<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Step Two: Making it go.</h4>
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">3.2.2</span> Step Two: Making it go.</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 Then this next code block creates the init.el file by running the
@@ -358,27 +363,21 @@ and were the emagicians starer kit is) and weaves it together into
 a file called init.el.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(org-babel-tangle)
+<pre class="code">(org-babel-tangle)
 </pre>
-</div>
 
 <p>
 if you are interested, you can have a look at it:
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(pop-to-buffer<span class="org-unicode-whitespace-subdued-space"> </span>(find-file-other-window<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./init.el"</span>))
+<pre class="code">(pop-to-buffer<span class="org-unicode-whitespace-subdued-space"> </span>(find-file-other-window<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./init.el"</span>))
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Branching for great justice</h3>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">3.3</span> Branching for great justice</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This next code block sets up a git branch.  Change the branch name
@@ -390,13 +389,10 @@ This also adds an entry to the .gitignore file that contains an
 entry to your private customization file.  More on this later
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(shell-command<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">branch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name))
+<pre class="code">(shell-command<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">branch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name))
 (shell-command<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">checkout</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name))
 (shell-command<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"echo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\""</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-private.org\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&gt;&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">.gitignore"</span>))
 </pre>
-</div>
 
 <p>
 I shouldn't have to tell you why this is a good idea.
@@ -404,8 +400,8 @@ I shouldn't have to tell you why this is a good idea.
 </div>
 </div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Customizing and Configuration</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">3.4</span> Customizing and Configuration</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 In the original starter kit, there were 2 different kinds of custom
@@ -418,8 +414,8 @@ others are optional.
 </p>
 </div>
 
-<div id="outline-container-sec-3-4-1" class="outline-4">
-<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Your personal file</h4>
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">3.4.1</span> Your personal file</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 This next command is an invokation.  Even if you are going to use
@@ -449,9 +445,7 @@ private.org in your personal directory that is already in your
 Another option is to store them in a private.org.gpg file.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/invoke-custom-file</span><span class="org-unicode-whitespace-subdued-space"> </span>(name)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/invoke-custom-file</span><span class="org-unicode-whitespace-subdued-space"> </span>(name)<span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Create</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">customiztaion</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">file,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">load</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">up</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emacs.</span>
 <span class="org-doc">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">actually</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">created</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">identifies</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">themself"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((filename<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./"</span><span class="org-unicode-whitespace-subdued-space"> </span>name)))
@@ -462,10 +456,9 @@ Another option is to store them in a private.org.gpg file.
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-4-2" class="outline-4">
-<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Your System-Type file</h4>
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">3.4.2</span> Your System-Type file</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <p>
 If you end up using differnet OS's, you may want to have this set up.
@@ -474,19 +467,16 @@ This would handle per-os level customization.  We use the
 do munge it a little by replacing any <code>/</code> with a <code>-</code>.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file
+<pre class="code">(emagician/invoke-custom-file
 <span class="org-unicode-whitespace-subdued-space">                       </span>(replace-regexp-in-string<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"/"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">                                                 </span><span class="org-string">"-"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">                                                 </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>system-type)))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-4-3" class="outline-4">
-<h4 id="sec-3-4-3"><span class="section-number-4">3.4.3</span> Your machine file(s)</h4>
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">3.4.3</span> Your machine file(s)</h4>
 <div class="outline-text-4" id="text-3-4-3">
 <p>
 Different machines are not nessicarily on differnet OS's.  Different
@@ -494,33 +484,26 @@ OS's aren't nessicarily different machines.  Now you can get more
 granular if need be.
 </p>
 
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file<span class="org-unicode-whitespace-subdued-space"> </span>system-name)
+<pre class="code">(emagician/invoke-custom-file<span class="org-unicode-whitespace-subdued-space"> </span>system-name)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-4-4" class="outline-4">
-<h4 id="sec-3-4-4"><span class="section-number-4">3.4.4</span> Your account file</h4>
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">3.4.4</span> Your account file</h4>
 <div class="outline-text-4" id="text-3-4-4">
 <p>
 Then again, maybe you need to separate customizations out by user account. Why not?
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(emagician/invoke-custom-file<span class="org-unicode-whitespace-subdued-space"> </span>(user-login-name))
+<pre class="code">(emagician/invoke-custom-file<span class="org-unicode-whitespace-subdued-space"> </span>(user-login-name))
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="section-number-3">3.5</span> The Testening</h3>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">3.5</span> The Testening</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 To properly test your magicians kit, you should build the tester,
@@ -544,9 +527,8 @@ control can return to this instance of emacs.
 <p>
 #+source make-a-tha-test-script
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#+begin_src</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">sh</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">:results</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">silent\n"</span>
+<pre class="code">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#+begin_src</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">sh</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">:results</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">silent\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">#</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">run</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">this</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">code</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">block</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">your</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emacs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">kit\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"</span>invocation-directory<span class="org-unicode-whitespace-subdued-space"> </span>invocation-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--no-init-file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--load="</span>
 <span class="org-unicode-whitespace-subdued-space">        </span>(file-name-directory<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name))
@@ -557,10 +539,9 @@ control can return to this instance of emacs.
 )
 </pre>
 </div>
-</div>
 
-<div id="outline-container-sec-3-5-1" class="outline-4">
-<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> No org-babel-execute function for sh?</h4>
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16"><span class="section-number-4">3.5.1</span> No org-babel-execute function for sh?</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 If you get the message <code>org-babel-execute-src-block: No
@@ -568,16 +549,13 @@ If you get the message <code>org-babel-execute-src-block: No
 mode for babel.  Do that by running this code block:
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-sh</span>)
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-sh</span>)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-5-2" class="outline-4">
-<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> what you should see when it works</h4>
+<div id="outline-container-orgheadline17" class="outline-4">
+<h4 id="orgheadline17"><span class="section-number-4">3.5.2</span> what you should see when it works</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <p>
 If it is working properly, the <code>*Messages*</code> buffer of the new emacs
@@ -591,8 +569,8 @@ loaded /home/jonny/emagicians-starter-kit/Emagician.el
 </div>
 </div>
 
-<div id="outline-container-sec-3-5-3" class="outline-4">
-<h4 id="sec-3-5-3"><span class="section-number-4">3.5.3</span> A note about some magic&#x2026; Wait, what just happened there?</h4>
+<div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18"><span class="section-number-4">3.5.3</span> A note about some magic&#x2026; Wait, what just happened there?</h4>
 <div class="outline-text-4" id="text-3-5-3">
 <p>
 Ok, check it out, the source block just spits out a string, that gets
@@ -609,8 +587,8 @@ cross-lingual aspect to figure out where it is.
 </div>
 </div>
 
-<div id="outline-container-sec-3-6" class="outline-3">
-<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Taking the plunge</h3>
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">3.6</span> Taking the plunge</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 One you run the next source block, you will have fully installed
@@ -622,9 +600,7 @@ Since we're going to over-write your .emacs.d/init file, we'll back
 it up first. 
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-sh"><span class="org-variable-name">NOW</span>=$(<span class="org-sh-quoted-exec">date</span><span class="org-unicode-whitespace-subdued-space"> </span>+<span class="org-string">"%Y-%m-%d_%H-%M-%S"</span>)
+<pre class="code"><span class="org-variable-name">NOW</span>=$(<span class="org-sh-quoted-exec">date</span><span class="org-unicode-whitespace-subdued-space"> </span>+<span class="org-string">"%Y-%m-%d_%H-%M-%S"</span>)
 <span class="org-variable-name">FILE</span>=<span class="org-string">"~./.emacs.d/init-backup-$NOW.el"</span>
 mv<span class="org-unicode-whitespace-subdued-space"> </span>-v<span class="org-unicode-whitespace-subdued-space"> </span>~/.emacs.d/init.el<span class="org-unicode-whitespace-subdued-space"> </span>$<span class="org-variable-name">FILE</span>
 cp<span class="org-unicode-whitespace-subdued-space"> </span>-v<span class="org-unicode-whitespace-subdued-space"> </span>./init.el<span class="org-unicode-whitespace-subdued-space"> </span>~/.emacs.d/
@@ -632,19 +608,15 @@ cp<span class="org-unicode-whitespace-subdued-space"> </span>-v<span class="org-
 </div>
 </div>
 </div>
-</div>
 
-
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> The actual Init file</h2>
+<div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22"><span class="section-number-2">4</span> The actual Init file</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 This is the init file that is tangled by the <code>org-babel-tagle</code> command, and then copied over to where you need it to be.  You don't really need to read it&#x2026; but you can if you like!
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">init.el</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">---</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">magic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">begins</span>
+<pre class="code"><span class="org-comment-delimiter">;;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">init.el</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">---</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">magic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">begins</span>
 <span class="org-comment-delimiter">;;</span>
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Part</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Kit.</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-comment-delimiter">;;</span>
@@ -659,25 +631,26 @@ This is the init file that is tangled by the <code>org-babel-tagle</code> comman
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-doc">"Automagically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">located"</span>)
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sucks,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">but</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">need</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">properly</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">running</span>
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>package-user-dir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"elpa"</span>))
-(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((package-load-list<span class="org-unicode-whitespace-subdued-space"> </span>'((org-plus-contrib<span class="org-unicode-whitespace-subdued-space"> </span>t))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(package-initialize))
+(package-initialize)
+(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org</span>)
 (<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org-install</span>)
 (<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ob-tangle</span>)
+(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Loaded</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">version:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>(org-version))
 (org-babel-load-file<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician.org"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> That's All folks!</h2>
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23"><span class="section-number-2">5</span> That's All folks!</h2>
 <div class="outline-text-2" id="text-5">
-<blockquote>
+<div class="epigraph"><blockquote>
 <p>
 Emacs is the ground. We run around and act silly on top of it, and when we die, may our remnants grace its ongoing incrementation.
 &#x2013;  Thien-Thi Nguyen, comp.emacs
 </p>
-</blockquote>
+
+</blockquote></div>
 
 
 <div class="figure">
@@ -689,8 +662,7 @@ Emacs is the ground. We run around and act silly on top of it, and when we die, 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-01 Thu 09:33</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2016-09-04 Sun 18:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,23 +3,30 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>User Interface Elements</title>
-<!-- 2016-09-01 Thu 09:33 -->
+<!-- 2016-09-04 Sun 18:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>User Interface Elements</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -58,15 +65,14 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -88,7 +94,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -147,157 +153,156 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Keystrokes and commands</a>
+<li><a href="#orgheadline4">1. Keystrokes and commands</a>
 <ul>
-<li><a href="#sec-1-1">1.1. Simple answers plz!</a></li>
-<li><a href="#sec-1-2">1.2. It used to be that Once in blue moon, vi keys would happen&#xa0;&#xa0;&#xa0;<span class="tag"><span class="history">history</span></span></a></li>
+<li><a href="#orgheadline1">1.1. Simple answers plz!</a></li>
+<li><a href="#orgheadline2">1.2. It used to be that Once in blue moon, vi keys would happen&#xa0;&#xa0;&#xa0;<span class="tag"><span class="history">history</span></span></a></li>
+<li><a href="#orgheadline3">1.3. Enable all Disabled commands</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2. Automated things</a>
+<li><a href="#orgheadline7">2. Automated things</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Midnight&#xa0;&#xa0;&#xa0;<span class="tag"><span class="automation">automation</span></span></a></li>
+<li><a href="#orgheadline6">2.1. Midnight&#xa0;&#xa0;&#xa0;<span class="tag"><span class="automation">automation</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Display&#xa0;&#xa0;&#xa0;<span class="tag"><span class="display">display</span></span></a>
+<li><a href="#orgheadline42">3. Display&#xa0;&#xa0;&#xa0;<span class="tag"><span class="display">display</span></span></a>
 <ul>
-<li><a href="#sec-3-1">3.1. Turn of scrollbars, toolbars, menu bars</a></li>
-<li><a href="#sec-3-2">3.2. 🛎 Bell 🔔</a></li>
-<li><a href="#sec-3-3">3.3. Fonts</a>
+<li><a href="#orgheadline8">3.1. Turn of scrollbars, toolbars, menu bars</a></li>
+<li><a href="#orgheadline9">3.2. 🛎 Bell 🔔</a></li>
+<li><a href="#orgheadline15">3.3. Fonts</a>
 <ul>
-<li><a href="#sec-3-3-1">3.3.1. Describe Char</a></li>
-<li><a href="#sec-3-3-2">3.3.2. Unicode</a></li>
+<li><a href="#orgheadline12">3.3.1. Stepping up my font game</a></li>
+<li><a href="#orgheadline13">3.3.2. Describe Char</a></li>
+<li><a href="#orgheadline14">3.3.3. Unicode</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-4">3.4. Ansi Color</a></li>
-<li><a href="#sec-3-5">3.5. Maximize primary window</a></li>
-<li><a href="#sec-3-6">3.6. Soft Word Wrap / Visual Line Mode</a></li>
-<li><a href="#sec-3-7">3.7. Frame titles</a></li>
-<li><a href="#sec-3-8">3.8. Modeline</a>
+<li><a href="#orgheadline16">3.4. Ansi Color</a></li>
+<li><a href="#orgheadline17">3.5. Maximize primary window</a></li>
+<li><a href="#orgheadline18">3.6. Soft Word Wrap / Visual Line Mode</a></li>
+<li><a href="#orgheadline19">3.7. Frame titles</a></li>
+<li><a href="#orgheadline27">3.8. Modeline</a>
 <ul>
-<li><a href="#sec-3-8-1">3.8.1. Basics</a></li>
-<li><a href="#sec-3-8-2">3.8.2. Diminish</a></li>
-<li><a href="#sec-3-8-3">3.8.3. Nyan mode</a></li>
-<li><a href="#sec-3-8-4">3.8.4. Turn on column and line numbers; file size</a></li>
-<li><a href="#sec-3-8-5">3.8.5. Powerline</a></li>
-<li><a href="#sec-3-8-6">3.8.6. Smart Mode Line&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
+<li><a href="#orgheadline20">3.8.1. Basics</a></li>
+<li><a href="#orgheadline5">3.8.2. Diminish</a></li>
+<li><a href="#orgheadline21">3.8.3. Nyan mode</a></li>
+<li><a href="#orgheadline22">3.8.4. Turn on column and line numbers; file size</a></li>
+<li><a href="#orgheadline25">3.8.5. Powerline</a></li>
+<li><a href="#orgheadline26">3.8.6. Smart Mode Line&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-3-9">3.9. Cursor Info</a>
+<li><a href="#orgheadline32">3.9. Cursor Info</a>
 <ul>
-<li><a href="#sec-3-9-1">3.9.1. Dimension 1: File status</a></li>
-<li><a href="#sec-3-9-2">3.9.2. Dimention 2: Modal Editing</a></li>
-<li><a href="#sec-3-9-3">3.9.3. Enhancements</a></li>
+<li><a href="#orgheadline28">3.9.1. Dimension 1: File status</a></li>
+<li><a href="#orgheadline29">3.9.2. Dimention 2: Modal Editing</a></li>
+<li><a href="#orgheadline31">3.9.3. Enhancements</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-10">3.10. Highlight Line</a></li>
-<li><a href="#sec-3-11">3.11. Show Empty lines</a></li>
-<li><a href="#sec-3-12">3.12. Show Whitespace with fill-column-indicator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactived">deactived</span></span></a></li>
-<li><a href="#sec-3-13">3.13. Themes</a>
+<li><a href="#orgheadline33">3.10. Highlight Line</a></li>
+<li><a href="#orgheadline34">3.11. Show Empty lines</a></li>
+<li><a href="#orgheadline35">3.12. Show Whitespace with fill-column-indicator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactived">deactived</span></span></a></li>
+<li><a href="#orgheadline40">3.13. Themes</a>
 <ul>
-<li><a href="#sec-3-13-1">3.13.1. Base theme: Moe, Moe, Kyun!</a></li>
-<li><a href="#sec-3-13-2">3.13.2. Org Beautify</a></li>
+<li><a href="#orgheadline38">3.13.1. Base theme: Moe, Moe, Kyun!</a></li>
+<li><a href="#orgheadline39">3.13.2. Org Beautify</a></li>
 </ul>
 </li>
-<li><a href="#sec-3-14">3.14. Digit Groups&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactivated">deactivated</span></span></a></li>
+<li><a href="#orgheadline41">3.14. Digit Groups&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactivated">deactivated</span></span></a></li>
 </ul>
 </li>
-<li><a href="#sec-4">4. Editing</a>
+<li><a href="#orgheadline59">4. Editing</a>
 <ul>
-<li><a href="#sec-4-1">4.1. UTF-8 Enforcement</a></li>
-<li><a href="#sec-4-2">4.2. The Mark</a>
+<li><a href="#orgheadline43">4.1. UTF-8 Enforcement</a></li>
+<li><a href="#orgheadline46">4.2. The Mark</a>
 <ul>
-<li><a href="#sec-4-2-1">4.2.1. Transient mark mode</a></li>
-<li><a href="#sec-4-2-2">4.2.2. Show Marks   :learn-me:</a></li>
+<li><a href="#orgheadline44">4.2.1. Transient mark mode</a></li>
+<li><a href="#orgheadline45">4.2.2. Show Marks   :learn-me:</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-3">4.3. Multiple Cursors&#xa0;&#xa0;&#xa0;<span class="tag"><span class="bind">bind</span></span></a></li>
-<li><a href="#sec-4-4">4.4. Killing and Yanking</a>
+<li><a href="#orgheadline47">4.3. Multiple Cursors&#xa0;&#xa0;&#xa0;<span class="tag"><span class="bind">bind</span></span></a></li>
+<li><a href="#orgheadline51">4.4. Killing and Yanking</a>
 <ul>
-<li><a href="#sec-4-4-1">4.4.1. Volatile Highlights</a></li>
-<li><a href="#sec-4-4-2">4.4.2. Swap</a></li>
-<li><a href="#sec-4-4-3">4.4.3. kill-buffer-file-name</a></li>
+<li><a href="#orgheadline48">4.4.1. Volatile Highlights</a></li>
+<li><a href="#orgheadline49">4.4.2. Swap</a></li>
+<li><a href="#orgheadline50">4.4.3. kill-buffer-file-name</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-5">4.5. Snippets</a></li>
-<li><a href="#sec-4-6">4.6. Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a>
+<li><a href="#orgheadline52">4.5. Snippets</a></li>
+<li><a href="#orgheadline56">4.6. Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a>
 <ul>
-<li><a href="#sec-4-6-1">4.6.1. Company Mode</a></li>
-<li><a href="#sec-4-6-2">4.6.2. Auto Complete</a></li>
+<li><a href="#orgheadline53">4.6.1. Company Mode</a></li>
+<li><a href="#orgheadline55">4.6.2. Auto Complete</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-7">4.7. Undo</a></li>
-<li><a href="#sec-4-8">4.8. Spell Checking</a></li>
+<li><a href="#orgheadline57">4.7. Undo</a></li>
+<li><a href="#orgheadline58">4.8. Spell Checking</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Navigating</a>
+<li><a href="#orgheadline68">5. Navigating</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Scrolling</a></li>
-<li><a href="#sec-5-2">5.2. Avy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></a></li>
-<li><a href="#sec-5-3">5.3. Ace window jump</a></li>
-<li><a href="#sec-5-4">5.4. Save Place</a></li>
-<li><a href="#sec-5-5">5.5. Goto Last Change&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></a></li>
-<li><a href="#sec-5-6">5.6. Uniquify</a></li>
-<li><a href="#sec-5-7">5.7. Searching</a>
+<li><a href="#orgheadline60">5.1. Scrolling</a></li>
+<li><a href="#orgheadline61">5.2. Avy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></a></li>
+<li><a href="#orgheadline62">5.3. Ace window jump</a></li>
+<li><a href="#orgheadline63">5.4. Save Place</a></li>
+<li><a href="#orgheadline64">5.5. Goto Last Change&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></a></li>
+<li><a href="#orgheadline65">5.6. Uniquify</a></li>
+<li><a href="#orgheadline67">5.7. Searching</a>
 <ul>
-<li><a href="#sec-5-7-1">5.7.1. Default to regexp Searches</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#sec-6">6. Saving</a>
-<ul>
-<li><a href="#sec-6-1">6.1. Backups</a>
-<ul>
-<li><a href="#sec-6-1-1">6.1.1. Set the backup directory to something decent</a></li>
+<li><a href="#orgheadline66">5.7.1. Default to regexp Searches</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-7">7. State Management</a>
+<li><a href="#orgheadline71">6. Saving</a>
 <ul>
-<li><a href="#sec-7-1">7.1. Server</a></li>
-<li><a href="#sec-7-2">7.2. Recent Files</a></li>
-<li><a href="#sec-7-3">7.3. Save Command History</a></li>
-</ul>
-</li>
-<li><a href="#sec-8">8. Help and Discoverability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="help">help</span></span></a>
+<li><a href="#orgheadline70">6.1. Backups</a>
 <ul>
-<li><a href="#sec-8-1">8.1. Achievements</a></li>
-<li><a href="#sec-8-2">8.2. Which Key</a></li>
-<li><a href="#sec-8-3">8.3. Discover My Major   :learn-me:bind:</a></li>
-<li><a href="#sec-8-4">8.4. Helm</a>
-<ul>
-<li><a href="#sec-8-4-1">8.4.1. F2 is my super duper DWIM helper</a></li>
-<li><a href="#sec-8-4-2">8.4.2. Helm for M-x</a></li>
-<li><a href="#sec-8-4-3">8.4.3. Buffer Selection</a></li>
-<li><a href="#sec-8-4-4">8.4.4. Show full paths</a></li>
-<li><a href="#sec-8-4-5">8.4.5. Extended Command, Insert, write and find files should use helm.</a></li>
-<li><a href="#sec-8-4-6">8.4.6. Personal Preferences</a></li>
+<li><a href="#orgheadline69">6.1.1. Set the backup directory to something decent</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-9">9. God Mode</a></li>
+<li><a href="#orgheadline75">7. State Management</a>
+<ul>
+<li><a href="#orgheadline72">7.1. Server</a></li>
+<li><a href="#orgheadline73">7.2. Recent Files</a></li>
+<li><a href="#orgheadline74">7.3. Save Command History</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline87">8. Help and Discoverability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="help">help</span></span></a>
+<ul>
+<li><a href="#orgheadline76">8.1. Achievements</a></li>
+<li><a href="#orgheadline77">8.2. Which Key</a></li>
+<li><a href="#orgheadline78">8.3. Discover My Major   :learn-me:bind:</a></li>
+<li><a href="#orgheadline86">8.4. Helm</a>
+<ul>
+<li><a href="#orgheadline79">8.4.1. F2 is my super duper DWIM helper</a></li>
+<li><a href="#orgheadline81">8.4.2. Helm for M-x</a></li>
+<li><a href="#orgheadline82">8.4.3. Buffer Selection</a></li>
+<li><a href="#orgheadline83">8.4.4. Show full paths</a></li>
+<li><a href="#orgheadline84">8.4.5. Extended Command, Insert, write and find files should use helm.</a></li>
+<li><a href="#orgheadline85">8.4.6. Personal Preferences</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline88">9. God Mode</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Keystrokes and commands</h2>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">1</span> Keystrokes and commands</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Simple answers plz!</h3>
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1"><span class="section-number-3">1.1</span> Simple answers plz!</h3>
 <div class="outline-text-3" id="text-1-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(fset<span class="org-unicode-whitespace-subdued-space"> </span>'yes-or-no-p<span class="org-unicode-whitespace-subdued-space"> </span>'y-or-n-p)
+<pre class="code">(fset<span class="org-unicode-whitespace-subdued-space"> </span>'yes-or-no-p<span class="org-unicode-whitespace-subdued-space"> </span>'y-or-n-p)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> It used to be that Once in blue moon, vi keys would happen&#xa0;&#xa0;&#xa0;<span class="tag"><span class="history">history</span></span></h3>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">1.2</span> It used to be that Once in blue moon, vi keys would happen&#xa0;&#xa0;&#xa0;<span class="tag"><span class="history">history</span></span></h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 That was before I really dug into Tramp mode.
@@ -320,11 +325,8 @@ By setting the var <code>w</code> to the string, when it is evaled with ESC-:
 the string is evaled instead.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>w!<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"uUuuuuuUUUuuuummmMMMmmmm.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">ain't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">vim."</span>)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>w!<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"uUuuuuuUUUuuuummmMMMmmmm.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">ain't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">vim."</span>)
 </pre>
-</div>
 
 <p>
 Now that I can do most of everything I need through tramp, and the
@@ -337,25 +339,31 @@ I keep it around (but don't load it) because it's clevar and fun.
 </p>
 </div>
 </div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">1.3</span> Enable all Disabled commands</h3>
+<div class="outline-text-3" id="text-1-3">
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>disabled-command-function<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Automated things</h2>
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">2</span> Automated things</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Midnight&#xa0;&#xa0;&#xa0;<span class="tag"><span class="automation">automation</span></span></h3>
+</div><div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">2.1</span> Midnight&#xa0;&#xa0;&#xa0;<span class="tag"><span class="automation">automation</span></span></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 It's very silent in the background, and just kind of does the right thing.  Clears out old buffers not in use.  I also use it as a next-day scheduler.
 </p>
 
 <p>
-I have seen some other Emagicians state that they didn't know why they had this package. See also <a href="#sec-3-8-2">Diminish</a>.
+I have seen some other Emagicians state that they didn't know why they had this package. See also <a href="#orgheadline5">Diminish</a>.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">midnight</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">midnight</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>clean-buffer-list-kill-never-buffer-names<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"*httpd*"</span>))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
@@ -364,10 +372,9 @@ I have seen some other Emagicians state that they didn't know why they had this 
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Display&#xa0;&#xa0;&#xa0;<span class="tag"><span class="display">display</span></span></h2>
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><span class="section-number-2">3</span> Display&#xa0;&#xa0;&#xa0;<span class="tag"><span class="display">display</span></span></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 There is an argument that Emacs doesn't need to look pretty.  That all we're really doing is editing text, so why do anything to it beyond a basic theme to give you syntax colors.
@@ -378,20 +385,20 @@ I call bullshit.  All of us already live in a prison of existential crisis.  Why
 </p>
 
 <p>
-I eat delicious food, not soylent.
+I eat delicious food, not Soylent.
 </p>
 
 <p>
-I drink excellent beer, not MGD. 
+I drink excellent beer, not AGD. 
 </p>
 
 <p>
-ÆＳＴＨＥＴＩＣ is important.
+ÆＳÞＥTＩC is important.
 </p>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Turn of scrollbars, toolbars, menu bars</h3>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.1</span> Turn of scrollbars, toolbars, menu bars</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 All that said, there are some shit that is just &#x2026; not good.
@@ -401,17 +408,14 @@ All that said, there are some shit that is just &#x2026; not good.
 Scrollbars, Toolbars and Menu Bars. Oh my.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">dolist</span><span class="org-unicode-whitespace-subdued-space"> </span>(mode<span class="org-unicode-whitespace-subdued-space"> </span>'(menu-bar-mode<span class="org-unicode-whitespace-subdued-space"> </span>tool-bar-mode<span class="org-unicode-whitespace-subdued-space"> </span>scroll-bar-mode))
+<pre class="code">(<span class="org-keyword">dolist</span><span class="org-unicode-whitespace-subdued-space"> </span>(mode<span class="org-unicode-whitespace-subdued-space"> </span>'(menu-bar-mode<span class="org-unicode-whitespace-subdued-space"> </span>tool-bar-mode<span class="org-unicode-whitespace-subdued-space"> </span>scroll-bar-mode))
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(fboundp<span class="org-unicode-whitespace-subdued-space"> </span>mode)<span class="org-unicode-whitespace-subdued-space"> </span>(funcall<span class="org-unicode-whitespace-subdued-space"> </span>mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 🛎 Bell 🔔</h3>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">3.2</span> 🛎 Bell 🔔</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 When emacs emits C-g (bell) to the user, it is to signal an error,
@@ -434,16 +438,13 @@ top and bottom now rather than the whole screen, and is nice when
 you don't have the volume up.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>visible-bell<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>visible-bell<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Fonts</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">3.3</span> Fonts</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Font choice is very important aesthetically speaking.  I am however failing at my main font choice.
@@ -454,27 +455,60 @@ My unicode game is pretty solid though.
 </p>
 </div>
 
-<div id="outline-container-sec-3-3-1" class="outline-4">
-<h4 id="sec-3-3-1"><span class="section-number-4">3.3.1</span> Describe Char</h4>
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">3.3.1</span> Stepping up my font game</h4>
 <div class="outline-text-4" id="text-3-3-1">
+</div><ol class="org-ol"><li><a id="orgheadline10"></a>Inconsolata<br  /><div class="outline-text-5" id="text-3-3-1-1">
+<p>
+<a href="https://fonts.google.com/specimen/Inconsolata">https://fonts.google.com/specimen/Inconsolata</a>
+</p>
+
+<p>
+This was my usual jam in the older days. 
+</p>
+
+<pre class="code">(set-face-attribute<span class="org-unicode-whitespace-subdued-space"> </span>'default<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:family</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Inconsolata"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:height</span><span class="org-unicode-whitespace-subdued-space"> </span>140)
+</pre>
+</div></li>
+
+<li><a id="orgheadline11"></a>Anonymous Pro<br  /><div class="outline-text-5" id="text-3-3-1-2">
+<p>
+<a href="http://www.marksimonson.com/fonts/view/anonymous-pro">http://www.marksimonson.com/fonts/view/anonymous-pro</a>
+</p>
+
+<p>
+It's a very wide font.  Very wide.  It comes highly regarded, but I am not sure about its ÆＳꝤＥＴＩＣ yet.
+</p>
+
+<p>
+It is however, very easy to read, but it does look a little awkward. 
+</p>
+
+<pre class="code">(set-face-attribute<span class="org-unicode-whitespace-subdued-space"> </span>'default<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:family</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Anonymous</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Pro"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:height</span><span class="org-unicode-whitespace-subdued-space"> </span>140)
+</pre>
+</div></li></ol>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">3.3.2</span> Describe Char</h4>
+<div class="outline-text-4" id="text-3-3-2">
 <p>
 Give us all the unicode information for a glyph.
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>describe-char-unidata-list<span class="org-unicode-whitespace-subdued-space"> </span>'(name<span class="org-unicode-whitespace-subdued-space"> </span>old-name<span class="org-unicode-whitespace-subdued-space"> </span>general-category<span class="org-unicode-whitespace-subdued-space"> </span>canonical-combining-class<span class="org-unicode-whitespace-subdued-space"> </span>bidi-class<span class="org-unicode-whitespace-subdued-space"> </span>decomposition<span class="org-unicode-whitespace-subdued-space"> </span>decimal-digit-value<span class="org-unicode-whitespace-subdued-space"> </span>digit-value<span class="org-unicode-whitespace-subdued-space"> </span>numeric-value<span class="org-unicode-whitespace-subdued-space"> </span>mirrored<span class="org-unicode-whitespace-subdued-space"> </span>uppercase<span class="org-unicode-whitespace-subdued-space"> </span>lowercase<span class="org-unicode-whitespace-subdued-space"> </span>titlecase))
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>describe-char-unidata-list<span class="org-unicode-whitespace-subdued-space"> </span>'(name<span class="org-unicode-whitespace-subdued-space"> </span>old-name<span class="org-unicode-whitespace-subdued-space"> </span>general-category<span class="org-unicode-whitespace-subdued-space"> </span>canonical-combining-class<span class="org-unicode-whitespace-subdued-space"> </span>bidi-class<span class="org-unicode-whitespace-subdued-space"> </span>decomposition<span class="org-unicode-whitespace-subdued-space"> </span>decimal-digit-value<span class="org-unicode-whitespace-subdued-space"> </span>digit-value<span class="org-unicode-whitespace-subdued-space"> </span>numeric-value<span class="org-unicode-whitespace-subdued-space"> </span>mirrored<span class="org-unicode-whitespace-subdued-space"> </span>uppercase<span class="org-unicode-whitespace-subdued-space"> </span>lowercase<span class="org-unicode-whitespace-subdued-space"> </span>titlecase))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-3-2" class="outline-4">
-<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Unicode</h4>
-<div class="outline-text-4" id="text-3-3-2">
-<p class="verse">
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">3.3.3</span> Unicode</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<div class="epigraph"><blockquote>
 Unicode<br  />
 &#xa0;&#xa0;|(⁀ₒ⁀)/    ,(   Get all teh characters! )<br  />
-</p>
+
+</blockquote></div>
 
 <p>
 The <code>unicode-fonts</code> package does a pretty good job of helping you get to a place where all characters can be displayed.  
@@ -483,17 +517,13 @@ The <code>unicode-fonts</code> package does a pretty good job of helping you get
 <p>
 You'll need a number of fonts to make this work, here is the bare minimum:
 </p>
+
 <dl class="org-dl">
-<dt> Symbola </dt><dd><a href="http://users.teilar.gr/~g1951d/Symbola.zip">http://users.teilar.gr/~g1951d/Symbola.zip</a>
-</dd>
-<dt> Quivira </dt><dd><a href="http://www.quivira-font.com/files/Quivira.ttf">http://www.quivira-font.com/files/Quivira.ttf</a>
-</dd>
-<dt> Dejavu Sans </dt><dd><a href="http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2">http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2</a>
-</dd>
-<dt> Noto Sans </dt><dd><a href="https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true">https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true</a>
-</dd>
-<dt> Noto Sans Symbols </dt><dd><a href="https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true">https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true</a>
-</dd>
+<dt>Symbola</dt><dd><a href="http://users.teilar.gr/~g1951d/Symbola.zip">http://users.teilar.gr/~g1951d/Symbola.zip</a></dd>
+<dt>Quivira</dt><dd><a href="http://www.quivira-font.com/files/Quivira.ttf">http://www.quivira-font.com/files/Quivira.ttf</a></dd>
+<dt>Dejavu Sans</dt><dd><a href="http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2">http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2</a></dd>
+<dt>Noto Sans</dt><dd><a href="https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true">https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true</a></dd>
+<dt>Noto Sans Symbols</dt><dd><a href="https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true">https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true</a></dd>
 </dl>
 
 <p>
@@ -504,13 +534,12 @@ Really though, the key here is being able to get all the emoji.
 The secret sauce to making sure to get all the emoji is <code>(setq unicode-fonts-ignore-overrides t)</code>
 </p>
 
-<p class="verse">
+<div class="epigraph"><blockquote>
 👯 ,( Get all teh Emoji! )<br  />
-</p>
 
-<div class="org-src-container">
+</blockquote></div>
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">unicode-fonts</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">unicode-fonts</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>unicode-fonts-skip-fonts)
@@ -522,10 +551,9 @@ The secret sauce to making sure to get all the emoji is <code>(setq unicode-font
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Ansi Color</h3>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3">3.4</span> Ansi Color</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 ARGH, we were so close to getting away from this until hipsters brought it all back again.
@@ -535,16 +563,13 @@ ARGH, we were so close to getting away from this until hipsters brought it all b
 Thanks Obama.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ansi-color</span>)
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ansi-color</span>)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Maximize primary window</h3>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">3.5</span> Maximize primary window</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 This seems to be the best way to get emacs to be maximized on the primary display in a multi monitor setup on OS X.  I want emacs maximized on a single monitor, and not to create it's own OS X screen.
@@ -554,9 +579,7 @@ This seems to be the best way to get emacs to be maximized on the primary displa
 You'd think that as an old Amiga head I'd enjoy the screen handling of OS X, but it just seems really clunky.  It doesn't have the same charm as the Other Raster Port.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>default-frame-parameters<span class="org-unicode-whitespace-subdued-space"> </span>'((fullscreen<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>maximized)))
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>default-frame-parameters<span class="org-unicode-whitespace-subdued-space"> </span>'((fullscreen<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>maximized)))
 (<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/full-screen</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Fullscreen</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode!"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
@@ -565,10 +588,9 @@ You'd think that as an old Amiga head I'd enjoy the screen handling of OS X, but
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-6" class="outline-3">
-<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Soft Word Wrap / Visual Line Mode</h3>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">3.6</span> Soft Word Wrap / Visual Line Mode</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 "Visual Line Mode" is probably the worst name ever.  
@@ -581,21 +603,22 @@ I prefer movement and killing via logical lines, not visual lines.
 <p>
 Also, Indicators Plz!
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>unmap-visual-line-mode-keys<span class="org-unicode-whitespace-subdued-space"> </span>global-visual-line-mode-hook
-<span class="org-unicode-whitespace-subdued-space">  </span>(unbind-key<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;remap&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&lt;kill-visual-line&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>visual-line-mode-map)
-<span class="org-unicode-whitespace-subdued-space">  </span>(unbind-key<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;remap&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&lt;beginning-visual-line&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>visual-line-mode-map)
-<span class="org-unicode-whitespace-subdued-space">  </span>(unbind-key<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;remap&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&lt;end-of-visual-line&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>visual-line-mode-map))
+<p>
+Thanks to Wasamasa<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+<a href="https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode">https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode</a>
+</p></span> for the funk of using <code>(setcdr)</code> on the map.  Brilliant.
+</p>
+
+<pre class="code">(setcdr<span class="org-unicode-whitespace-subdued-space"> </span>visual-line-mode-map<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>visual-line-fringe-indicators<span class="org-unicode-whitespace-subdued-space"> </span>t)
 (global-visual-line-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-7" class="outline-3">
-<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Frame titles</h3>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">3.7</span> Frame titles</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Shamelessly snarfed from bbatsov.
@@ -605,9 +628,7 @@ Shamelessly snarfed from bbatsov.
 Shows either the full file path or buffer name, and the name of the process when available.  
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>frame-title-format
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>frame-title-format
 <span class="org-unicode-whitespace-subdued-space">      </span>'(<span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">        </span>invocation-name
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">-|-+-|-</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"</span>
@@ -619,30 +640,26 @@ Shows either the full file path or buffer name, and the name of the process when
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8" class="outline-3">
-<h3 id="sec-3-8"><span class="section-number-3">3.8</span> Modeline</h3>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">3.8</span> Modeline</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 The modeline should show as much information as required, in as small a space as possible.  I am a too-much-info kinda guy.  It's a sickness.
 </p>
 </div>
 
-<div id="outline-container-sec-3-8-1" class="outline-4">
-<h4 id="sec-3-8-1"><span class="section-number-4">3.8.1</span> Basics</h4>
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20"><span class="section-number-4">3.8.1</span> Basics</h4>
 <div class="outline-text-4" id="text-3-8-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>column-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>column-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>line-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8-2" class="outline-4">
-<h4 id="sec-3-8-2"><span class="section-number-4">3.8.2</span> Diminish</h4>
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">3.8.2</span> Diminish</h4>
 <div class="outline-text-4" id="text-3-8-2">
 <p>
 I am not sure if it is Author: Will Mengarini, or Maintainer:
@@ -650,9 +667,7 @@ Martin Yrjölä who came up with this, but it is the most poetic
 commentary in any lisp file I have seen so far:
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">When</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">are</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">saying</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">want</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">continue</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">doing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">its</span>
+<pre class="code"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">When</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">are</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">saying</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">want</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">continue</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">doing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">its</span>
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">work</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">us,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">but</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">no</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">longer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">want</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">be</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">reminded</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-comment">It</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">becomes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span>
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">night</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">worker,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">like</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">janitor;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">becomes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">an</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">invisible</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">man;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">remains</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span>
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">component,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">perhaps</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">an</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">important</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">one,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sometimes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">an</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">indispensable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">one,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">of</span>
@@ -675,15 +690,12 @@ commentary in any lisp file I have seen so far:
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">thoughtful</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">remain</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">silent,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">invisible,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">self-diminished,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">discover,</span>
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">perhaps</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">first</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">surprise,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">freedom</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">they</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">thus</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">gain,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">grow</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">strong.</span>
 </pre>
-</div>
 
 <p>
 So yeah.  It's a great mode to have around, but there's that too.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">diminish</span>)
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">diminish</span>)
 (diminish<span class="org-unicode-whitespace-subdued-space"> </span>'visual-line-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#8617;&#65039;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
 
 (<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">autorevert</span>
@@ -691,17 +703,15 @@ So yeah.  It's a great mode to have around, but there's that too.
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8-3" class="outline-4">
-<h4 id="sec-3-8-3"><span class="section-number-4">3.8.3</span> Nyan mode</h4>
+<div id="outline-container-orgheadline21" class="outline-4">
+<h4 id="orgheadline21"><span class="section-number-4">3.8.3</span> Nyan mode</h4>
 <div class="outline-text-4" id="text-3-8-3">
 <p>
 Nyan mode conveys information.  It's also Cute AF. 
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">nyan-mode</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">nyan-mode</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>nyan-wavy-trail<span class="org-unicode-whitespace-subdued-space"> </span>t)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>nyan-bar-length<span class="org-unicode-whitespace-subdued-space"> </span>10)
@@ -709,25 +719,21 @@ Nyan mode conveys information.  It's also Cute AF.
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8-4" class="outline-4">
-<h4 id="sec-3-8-4"><span class="section-number-4">3.8.4</span> Turn on column and line numbers; file size</h4>
+<div id="outline-container-orgheadline22" class="outline-4">
+<h4 id="orgheadline22"><span class="section-number-4">3.8.4</span> Turn on column and line numbers; file size</h4>
 <div class="outline-text-4" id="text-3-8-4">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(column-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
+<pre class="code">(column-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
 (line-number-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
 (size-indication-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8-5" class="outline-4">
-<h4 id="sec-3-8-5"><span class="section-number-4">3.8.5</span> Powerline</h4>
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25"><span class="section-number-4">3.8.5</span> Powerline</h4>
 <div class="outline-text-4" id="text-3-8-5">
-</div><ol class="org-ol"><li><a id="sec-3-8-5-1" name="sec-3-8-5-1"></a>The EMagician powerline theme<br  /><div class="outline-text-5" id="text-3-8-5-1">
+</div><ol class="org-ol"><li><a id="orgheadline23"></a>The EMagician powerline theme<br  /><div class="outline-text-5" id="text-3-8-5-1">
 <p>
 Inludes Nyan cat powers.
 </p>
@@ -735,9 +741,8 @@ Inludes Nyan cat powers.
 <p>
 This theme is a beast.  I don't like it.  I love how it looks visually, but I hate how it looks in code. 
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/powerline-theme</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/powerline-theme</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Setup</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">default</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode-line."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq-default<span class="org-unicode-whitespace-subdued-space"> </span>mode-line-format
@@ -787,45 +792,39 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 <span class="org-unicode-whitespace-subdued-space">                             </span>(powerline-fill<span class="org-unicode-whitespace-subdued-space"> </span>face1<span class="org-unicode-whitespace-subdued-space"> </span>(powerline-width<span class="org-unicode-whitespace-subdued-space"> </span>rhs))
 <span class="org-unicode-whitespace-subdued-space">                             </span>(powerline-render<span class="org-unicode-whitespace-subdued-space"> </span>rhs)))))))
 </pre>
-</div>
-</div>
-</li>
-<li><a id="sec-3-8-5-2" name="sec-3-8-5-2"></a>Other settings<br  /><div class="outline-text-5" id="text-3-8-5-2">
+</div></li>
+
+<li><a id="orgheadline24"></a>Other settings<br  /><div class="outline-text-5" id="text-3-8-5-2">
 <p>
      Available Separators are:
 alternate, arrow, arrow-fade, bar, box, brace, butt,
 chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">powerline</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">powerline</span>
 <span class="org-unicode-whitespace-subdued-space">             </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">             </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">             </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>powerline-default-separator<span class="org-unicode-whitespace-subdued-space"> </span>'rounded)
 <span class="org-unicode-whitespace-subdued-space">             </span>(emagician/powerline-theme))
 </pre>
+</div></li></ol>
 </div>
-</div>
-</li></ol>
-</div>
-<div id="outline-container-sec-3-8-6" class="outline-4">
-<h4 id="sec-3-8-6"><span class="section-number-4">3.8.6</span> Smart Mode Line&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></h4>
+
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">3.8.6</span> Smart Mode Line&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></h4>
 <div class="outline-text-4" id="text-3-8-6">
 <p>
 Not sure that this adds anything
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(emagician/expect-package<span class="org-unicode-whitespace-subdued-space"> </span>'smart-mode-line)
+<pre class="code">(emagician/expect-package<span class="org-unicode-whitespace-subdued-space"> </span>'smart-mode-line)
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-9" class="outline-3">
-<h3 id="sec-3-9"><span class="section-number-3">3.9</span> Cursor Info</h3>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">3.9</span> Cursor Info</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 There are a few ways to change the cursor: blinking, shape and
@@ -834,45 +833,35 @@ information available to us.
 </p>
 </div>
 
-<div id="outline-container-sec-3-9-1" class="outline-4">
-<h4 id="sec-3-9-1"><span class="section-number-4">3.9.1</span> Dimension 1: File status</h4>
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">3.9.1</span> Dimension 1: File status</h4>
 <div class="outline-text-4" id="text-3-9-1">
 <dl class="org-dl">
-<dt> light blue </dt><dd>no file or process attached
-</dd>
-<dt> dark blue </dt><dd>process attached
-</dd>
-<dt> yellow </dt><dd>read only
-</dd>
-<dt> red </dt><dd>Important (SSH to production server, etc)
-</dd>
-<dt> grey </dt><dd>file visited
-</dd>
+<dt>light blue</dt><dd>no file or process attached</dd>
+<dt>dark blue</dt><dd>process attached</dd>
+<dt>yellow</dt><dd>read only</dd>
+<dt>red</dt><dd>Important (SSH to production server, etc)</dd>
+<dt>grey</dt><dd>file visited</dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-sec-3-9-2" class="outline-4">
-<h4 id="sec-3-9-2"><span class="section-number-4">3.9.2</span> Dimention 2: Modal Editing</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">3.9.2</span> Dimention 2: Modal Editing</h4>
 <div class="outline-text-4" id="text-3-9-2">
 <dl class="org-dl">
-<dt> overwrite </dt><dd>hollow box
-</dd>
-<dt> 'normal' </dt><dd>line
-</dd>
-<dt> god mode </dt><dd>Horizontal cursor
-</dd>
+<dt>overwrite</dt><dd>hollow box</dd>
+<dt>'normal'</dt><dd>line</dd>
+<dt>god mode</dt><dd>Horizontal cursor</dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-sec-3-9-3" class="outline-4">
-<h4 id="sec-3-9-3"><span class="section-number-4">3.9.3</span> Enhancements</h4>
+<div id="outline-container-orgheadline31" class="outline-4">
+<h4 id="orgheadline31"><span class="section-number-4">3.9.3</span> Enhancements</h4>
 <div class="outline-text-4" id="text-3-9-3">
-</div><ol class="org-ol"><li><a id="sec-3-9-3-1" name="sec-3-9-3-1"></a><span class="todo TODO">TODO</span> set up a way to handle production buffers through a buffer local var.<br  /><div class="outline-text-5" id="text-3-9-3-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp" id="cursor-status"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Change</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">cursor</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">according</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode</span>
+</div><ol class="org-ol"><li><a id="orgheadline30"></a><span class="todo TODO">TODO</span> set up a way to handle production buffers through a buffer local var.<br  /><div class="outline-text-5" id="text-3-9-3-1">
+<pre class="code"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Change</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">cursor</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">according</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode</span>
 (<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/set-cursor-color-color</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
 (<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/set-cursor-color-type</span><span class="org-unicode-whitespace-subdued-space"> </span>nil)
 (<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/set-cursor-color-buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
@@ -901,36 +890,28 @@ information available to us.
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dangerous-buffer<span class="org-unicode-whitespace-subdued-space"> </span>t)
 (add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'post-command-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/set-cursor-color-according-to-mode)
 </pre>
-</div>
-</div>
-</li></ol>
+</div></li></ol>
 </div>
 </div>
 
-<div id="outline-container-sec-3-10" class="outline-3">
-<h3 id="sec-3-10"><span class="section-number-3">3.10</span> Highlight Line</h3>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">3.10</span> Highlight Line</h3>
 <div class="outline-text-3" id="text-3-10">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(global-hl-line-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
+<pre class="code">(global-hl-line-mode<span class="org-unicode-whitespace-subdued-space"> </span>1)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-11" class="outline-3">
-<h3 id="sec-3-11"><span class="section-number-3">3.11</span> Show Empty lines</h3>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><span class="section-number-3">3.11</span> Show Empty lines</h3>
 <div class="outline-text-3" id="text-3-11">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>indicate-empty-lines<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>indicate-empty-lines<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-12" class="outline-3">
-<h3 id="sec-3-12"><span class="section-number-3">3.12</span> Show Whitespace with fill-column-indicator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactived">deactived</span></span></h3>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">3.12</span> Show Whitespace with fill-column-indicator&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactived">deactived</span></span></h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 I was initially using fill-column-indicator, but that turned out to
@@ -939,12 +920,10 @@ visual-line-mode.
 </p>
 
 <p>
-See <a href="Programming.html">Show whitespace in Programming.org</a>
+See <a href="Programming.html#MissingReference">Show whitespace in Programming.org</a>
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">fill-column-indicator</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">fill-column-indicator</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>fci-rule-width<span class="org-unicode-whitespace-subdued-space"> </span>1)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>fci-rule-column<span class="org-unicode-whitespace-subdued-space"> </span>81)
@@ -953,20 +932,19 @@ See <a href="Programming.html">Show whitespace in Programming.org</a>
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-13" class="outline-3">
-<h3 id="sec-3-13"><span class="section-number-3">3.13</span> Themes</h3>
+<div id="outline-container-orgheadline40" class="outline-3">
+<h3 id="orgheadline40"><span class="section-number-3">3.13</span> Themes</h3>
 <div class="outline-text-3" id="text-3-13">
-</div><div id="outline-container-sec-3-13-1" class="outline-4">
-<h4 id="sec-3-13-1"><span class="section-number-4">3.13.1</span> Base theme: Moe, Moe, Kyun!</h4>
+</div><div id="outline-container-orgheadline38" class="outline-4">
+<h4 id="orgheadline38"><span class="section-number-4">3.13.1</span> Base theme: Moe, Moe, Kyun!</h4>
 <div class="outline-text-4" id="text-3-13-1">
 <p>
 This theme is my favorite so far.  It's got good color choices and it's nice and dark.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-3-13-1-1" name="sec-3-13-1-1"></a>Set up different colors for different days<br  /><div class="outline-text-5" id="text-3-13-1-1">
+<ol class="org-ol"><li><a id="orgheadline36"></a>Set up different colors for different days<br  /><div class="outline-text-5" id="text-3-13-1-1">
 <p>
 The colors are:
 </p>
@@ -975,77 +953,82 @@ The colors are:
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">Day</th>
-<th scope="col" class="left">apsect</th>
-<th scope="col" class="left">Color</th>
-<th scope="col" class="left">☰</th>
+<th scope="col" class="org-left">Day</th>
+<th scope="col" class="org-left">apsect</th>
+<th scope="col" class="org-left">Color</th>
+<th scope="col" class="org-left">☰</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
-<td class="left">Sunday</td>
-<td class="left">Benevolence</td>
-<td class="left">yellow</td>
-<td class="left">🌞</td>
+<td class="org-left">Sunday</td>
+<td class="org-left">Benevolence</td>
+<td class="org-left">yellow</td>
+<td class="org-left">🌞</td>
 </tr>
 
-<tr>
-<td class="left">Monday</td>
-<td class="left">Reverence</td>
-<td class="left">blue</td>
-<td class="left">🌚</td>
-</tr>
 
 <tr>
-<td class="left">Tuesday</td>
-<td class="left">Courage</td>
-<td class="left">red</td>
-<td class="left">♂</td>
+<td class="org-left">Monday</td>
+<td class="org-left">Reverence</td>
+<td class="org-left">blue</td>
+<td class="org-left">🌚</td>
 </tr>
 
-<tr>
-<td class="left">Wednesday</td>
-<td class="left">Honesty</td>
-<td class="left">cyan</td>
-<td class="left">☿</td>
-</tr>
 
 <tr>
-<td class="left">Thursday</td>
-<td class="left">Rectitude</td>
-<td class="left">green</td>
-<td class="left">♃</td>
+<td class="org-left">Tuesday</td>
+<td class="org-left">Courage</td>
+<td class="org-left">red</td>
+<td class="org-left">♂</td>
 </tr>
 
-<tr>
-<td class="left">Friday</td>
-<td class="left">Honour</td>
-<td class="left">magenta</td>
-<td class="left">♀</td>
-</tr>
 
 <tr>
-<td class="left">Saturday</td>
-<td class="left">Loyalty</td>
-<td class="left">b/w</td>
-<td class="left">♄</td>
+<td class="org-left">Wednesday</td>
+<td class="org-left">Honesty</td>
+<td class="org-left">cyan</td>
+<td class="org-left">☿</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Thursday</td>
+<td class="org-left">Rectitude</td>
+<td class="org-left">green</td>
+<td class="org-left">♃</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Friday</td>
+<td class="org-left">Honour</td>
+<td class="org-left">magenta</td>
+<td class="org-left">♀</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Saturday</td>
+<td class="org-left">Loyalty</td>
+<td class="org-left">b/w</td>
+<td class="org-left">♄</td>
 </tr>
 </tbody>
 </table>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/get-moe-color-for-day</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>day)
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/get-moe-color-for-day</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>day)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(null<span class="org-unicode-whitespace-subdued-space"> </span>day)
 <span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>day<span class="org-unicode-whitespace-subdued-space"> </span>(nth<span class="org-unicode-whitespace-subdued-space"> </span>6<span class="org-unicode-whitespace-subdued-space"> </span>(decode-time))))
 <span class="org-unicode-whitespace-subdued-space">  </span>(case<span class="org-unicode-whitespace-subdued-space"> </span>day
@@ -1065,18 +1048,14 @@ The colors are:
 <span class="org-unicode-whitespace-subdued-space">  </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(member<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/get-moe-color-for-day)
 <span class="org-unicode-whitespace-subdued-space">                  </span>'(yellow<span class="org-unicode-whitespace-subdued-space"> </span>blue<span class="org-unicode-whitespace-subdued-space"> </span>red<span class="org-unicode-whitespace-subdued-space"> </span>cyan<span class="org-unicode-whitespace-subdued-space"> </span>green<span class="org-unicode-whitespace-subdued-space"> </span>magenta<span class="org-unicode-whitespace-subdued-space"> </span>w/b))))
 </pre>
-</div>
-</div>
-</li>
+</div></li>
 
-
-<li><a id="sec-3-13-1-2" name="sec-3-13-1-2"></a>Main setup<br  /><div class="outline-text-5" id="text-3-13-1-2">
+<li><a id="orgheadline37"></a>Main setup<br  /><div class="outline-text-5" id="text-3-13-1-2">
 <p>
 The theme needs to be loaded after powerline to work.
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">moe-theme</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">moe-theme</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>moe-theme-highlight-buffer-id<span class="org-unicode-whitespace-subdued-space"> </span>t)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
@@ -1090,28 +1069,25 @@ The theme needs to be loaded after powerline to work.
 <span class="org-unicode-whitespace-subdued-space">  </span>(powerline-reset)
 )
 </pre>
+</div></li></ol>
 </div>
-</div>
-</li></ol>
-</div>
-<div id="outline-container-sec-3-13-2" class="outline-4">
-<h4 id="sec-3-13-2"><span class="section-number-4">3.13.2</span> Org Beautify</h4>
+
+<div id="outline-container-orgheadline39" class="outline-4">
+<h4 id="orgheadline39"><span class="section-number-4">3.13.2</span> Org Beautify</h4>
 <div class="outline-text-4" id="text-3-13-2">
 <p>
 Load from our bad self!
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'custom-theme-load-path<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"themes/org-beautify-theme/"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))
+<pre class="code">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'custom-theme-load-path<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"themes/org-beautify-theme/"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))
 (load-theme<span class="org-unicode-whitespace-subdued-space"> </span>'org-beautify<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-3-14" class="outline-3">
-<h3 id="sec-3-14"><span class="section-number-3">3.14</span> Digit Groups&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactivated">deactivated</span></span></h3>
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41"><span class="section-number-3">3.14</span> Digit Groups&#xa0;&#xa0;&#xa0;<span class="tag"><span class="deactivated">deactivated</span></span></h3>
 <div class="outline-text-3" id="text-3-14">
 <p>
 Currently a little buggy, completely overrides my theme. 
@@ -1134,9 +1110,7 @@ Looks like this:
 --   ---
 </pre>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">digit-groups</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">digit-groups</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(digit-groups-global-mode<span class="org-unicode-whitespace-subdued-space"> </span>1))
@@ -1144,34 +1118,30 @@ Looks like this:
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Editing</h2>
+<div id="outline-container-orgheadline59" class="outline-2">
+<h2 id="orgheadline59"><span class="section-number-2">4</span> Editing</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> UTF-8 Enforcement</h3>
+</div><div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43"><span class="section-number-3">4.1</span> UTF-8 Enforcement</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 I've kept a version of this since 2006.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(prefer-coding-system<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
+<pre class="code">(prefer-coding-system<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
 (set-default-coding-systems<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
 (set-terminal-coding-system<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
 (set-keyboard-coding-system<span class="org-unicode-whitespace-subdued-space"> </span>'utf-8)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> The Mark</h3>
+<div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46"><span class="section-number-3">4.2</span> The Mark</h3>
 <div class="outline-text-3" id="text-4-2">
-</div><div id="outline-container-sec-4-2-1" class="outline-4">
-<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Transient mark mode</h4>
+</div><div id="outline-container-orgheadline44" class="outline-4">
+<h4 id="orgheadline44"><span class="section-number-4">4.2.1</span> Transient mark mode</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 For now Transient Mark mode is just turned off.  I don't like
@@ -1192,37 +1162,31 @@ I'll fix the emagicians kit so that transient mark mode can be
 easily activated.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp" id="turn-off-transient-mark">(transient-mark-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)
+<pre class="code">(transient-mark-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-2-2" class="outline-4">
-<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Show Marks   :learn-me:</h4>
+<div id="outline-container-orgheadline45" class="outline-4">
+<h4 id="orgheadline45"><span class="section-number-4">4.2.2</span> Show Marks   :learn-me:</h4>
 <div class="outline-text-4" id="text-4-2-2">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">show-marks</span>)
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">show-marks</span>)
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Multiple Cursors&#xa0;&#xa0;&#xa0;<span class="tag"><span class="bind">bind</span></span></h3>
+<div id="outline-container-orgheadline47" class="outline-3">
+<h3 id="orgheadline47"><span class="section-number-3">4.3</span> Multiple Cursors&#xa0;&#xa0;&#xa0;<span class="tag"><span class="bind">bind</span></span></h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Note that this is a great example of building your own custom
-keymap and using it with use-package.<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+keymap and using it with use-package.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+Thanks habamax and jwiegley. <a href="https://github.com/jwiegley/use-package/issues/366">https://github.com/jwiegley/use-package/issues/366</a>
+</p></span>
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">multiple-cursors</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">multiple-cursors</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(define-prefix-command<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/mc-keymap)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span>((<span class="org-string">"C-S-c"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/mc-keymap))
@@ -1241,30 +1205,23 @@ keymap and using it with use-package.<sup><a id="fnr.1" name="fnr.1" class="foot
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-4" class="outline-3">
-<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Killing and Yanking</h3>
+<div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51"><span class="section-number-3">4.4</span> Killing and Yanking</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Having a big kill ring is very helpful.  It's searchable by helm.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-ring-max<span class="org-unicode-whitespace-subdued-space"> </span>120)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-ring-max<span class="org-unicode-whitespace-subdued-space"> </span>120)
 </pre>
-</div>
 
 <p>
 Also, the system clipboard is a must have.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>save-interprogram-paste-before-kill<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>save-interprogram-paste-before-kill<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
-</div>
 
 <p>
 Allow Read-only killing.  Being able to throw chunks of a read-only buffer is so powerful.  It's one of the things I love about emacs.
@@ -1274,51 +1231,42 @@ Allow Read-only killing.  Being able to throw chunks of a read-only buffer is so
 The Power of plain text.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-read-only-ok<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-read-only-ok<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
-</div>
 
 <p>
 Kill-whole-line just blew chunks for me.  REALLY blew chunks.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-whole-line<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>kill-whole-line<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
-</div>
 
-<div id="outline-container-sec-4-4-1" class="outline-4">
-<h4 id="sec-4-4-1"><span class="section-number-4">4.4.1</span> Volatile Highlights</h4>
+<div id="outline-container-orgheadline48" class="outline-4">
+<h4 id="orgheadline48"><span class="section-number-4">4.4.1</span> Volatile Highlights</h4>
 <div class="outline-text-4" id="text-4-4-1">
 <p>
 Shows what changed through undo, yank etc. commands
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">volatile-highlights</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">volatile-highlights</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(volatile-highlights-mode<span class="org-unicode-whitespace-subdued-space"> </span>t))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-4-2" class="outline-4">
-<h4 id="sec-4-4-2"><span class="section-number-4">4.4.2</span> Swap</h4>
+<div id="outline-container-orgheadline49" class="outline-4">
+<h4 id="orgheadline49"><span class="section-number-4">4.4.2</span> Swap</h4>
 <div class="outline-text-4" id="text-4-4-2">
 <p>
-Found from Stackoverflow.  Thank you jcubic and legoscia.<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
+Found from Stackoverflow.  Thank you jcubic and legoscia.<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+<a href="http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296">http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296</a>
+</p></span>
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">swap-region-with-kill</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>arg)
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">swap-region-with-kill</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>arg)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"replace</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">selected</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">text</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">one</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kill</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ring"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*P"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(backward-delete-char<span class="org-unicode-whitespace-subdued-space"> </span>(-<span class="org-unicode-whitespace-subdued-space"> </span>(point)<span class="org-unicode-whitespace-subdued-space"> </span>(mark)))
@@ -1326,18 +1274,15 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.<sup><a id="fnr.2" name
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-4-3" class="outline-4">
-<h4 id="sec-4-4-3"><span class="section-number-4">4.4.3</span> kill-buffer-file-name</h4>
+<div id="outline-container-orgheadline50" class="outline-4">
+<h4 id="orgheadline50"><span class="section-number-4">4.4.3</span> kill-buffer-file-name</h4>
 <div class="outline-text-4" id="text-4-4-3">
 <p>
 I use this all the time.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">kill-buffer-file-name</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">kill-buffer-file-name</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">current</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">buffer's</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">filename</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">echo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">area</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">add</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kill</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ring."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((buffer-file-name<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name)))
@@ -1345,11 +1290,8 @@ I use this all the time.
 <span class="org-unicode-whitespace-subdued-space">        </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">associated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">file."</span><span class="org-unicode-whitespace-subdued-space"> </span>(buffer-name))
 <span class="org-unicode-whitespace-subdued-space">      </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>(kill-new<span class="org-unicode-whitespace-subdued-space"> </span>buffer-file-name)))))
 </pre>
-</div>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">kill-buffer-file-basename</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">kill-buffer-file-basename</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">buffers</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">base</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">name</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">echo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">area</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">add</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kill</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ring."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((bufer-file-name<span class="org-unicode-whitespace-subdued-space"> </span>(buffer-file-name)))
@@ -1360,10 +1302,9 @@ I use this all the time.
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-5" class="outline-3">
-<h3 id="sec-4-5"><span class="section-number-3">4.5</span> Snippets</h3>
+<div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52"><span class="section-number-3">4.5</span> Snippets</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 See also <a href="./Snippets.html">./Snippets.html</a> for the actual Snippets.
@@ -1376,9 +1317,8 @@ Set the snippet dir.
 <p>
 (emagician/expect-dir "assets/snippets")
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yasnippet</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yasnippet</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>yas-snippet-dirs<span class="org-unicode-whitespace-subdued-space"> </span>`(,(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/snippets"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)<span class="org-unicode-whitespace-subdued-space"> </span>yas-installed-snippets-dir))
@@ -1388,15 +1328,12 @@ Set the snippet dir.
 <span class="org-unicode-whitespace-subdued-space">  </span>(diminish<span class="org-unicode-whitespace-subdued-space"> </span>'yas-minor-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(yas/reload-all))
 </pre>
-</div>
 
 <p>
 This rigamaroo might nit be needed anymore:
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yas/org-very-safe-expand</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yas/org-very-safe-expand</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((yas/fallback-behavior<span class="org-unicode-whitespace-subdued-space"> </span>'return-nil))<span class="org-unicode-whitespace-subdued-space"> </span>(yas/expand)))
 
 <span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yas/org-setup</span><span class="org-unicode-whitespace-subdued-space"> </span>()
@@ -1410,17 +1347,14 @@ This rigamaroo might nit be needed anymore:
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-6" class="outline-3">
-<h3 id="sec-4-6"><span class="section-number-3">4.6</span> Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
+<div id="outline-container-orgheadline56" class="outline-3">
+<h3 id="orgheadline56"><span class="section-number-3">4.6</span> Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
 <div class="outline-text-3" id="text-4-6">
-</div><div id="outline-container-sec-4-6-1" class="outline-4">
-<h4 id="sec-4-6-1"><span class="section-number-4">4.6.1</span> Company Mode</h4>
+</div><div id="outline-container-orgheadline53" class="outline-4">
+<h4 id="orgheadline53"><span class="section-number-4">4.6.1</span> Company Mode</h4>
 <div class="outline-text-4" id="text-4-6-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">company</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">company</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127546;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(global-company-mode)
@@ -1430,15 +1364,13 @@ This rigamaroo might nit be needed anymore:
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-6-2" class="outline-4">
-<h4 id="sec-4-6-2"><span class="section-number-4">4.6.2</span> Auto Complete</h4>
+<div id="outline-container-orgheadline55" class="outline-4">
+<h4 id="orgheadline55"><span class="section-number-4">4.6.2</span> Auto Complete</h4>
 <div class="outline-text-4" id="text-4-6-2">
 <p>
 It's time to switch.  AC hasn't really changed that much, and it is starting to look awful.
 </p>
-
 
 <p>
 <b>Note:</b> if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.
@@ -1448,9 +1380,7 @@ It's time to switch.  AC hasn't really changed that much, and it is starting to 
 `ac-ignore-case` is really burning me right now, so I am enabling it.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">auto-complete</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">auto-complete</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
@@ -1484,29 +1414,22 @@ It's time to switch.  AC hasn't really changed that much, and it is starting to 
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'ac-dictionary-directories<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/ac-dictionaries"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)))
 </pre>
 </div>
-</div>
 
-<ol class="org-ol"><li><a id="sec-4-6-2-1" name="sec-4-6-2-1"></a>Auto Complete Default Sources :tangle no<br  /><div class="outline-text-5" id="text-4-6-2-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(set-default<span class="org-unicode-whitespace-subdued-space"> </span>'ac-sources
+<ol class="org-ol"><li><a id="orgheadline54"></a>Auto Complete Default Sources :tangle no<br  /><div class="outline-text-5" id="text-4-6-2-1">
+<pre class="code">(set-default<span class="org-unicode-whitespace-subdued-space"> </span>'ac-sources
 <span class="org-unicode-whitespace-subdued-space">             </span>'(ac-source-yasnippet
 <span class="org-unicode-whitespace-subdued-space">               </span>ac-source-dictionary
 <span class="org-unicode-whitespace-subdued-space">               </span>ac-source-words-in-buffer
 <span class="org-unicode-whitespace-subdued-space">               </span>ac-source-words-in-same-mode-buffers))
 </pre>
-</div>
-</div>
-</li></ol>
+</div></li></ol>
 </div>
 </div>
 
-<div id="outline-container-sec-4-7" class="outline-3">
-<h3 id="sec-4-7"><span class="section-number-3">4.7</span> Undo</h3>
+<div id="outline-container-orgheadline57" class="outline-3">
+<h3 id="orgheadline57"><span class="section-number-3">4.7</span> Undo</h3>
 <div class="outline-text-3" id="text-4-7">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">undo-tree</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">undo-tree</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>undo-tree-enable-undo-in-region<span class="org-unicode-whitespace-subdued-space"> </span>t
@@ -1517,49 +1440,40 @@ It's time to switch.  AC hasn't really changed that much, and it is starting to 
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-4-8" class="outline-3">
-<h3 id="sec-4-8"><span class="section-number-3">4.8</span> Spell Checking</h3>
+<div id="outline-container-orgheadline58" class="outline-3">
+<h3 id="orgheadline58"><span class="section-number-3">4.8</span> Spell Checking</h3>
 <div class="outline-text-3" id="text-4-8">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flyspell</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flyspell</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span>(flyspell-mode<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Navigating</h2>
+<div id="outline-container-orgheadline68" class="outline-2">
+<h2 id="orgheadline68"><span class="section-number-2">5</span> Navigating</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Scrolling</h3>
+</div><div id="outline-container-orgheadline60" class="outline-3">
+<h3 id="orgheadline60"><span class="section-number-3">5.1</span> Scrolling</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Keep the screen position when scrolling.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>scroll-preserve-screen-position<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>scroll-preserve-screen-position<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Avy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></h3>
+<div id="outline-container-orgheadline61" class="outline-3">
+<h3 id="orgheadline61"><span class="section-number-3">5.2</span> Avy&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Basically Acejump++.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">avy</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">avy</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>((<span class="org-string">"M-g</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">f"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>avy-goto-line)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"M-g</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">h"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>avy-goto-char-2)
@@ -1567,22 +1481,17 @@ Basically Acejump++.
 </pre>
 </div>
 </div>
-</div>
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Ace window jump</h3>
+
+<div id="outline-container-orgheadline62" class="outline-3">
+<h3 id="orgheadline62"><span class="section-number-3">5.3</span> Ace window jump</h3>
 <div class="outline-text-3" id="text-5-3">
 <ul class="org-ul">
-<li>Set the keys to home-row
-</li>
-<li>Make the ace-jump key super visible
-</li>
-<li>Only apply to this frame
-</li>
+<li>Set the keys to home-row</li>
+<li>Make the ace-jump key super visible</li>
+<li>Only apply to this frame</li>
 </ul>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">ace-window</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">ace-window</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(face-spec-set
 <span class="org-unicode-whitespace-subdued-space">   </span>'aw-leading-char-face
@@ -1594,95 +1503,78 @@ Basically Acejump++.
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Save Place</h3>
+<div id="outline-container-orgheadline63" class="outline-3">
+<h3 id="orgheadline63"><span class="section-number-3">5.4</span> Save Place</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Saveplace allows emacs to remember where you were in a file.  It is very handy and mostly transparent.
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">saveplace</span>)
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">saveplace</span>)
 (setq-default<span class="org-unicode-whitespace-subdued-space"> </span>save-place<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Goto Last Change&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></h3>
+<div id="outline-container-orgheadline64" class="outline-3">
+<h3 id="orgheadline64"><span class="section-number-3">5.5</span> Goto Last Change&#xa0;&#xa0;&#xa0;<span class="tag"><span class="learn">learn</span></span></h3>
 <div class="outline-text-3" id="text-5-5">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">goto-last-change</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">goto-last-change</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"C-x</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">C-/"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>goto-last-change))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Uniquify</h3>
+<div id="outline-container-orgheadline65" class="outline-3">
+<h3 id="orgheadline65"><span class="section-number-3">5.6</span> Uniquify</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 Rename buffers so they are unique.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">uniquify</span>)
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">uniquify</span>)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-5-7" class="outline-3">
-<h3 id="sec-5-7"><span class="section-number-3">5.7</span> Searching</h3>
+<div id="outline-container-orgheadline67" class="outline-3">
+<h3 id="orgheadline67"><span class="section-number-3">5.7</span> Searching</h3>
 <div class="outline-text-3" id="text-5-7">
-</div><div id="outline-container-sec-5-7-1" class="outline-4">
-<h4 id="sec-5-7-1"><span class="section-number-4">5.7.1</span> Default to regexp Searches</h4>
+</div><div id="outline-container-orgheadline66" class="outline-4">
+<h4 id="orgheadline66"><span class="section-number-4">5.7.1</span> Default to regexp Searches</h4>
 <div class="outline-text-4" id="text-5-7-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>[(control<span class="org-unicode-whitespace-subdued-space"> </span>s)]<span class="org-unicode-whitespace-subdued-space"> </span>'isearch-forward-regexp)
+<pre class="code">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>[(control<span class="org-unicode-whitespace-subdued-space"> </span>s)]<span class="org-unicode-whitespace-subdued-space"> </span>'isearch-forward-regexp)
 (global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>[(control<span class="org-unicode-whitespace-subdued-space"> </span>r)]<span class="org-unicode-whitespace-subdued-space"> </span>'isearch-backward-regexp)
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Saving</h2>
+<div id="outline-container-orgheadline71" class="outline-2">
+<h2 id="orgheadline71"><span class="section-number-2">6</span> Saving</h2>
 <div class="outline-text-2" id="text-6">
-</div><div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Backups</h3>
+</div><div id="outline-container-orgheadline70" class="outline-3">
+<h3 id="orgheadline70"><span class="section-number-3">6.1</span> Backups</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>auto-save-default<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>auto-save-default<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
-</div>
 
-<div id="outline-container-sec-6-1-1" class="outline-4">
-<h4 id="sec-6-1-1"><span class="section-number-4">6.1.1</span> Set the backup directory to something decent</h4>
+<div id="outline-container-orgheadline69" class="outline-4">
+<h4 id="orgheadline69"><span class="section-number-4">6.1.1</span> Set the backup directory to something decent</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <p>
 (emagician/expect-dir "backups")
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>backup-directory-alist
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>backup-directory-alist
 <span class="org-unicode-whitespace-subdued-space">      </span>`((<span class="org-string">"."</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>,(expand-file-name
 <span class="org-unicode-whitespace-subdued-space">                 </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>user-emacs-directory<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"backups"</span>)))))
 
@@ -1695,67 +1587,56 @@ Disabling backups was a monumentally stupidly bad idea.  I shall never do it aga
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> State Management</h2>
+<div id="outline-container-orgheadline75" class="outline-2">
+<h2 id="orgheadline75"><span class="section-number-2">7</span> State Management</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Server</h3>
+</div><div id="outline-container-orgheadline72" class="outline-3">
+<h3 id="orgheadline72"><span class="section-number-3">7.1</span> Server</h3>
 <div class="outline-text-3" id="text-7-1">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(string-equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"root"</span><span class="org-unicode-whitespace-subdued-space"> </span>(getenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"USER"</span>))
+<pre class="code">(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(string-equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"root"</span><span class="org-unicode-whitespace-subdued-space"> </span>(getenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"USER"</span>))
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">server</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(server-running-p)<span class="org-unicode-whitespace-subdued-space"> </span>(server-start)))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Recent Files</h3>
+<div id="outline-container-orgheadline73" class="outline-3">
+<h3 id="orgheadline73"><span class="section-number-3">7.2</span> Recent Files</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 500 should be as enough files to handle long editing sessions at
 work, and some weekend projects as well.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">recentf</span>)
+<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">recentf</span>)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>recentf-max-saved-items<span class="org-unicode-whitespace-subdued-space"> </span>500)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-7-3" class="outline-3">
-<h3 id="sec-7-3"><span class="section-number-3">7.3</span> Save Command History</h3>
+<div id="outline-container-orgheadline74" class="outline-3">
+<h3 id="orgheadline74"><span class="section-number-3">7.3</span> Save Command History</h3>
 <div class="outline-text-3" id="text-7-3">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>savehist-additional-variables<span class="org-unicode-whitespace-subdued-space"> </span>'(search-ring<span class="org-unicode-whitespace-subdued-space"> </span>regexp-search-ring<span class="org-unicode-whitespace-subdued-space"> </span>kill-ring<span class="org-unicode-whitespace-subdued-space"> </span>compile-command<span class="org-unicode-whitespace-subdued-space"> </span>))
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>savehist-additional-variables<span class="org-unicode-whitespace-subdued-space"> </span>'(search-ring<span class="org-unicode-whitespace-subdued-space"> </span>regexp-search-ring<span class="org-unicode-whitespace-subdued-space"> </span>kill-ring<span class="org-unicode-whitespace-subdued-space"> </span>compile-command<span class="org-unicode-whitespace-subdued-space"> </span>))
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>savehist-autosave-interval<span class="org-unicode-whitespace-subdued-space"> </span>60)
 (savehist-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Help and Discoverability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="help">help</span></span></h2>
+<div id="outline-container-orgheadline87" class="outline-2">
+<h2 id="orgheadline87"><span class="section-number-2">8</span> Help and Discoverability&#xa0;&#xa0;&#xa0;<span class="tag"><span class="help">help</span></span></h2>
 <div class="outline-text-2" id="text-8">
-</div><div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Achievements</h3>
+</div><div id="outline-container-orgheadline76" class="outline-3">
+<h3 id="orgheadline76"><span class="section-number-3">8.1</span> Achievements</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Achievements are fun!  There is nothing at all wrong with exploring them.
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">achievements</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">achievements</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127942;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
@@ -1763,18 +1644,15 @@ Achievements are fun!  There is nothing at all wrong with exploring them.
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Which Key</h3>
+<div id="outline-container-orgheadline77" class="outline-3">
+<h3 id="orgheadline77"><span class="section-number-3">8.2</span> Which Key</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 More like—witch key.  Which-key is the ultimate in discoverability.  I really enjoy this package and for-stalled my install of <code>god-mode</code> until I was sure they could play well together.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">which-key</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">which-key</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
@@ -1789,46 +1667,63 @@ More like—witch key.  Which-key is the ultimate in discoverability.  I really 
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-3" class="outline-3">
-<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Discover My Major   :learn-me:bind:</h3>
+<div id="outline-container-orgheadline78" class="outline-3">
+<h3 id="orgheadline78"><span class="section-number-3">8.3</span> Discover My Major   :learn-me:bind:</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 I don't use this mode enough. 
 </p>
 
-<div class="org-src-container">
+<pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">make-discovery</span><span class="org-unicode-whitespace-subdued-space"> </span>(sym<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>mode)
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Make</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">command</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">called</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">discover-NAME"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((name<span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>sym))
+<span class="org-unicode-whitespace-subdued-space">         </span>(command<span class="org-unicode-whitespace-subdued-space"> </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"discover-"</span><span class="org-unicode-whitespace-subdued-space"> </span>name)))
+<span class="org-unicode-whitespace-subdued-space">         </span>(mode<span class="org-unicode-whitespace-subdued-space"> </span>(or<span class="org-unicode-whitespace-subdued-space"> </span>mode
+<span class="org-unicode-whitespace-subdued-space">                   </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-mode"</span>)))))
+<span class="org-unicode-whitespace-subdued-space">    </span>`(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span>,command<span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">      </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">created</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">by</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">kit.\n"</span>
+<span class="org-unicode-whitespace-subdued-space">               </span><span class="org-string">"Helps</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">user</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">discover</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>mode))
+<span class="org-unicode-whitespace-subdued-space">      </span>(interactive)
+<span class="org-unicode-whitespace-subdued-space">      </span>(discover-my-mode<span class="org-unicode-whitespace-subdued-space"> </span>(quote,mode)))))
 
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">discover-my-major</span>
+(macroexpand<span class="org-unicode-whitespace-subdued-space"> </span>'(make-discovery<span class="org-unicode-whitespace-subdued-space"> </span>paredit))
+
+
+(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">discover-my-major</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(make-discovery<span class="org-unicode-whitespace-subdued-space"> </span>paredit)
+<span class="org-unicode-whitespace-subdued-space">  </span>(make-discovery<span class="org-unicode-whitespace-subdued-space"> </span>projectile)
+<span class="org-unicode-whitespace-subdued-space">  </span>(make-discovery<span class="org-unicode-whitespace-subdued-space"> </span>ruby-tools)
+<span class="org-unicode-whitespace-subdued-space">  </span>(bind-keys<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:prefix-map</span><span class="org-unicode-whitespace-subdued-space"> </span>discovery-map
+<span class="org-unicode-whitespace-subdued-space">             </span><span class="org-builtin">:prefix</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;f1&gt;"</span>
+<span class="org-unicode-whitespace-subdued-space">             </span>(<span class="org-string">"("</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>discover-paredit)
+<span class="org-unicode-whitespace-subdued-space">             </span>(<span class="org-string">"p"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>discover-projectile)
+<span class="org-unicode-whitespace-subdued-space">             </span>(<span class="org-string">"r"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>discover-ruby-tools))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>((<span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">C-h"</span><span class="org-unicode-whitespace-subdued-space">   </span>.<span class="org-unicode-whitespace-subdued-space"> </span>discover-my-major)
 <span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">C-S-H"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>discover-my-mode)))
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-4" class="outline-3">
-<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Helm</h3>
+<div id="outline-container-orgheadline86" class="outline-3">
+<h3 id="orgheadline86"><span class="section-number-3">8.4</span> Helm</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 I have a complicated relationship with helm.  
 </p>
 
 <dl class="org-dl">
-<dt> ⛥ </dt><dd>On the one hand its completion mechanism just does what I expect.  Little to no fuss nor muss.
-</dd>
-<dt> ⛥ </dt><dd>On the other hand it's a bitch to extend and seems to have gotten very far from it's easy-to-extend Anything roots.  Case-in-point: <code>M-x</code> used to not only show commands, but give you actions to provide documentation for them, their source location, as well as a whole host of other things.  I miss that.
-</dd>
+<dt>⛥</dt><dd>On the one hand its completion mechanism just does what I expect.  Little to no fuss nor muss.</dd>
+<dt>⛥</dt><dd>On the other hand it's a bitch to extend and seems to have gotten very far from it's easy-to-extend Anything roots.  Case-in-point: <code>M-x</code> used to not only show commands, but give you actions to provide documentation for them, their source location, as well as a whole host of other things.  I miss that.</dd>
 </dl>
 
 <p>
 It's still a demand package though. 
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp" id="helm">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">helm</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">helm</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span>(helm-mode<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
@@ -1839,18 +1734,15 @@ It's still a demand package though.
 <span class="org-unicode-whitespace-subdued-space">  </span>(helm-mode<span class="org-unicode-whitespace-subdued-space"> </span>1))
 </pre>
 </div>
-</div>
 
-<div id="outline-container-sec-8-4-1" class="outline-4">
-<h4 id="sec-8-4-1"><span class="section-number-4">8.4.1</span> F2 is my super duper DWIM helper</h4>
+<div id="outline-container-orgheadline79" class="outline-4">
+<h4 id="orgheadline79"><span class="section-number-4">8.4.1</span> F2 is my super duper DWIM helper</h4>
 <div class="outline-text-4" id="text-8-4-1">
 <p>
 F2 means "I wanna do something, get somewhere."  So show me a list of everything.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/helm</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/helm</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Super</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">powered</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">helm</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">DWIM!"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(and<span class="org-unicode-whitespace-subdued-space"> </span>helm-source-ls-git-status
@@ -1877,65 +1769,53 @@ F2 means "I wanna do something, get somewhere."  So show me a list of everything
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-4-2" class="outline-4">
-<h4 id="sec-8-4-2"><span class="section-number-4">8.4.2</span> Helm for M-x</h4>
+<div id="outline-container-orgheadline81" class="outline-4">
+<h4 id="orgheadline81"><span class="section-number-4">8.4.2</span> Helm for M-x</h4>
 <div class="outline-text-4" id="text-8-4-2">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-x"</span>)<span class="org-unicode-whitespace-subdued-space">     </span>'helm-M-x)
+<pre class="code">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-x"</span>)<span class="org-unicode-whitespace-subdued-space">     </span>'helm-M-x)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-M-x-always-save-history<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
-</div>
 
-<ol class="org-ol"><li><a id="sec-8-4-2-1" name="sec-8-4-2-1"></a>Key binding muscle memory<br  /><div class="outline-text-5" id="text-8-4-2-1">
+<ol class="org-ol"><li><a id="orgheadline80"></a>Key binding muscle memory<br  /><div class="outline-text-5" id="text-8-4-2-1">
 <p>
 The Fix-Muscle Memory keybinding setting re-enables the "You can run the command <code>foo</code> with <code>bar</code>". This is one of the annoyances with <code>Helm-M-x</code> for me.  
 </p>
 
 <p>
-See <a href="Lamp.html">Fix-Muscle-Memory (was Emagician-Fix-Spell)</a>
+See <a href="Lamp.html#MissingReference">Fix-Muscle-Memory (was Emagician-Fix-Spell)</a>
 </p>
+</div></li></ol>
 </div>
-</li></ol>
-</div>
-<div id="outline-container-sec-8-4-3" class="outline-4">
-<h4 id="sec-8-4-3"><span class="section-number-4">8.4.3</span> Buffer Selection</h4>
+
+<div id="outline-container-orgheadline82" class="outline-4">
+<h4 id="orgheadline82"><span class="section-number-4">8.4.3</span> Buffer Selection</h4>
 <div class="outline-text-4" id="text-8-4-3">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-x</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">b"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'helm-buffers-list)
+<pre class="code">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-x</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">b"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'helm-buffers-list)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-4-4" class="outline-4">
-<h4 id="sec-8-4-4"><span class="section-number-4">8.4.4</span> Show full paths</h4>
+<div id="outline-container-orgheadline83" class="outline-4">
+<h4 id="orgheadline83"><span class="section-number-4">8.4.4</span> Show full paths</h4>
 <div class="outline-text-4" id="text-8-4-4">
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-ff-transformer-show-only-basename<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-ff-transformer-show-only-basename<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
 </div>
-</div>
-<div id="outline-container-sec-8-4-5" class="outline-4">
-<h4 id="sec-8-4-5"><span class="section-number-4">8.4.5</span> Extended Command, Insert, write and find files should use helm.</h4>
-<div class="outline-text-4" id="text-8-4-5">
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-x</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">C-f"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'helm-find-files)
+<div id="outline-container-orgheadline84" class="outline-4">
+<h4 id="orgheadline84"><span class="section-number-4">8.4.5</span> Extended Command, Insert, write and find files should use helm.</h4>
+<div class="outline-text-4" id="text-8-4-5">
+<pre class="code">(global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-x</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">C-f"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'helm-find-files)
 (global-set-key<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-y"</span>)<span class="org-unicode-whitespace-subdued-space">     </span>'helm-show-kill-ring)
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-8-4-6" class="outline-4">
-<h4 id="sec-8-4-6"><span class="section-number-4">8.4.6</span> Personal Preferences</h4>
+<div id="outline-container-orgheadline85" class="outline-4">
+<h4 id="orgheadline85"><span class="section-number-4">8.4.6</span> Personal Preferences</h4>
 <div class="outline-text-4" id="text-8-4-6">
 <p>
 Make helm open a new window instead of taking over another.
@@ -1944,59 +1824,52 @@ Make helm open a new window instead of taking over another.
 <p>
 Make it a bit nicer too.
 </p>
-<div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-split-window-in-side-p<span class="org-unicode-whitespace-subdued-space"> </span>t)
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-split-window-in-side-p<span class="org-unicode-whitespace-subdued-space"> </span>t)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-candidate-separator<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;"</span>)
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> God Mode</h2>
+<div id="outline-container-orgheadline88" class="outline-2">
+<h2 id="orgheadline88"><span class="section-number-2">9</span> God Mode</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Just starting to use god mode, not sure about it yet.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">god-mode</span>
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">god-mode</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-space"> </span>((<span class="org-string">"&lt;escape&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>god-local-mode))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128048;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>god-mode-cursor-update<span class="org-unicode-whitespace-subdued-space"> </span>god-mode-enabled-hook
-<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>cursor-type<span class="org-unicode-whitespace-subdued-space"> </span>'(hbar<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>3)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>god-mode-cursor-backtrack<span class="org-unicode-whitespace-subdued-space"> </span>god-mode-disabled-hook
-<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>cursor-type<span class="org-unicode-whitespace-subdued-space"> </span>'box))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(which-key-enable-god-mode-support))
 </pre>
-</div>
 </div>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
-Thanks habamax and jwiegley. <a href="https://github.com/jwiegley/use-package/issues/366">https://github.com/jwiegley/use-package/issues/366</a>
-</p></div>
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode">https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode</a>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Thanks habamax and jwiegley. <a href="https://github.com/jwiegley/use-package/issues/366">https://github.com/jwiegley/use-package/issues/366</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 <a href="http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296">http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296</a>
-</p></div>
+</p></div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-01 Thu 09:33</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2016-09-04 Sun 18:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

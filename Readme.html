@@ -3,23 +3,30 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Readme</title>
-<!-- 2016-09-01 Thu 09:33 -->
+<!-- 2016-09-04 Sun 18:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Read Me</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
   .todo   { font-family: monospace; color: red; }
-  .done   { color: green; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -58,15 +65,14 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.right  { text-align: center;  }
-  th.left   { text-align: center;   }
-  th.center { text-align: center; }
-  td.right  { text-align: right;  }
-  td.left   { text-align: left;   }
-  td.center { text-align: center; }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara:nth-child(2) { display: inline; }
-  .footpara { display: block; }
+  .footpara { display: inline; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -88,7 +94,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -142,28 +148,36 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="index"> HOME </a>
 </div><div id="content">
-<h1 class="title">Readme</h1>
+<h1 class="title">Read Me</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1. Hello!</a></li>
-<li><a href="#sec-2">2. A starter kit for magicians</a>
+<li><a href="#orgheadline8">1. Hello!</a>
 <ul>
-<li><a href="#sec-2-1">2.1. Working with the Emagicians Starter Kit</a></li>
-<li><a href="#sec-2-2">2.2. Installing</a></li>
-<li><a href="#sec-2-3">2.3. Customizing</a></li>
+<li><a href="#orgheadline7">1.1. Five 'W's and 2 'Y's.</a>
+<ul>
+<li><a href="#orgheadline1">1.1.1. Who am I?</a></li>
+<li><a href="#orgheadline2">1.1.2. What is this? A starter kit for magicians.</a></li>
+<li><a href="#orgheadline3">1.1.3. Why?</a></li>
+<li><a href="#orgheadline4">1.1.4. How</a></li>
+<li><a href="#orgheadline5">1.1.5. When</a></li>
+<li><a href="#orgheadline6">1.1.6. Where</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. A note about tone</a></li>
-<li><a href="#sec-4">4. Dedication</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline9">2. A note about tone</a></li>
+<li><a href="#orgheadline10">3. Dedication</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Hello!</h2>
+
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">1</span> Hello!</h2>
 <div class="outline-text-2" id="text-1">
-<div class= "notice notice-info">
+<div class= "notice notice-info tiny-box">
+
 <p>
 Project Status:
 </p>
@@ -175,32 +189,61 @@ Fit for other humans to tell me it is broken, and I can fix it.
 <p>
 But Not Even Alpha.
 </p>
+
 </div>
 
 <p>
-🐰,(hello!)
+🐰-(hello!)
 </p>
 
-<div class="notice notice-warning">
+<div class="notice notice-warning tiny-box">
+
 <p>
 What is here is not on the master branch, but is instead in the v2 branch. 
 </p>
+
 </div>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> A starter kit for magicians</h2>
-<div class="outline-text-2" id="text-2">
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">1.1</span> Five 'W's and 2 'Y's.</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Who am I?</h4>
+<div class="outline-text-4" id="text-1-1-1">
 <p>
-I stand on the shoulders of giants to weave my own spells.  
+I'm Jonnay!
 </p>
 
 <p>
-I got tired of my old .emacs file, and poorly maintained collection
-of extensions, that was working less and less well, the more time
-went on and on.  So I made the Emagicians Starter Kit.
+I've been using Emacs since 2007.  I make <a href="http://www.jonnay.net/">Music, Art and Video
+Blogs</a>.  I'm a front-end narwhal (a Canadian coder who can do UX
+and design as well).  Professionally I have used many
+languages—including P/LB—but my favorite is Scheme.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2"><span class="section-number-4">1.1.2</span> What is this? A starter kit for magicians.</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+The Emagicians Starter Kit is a set of org-mode files that are
+automagikally tangled into Emacs Lisp on startup.
 </p>
 
+<p>
+I got tired of my old .emacs file and poorly maintained collection
+of extensions. It was working less and less well the more and more
+time went on and on.  So In an airplane across the Atlantic I made
+the very first version of the Emagicians Starter Kit.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">1.1.3</span> Why?</h4>
+<div class="outline-text-4" id="text-1-1-3">
 <p>
 I Love the idea of the starter kits, but I found they made too many
 assumptions and just wasn't fit for what I needed.  I also have a
@@ -209,65 +252,56 @@ well. However with regards to emacs: (and to to paraphrase Douglas
 McArther Shaftoe from the Neal Stephenson novel <i>Cryptonomicon</i>.)
 </p>
 
-<blockquote>
+<div class="epigraph"><blockquote>
 <p>
 This is my Emacs.  There are plenty like it, but this one is mine.
 </p>
-</blockquote>
-</div>
 
-<div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Working with the Emagicians Starter Kit</h3>
-<div class="outline-text-3" id="text-2-1">
+</blockquote></div>
+
 <p>
-Son, there is no brogramming here.  No easy install shell file that
-you can just run, and everything goes.  In fact, it is antithetical
-to the whole concept of the emagicians starter-kit.  Instead this
-starter kit has org-mode super-powers. 
+Additionally, there is real value in people explaining their emacs
+setup, especially in easily digestible forms.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Installing</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">1.1.4</span> How</h4>
+<div class="outline-text-4" id="text-1-1-4">
 <p>
-Installing, customizing, and making it go is as easy as opening the
-<a href="./Emagician-Install.html">./Emagician-Install.html</a> and then following instructions.
-There are plenty of code blocks in there that will get you started
-for installing and testing.  Basically, you shouldn't ever need to
-leave the comfort of your org-mode buffer.
+Everything is in Org-Mode.  If you want to join in all the fun,
+there is an <a href="./Emagician-Install.html">./Emagician-Install.html</a> file that you can follow
+along with.  It will get you moving into basic configurations, all
+the way through testing the result before making the emagician
+starter kit your actual init file.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Customizing</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">1.1.5</span> When</h4>
+<div class="outline-text-4" id="text-1-1-5">
 <p>
-If you need to customize the emagician starter kit, I provide you
-with a way to do it based on:
+March 2012.  It got commited to a git repo later that year.
 </p>
+</div>
+</div>
 
-<ul class="org-ul">
-<li>Your True Name
-</li>
-<li>Machine Name
-</li>
-<li>Login Name
-</li>
-</ul>
-
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">1.1.6</span> Where</h4>
+<div class="outline-text-4" id="text-1-1-6">
 <p>
-Most of the instructions are on the Install File. 
+It started in an airplane.
 </p>
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> A note about tone</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9"><span class="section-number-2">2</span> A note about tone</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 If your primary tool, as both hobby and vocation is your text
 editor, does it not then follow that it is one of the fundamentally
@@ -293,9 +327,9 @@ That's what.
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Dedication</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">3</span> Dedication</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 To My Wife:  Shell Arkell.  The most important person in my life,
 who outshines all other people, like the noon-day sun outshines the
@@ -310,8 +344,7 @@ stars.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-01 Thu 09:33</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="date">Created: 2016-09-04 Sun 18:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
