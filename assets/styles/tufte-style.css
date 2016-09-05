@@ -6,7 +6,8 @@ pre.code {
     width: 90%;
 }
 
-@media slcreen {
+
+@media not-screen-untill-debuged {
     h1.title {
         margin-left: 260px;
     }
