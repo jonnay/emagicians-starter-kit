@@ -1,0 +1,64 @@
+@import url("tufte.css");
+
+.title { text-align: left; }
+
+pre.code {
+    width: 90%;
+}
+
+@media slcreen {
+    h1.title {
+        margin-left: 260px;
+    }
+
+    #table-of-contents {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 1ex 0 2em 2em;
+        border-right: 1px solid #bbb;
+        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
+        width: 240px;
+        height: 100vh;
+        font-size: 11px;
+        background: hsl(60, 100%, 95%);
+        overflow: auto;
+    }
+
+    #table-of-contents h2,
+    #table-of-contents ol,
+    #table-of-contents ul{
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    #table-of-contents ul>li>ul>li>ul>li {
+        font-size: 80%;
+        display: block;
+    }
+
+    #table-of-contents h2 {
+        margin-top: 0;
+        border: 0;
+        box-shadow: 0;
+    }
+
+    #table-of-contents code {
+        font-size: 12px;
+    }
+
+    #footnotes {
+        margin-left: 280px;
+        max-width: 960px;
+    }
+    #postamble {
+        margin-left: 230px;
+        margin-top: 0;
+        padding-top: 30px;
+    }
+    div.outline-2 {
+        margin-left: 230px;
+        max-width: 960px;
+    }
+
+}
