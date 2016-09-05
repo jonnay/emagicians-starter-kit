@@ -1,321 +1,324 @@
-#+title:General Programming helpers
-
-* Editing
-** Tabs
-
-Probably one of the most disputed things when "growing up" as a programmer.  It's seemed to have settled town to a tab stop of 2, with no physical ~Control I~ tabs.
-
-Or maybe that's just age.  I used to really want 4-space, physical tabs. 
-
-Now, not so much.  Explicit spaces are probably the easiest for everyone involved.
-
-In short, it's fucking moot.  Go with the project, and find peace.  If it's really brutal, make computers format it for you incoming, and reformat it for everyone else outgoing.
-
-#+begin_src emacs-lisp 
-  (setq-default indent-tabs-mode nil)
-#+end_src
-
-** Spell Checking on Programming Modes
-
-   Gah. So bad at this.  
-
-   ~emagician/minor-in-major-mode~ doesn't work because flyspell-prog-mode doesn't take an argument. 
-
-#+begin_src emacs-lisp 
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
-#+end_src
-
-** Yanking
-
-   This is such a handy piece of functionality.  It just works. 
-
-#+begin_src emacs-lisp
-  (defadvice yank (after indent-region activate)
-    "indent the region after a yank if we're in a programming mode."
-    (if (derived-mode-p 'prog-mode)
-        (indent-region (region-beginning) (region-end) nil)))
-#+end_src
-** YAS  
-The more boilerplate your language requires, the more abstractions it can afford the user.
-
-There is always a little bit of boiler-plate that is required.
-
-#+begin_src emacs-lisp 
-(add-hook 'prog-mode-hook 'yas-minor-mode-on)
-#+end_src
-
-** Smart Paren Mode
-   I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed from another config somewhere. 
-
-#+begin_src emacs-lisp 
-(use-package smartparens
-  :defer t
-  :diminish "⒮"
-  :bind (("M-9" . sp-backward-sexp)
-         ("M-0" . sp-forward-sexp))
-  :init
-  (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
-  :config
-  (add-to-list 'sp-sexp-suffix '(json-mode regex ""))
-  (add-to-list 'sp-sexp-suffix '(es-mode regex ""))
-
-  (require 'smartparens-config)
-  (add-hook 'sh-mode-hook
-            (lambda ()
-              ;; Remove when https://github.com/Fuco1/smartparens/issues/257
-              ;; is fixed
-              (setq sp-autoescape-string-quote nil)))
-
-    ;; Remove the M-<backspace> binding that smartparens adds
-
-  (let ((disabled '("M-<backspace>")))
-    (setq sp-smartparens-bindings
-          (cl-remove-if (lambda (key-command)
-                          (member (car key-command) disabled))
-                        sp-smartparens-bindings)))
-
-  (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
-  (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
-  (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-  (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
-    ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
-    ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
-
-  (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-  (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
-  (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
-  (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
-  (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-  (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-  (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
-
-  (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
-  (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
-    ;; (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
-    ;; (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
-
-  (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
-  (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
-  (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
-  (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
-  (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-  (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
-  (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
-  (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
-  (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
-  (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
-  (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
-  (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
-  (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
-  (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
-  (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
-  (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
-  (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
-
-  (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-    ;; Remove '' pairing in elisp because quoting is used a ton
-)
-
-#+end_src
-
-* Interface elements
-** Line Numbers
-   I spend anywhere between 10%-90% of my week pair programming.
-
-   On a projector.
-
-   Being able to point to a line and give it a name like ~45~ is important.
-
-#+begin_src emacs-lisp 
-(add-hook 'prog-mode-hook 'linum-mode)
-#+end_src
-
-** Which Function
-   Display the function on the mode line.
-
-   Only because I am an info-junkie.  Not because it is particularly useful from a UI perspective.
-
-#+begin_src emacs-lisp 
-(which-function-mode t)
-#+end_src
-
-** Check Parens
-   Enforce checking of parens in programming modes.  Not 100% sure about this yet.  But 90% sure.
-
-#+begin_src emacs-lisp
-(defun emagician/check-parens ()
-  (when after-init-time   ; Don't check parens if we're initializing. 
-    (condition-case err
-        (check-parens)
-      ((error) (message "Buffer has unmatched Parens or quote!")))))
-
-#+end_src
-
-#+begin_src emacs-lisp
-(add-hook 'prog-mode-hook 'emagician/check-parens t)
-#+end_src
-** Show Paren Mode
-   This config could use tweaking. 
-
-#+begin_src emacs-lisp 
-(setq show-paren-style 'mixed)
-(setq show-paren-delay 0)
-(show-paren-mode)
-#+end_src
-*** TODO  Snarf the smartparens from interface and barf here instead
-*** TODO Update my config to be sane, check https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens
-
-
-** Rainbow Delimiters
-   Not 100% sure about this yet.
-
-   Rainbow Delimiters are static.  It's always the same color regardless of where the point is.
-
-#+begin_src emacs-lisp :tangle no
-(use-package rainbow-delimiters
-  :demand
-  :init
-  (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode-hook)
-  :config
-  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "grey43")
-  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "grey45")
-  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "grey47")
-  (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "grey50")
-  (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "grey55")
-  (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "grey60")
-  (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "grey65")
-  (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "grey70")
-  (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "grey75"))
-#+end_src
-
-** Rainbow Blocks                                                                         :disabled:
-   Trying an experiment.  Syntax highlight blocks based on overline. 
-
-   It sould have been hella cool, but what happens is that the rainbow-block-face over-rides the entire face.
-
-   I'll need to learn more about emacs faces to continue.
-
-
-
-#+begin_src emacs-lisp :tangle no
-(use-package rainbow-blocks
-  :demand
-  :init
-  (emagician/minor-in-major-mode rainbow-blocks-mode prog-mode-hook)
-  :config
-  (custom-set-faces
-   '(rainbow-blocks-depth-1-face ((t (:overline "grey10"))))
-   '(rainbow-blocks-depth-2-face ((t (:overline "grey20"))))
-   '(rainbow-blocks-depth-3-face ((t (:overline "grey30"))))
-   '(rainbow-blocks-depth-4-face ((t (:overline "grey40"))))
-   '(rainbow-blocks-depth-5-face ((t (:overline "grey50"))))
-   '(rainbow-blocks-depth-6-face ((t (:overline "grey60"))))
-   '(rainbow-blocks-depth-7-face ((t (:overline "grey70"))))
-   '(rainbow-blocks-depth-8-face ((t (:overline "grey80"))))
-   '(rainbow-blocks-depth-9-face ((t (:overline "grey90"))))))
-#+end_src
-
-(foo (bar (baz BLag) (bar baz (foo bar (foo bar ) baz blarg (foo  BLag) (bar baz (foo bar (foo bar ) baz blarg (foo ) ) far ) b00) barg ) blarg ) foo foo) 
-
-** Color Identifiers
-
-   Like manna from heaven.
-
-   This is one of the coolest modes so far.  Yeah, it's slightly angry fruit salad, but it is also just... wow.  It doesn't NEED a mode lighter, but it deserves it.
-
-#+begin_src emacs-lisp 
-(use-package color-identifiers-mode
-  :diminish (color-identifiers-mode . "🎨 ")
-  :init
-  (add-hook 'after-init-hook 'global-color-identifiers-mode))
-
-#+end_src
-
-** Show whitespace
-
-   Whitespace unicode does good stuff with whitespace.  Use that.
-
-   With unicode setup, it is much better. 
-
-#+begin_src emacs-lisp 
-(use-package whitespace
-  :diminish "· "
-  :init
-  (add-hook 'prog-mode-hook 'whitespace-mode)
-  (use-package unicode-whitespace
-    :config
-    (unicode-whitespace-setup 'subdued-faces)))
-#+end_src
-
-** Prettify Symbols
-
-   Oh man, with the unicode pretty symbols, this is sweet.  I have been considering making the jump to FiraCode, but there is so many weird little things about it I am unsure of.
-
-   Prettify Symbols is 80% there, and looks freaking hawt.
-
-#+begin_src emacs-lisp 
-(global-prettify-symbols-mode 1)
-#+end_src
-
-*** Prettify Symbols List
-
-Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCode. 
-
-#+begin_src emacs-lisp :tangle yes
-(defvar emagician/prettify-list
-  '(("lambda" . 955)
-    ("<=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≤))
-    (">=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≥))
-    ("->" . ?⟶)
-    ("=>" . ?⟹)
-    ("==" . ?⩵)
-    ("//" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?⫽))
-    ("!=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≠))
-    ("->>" .  (?\s (Br . Bl) ?\s (Br . Bl) ?\s
-                   (Bl . Bl) ?- (Bc . Br) ?- (Bc . Bc) ?>
-                   (Bc . Bl) ?- (Br . Br) ?>))))
-
-(emagician/defhook emagician-prettify-code prog-mode-hook
-  (setq prettify-symbols-alist emagician/prettify-list))
-#+end_src
-
-| You enter | Displayed |
-|-----------+-----------|
-| ~lambda~  | λ         |
-|-----------+-----------|
-| ~<=~      | ≤         |
-| ~>=~      | ≥         |
-| ~->~      | ⟶         |
-| ~=>~      | ⟹         |
-| ~//~      | ⫽         |
-| ~!=~      | ≠         |
-| ~==~      | ⩵         |
-
-Using http://unicode-table.com/ helped a LOT
-
-**** How does this jiggery-pokery work?
-Prettify is basically a call to compose region, it automagickally sets
-start and end, and the second arg of the a-list is ~components~
-
-So for ~("lambda" . 955)~, "lambda" just gets turned into char 955, or λ.
-
-But for ~("<=" . (?\s (Br . Bl) ?\s (Bc . Bc) ?≥))~?
+#+title:General Programming
+
+* Interface
+** Display
+*** Line Numbers
+    I spend anywhere between 10%-90% of my week pair programming.
+
+    On a projector.
+
+    Being able to point to a line and give it a name like ~45~ is important.
+
+ #+begin_src emacs-lisp 
+ (add-hook 'prog-mode-hook 'linum-mode)
+ #+end_src
+
+*** Which Function
+    Display the function on the mode line.
+
+    Only because I am an info-junkie.  Not because it is particularly useful from a UI perspective.
+
+ #+begin_src emacs-lisp 
+ (which-function-mode t)
+ #+end_src
+
+*** Check Parens
+    Enforce checking of parens in programming modes.  Not 100% sure about this yet.  But 90% sure.
+
+ #+begin_src emacs-lisp
+ (defun emagician/check-parens ()
+   (when after-init-time   ; Don't check parens if we're initializing. 
+     (condition-case err
+         (check-parens)
+       ((error) (message "Buffer has unmatched Parens or quote!")))))
+
+ #+end_src
+
+ #+begin_src emacs-lisp
+ (add-hook 'prog-mode-hook 'emagician/check-parens t)
+ #+end_src
+*** Show Paren Mode
+    This config could use tweaking. 
+
+ #+begin_src emacs-lisp 
+ (setq show-paren-style 'mixed)
+ (setq show-paren-delay 0)
+ (show-paren-mode)
+ #+end_src
+**** TODO  Snarf the smartparens from interface and barf here instead
+**** TODO Update my config to be sane, check https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens
+
+
+*** Rainbow Delimiters
+    Not 100% sure about this yet.
+
+    Rainbow Delimiters are static.  It's always the same color regardless of where the point is.
+
+ #+begin_src emacs-lisp :tangle no
+ (use-package rainbow-delimiters
+   :demand
+   :init
+   (emagician/minor-in-major-mode rainbow-delimiters-mode prog-mode-hook)
+   :config
+   (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "grey43")
+   (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "grey45")
+   (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "grey47")
+   (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "grey50")
+   (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "grey55")
+   (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "grey60")
+   (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "grey65")
+   (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "grey70")
+   (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "grey75"))
+ #+end_src
+
+*** Rainbow Blocks                                                                        :disabled:
+    Trying an experiment.  Syntax highlight blocks based on overline. 
+
+    It sould have been hella cool, but what happens is that the rainbow-block-face over-rides the entire face.
+
+    I'll need to learn more about emacs faces to continue.
+
+
+
+ #+begin_src emacs-lisp :tangle no
+ (use-package rainbow-blocks
+   :demand
+   :init
+   (emagician/minor-in-major-mode rainbow-blocks-mode prog-mode-hook)
+   :config
+   (custom-set-faces
+    '(rainbow-blocks-depth-1-face ((t (:overline "grey10"))))
+    '(rainbow-blocks-depth-2-face ((t (:overline "grey20"))))
+    '(rainbow-blocks-depth-3-face ((t (:overline "grey30"))))
+    '(rainbow-blocks-depth-4-face ((t (:overline "grey40"))))
+    '(rainbow-blocks-depth-5-face ((t (:overline "grey50"))))
+    '(rainbow-blocks-depth-6-face ((t (:overline "grey60"))))
+    '(rainbow-blocks-depth-7-face ((t (:overline "grey70"))))
+    '(rainbow-blocks-depth-8-face ((t (:overline "grey80"))))
+    '(rainbow-blocks-depth-9-face ((t (:overline "grey90"))))))
+ #+end_src
+
+ (foo (bar (baz BLag) (bar baz (foo bar (foo bar ) baz blarg (foo  BLag) (bar baz (foo bar (foo bar ) baz blarg (foo ) ) far ) b00) barg ) blarg ) foo foo) 
+
+*** Color Identifiers
+
+    Like manna from heaven.
+
+    This is one of the coolest modes so far.  Yeah, it's slightly angry fruit salad, but it is also just... wow.  It doesn't NEED a mode lighter, but it deserves it.
+
+ #+begin_src emacs-lisp 
+ (use-package color-identifiers-mode
+   :diminish (color-identifiers-mode . "🎨 ")
+   :init
+   (add-hook 'after-init-hook 'global-color-identifiers-mode))
+
+ #+end_src
+
+*** Show whitespace
+
+    Whitespace unicode does good stuff with whitespace.  Use that.
+
+    With unicode setup, it is much better. 
+
+ #+begin_src emacs-lisp 
+ (use-package whitespace
+   :diminish "· "
+   :init
+   (add-hook 'prog-mode-hook 'whitespace-mode)
+   (use-package unicode-whitespace
+     :config
+     (unicode-whitespace-setup 'subdued-faces)))
+ #+end_src
+
+*** Prettify Symbols
+
+    Oh man, with the unicode pretty symbols, this is sweet.  I have been considering making the jump to FiraCode, but there is so many weird little things about it I am unsure of.
+
+    Prettify Symbols is 80% there, and looks freaking hawt.
+
+ #+begin_src emacs-lisp 
+ (global-prettify-symbols-mode 1)
+ #+end_src
+
+**** Prettify Symbols List
+
+ Thanks to Artur Malabarba [fn:3], Inspired by:  https://github.com/tonsky/FiraCode. 
+
+ #+begin_src emacs-lisp :tangle yes
+ (defvar emagician/prettify-list
+   '(("lambda" . 955)
+     ("<=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≤))
+     (">=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≥))
+     ("->" . ?⟶)
+     ("=>" . ?⟹)
+     ("==" . ?⩵)
+     ("//" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?⫽))
+     ("!=" . (?\s  (Br . Bl) ?\s (Bc . Bc) ?≠))
+     ("->>" .  (?\s (Br . Bl) ?\s (Br . Bl) ?\s
+                    (Bl . Bl) ?- (Bc . Br) ?- (Bc . Bc) ?>
+                    (Bc . Bl) ?- (Br . Br) ?>))))
+
+ (emagician/defhook emagician-prettify-code prog-mode-hook
+   (setq prettify-symbols-alist emagician/prettify-list))
+ #+end_src
+
+ | You enter | Displayed |
+ |-----------+-----------|
+ | ~lambda~  | λ         |
+ |-----------+-----------|
+ | ~<=~      | ≤         |
+ | ~>=~      | ≥         |
+ | ~->~      | ⟶         |
+ | ~=>~      | ⟹         |
+ | ~//~      | ⫽         |
+ | ~!=~      | ≠         |
+ | ~==~      | ⩵         |
+
+ Using http://unicode-table.com/ helped a LOT
+
+***** How does this jiggery-pokery work?
+ Prettify is basically a call to compose region, it automagickally sets
+ start and end, and the second arg of the a-list is ~components~
+
+ So for ~("lambda" . 955)~, "lambda" just gets turned into char 955, or λ.
+
+ But for ~("<=" . (?\s (Br . Bl) ?\s (Bc . Bc) ?≥))~?
  
-#+begin_quote
-If it is a vector or list, it is a sequence of alternate characters and
-composition rules, where (2N)th elements are characters and (2N+1)th
-elements are composition rules to specify how to compose (2N+2)th
-elements with previously composed N glyphs.
+ #+begin_quote
+ If it is a vector or list, it is a sequence of alternate characters and
+ composition rules, where (2N)th elements are characters and (2N+1)th
+ elements are composition rules to specify how to compose (2N+2)th
+ elements with previously composed N glyphs.
 
-A composition rule is a cons of global and new glyph reference point
-symbols.  See the documentation of [[help:reference-point-alist]] for more
-details.
-#+end_quote
+ A composition rule is a cons of global and new glyph reference point
+ symbols.  See the documentation of [[help:reference-point-alist]] for more
+ details.
+ #+end_quote
 
-Rrrriiiiggghhhhht.  
+ Rrrriiiiggghhhhht.  
 
-I don't entirely understand this yet. 
+ I don't entirely understand this yet. 
+** Editing
+*** Tabs
 
+ Probably one of the most disputed things when "growing up" as a
+ programmer.  It's seemed to have settled town to a tab stop of 2, with
+ no physical ~Control I~ tabs.
+
+ Or maybe that's just age.  I used to really want 4-space-wide physical
+ tabs, but now, not so much.  Explicit spaces are probably the easiest
+ for everyone involved.
+
+ In short, it's fucking moot.  Go with the project, and find peace.  If
+ it's really brutal, make computers format it for you incoming, and
+ reformat it for everyone else outgoing.
+
+ #+begin_src emacs-lisp 
+   (setq-default indent-tabs-mode nil)
+ #+end_src
+
+*** Spell Checking on Programming Modes
+
+    Gah. So bad at this.  
+
+    ~emagician/minor-in-major-mode~ doesn't work because flyspell-prog-mode doesn't take an argument. 
+
+ #+begin_src emacs-lisp 
+ (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+ #+end_src
+
+*** Yanking
+
+    This is such a handy piece of functionality.  It just works. 
+
+ #+begin_src emacs-lisp
+   (defadvice yank (after indent-region activate)
+     "indent the region after a yank if we're in a programming mode."
+     (if (derived-mode-p 'prog-mode)
+         (indent-region (region-beginning) (region-end) nil)))
+ #+end_src
+*** YAS  
+ The more boilerplate your language requires, the more abstractions it can afford the user.
+
+ There is always a little bit of boiler-plate that is required.
+
+ #+begin_src emacs-lisp 
+ (add-hook 'prog-mode-hook 'yas-minor-mode-on)
+ #+end_src
+
+*** Smart Paren Mode
+    I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed from another config somewhere. 
+
+ #+begin_src emacs-lisp 
+ (use-package smartparens
+   :defer t
+   :diminish "⒮"
+   :bind (("M-9" . sp-backward-sexp)
+          ("M-0" . sp-forward-sexp))
+   :init
+   (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
+   :config
+   (add-to-list 'sp-sexp-suffix '(json-mode regex ""))
+   (add-to-list 'sp-sexp-suffix '(es-mode regex ""))
+
+   (require 'smartparens-config)
+   (add-hook 'sh-mode-hook
+             (lambda ()
+               ;; Remove when https://github.com/Fuco1/smartparens/issues/257
+               ;; is fixed
+               (setq sp-autoescape-string-quote nil)))
+
+     ;; Remove the M-<backspace> binding that smartparens adds
+
+   (let ((disabled '("M-<backspace>")))
+     (setq sp-smartparens-bindings
+           (cl-remove-if (lambda (key-command)
+                           (member (car key-command) disabled))
+                         sp-smartparens-bindings)))
+
+   (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+   (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+   (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+   (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+     ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
+     ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
+
+   (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
+   (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
+   (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
+   (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
+   (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+   (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
+   (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
+
+   (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
+   (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
+     ;; (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
+     ;; (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
+
+   (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
+   (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
+   (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
+   (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
+   (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
+   (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
+   (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
+   (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
+   (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
+   (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
+   (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
+   (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
+   (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
+   (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
+   (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
+   (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
+   (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
+
+   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
+     ;; Remove '' pairing in elisp because quoting is used a ton
+ )
+
+ #+end_src
 * Tools
 ** Flycheck
 
@@ -397,26 +400,25 @@ Tweak Ediff to be better
 *** TODO fix this and make it work. 
 *** TODO bugfix for the shell-command-to-string bug
 
-* Version control
+** Version control
 
-  Version control Gets it's own section. 
+   Version control Gets it's own section. 
 
-  Don't manage ancient version control backends.
-#+begin_src emacs-lisp 
-(setq vc-handled-backends '(Git))
-#+end_src
+   Don't manage ancient version control backends.
+ #+begin_src emacs-lisp 
+ (setq vc-handled-backends '(Git))
+ #+end_src
 
-** Editing
+*** Editing
    
-   Modes for editing git-specific files. 
+    Modes for editing git-specific files. 
 
-#+begin_src emacs-lisp 
-  (use-package git-commit)
-  (use-package gitconfig-mode)
-  (use-package gitignore-mode)
-#+end_src
+ #+begin_src emacs-lisp 
+   (use-package git-commit)
+   (use-package gitconfig-mode)
+   (use-package gitignore-mode)
+ #+end_src
 
-** Interface 
 *** Magit
 
     Magit is like manna from heaven.
@@ -456,7 +458,6 @@ Tweak Ediff to be better
                             (magit-toplevel)))
 #+end_src
 
-
 *** Git Gutter
 
     So pleasant. 
@@ -470,20 +471,20 @@ Tweak Ediff to be better
   (add-hook 'prog-mode-hook 'git-gutter+-mode))
 #+end_src
 
-* Project Management
-** Projectile
-   The last time I used projectile it was not what I needed at all.
+** Project Management
+*** Projectile
+    The last time I used projectile it was not what I needed at all.
 
-   But that was a long time ago.
+    But that was a long time ago.
 
-#+begin_src emacs-lisp 
-(use-package projectile
-  :init
-  (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
-  (projectile-global-mode))
+ #+begin_src emacs-lisp 
+ (use-package projectile
+   :init
+   (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
+   (projectile-global-mode))
 
-(use-package helm-projectile)
-#+end_src
+ (use-package helm-projectile)
+ #+end_src
 
 * Languages
   Each language gets it's own file.

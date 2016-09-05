@@ -1,5 +1,5 @@
 #+Title: User Interface Elements
-
+padline yes comments link
 * Keystrokes and commands
 ** Simple answers plz!
 #+begin_src emacs-lisp 
@@ -938,14 +938,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (make-discovery ruby-tools)
   (bind-keys :prefix-map discovery-map
              :prefix "<f1>"
-             ("(" . discover-paredit)
-             ("p" . discover-projectile)
-             ("r" . discover-ruby-tools))
-  :bind
-  (("C-c C-h"   . discover-my-major)
-   ("C-c C-S-H" . discover-my-mode)))
-
-
+             ("<f1>" . discover-my-major)
+             ("<f2>" . discover-my-mode)
+             ("("    . discover-paredit)
+             ("p"    . discover-projectile)
+             ("r"    . discover-ruby-tools)))
 #+end_src
 
  

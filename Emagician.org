@@ -169,7 +169,7 @@ before the rest of the scratch interface is built.")
                                 emagician/dir))
         (load-result nil)
         (emagician/load-depth (1+ emagician/load-depth))
-        (org-babel-default-header-args (cons '(:comment . "link") 
+        (org-babel-default-header-args (cons '(:comments . "link") 
                                              (assq-delete-all :comment
                                                               org-babel-default-header-args))))
     (if (file-exists-p file)
@@ -230,74 +230,89 @@ before the rest of the scratch interface is built.")
   In the case of #1, we want the assets directory to be destroyed and rebuilt everytime. 
   In the case of #2, it should be in source control 
 
-* Interface
-
-  This file handles the baseline interface for emacs, and is split into the following sections:
-
-  - Keystrokes :: Really just a small bit about an anti-vim hack
-  - Display :: anything visible, modeline, titlebar, theme, etc
-  - Editing :: about inserting and using text, including snippets and autocomplete
-  - Navigating :: Moving the mark.  This includes searching.
-  - Saving :: All about backups.
-  - State Management :: Persist state across emacs sessions.
-  - Help and Discoverability :: Getting more help with emacs, and learning commands better. 
-
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Interface.org")
-#+END_SRC
-
-* Text
-
-  Emacs is a text editor afteral.
-
-#+BEGIN_SRC emacs-lisp 
-(emagician/load "Text.org")
-#+END_SRC
-
-* Programming
-
-  This sets up some baseline programming helpers and then loads
-  individual org files for each programming mode. 
-
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Programming.org")
-#+END_SRC
-
-* Org Mode
-  Deserves it's own file... ORG GRIMOIRE!
-
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Org-Grimoire.org")
-#+END_SRC
-
-* Shell
-
-  (Also my lovely wife)
-
-  Why would you not use Eshell?
-
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Eshell-Magick.org")
-#+END_SRC
-
-* Lamp
-
-  The Lamp is a 5th magickal weapon along with the wand, sword, cup
-  and chalace.  It represents illumination and self knowledge.
-
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Lamp.org")
-#+END_SRC
+* Key Concepts
+  - The Bunny of ÆＳÞＥTＩC
+  - The Bunny of Discoverability
+  - The Bunny of Mise en Place
   
-* Emagician Starter Kit has it's own Lamp
 
-  Tools to make developing the Emagician Starter kit easier.
+* File Layout
+** Interface
+   There is both an Interface file to handle the general emacs UI and sections inside of individual files. 
 
-#+BEGIN_SRC emacs-lisp
-(emagician/load "Emagician-Meta.org")
-#+END_SRC
+   - Keystrokes :: Key related commands. 
+   - Display :: anything visible, modeline, titlebar, theme, etc
+   - Editing :: about inserting and using text, including snippets and autocomplete
+   - Navigating :: Moving the mark.  This includes searching.
+   - Saving :: All about backups.
+   - State Management :: Persist state across emacs sessions.
+   - Help and Discoverability :: Getting more help with emacs, and learning commands better. 
+
+** Tools
+   External or Internal.  Think of tools as being less about Editing of text and more about getting a particular job done.
+
+   There is no global tools file.  But maybe There should be, and E-Shell would be in it.
+
+* Files
+  There is a fine line between too many files, and too few.
+
+** Interface
+
+  #+BEGIN_SRC emacs-lisp
+  (emagician/load "Interface.org")
+  #+END_SRC
+
+** Text
+
+   Emacs is a text editor afteral.
+
+ #+BEGIN_SRC emacs-lisp 
+ (emagician/load "Text.org")
+ #+END_SRC
+
+** Programming
+
+   This sets up some baseline programming helpers and then loads
+   individual org files for each programming mode. 
+
+ #+BEGIN_SRC emacs-lisp
+ (emagician/load "Programming.org")
+ #+END_SRC
+
+** Org Mode
+   Deserves it's own file... ORG GRIMOIRE!
+
+ #+BEGIN_SRC emacs-lisp
+ (emagician/load "Org-Grimoire.org")
+ #+END_SRC
+
+** E-Shell
+
+   Why would you not use E-Shell?
+
+ #+BEGIN_SRC emacs-lisp
+ (emagician/load "Eshell-Magick.org")
+ #+END_SRC
+
+** Lamp
+
+   The Lamp is a 5th magickal weapon along with the wand, sword, cup
+   and chalace.  It represents illumination and self knowledge.
+
+ #+BEGIN_SRC emacs-lisp
+ (emagician/load "Lamp.org")
+ #+END_SRC
   
-* Now load the users files
+** Emagician Starter Kit has it's own Lamp
+
+   Tools to make developing the Emagician Starter kit easier.
+
+ #+BEGIN_SRC emacs-lisp
+ (emagician/load "Emagician-Meta.org")
+ #+END_SRC
+  
+
+* Entity Customization
 ** First the customization
 #+BEGIN_SRC emacs-lisp
 (load custom-file)
@@ -323,12 +338,16 @@ before the rest of the scratch interface is built.")
 (emagician/load user-login-name)
 #+END_SRC
    
+
 * Some Inspirational words from the book of emacs
+#+begin_verse
 THE BOOK OF THE EMACS, Part I
 Liber Lisper Legis
 as (R)eceived (M)ade (S)ound [RMS]
 on this 15th day of December,
 the Year of our Editor 2007.
+#+end_verse
+
 Chapter 1
 
   1. Buf! Manifestation of Chat.

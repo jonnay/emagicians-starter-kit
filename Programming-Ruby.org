@@ -20,14 +20,14 @@
 (use-package yari)
 #+end_src
 *** Making it work
-Getting hte base ruby documentation here
-#+begin_src sh 
+Get the base ruby documentation here
+#+begin_src sh :tangle no
 gem install rdoc-data
 rdoc-data --install
 #+end_src
 
 This gets all the rdoc for your installed gems
-#+begin_src sh 
+#+begin_src sh :tangle no
 gem rdoc --all --ri
 #+end_src
 
@@ -50,7 +50,6 @@ gem rdoc --all --ri
 ** Robe
 #+begin_src emacs-lisp 
 (use-package robe)
-
 #+end_src
       
 ** Mode setup
@@ -80,8 +79,8 @@ gem rdoc --all --ri
 #+end_src
 
 * Environment
-** Add RBEnv path 
-This may not be needed
+** Add RBEnv path                                                                         :disabled:
+This used to be required to make rbenv work, but not any more. 
 #+begin_src emacs-lisp :tangle no
   (emagician/add-to-path (concat (getenv "HOME") "/.rbenv/shims") t)
 #+end_src
