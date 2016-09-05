@@ -1,7 +1,7 @@
 #+title: Meta-Development
 * Illumination…
+#+NAME: Peter Carroll
 #+BEGIN_QUOTE
-
 Is deliberate self modification by magic and may include spells of
 Enchantment cast at oneself to repair weaknesses or increase
 strengths, and Divination and Invocation performed for inspiration and
@@ -13,8 +13,6 @@ Enchantment or Divination. Imagination is that which occurs when will
 and perception stimulate each other.
 #+END_QUOTE
 
---Peter Carroll
-
 * ~F3~ Das Uberkey
 
   The idea here is that ~f3~ can be pressed whenever I need to do
@@ -24,10 +22,12 @@ and perception stimulate each other.
   start to learn the keystrokes.
 
 ** Meta Keys and Prefixes
-   - i     :: insert magickal key.  (p-crosses and poops and bunnies, oh my!)
-   - shift :: Do the thing, but in debug.
+   - f3    :: Open an emagician file
+   - i     :: Insert magickal key.  (P-crosses and poops and bunnies, oh my!)
+   - t     :: Show a todo list
 
-#+begin_src emacs-lisp
+
+#+BEGIN_SRC emacs-lisp
 (bind-keys :prefix-map emagician/meta-keymap
            :prefix "<f3>"
            ("<f3>"    . emagician/helm-emagician-dir)
@@ -38,13 +38,13 @@ and perception stimulate each other.
            ("a"       . emagician/meta/agenda)
            ("i"       . emagician/magick-keymap)
            ("t"       . emagician/meta/show-todo))
-#+end_src
+#+END_SRC
 * Developing
 ** Emagician Helm Source
 
    Helm keeps changing its interface.  For such an awesome package this is the one way in which it falls down for me.  Anything used to be so easy to configure.
 
-   #+begin_src emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp
    (defclass emagician/files-helm-source (helm-source-sync helm-type-file)
      ((candidates :initform (lambda () (when (file-accessible-directory-p emagician/dir)
                                                (directory-files emagician/dir t))))
@@ -69,19 +69,19 @@ and perception stimulate each other.
      (helm :sources (helm-make-source "Files in Emagician-dir" 'emagician/files-helm-source)
            :candidate-number-limit 40
            :buffer "*emagician-|-+-|-files*"))
-#+end_src
+   #+END_SRC
 
 ** Testing
 ** Running all ERT tests
-#+begin_src emacs-lisp
-(defun emagician/run-all-tests ()
+#+BEGIN_SRC emacs-lisp
+(defun emagician/meta/run-all-tests ()
   (interactive)
   (ert "emagician/"))
-#+end_src
+#+END_SRC
 
 ** Test out a fresh hot load of Emagician  💩
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defun emagician/test-initialization (&optional forms)
   (interactive)
   (let* ((init-file (expand-file-name "init.el"
@@ -122,27 +122,27 @@ and perception stimulate each other.
   "Test an Emacs initialization with a given chunk of lisp."
   (interactive  "xExecute: ")
   (emagician/test-initialization lisp))
-#+end_src
+#+END_SRC
 
 
     This loads the starter kit as a batch and outputs the results as a message.
 
-#+begin_src emacs-lisp
-  (defun emagician/test-init-through-batch ()
-    (interactive)
-    (message "Running New Emacs: %s"
-             (shell-command-to-string
-              (concat invocation-directory invocation-name " "
-                      "--no-init-file --batch "
-                      "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
-                      "--load=" (expand-file-name "init.el " emagician/dir)
-                      "--eval='' "
-                      "&"))))
-#+end_src
+#+BEGIN_SRC emacs-lisp
+(defun emagician/test-init-through-batch ()
+  (interactive)
+  (message "Running New Emacs: %s"
+           (shell-command-to-string
+            (concat invocation-directory invocation-name " "
+                    "--no-init-file --batch "
+                    "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
+                    "--load=" (expand-file-name "init.el " emagician/dir)
+                    "--eval='' "
+                    "&"))))
+#+END_SRC
 
 This does a full GUI load, outputting any results as a message.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defun emagician/test-full-init()
   (interactive)
   (message (concat "Running New Emacs: "
@@ -152,11 +152,11 @@ This does a full GUI load, outputting any results as a message.
                             "--eval='(progn (setq debug-on-error t) (setq emagician/self-test t))' "
                             "--load=" (expand-file-name "init.el " emagician/dir)
                             "&")))))
-#+end_src
+#+END_SRC
 ** Peering into the kit, the Emagician Agenda
    Note, this has 2 strikes.  The third agenda related strike requires a refactoring
 *** General agenda
-  #+begin_src emacs-lisp
+  #+BEGIN_SRC emacs-lisp
   (defun emagician/meta/agenda ()
     "Run agenda commands on the starter kit."
     (interactive)
@@ -164,10 +164,10 @@ This does a full GUI load, outputting any results as a message.
           (org-agenda-files (list emagician/dir))
           (org-agenda-file-regexp "[^.].+\.org$"))
       (call-interactively 'org-agenda)))
-  #+end_src
+  #+END_SRC
 
 *** Find Todo Items in these files
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defun emagician/meta/show-todo ()
   "Show a list of TODO actions that are on Emagicians Starter Kit."
   (interactive)
@@ -176,14 +176,40 @@ This does a full GUI load, outputting any results as a message.
         (org-agenda-file-regexp "[^.].+\.org$")
         (org-agenda-overriding-header "-|-+-|- 🐰 META 🐰 -|-+-|-"))
     (org-agenda nil "t" nil)))
-#+end_src
+#+END_SRC
 
 * Distributing
 ** Building the emagician site
 *** Skewer!
     Use the bookmarklet to connect and you're off to the races!
 *** Publishing functions
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp 
+(defun org-html-publish-to-tufte-html (plist filename pub-dir)
+  "Publish an org file to Tufte-styled HTML.
+
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name."
+  (org-publish-org-to 'tufte-html filename
+		      (concat "." (or (plist-get plist :html-extension)
+				      org-html-extension
+				      "html"))
+		      plist pub-dir))
+#+end_src
+
+*** Get ox-tufte 
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-md)
+(use-package ox-tufte)
+#+END_SRC
+
+
+
+*** Main publisher
+#+BEGIN_SRC emacs-lisp
 (setq org-html-htmlize-output-type 'css)
 (setq htmlize-html-charset 'utf-8)
 (setq httpd-root (expand-file-name "gh-pages" emagician/dir))
@@ -194,7 +220,7 @@ This does a full GUI load, outputting any results as a message.
                                      ("emagician-assets"
                                       :base-directory ,(expand-file-name "assets/" emagician/dir)
                                       :recursive t
-                                      :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+                                      :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|svg\\|eot\\|tff\\|woff"
                                       :publishing-directory ,(expand-file-name "gh-pages/assets" emagician/dir)
                                       :publishing-function org-publish-attachment)
                                      ("emagician-org"
@@ -206,9 +232,9 @@ This does a full GUI load, outputting any results as a message.
                                       :auto-sitemap t
                                       :sitemap-ignore-case t
                                       :html-html5-fancy t
-                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\"><script src=\"https://use.fontawesome.com/432a2f463b.js\"></script>"
+                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/styles/tufte-style.css\" rel=\"stylesheet\"><script src=\"https://use.fontawesome.com/432a2f463b.js\"></script>"
                                       :html-link-home "index"
-                                      :publishing-function org-html-publish-to-html
+                                      :publishing-function org-html-publish-to-tufte-html
                                       )
                                      ("emagician-org-test"
                                       :base-directory ,emagician/dir
@@ -218,8 +244,8 @@ This does a full GUI load, outputting any results as a message.
                                       :publishing-directory ,(expand-file-name "gh-pages" emagician/dir)
                                       :htmlized-source t
                                       :html-html5-fancy t
-                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/style.css\" rel=\"stylesheet\">"
-                                      :publishing-function org-html-publish-to-html
+                                      :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/styles/tufte-style.css\" rel=\"stylesheet\">"
+                                      :publishing-function org-html-publish-to-tufte-html
                                       )
                                      )))
     (org-publish project force async)))
@@ -236,24 +262,43 @@ This does a full GUI load, outputting any results as a message.
   (interactive)
   (emagician/meta/publish "emagician-assets" t nil))
 
-#+end_src
-
-*** ÆＳÞＥTＩC
+#+END_SRC
+ 
+** ÆＳÞＥTＩC 
 
     The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want 
 
-**** TODO Look at the Edward Tufte CSS and Org Export
+
+#+BEGIN_SRC emacs-lisp
+(emagician/expect-dir "assets/styles")
+#+END_SRC
+
 
      While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skill. 
 
-https://github.com/dakrone/ox-tufte - recipe coming soon
-https://github.com/melpa/melpa/pull/4201
-https://edwardtufte.github.io/tufte-css/
-**** The CSS file
+     - https://github.com/dakrone/ox-tufte 
+     - https://github.com/melpa/melpa/pull/4201
+     - https://edwardtufte.github.io/tufte-css/
 
-The thi.ng/org-spec[fn:1] is a good basis to build off of.  This is step 1 .
 
-#+begin_src css :noweb yes :tangle gh-pages/assets/style.css :padline t :comments link
+*** Image Quilt
+
+    (coming soon)
+
+*** Old The CSS file
+
+    The thi.ng/org-spec is a good basis to build off of.[fn:1]
+
+    Things I like:
+    - The source blocks, properties blocks, etc all have little outlines
+    - The tags are displayed
+    - Outbound links are displayed differently
+    - Table of contents
+
+    Things I don't like:
+    - ÆＳÞＥTＩC ... or lack thereof.
+
+#+BEGIN_SRC css
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -782,26 +827,107 @@ div.figure {
         display: none;
     }
 }
-#+end_src
+#+END_SRC
+
+*** The newer CSS file
+
+    Things that need to be fixed
+    - TOC
+    - Source Block display
+    - Show Tags
+    - Show block types 
+    - Does it need to be fontified?  Probably not. 
+    - I just fudged 90% width, maybe that can be better
+
+#+BEGIN_SRC css :tangle "gh-pages/assets/styles/tufte-style.css"
+@import url("tufte.css");
+
+.title { text-align: left; }
+
+pre.code {
+    width: 90%;
+}
+
+
+@media slcreen {
+    h1.title {
+        margin-left: 260px;
+    }
+
+    #table-of-contents {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 1ex 0 2em 2em;
+        border-right: 1px solid #bbb;
+        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
+        width: 240px;
+        height: 100vh;
+        font-size: 11px;
+        background: hsl(60, 100%, 95%);
+        overflow: auto;
+    }
+
+    #table-of-contents h2,
+    #table-of-contents ol,
+    #table-of-contents ul{
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    #table-of-contents ul>li>ul>li>ul>li {
+        font-size: 80%;
+        display: block;
+    }
+
+    #table-of-contents h2 {
+        margin-top: 0;
+        border: 0;
+        box-shadow: 0;
+    }
+
+    #table-of-contents code {
+        font-size: 12px;
+    }
+
+    #footnotes {
+        margin-left: 280px;
+        max-width: 960px;
+    }
+    #postamble {
+        margin-left: 230px;
+        margin-top: 0;
+        padding-top: 30px;
+    }
+    div.outline-2 {
+        margin-left: 230px;
+        max-width: 960px;
+    }
+
+}
+
+#+END_SRC
+
 * Inserting text chunks
-   In 2016 I participated in GISHWHES (The Greatest International Scavenger Hunt the World Has Ever Seen).  One of the items was to make an animation on a Commodore-64.
+   In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.[fn:2]
 
    I think I ended up getting inspired by the keyboard.
+
 
    [[file:assets/images/Commodore.gif]]
 
 ** Symbol Getter
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (defun emagician/meta/get-insert-symbol (text)
   "Returns a insert-symbol for the chunk of text"
   (intern (format "emagician/insert/%s" text)))
-#+end_src
+#+END_SRC
 
 ** Make some Magickal Keys
 
    The next chunk makes a keymap and starts defining and binding insert functions on it.
 
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (define-prefix-command 'emagician/magick-keymap)
 (mapcar (lambda (pair)
           (fset (emagician/meta/get-insert-symbol (cdr pair))
@@ -816,10 +942,10 @@ div.figure {
           ("e" . "💊")        ; Hah, it's a joke son.
           ("s" . "💩")
           ("t" . "🚽")))
-#+end_src
+#+END_SRC
 
 ** Random bunny
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (defun emagician/random-bunny ()
   (let ((bunnies '(
            "／(･ × ･)＼"
@@ -851,19 +977,19 @@ div.figure {
            "/ ( ´•̥×•̥` )＼")))
     (nth (random (length bunnies))
          bunnies)))
-#+end_src
+#+END_SRC
 
 *** Insert a random bunny  ／(≡・ x ・≡)＼
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (defun emagician/insert-random-bunny ()
   (interactive)
   "Insert a random bunny."
   (insert (emagician/random-bunny)))
 
 (bind-key "B" 'emagician/insert-random-bunny emagician/meta-keymap)
-    
-#+end_src
+
+#+END_SRC
 
 * Footnotes
-
 [fn:1] https://github.com/thi-ng/org-spec
+[fn:2] The Greatest International Scavenger Hunt the World Has Ever Seen.  This is a yearly event with up to 10,000 people participating.  It lasts for a week long and participants are split into teams of ~13 people.  Some of the items are silly (go to the dentist and get dental work done while a string quartet performs), some are charitable (go to a nursing home and read to one of the residents while wearing a pirate costume).  More information on [[https://www.youtube.com/watch?v=SxeusMu7FuY][I'm Jonnay Season 9 Season 2 - TAZ]].

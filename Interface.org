@@ -916,12 +916,39 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
    I don't use this mode enough. 
 
 #+begin_src emacs-lisp
-  (use-package discover-my-major
-    :bind
-    (("C-c C-h"   . discover-my-major)
-     ("C-c C-S-H" . discover-my-mode)))
+(defmacro make-discovery (sym &optional mode)
+  "Make a command called discover-NAME"
+  (let* ((name (symbol-name sym))
+         (command (intern (concat "discover-" name)))
+         (mode (or mode
+                   (intern (concat name "-mode")))))
+    `(defun ,command ()
+      ,(concat "Automagickally created by Emagicians Starter kit.\n"
+               "Helps the user discover mode " (symbol-name mode))
+      (interactive)
+      (discover-my-mode (quote,mode)))))
+
+(macroexpand '(make-discovery paredit))
+
+
+(use-package discover-my-major
+  :init
+  (make-discovery paredit)
+  (make-discovery projectile)
+  (make-discovery ruby-tools)
+  (bind-keys :prefix-map discovery-map
+             :prefix "<f1>"
+             ("(" . discover-paredit)
+             ("p" . discover-projectile)
+             ("r" . discover-ruby-tools))
+  :bind
+  (("C-c C-h"   . discover-my-major)
+   ("C-c C-S-H" . discover-my-mode)))
+
+
 #+end_src
 
+ 
 ** Helm
    I have a complicated relationship with helm.  
 

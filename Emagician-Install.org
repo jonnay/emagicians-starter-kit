@@ -37,6 +37,11 @@ Let there be light
   typing C-c C-c inside the relevant code block, and answering "yes"
   if it asks you whether or not you want to run said code block.
   
+  If you can't run the shell blocks, try executing this:
+
+#+begin_src emacs-lisp
+  (require 'ob-sh)
+#+end_src
 * Installation
 
   You need emacs 24. I am sure you can get it and install it, if you
@@ -277,6 +282,8 @@ mv -v ~/.emacs.d/init.el $FILE
 cp -v ./init.el ~/.emacs.d/
 #+end_src
 
+#+RESULTS:
+: ./init.el -> /Users/joarkell/.emacs.d/init.el
 
 * The actual Init file
 
@@ -295,10 +302,11 @@ cp -v ./init.el ~/.emacs.d/
 <<set-this-dir-as-var>>
 ;; This sucks, but we need org mode properly running
 (setq package-user-dir (concat emagician/dir "elpa"))
-(let ((package-load-list '((org-plus-contrib t))))
-  (package-initialize))
+(package-initialize)
+(require 'org)
 (require 'org-install)
 (require 'ob-tangle)
+(message "Loaded with org version: %s" (org-version))
 (org-babel-load-file (expand-file-name "Emagician.org" emagician/dir))
 #+end_src
 

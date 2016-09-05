@@ -36,7 +36,6 @@
 #+begin_src emacs-lisp 
 (add-hook 'generic-lisp-mode-hook #'turn-off-smartparens-mode t)
 #+end_src
-
 * Individual Lisps
 ** Elisp
 *** Editing 

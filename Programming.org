@@ -166,7 +166,7 @@ There is always a little bit of boiler-plate that is required.
 *** TODO Update my config to be sane, check https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens
 
 
-** Rainbow Delimiters                                                                     :disabled:
+** Rainbow Delimiters
    Not 100% sure about this yet.
 
    Rainbow Delimiters are static.  It's always the same color regardless of where the point is.
@@ -186,29 +186,33 @@ There is always a little bit of boiler-plate that is required.
   (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "grey65")
   (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "grey70")
   (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "grey75"))
-
-(remove-hook 'prog-mode-hook 'turn-on-rainbow-blocks-mode)
-
 #+end_src
 
-** Rainbow Blocks 
+** Rainbow Blocks                                                                         :disabled:
    Trying an experiment.  Syntax highlight blocks based on overline. 
 
-#+begin_src emacs-lisp 
+   It sould have been hella cool, but what happens is that the rainbow-block-face over-rides the entire face.
+
+   I'll need to learn more about emacs faces to continue.
+
+
+
+#+begin_src emacs-lisp :tangle no
 (use-package rainbow-blocks
   :demand
   :init
   (emagician/minor-in-major-mode rainbow-blocks-mode prog-mode-hook)
   :config
-  (face-spec-set 'rainbow-blocks-depth-1-face '((t (:overline "grey10"))))
-  (face-spec-set 'rainbow-blocks-depth-2-face '((t (:overline "grey20"))))
-  (face-spec-set 'rainbow-blocks-depth-3-face '((t (:overline "grey30"))))
-  (face-spec-set 'rainbow-blocks-depth-4-face '((t (:overline "grey40"))))
-  (face-spec-set 'rainbow-blocks-depth-5-face '((t (:overline "grey50"))))
-  (face-spec-set 'rainbow-blocks-depth-6-face '((t (:overline "grey60"))))
-  (face-spec-set 'rainbow-blocks-depth-7-face '((t (:overline "grey70"))))
-  (face-spec-set 'rainbow-blocks-depth-8-face '((t (:overline "grey80"))))
-  (face-spec-set 'rainbow-blocks-depth-9-face '((t (:overline "grey90")))))
+  (custom-set-faces
+   '(rainbow-blocks-depth-1-face ((t (:overline "grey10"))))
+   '(rainbow-blocks-depth-2-face ((t (:overline "grey20"))))
+   '(rainbow-blocks-depth-3-face ((t (:overline "grey30"))))
+   '(rainbow-blocks-depth-4-face ((t (:overline "grey40"))))
+   '(rainbow-blocks-depth-5-face ((t (:overline "grey50"))))
+   '(rainbow-blocks-depth-6-face ((t (:overline "grey60"))))
+   '(rainbow-blocks-depth-7-face ((t (:overline "grey70"))))
+   '(rainbow-blocks-depth-8-face ((t (:overline "grey80"))))
+   '(rainbow-blocks-depth-9-face ((t (:overline "grey90"))))))
 #+end_src
 
 (foo (bar (baz BLag) (bar baz (foo bar (foo bar ) baz blarg (foo  BLag) (bar baz (foo bar (foo bar ) baz blarg (foo ) ) far ) b00) barg ) blarg ) foo foo) 

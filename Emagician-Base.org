@@ -170,6 +170,7 @@ If USE-PROPER-LIST is true then instead of a (dotted . list) a
                  (not (member (quote ,name) ,hook)))
          (add-hook (quote ,hook) (quote ,name))))))
 #+end_src
+
 **** Unit tests
 #+begin_src emacs-lisp 
 (ert-deftest emagician/defhook-defines-hook-and-adds-it ()
@@ -181,7 +182,7 @@ If USE-PROPER-LIST is true then instead of a (dotted . list) a
     (run-hooks 'hook)
     (should (fboundp 'test-hook))
     (should executed)
-    (fmakeunbound 'test-hook)))
+    (fmakunbound 'test-hook)))
 
 (ert-deftest emagician/defhook-redefines-when-bound ()
   (let ((hook '())
@@ -334,7 +335,7 @@ If it's a list, then scratchify the list members."
 
 #+begin_src emacs-lisp 
 (ert-deftest emagician/scratchify-text-props ()
-  (should (equal ";;; foo\n" (emagician/scratchify-text (propertize "foo" 'face (:foreground "red"))))))
+  (should (equal ";;; foo\n" (emagician/scratchify-text (propertize "foo" 'face '(:foreground "red"))))))
 
 (ert-deftest emagician/scratchify-text ()
   (should (equal ";;; foo\n" (emagician/scratchify-text "foo")))
