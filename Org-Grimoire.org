@@ -711,21 +711,22 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 * Saving and auto Commiting
 
 #+begin_src emacs-lisp 
-  (defun emagician-org/save-commit-and-push ()
-    "Do the thing automagickally"
-    (org-save-all-org-buffers)
-    (with-helm-default-directory "~/org"
-        (async-start
-         (lambda ()
-           (message "Commiting to git")
-           (shell-command "git add *" "*org autocommit*" "*org autocommit*"))
-         (lambda (result)
-           (async-start
-            (lambda ()
-              (shell-command "git commit -m\"autopmagick commit\"" "*org autocommit*" "*org autocommit*"))
-            'ignore)))))
+(defun emagician-org/save-commit-and-push ()
+  "Do the thing automagickally"
+  (message "Autosaving buffers")
+  (org-save-all-org-buffers)
+  (with-helm-default-directory "~/org"
+      (async-start
+       (lambda ()
+         (message "Commiting to git")
+         (shell-command "git add *" "*org autocommit*" "*org autocommit*"))
+       (lambda (result)
+         (async-start
+          (lambda ()
+            (shell-command "git commit -m\"autpmagick commit\"" "*org autocommit*" "*org autocommit*"))
+          'ignore)))))
 
-  (run-at-time t 600 'emagician-org/save-commit-and-push)
+(run-at-time t 600 'emagician-org/save-commit-and-push)
 #+end_src
 
 *** TODO fix this to use shell commands instead. 

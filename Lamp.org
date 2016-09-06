@@ -601,6 +601,40 @@ Know your HTTP Well!  M-x http-foo and media-types
 
 (diminish 'abbrev-mode)
 #+end_src
+* Rid myself of Art Bollocks
+
+  One of the problems I sort of have a lot of, is that I kind of use a lot of weasel words.  Perhaps I think I should leverage an Emacs plugin to change this.
+
+  Like Really a lot.
+
+#+begin_src emacs-lisp 
+(use-package artbollocks-mode
+  :defer t
+  :init
+  (setq artbollocks-weasel-words-regex
+        (concat "\\b" (regexp-opt
+                       '("one of the"
+                         "should"
+                         "kinda"
+                         "kind of"
+                         "just"
+                         "sort of"
+                         "a lot"
+                         "probably"
+                         "maybe"
+                         "perhaps"
+                         "I think"
+                         "really"
+                         "pretty"
+                         "nice"
+                         "action"
+                         "utilize"
+                         "leverage") t) "\\b"))
+  (setq artbollocks-jargon nil)
+  (emagician/minor-in-major-mode artbolloks-mode text-mode)
+  (emagician/minor-in-major-mode artbolloks-mode org-mode))
+#+end_src
+
 * Sierpinski
  ... is my jam! [fn:1]
 

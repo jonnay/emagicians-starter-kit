@@ -36,6 +36,12 @@
   (setq web-mode-markup-indent-offset 2))
 #+end_src
 ** Stylesheets
+*** CSS Mode
+#+begin_src emacs-lisp 
+  (setq css-indent-level 2)
+  (setq css-indent-offset 2)
+#+end_src
+
 *** SCSS Mode 
 #+begin_src emacs-lisp 
 (use-package scss-mode

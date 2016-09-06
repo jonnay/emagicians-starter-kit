@@ -35,6 +35,28 @@ padline yes comments link
 (setq disabled-command-function nil)
 #+end_src
 
+** Newlines
+   New line AND indent. 
+
+#+begin_src emacs-lisp 
+(global-set-key (kbd "RET") 'newline-and-indent)
+#+end_src
+
+** Kill back to indentation
+
+   From https://github.com/purcell/emacs.d/blob/master/lisp/init-editing-utils.el
+
+#+begin_src emacs-lisp 
+(defun sanityinc/kill-back-to-indentation ()
+  "Kill from point back to the first non-whitespace character on the line."
+  (interactive)
+  (let ((prev-pos (point)))
+    (back-to-indentation)
+    (kill-region (point) prev-pos)))
+
+(bind-key "C-M-<backspace>" 'sanityinc/kill-back-to-indentation)
+
+#+end_src
 * Automated things
 ** Midnight  :automation:
    It's very silent in the background, and just kind of does the right thing.  Clears out old buffers not in use.  I also use it as a next-day scheduler.
@@ -193,6 +215,7 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 #+begin_src emacs-lisp 
 (setcdr visual-line-mode-map nil)
 (setq visual-line-fringe-indicators t)
+(setq line-move-visual t)
 (global-visual-line-mode 1)
 #+end_src
 
@@ -658,12 +681,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
    Set the snippet dir.
 
-(emagician/expect-dir "assets/snippets")
 #+begin_src emacs-lisp 
 (use-package yasnippet
   :diminish ""
   :init
-  (setq yas-snippet-dirs `(,(expand-file-name "assets/snippets" emagician/dir) yas-installed-snippets-dir))
+  (setq yas-snippet-dirs `(,(emagician/expect-dir "assets/snippets")))
   (setq yas-trigger-key nil)
   (add-hook 'text-mode-hook 'yas-minor-mode-on)
   :config
@@ -698,10 +720,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (global-company-mode)
   (use-package company-quickhelp
     :init
-    (setq company-quickhelp-idle-delay 0.25)))
+    (company-quickhelp-mode 1)
+    (setq company-quickhelp-delay 0.25)))
 #+end_src
 
-*** Auto Complete
+*** Auto Complete                                                                      :deactivated:
 
     It's time to switch.  AC hasn't really changed that much, and it is starting to look awful.
 
@@ -839,28 +862,57 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 * Saving
 ** Backups
-   Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.
+   Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.  I figured since I was working mostly in source control, I'd be safe.  Then I was wrong one day, and lost a very important change.
+
+   Lesson learned.
 
 #+begin_src emacs-lisp
 (setq auto-save-default t)
 #+end_src
 
-*** Set the backup directory to something decent
-(emagician/expect-dir "backups")
+   Set the directory to a directory in the user-emacs-directory, and then create it.
 
 #+begin_src emacs-lisp
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name
-                 (concat user-emacs-directory "backups")))))
+      `(("." . ,(emagician/expect-dir "backups" user-emacs-directory))))
 
 (setq tramp-backup-directory-alist backup-directory-alist)
+#+end_src
 
-;; Make backups of files, even when they're in version control
+   Never delete any old verisons.  
+
+   (Disk is cheap and text is tiny.)- 🐦
+
+#+begin_src emacs-lisp 
+(setq delete-old-verisons -1)
+#+end_src
+
+   Even in version control.  And while were at it, lets version control backups.  
+ 
+   (Again. Disk. Cheep.)- 🐦
+
+#+begin_src emacs-lisp 
+(setq version-control t)
 (setq vc-make-backup-files t)
+#+end_src
+
+   Auto save filename translation, put everything in it's own directory.
+
+   Also, this might fix auto-saves in tramp?
+
+#+begin_src emacs-lisp 
+(setq auto-save-file-name-transforms
+      `((".*" 
+         ,(emagician/expect-dir "auto-save-list"
+                                user-emacs-directory)
+         t)))
 #+end_src
 
 * State Management
 ** Server
+
+   Server is good shit.  Lots of funk there.
+
 #+begin_src emacs-lisp
 (unless (string-equal "root" (getenv "USER"))
   (require 'server)
@@ -876,10 +928,26 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (setq recentf-max-saved-items 500)
 #+end_src
 
-** Save Command History
+** History
+#+begin_quote
+   Our sense of self is really our sense of history.  The I that sits behind your eye is the memories of your self.
+#+end_quote
+
+   Save all history.  This is okay because we delete duplicates.
+
+#+begin_src emacs-lisp 
+(setq history-length t)
+(setq history-delete-duplicates t)
+#+end_src
+
+** Save History
 #+begin_src emacs-lisp
-(setq savehist-additional-variables '(search-ring regexp-search-ring kill-ring compile-command ))
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(search-ring regexp-search-ring kill-ring compile-command ))
+
 (setq savehist-autosave-interval 60)
+
 (savehist-mode t)
 #+end_src
 
@@ -913,7 +981,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Discover My Major   :learn-me:bind:
-   I don't use this mode enough. 
+
+   ~f1~ is now a discovery prefix key.  From there you can get help on various modes.
 
 #+begin_src emacs-lisp
 (defmacro make-discovery (sym &optional mode)
@@ -928,19 +997,18 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
       (interactive)
       (discover-my-mode (quote,mode)))))
 
-(macroexpand '(make-discovery paredit))
-
-
 (use-package discover-my-major
   :init
   (make-discovery paredit)
   (make-discovery projectile)
   (make-discovery ruby-tools)
+  (make-discovery company)
   (bind-keys :prefix-map discovery-map
              :prefix "<f1>"
              ("<f1>" . discover-my-major)
              ("<f2>" . discover-my-mode)
              ("("    . discover-paredit)
+             ("c"    . discover-company)
              ("p"    . discover-projectile)
              ("r"    . discover-ruby-tools)))
 #+end_src

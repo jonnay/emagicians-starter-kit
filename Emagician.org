@@ -159,7 +159,7 @@ before the rest of the scratch interface is built.")
 #+name: starter-kit-load
 #+BEGIN_SRC emacs-lisp
 (defvar emagician/load-depth 0)
-(defvar emagician/slow-loaders '())
+(defvar emagician/slow-loaders '() "A list of files that took long to load with `emagician/load'")
 (defun emagician/load (file)
   "Load configuration from other .org files."
   (let ((start-time (current-time))
@@ -194,7 +194,7 @@ before the rest of the scratch interface is built.")
                        elapsed)))
     (emagician/append-scratch "...done!" "\n")
     load-result))
-
+(makunbound 'emagician/load-depth)
 #+END_SRC
 
 * Package Management
@@ -369,16 +369,22 @@ M-x all-hail-emacs
 https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 
 * References, Bibliography, Shout Outs, and Props.
-  - ESchultes Emacs Starter Kit :: https://github.com/eschulte/emacs-starter-kit
-  - Sacha Chu :: http://dl.dropbox.com/u/3968124/sacha-emacs.html
-  - Emacs Starter Kit :: https://github.com/technomancy/emacs-starter-kit
-  - Cabbage  :: https://github.com/senny/cabbage
-  - Emacs Live :: https://github.com/overtone/emacs-live
-  - novoid :: https://github.com/novoid/dot-emacs
-  - ocodo :: https://github.com/ocodo/emacs.d
-  - https://github.com/redguardtoo/emacs.d/blob/master/init-misc.el
-  - http://rix.si/blog/2015/01/05/fsem-001/
-  - https://www.writequit.org/org/settings.html#sec-1-20
+
+  In most cases I explicitly call out where I found the config I snarfed. Sometimes I didn't.  If you know the source, let me know!
+
+ | Magician                    | Source                                               | Last Visited | Status |
+ |-----------------------------+------------------------------------------------------+--------------+--------|
+ | MagnarS                     | https://github.com/magnars/.emacs.d                  |              |        |
+ | ESchultes Emacs Starter Kit | http://eschulte.github.io/emacs-starter-kit/         |              |        |
+ | Sacha Chu                   | http://dl.dropbox.com/u/3968124/sacha-emacs.html     |   2016-09-05 | Revist |
+ | Emacs Starter Kit           | https://github.com/technomancy/emacs-starter-kit     |              |        |
+ | Cabbage                     | https://github.com/senny/cabbage                     |   2016-09-05 | Meh    |
+ | Emacs Live                  | https://github.com/overtone/emacs-live               |              |        |
+ | novoid                      | https://github.com/novoid/dot-emacs                  |              |        |
+ | ocodo                       | https://github.com/ocodo/emacs.d                     |              |        |
+ | Ryan Rix                    | http://doc.rix.si/cce/cce.html                       |              |        |
+ | Lee Hinman                  | https://www.writequit.org/org/settings.html#sec-1-20 |              |        |
+ | Wasamasa                    | https://github.com/wasamasa/dotemacs                 |   2016-08-26 |        |
 * Thee End
 *** Initiate thee scratch
 [[file:assets/images/Troll_Scratch.gif]]

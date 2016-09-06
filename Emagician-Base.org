@@ -23,7 +23,7 @@ There are helpers funcitons and variables that just make working with Emacs Lisp
 ** Garbage Collection
 50 Megs, or 10 percent of the heap.  Seems legit.  It's original value is 800000.  Which seems like a lot, but its' really only 800 K.
 #+begin_src emacs-lisp 
-(setq gc-cons-threshold 50000000)
+(setq gc-cons-threshold (* 500 1024 1024))
 #+end_src
 
 ** Prefer new files
@@ -254,26 +254,36 @@ A bit of a naive version of this for now.
   Make sure a dirs exist.
 
 #+begin_src emacs-lisp
-  (defun emagician/expect-dir (dir) 
-    "Ensures that the named directory exists."
-    (let ((path (expand-file-name dir emagician/dir)))
-      (when (not (file-directory-p path))
-        (when (file-exists-p path)
-          (error "Cannot Create %s, it already exists and is a file." path))
-        (make-directory path nil))
-      path))
-  
+(defun emagician/expect-dir (dir &optional pathroot) 
+  "Ensures that the named directory exists."
+  (let ((path (expand-file-name dir
+                                (or pathroot emagician/dir))))
+    (when (not (file-directory-p path))
+      (when (file-exists-p path)
+        (error "Cannot Create %s, it already exists and is a file." path))
+      (make-directory path nil))
+    path))
+
 #+end_src
 
 #+begin_src emacs-lisp
-  (ert-deftest emagician/expect-dir ()
-    (let ((tdir "emagician-expect-dir-dummy-test-dir"))   
-      (should (not (file-directory-p tdir)))
-      (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
-      (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
-      (should (progn (delete-directory tdir) (not (file-directory-p tdir))))
-      (should-error (emagician/expect-dir "foo/bar/baz/notexisting")))
-    (should-error (emagician/expect-dir "Emagician.org")))
+(ert-deftest emagician/expect-dir ()
+  (let ((tdir "emagician-expect-dir-scratch-monkey"))   
+    (should (not (file-directory-p tdir)))
+    (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
+    (should (file-directory-p (emagician/expect-dir "emagician-expect-dir-dummy-test-dir")))
+    (should (progn (delete-directory tdir) (not (file-directory-p tdir))))
+    (should-error (emagician/expect-dir "foo/bar/baz/notexisting")))
+  (should-error (emagician/expect-dir "Emagician.org")))
+
+(ert-deftest emagician/expect-dir-with-extra-arg ()
+  (let* ((dirname "emagician-expect-dir-scratch-monkey")
+         (tdir (concat temporary-file-directory dirname)))
+    (should (not (file-directory-p tdir)))
+    (should (file-directory-p (emagician/expect-dir dirname
+                                                    temporary-file-directory)))
+    (should (progn (delete-directory tdir)
+                   (not (file-directory-p tdir))))))
 #+end_src
 
 ** Add to Path

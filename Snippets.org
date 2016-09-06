@@ -1,39 +1,37 @@
-#+TITLE: YASnippets 
-#+PROPERTY: padline no 
+#+TITLE: YASnippets
+#+PROPERTY: padline no
 #+results: silent
 * This is not the file you are looking for...
   If you want to configure yasnippets for the emagicians starter kit, you want to go into the "editing" section.  This file is actually for *generating* the snippets.
 
 * Building															  :build:
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
 (emagician/expect-dir "./assets/snippets")
-(emagician/expect-dir "./assets/snippets/js-mode")
-(emagician/expect-dir "./assets/snippets/coffeescript-mode")
-(emagician/expect-dir "./assets/snippets/org-mode")
-(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
-(emagician/expect-dir "./assets/snippets/ruby-mode")
-(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
-(emagician/expect-dir "./assets/snippets/sql-mode")
 #+end_src
 
 ** Execute this during development
 #+begin_src emacs-lisp :tangle no
-  (defun emagician/snippet-tangle-and-reload () 
+  (defun emagician/snippet-tangle-and-reload ()
     "Helper function to automagickally tangle and reload snippets after the snippet file is saved"
-    (org-babel-tangle)
+    (org-babel-tangle nil)
+    (yas-recompile-all)
     (yas-reload-all))
-  
+
   (add-hook 'after-save-hook 'emagician/snippet-tangle-and-reload t t)
 #+end_src
- 
-#+RESULTS:
-| flycheck-handle-save | t | emagician/snippet-tangle-and-reload |
 
- 
- 
+#+RESULTS:
+| flycheck-handle-save | git-gutter+-refresh | t | emagician/snippet-tangle-and-reload |
+
+
+
 * Text modes
-** Org :org:
-*** Source blocks.  A majority of mine are elisp and snippets 
+** Org         :org:
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/org-mode")
+#+end_src
+
+*** Source blocks.  A majority of mine are elisp and snippets
 #+begin_src text :tangle assets/snippets/org-mode/src
   # name: source block
   # key: src
@@ -71,19 +69,23 @@
 #+end_src
 
 
-
 *** So meta! Such Wow!
 
+This is so fucking cool.
+
+This is a snippet to build a snippet in an org mode file.
+
 #+begin_src text :tangle assets/snippets/org-mode/yasnippet
-  # name: yasnippet
-  # key: snippet
-  # --
-  ,#+begin_src yasnippet :tangle assets/snippets/$1/$2
-  # name: $2
-  # key: $2
-  #--
-  $0
-  ,#+end_src
+# name: yasnippet
+# key: snippet
+# expand-env: ((yas-indent-line 'never)  (yas-wrap-around-region 'nil))
+# --
+,#+begin_src yasnippet :tangle assets/snippets/$1/$2
+# name: $2
+# key: $2
+# --
+$0
+,#+end_src
 #+end_src
 
 *** David Allen's Natural Project Planning model.
@@ -97,14 +99,16 @@
    - Success Looks Like - 40K  :: $3
    - Brainstorming - 30K
      - $4
-   - Organize the brainstorming and come up with next actions (20K) 
+   - Organize the brainstorming and come up with next actions (20K)
 ,*** TODO $5
 #+end_src
 
 
- 
-* Programming modes 
-** Javascript 
+* Programming modes
+** Javascript
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/js-mode")
+#+end_src
 
 #+begin_src yasnippet :tangle assets/snippets/js-mode/.yas.parents
 text-mode
@@ -116,7 +120,7 @@ text-mode
 # --
 function(${1:args}) {
     $0
-} 
+}
 #+end_src
 
 #+begin_src yasnippet :tangle assets/snippets/js-mode/var
@@ -153,57 +157,168 @@ it("$1", function(done) {
 });
 #+end_src
 ** Coffeescript
-#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if
-  # name: if
-  # key: if
-  # -- 
-  if $1
-    $0
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/coffee-mode")
 #+end_src
 
-#+begin_src yasnippet :tangle assets/snippets/coffeescript-mode/if.else
-  # name: if
-  # key: if
-  # -- 
-  if $1
-    $2
-  else v$0
+#+begin_src yasnippet :tangle assets/snippets/coffee-mode/if
+# name: if
+# key: if
+# --
+if $1
+  $0
 #+end_src
 
-** Lisp
+#+begin_src yasnippet :tangle assets/snippets/coffee-mode/if.else
+# name: if
+# key: if
+# --
+if $1
+  $2
+else
+  $0
+#+end_src
+
+** Emacs Lisp
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/emacs-lisp-mode")
+#+end_src
+
 #+begin_src yasnippet :tangle assets/snippets/emacs-lisp-mode/defun
 # name: defun
 # key: defun
 #--
-(defun $1 ($2) 
+defun $1 ($2)
   "$3"
-  $0)
+  $0
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/emacs-lisp-mode/use-package
+# name: use-package
+# key: use-package
+#--
+use-package ${name-no-quote}
+$0
 #+end_src
 
 ** Ruby
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/ruby-mode")
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/class
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+class `(s-upper-camel-case (file-name-base))`
+  $0
+end
+#+end_src
+
 #+begin_src yasnippet :tangle assets/snippets/ruby-mode/def
-  # name: def
-  # key: def
-  # -- 
-  def $1 $2
-    $0
-  end
+# -*- mode: snippet -*-
+# name: def
+# key: def
+# --
+def $1($2)
+  $0
+end
 #+end_src
 
 #+begin_src yasnippet :tangle assets/snippets/ruby-mode/if
-  # name: if
-  # key: if
-  # -- 
-  if ($1)
-    $0
-  end
+# -*- mode: snippet -*-
+# name: if
+# key: if
+# --
+if ($1)
+  $0
+end
+#+end_src
+
+Note that the end is already inserted by the if snippet
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/elsif
+# -*- mode: snippet -*-
+# name: elsif
+# key: elsif
+# --
+elsif ($1)
+  $0
+#+end_src
+
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/do
+# -*- mode: snippet -*-
+# name: do-block
+# key: do
+# --
+do ${1:|$2|}
+  $0
+end
+#+end_src
+
+*** Unit Testing
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/describe
+# name: describe
+# key: describe
+# --
+describe "$1" do
+  $0
+end
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/context
+# name: context
+# key: context
+# --
+context "$1" do
+  $0
+end
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/it
+# name: it
+# key: it
+# --
+it "$1" do
+  $0
+end
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/let
+# name: let
+# key: let
+# --
+let (:$1) { $2 }
+$0
+#+end_src
+
+#+begin_src yasnippet :tangle assets/snippets/ruby-mode/let!
+# name: let!
+# key: let!
+# --
+let! (:$1) { $2 }
+$0
 #+end_src
 
 ** SQL
+#+begin_src emacs-lisp 
+(emagician/expect-dir "./assets/snippets/sql-mode")
+#+end_src
+
 #+begin_src yasnippet :tangle assets/snippets/sql-mode/select
 # name: select
 # key: select
 #--
-select $1 from $2 as $3 ${4:left join $5 as $6 on $3.$7 = $6.${7:id} } where $8 
+select $1 from $2 as  
 #+end_src
 
+#+begin_src yasnippet :tangle assets/snippets/sql-mode/left-join
+# name: left join
+# key: left
+# --
+left join ${1} as ${2:`(s-left 1 yas-text)`} on ${1:.id} = $0 
+#+end_src
+
+ 
