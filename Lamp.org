@@ -609,7 +609,6 @@ Know your HTTP Well!  M-x http-foo and media-types
 
 #+begin_src emacs-lisp 
 (use-package artbollocks-mode
-  :defer t
   :init
   (setq artbollocks-weasel-words-regex
         (concat "\\b" (regexp-opt
@@ -631,8 +630,8 @@ Know your HTTP Well!  M-x http-foo and media-types
                          "utilize"
                          "leverage") t) "\\b"))
   (setq artbollocks-jargon nil)
-  (emagician/minor-in-major-mode artbolloks-mode text-mode)
-  (emagician/minor-in-major-mode artbolloks-mode org-mode))
+  (emagician/minor-in-major-mode artbollocks-mode text-mode-hook)
+  (emagician/minor-in-major-mode artbollocks-mode org-mode-hook))
 #+end_src
 
 * Sierpinski

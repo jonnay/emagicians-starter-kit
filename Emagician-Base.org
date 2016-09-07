@@ -21,10 +21,29 @@
 There are helpers funcitons and variables that just make working with Emacs Lisp that much nicer.
 
 ** Garbage Collection
+#+name: Motherfucker-past-jonnay
+#+begin_quote
 50 Megs, or 10 percent of the heap.  Seems legit.  It's original value is 800000.  Which seems like a lot, but its' really only 800 K.
-#+begin_src emacs-lisp 
+#+end_quote
+
+Resulting in this abomination:
+
+#+begin_src emacs-lisp :tangle no
 (setq gc-cons-threshold (* 500 1024 1024))
 #+end_src
+
+There was even a little voice in my head that said "Maybe Jonnay, maybe you shouldn't fuck with the garbage collector?"
+
+Which gave me these lessons:
+
+- Listen to that little voice, and
+- don't fuck around with garbage collection unless you know what you're doing and what you're setting.
+
+
+http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
+
+*** TODO implement the in-minibuffer-no-gc out-of-buffer-gc
+*** TODO implement no gc on startup, but a single timer to gc after 30 idle seconds
 
 ** Prefer new files
 #+begin_src emacs-lisp 

@@ -116,16 +116,9 @@ Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
 **** Geiser REPL
 
 #+begin_src emacs-lisp 
-(use-package geiser
-  :init
-  (setq geiser-active-implementations '(chicken))
-  :config 
-  (require 'ac-geiser)
-  (emagician/defhook emagician/ac-set-scheme-sources scheme-mode-hook
-    (setq ac-sources
-          '(ac-source-yasnippet
-            ac-source-geiser
-            ac-source-files-in-current-dir
-            ac-source-words-in-buffer
-            ac-source-words-in-same-mode-buffers))))
+  (use-package geiser
+    :init
+    (setq geiser-active-implementations '(chicken))
+    :config 
+    (emagician/defhook emagician/ac-set-scheme-sources scheme-mode-hook))
 #+end_src

@@ -1,5 +1,4 @@
 #+Title: User Interface Elements
-padline yes comments link
 * Keystrokes and commands
 ** Simple answers plz!
 #+begin_src emacs-lisp 
@@ -215,7 +214,7 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 #+begin_src emacs-lisp 
 (setcdr visual-line-mode-map nil)
 (setq visual-line-fringe-indicators t)
-(setq line-move-visual t)
+(setq line-move-visual nil)
 (global-visual-line-mode 1)
 #+end_src
 
@@ -303,8 +302,7 @@ Nyan mode conveys information.  It's also Cute AF.
 (size-indication-mode t)
 #+end_src
 
-*** Powerline
-**** The EMagician powerline theme
+*** The EMagician powerline theme
 Inludes Nyan cat powers.
 
 This theme is a beast.  I don't like it.  I love how it looks visually, but I hate how it looks in code. 
@@ -350,7 +348,10 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
                                         (powerline-raw " :" face2)
                                         (powerline-minor-modes face2 'l)
                                         (powerline-raw " " face2)
+                                        (funcall separator-right face2 mode-line)
+                                        (powerline-raw " " mode-line)
                                         (nyan-create)
+                                        (funcall separator-right mode-line face2)
                                         (powerline-raw " " face2)
                                         (funcall separator-right face2 face1))))
                      (concat (powerline-render lhs)
@@ -359,7 +360,7 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
                              (powerline-fill face1 (powerline-width rhs))
                              (powerline-render rhs)))))))
 #+end_src
-**** Other settings
+*** Other settings
 
      Available Separators are:
 alternate, arrow, arrow-fade, bar, box, brace, butt,
@@ -369,7 +370,7 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   (use-package powerline
                :demand
                :init
-               (setq powerline-default-separator 'rounded)
+               (setq powerline-default-separator 'butt)
                (emagician/powerline-theme))
 #+end_src
 *** Smart Mode Line                                                                       :disabled:
@@ -720,8 +721,9 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   (global-company-mode)
   (use-package company-quickhelp
     :init
-    (company-quickhelp-mode 1)
-    (setq company-quickhelp-delay 0.25)))
+    (setq company-quickhelp-delay 0.25)
+    :config
+     (company-quickhelp-mode 1)))
 #+end_src
 
 *** Auto Complete                                                                      :deactivated:
@@ -790,6 +792,12 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Spell Checking
+
+#+name: Mo Khan
+#+begin_quote
+   Your Emacs has cast aspell! 
+#+end_quote
+
 #+begin_src emacs-lisp 
 
 (use-package flyspell
@@ -997,23 +1005,26 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
       (interactive)
       (discover-my-mode (quote,mode)))))
 
+
+
 (use-package discover-my-major
   :init
   (make-discovery paredit)
   (make-discovery projectile)
   (make-discovery ruby-tools)
-  (make-discovery company)
+  ;(make-discovery company)
   (bind-keys :prefix-map discovery-map
              :prefix "<f1>"
              ("<f1>" . discover-my-major)
              ("<f2>" . discover-my-mode)
              ("("    . discover-paredit)
-             ("c"    . discover-company)
+            ; ("c"    . discover-company)
              ("p"    . discover-projectile)
              ("r"    . discover-ruby-tools)))
 #+end_src
 
- 
+ *** TODO fix Company Discovery 
+
 ** Helm
    I have a complicated relationship with helm.  
 
@@ -1064,31 +1075,29 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
           helm-source-buffer-not-found)))
 #+end_src
 
-*** Helm for M-x
-#+begin_src emacs-lisp 
-  (global-set-key (kbd "M-x")     'helm-M-x)
-  (setq helm-M-x-always-save-history t)
-#+end_src
 
 **** Key binding muscle memory
      The Fix-Muscle Memory keybinding setting re-enables the "You can run the command ~foo~ with ~bar~". This is one of the annoyances with ~Helm-M-x~ for me.  
 
      See [[file:Lamp.org::*Fix-Muscle-Memory%20(was%20Emagician-Fix-Spell)][Fix-Muscle-Memory (was Emagician-Fix-Spell)]]
-*** Buffer Selection
-#+begin_src emacs-lisp 
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-#+end_src
 
 *** Show full paths
 #+begin_src emacs-lisp 
 (setq helm-ff-transformer-show-only-basename nil)
 #+end_src
-*** Extended Command, Insert, write and find files should use helm.
+*** Extended Command, Buffer Selection, Insert, write and find files should use helm.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
+(with-eval-after-load 'helm
+  (global-set-key (kbd "M-x")     'helm-M-x)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-y")     'helm-show-kill-ring)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring))
+
+  (setq helm-M-x-always-save-history t)
 #+end_src
+
+
 
 *** Personal Preferences
 Make helm open a new window instead of taking over another.

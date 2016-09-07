@@ -194,7 +194,6 @@ before the rest of the scratch interface is built.")
                        elapsed)))
     (emagician/append-scratch "...done!" "\n")
     load-result))
-(makunbound 'emagician/load-depth)
 #+END_SRC
 
 * Package Management

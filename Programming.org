@@ -483,7 +483,8 @@ Tweak Ediff to be better
    (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
    (projectile-global-mode))
 
- (use-package helm-projectile)
+ (with-eval-after-load 'helm
+   (use-package helm-projectile))
  #+end_src
 
 * Languages

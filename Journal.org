@@ -1,0 +1,82 @@
+#+title: Journal
+
+* Wax about Journal
+  To the tune of Deck the Halls:
+
+  Blah Blah Blah Blah
+  Et Cetera.
+
+* 2016
+** September
+*** 6th - Debugging an Emacs slowdown
+    Something has gone horribly wrong with my emacs.  Every 5 minutes or so I get a spinning beachball of death.  It's either:
+    - I've upgraded a package and it's behaving badly
+    - I've installed a package that is behaving badly
+    - Some config changes in the past day or so have caused slowdown.
+
+    So to debug this issue, I am taking it slow.  Right now I have disabled artbollocks mode (one of the new packages) and gave emacs a restart.  The shit thing is that it takes forever to find the cause of the problem.
+
+    Okay, it's not artbollocks. Whatever it is, it affects all modes.
+
+    Next, it could be company.  I hope not.  I 💟 Company mode.
+
+    Also, Helm needed an upgrade, so i did that at the same time as deactivating Company mode.  Sure, not the greatest in troubleshooting!
+
+    One of the things I can do is finally get around to writing the "In case of emergency, break glass" function that sends SIGUSR2 to emacs. 
+
+#+begin_src sh :tangle /usr/local/bin/emacsurgency :shebang "#!/bin/bash"
+kill -SIGUSR2 $( ps aux | grep Emacs | awk '{print $2}')
+#+end_src
+
+    Ironically, it seems as if the upgrade to helm may have fixed my problem.
+
+    Now to re-enable company. 
+
+    Looks like company is the cause of slowdown.  I'll keep it off for now.  There is a good chance that it is the company-help plugin.  So next up I'll turn that on, and turn off the help.
+
+    Or.. or maybe it is the backup files.  Need to turn that off next.  No effect.  Next?
+
+    Lots of messages like ~Invalid face attribute :foreground <num>~, searching for packages that change forground based on a number:
+    - color-identifiers
+    - fill-column-indicator
+    - helm
+    - org    
+    - pos-tip
+    - rainbow-delimiters
+    
+    Next up: Helm. I'll make the rest of the kit manage without it.  Turns out removing helm is hard.
+
+    Removed helm, rainbow-delimiters.
+
+    Maybe keyfreq?  Maybe my save and push? Disabling both
+
+    Postip is next.  Also Achievements Mode.  It shouldn't be enabled, but you don't know.
+
+    Shit.
+
+    No more ~Invalid face...~ errors, but still a beachball.  I'm lost. 
+
+    Time to roll back configs until the problem is gone. 
+    
+    GC-CONS-THRESHOLD.  It seems to be gc-cons-threshold.
+    
+    See: https://lists.gnu.org/archive/html/help-gnu-emacs/2007-06/msg00243.html
+    Also: http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
+
+*** 5th - Configs and a new mode
+
+#+begin_quote
+ Good artists copy.  Great artists steal.
+#+end_quote 
+
+    I forgot just how rewarding it is to go through other Emagicians configs, and +steal their stuff+, art their configurations.  There are scores of great Emacs people who really know their editor.
+
+    As an aside, I started work on a new parens-underlining package.  I don't know if I like it yet.
+
+
+
+    
+
+    
+
+    
