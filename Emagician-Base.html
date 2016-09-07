@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emagician-Base</title>
@@ -155,41 +155,46 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgheadline1">1. Bassline / Baseline</a></li>
 <li><a href="#orgheadline2">2. Basic helpers</a></li>
-<li><a href="#orgheadline11">3. Emacs Lisp Evaluation Environment</a>
+<li><a href="#orgheadline13">3. Emacs Lisp Evaluation Environment</a>
 <ul>
-<li><a href="#orgheadline3">3.1. Garbage Collection</a></li>
-<li><a href="#orgheadline4">3.2. Prefer new files</a></li>
-<li><a href="#orgheadline5">3.3. Lexical Evaluation</a></li>
-<li><a href="#orgheadline6">3.4. Common Lisp</a></li>
-<li><a href="#orgheadline7">3.5. Evaluation and Printing</a></li>
-<li><a href="#orgheadline8">3.6. Anaphoric Goodness</a></li>
-<li><a href="#orgheadline9">3.7. Asyc</a></li>
-<li><a href="#orgheadline10">3.8. Testing</a></li>
+<li><a href="#orgheadline5">3.1. Garbage Collection</a>
+<ul>
+<li><a href="#orgheadline3">3.1.1. <span class="todo TODO">TODO</span> implement the in-minibuffer-no-gc out-of-buffer-gc</a></li>
+<li><a href="#orgheadline4">3.1.2. <span class="todo TODO">TODO</span> implement no gc on startup, but a single timer to gc after 30 idle seconds</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline14">4. emagick-🐰 Extensions to Emacs Lisp</a>
-<ul>
-<li><a href="#orgheadline12">4.1. Test suite</a></li>
-<li><a href="#orgheadline13">4.2. alist-set: Change element in list</a></li>
+<li><a href="#orgheadline6">3.2. Prefer new files</a></li>
+<li><a href="#orgheadline7">3.3. Lexical Evaluation</a></li>
+<li><a href="#orgheadline8">3.4. Common Lisp</a></li>
+<li><a href="#orgheadline9">3.5. Evaluation and Printing</a></li>
+<li><a href="#orgheadline10">3.6. Anaphoric Goodness</a></li>
+<li><a href="#orgheadline11">3.7. Asyc</a></li>
+<li><a href="#orgheadline12">3.8. Testing</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline29">5. Emagician Helpers</a>
+<li><a href="#orgheadline16">4. emagick-🐰 Extensions to Emacs Lisp</a>
 <ul>
-<li><a href="#orgheadline19">5.1. Hook Helpers</a>
-<ul>
-<li><a href="#orgheadline16">5.1.1. Minor In Major</a></li>
-<li><a href="#orgheadline18">5.1.2. Def hook</a></li>
+<li><a href="#orgheadline14">4.1. Test suite</a></li>
+<li><a href="#orgheadline15">4.2. alist-set: Change element in list</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline20">5.2. Backtrace Magick</a></li>
-<li><a href="#orgheadline21">5.3. Sanitize File name</a></li>
-<li><a href="#orgheadline22">5.4. Expect Dir</a></li>
-<li><a href="#orgheadline23">5.5. Add to Path</a></li>
-<li><a href="#orgheadline28">5.6. Final Emagician Scratch</a>
+<li><a href="#orgheadline31">5. Emagician Helpers</a>
 <ul>
-<li><a href="#orgheadline24">5.6.1. Scratchify</a></li>
-<li><a href="#orgheadline25">5.6.2. Reset Scratch</a></li>
-<li><a href="#orgheadline27">5.6.3. Main Scratch Initiation</a></li>
+<li><a href="#orgheadline21">5.1. Hook Helpers</a>
+<ul>
+<li><a href="#orgheadline18">5.1.1. Minor In Major</a></li>
+<li><a href="#orgheadline20">5.1.2. Def hook</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline22">5.2. Backtrace Magick</a></li>
+<li><a href="#orgheadline23">5.3. Sanitize File name</a></li>
+<li><a href="#orgheadline24">5.4. Expect Dir</a></li>
+<li><a href="#orgheadline25">5.5. Add to Path</a></li>
+<li><a href="#orgheadline30">5.6. Final Emagician Scratch</a>
+<ul>
+<li><a href="#orgheadline26">5.6.1. Scratchify</a></li>
+<li><a href="#orgheadline27">5.6.2. Reset Scratch</a></li>
+<li><a href="#orgheadline29">5.6.3. Main Scratch Initiation</a></li>
 </ul>
 </li>
 </ul>
@@ -226,36 +231,68 @@ Just enough to make editing in a broken environment not a pain,
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">3</span> Emacs Lisp Evaluation Environment</h2>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">3</span> Emacs Lisp Evaluation Environment</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 There are helpers funcitons and variables that just make working with Emacs Lisp that much nicer.
 </p>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">3.1</span> Garbage Collection</h3>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">3.1</span> Garbage Collection</h3>
 <div class="outline-text-3" id="text-3-1">
+<div class="epigraph"><blockquote>
 <p>
 50 Megs, or 10 percent of the heap.  Seems legit.  It's original value is 800000.  Which seems like a lot, but its' really only 800 K.
 </p>
 
-<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>50000000)
+<footer>Motherfucker-past-jonnay</footer></blockquote></div>
+
+<p>
+Resulting in this abomination:
+</p>
+
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>(*<span class="org-unicode-whitespace-subdued-space"> </span>500<span class="org-unicode-whitespace-subdued-space"> </span>1024<span class="org-unicode-whitespace-subdued-space"> </span>1024))
 </pre>
+
+<p>
+There was even a little voice in my head that said "Maybe Jonnay, maybe you shouldn't fuck with the garbage collector?"
+</p>
+
+<p>
+Which gave me these lessons:
+</p>
+
+<ul class="org-ul">
+<li>Listen to that little voice, and</li>
+<li>don't fuck around with garbage collection unless you know what you're doing and what you're setting.</li>
+</ul>
+
+
+<p>
+<a href="http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/">http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/</a>
+</p>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">3.1.1</span> <span class="todo TODO">TODO</span> implement the in-minibuffer-no-gc out-of-buffer-gc</h4>
+</div>
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">3.1.2</span> <span class="todo TODO">TODO</span> implement no gc on startup, but a single timer to gc after 30 idle seconds</h4>
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">3.2</span> Prefer new files</h3>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">3.2</span> Prefer new files</h3>
 <div class="outline-text-3" id="text-3-2">
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>load-prefer-newer<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">3.3</span> Lexical Evaluation</h3>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">3.3</span> Lexical Evaluation</h3>
 <div class="outline-text-3" id="text-3-3">
 <pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">lexically</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>forms)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Lexically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">execute</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">forms"</span>
@@ -268,8 +305,8 @@ There are helpers funcitons and variables that just make working with Emacs Lisp
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">3.4</span> Common Lisp</h3>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.4</span> Common Lisp</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Sometimes the depricated CL environment is still required.  One day
@@ -281,8 +318,8 @@ this can go away. That day isn't today.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">3.5</span> Evaluation and Printing</h3>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">3.5</span> Evaluation and Printing</h3>
 <div class="outline-text-3" id="text-3-5">
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>eval-expression-print-length<span class="org-unicode-whitespace-subdued-space"> </span>9000
 <span class="org-unicode-whitespace-subdued-space">      </span>print-length<span class="org-unicode-whitespace-subdued-space"> </span>90000
@@ -292,16 +329,16 @@ this can go away. That day isn't today.
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">3.6</span> Anaphoric Goodness</h3>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">3.6</span> Anaphoric Goodness</h3>
 <div class="outline-text-3" id="text-3-6">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">anaphora</span>)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">3.7</span> Asyc</h3>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">3.7</span> Asyc</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Run commands asyncronously. 
@@ -312,8 +349,8 @@ Run commands asyncronously.
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">3.8</span> Testing</h3>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">3.8</span> Testing</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 ERT for testing.  Of course.
@@ -333,11 +370,11 @@ Fakir is cool ass, but I don't need it.  yet.  Also, a great name
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">4</span> emagick-🐰 Extensions to Emacs Lisp</h2>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">4</span> emagick-🐰 Extensions to Emacs Lisp</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">4.1</span> Test suite</h3>
+</div><div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">4.1</span> Test suite</h3>
 <div class="outline-text-3" id="text-4-1">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/run-all-emagick-tests</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Run</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">tests</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagick-&#128048;"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
@@ -347,8 +384,8 @@ Fakir is cool ass, but I don't need it.  yet.  Also, a great name
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">4.2</span> alist-set: Change element in list</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">4.2</span> alist-set: Change element in list</h3>
 <div class="outline-text-3" id="text-4-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagick-&#128048;/alist-set</span><span class="org-unicode-whitespace-subdued-space"> </span>(key<span class="org-unicode-whitespace-subdued-space"> </span>value<span class="org-unicode-whitespace-subdued-space"> </span>alist<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>use-proper-list)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Sets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">or</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">KEY</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">VALUE</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">on</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ALIST,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">return</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list.</span>
@@ -387,21 +424,21 @@ Fakir is cool ass, but I don't need it.  yet.  Also, a great name
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-2">
-<h2 id="orgheadline29"><span class="section-number-2">5</span> Emagician Helpers</h2>
+<div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31"><span class="section-number-2">5</span> Emagician Helpers</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">5.1</span> Hook Helpers</h3>
+</div><div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">5.1</span> Hook Helpers</h3>
 <div class="outline-text-3" id="text-5-1">
-</div><div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16"><span class="section-number-4">5.1.1</span> Minor In Major</h4>
+</div><div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18"><span class="section-number-4">5.1.1</span> Minor In Major</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 Kinda one of those things that I am surprised is not a thing.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline15"></a><span class="todo TODO">TODO</span> Needs a better test (functional) and needs to make sure not to add an extra hook when already defined.<br  /><div class="outline-text-5" id="text-5-1-1-1">
+<ol class="org-ol"><li><a id="orgheadline17"></a><span class="todo TODO">TODO</span> Needs a better test (functional) and needs to make sure not to add an extra hook when already defined.<br  /><div class="outline-text-5" id="text-5-1-1-1">
 <pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>(minor-mode<span class="org-unicode-whitespace-subdued-space"> </span>major-mode-hook)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((turn-on-symbol<span class="org-unicode-whitespace-subdued-space"> </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"turn-on-"</span><span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>minor-mode)))))
 <span class="org-unicode-whitespace-subdued-space">    </span>(list<span class="org-unicode-whitespace-subdued-trailing"> </span>
@@ -421,8 +458,8 @@ Kinda one of those things that I am surprised is not a thing.
 </div></li></ol>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">5.1.2</span> Def hook</h4>
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20"><span class="section-number-4">5.1.2</span> Def hook</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>(name<span class="org-unicode-whitespace-subdued-space"> </span>hook<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>b)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">declare</span><span class="org-unicode-whitespace-subdued-space"> </span>(indent<span class="org-unicode-whitespace-subdued-space"> </span>2))
@@ -438,7 +475,7 @@ Kinda one of those things that I am surprised is not a thing.
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline17"></a>Unit tests<br  /><div class="outline-text-5" id="text-5-1-2-1">
+<ol class="org-ol"><li><a id="orgheadline19"></a>Unit tests<br  /><div class="outline-text-5" id="text-5-1-2-1">
 <pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-defines-hook-and-adds-it</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Basic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">make</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sure</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">defines</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">hook</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
@@ -478,8 +515,8 @@ Kinda one of those things that I am surprised is not a thing.
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">5.2</span> Backtrace Magick</h3>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">5.2</span> Backtrace Magick</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 HOLY SHIT. This worked better than I expected. 
@@ -509,8 +546,8 @@ This function snarfs the backtrace when called and returns it as a list.   This 
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">5.3</span> Sanitize File name</h3>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">5.3</span> Sanitize File name</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 A bit of a naive version of this for now.
@@ -529,16 +566,17 @@ A bit of a naive version of this for now.
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">5.4</span> Expect Dir</h3>
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">5.4</span> Expect Dir</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Make sure a dirs exist.
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>(dir)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>(dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>pathroot)<span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Ensures</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">named</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">directory</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">exists."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((path<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span>dir<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((path<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span>dir
+<span class="org-unicode-whitespace-subdued-space">                                </span>(or<span class="org-unicode-whitespace-subdued-space"> </span>pathroot<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))))
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>path))
 <span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-exists-p<span class="org-unicode-whitespace-subdued-space"> </span>path)
 <span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Cannot</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Create</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">already</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">exists</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">file."</span><span class="org-unicode-whitespace-subdued-space"> </span>path))
@@ -547,19 +585,28 @@ Make sure a dirs exist.
 </pre>
 
 <pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((tdir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>))<span class="org-unicode-whitespace-subdued-trailing">   </span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((tdir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-scratch-monkey"</span>))<span class="org-unicode-whitespace-subdued-trailing">   </span>
 <span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir)))
 <span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
 <span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
 <span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>(delete-directory<span class="org-unicode-whitespace-subdued-space"> </span>tdir)<span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir))))
 <span class="org-unicode-whitespace-subdued-space">    </span>(should-error<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo/bar/baz/notexisting"</span>)))
 <span class="org-unicode-whitespace-subdued-space">  </span>(should-error<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician.org"</span>)))
+
+(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir-with-extra-arg</span><span class="org-unicode-whitespace-subdued-space"> </span>()
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((dirname<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-scratch-monkey"</span>)
+<span class="org-unicode-whitespace-subdued-space">         </span>(tdir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>temporary-file-directory<span class="org-unicode-whitespace-subdued-space"> </span>dirname)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span>dirname
+<span class="org-unicode-whitespace-subdued-space">                                                    </span>temporary-file-directory)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>(delete-directory<span class="org-unicode-whitespace-subdued-space"> </span>tdir)
+<span class="org-unicode-whitespace-subdued-space">                   </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir))))))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">5.5</span> Add to Path</h3>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">5.5</span> Add to Path</h3>
 <div class="outline-text-3" id="text-5-5">
 <pre class="code"><span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/add-to-path</span><span class="org-unicode-whitespace-subdued-space"> </span>(path<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>front)
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PATH</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PATH</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">env</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">variable,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">eshell-path-env</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">as</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">well</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">as</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">exec-path.</span>
@@ -580,8 +627,8 @@ Make sure a dirs exist.
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28"><span class="section-number-3">5.6</span> Final Emagician Scratch</h3>
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">5.6</span> Final Emagician Scratch</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 When the starter it is loaded we want to display the scratch buffer
@@ -608,8 +655,8 @@ If you want to add items, you can do so through the
 </pre>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24"><span class="section-number-4">5.6.1</span> Scratchify</h4>
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">5.6.1</span> Scratchify</h4>
 <div class="outline-text-4" id="text-5-6-1">
 <pre class="code"><span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-text</span><span class="org-unicode-whitespace-subdued-space"> </span>(text-or-list)
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Takes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chunk</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">text,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">newline</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">boundary</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">inserts</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">;;;</span>
@@ -647,8 +694,8 @@ If you want to add items, you can do so through the
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">5.6.2</span> Reset Scratch</h4>
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">5.6.2</span> Reset Scratch</h4>
 <div class="outline-text-4" id="text-5-6-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/reset-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(str)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">with-current-buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*scratch*"</span>
@@ -661,8 +708,8 @@ If you want to add items, you can do so through the
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-4">
-<h4 id="orgheadline27"><span class="section-number-4">5.6.3</span> Main Scratch Initiation</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">5.6.3</span> Main Scratch Initiation</h4>
 <div class="outline-text-4" id="text-5-6-3">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/initiate-thee-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span>(flet<span class="org-unicode-whitespace-subdued-space"> </span>((with-bg-fg<span class="org-unicode-whitespace-subdued-space"> </span>(str<span class="org-unicode-whitespace-subdued-space"> </span>bg<span class="org-unicode-whitespace-subdued-space"> </span>fg)
@@ -724,14 +771,14 @@ If you want to add items, you can do so through the
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline26"></a><span class="todo TODO">TODO</span> make the scratch use color again.<br  /></li></ol>
+<ol class="org-ol"><li><a id="orgheadline28"></a><span class="todo TODO">TODO</span> make the scratch use color again.<br  /></li></ol>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:22</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

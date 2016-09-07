@@ -3,11 +3,11 @@
 .title { text-align: left; }
 
 pre.code {
+    font-size: 90%
     width: 90%;
 }
 
-
-@media not-screen-untill-debuged {
+@media screen {
     h1.title {
         margin-left: 260px;
     }
@@ -16,10 +16,10 @@ pre.code {
         position: fixed;
         top: 0;
         left: 0;
-        padding: 1ex 0 2em 2em;
+        padding: 1ex 1em 5em 2em;
         border-right: 1px solid #bbb;
         box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
-        width: 240px;
+        width: 220px;
         height: 100vh;
         font-size: 11px;
         background: hsl(60, 100%, 95%);

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:21 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thee Lamp</title>
@@ -167,8 +167,9 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#orgheadline8">3. Fix-Muscle-Memory (was Emagician-Fix-Spell)</a></li>
-<li><a href="#orgheadline9">4. Sierpinski</a></li>
-<li><a href="#orgheadline10">5. Alchemical Symbols</a></li>
+<li><a href="#orgheadline9">4. Rid myself of Art Bollocks</a></li>
+<li><a href="#orgheadline10">5. Sierpinski</a></li>
+<li><a href="#orgheadline11">6. Alchemical Symbols</a></li>
 </ul>
 </div>
 </div>
@@ -201,7 +202,6 @@ With the current one (moar)
 <p>
 Cookie files are really easy:
 </p>
-
 <pre class="example">
 stuff
 stuff
@@ -214,7 +214,6 @@ other stuff
 <p>
 This gives us an interesting opportunity to display a random something.  For an emagician, one may want to display the following:
 </p>
-
 <ul class="org-ul">
 <li>a "psychological workout" task for the day</li>
 <li>a card of personal meaning (tarot, I-Ching, Discordian tarot, whatevs)</li>
@@ -241,7 +240,6 @@ Note the Final <code>%%</code>
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline6" class="outline-3">
 <h3 id="orgheadline6"><span class="section-number-3">2.3</span> Content</h3>
 <div class="outline-text-3" id="text-2-3">
@@ -251,13 +249,11 @@ Note the Final <code>%%</code>
 <p>
 Sources:
 </p>
-
 <ul class="org-ul">
 <li>Principia Discorida</li>
 <li>On formerally undecidable propositions of the Principia Discorida and other related systems</li>
 <li>Thee Grey Book</li>
 </ul>
-
 <pre class="code">A jug of wine,
 A leg of lamb
 And thou!
@@ -761,7 +757,6 @@ haven't killled yourself yet!
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline5" class="outline-4">
 <h4 id="orgheadline5"><span class="section-number-4">2.3.2</span> Minor Lamp Invocation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></h4>
 <div class="outline-text-4" id="text-2-3-2">
@@ -794,7 +789,6 @@ emacs-howdoi
 Know your HTTP Well!  M-x http-foo and media-types
 %%
 </pre>
-
 <p>
 ^&#x2014; %%!
 </p>
@@ -802,7 +796,6 @@ Know your HTTP Well!  M-x http-foo and media-types
 </div>
 </div>
 </div>
-
 <div id="outline-container-orgheadline8" class="outline-2">
 <h2 id="orgheadline8"><span class="section-number-2">3</span> Fix-Muscle-Memory (was Emagician-Fix-Spell)</h2>
 <div class="outline-text-2" id="text-3">
@@ -828,14 +821,52 @@ This was originally defined in this file, but it got moved to it's own repo.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">4</span> Sierpinski</h2>
+<h2 id="orgheadline9"><span class="section-number-2">4</span> Rid myself of Art Bollocks</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-&#x2026; is my jam! <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+One of the problems I sort of have a lot of, is that I kind of use a lot of weasel words.  Perhaps I think I should leverage an Emacs plugin to change this.
+</p>
+
+<p>
+Like Really a lot.
+</p>
+
+<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">artbollocks-mode</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-weasel-words-regex
+<span class="org-unicode-whitespace-subdued-space">        </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\b"</span><span class="org-unicode-whitespace-subdued-space"> </span>(regexp-opt
+<span class="org-unicode-whitespace-subdued-space">                       </span>'(<span class="org-string">"one</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"should"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"kinda"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"kind</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"just"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"sort</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">lot"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"probably"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"maybe"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"perhaps"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"I</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">think"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"really"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"pretty"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"nice"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"action"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"utilize"</span>
+<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"leverage"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>t)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\b"</span>))
+<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-jargon<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>text-mode-hook)
+<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-hook))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10"><span class="section-number-2">5</span> Sierpinski</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+&#x2026; is my jam! <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 <a href="http://nullprogram.com/blog/2012/09/14/">http://nullprogram.com/blog/2012/09/14/</a>
-</p></span>
+</span>
 </p>
 
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">sierpinski</span><span class="org-unicode-whitespace-subdued-space"> </span>(s)
@@ -852,9 +883,9 @@ This was originally defined in this file, but it got moved to it's own repo.
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">5</span> Alchemical Symbols</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11"><span class="section-number-2">6</span> Alchemical Symbols</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 No self respecting Emagicians Starter Kit would be without em!
 </p>
@@ -879,7 +910,6 @@ No self respecting Emagicians Starter Kit would be without em!
 <th scope="col" class="org-left">S</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td class="org-right">128768</td>
@@ -888,14 +918,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜀</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128769</td>
 <td class="org-left">1F701</td>
 <td class="org-left">AIR</td>
 <td class="org-left">🜁</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128770</td>
@@ -904,14 +932,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜂</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128771</td>
 <td class="org-left">1F703</td>
 <td class="org-left">EARTH</td>
 <td class="org-left">🜃</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128772</td>
@@ -920,14 +946,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜄</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128773</td>
 <td class="org-left">1F705</td>
 <td class="org-left">AQUAFORTIS</td>
 <td class="org-left">🜅</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128774</td>
@@ -936,14 +960,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜆</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128775</td>
 <td class="org-left">1F707</td>
 <td class="org-left">AQUA REGIA-2</td>
 <td class="org-left">🜇</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128776</td>
@@ -952,14 +974,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜈</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128777</td>
 <td class="org-left">1F709</td>
 <td class="org-left">AQUA VITAE-2</td>
 <td class="org-left">🜉</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128778</td>
@@ -968,14 +988,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜊</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128779</td>
 <td class="org-left">1F70B</td>
 <td class="org-left">VINEGAR-2</td>
 <td class="org-left">🜋</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128780</td>
@@ -984,14 +1002,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜌</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128781</td>
 <td class="org-left">1F70D</td>
 <td class="org-left">SULFUR</td>
 <td class="org-left">🜍</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128782</td>
@@ -1000,14 +1016,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜎</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128783</td>
 <td class="org-left">1F70F</td>
 <td class="org-left">BLACK SULFUR</td>
 <td class="org-left">🜏</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128784</td>
@@ -1016,14 +1030,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜐</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128785</td>
 <td class="org-left">1F711</td>
 <td class="org-left">MERCURY SUBLIMATE-2</td>
 <td class="org-left">🜑</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128786</td>
@@ -1032,14 +1044,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜒</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128787</td>
 <td class="org-left">1F713</td>
 <td class="org-left">CINNABAR</td>
 <td class="org-left">🜓</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128788</td>
@@ -1048,14 +1058,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜔</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128789</td>
 <td class="org-left">1F715</td>
 <td class="org-left">NITRE</td>
 <td class="org-left">🜕</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128790</td>
@@ -1064,14 +1072,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜖</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128791</td>
 <td class="org-left">1F717</td>
 <td class="org-left">VITRIOL-2</td>
 <td class="org-left">🜗</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128792</td>
@@ -1080,14 +1086,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜘</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128793</td>
 <td class="org-left">1F719</td>
 <td class="org-left">ROCK SALT-2</td>
 <td class="org-left">🜙</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128794</td>
@@ -1096,14 +1100,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜚</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128795</td>
 <td class="org-left">1F71B</td>
 <td class="org-left">SILVER</td>
 <td class="org-left">🜛</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128796</td>
@@ -1112,14 +1114,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜜</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128797</td>
 <td class="org-left">1F71D</td>
 <td class="org-left">IRON ORE-2</td>
 <td class="org-left">🜝</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128798</td>
@@ -1128,14 +1128,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜞</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128799</td>
 <td class="org-left">1F71F</td>
 <td class="org-left">REGULUS OF IRON</td>
 <td class="org-left">🜟</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128800</td>
@@ -1144,14 +1142,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜠</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128801</td>
 <td class="org-left">1F721</td>
 <td class="org-left">IRON-COPPER ORE</td>
 <td class="org-left">🜡</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128802</td>
@@ -1160,14 +1156,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜢</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128803</td>
 <td class="org-left">1F723</td>
 <td class="org-left">CROCUS OF COPPER</td>
 <td class="org-left">🜣</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128804</td>
@@ -1176,14 +1170,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜤</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128805</td>
 <td class="org-left">1F725</td>
 <td class="org-left">COPPER ANTIMONIATE</td>
 <td class="org-left">🜥</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128806</td>
@@ -1192,14 +1184,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜦</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128807</td>
 <td class="org-left">1F727</td>
 <td class="org-left">SUBLIMATE OF SALT OF COPPER</td>
 <td class="org-left">🜧</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128808</td>
@@ -1208,14 +1198,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜨</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128809</td>
 <td class="org-left">1F729</td>
 <td class="org-left">TIN ORE</td>
 <td class="org-left">🜩</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128810</td>
@@ -1224,14 +1212,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜪</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128811</td>
 <td class="org-left">1F72B</td>
 <td class="org-left">ANTIMONY ORE</td>
 <td class="org-left">🜫</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128812</td>
@@ -1240,14 +1226,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜬</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128813</td>
 <td class="org-left">1F72D</td>
 <td class="org-left">SALT OF ANTIMONY</td>
 <td class="org-left">🜭</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128814</td>
@@ -1256,14 +1240,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜮</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128815</td>
 <td class="org-left">1F72F</td>
 <td class="org-left">VINEGAR OF ANTIMONY</td>
 <td class="org-left">🜯</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128816</td>
@@ -1272,14 +1254,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜰</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128817</td>
 <td class="org-left">1F731</td>
 <td class="org-left">REGULUS OF ANTIMONY-2</td>
 <td class="org-left">🜱</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128818</td>
@@ -1288,14 +1268,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜲</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128819</td>
 <td class="org-left">1F733</td>
 <td class="org-left">REGULUS-2</td>
 <td class="org-left">🜳</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128820</td>
@@ -1304,14 +1282,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜴</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128821</td>
 <td class="org-left">1F735</td>
 <td class="org-left">REGULUS-4</td>
 <td class="org-left">🜵</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128822</td>
@@ -1320,14 +1296,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜶</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128823</td>
 <td class="org-left">1F737</td>
 <td class="org-left">ALKALI-2</td>
 <td class="org-left">🜷</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128824</td>
@@ -1336,14 +1310,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜸</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128825</td>
 <td class="org-left">1F739</td>
 <td class="org-left">SAL-AMMONIAC</td>
 <td class="org-left">🜹</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128826</td>
@@ -1352,14 +1324,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜺</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128827</td>
 <td class="org-left">1F73B</td>
 <td class="org-left">REALGAR</td>
 <td class="org-left">🜻</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128828</td>
@@ -1368,14 +1338,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜼</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128829</td>
 <td class="org-left">1F73D</td>
 <td class="org-left">AURIPIGMENT</td>
 <td class="org-left">🜽</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128830</td>
@@ -1384,14 +1352,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🜾</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128831</td>
 <td class="org-left">1F73F</td>
 <td class="org-left">TARTAR</td>
 <td class="org-left">🜿</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128832</td>
@@ -1400,14 +1366,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝀</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128833</td>
 <td class="org-left">1F741</td>
 <td class="org-left">QUICK LIME</td>
 <td class="org-left">🝁</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128834</td>
@@ -1416,14 +1380,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝂</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128835</td>
 <td class="org-left">1F743</td>
 <td class="org-left">BORAX-2</td>
 <td class="org-left">🝃</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128836</td>
@@ -1432,14 +1394,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝄</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128837</td>
 <td class="org-left">1F745</td>
 <td class="org-left">ALUM</td>
 <td class="org-left">🝅</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128838</td>
@@ -1448,14 +1408,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝆</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128839</td>
 <td class="org-left">1F747</td>
 <td class="org-left">SPIRIT</td>
 <td class="org-left">🝇</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128840</td>
@@ -1464,14 +1422,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝈</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128841</td>
 <td class="org-left">1F749</td>
 <td class="org-left">GUM</td>
 <td class="org-left">🝉</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128842</td>
@@ -1480,14 +1436,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝊</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128843</td>
 <td class="org-left">1F74B</td>
 <td class="org-left">POWDER</td>
 <td class="org-left">🝋</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128844</td>
@@ -1496,14 +1450,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝌</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128845</td>
 <td class="org-left">1F74D</td>
 <td class="org-left">TUTTY</td>
 <td class="org-left">🝍</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128846</td>
@@ -1512,14 +1464,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝎</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128847</td>
 <td class="org-left">1F74F</td>
 <td class="org-left">SCEPTER OF JOVE</td>
 <td class="org-left">🝏</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128848</td>
@@ -1528,14 +1478,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝐</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128849</td>
 <td class="org-left">1F751</td>
 <td class="org-left">TRIDENT</td>
 <td class="org-left">🝑</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128850</td>
@@ -1544,14 +1492,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝒</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128851</td>
 <td class="org-left">1F753</td>
 <td class="org-left">LODESTONE</td>
 <td class="org-left">🝓</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128852</td>
@@ -1560,14 +1506,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝔</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128853</td>
 <td class="org-left">1F755</td>
 <td class="org-left">URINE</td>
 <td class="org-left">🝕</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128854</td>
@@ -1576,14 +1520,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝖</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128855</td>
 <td class="org-left">1F757</td>
 <td class="org-left">ASHES</td>
 <td class="org-left">🝗</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128856</td>
@@ -1592,14 +1534,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝘</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128857</td>
 <td class="org-left">1F759</td>
 <td class="org-left">BRICK</td>
 <td class="org-left">🝙</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128858</td>
@@ -1608,14 +1548,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝚</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128859</td>
 <td class="org-left">1F75B</td>
 <td class="org-left">AMALGAM</td>
 <td class="org-left">🝛</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128860</td>
@@ -1624,14 +1562,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝜</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128861</td>
 <td class="org-left">1F75D</td>
 <td class="org-left">STRATUM SUPER STRATUM-2</td>
 <td class="org-left">🝝</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128862</td>
@@ -1640,14 +1576,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝞</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128863</td>
 <td class="org-left">1F75F</td>
 <td class="org-left">PRECIPITATE</td>
 <td class="org-left">🝟</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128864</td>
@@ -1656,14 +1590,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝠</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128865</td>
 <td class="org-left">1F761</td>
 <td class="org-left">DISSOLVE</td>
 <td class="org-left">🝡</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128866</td>
@@ -1672,14 +1604,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝢</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128867</td>
 <td class="org-left">1F763</td>
 <td class="org-left">PURIFY</td>
 <td class="org-left">🝣</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128868</td>
@@ -1688,14 +1618,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝤</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128869</td>
 <td class="org-left">1F765</td>
 <td class="org-left">CRUCIBLE</td>
 <td class="org-left">🝥</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128870</td>
@@ -1704,14 +1632,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝦</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128871</td>
 <td class="org-left">1F767</td>
 <td class="org-left">CRUCIBLE-3</td>
 <td class="org-left">🝧</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128872</td>
@@ -1720,14 +1646,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝨</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128873</td>
 <td class="org-left">1F769</td>
 <td class="org-left">CRUCIBLE-5</td>
 <td class="org-left">🝩</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128874</td>
@@ -1736,14 +1660,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝪</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128875</td>
 <td class="org-left">1F76B</td>
 <td class="org-left">BATH OF MARY</td>
 <td class="org-left">🝫</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128876</td>
@@ -1752,14 +1674,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝬</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128877</td>
 <td class="org-left">1F76D</td>
 <td class="org-left">RETORT</td>
 <td class="org-left">🝭</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128878</td>
@@ -1768,14 +1688,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝮</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128879</td>
 <td class="org-left">1F76F</td>
 <td class="org-left">NIGHT</td>
 <td class="org-left">🝯</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128880</td>
@@ -1784,7 +1702,6 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝰</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128881</td>
 <td class="org-left">1F771</td>
@@ -1792,14 +1709,12 @@ No self respecting Emagicians Starter Kit would be without em!
 <td class="org-left">🝱</td>
 </tr>
 
-
 <tr>
 <td class="org-right">128882</td>
 <td class="org-left">1F772</td>
 <td class="org-left">HALF DRAM</td>
 <td class="org-left">🝲</td>
 </tr>
-
 
 <tr>
 <td class="org-right">128883</td>
@@ -1824,7 +1739,7 @@ No self respecting Emagicians Starter Kit would be without em!
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:21</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

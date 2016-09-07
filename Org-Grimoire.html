@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org-Grimoire</title>
@@ -342,7 +342,6 @@ The latest version of yasnippet doesn't play well with Org mode.
 If the above code does not fix the conflict, start by defining the
 following function:
 </p>
-
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">yas/org-very-safe-expand</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((yas/fallback-behavior<span class="org-unicode-whitespace-subdued-space"> </span>'return-nil))<span class="org-unicode-whitespace-subdued-space"> </span>(yas/expand)))
 </pre>
@@ -350,7 +349,6 @@ following function:
 <p>
 Then, tell Org mode what to do with the new function:
 </p>
-
 <pre class="code">(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>fix-yasnippet-for-org<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-hook
 <span class="org-unicode-whitespace-subdued-space">  </span>(make-variable-buffer-local<span class="org-unicode-whitespace-subdued-space"> </span>'yas/trigger-key)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>yas/trigger-key<span class="org-unicode-whitespace-subdued-space"> </span>[tab])
@@ -389,7 +387,6 @@ Then, tell Org mode what to do with the new function:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgheadline8" class="outline-2">
 <h2 id="orgheadline8"><span class="section-number-2">5</span> Agenda Files</h2>
 <div class="outline-text-2" id="text-5">
@@ -462,7 +459,6 @@ A better looking org mode looks better.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline13" class="outline-3">
 <h3 id="orgheadline13"><span class="section-number-3">6.5</span> Set as next action</h3>
 <div class="outline-text-3" id="text-6-5">
@@ -626,8 +622,10 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 <pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org-habit</span>)
 </pre>
 
+
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-habit-graph-column<span class="org-unicode-whitespace-subdued-space"> </span>50)
 </pre>
+
 
 <pre class="code">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'org-todo-keywords<span class="org-unicode-whitespace-subdued-space"> </span>'(sequence<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"HABIT(h)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"|"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DONE(d!)"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
@@ -666,14 +664,12 @@ Work, Music, Personal.  That's it.  Everything else should be a tag.
 </div>
 </div>
 </div>
-
 <div id="outline-container-orgheadline27" class="outline-2">
 <h2 id="orgheadline27"><span class="section-number-2">11</span> Refiling</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 All agenda files are valid for targeting
 </p>
-
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-refile-targets<span class="org-unicode-whitespace-subdued-space"> </span>'((org-agenda-files<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:maxlevel</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>1)))
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>org-refile-use-outline-path<span class="org-unicode-whitespace-subdued-space"> </span>'file)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>org-outline-path-complete-in-steps<span class="org-unicode-whitespace-subdued-space"> </span>nil)
@@ -690,6 +686,7 @@ All agenda files are valid for targeting
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>org-return-follows-link<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 
+
 <pre class="code">(define-key<span class="org-unicode-whitespace-subdued-space"> </span>global-map<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\C-cl"</span><span class="org-unicode-whitespace-subdued-space"> </span>'org-store-link)
 
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>org-return-follows-link<span class="org-unicode-whitespace-subdued-space"> </span>t)
@@ -705,7 +702,6 @@ All agenda files are valid for targeting
 </div>
 </div>
 </div>
-
 <div id="outline-container-orgheadline31" class="outline-2">
 <h2 id="orgheadline31"><span class="section-number-2">13</span> Capturing and Capture Templates</h2>
 <div class="outline-text-2" id="text-13">
@@ -765,13 +761,13 @@ Fancy it up a little
 <p>
 51.0368334,-114.0715046,15z
 </p>
-
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>calendar-longitude<span class="org-unicode-whitespace-subdued-space"> </span>-114.0715046)
 (setq<span class="org-unicode-whitespace-subdued-space"> </span>calendar-latitude<span class="org-unicode-whitespace-subdued-space"> </span>51.0368334)
 </pre>
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-orgheadline35" class="outline-3">
 <h3 id="orgheadline35"><span class="section-number-3">15.2</span> Include it in agenda</h3>
@@ -850,7 +846,6 @@ Fancy it up a little
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline43" class="outline-3">
 <h3 id="orgheadline43"><span class="section-number-3">17.4</span> Display a cool subtitle with Kawaii</h3>
 </div>
@@ -864,7 +859,6 @@ Fancy it up a little
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline50" class="outline-3">
 <h3 id="orgheadline50"><span class="section-number-3">17.6</span> Display the current cycles</h3>
 <div class="outline-text-3" id="text-17-6">
@@ -883,7 +877,6 @@ Fancy it up a little
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline46" class="outline-4">
 <h4 id="orgheadline46"><span class="section-number-4">17.6.2</span> Solar Calendar</h4>
 <div class="outline-text-4" id="text-17-6-2">
@@ -904,11 +897,9 @@ Fancy it up a little
 <div id="outline-container-orgheadline47" class="outline-4">
 <h4 id="orgheadline47"><span class="section-number-4">17.6.3</span> <span class="todo TODO">TODO</span> Erisian Calendar</h4>
 </div>
-
 <div id="outline-container-orgheadline48" class="outline-4">
 <h4 id="orgheadline48"><span class="section-number-4">17.6.4</span> <span class="todo TODO">TODO</span> 8 Wheel Spoke</h4>
 </div>
-
 <div id="outline-container-orgheadline49" class="outline-4">
 <h4 id="orgheadline49"><span class="section-number-4">17.6.5</span> Cycle Display</h4>
 <div class="outline-text-4" id="text-17-6-5">
@@ -937,6 +928,7 @@ Fancy it up a little
 </pre>
 </div>
 
+
 <div id="outline-container-orgheadline52" class="outline-4">
 <h4 id="orgheadline52"><span class="section-number-4">17.8.1</span> <span class="todo TODO">TODO</span> Get context from Location</h4>
 </div>
@@ -948,7 +940,6 @@ Fancy it up a little
 <p>
 Best is the enemy of the good.  Make this not suck later. 
 </p>
-
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-agenda/get-tag</span><span class="org-unicode-whitespace-subdued-space"> </span>(tag<span class="org-unicode-whitespace-subdued-space"> </span>title<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>include-dates)<span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>include-dates)
 <span class="org-unicode-whitespace-subdued-space">    </span>`(todo<span class="org-unicode-whitespace-subdued-space"> </span>,tag<span class="org-unicode-whitespace-subdued-trailing"> </span>
@@ -961,6 +952,7 @@ Best is the enemy of the good.  Make this not suck later.
 <p>
 (emagician-agenda/get-tag "NEXT" "❇ Next Actions" t)
 </p>
+
 
 <p>
 (todo "NEXT" ((org-agenda-overriding-header "❇ Next Actions") 
@@ -1021,7 +1013,6 @@ Best is the enemy of the good.  Make this not suck later.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline57" class="outline-4">
 <h4 id="orgheadline57"><span class="section-number-4">17.11.2</span> Display the started action</h4>
 </div>
@@ -1029,12 +1020,10 @@ Best is the enemy of the good.  Make this not suck later.
 <div id="outline-container-orgheadline58" class="outline-4">
 <h4 id="orgheadline58"><span class="section-number-4">17.11.3</span> Display next actions for the context</h4>
 </div>
-
 <div id="outline-container-orgheadline61" class="outline-4">
 <h4 id="orgheadline61"><span class="section-number-4">17.11.4</span> <span class="todo PROJECT">PROJECT</span> List all next actions on a keystroke (F4)</h4>
 <div class="outline-text-4" id="text-17-11-4">
 </div><ol class="org-ol"><li><a id="orgheadline59"></a><span class="todo NEXT">NEXT</span> Org agenda command<br  /></li>
-
 <li><a id="orgheadline60"></a><span class="todo TODO">TODO</span> filter to work<br  /></li></ol>
 </div>
 </div>
@@ -1114,11 +1103,13 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 </div>
 </div>
 
+
 <div id="outline-container-orgheadline74" class="outline-2">
 <h2 id="orgheadline74"><span class="section-number-2">20</span> Saving and auto Commiting</h2>
 <div class="outline-text-2" id="text-20">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician-org/save-commit-and-push</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Do</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">thing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">automagickally"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Autosaving</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">buffers"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(org-save-all-org-buffers)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">with-helm-default-directory</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~/org"</span>
 <span class="org-unicode-whitespace-subdued-space">      </span>(async-start
@@ -1128,7 +1119,7 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 <span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(result)
 <span class="org-unicode-whitespace-subdued-space">         </span>(async-start
 <span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">            </span>(shell-command<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-m\"autopmagick</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit\""</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span>))
+<span class="org-unicode-whitespace-subdued-space">            </span>(shell-command<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-m\"autpmagick</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">commit\""</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">autocommit*"</span>))
 <span class="org-unicode-whitespace-subdued-space">          </span>'ignore)))))
 
 (run-at-time<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>600<span class="org-unicode-whitespace-subdued-space"> </span>'emagician-org/save-commit-and-push)
@@ -1138,7 +1129,6 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 <div id="outline-container-orgheadline72" class="outline-4">
 <h4 id="orgheadline72"><span class="section-number-4">20.0.1</span> <span class="todo TODO">TODO</span> fix this to use shell commands instead.</h4>
 </div>
-
 <div id="outline-container-orgheadline73" class="outline-4">
 <h4 id="orgheadline73"><span class="section-number-4">20.0.2</span> Mobile Org</h4>
 <div class="outline-text-4" id="text-20-0-2">
@@ -1160,7 +1150,7 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:22</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

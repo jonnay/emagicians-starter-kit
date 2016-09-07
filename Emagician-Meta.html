@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Meta-Development</title>
@@ -206,7 +206,6 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><span class="section-number-2">1</span> Illumination…</h2>
 <div class="outline-text-2" id="text-1">
@@ -252,6 +251,7 @@ start to learn the keystrokes.
 <dt>t    </dt><dd>Show a todo list</dd>
 </dl>
 
+
 <pre class="code">(bind-keys<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:prefix-map</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/meta-keymap
 <span class="org-unicode-whitespace-subdued-space">           </span><span class="org-builtin">:prefix</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;f3&gt;"</span>
 <span class="org-unicode-whitespace-subdued-space">           </span>(<span class="org-string">"&lt;f3&gt;"</span><span class="org-unicode-whitespace-subdued-space">    </span>.<span class="org-unicode-whitespace-subdued-space"> </span>emagician/helm-emagician-dir)
@@ -266,7 +266,6 @@ start to learn the keystrokes.
 </div>
 </div>
 </div>
-
 <div id="outline-container-orgheadline11" class="outline-2">
 <h2 id="orgheadline11"><span class="section-number-2">3</span> Developing</h2>
 <div class="outline-text-2" id="text-3">
@@ -308,7 +307,6 @@ Helm keeps changing its interface.  For such an awesome package this is the one 
 <div id="outline-container-orgheadline5" class="outline-3">
 <h3 id="orgheadline5"><span class="section-number-3">3.2</span> Testing</h3>
 </div>
-
 <div id="outline-container-orgheadline6" class="outline-3">
 <h3 id="orgheadline6"><span class="section-number-3">3.3</span> Running all ERT tests</h3>
 <div class="outline-text-3" id="text-3-3">
@@ -364,6 +362,7 @@ Helm keeps changing its interface.  For such an awesome package this is the one 
 <span class="org-unicode-whitespace-subdued-space">  </span>(emagician/test-initialization<span class="org-unicode-whitespace-subdued-space"> </span>lisp))
 </pre>
 
+
 <p>
 This loads the starter kit as a batch and outputs the results as a message.
 </p>
@@ -396,7 +395,6 @@ This does a full GUI load, outputting any results as a message.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline10" class="outline-3">
 <h3 id="orgheadline10"><span class="section-number-3">3.5</span> Peering into the kit, the Emagician Agenda</h3>
 <div class="outline-text-3" id="text-3-5">
@@ -404,7 +402,6 @@ This does a full GUI load, outputting any results as a message.
 Note, this has 2 strikes.  The third agenda related strike requires a refactoring
 </p>
 </div>
-
 <div id="outline-container-orgheadline8" class="outline-4">
 <h4 id="orgheadline8"><span class="section-number-4">3.5.1</span> General agenda</h4>
 <div class="outline-text-4" id="text-3-5-1">
@@ -450,7 +447,6 @@ Use the bookmarklet to connect and you're off to the races!
 </p>
 </div>
 </div>
-
 <div id="outline-container-orgheadline13" class="outline-4">
 <h4 id="orgheadline13"><span class="section-number-4">4.1.2</span> Publishing functions</h4>
 <div class="outline-text-4" id="text-4-1-2">
@@ -479,6 +475,8 @@ Use the bookmarklet to connect and you're off to the races!
 </pre>
 </div>
 </div>
+
+
 
 <div id="outline-container-orgheadline15" class="outline-4">
 <h4 id="orgheadline15"><span class="section-number-4">4.1.4</span> Main publisher</h4>
@@ -546,8 +544,10 @@ Use the bookmarklet to connect and you're off to the races!
 The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want 
 </p>
 
+
 <pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/styles"</span>)
 </pre>
+
 
 <p>
 While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skill. 
@@ -559,6 +559,7 @@ While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skil
 <li><a href="https://edwardtufte.github.io/tufte-css/">https://edwardtufte.github.io/tufte-css/</a></li>
 </ul>
 </div>
+
 
 <div id="outline-container-orgheadline17" class="outline-4">
 <h4 id="orgheadline17"><span class="section-number-4">4.2.1</span> Image Quilt</h4>
@@ -573,15 +574,14 @@ While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skil
 <h4 id="orgheadline18"><span class="section-number-4">4.2.2</span> Old The CSS file</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
-The thi.ng/org-spec is a good basis to build off of.<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+The thi.ng/org-spec is a good basis to build off of.<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 <a href="https://github.com/thi-ng/org-spec">https://github.com/thi-ng/org-spec</a>
-</p></span>
+</span>
 </p>
 
 <p>
 Things I like:
 </p>
-
 <ul class="org-ul">
 <li>The source blocks, properties blocks, etc all have little outlines</li>
 <li>The tags are displayed</li>
@@ -592,7 +592,6 @@ Things I like:
 <p>
 Things I don't like:
 </p>
-
 <ul class="org-ul">
 <li>ÆＳÞＥTＩC &#x2026; or lack thereof.</li>
 </ul>
@@ -1135,7 +1134,6 @@ tbody<span class="org-unicode-whitespace-subdued-space"> </span>tr:nth-child(odd
 <p>
 Things that need to be fixed
 </p>
-
 <ul class="org-ul">
 <li>TOC</li>
 <li>Source Block display</li>
@@ -1150,11 +1148,11 @@ Things that need to be fixed
 <span class="org-css-selector">.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-property">text-align</span>:<span class="org-unicode-whitespace-subdued-space"> </span>left;<span class="org-unicode-whitespace-subdued-space"> </span>}
 
 <span class="org-css-selector">pre.code</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>90%
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>90%;
 }
 
-
-<span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>slcreen<span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>screen<span class="org-unicode-whitespace-subdued-space"> </span>{
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h1.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">margin-left</span>:<span class="org-unicode-whitespace-subdued-space"> </span>260px;
 <span class="org-unicode-whitespace-subdued-space">    </span>}
@@ -1220,14 +1218,15 @@ Things that need to be fixed
 <h2 id="orgheadline26"><span class="section-number-2">5</span> Inserting text chunks</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">
 The Greatest International Scavenger Hunt the World Has Ever Seen.  This is a yearly event with up to 10,000 people participating.  It lasts for a week long and participants are split into teams of ~13 people.  Some of the items are silly (go to the dentist and get dental work done while a string quartet performs), some are charitable (go to a nursing home and read to one of the residents while wearing a pirate costume).  More information on <a href="https://www.youtube.com/watch?v=SxeusMu7FuY">I'm Jonnay Season 9 Season 2 - TAZ</a>.
-</p></span>
+</span>
 </p>
 
 <p>
 I think I ended up getting inspired by the keyboard.
 </p>
+
 
 
 <div class="figure">
@@ -1339,7 +1338,7 @@ The Greatest International Scavenger Hunt the World Has Ever Seen.  This is a ye
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:22</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

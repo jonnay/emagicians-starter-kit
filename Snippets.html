@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:21 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>YASnippets</title>
@@ -170,19 +170,22 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline14">4. Programming modes</a>
+<li><a href="#orgheadline15">4. Programming modes</a>
 <ul>
 <li><a href="#orgheadline9">4.1. Javascript</a></li>
 <li><a href="#orgheadline10">4.2. Coffeescript</a></li>
-<li><a href="#orgheadline11">4.3. Lisp</a></li>
-<li><a href="#orgheadline12">4.4. Ruby</a></li>
-<li><a href="#orgheadline13">4.5. SQL</a></li>
+<li><a href="#orgheadline11">4.3. Emacs Lisp</a></li>
+<li><a href="#orgheadline13">4.4. Ruby</a>
+<ul>
+<li><a href="#orgheadline12">4.4.1. Unit Testing</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline14">4.5. SQL</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><span class="section-number-2">1</span> This is not the file you are looking for&#x2026;</h2>
 <div class="outline-text-2" id="text-1">
@@ -196,22 +199,16 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 <h2 id="orgheadline3"><span class="section-number-2">2</span> Building&#xa0;&#xa0;&#xa0;<span class="tag"><span class="build">build</span></span></h2>
 <div class="outline-text-2" id="text-2">
 <pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/js-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/coffeescript-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/org-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/ruby-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
-(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/sql-mode"</span>)
 </pre>
 </div>
 
 <div id="outline-container-orgheadline2" class="outline-3">
 <h3 id="orgheadline2"><span class="section-number-3">2.1</span> Execute this during development</h3>
 <div class="outline-text-3" id="text-2-1">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/snippet-tangle-and-reload</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/snippet-tangle-and-reload</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Helper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">tangle</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">reload</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">snippets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">after</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">snippet</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">saved"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(org-babel-tangle)
+<span class="org-unicode-whitespace-subdued-space">  </span>(org-babel-tangle<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<span class="org-unicode-whitespace-subdued-space">  </span>(yas-recompile-all)
 <span class="org-unicode-whitespace-subdued-space">  </span>(yas-reload-all))
 
 (add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'after-save-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/snippet-tangle-and-reload<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t)
@@ -220,13 +217,19 @@ If you want to configure yasnippets for the emagicians starter kit, you want to 
 </div>
 </div>
 
+
+
 <div id="outline-container-orgheadline8" class="outline-2">
 <h2 id="orgheadline8"><span class="section-number-2">3</span> Text modes</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-orgheadline7" class="outline-3">
 <h3 id="orgheadline7"><span class="section-number-3">3.1</span> Org&#xa0;&#xa0;&#xa0;<span class="tag"><span class="org">org</span></span></h3>
 <div class="outline-text-3" id="text-3-1">
-</div><div id="outline-container-orgheadline4" class="outline-4">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/org-mode"</span>)
+</pre>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
 <h4 id="orgheadline4"><span class="section-number-4">3.1.1</span> Source blocks.  A majority of mine are elisp and snippets</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <pre class="code"># name: source block
@@ -263,16 +266,26 @@ $0
 </div>
 </div>
 
+
 <div id="outline-container-orgheadline5" class="outline-4">
 <h4 id="orgheadline5"><span class="section-number-4">3.1.2</span> So meta! Such Wow!</h4>
 <div class="outline-text-4" id="text-3-1-2">
+<p>
+This is so fucking cool.
+</p>
+
+<p>
+This is a snippet to build a snippet in an org mode file.
+</p>
+
 <pre class="code"># name: yasnippet
 # key: snippet
+# expand-env: ((yas-indent-line 'never)  (yas-wrap-around-region 'nil))
 # --
 #+begin_src yasnippet :tangle assets/snippets/$1/$2
 # name: $2
 # key: $2
-#--
+# --
 $0
 #+end_src
 </pre>
@@ -290,7 +303,7 @@ $0
    - Success Looks Like - 40K  :: $3
    - Brainstorming - 30K
      - $4
-   - Organize the brainstorming and come up with next actions (20K) 
+   - Organize the brainstorming and come up with next actions (20K)
 *** TODO $5
 </pre>
 </div>
@@ -298,12 +311,16 @@ $0
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">4</span> Programming modes</h2>
+
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15"><span class="section-number-2">4</span> Programming modes</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-orgheadline9" class="outline-3">
 <h3 id="orgheadline9"><span class="section-number-3">4.1</span> Javascript</h3>
 <div class="outline-text-3" id="text-4-1">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/js-mode"</span>)
+</pre>
+
 <pre class="code">text-mode
 </pre>
 
@@ -321,11 +338,13 @@ function(${1:args}) {
 var $0;
 </pre>
 
+
 <pre class="code"># name: var (assign)
 # key: var
 # --
 var $1 = $0;
 </pre>
+
 
 <pre class="code"># name: var (assign)
 # key: var
@@ -344,68 +363,169 @@ it("$1", function(done) {
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline10" class="outline-3">
 <h3 id="orgheadline10"><span class="section-number-3">4.2</span> Coffeescript</h3>
 <div class="outline-text-3" id="text-4-2">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/coffee-mode"</span>)
+</pre>
+
 <pre class="code"># name: if
 # key: if
-# -- 
+# --
 if $1
   $0
 </pre>
 
 <pre class="code"># name: if
 # key: if
-# -- 
+# --
 if $1
   $2
-else v$0
+else
+  $0
 </pre>
 </div>
 </div>
 
 <div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">4.3</span> Lisp</h3>
+<h3 id="orgheadline11"><span class="section-number-3">4.3</span> Emacs Lisp</h3>
 <div class="outline-text-3" id="text-4-3">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/emacs-lisp-mode"</span>)
+</pre>
+
 <pre class="code"># name: defun
 # key: defun
 #--
-(defun $1 ($2) 
+defun $1 ($2)
   "$3"
-  $0)
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">4.4</span> Ruby</h3>
-<div class="outline-text-3" id="text-4-4">
-<pre class="code"># name: def
-# key: def
-# -- 
-def $1 $2
   $0
-end
 </pre>
 
-<pre class="code"># name: if
-# key: if
-# -- 
-if ($1)
-  $0
-end
+<pre class="code"># name: use-package
+# key: use-package
+#--
+use-package ${name-no-quote}
+$0
 </pre>
 </div>
 </div>
 
 <div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">4.5</span> SQL</h3>
+<h3 id="orgheadline13"><span class="section-number-3">4.4</span> Ruby</h3>
+<div class="outline-text-3" id="text-4-4">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/ruby-mode"</span>)
+</pre>
+
+<pre class="code"># -*- mode: snippet -*-
+# name: class
+# key: class
+# --
+class `(s-upper-camel-case (file-name-base))`
+  $0
+end
+</pre>
+
+<pre class="code"># -*- mode: snippet -*-
+# name: def
+# key: def
+# --
+def $1($2)
+  $0
+end
+</pre>
+
+<pre class="code"># -*- mode: snippet -*-
+# name: if
+# key: if
+# --
+if ($1)
+  $0
+end
+</pre>
+
+<p>
+Note that the end is already inserted by the if snippet
+</p>
+
+<pre class="code"># -*- mode: snippet -*-
+# name: elsif
+# key: elsif
+# --
+elsif ($1)
+  $0
+</pre>
+
+
+<pre class="code"># -*- mode: snippet -*-
+# name: do-block
+# key: do
+# --
+do ${1:|$2|}
+  $0
+end
+</pre>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">4.4.1</span> Unit Testing</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<pre class="code"># name: describe
+# key: describe
+# --
+describe "$1" do
+  $0
+end
+</pre>
+
+<pre class="code"># name: context
+# key: context
+# --
+context "$1" do
+  $0
+end
+</pre>
+
+<pre class="code"># name: it
+# key: it
+# --
+it "$1" do
+  $0
+end
+</pre>
+
+<pre class="code"># name: let
+# key: let
+# --
+let (:$1) { $2 }
+$0
+</pre>
+
+<pre class="code"># name: let!
+# key: let!
+# --
+let! (:$1) { $2 }
+$0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">4.5</span> SQL</h3>
 <div class="outline-text-3" id="text-4-5">
+<pre class="code">(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"./assets/snippets/sql-mode"</span>)
+</pre>
+
 <pre class="code"># name: select
 # key: select
 #--
-select $1 from $2 as $3 ${4:left join $5 as $6 on $3.$7 = $6.${7:id} } where $8
+select $1 from $2 as
+</pre>
+
+<pre class="code"># name: left join
+# key: left
+# --
+left join ${1} as ${2:`(s-left 1 yas-text)`} on ${1:.id} = $0
 </pre>
 </div>
 </div>
@@ -413,7 +533,7 @@ select $1 from $2 as $3 ${4:left join $5 as $6 on $3.$7 = $6.${7:id} } where $8
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:21</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

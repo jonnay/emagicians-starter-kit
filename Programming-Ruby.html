@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-04 Sun 18:30 -->
+<!-- 2016-09-06 Tue 23:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Ruby</title>
@@ -179,13 +179,12 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#orgheadline14">4. Environment</a>
 <ul>
-<li><a href="#orgheadline13">4.1. Add RBEnv path</a></li>
+<li><a href="#orgheadline13">4.1. Add RBEnv path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-orgheadline2" class="outline-2">
 <h2 id="orgheadline2"><span class="section-number-2">1</span> Interface</h2>
 <div class="outline-text-2" id="text-1">
@@ -208,7 +207,6 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline4" class="outline-3">
 <h3 id="orgheadline4"><span class="section-number-3">2.2</span> Rspec</h3>
 <div class="outline-text-3" id="text-2-2">
@@ -216,21 +214,18 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline6" class="outline-3">
 <h3 id="orgheadline6"><span class="section-number-3">2.3</span> Yari</h3>
 <div class="outline-text-3" id="text-2-3">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yari</span>)
 </pre>
 </div>
-
 <div id="outline-container-orgheadline5" class="outline-4">
 <h4 id="orgheadline5"><span class="section-number-4">2.3.1</span> Making it work</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
-Getting hte base ruby documentation here
+Get the base ruby documentation here
 </p>
-
 <pre class="code">gem<span class="org-unicode-whitespace-subdued-space"> </span>install<span class="org-unicode-whitespace-subdued-space"> </span>rdoc-data
 rdoc-data<span class="org-unicode-whitespace-subdued-space"> </span>--install
 </pre>
@@ -238,7 +233,6 @@ rdoc-data<span class="org-unicode-whitespace-subdued-space"> </span>--install
 <p>
 This gets all the rdoc for your installed gems
 </p>
-
 <pre class="code">gem<span class="org-unicode-whitespace-subdued-space"> </span>rdoc<span class="org-unicode-whitespace-subdued-space"> </span>--all<span class="org-unicode-whitespace-subdued-space"> </span>--ri
 </pre>
 </div>
@@ -260,7 +254,6 @@ This gets all the rdoc for your installed gems
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline9" class="outline-3">
 <h3 id="orgheadline9"><span class="section-number-3">3.2</span> Rinari</h3>
 <div class="outline-text-3" id="text-3-2">
@@ -273,7 +266,6 @@ Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goo
 </pre>
 </div>
 </div>
-
 <div id="outline-container-orgheadline10" class="outline-3">
 <h3 id="orgheadline10"><span class="section-number-3">3.3</span> Robe</h3>
 <div class="outline-text-3" id="text-3-3">
@@ -286,9 +278,9 @@ Rinari Is Not A Rails Ide.  ESPRYGAA!  (Emagicians Starter Pack Rejects Your Goo
 <h3 id="orgheadline11"><span class="section-number-3">3.4</span> Mode setup</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
-Thanks to the emacs starter kit classic for the list of ode files list. <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote"><p class="footpara">
+Thanks to the emacs starter kit classic for the list of ode files list. <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 <a href="https://github.com/technomancy/emacs-starter-kit/blob/v2/modules/starter-kit-ruby.el">https://github.com/technomancy/emacs-starter-kit/blob/v2/modules/starter-kit-ruby.el</a>
-</p></span>
+</span>
 </p>
 
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">ruby-mode</span>
@@ -319,12 +311,11 @@ Thanks to the emacs starter kit classic for the list of ode files list. <label f
 <h2 id="orgheadline14"><span class="section-number-2">4</span> Environment</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">4.1</span> Add RBEnv path</h3>
+<h3 id="orgheadline13"><span class="section-number-3">4.1</span> Add RBEnv path&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
-This may not be needed
+This used to be required to make rbenv work, but not any more. 
 </p>
-
 <pre class="code">(emagician/add-to-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(getenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"HOME"</span>)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"/.rbenv/shims"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 </div>
@@ -343,7 +334,7 @@ This may not be needed
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-04 Sun 18:30</p>
+<p class="date">Created: 2016-09-06 Tue 23:22</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
