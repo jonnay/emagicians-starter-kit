@@ -1,28 +1,37 @@
+#+title: Emagician
 * Base Initialization and Circle Casting
 #+BEGIN_SRC emacs-lisp
 (defconst emagician/version "0.23.1")
-(setq debug-on-error t)
 #+END_SRC
   
   This is my emacs.  There are many like it, but this one is mine.
 
-** Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.
+** Breakage Helpers
+
+Debug Errors. Super fundamental.
+
+#+BEGIN_SRC emacs-lisp
+(setq debug-on-error t)
+#+END_SRC
+
+*** Scratch messaging
 
    Snarfed this idea from https://github.com/overtone/emacs-live.
-   Which goes to show: even if you use the word brogrammer you might
-   still have good ideas. 😼
 
 #+begin_example
 ​‌డ(°益°)హ ,( Bro, Even if you're swol, it doesn't mean you're a bro, bro. )
 #+end_example
 
-   Debug Errors.  
+   It's a super great idea to use the scratch buffer as a way to communicate state to the user.  For now we need simple functions that are not prone to breaking. 
+
+First step is to inhibit the splash.  We're making our own splash!
 
 #+BEGIN_SRC emacs-lisp
-(setq debug-on-error t)
+(setq inhibit-splash-screen t)
 #+END_SRC
 
-*** Super Baseline, Start with the Barest thing that could possibly work
+Now a basic scratch message.  If things go pants-up here, we want a basic message saying so. 
+
 #+BEGIN_SRC emacs-lisp
 (setq initial-stratch-message
       (concat ";;; -X-x-X- Invokaction SuperFailure! -X-x-X-" "\n"
@@ -30,7 +39,7 @@
 
 #+END_SRC
 
-*** Define Scratch Message Helper Functions
+Now that we have the basics done, lets define 2 helper functions to set or add the scratch message.
 
 #+BEGIN_SRC emacs-lisp
 (defun emagician/set-scratch (&rest lines)
@@ -38,7 +47,15 @@
 
 (defun emagician/append-scratch (&rest lines)
   (setq initial-scratch-message (apply 'concat initial-scratch-message lines)))
+#+end_src
 
+*** Pre-Scratch-Links
+
+    The scratch buffer will turn into something of a desktop.  It's handy to be able to stuff "scratch links" in there.  Anything in there gets output to the scratch during [[file:Emagician-Base.org::*Final%20Emagician%20Scratch][Thee Scratch Initiation]].[fn:1]
+
+    Then when Emacs loads, you can put the cursor over the sexp and ~C-x C-e~.  I use this to launch magit for work/personal projects, start vms, etc.
+
+#+Begin_src emacs-lisp
 (defvar emagician/pre-scratch-links '()
   "A list of links to append to emagician/scratch-links.
 
@@ -49,13 +66,18 @@ before the rest of the scratch interface is built.")
     
 *** Now set it to our Baseline beautified "you're-busted" text
 
+Okay, so this is the secret sauce.  I set the scratch to this baseline helper (plus cuteness) so that I can debug startups much easier.  It includes a chunk to launch emacs forcing debug-init. 
+
 #+BEGIN_SRC emacs-lisp
 (emagician/set-scratch
   ";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-" "\n"
   ";; You know what to do." "\n"
   ";; \n"
   ";; Emagician Starter kit Version: " emagician/version "\n"
-  ";; Emacs: " (number-to-string emacs-major-version) "." (number-to-string emacs-minor-version) " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" "\n"
+  ";; Emacs: " (number-to-string emacs-major-version) "." 
+      (number-to-string emacs-minor-version) 
+      " [" (when emacs-repository-version (number-to-string emacs-repository-version)) "]" 
+      "\n"
   ";; \n"
   ";;;;;;;;;;;;;;;;;;;;;;;;;;" "\n"
   ";;                      ;;" "\n"      
@@ -70,7 +92,9 @@ before the rest of the scratch interface is built.")
   "(shell-command \"" invocation-directory invocation-name " --debug-init\")\n")
 #+END_SRC
 
-** Verify emagician/dir is set 
+** Verify emagician/dir
+
+IF this isn't around, then everything goes pear shaped. Explicitly look for it and fail with helpful messages.
 
 #+BEGIN_SRC emacs-lisp
 (when (null emagician/dir)
@@ -78,6 +102,8 @@ before the rest of the scratch interface is built.")
     (emagician/append-scratch ";;; " err "\n" ";;; Check the file Emagician-Install.org for more details.")
     (error err)))
 #+END_SRC
+
+Now that we have the emagician/dir we can keep going and add new helpers to the scratch.
 
 #+BEGIN_SRC emacs-lisp
 (emagician/append-scratch
@@ -87,11 +113,6 @@ before the rest of the scratch interface is built.")
 #+END_SRC
 
 ** Use the new improved emagician scratch.
-*** Inhibit the old one
-#+BEGIN_SRC emacs-lisp
-(setq inhibit-splash-screen t)
-#+END_SRC
-
 *** Add a show-scratch function 
 	This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
 #+BEGIN_SRC emacs-lisp
@@ -345,7 +366,6 @@ Liber Lisper Legis
 as (R)eceived (M)ade (S)ound [RMS]
 on this 15th day of December,
 the Year of our Editor 2007.
-#+end_verse
 
 Chapter 1
 
@@ -364,6 +384,7 @@ Chapter 1
   13. No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)
 	  
 M-x all-hail-emacs
+#+end_verse
 
 https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 
@@ -406,3 +427,6 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 (provide 'emagician)
 #+END_SRC
 
+* Footnotes
+
+[fn:1] This is a Homestuck reference.  It will be expounded upon later.

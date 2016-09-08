@@ -327,7 +327,7 @@ A bit of a naive version of this for now.
 
 ** Final Emagician Scratch
 
-When the starter it is loaded we want to display the scratch buffer
+When the starter kit is loaded we want to display the scratch buffer
 with a new and improved scratch buffer giving some statistics, showing
 inspirational messages, dire warnings, and apocalyptic screeds.
 

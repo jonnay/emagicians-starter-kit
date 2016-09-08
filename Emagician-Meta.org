@@ -15,8 +15,7 @@ and perception stimulate each other.
 
 * ~F3~ Das Uberkey
 
-  The idea here is that ~f3~ can be pressed whenever I need to do
-  anything specifically with the Starter Kit.
+  The idea here is that I can press ~f3~, and it becomes Anything-Emagician.
 
   With [[file:Interface.org::*Which%20Key][Which Key]] it means ~f3~ becomes a visual menu until I really
   start to learn the keystrokes.
@@ -24,7 +23,7 @@ and perception stimulate each other.
 ** Meta Keys and Prefixes
    - f3    :: Open an emagician file
    - i     :: Insert magickal key.  (P-crosses and poops and bunnies, oh my!)
-   - t     :: Show a todo list
+   - t     :: Show a todo list.
 
 
 #+BEGIN_SRC emacs-lisp
@@ -183,7 +182,7 @@ This does a full GUI load, outputting any results as a message.
 *** Skewer!
     Use the bookmarklet to connect and you're off to the races!
 *** Publishing functions
-#+begin_src emacs-lisp 
+#+BEGIN_SRC emacs-lisp
 (defun org-html-publish-to-tufte-html (plist filename pub-dir)
   "Publish an org file to Tufte-styled HTML.
 
@@ -193,11 +192,11 @@ publishing directory.
 
 Return output file name."
   (org-publish-org-to 'tufte-html filename
-		      (concat "." (or (plist-get plist :html-extension)
-				      org-html-extension
-				      "html"))
-		      plist pub-dir))
-#+end_src
+                      (concat "." (or (plist-get plist :html-extension)
+                                      org-html-extension
+                                      "html"))
+                      plist pub-dir))
+#+END_SRC
 
 *** Get ox-tufte 
 
@@ -205,8 +204,6 @@ Return output file name."
 (require 'ox-md)
 (use-package ox-tufte)
 #+END_SRC
-
-
 
 *** Main publisher
 #+BEGIN_SRC emacs-lisp
@@ -232,6 +229,7 @@ Return output file name."
                                       :auto-sitemap t
                                       :sitemap-ignore-case t
                                       :html-html5-fancy t
+                                      :headline-levels 5
                                       :html-head-extra "<link href=\"https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400\" rel=\"stylesheet\"><link href=\"./assets/styles/tufte-style.css\" rel=\"stylesheet\"><script src=\"https://use.fontawesome.com/432a2f463b.js\"></script>"
                                       :html-link-home "index"
                                       :publishing-function org-html-publish-to-tufte-html
@@ -266,15 +264,13 @@ Return output file name."
  
 ** ÆＳÞＥTＩC 
 
-    The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want 
+    The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want.  [[mn:1][file:./assets/images/tome-quilt/grimoire.jpg]]
 
+    Using the Tufte CSS along with dakrone's awesome exporter. 
 
-#+BEGIN_SRC emacs-lisp
-(emagician/expect-dir "assets/styles")
-#+END_SRC
+     While I am not a fan of Tufte's ÆＳÞＥTＩC, there is no denying his design skill. 
 
-
-     While I am not a fan of his ÆＳÞＥTＩC, there is no denying his design skill. 
+     His ÆＳÞＥTＩC blows mine out of the water. 
 
      - https://github.com/dakrone/ox-tufte 
      - https://github.com/melpa/melpa/pull/4201
@@ -283,89 +279,53 @@ Return output file name."
 
 *** Image Quilt
 
-    (coming soon)
+#+begin_src emacs-lisp :results html :exports both
+(concat "<div class=\"my-quilt\">\n"      
+        (mapconcat (lambda (f)
+                     (format "  <img src=\"./assets/images/tome-quilt/%s\" />\n" f))
+                   (directory-files "assets/images/tome-quilt"
+                                    nil
+                                    (regexp-opt '("jpg" "jpeg" "png" "gif")))
+                   "")
+        "</div>\n")
+#+end_src
 
-*** Old The CSS file
+#+RESULTS:
+#+BEGIN_HTML
+<div class="my-quilt">
+  <img src="./assets/images/tome-quilt/Grimoire-Pages-by-Reighnhell.png" />
+  <img src="./assets/images/tome-quilt/Lovecraft-Grimoire-Page-by-AzrielMordecai.jpg" />
+  <img src="./assets/images/tome-quilt/codex_seraphinianus8.jpg" />
+  <img src="./assets/images/tome-quilt/dresden-codex.jpg" />
+  <img src="./assets/images/tome-quilt/grimoire.jpg" />
+  <img src="./assets/images/tome-quilt/psychonaught.jpg" />
+</div>
+#+END_HTML
+
+
+
+*** Styling 
+
+#+BEGIN_SRC emacs-lisp
+(emagician/expect-dir "assets/styles")
+#+END_SRC
+
+*** Old Grey Rounded Squares.  Just no
 
     The thi.ng/org-spec is a good basis to build off of.[fn:1]
 
     Things I like:
     - The source blocks, properties blocks, etc all have little outlines
-    - The tags are displayed
-    - Outbound links are displayed differently
-    - Table of contents
+    - Tags displayed nicely.
+    - Outbound links displayed differently.
+    - Table of contents.
 
     Things I don't like:
     - ÆＳÞＥTＩC ... or lack thereof.
 
+    I've started to trim the fat off of that CSS and focus on the elements I enjoy.
+
 #+BEGIN_SRC css
-body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.4;
-    color: #33333f;
-    padding: 0;
-    margin: 0;
-}
-
-code {
-    font-family: "Inconsolata", monospace;
-    font-size: 16px;
-}
-
-p>code, li>code {
-    background-color: #eee;
-    padding: 0.25em;
-}
-
-h1, h2, h3 {
-    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
-}
-
-h1 {
-    font-family: cursive;
-}
-
-h2 {
-    font-size: 1.75em;
-}
-
-h3 {
-    margin-top: 2em;
-    font-size: 1.5em;
-}
-
-h4 {
-    font-size: 1.25em;
-}
-
-h5 {
-    font-size: 1em;
-}
-
-h2 code, h3 code, h4 code, h5 code, td code {
-    font-family: inherit !important;
-    font-size: inherit !important;
-}
-
-td code {
-    font-weight: bold;
-}
-
-a:before, a:after {
-    color: hsl(0,0%,80%);
-    font-size: 120%;
-}
-
-a:before {
-    content: "[[";
-}
-
-a:after {
-    content: "]]";
-}
-
-
 a[name]:before {
     content: "#" attr(name);
 }
@@ -374,218 +334,9 @@ a[name]:after {
     content: "";
 }
 
-a:link,
-a:hover,
-a:visited {
-    text-decoration: none;
-    color: black;
-    padding:3px;
-}
-
-a:link {
-
-}
-
-a:visited {
-    color: #666;
-}
-
-a:link:hover,
-a:visited:hover {
-    background: hsl(0, 0%, 62%);
-}
-
 a[href^="http"]:after {
     content: "\21F4]]";
     padding-left: 0.2em;
-}
-
-#meta {
-    margin-top: 2em;
-}
-
-#table-of-contents a:link,
-#table-of-contents a:visited {
-    color: black;
-    background: transparent;
-}
-
-#table-of-contents {
-    line-height: 1.2;
-}
-#table-of-contents h2 {
-    border-bottom: 0;
-}
-
-#table-of-contents ul {
-    list-style: none;
-    padding-left:0;
-    font-weight: normal;
-}
-
-#table-of-contents div>ul>li {
-    margin-top: 1em;
-    font-weight: bold;
-}
-
-#table-of-contents .tag {
-    display: none;
-}
-
-#table-of-contents .todo,
-#table-of-contents .done {
-    font-size: 80%;
-}
-
-#table-of-contents ol>li {
-    margin-top: 1em;
-}
-
-#org-div-home-and-up {
-    text-align: right;
-    white-space: nowrap;
-    background-color: hsl(0, 0%, 90%);
-    padding: 0.5ex 1em 1ex;
-}
-
-table {
-    width: 100%;
-}
-
-table, th, td {
-    border: 1px solid #666;
-}
-
-th, td {
-    padding: 0.5em;
-    text-align: left;
-}
-
-tbody tr:nth-child(odd) {
-    background-color: #eee;
-}
-
-span.section-number-1,
-span.section-number-2,
-span.section-number-3,
-span.section-number-4,
-span.section-number-5 {
-    font-family: cursive;
-    font-size: 120%;
-    border: 1px solid hsl(0, 0%, 68%);
-    display: inline-block;
-    padding: 8px;
-    line-height: 70%;
-    border-radius: 10px;
-    background-color: hsl(0, 0%, 93%);
-}
-
-.outline-3, .outline-4, .outline-5, .outline-6 {
-    margin-left: 15px;
-}
-
-img {
-    max-width: 90%;
-}
-
-div.notice {
-    position: relative;
-    margin: 0 1.2em;
-    padding: 0.25em 1em;
-    border-left: 4px solid;
-}
-
-table + div.notice {
-    margin-top: 2em;
-}
-
-div.notice a {
-    background: transparent !important;
-    border-bottom: 1px dotted;
-}
-
-div.notice a[href^="http"]:after {
-    background: transparent !important;
-}
-
-div.notice:before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.25em 0.5em 0;
-    font-size: 60%;
-    border-bottom-left-radius: 0.5em;
-}
-
-.notice-warning {
-    background: #fcc;
-    color: #600;
-}
-
-.notice-example {
-    background: #def;
-    color: #069;
-}
-
-.notice-info {
-    background: #efe;
-    color: #060;
-}
-
-.notice-warning a {
-    color: #600;
-}
-
-.notice-example a {
-    color: #069;
-}
-
-.notice-info a {
-    color: #060;
-}
-
-div.notice-warning:before {
-    content: "WARNING";
-    background: #c99;
-    color: #fcc;
-}
-
-div.notice-example:before {
-    content: "EXAMPLE";
-    background: #abc;
-    color: #def;
-}
-
-div.notice-info:before {
-    content: "INFO";
-    background: #9c9;
-    color: #efe;
-}
-
-blockquote {
-    background-color: hsl(0,0%,93%);
-    margin: 0;
-    padding: 0.125em 4em;
-    border-left: 2px solid hsl(0,0%,80%);
-}
-
-pre {
-    font-family: Inconsolata;
-    border: 0;
-    box-shadow: none;
-}
-
-pre.example:before {
-    content: "Example";
-    display: block;
-    border-bottom: 1px dotted;
-    margin-bottom: 1em;
-}
-
-pre.example {
-    background: #fec;
-    color: #666;
-    font-size: 0.85em;
 }
 
 pre {
@@ -593,10 +344,6 @@ pre {
     background-size: 8px 8px;
     background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));
     overflow: auto !important;
-}
-
-pre.src {
-    padding: 0.5em;
 }
 
 pre.src:before {
@@ -626,42 +373,6 @@ pre.src-emacs-lisp:before {
 
 pre.src-c:before {
     content: "C";
-}
-
-span.org-string {
-    color: #f94;
-}
-
-span.org-keyword {
-    color: #c07;
-}
-
-span.org-variable-name {
-    color: #f04;
-}
-
-span.org-clojure-keyword {
-    color: #09f;
-}
-
-span.org-comment, span.org-comment-delimiter {
-    color: #999;
-}
-
-span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 {
-    color: #666;
-}
-
-span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 {
-    color: #888;
-}
-
-span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 {
-    color: #aaa;
-}
-
-span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
-    color: #ccc;
 }
 
 div.figure {
@@ -700,154 +411,92 @@ div.figure {
     background: #5f7;
     color: white;
 }
+#+end_src
 
-#postamble {
-    margin-top: 3em;
-    padding: 1ex 2em 2ex;
-    background-color: hsl(0, 0%, 93%);
-}
-
-@media screen {
-    h1.title {
-        text-align: left;
-        margin: 0 1em 0 260px;
-        border: 1px solid #aaa;
-        border-top: 0;
-        padding: 1em;
-        background-color: #f8f8f8;
-        border-bottom-right-radius: 20px;
-        box-shadow: 0 3px 3px hsla(0,0%,0%,0.1);
-    }
-
-    h2 {
-        border: 1px solid hsl(0, 0%, 77%);
-        background-color: hsl(0, 0%, 93%);
-        margin-left: -21px;
-        margin-right: 0;
-        border-bottom-right-radius: 10px;
-        padding: 0.25em 1em;
-        margin-top: 0;
-    }
-
-    #table-of-contents {
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 1ex 0 2em 2em;
-        border-right: 1px solid #bbb;
-        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
-        width: 240px;
-        height: 100vh;
-        font-size: 11px;
-        background: #eee;
-        overflow: auto;
-    }
-
-    #table-of-contents ul>li>ul>li>ul>li {
-        font-size: 80%;
-        display: block;
-    }
-
-    #table-of-contents h2 {
-        margin-top: 0;
-        border: 0;
-        box-shadow: 0;
-    }
-
-    #table-of-contents code {
-        font-size: 12px;
-    }
-
-    #footnotes {
-        margin-left: 280px;
-        max-width: 960px;
-    }
-    #postamble {
-        margin-left: 262px;
-        margin-top: 0;
-        padding-top: 30px;
-        box-shadow: 0 -2px 3px hsla(0,0%,0%,0.1);
-    }
-    div.outline-2 {
-        margin: 0 0 0 263px;
-        padding: 0 20px 20px;
-        max-width: 960px;
-        background-image: linear-gradient( 0deg, hsl(0, 0%, 98%), hsl(0, 0%, 100%));
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    html, body {
-        font-size: 14px;
-    }
-
-    #table-of-contents {
-        display: none;
-    }
-
-    h1.title {
-        margin-left: 5%;
-    }
-
-    div.outline-2, #footnotes {
-        margin-left: 5%;
-        max-width: 90%;
-    }
-}
-
-@media print {
-
-    body {
-        color: black;
-    }
-
-    @page {
-        margin: 25mm;
-    }
-
-    h2, h3 {
-        page-break-before: always;
-        margin-top: 0;
-    }
-
-    table {
-        page-break-inside: avoid;
-    }
-
-    a:visited {
-        color: black;
-        background: hsl(0, 0%, 62%);
-    }
-
-    a[href^="http"]:visited {
-        background: hsl(0, 0%, 62%);
-    }
-
-    div.notice:before {
-        display: none;
-    }
-}
-#+END_SRC
-
-*** The newer CSS file
-
-    Things that need to be fixed
-    - TOC
-    - Source Block display
-    - Show Tags
-    - Show block types 
-    - Does it need to be fontified?  Probably not. 
-    - I just fudged 90% width, maybe that can be better
+*** Tufte-Plus CSS.
 
 #+BEGIN_SRC css :tangle "gh-pages/assets/styles/tufte-style.css"
 @import url("tufte.css");
 
 .title { text-align: left; }
 
-pre.code {
-    font-size: 90%
-    width: 90%;
+.my-quilt {
+  margin: 4rem 0;
+  text-align: center;
+  font-size: 0;
 }
+
+.my-quilt img {
+  max-height: 200px;
+  min-height: 200px;
+  display: inline-block;
+}
+
+pre.code {
+  font-size: 60%;
+  transition: width 0.25s ease-in, font-size 0.25s ease-in;
+}
+
+pre.code:hover {
+  width: 90%;
+  font-size: 85%;
+}
+
+.tag:before {
+  font-family: FontAwesome;
+  content: "\f02b";
+  padding-right: 0.5rem;
+}
+
+.tag {
+  padding: 0.3rem;
+  float: right;
+  background-image: linear-gradient(90deg, hsl(19, 27%, 86%), hsl(19, 28%, 84%));
+  border-radius: 0.3em;
+  border: 1px solid hsl(19, 28%, 70%);
+  box-shadow: 4px 4px 2px hsla(0, 0%, 0%, 0.2);
+}
+
+.tag span {
+  border-radius: 0.2em;
+}
+
+span.org-string {
+    color: #f94;
+}
+
+span.org-keyword {
+    color: #c07;
+}
+
+span.org-variable-name {
+    color: #f04;
+}
+
+span.org-clojure-keyword {
+    color: #09f;
+}
+
+span.org-comment, span.org-comment-delimiter {
+    color: #999;
+}
+
+span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 {
+    color: #666;
+}
+
+span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 {
+    color: #888;
+}
+
+span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 {
+    color: #aaa;
+}
+
+span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
+    color: #ccc;
+}
+
 
 @media screen {
     h1.title {
@@ -860,11 +509,20 @@ pre.code {
         left: 0;
         padding: 1ex 1em 5em 2em;
         border-right: 1px solid #bbb;
-        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
+        box-shadow: 3px 0 3px hsla(0,30%,50%,0.1),
+                    5px 0 5px hsla(0,30%,50%,0.1),
+                    8px 0 8px hsla(0,30%,50%,0.1),
+                    13px 0 13px hsla(0,30%,50%,0.1),
+                    inset -3px 0 3px hsla(0,30%,50%,0.1),
+                    inset -5px 0 5px hsla(0,30%,50%,0.1),
+                    inset -8px 0 8px hsla(0,30%,50%,0.1),
+                    inset -13px 0 13px hsla(0,30%,50%,0.1),
+                    inset 8px 0 8px hsla(0,0%,0%,0.1),                          
+                    inset 13px 0 13px hsla(0,0%,0%,0.1);
         width: 220px;
         height: 100vh;
         font-size: 11px;
-        background: hsl(60, 100%, 95%);
+        background: hsl(43, 29%, 92%);
         overflow: auto;
     }
 
@@ -872,7 +530,27 @@ pre.code {
     #table-of-contents ol,
     #table-of-contents ul{
         font-size: 1rem;
-        width: 100%;
+        width: 95%;
+        margin-bottom: 0.5rem;
+    }
+
+    #table-of-contents h2:before,
+    #table-of-contents h2:after {
+      color: hsl(0, 96%, 40%);
+      content: "⛥";
+    }
+    
+    #table-of-contents li {
+      padding-top: 0.2rem;
+      padding-bottom: 0.3rem;
+      list-style-type: none;
+    }
+    
+    #table-of-contents li:before {
+      color: hsl(0, 96%, 40%);
+      content: "⛥";
+      padding-right: 0.5rem;
+      margin-left: -1rem;
     }
     
     #table-of-contents ul>li>ul>li>ul>li {
@@ -880,16 +558,38 @@ pre.code {
         display: block;
     }
 
-    #table-of-contents h2 {
-        margin-top: 0;
-        border: 0;
-        box-shadow: 0;
+    #table-of-contents>h2 {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      color: hsl(0, 96%, 35%);
+      text-shadow: 0.03em 0 hsl(60, 100%, 99%),
+      -0.03em 0 hsl(60, 100%, 99%),
+      0 0.03em hsl(60, 100%, 99%),
+      0 -0.03em hsl(60, 100%, 99%),
+      0.06em 0 hsl(60, 100%, 99%),
+      -0.06em 0 hsl(60, 100%, 99%),
+      0.09em 0 hsl(60, 100%, 99%),
+      -0.09em 0 hsl(60, 100%, 99%),
+      0.12em 0 hsl(60, 100%, 99%),
+      -0.12em 0 hsl(60, 100%, 99%),
+      0.15em 0 hsl(60, 100%, 99%),
+      -0.15em 0 hsl(60, 100%, 99%);
     }
 
     #table-of-contents code {
         font-size: 12px;
     }
 
+    #table-of-contents a {
+      color: hsl(0, 96%, 30%);
+      background: linear-gradient(hsl(60, 37%, 88%), hsl(60, 37%, 88%)),
+      linear-gradient(hsl(60, 37%, 88%), hsl(60, 37%, 88%));
+    }
+
+    #table-of-contents .tag {
+      display: none;
+    }
+    
     #footnotes {
         margin-left: 280px;
         max-width: 960px;
@@ -907,6 +607,10 @@ pre.code {
 }
 
 #+END_SRC
+
+**** TODO Fix colors for syntax highlighting
+**** TODO Fix UP | HOME links
+**** TODO Write some kind of basic top menu thing if doable
 
 * Inserting text chunks
    In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.[fn:2]

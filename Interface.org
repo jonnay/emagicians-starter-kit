@@ -78,7 +78,7 @@ I call bullshit.  All of us already live in a prison of existential crisis.  Why
 
 I eat delicious food, not Soylent.
 
-I drink excellent beer, not AGD. 
+I drink excellent beer, not Alberta Genuine Draft. 
 
 ÆＳÞＥTＩC is important.
 
@@ -113,30 +113,73 @@ Scrollbars, Toolbars and Menu Bars. Oh my.
 
 ** Fonts
 
-   Font choice is very important aesthetically speaking.  I am however failing at my main font choice.
+   Font choice is important aesthetically speaking. 
 
-   My unicode game is pretty solid though.
+   Of the 4 fonts that came recommended to me, I went with Adobe Source Code Pro.  Here is my reasoning:
 
-*** Stepping up my font game
-**** Inconsolata
-https://fonts.google.com/specimen/Inconsolata
+   - It looks great.
+   - The o0 li1I handling is good.
+   - The differences between ({[]}) are all super apparent.
+   - It has a great set of weights.
 
-This was my usual jam in the older days. 
+*** Adobe Source Code Pro
+https://github.com/adobe-fonts/source-code-pro 
+
+Trying this guy out for now…
+
+Amazingly few discotheques provide jukeboxes.
+01234567890 ({[ .,:;"'`*~^ ]}) 
+
+[[file:assets/images/AdobeSourceCodePro.png]]
+
+#+begin_src emacs-lisp 
+(set-face-attribute 'default nil :family "Source Code Pro" :height 130 :weight 'normal)
+#+end_src
+
+*** Fira Code 
+
+Amazingly few discotheques provide jukeboxes. 
+01234567890 ({[ .,:;"'`*~^ ]}) 
+
+[[file:assets/images/FiraCode.png]]
 
 #+begin_src emacs-lisp :tangle no
-(set-face-attribute 'default nil :family "Inconsolata" :height 140)
+(set-face-attribute 'default nil :family "Fira Mono" :height 130 :weight 'normal)
 #+end_src
 
-**** Anonymous Pro
+*** Inconsolata
+[[https://fonts.google.com/specimen/Inconsolata]]
+
+This was my usual jam in the older days.  It has become my jam again
+on account of Anonymous Pro's Parenthesis-flaw.
+
+Amazingly few discotheques provide jukeboxes.
+01234567890 ({[ .,:;"'`*~^ ]}) 
+
+[[file:assets/images/Inconsolata.png]]
+
+
+#+begin_src emacs-lisp :tangle no
+(set-face-attribute 'default nil :family "Inconsolata" :height 150)
+#+end_src
+
+*** Anonymous Pro
 http://www.marksimonson.com/fonts/view/anonymous-pro
 
-It's a very wide font.  Very wide.  It comes highly regarded, but I am not sure about its ÆＳꝤＥＴＩＣ yet.
+It's a wide font.  Very wide.  It comes highly regarded, but I am not
+sure about its ÆＳÞＥTＩC yet. It is however easy to read. but it
+does look a little awkward.  It's fundamental flaw is how the
+parenthesis looks like a curly brace.
 
-It is however, very easy to read, but it does look a little awkward. 
+Amazingly few discotheques provide jukeboxes.
+01234567890 ({[ .,:;"'`*~^ ]}) 
 
-#+begin_src emacs-lisp :tangle yes
+[[file:assets/images/AnonymousPro.png]]
+
+#+begin_src emacs-lisp :tangle no
 (set-face-attribute 'default nil :family "Anonymous Pro" :height 140)
 #+end_src
+
 
 *** Describe Char
    Give us all the unicode information for a glyph.
@@ -179,9 +222,10 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 #+end_src
 
 ** Ansi Color
+
    ARGH, we were so close to getting away from this until hipsters brought it all back again.
 
-   Thanks Obama.
+   Thanks Obama.  [[mn:2][file:assets/images/YouAreWelcome.jpg]]
 
 #+begin_src emacs-lisp 
 (require 'ansi-color)
@@ -892,7 +936,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
    (Disk is cheap and text is tiny.)- 🐦
 
 #+begin_src emacs-lisp 
-(setq delete-old-verisons -1)
+(setq delete-old-versions -1)
 #+end_src
 
    Even in version control.  And while were at it, lets version control backups.  
@@ -1122,6 +1166,7 @@ Make it a bit nicer too.
 #+end_src
 
 * Footnotes
+
 
 [fn:1] http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296
 

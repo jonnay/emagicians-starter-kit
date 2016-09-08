@@ -11,9 +11,6 @@
 
 🐰-(hello!)
 
-#+HTML: <div class="notice notice-warning tiny-box">
-  What is here is not on the master branch, but is instead in the v2 branch. 
-#+HTML: </div>
 **  Five 'W's and 2 'Y's. 
 *** Who am I?
     I'm Jonnay!
@@ -30,14 +27,17 @@
    I got tired of my old .emacs file and poorly maintained collection
    of extensions. It was working less and less well the more and more
    time went on and on.  So In an airplane across the Atlantic I made
-   the very first version of the Emagicians Starter Kit.
+   the first version of the Emagicians Starter Kit.
+
+   But it's more than that.  It's a set of lessons learned, ramblings
+   of a lisp fanatic, and something of a personal great work.
 
 *** Why?
 
-   I Love the idea of the starter kits, but I found they made too many
+   I Love the idea of the starter kits, but I found they made
    assumptions and just wasn't fit for what I needed.  I also have a
    bit of a "not-invented-here" problem.  It's minor and I cope pretty
-   well. However with regards to emacs: (and to to paraphrase Douglas
+   well. However with regards to emacs: (and to paraphrase Douglas
    McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
 
    #+begin_quote
