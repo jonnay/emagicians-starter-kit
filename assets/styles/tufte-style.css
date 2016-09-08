@@ -2,10 +2,83 @@
 
 .title { text-align: left; }
 
-pre.code {
-    font-size: 90%
-    width: 90%;
+.my-quilt {
+  margin: 4rem 0;
+  text-align: center;
+  font-size: 0;
 }
+
+.my-quilt img {
+  max-height: 200px;
+  min-height: 200px;
+  display: inline-block;
+}
+
+pre.code {
+  font-size: 60%;
+  transition: width 0.25s ease-in, font-size 0.25s ease-in;
+}
+
+pre.code:hover {
+  width: 90%;
+  font-size: 85%;
+}
+
+.tag:before {
+  font-family: FontAwesome;
+  content: "\f02b";
+  padding-right: 0.5rem;
+}
+
+.tag {
+  padding: 0.3rem;
+  float: right;
+  background-image: linear-gradient(90deg, hsl(19, 27%, 86%), hsl(19, 28%, 84%));
+  border-radius: 0.3em;
+  border: 1px solid hsl(19, 28%, 70%);
+  box-shadow: 4px 4px 2px hsla(0, 0%, 0%, 0.2);
+}
+
+.tag span {
+  border-radius: 0.2em;
+}
+
+span.org-string {
+    color: #f94;
+}
+
+span.org-keyword {
+    color: #c07;
+}
+
+span.org-variable-name {
+    color: #f04;
+}
+
+span.org-clojure-keyword {
+    color: #09f;
+}
+
+span.org-comment, span.org-comment-delimiter {
+    color: #999;
+}
+
+span.org-rainbow-delimiters-depth-1, span.org-rainbow-delimiters-depth-5 {
+    color: #666;
+}
+
+span.org-rainbow-delimiters-depth-2, span.org-rainbow-delimiters-depth-6 {
+    color: #888;
+}
+
+span.org-rainbow-delimiters-depth-3, span.org-rainbow-delimiters-depth-7 {
+    color: #aaa;
+}
+
+span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
+    color: #ccc;
+}
+
 
 @media screen {
     h1.title {
@@ -18,11 +91,20 @@ pre.code {
         left: 0;
         padding: 1ex 1em 5em 2em;
         border-right: 1px solid #bbb;
-        box-shadow: 2px 0 2px hsla(0,0%,0%,0.1);
+        box-shadow: 3px 0 3px hsla(0,30%,50%,0.1),
+                    5px 0 5px hsla(0,30%,50%,0.1),
+                    8px 0 8px hsla(0,30%,50%,0.1),
+                    13px 0 13px hsla(0,30%,50%,0.1),
+                    inset -3px 0 3px hsla(0,30%,50%,0.1),
+                    inset -5px 0 5px hsla(0,30%,50%,0.1),
+                    inset -8px 0 8px hsla(0,30%,50%,0.1),
+                    inset -13px 0 13px hsla(0,30%,50%,0.1),
+                    inset 8px 0 8px hsla(0,0%,0%,0.1),                          
+                    inset 13px 0 13px hsla(0,0%,0%,0.1);
         width: 220px;
         height: 100vh;
         font-size: 11px;
-        background: hsl(60, 100%, 95%);
+        background: hsl(43, 29%, 92%);
         overflow: auto;
     }
 
@@ -30,7 +112,27 @@ pre.code {
     #table-of-contents ol,
     #table-of-contents ul{
         font-size: 1rem;
-        width: 100%;
+        width: 95%;
+        margin-bottom: 0.5rem;
+    }
+
+    #table-of-contents h2:before,
+    #table-of-contents h2:after {
+      color: hsl(0, 96%, 40%);
+      content: "⛥";
+    }
+    
+    #table-of-contents li {
+      padding-top: 0.2rem;
+      padding-bottom: 0.3rem;
+      list-style-type: none;
+    }
+    
+    #table-of-contents li:before {
+      color: hsl(0, 96%, 40%);
+      content: "⛥";
+      padding-right: 0.5rem;
+      margin-left: -1rem;
     }
     
     #table-of-contents ul>li>ul>li>ul>li {
@@ -38,16 +140,38 @@ pre.code {
         display: block;
     }
 
-    #table-of-contents h2 {
-        margin-top: 0;
-        border: 0;
-        box-shadow: 0;
+    #table-of-contents>h2 {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      color: hsl(0, 96%, 35%);
+      text-shadow: 0.03em 0 hsl(60, 100%, 99%),
+      -0.03em 0 hsl(60, 100%, 99%),
+      0 0.03em hsl(60, 100%, 99%),
+      0 -0.03em hsl(60, 100%, 99%),
+      0.06em 0 hsl(60, 100%, 99%),
+      -0.06em 0 hsl(60, 100%, 99%),
+      0.09em 0 hsl(60, 100%, 99%),
+      -0.09em 0 hsl(60, 100%, 99%),
+      0.12em 0 hsl(60, 100%, 99%),
+      -0.12em 0 hsl(60, 100%, 99%),
+      0.15em 0 hsl(60, 100%, 99%),
+      -0.15em 0 hsl(60, 100%, 99%);
     }
 
     #table-of-contents code {
         font-size: 12px;
     }
 
+    #table-of-contents a {
+      color: hsl(0, 96%, 30%);
+      background: linear-gradient(hsl(60, 37%, 88%), hsl(60, 37%, 88%)),
+      linear-gradient(hsl(60, 37%, 88%), hsl(60, 37%, 88%));
+    }
+
+    #table-of-contents .tag {
+      display: none;
+    }
+    
     #footnotes {
         margin-left: 280px;
         max-width: 960px;

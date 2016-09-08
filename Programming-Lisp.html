@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-06 Tue 23:22 -->
+<!-- 2016-09-07 Wed 17:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lisp</title>
@@ -164,14 +164,34 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgheadline13">3.1. Elisp</a>
 <ul>
-<li><a href="#orgheadline11">3.1.1. Editing</a></li>
+<li><a href="#orgheadline11">3.1.1. Editing</a>
+<ul>
+<li><a href="#orgheadline5">3.1.1.1. Highlighting</a></li>
+<li><a href="#orgheadline6">3.1.1.2. Eldoc</a></li>
+<li><a href="#orgheadline7">3.1.1.3. Auto Complete</a></li>
+<li><a href="#orgheadline8">3.1.1.4. Indentation</a></li>
+<li><a href="#orgheadline10">3.1.1.5. Package checking</a>
+<ul>
+<li><a href="#orgheadline9">3.1.1.5.1. Turn off in orc-src buffers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#orgheadline12">3.1.2. Environment</a></li>
 </ul>
 </li>
 <li><a href="#orgheadline18">3.2. Scheme</a>
 <ul>
-<li><a href="#orgheadline15">3.2.1. Editing</a></li>
-<li><a href="#orgheadline17">3.2.2. Interface</a></li>
+<li><a href="#orgheadline15">3.2.1. Editing</a>
+<ul>
+<li><a href="#orgheadline14">3.2.1.1. Intenting</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline17">3.2.2. Interface</a>
+<ul>
+<li><a href="#orgheadline16">3.2.2.1. Geiser REPL</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -236,13 +256,18 @@ Turn this shit off on lisps
 </div><div id="outline-container-orgheadline11" class="outline-4">
 <h4 id="orgheadline11"><span class="section-number-4">3.1.1</span> Editing</h4>
 <div class="outline-text-4" id="text-3-1-1">
-</div><ol class="org-ol"><li><a id="orgheadline5"></a>Highlighting<br  /><div class="outline-text-5" id="text-3-1-1-1">
+</div><div id="outline-container-orgheadline5" class="outline-5">
+<h5 id="orgheadline5"><span class="section-number-5">3.1.1.1</span> Highlighting</h5>
+<div class="outline-text-5" id="text-3-1-1-1">
 <pre class="code">(<span class="org-keyword">with-eval-after-load</span><span class="org-unicode-whitespace-subdued-space"> </span>'dash
 <span class="org-unicode-whitespace-subdued-space">  </span>(dash-enable-font-lock))
 </pre>
-</div></li>
+</div>
+</div>
 
-<li><a id="orgheadline6"></a>Eldoc<br  /><div class="outline-text-5" id="text-3-1-1-2">
+<div id="outline-container-orgheadline6" class="outline-5">
+<h5 id="orgheadline6"><span class="section-number-5">3.1.1.2</span> Eldoc</h5>
+<div class="outline-text-5" id="text-3-1-1-2">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eldoc</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
@@ -253,9 +278,12 @@ Turn this shit off on lisps
 <span class="org-unicode-whitespace-subdued-space">                        </span><span class="org-builtin">:underline</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"green"</span>
 <span class="org-unicode-whitespace-subdued-space">                        </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>'bold))
 </pre>
-</div></li>
+</div>
+</div>
 
-<li><a id="orgheadline7"></a>Auto Complete<br  /><div class="outline-text-5" id="text-3-1-1-3">
+<div id="outline-container-orgheadline7" class="outline-5">
+<h5 id="orgheadline7"><span class="section-number-5">3.1.1.3</span> Auto Complete</h5>
+<div class="outline-text-5" id="text-3-1-1-3">
 <pre class="code">(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician/ac-set-elisp-sources<span class="org-unicode-whitespace-subdued-space"> </span>emacs-lisp-mode
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>ac-sources
 <span class="org-unicode-whitespace-subdued-space">        </span>'(ac-source-yasnippet
@@ -267,21 +295,29 @@ Turn this shit off on lisps
 <span class="org-unicode-whitespace-subdued-space">          </span>ac-source-words-in-buffer
 <span class="org-unicode-whitespace-subdued-space">          </span>ac-source-words-in-same-mode-buffers)))
 </pre>
-</div></li>
-<li><a id="orgheadline8"></a>Indentation<br  /><div class="outline-text-5" id="text-3-1-1-4">
+</div>
+</div>
+<div id="outline-container-orgheadline8" class="outline-5">
+<h5 id="orgheadline8"><span class="section-number-5">3.1.1.4</span> Indentation</h5>
+<div class="outline-text-5" id="text-3-1-1-4">
 <pre class="code">(put<span class="org-unicode-whitespace-subdued-space"> </span>'use-package<span class="org-unicode-whitespace-subdued-space"> </span>'lisp-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
 (put<span class="org-unicode-whitespace-subdued-space"> </span>'lexically<span class="org-unicode-whitespace-subdued-space"> </span>'lisp-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>0)
 </pre>
-</div></li>
+</div>
+</div>
 
-<li><a id="orgheadline10"></a>Package checking<br  /><div class="outline-text-5" id="text-3-1-1-5">
+<div id="outline-container-orgheadline10" class="outline-5">
+<h5 id="orgheadline10"><span class="section-number-5">3.1.1.5</span> Package checking</h5>
+<div class="outline-text-5" id="text-3-1-1-5">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flycheck-package</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(flycheck-package-setup))
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline9"></a>Turn off in orc-src buffers<br  /><div class="outline-text-6" id="text-3-1-1-5-1">
+<div id="outline-container-orgheadline9" class="outline-6">
+<h6 id="orgheadline9"><span class="section-number-6">3.1.1.5.1</span> Turn off in orc-src buffers</h6>
+<div class="outline-text-6" id="text-3-1-1-5-1">
 <p>
 Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
 </p>
@@ -290,7 +326,9 @@ Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>mode-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emacs-Lisp"</span>)
 <span class="org-unicode-whitespace-subdued-space">    </span>(flycheck-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)))
 </pre>
-</div></li></ol></li></ol>
+</div>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orgheadline12" class="outline-4">
@@ -309,7 +347,9 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 </div><div id="outline-container-orgheadline15" class="outline-4">
 <h4 id="orgheadline15"><span class="section-number-4">3.2.1</span> Editing</h4>
 <div class="outline-text-4" id="text-3-2-1">
-</div><ol class="org-ol"><li><a id="orgheadline14"></a>Intenting<br  /><div class="outline-text-5" id="text-3-2-1-1">
+</div><div id="outline-container-orgheadline14" class="outline-5">
+<h5 id="orgheadline14"><span class="section-number-5">3.2.1.1</span> Intenting</h5>
+<div class="outline-text-5" id="text-3-2-1-1">
 <pre class="code"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Indenting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">module</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">body</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">code</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">column</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">0</span>
 (<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">scheme-module-indent</span><span class="org-unicode-whitespace-subdued-space"> </span>(state<span class="org-unicode-whitespace-subdued-space"> </span>indent-point<span class="org-unicode-whitespace-subdued-space"> </span>normal-indent)<span class="org-unicode-whitespace-subdued-space"> </span>0)
 (put<span class="org-unicode-whitespace-subdued-space"> </span>'module<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-module-indent)
@@ -321,26 +361,30 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 (put<span class="org-unicode-whitespace-subdued-space"> </span>'unless<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
 (put<span class="org-unicode-whitespace-subdued-space"> </span>'match<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
 </pre>
-</div></li></ol>
+</div>
+</div>
 </div>
 <div id="outline-container-orgheadline17" class="outline-4">
 <h4 id="orgheadline17"><span class="section-number-4">3.2.2</span> Interface</h4>
 <div class="outline-text-4" id="text-3-2-2">
-</div><ol class="org-ol"><li><a id="orgheadline16"></a>Geiser REPL<br  /><div class="outline-text-5" id="text-3-2-2-1">
+</div><div id="outline-container-orgheadline16" class="outline-5">
+<h5 id="orgheadline16"><span class="section-number-5">3.2.2.1</span> Geiser REPL</h5>
+<div class="outline-text-5" id="text-3-2-2-1">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">geiser</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>geiser-active-implementations<span class="org-unicode-whitespace-subdued-space"> </span>'(chicken))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician/ac-set-scheme-sources<span class="org-unicode-whitespace-subdued-space"> </span>scheme-mode-hook))
 </pre>
-</div></li></ol>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-06 Tue 23:22</p>
+<p class="date">Created: 2016-09-07 Wed 17:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

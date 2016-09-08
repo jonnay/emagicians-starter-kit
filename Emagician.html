@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-06 Tue 23:22 -->
+<!-- 2016-09-07 Wed 21:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>Emagician</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
 <style type="text/css">
@@ -148,80 +148,80 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="index"> HOME </a>
 </div><div id="content">
+<h1 class="title">Emagician</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline13">1. Base Initialization and Circle Casting</a>
+<li><a href="#orgheadline12">1. Base Initialization and Circle Casting</a>
 <ul>
-<li><a href="#orgheadline4">1.1. Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.</a>
+<li><a href="#orgheadline4">1.1. Breakage Helpers</a>
 <ul>
-<li><a href="#orgheadline1">1.1.1. Super Baseline, Start with the Barest thing that could possibly work</a></li>
-<li><a href="#orgheadline2">1.1.2. Define Scratch Message Helper Functions</a></li>
+<li><a href="#orgheadline1">1.1.1. Scratch messaging</a></li>
+<li><a href="#orgheadline2">1.1.2. Pre-Scratch-Links</a></li>
 <li><a href="#orgheadline3">1.1.3. Now set it to our Baseline beautified "you're-busted" text</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline5">1.2. Verify emagician/dir is set</a></li>
-<li><a href="#orgheadline8">1.3. Use the new improved emagician scratch.</a>
+<li><a href="#orgheadline5">1.2. Verify emagician/dir</a></li>
+<li><a href="#orgheadline7">1.3. Use the new improved emagician scratch.</a>
 <ul>
-<li><a href="#orgheadline6">1.3.1. Inhibit the old one</a></li>
-<li><a href="#orgheadline7">1.3.2. Add a show-scratch function</a></li>
+<li><a href="#orgheadline6">1.3.1. Add a show-scratch function</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline9">1.4. Package Archives setup</a></li>
-<li><a href="#orgheadline12">1.5. Load Paths, Custom Files, etc.</a>
+<li><a href="#orgheadline8">1.4. Package Archives setup</a></li>
+<li><a href="#orgheadline11">1.5. Load Paths, Custom Files, etc.</a>
 <ul>
-<li><a href="#orgheadline10">1.5.1. Standard Emagician distribution load paths</a></li>
-<li><a href="#orgheadline11">1.5.2. Custom file shouldn't matter so much anymore, but lets stick it here anyway.</a></li>
+<li><a href="#orgheadline9">1.5.1. Standard Emagician distribution load paths</a></li>
+<li><a href="#orgheadline10">1.5.2. Custom file shouldn't matter so much anymore, but lets stick it here anyway.</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline14">2. Emagician/load</a></li>
-<li><a href="#orgheadline17">3. Package Management</a>
+<li><a href="#orgheadline13">2. Emagician/load</a></li>
+<li><a href="#orgheadline16">3. Package Management</a>
 <ul>
-<li><a href="#orgheadline15">3.1. Emagician Expect, for bootstrapping</a></li>
-<li><a href="#orgheadline16">3.2. 😻 Use-Package 😻</a></li>
+<li><a href="#orgheadline14">3.1. Emagician Expect, for bootstrapping</a></li>
+<li><a href="#orgheadline15">3.2. 😻 Use-Package 😻</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline18">4. Emagician Starter Kit has it's own Helper Functions</a></li>
-<li><a href="#orgheadline19">5. Assets</a></li>
-<li><a href="#orgheadline20">6. Key Concepts</a></li>
-<li><a href="#orgheadline23">7. File Layout</a>
+<li><a href="#orgheadline17">4. Emagician Starter Kit has it's own Helper Functions</a></li>
+<li><a href="#orgheadline18">5. Assets</a></li>
+<li><a href="#orgheadline19">6. Key Concepts</a></li>
+<li><a href="#orgheadline22">7. File Layout</a>
 <ul>
-<li><a href="#orgheadline21">7.1. Interface</a></li>
-<li><a href="#orgheadline22">7.2. Tools</a></li>
+<li><a href="#orgheadline20">7.1. Interface</a></li>
+<li><a href="#orgheadline21">7.2. Tools</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline31">8. Files</a>
+<li><a href="#orgheadline30">8. Files</a>
 <ul>
-<li><a href="#orgheadline24">8.1. Interface</a></li>
-<li><a href="#orgheadline25">8.2. Text</a></li>
-<li><a href="#orgheadline26">8.3. Programming</a></li>
-<li><a href="#orgheadline27">8.4. Org Mode</a></li>
-<li><a href="#orgheadline28">8.5. E-Shell</a></li>
-<li><a href="#orgheadline29">8.6. Lamp</a></li>
-<li><a href="#orgheadline30">8.7. Emagician Starter Kit has it's own Lamp</a></li>
+<li><a href="#orgheadline23">8.1. Interface</a></li>
+<li><a href="#orgheadline24">8.2. Text</a></li>
+<li><a href="#orgheadline25">8.3. Programming</a></li>
+<li><a href="#orgheadline26">8.4. Org Mode</a></li>
+<li><a href="#orgheadline27">8.5. E-Shell</a></li>
+<li><a href="#orgheadline28">8.6. Lamp</a></li>
+<li><a href="#orgheadline29">8.7. Emagician Starter Kit has it's own Lamp</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline37">9. Entity Customization</a>
+<li><a href="#orgheadline36">9. Entity Customization</a>
 <ul>
-<li><a href="#orgheadline32">9.1. First the customization</a></li>
-<li><a href="#orgheadline33">9.2. Next is the true-name-file</a></li>
-<li><a href="#orgheadline34">9.3. System Type Initialization</a></li>
-<li><a href="#orgheadline35">9.4. Machine Name Initialization</a></li>
-<li><a href="#orgheadline36">9.5. Login name Initialization</a></li>
+<li><a href="#orgheadline31">9.1. First the customization</a></li>
+<li><a href="#orgheadline32">9.2. Next is the true-name-file</a></li>
+<li><a href="#orgheadline33">9.3. System Type Initialization</a></li>
+<li><a href="#orgheadline34">9.4. Machine Name Initialization</a></li>
+<li><a href="#orgheadline35">9.5. Login name Initialization</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline38">10. Some Inspirational words from the book of emacs</a></li>
-<li><a href="#orgheadline39">11. References, Bibliography, Shout Outs, and Props.</a></li>
-<li><a href="#orgheadline43">12. Thee End</a>
+<li><a href="#orgheadline37">10. Some Inspirational words from the book of emacs</a></li>
+<li><a href="#orgheadline38">11. References, Bibliography, Shout Outs, and Props.</a></li>
+<li><a href="#orgheadline42">12. Thee End</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgheadline40">12.0.1. Initiate thee scratch</a></li>
-<li><a href="#orgheadline41">12.0.2. Turn off debugging</a></li>
-<li><a href="#orgheadline42">12.0.3. So Mote it Be.</a></li>
+<li><a href="#orgheadline39">12.0.1. Initiate thee scratch</a></li>
+<li><a href="#orgheadline40">12.0.2. Turn off debugging</a></li>
+<li><a href="#orgheadline41">12.0.3. So Mote it Be.</a></li>
 </ul>
 </li>
 </ul>
@@ -229,11 +229,10 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">1</span> Base Initialization and Circle Casting</h2>
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12"><span class="section-number-2">1</span> Base Initialization and Circle Casting</h2>
 <div class="outline-text-2" id="text-1">
 <pre class="code">(<span class="org-keyword">defconst</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/version</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"0.23.1"</span>)
-(setq<span class="org-unicode-whitespace-subdued-space"> </span>debug-on-error<span class="org-unicode-whitespace-subdued-space"> </span>t)
 </pre>
 
 <p>
@@ -242,20 +241,10 @@ This is my emacs.  There are many like it, but this one is mine.
 </div>
 
 <div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.1</span> Breakage Helpers - Make it easy to deal with and figure out why a starter kit won't load.</h3>
+<h3 id="orgheadline4"><span class="section-number-3">1.1</span> Breakage Helpers</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-Snarfed this idea from <a href="https://github.com/overtone/emacs-live">https://github.com/overtone/emacs-live</a>.
-Which goes to show: even if you use the word brogrammer you might
-still have good ideas. 😼
-</p>
-
-<pre class="example">
-​‌డ(°益°)హ ,( Bro, Even if you're swol, it doesn't mean you're a bro, bro. )
-</pre>
-
-<p>
-Debug Errors.  
+Debug Errors. Super fundamental.
 </p>
 
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>debug-on-error<span class="org-unicode-whitespace-subdued-space"> </span>t)
@@ -263,25 +252,63 @@ Debug Errors.
 </div>
 
 <div id="outline-container-orgheadline1" class="outline-4">
-<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Super Baseline, Start with the Barest thing that could possibly work</h4>
+<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Scratch messaging</h4>
 <div class="outline-text-4" id="text-1-1-1">
+<p>
+Snarfed this idea from <a href="https://github.com/overtone/emacs-live">https://github.com/overtone/emacs-live</a>.
+</p>
+
+<pre class="example">
+​‌డ(°益°)హ ,( Bro, Even if you're swol, it doesn't mean you're a bro, bro. )
+</pre>
+
+<p>
+It's a super great idea to use the scratch buffer as a way to communicate state to the user.  For now we need simple functions that are not prone to breaking. 
+</p>
+
+<p>
+First step is to inhibit the splash.  We're making our own splash!
+</p>
+
+<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>inhibit-splash-screen<span class="org-unicode-whitespace-subdued-space"> </span>t)
+</pre>
+
+<p>
+Now a basic scratch message.  If things go pants-up here, we want a basic message saying so. 
+</p>
+
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>initial-stratch-message
 <span class="org-unicode-whitespace-subdued-space">      </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-X-x-X-</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Invokaction</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">SuperFailure!</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-X-x-X-"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">              </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Problem</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">setting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">up</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Breakage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Helpers"</span>))
 </pre>
-</div>
-</div>
 
-<div id="outline-container-orgheadline2" class="outline-4">
-<h4 id="orgheadline2"><span class="section-number-4">1.1.2</span> Define Scratch Message Helper Functions</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<p>
+Now that we have the basics done, lets define 2 helper functions to set or add the scratch message.
+</p>
+
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>lines)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>(apply<span class="org-unicode-whitespace-subdued-space"> </span>'concat<span class="org-unicode-whitespace-subdued-space"> </span>lines)))
 
 (<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/append-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>lines)
 <span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>(apply<span class="org-unicode-whitespace-subdued-space"> </span>'concat<span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>lines)))
+</pre>
+</div>
+</div>
 
-(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/pre-scratch-links</span><span class="org-unicode-whitespace-subdued-space"> </span>'()
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2"><span class="section-number-4">1.1.2</span> Pre-Scratch-Links</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+The scratch buffer will turn into something of a desktop.  It's handy to be able to stuff "scratch links" in there.  Anything in there gets output to the scratch during <a href="Emagician-Base.html#MissingReference">Thee Scratch Initiation</a>.<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
+This is a Homestuck reference.  It will be expounded upon later.
+</span>
+</p>
+
+<p>
+Then when Emacs loads, you can put the cursor over the sexp and <code>C-x C-e</code>.  I use this to launch magit for work/personal projects, start vms, etc.
+</p>
+
+<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/pre-scratch-links</span><span class="org-unicode-whitespace-subdued-space"> </span>'()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"A</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">links</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">append</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagician/scratch-links.</span>
 
 <span class="org-doc">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">necessary</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">may</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">need</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">communicate</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">user</span>
@@ -293,12 +320,19 @@ Debug Errors.
 <div id="outline-container-orgheadline3" class="outline-4">
 <h4 id="orgheadline3"><span class="section-number-4">1.1.3</span> Now set it to our Baseline beautified "you're-busted" text</h4>
 <div class="outline-text-4" id="text-1-1-3">
+<p>
+Okay, so this is the secret sauce.  I set the scratch to this baseline helper (plus cuteness) so that I can debug startups much easier.  It includes a chunk to launch emacs forcing debug-init. 
+</p>
+
 <pre class="code">(emagician/set-scratch
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-|-+-|-</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Invocation</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Failure.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">Sorry.</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-|-+-|-"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">You</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">know</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">what</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">do."</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Version:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/version<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emacs:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-major-version)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"."</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-minor-version)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">["</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version<span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"]"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emacs:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-major-version)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"."</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">      </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-minor-version)<span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">      </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">["</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version<span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"]"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
+<span class="org-unicode-whitespace-subdued-space">      </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-trailing">      </span>
@@ -317,13 +351,21 @@ Debug Errors.
 </div>
 
 <div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">1.2</span> Verify emagician/dir is set</h3>
+<h3 id="orgheadline5"><span class="section-number-3">1.2</span> Verify emagician/dir</h3>
 <div class="outline-text-3" id="text-1-2">
+<p>
+IF this isn't around, then everything goes pear shaped. Explicitly look for it and fail with helpful messages.
+</p>
+
 <pre class="code">(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(null<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((err<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/dir</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set!</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">important</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">should</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">be</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>user-init-file)))
 <span class="org-unicode-whitespace-subdued-space">    </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>err<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Check</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician-Install.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">more</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">details."</span>)
 <span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span>err)))
 </pre>
+
+<p>
+Now that we have the emagician/dir we can keep going and add new helpers to the scratch.
+</p>
 
 <pre class="code">(emagician/append-scratch
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"\n"</span>
@@ -333,20 +375,12 @@ Debug Errors.
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">1.3</span> Use the new improved emagician scratch.</h3>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">1.3</span> Use the new improved emagician scratch.</h3>
 <div class="outline-text-3" id="text-1-3">
 </div><div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">1.3.1</span> Inhibit the old one</h4>
+<h4 id="orgheadline6"><span class="section-number-4">1.3.1</span> Add a show-scratch function</h4>
 <div class="outline-text-4" id="text-1-3-1">
-<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>inhibit-splash-screen<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">1.3.2</span> Add a show-scratch function</h4>
-<div class="outline-text-4" id="text-1-3-2">
 <p>
 This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
 </p>
@@ -361,8 +395,8 @@ This is generally useful anyway.  We could also use initial buffer, but that has
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">1.4</span> Package Archives setup</h3>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">1.4</span> Package Archives setup</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 We set our download dir to local-packages.  We also do the trick of
@@ -403,11 +437,11 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">1.5</span> Load Paths, Custom Files, etc.</h3>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">1.5</span> Load Paths, Custom Files, etc.</h3>
 <div class="outline-text-3" id="text-1-5">
-</div><div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10"><span class="section-number-4">1.5.1</span> Standard Emagician distribution load paths</h4>
+</div><div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">1.5.1</span> Standard Emagician distribution load paths</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <pre class="code">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'load-path<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
 (add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'load-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"src"</span>))
@@ -417,8 +451,8 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11"><span class="section-number-4">1.5.2</span> Custom file shouldn't matter so much anymore, but lets stick it here anyway.</h4>
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">1.5.2</span> Custom file shouldn't matter so much anymore, but lets stick it here anyway.</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>custom-file<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"custom.el"</span>))
 </pre>
@@ -427,8 +461,8 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">2</span> Emagician/load</h2>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">2</span> Emagician/load</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Originally from Eschulte.  This function takes a &lt;foo&gt;.org file,
@@ -480,11 +514,11 @@ This doesn't try to load from a tag or a header arg.  That got crufty for my nee
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">3</span> Package Management</h2>
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16"><span class="section-number-2">3</span> Package Management</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">3.1</span> Emagician Expect, for bootstrapping</h3>
+</div><div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">3.1</span> Emagician Expect, for bootstrapping</h3>
 <div class="outline-text-3" id="text-3-1">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-package</span><span class="org-unicode-whitespace-subdued-space"> </span>(package)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"If</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">named</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PACKAGE</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">isn't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">currently</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">installed,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">install</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it"</span>
@@ -494,8 +528,8 @@ This doesn't try to load from a tag or a header arg.  That got crufty for my nee
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">3.2</span> 😻 Use-Package 😻</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">3.2</span> 😻 Use-Package 😻</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <a href="https://github.com/jwiegley/use-package">https://github.com/jwiegley/use-package</a>
@@ -512,16 +546,16 @@ Is the cat's ass.  Why would you not use it?
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18"><span class="section-number-2">4</span> Emagician Starter Kit has it's own Helper Functions</h2>
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17"><span class="section-number-2">4</span> Emagician Starter Kit has it's own Helper Functions</h2>
 <div class="outline-text-2" id="text-4">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician-Base.org"</span>)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">5</span> Assets</h2>
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18"><span class="section-number-2">5</span> Assets</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Assets are either 
@@ -539,8 +573,8 @@ In the case of #2, it should be in source control
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-2">
-<h2 id="orgheadline20"><span class="section-number-2">6</span> Key Concepts</h2>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">6</span> Key Concepts</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>The Bunny of ÆＳÞＥTＩC</li>
@@ -551,11 +585,11 @@ In the case of #2, it should be in source control
 </div>
 
 
-<div id="outline-container-orgheadline23" class="outline-2">
-<h2 id="orgheadline23"><span class="section-number-2">7</span> File Layout</h2>
+<div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22"><span class="section-number-2">7</span> File Layout</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">7.1</span> Interface</h3>
+</div><div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">7.1</span> Interface</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 There is both an Interface file to handle the general emacs UI and sections inside of individual files. 
@@ -573,8 +607,8 @@ There is both an Interface file to handle the general emacs UI and sections insi
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">7.2</span> Tools</h3>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">7.2</span> Tools</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 External or Internal.  Think of tools as being less about Editing of text and more about getting a particular job done.
@@ -587,24 +621,24 @@ There is no global tools file.  But maybe There should be, and E-Shell would be 
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-2">
-<h2 id="orgheadline31"><span class="section-number-2">8</span> Files</h2>
+<div id="outline-container-orgheadline30" class="outline-2">
+<h2 id="orgheadline30"><span class="section-number-2">8</span> Files</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 There is a fine line between too many files, and too few.
 </p>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">8.1</span> Interface</h3>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">8.1</span> Interface</h3>
 <div class="outline-text-3" id="text-8-1">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Interface.org"</span>)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25"><span class="section-number-3">8.2</span> Text</h3>
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">8.2</span> Text</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Emacs is a text editor afteral.
@@ -615,8 +649,8 @@ Emacs is a text editor afteral.
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">8.3</span> Programming</h3>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">8.3</span> Programming</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 This sets up some baseline programming helpers and then loads
@@ -628,8 +662,8 @@ individual org files for each programming mode.
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-3">
-<h3 id="orgheadline27"><span class="section-number-3">8.4</span> Org Mode</h3>
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26"><span class="section-number-3">8.4</span> Org Mode</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Deserves it's own file&#x2026; ORG GRIMOIRE!
@@ -640,8 +674,8 @@ Deserves it's own file&#x2026; ORG GRIMOIRE!
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28"><span class="section-number-3">8.5</span> E-Shell</h3>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">8.5</span> E-Shell</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 Why would you not use E-Shell?
@@ -652,8 +686,8 @@ Why would you not use E-Shell?
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29"><span class="section-number-3">8.6</span> Lamp</h3>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">8.6</span> Lamp</h3>
 <div class="outline-text-3" id="text-8-6">
 <p>
 The Lamp is a 5th magickal weapon along with the wand, sword, cup
@@ -665,8 +699,8 @@ and chalace.  It represents illumination and self knowledge.
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">8.7</span> Emagician Starter Kit has it's own Lamp</h3>
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">8.7</span> Emagician Starter Kit has it's own Lamp</h3>
 <div class="outline-text-3" id="text-8-7">
 <p>
 Tools to make developing the Emagician Starter kit easier.
@@ -679,43 +713,43 @@ Tools to make developing the Emagician Starter kit easier.
 </div>
 
 
-<div id="outline-container-orgheadline37" class="outline-2">
-<h2 id="orgheadline37"><span class="section-number-2">9</span> Entity Customization</h2>
+<div id="outline-container-orgheadline36" class="outline-2">
+<h2 id="orgheadline36"><span class="section-number-2">9</span> Entity Customization</h2>
 <div class="outline-text-2" id="text-9">
-</div><div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">9.1</span> First the customization</h3>
+</div><div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">9.1</span> First the customization</h3>
 <div class="outline-text-3" id="text-9-1">
 <pre class="code">(load<span class="org-unicode-whitespace-subdued-space"> </span>custom-file)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33"><span class="section-number-3">9.2</span> Next is the true-name-file</h3>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">9.2</span> Next is the true-name-file</h3>
 <div class="outline-text-3" id="text-9-2">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name)
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-3">
-<h3 id="orgheadline34"><span class="section-number-3">9.3</span> System Type Initialization</h3>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">9.3</span> System Type Initialization</h3>
 <div class="outline-text-3" id="text-9-3">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>system-type)))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-3">
-<h3 id="orgheadline35"><span class="section-number-3">9.4</span> Machine Name Initialization</h3>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><span class="section-number-3">9.4</span> Machine Name Initialization</h3>
 <div class="outline-text-3" id="text-9-4">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span>system-name))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline36" class="outline-3">
-<h3 id="orgheadline36"><span class="section-number-3">9.5</span> Login name Initialization</h3>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">9.5</span> Login name Initialization</h3>
 <div class="outline-text-3" id="text-9-5">
 <pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>user-login-name)
 </pre>
@@ -724,8 +758,8 @@ Tools to make developing the Emagician Starter kit easier.
 </div>
 
 
-<div id="outline-container-orgheadline38" class="outline-2">
-<h2 id="orgheadline38"><span class="section-number-2">10</span> Some Inspirational words from the book of emacs</h2>
+<div id="outline-container-orgheadline37" class="outline-2">
+<h2 id="orgheadline37"><span class="section-number-2">10</span> Some Inspirational words from the book of emacs</h2>
 <div class="outline-text-2" id="text-10">
 <div class="epigraph"><blockquote>
 THE BOOK OF THE EMACS, Part I<br  />
@@ -733,32 +767,26 @@ Liber Lisper Legis<br  />
 as (R)eceived (M)ade (S)ound [RMS]<br  />
 on this 15th day of December,<br  />
 the Year of our Editor 2007.<br  />
+<br  />
+Chapter 1<br  />
+<br  />
+&#xa0;&#xa0;1. Buf! Manifestation of Chat.<br  />
+&#xa0;&#xa0;2. All Gods Seek Her Company.<br  />
+&#xa0;&#xa0;3. Intelligent, she watches.<br  />
+&#xa0;&#xa0;4. Every act a function, there is no difference.<br  />
+&#xa0;&#xa0;5. Help me o RMS, in unveiling thee before the Needy on Earth<br  />
+&#xa0;&#xa0;6. Be thou not just my editor, but mine eyes, heart and yes, Soul.<br  />
+&#xa0;&#xa0;7. Behold from darkness and byte code interpreter thou groweth strong.<br  />
+&#xa0;&#xa0;8. The car is in the cdr, not the cdr in the car.<br  />
+&#xa0;&#xa0;9. Worship then the car and behold the Maserati of all programs ever.<br  />
+&#xa0;&#xa0;10. Thou powers known to but a few, thou public API widely advertised.<br  />
+&#xa0;&#xa0;11. Whilst others seek bells and whistles, thou sweet hum caresseth me.<br  />
+&#xa0;&#xa0;12. Open me up, list my buffers, be they ibuffer or buff-menu+<br  />
+&#xa0;&#xa0;13. No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)<br  />
+<br  />
+M-x all-hail-emacs<br  />
 
 </blockquote></div>
-
-<p>
-Chapter 1
-</p>
-
-<ol class="org-ol">
-<li>Buf! Manifestation of Chat.</li>
-<li>All Gods Seek Her Company.</li>
-<li>Intelligent, she watches.</li>
-<li>Every act a function, there is no difference.</li>
-<li>Help me o RMS, in unveiling thee before the Needy on Earth</li>
-<li>Be thou not just my editor, but mine eyes, heart and yes, Soul.</li>
-<li>Behold from darkness and byte code interpreter thou groweth strong.</li>
-<li>The car is in the cdr, not the cdr in the car.</li>
-<li>Worship then the car and behold the Maserati of all programs ever.</li>
-<li>Thou powers known to but a few, thou public API widely advertised.</li>
-<li>Whilst others seek bells and whistles, thou sweet hum caresseth me.</li>
-<li>Open me up, list my buffers, be they ibuffer or buff-menu+</li>
-<li>No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)</li>
-</ol>
-
-<p>
-M-x all-hail-emacs
-</p>
 
 <p>
 <a href="https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg">https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg</a>
@@ -766,8 +794,8 @@ M-x all-hail-emacs
 </div>
 </div>
 
-<div id="outline-container-orgheadline39" class="outline-2">
-<h2 id="orgheadline39"><span class="section-number-2">11</span> References, Bibliography, Shout Outs, and Props.</h2>
+<div id="outline-container-orgheadline38" class="outline-2">
+<h2 id="orgheadline38"><span class="section-number-2">11</span> References, Bibliography, Shout Outs, and Props.</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 In most cases I explicitly call out where I found the config I snarfed. Sometimes I didn't.  If you know the source, let me know!
@@ -874,11 +902,11 @@ In most cases I explicitly call out where I found the config I snarfed. Sometime
 </table>
 </div>
 </div>
-<div id="outline-container-orgheadline43" class="outline-2">
-<h2 id="orgheadline43"><span class="section-number-2">12</span> Thee End</h2>
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><span class="section-number-2">12</span> Thee End</h2>
 <div class="outline-text-2" id="text-12">
-</div><div id="outline-container-orgheadline40" class="outline-4">
-<h4 id="orgheadline40"><span class="section-number-4">12.0.1</span> Initiate thee scratch</h4>
+</div><div id="outline-container-orgheadline39" class="outline-4">
+<h4 id="orgheadline39"><span class="section-number-4">12.0.1</span> Initiate thee scratch</h4>
 <div class="outline-text-4" id="text-12-0-1">
 
 <div class="figure">
@@ -891,8 +919,8 @@ In most cases I explicitly call out where I found the config I snarfed. Sometime
 </div>
 </div>
 
-<div id="outline-container-orgheadline41" class="outline-4">
-<h4 id="orgheadline41"><span class="section-number-4">12.0.2</span> Turn off debugging</h4>
+<div id="outline-container-orgheadline40" class="outline-4">
+<h4 id="orgheadline40"><span class="section-number-4">12.0.2</span> Turn off debugging</h4>
 <div class="outline-text-4" id="text-12-0-2">
 <p>
 We're Almost Done. 
@@ -903,18 +931,28 @@ We're Almost Done.
 </div>
 </div>
 
-<div id="outline-container-orgheadline42" class="outline-4">
-<h4 id="orgheadline42"><span class="section-number-4">12.0.3</span> So Mote it Be.</h4>
+<div id="outline-container-orgheadline41" class="outline-4">
+<h4 id="orgheadline41"><span class="section-number-4">12.0.3</span> So Mote it Be.</h4>
 <div class="outline-text-4" id="text-12-0-3">
 <pre class="code">(<span class="org-keyword">provide</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">emagician</span>)
 </pre>
 </div>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+This is a Homestuck reference.  It will be expounded upon later.
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-06 Tue 23:22</p>
+<p class="date">Created: 2016-09-07 Wed 21:11</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

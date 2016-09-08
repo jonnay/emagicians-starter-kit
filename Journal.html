@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-07 Wed 17:27 -->
+<!-- 2016-09-07 Wed 17:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>NixOS</title>
+<title>Journal</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Jonathan Arkell" />
 <style type="text/css">
@@ -148,16 +148,173 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="index"> HOME </a>
 </div><div id="content">
-<h1 class="title">NixOS</h1>
+<h1 class="title">Journal</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. Wax about Journal</a></li>
+<li><a href="#orgheadline5">2. 2016</a>
+<ul>
+<li><a href="#orgheadline4">2.1. September</a>
+<ul>
+<li><a href="#orgheadline2">2.1.1. 6th - Debugging an Emacs slowdown</a></li>
+<li><a href="#orgheadline3">2.1.2. 5th - Configs and a new mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Wax about Journal</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-It's old, but this was needed to make NixOS work well with tramp.
+To the tune of Deck the Halls:
 </p>
-<pre class="code">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'tramp-remote-path<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"/var/run/current-system/sw/bin"</span>)
+
+<p>
+Blah Blah Blah Blah
+Et Cetera.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">2</span> 2016</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">2.1</span> September</h3>
+<div class="outline-text-3" id="text-2-1">
+</div><div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> 6th - Debugging an Emacs slowdown</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Something has gone horribly wrong with my emacs.  Every 5 minutes or so I get a spinning beachball of death.  It's either:
+</p>
+<ul class="org-ul">
+<li>I've upgraded a package and it's behaving badly</li>
+<li>I've installed a package that is behaving badly</li>
+<li>Some config changes in the past day or so have caused slowdown.</li>
+</ul>
+
+<p>
+So to debug this issue, I am taking it slow.  Right now I have disabled artbollocks mode (one of the new packages) and gave emacs a restart.  The shit thing is that it takes forever to find the cause of the problem.
+</p>
+
+<p>
+Okay, it's not artbollocks. Whatever it is, it affects all modes.
+</p>
+
+<p>
+Next, it could be company.  I hope not.  I 💟 Company mode.
+</p>
+
+<p>
+Also, Helm needed an upgrade, so i did that at the same time as deactivating Company mode.  Sure, not the greatest in troubleshooting!
+</p>
+
+<p>
+One of the things I can do is finally get around to writing the "In case of emergency, break glass" function that sends SIGUSR2 to emacs. 
+</p>
+
+<pre class="code"><span class="org-builtin">kill</span><span class="org-unicode-whitespace-subdued-space"> </span>-SIGUSR2<span class="org-unicode-whitespace-subdued-space"> </span>$(<span class="org-unicode-whitespace-subdued-space"> </span>ps<span class="org-unicode-whitespace-subdued-space"> </span>aux<span class="org-unicode-whitespace-subdued-space"> </span>|<span class="org-unicode-whitespace-subdued-space"> </span>grep<span class="org-unicode-whitespace-subdued-space"> </span>Emacs<span class="org-unicode-whitespace-subdued-space"> </span>|<span class="org-unicode-whitespace-subdued-space"> </span>awk<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">'{print</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">$2}'</span>)
 </pre>
+
+<p>
+Ironically, it seems as if the upgrade to helm may have fixed my problem.
+</p>
+
+<p>
+Now to re-enable company. 
+</p>
+
+<p>
+Looks like company is the cause of slowdown.  I'll keep it off for now.  There is a good chance that it is the company-help plugin.  So next up I'll turn that on, and turn off the help.
+</p>
+
+<p>
+Or.. or maybe it is the backup files.  Need to turn that off next.  No effect.  Next?
+</p>
+
+<p>
+Lots of messages like <code>Invalid face attribute :foreground &lt;num&gt;</code>, searching for packages that change forground based on a number:
+</p>
+<ul class="org-ul">
+<li>color-identifiers</li>
+<li>fill-column-indicator</li>
+<li>helm</li>
+<li>org</li>
+<li>pos-tip</li>
+<li>rainbow-delimiters</li>
+</ul>
+
+<p>
+Next up: Helm. I'll make the rest of the kit manage without it.  Turns out removing helm is hard.
+</p>
+
+<p>
+Removed helm, rainbow-delimiters.
+</p>
+
+<p>
+Maybe keyfreq?  Maybe my save and push? Disabling both
+</p>
+
+<p>
+Postip is next.  Also Achievements Mode.  It shouldn't be enabled, but you don't know.
+</p>
+
+<p>
+Shit.
+</p>
+
+<p>
+No more <code>Invalid face...</code> errors, but still a beachball.  I'm lost. 
+</p>
+
+<p>
+Time to roll back configs until the problem is gone. 
+</p>
+
+<p>
+GC-CONS-THRESHOLD.  It seems to be gc-cons-threshold.
+</p>
+
+<p>
+See: <a href="https://lists.gnu.org/archive/html/help-gnu-emacs/2007-06/msg00243.html">https://lists.gnu.org/archive/html/help-gnu-emacs/2007-06/msg00243.html</a>
+Also: <a href="http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/">http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> 5th - Configs and a new mode</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<div class="epigraph"><blockquote>
+<p>
+Good artists copy.  Great artists steal.
+</p>
+
+</blockquote></div>
+
+<p>
+I forgot just how rewarding it is to go through other Emagicians configs, and <del>steal their stuff</del>, art their configurations.  There are scores of great Emacs people who really know their editor.
+</p>
+
+<p>
+As an aside, I started work on a new parens-underlining package.  I don't know if I like it yet.
+</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-07 Wed 17:27</p>
+<p class="date">Created: 2016-09-07 Wed 17:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

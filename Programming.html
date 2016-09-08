@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-06 Tue 23:22 -->
+<!-- 2016-09-07 Wed 17:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Programming</title>
@@ -160,12 +160,25 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline1">1.1.1. Line Numbers</a></li>
 <li><a href="#orgheadline2">1.1.2. Which Function</a></li>
 <li><a href="#orgheadline3">1.1.3. Check Parens</a></li>
-<li><a href="#orgheadline6">1.1.4. Show Paren Mode</a></li>
+<li><a href="#orgheadline6">1.1.4. Show Paren Mode</a>
+<ul>
+<li><a href="#orgheadline4">1.1.4.1. <span class="todo TODO">TODO</span> Snarf the smartparens from interface and barf here instead</a></li>
+<li><a href="#orgheadline5">1.1.4.2. <span class="todo TODO">TODO</span> Update my config to be sane, check </a></li>
+</ul>
+</li>
 <li><a href="#orgheadline7">1.1.5. Rainbow Delimiters</a></li>
 <li><a href="#orgheadline8">1.1.6. Rainbow Blocks&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
 <li><a href="#orgheadline9">1.1.7. Color Identifiers</a></li>
 <li><a href="#orgheadline10">1.1.8. Show whitespace</a></li>
-<li><a href="#orgheadline13">1.1.9. Prettify Symbols</a></li>
+<li><a href="#orgheadline13">1.1.9. Prettify Symbols</a>
+<ul>
+<li><a href="#orgheadline12">1.1.9.1. Prettify Symbols List</a>
+<ul>
+<li><a href="#orgheadline11">1.1.9.1.1. How does this jiggery-pokery work?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#orgheadline20">1.2. Editing</a>
@@ -187,7 +200,13 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline25">2.4. Ediff</a></li>
 <li><a href="#orgheadline30">2.5. Jenkins</a>
 <ul>
-<li><a href="#orgheadline29">2.5.1. My wishlist</a></li>
+<li><a href="#orgheadline29">2.5.1. My wishlist</a>
+<ul>
+<li><a href="#orgheadline26">2.5.1.1. <span class="todo TODO">TODO</span> Refresh PR accepted</a></li>
+<li><a href="#orgheadline27">2.5.1.2. <span class="todo TODO">TODO</span> Add an idle refresh timer</a></li>
+<li><a href="#orgheadline28">2.5.1.3. <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#orgheadline33">2.6. Helm Dash for manuals</a>
@@ -199,7 +218,12 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline39">2.7. Version control</a>
 <ul>
 <li><a href="#orgheadline34">2.7.1. Editing</a></li>
-<li><a href="#orgheadline37">2.7.2. Magit</a></li>
+<li><a href="#orgheadline37">2.7.2. Magit</a>
+<ul>
+<li><a href="#orgheadline35">2.7.2.1. Interact with github</a></li>
+<li><a href="#orgheadline36">2.7.2.2. Add a function for automagickally setting the config</a></li>
+</ul>
+</li>
 <li><a href="#orgheadline38">2.7.3. Git Gutter</a></li>
 </ul>
 </li>
@@ -292,8 +316,12 @@ This config could use tweaking.
 (show-paren-mode)
 </pre>
 </div>
-<ol class="org-ol"><li><a id="orgheadline4"></a><span class="todo TODO">TODO</span> Snarf the smartparens from interface and barf here instead<br  /></li>
-<li><a id="orgheadline5"></a><span class="todo TODO">TODO</span> Update my config to be sane, check <a href="https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens">https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens</a><br  /></li></ol>
+<div id="outline-container-orgheadline4" class="outline-5">
+<h5 id="orgheadline4"><span class="section-number-5">1.1.4.1</span> <span class="todo TODO">TODO</span> Snarf the smartparens from interface and barf here instead</h5>
+</div>
+<div id="outline-container-orgheadline5" class="outline-5">
+<h5 id="orgheadline5"><span class="section-number-5">1.1.4.2</span> <span class="todo TODO">TODO</span> Update my config to be sane, check <a href="https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens">https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens</a></h5>
+</div>
 </div>
 
 
@@ -422,7 +450,9 @@ Prettify Symbols is 80% there, and looks freaking hawt.
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline12"></a>Prettify Symbols List<br  /><div class="outline-text-5" id="text-1-1-9-1">
+<div id="outline-container-orgheadline12" class="outline-5">
+<h5 id="orgheadline12"><span class="section-number-5">1.1.9.1</span> Prettify Symbols List</h5>
+<div class="outline-text-5" id="text-1-1-9-1">
 <p>
 Thanks to Artur Malabarba <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 <a href="http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html">http://endlessparentheses.com/using-prettify-symbols-in-clojure-and-elisp-without-breaking-indentation.html</a>
@@ -509,7 +539,9 @@ Using <a href="http://unicode-table.com/">http://unicode-table.com/</a> helped a
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline11"></a>How does this jiggery-pokery work?<br  /><div class="outline-text-6" id="text-1-1-9-1-1">
+<div id="outline-container-orgheadline11" class="outline-6">
+<h6 id="orgheadline11"><span class="section-number-6">1.1.9.1.1</span> How does this jiggery-pokery work?</h6>
+<div class="outline-text-6" id="text-1-1-9-1-1">
 <p>
 Prettify is basically a call to compose region, it automagickally sets
 start and end, and the second arg of the a-list is <code>components</code>
@@ -546,7 +578,9 @@ Rrrriiiiggghhhhht.
 <p>
 I don't entirely understand this yet. 
 </p>
-</div></li></ol></li></ol>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="outline-container-orgheadline20" class="outline-3">
@@ -802,9 +836,15 @@ So far so good.
 <div id="outline-container-orgheadline29" class="outline-4">
 <h4 id="orgheadline29"><span class="section-number-4">2.5.1</span> My wishlist</h4>
 <div class="outline-text-4" id="text-2-5-1">
-</div><ol class="org-ol"><li><a id="orgheadline26"></a><span class="todo TODO">TODO</span> Refresh PR accepted<br  /></li>
-<li><a id="orgheadline27"></a><span class="todo TODO">TODO</span> Add an idle refresh timer<br  /></li>
-<li><a id="orgheadline28"></a><span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.<br  /></li></ol>
+</div><div id="outline-container-orgheadline26" class="outline-5">
+<h5 id="orgheadline26"><span class="section-number-5">2.5.1.1</span> <span class="todo TODO">TODO</span> Refresh PR accepted</h5>
+</div>
+<div id="outline-container-orgheadline27" class="outline-5">
+<h5 id="orgheadline27"><span class="section-number-5">2.5.1.2</span> <span class="todo TODO">TODO</span> Add an idle refresh timer</h5>
+</div>
+<div id="outline-container-orgheadline28" class="outline-5">
+<h5 id="orgheadline28"><span class="section-number-5">2.5.1.3</span> <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</h5>
+</div>
 </div>
 </div>
 
@@ -879,7 +919,9 @@ It is seriously one of the coolest Emacs packages out there.
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline35"></a>Interact with github<br  /><div class="outline-text-5" id="text-2-7-2-1">
+<div id="outline-container-orgheadline35" class="outline-5">
+<h5 id="orgheadline35"><span class="section-number-5">2.7.2.1</span> Interact with github</h5>
+<div class="outline-text-5" id="text-2-7-2-1">
 <p>
 I haven't given up on this yet, but I am getting close.  :/
 </p>
@@ -893,16 +935,20 @@ It doesn't quite work.
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'magit-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-magit-gh-pulls))
 </pre>
-</div></li>
+</div>
+</div>
 
-<li><a id="orgheadline36"></a>Add a function for automagickally setting the config<br  /><div class="outline-text-5" id="text-2-7-2-2">
+<div id="outline-container-orgheadline36" class="outline-5">
+<h5 id="orgheadline36"><span class="section-number-5">2.7.2.2</span> Add a function for automagickally setting the config</h5>
+<div class="outline-text-5" id="text-2-7-2-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-github-gh-pull-config</span><span class="org-unicode-whitespace-subdued-space"> </span>(user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">proper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">gh-pulls."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"sUser/Org:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\nsRepo:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(magit-git-command-topdir<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">magit.gh-pulls-repo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s/%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
 <span class="org-unicode-whitespace-subdued-space">                            </span>(magit-toplevel)))
 </pre>
-</div></li></ol>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orgheadline38" class="outline-4">
@@ -990,7 +1036,7 @@ Each language gets it's own file.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-06 Tue 23:22</p>
+<p class="date">Created: 2016-09-07 Wed 17:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

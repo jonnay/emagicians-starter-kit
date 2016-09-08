@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-06 Tue 23:22 -->
+<!-- 2016-09-07 Wed 17:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emagician-Base</title>
@@ -182,8 +182,16 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgheadline21">5.1. Hook Helpers</a>
 <ul>
-<li><a href="#orgheadline18">5.1.1. Minor In Major</a></li>
-<li><a href="#orgheadline20">5.1.2. Def hook</a></li>
+<li><a href="#orgheadline18">5.1.1. Minor In Major</a>
+<ul>
+<li><a href="#orgheadline17">5.1.1.1. <span class="todo TODO">TODO</span> Needs a better test (functional) and needs to make sure not to add an extra hook when already defined.</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline20">5.1.2. Def hook</a>
+<ul>
+<li><a href="#orgheadline19">5.1.2.1. Unit tests</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#orgheadline22">5.2. Backtrace Magick</a></li>
@@ -194,7 +202,11 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgheadline26">5.6.1. Scratchify</a></li>
 <li><a href="#orgheadline27">5.6.2. Reset Scratch</a></li>
-<li><a href="#orgheadline29">5.6.3. Main Scratch Initiation</a></li>
+<li><a href="#orgheadline29">5.6.3. Main Scratch Initiation</a>
+<ul>
+<li><a href="#orgheadline28">5.6.3.1. <span class="todo TODO">TODO</span> make the scratch use color again.</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -438,7 +450,9 @@ Kinda one of those things that I am surprised is not a thing.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline17"></a><span class="todo TODO">TODO</span> Needs a better test (functional) and needs to make sure not to add an extra hook when already defined.<br  /><div class="outline-text-5" id="text-5-1-1-1">
+<div id="outline-container-orgheadline17" class="outline-5">
+<h5 id="orgheadline17"><span class="section-number-5">5.1.1.1</span> <span class="todo TODO">TODO</span> Needs a better test (functional) and needs to make sure not to add an extra hook when already defined.</h5>
+<div class="outline-text-5" id="text-5-1-1-1">
 <pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>(minor-mode<span class="org-unicode-whitespace-subdued-space"> </span>major-mode-hook)
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((turn-on-symbol<span class="org-unicode-whitespace-subdued-space"> </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"turn-on-"</span><span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>minor-mode)))))
 <span class="org-unicode-whitespace-subdued-space">    </span>(list<span class="org-unicode-whitespace-subdued-trailing"> </span>
@@ -455,7 +469,8 @@ Kinda one of those things that I am surprised is not a thing.
 <span class="org-unicode-whitespace-subdued-space">                 </span>'(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">turn-on-paredit-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">"Automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">by</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit."</span><span class="org-unicode-whitespace-subdued-space"> </span>(interactive)<span class="org-unicode-whitespace-subdued-space"> </span>(paredit-mode<span class="org-unicode-whitespace-subdued-space"> </span>+1))
 <span class="org-unicode-whitespace-subdued-space">                         </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'elisp-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-paredit-mode)))))
 </pre>
-</div></li></ol>
+</div>
+</div>
 </div>
 
 <div id="outline-container-orgheadline20" class="outline-4">
@@ -475,7 +490,9 @@ Kinda one of those things that I am surprised is not a thing.
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline19"></a>Unit tests<br  /><div class="outline-text-5" id="text-5-1-2-1">
+<div id="outline-container-orgheadline19" class="outline-5">
+<h5 id="orgheadline19"><span class="section-number-5">5.1.2.1</span> Unit tests</h5>
+<div class="outline-text-5" id="text-5-1-2-1">
 <pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-defines-hook-and-adds-it</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Basic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">make</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sure</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">defines</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">hook</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it."</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
@@ -511,7 +528,8 @@ Kinda one of those things that I am surprised is not a thing.
 <span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>executed))
 <span class="org-unicode-whitespace-subdued-space">    </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook)))
 </pre>
-</div></li></ol>
+</div>
+</div>
 </div>
 </div>
 
@@ -631,7 +649,7 @@ Make sure a dirs exist.
 <h3 id="orgheadline30"><span class="section-number-3">5.6</span> Final Emagician Scratch</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
-When the starter it is loaded we want to display the scratch buffer
+When the starter kit is loaded we want to display the scratch buffer
 with a new and improved scratch buffer giving some statistics, showing
 inspirational messages, dire warnings, and apocalyptic screeds.
 </p>
@@ -771,14 +789,16 @@ If you want to add items, you can do so through the
 </pre>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline28"></a><span class="todo TODO">TODO</span> make the scratch use color again.<br  /></li></ol>
+<div id="outline-container-orgheadline28" class="outline-5">
+<h5 id="orgheadline28"><span class="section-number-5">5.6.3.1</span> <span class="todo TODO">TODO</span> make the scratch use color again.</h5>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-06 Tue 23:22</p>
+<p class="date">Created: 2016-09-07 Wed 17:28</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
