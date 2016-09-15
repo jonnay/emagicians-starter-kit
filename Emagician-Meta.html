@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-07 Wed 23:58 -->
+<!-- 2016-09-14 Wed 20:36 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Meta-Development</title>
@@ -173,7 +173,7 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline22">4. Distributing</a>
+<li><a href="#orgheadline26">4. Distributing</a>
 <ul>
 <li><a href="#orgheadline16">4.1. Building the emagician site</a>
 <ul>
@@ -183,23 +183,30 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline15">4.1.4. Main publisher</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline21">4.2. ÆＳÞＥTＩC</a>
+<li><a href="#orgheadline25">4.2. ÆＳÞＥTＩC</a>
 <ul>
 <li><a href="#orgheadline17">4.2.1. Image Quilt</a></li>
 <li><a href="#orgheadline18">4.2.2. Styling</a></li>
 <li><a href="#orgheadline19">4.2.3. Old Grey Rounded Squares.  Just no</a></li>
-<li><a href="#orgheadline20">4.2.4. Tufte-Plus CSS.</a></li>
+<li><a href="#orgheadline23">4.2.4. Tufte-Plus CSS.</a>
+<ul>
+<li><a href="#orgheadline20">4.2.4.1. <span class="todo TODO">TODO</span> Fix colors for syntax highlighting</a></li>
+<li><a href="#orgheadline21">4.2.4.2. <span class="todo TODO">TODO</span> Fix UP | HOME links</a></li>
+<li><a href="#orgheadline22">4.2.4.3. <span class="todo TODO">TODO</span> Write some kind of basic top menu thing if doable</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline24">4.2.5. <span class="todo TODO">TODO</span> Get some basic Next/Prev links in there</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline27">5. Inserting text chunks</a>
+<li><a href="#orgheadline31">5. Inserting text chunks</a>
 <ul>
-<li><a href="#orgheadline23">5.1. Symbol Getter</a></li>
-<li><a href="#orgheadline24">5.2. Make some Magickal Keys</a></li>
-<li><a href="#orgheadline26">5.3. Random bunny</a>
+<li><a href="#orgheadline27">5.1. Symbol Getter</a></li>
+<li><a href="#orgheadline28">5.2. Make some Magickal Keys</a></li>
+<li><a href="#orgheadline30">5.3. Random bunny</a>
 <ul>
-<li><a href="#orgheadline25">5.3.1. Insert a random bunny  ／(≡・ x ・≡)＼</a></li>
+<li><a href="#orgheadline29">5.3.1. Insert a random bunny  ／(≡・ x ・≡)＼</a></li>
 </ul>
 </li>
 </ul>
@@ -433,8 +440,8 @@ Note, this has 2 strikes.  The third agenda related strike requires a refactorin
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22"><span class="section-number-2">4</span> Distributing</h2>
+<div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26"><span class="section-number-2">4</span> Distributing</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-orgheadline16" class="outline-3">
 <h3 id="orgheadline16"><span class="section-number-3">4.1</span> Building the emagician site</h3>
@@ -536,11 +543,14 @@ Use the bookmarklet to connect and you're off to the races!
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">4.2</span> ÆＳÞＥTＩC</h3>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">4.2</span> ÆＳÞＥTＩC</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
-The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want.  <label for="1" class="margin-toggle">&#8853;</label><input type="checkbox" id="1" class="margin-toggle"/><span class="marginnote"><img src="./assets/images/tome-quilt/grimoire.jpg" alt="grimoire.jpg" /></span>
+<label for="1" class="margin-toggle">&#8853;</label><input type="checkbox" id="1" class="margin-toggle"/><span class="marginnote"><img src="./assets/images/tome-quilt/grimoire.jpg" alt="grimoire.jpg" /></span>
+The current
+ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead
+than a raw text export but nowhere near what I want.
 </p>
 
 <p>
@@ -562,14 +572,14 @@ His ÆＳÞＥTＩC blows mine out of the water.
 </ul>
 </div>
 
-
 <div id="outline-container-orgheadline17" class="outline-4">
 <h4 id="orgheadline17"><span class="section-number-4">4.2.1</span> Image Quilt</h4>
 <div class="outline-text-4" id="text-4-2-1">
-<pre class="code">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;div</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">class=\"my-quilt\"&gt;\n"</span><span class="org-unicode-whitespace-subdued-trailing">      </span>
+<pre class="code">(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;div</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">class=\"my-quilt\"&gt;\n"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span>(mapconcat<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(f)
 <span class="org-unicode-whitespace-subdued-space">                     </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">&lt;img</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">src=\"./assets/images/tome-quilt/%s\"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">/&gt;\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>f))
-<span class="org-unicode-whitespace-subdued-space">                   </span>(directory-files<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/images/tome-quilt"</span>
+<span class="org-unicode-whitespace-subdued-space">                   </span>(directory-files<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/images/tome-quilt"</span>
+<span class="org-unicode-whitespace-subdued-space">                                                      </span>emagician/dir)
 <span class="org-unicode-whitespace-subdued-space">                                    </span>nil
 <span class="org-unicode-whitespace-subdued-space">                                    </span>(regexp-opt<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"jpg"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"jpeg"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"png"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"gif"</span>)))
 <span class="org-unicode-whitespace-subdued-space">                   </span><span class="org-string">""</span>)
@@ -586,8 +596,6 @@ His ÆＳÞＥTＩC blows mine out of the water.
 </div>
 </div>
 </div>
-
-
 
 <div id="outline-container-orgheadline18" class="outline-4">
 <h4 id="orgheadline18"><span class="section-number-4">4.2.2</span> Styling</h4>
@@ -716,24 +724,19 @@ I've started to trim the fat off of that CSS and focus on the elements I enjoy.
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-4">
-<h4 id="orgheadline20"><span class="section-number-4">4.2.4</span> Tufte-Plus CSS.</h4>
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23"><span class="section-number-4">4.2.4</span> Tufte-Plus CSS.</h4>
 <div class="outline-text-4" id="text-4-2-4">
-<p>
-Things To Fix. 
-</p>
-<ul class="org-ul">
-<li>TOC</li>
-<li>Source Block display</li>
-<li>Show Tags</li>
-<li>Show block types</li>
-<li>Fontification?  Probably not.  something needs to happen with source though.
-<ul class="org-ul">
-<li>I just fudged 90% width, maybe that can be better?</li>
-</ul></li>
-</ul>
-
 <pre class="code"><span class="org-builtin">@import</span><span class="org-unicode-whitespace-subdued-space"> </span>url(<span class="org-string">"tufte.css"</span>);
+
+<span class="org-css-selector">h4</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">font-style</span>:<span class="org-unicode-whitespace-subdued-space"> </span>italic;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">font-weight</span>:<span class="org-unicode-whitespace-subdued-space"> </span>400;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1.7rem;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">margin-top</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1rem;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">margin-bottom</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">line-height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1;
+}
 
 <span class="org-css-selector">.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-property">text-align</span>:<span class="org-unicode-whitespace-subdued-space"> </span>left;<span class="org-unicode-whitespace-subdued-space"> </span>}
 
@@ -759,10 +762,19 @@ Things To Fix.
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">font-size</span>:<span class="org-unicode-whitespace-subdued-space"> </span>85%;
 }
 
+<span class="org-css-selector">.tag:before</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">font-family</span>:<span class="org-unicode-whitespace-subdued-space"> </span>FontAwesome;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">content</span>:<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\f02b"</span>;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">padding-right</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.5rem;
+}
+
 <span class="org-css-selector">.tag</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">padding</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.3rem;
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">float</span>:<span class="org-unicode-whitespace-subdued-space"> </span>right;
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">background-image</span>:<span class="org-unicode-whitespace-subdued-space"> </span>linear-gradient(hsla(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0.1),<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0.3));
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">border-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.2em;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">background-image</span>:<span class="org-unicode-whitespace-subdued-space"> </span>linear-gradient(90deg,<span class="org-unicode-whitespace-subdued-space"> </span>hsl(19,<span class="org-unicode-whitespace-subdued-space"> </span>27%,<span class="org-unicode-whitespace-subdued-space"> </span>86%),<span class="org-unicode-whitespace-subdued-space"> </span>hsl(19,<span class="org-unicode-whitespace-subdued-space"> </span>28%,<span class="org-unicode-whitespace-subdued-space"> </span>84%));
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">border-radius</span>:<span class="org-unicode-whitespace-subdued-space"> </span>0.3em;
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">border</span>:<span class="org-unicode-whitespace-subdued-space"> </span>1px<span class="org-unicode-whitespace-subdued-space"> </span>solid<span class="org-unicode-whitespace-subdued-space"> </span>hsl(19,<span class="org-unicode-whitespace-subdued-space"> </span>28%,<span class="org-unicode-whitespace-subdued-space"> </span>70%);
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">box-shadow</span>:<span class="org-unicode-whitespace-subdued-space"> </span>4px<span class="org-unicode-whitespace-subdued-space"> </span>4px<span class="org-unicode-whitespace-subdued-space"> </span>2px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0%,<span class="org-unicode-whitespace-subdued-space"> </span>0.2);
 }
 
 <span class="org-css-selector">.tag</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-css-selector">span</span><span class="org-unicode-whitespace-subdued-space"> </span>{
@@ -805,6 +817,10 @@ Things To Fix.
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-property">color</span>:<span class="org-unicode-whitespace-subdued-space"> </span>#ccc;
 }
 
+<span class="org-css-selector">#footnotes</span><span class="org-unicode-whitespace-subdued-space"> </span>{
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-css-property">display</span>:<span class="org-unicode-whitespace-subdued-space"> </span>none;
+}
+
 
 <span class="org-builtin">@media</span><span class="org-unicode-whitespace-subdued-space"> </span>screen<span class="org-unicode-whitespace-subdued-space"> </span>{
 <span class="org-unicode-whitespace-subdued-space">    </span><span class="org-css-selector">h1.title</span><span class="org-unicode-whitespace-subdued-space"> </span>{
@@ -825,7 +841,7 @@ Things To Fix.
 <span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>-5px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>5px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,30%,50%,0.1),
 <span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>-8px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,30%,50%,0.1),
 <span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>-13px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>13px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,30%,50%,0.1),
-<span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,0%,0%,0.1),<span class="org-unicode-whitespace-subdued-trailing">                          </span>
+<span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>8px<span class="org-unicode-whitespace-subdued-space"> </span>hula(0,0%,0%,0.1),
 <span class="org-unicode-whitespace-subdued-space">                    </span>inset<span class="org-unicode-whitespace-subdued-space"> </span>13px<span class="org-unicode-whitespace-subdued-space"> </span>0<span class="org-unicode-whitespace-subdued-space"> </span>13px<span class="org-unicode-whitespace-subdued-space"> </span>hsla(0,0%,0%,0.1);
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">width</span>:<span class="org-unicode-whitespace-subdued-space"> </span>220px;
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-css-property">height</span>:<span class="org-unicode-whitespace-subdued-space"> </span>100vh;
@@ -915,12 +931,25 @@ Things To Fix.
 }
 </pre>
 </div>
+
+<div id="outline-container-orgheadline20" class="outline-5">
+<h5 id="orgheadline20"><span class="section-number-5">4.2.4.1</span> <span class="todo TODO">TODO</span> Fix colors for syntax highlighting</h5>
 </div>
+<div id="outline-container-orgheadline21" class="outline-5">
+<h5 id="orgheadline21"><span class="section-number-5">4.2.4.2</span> <span class="todo TODO">TODO</span> Fix UP | HOME links</h5>
+</div>
+<div id="outline-container-orgheadline22" class="outline-5">
+<h5 id="orgheadline22"><span class="section-number-5">4.2.4.3</span> <span class="todo TODO">TODO</span> Write some kind of basic top menu thing if doable</h5>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27"><span class="section-number-2">5</span> Inserting text chunks</h2>
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">4.2.5</span> <span class="todo TODO">TODO</span> Get some basic Next/Prev links in there</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31"><span class="section-number-2">5</span> Inserting text chunks</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">
@@ -940,8 +969,8 @@ I think I ended up getting inspired by the keyboard.
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">5.1</span> Symbol Getter</h3>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">5.1</span> Symbol Getter</h3>
 <div class="outline-text-3" id="text-5-1">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/get-insert-symbol</span><span class="org-unicode-whitespace-subdued-space"> </span>(text)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Returns</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">insert-symbol</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chunk</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">text"</span>
@@ -950,8 +979,8 @@ I think I ended up getting inspired by the keyboard.
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">5.2</span> Make some Magickal Keys</h3>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">5.2</span> Make some Magickal Keys</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 The next chunk makes a keymap and starts defining and binding insert functions on it.
@@ -975,8 +1004,8 @@ The next chunk makes a keymap and starts defining and binding insert functions o
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">5.3</span> Random bunny</h3>
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">5.3</span> Random bunny</h3>
 <div class="outline-text-3" id="text-5-3">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/random-bunny</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((bunnies<span class="org-unicode-whitespace-subdued-space"> </span>'(
@@ -1012,8 +1041,8 @@ The next chunk makes a keymap and starts defining and binding insert functions o
 </pre>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">5.3.1</span> Insert a random bunny  ／(≡・ x ・≡)＼</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">5.3.1</span> Insert a random bunny  ／(≡・ x ・≡)＼</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/insert-random-bunny</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span>(interactive)
@@ -1043,7 +1072,7 @@ The Greatest International Scavenger Hunt the World Has Ever Seen.  This is a ye
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-07 Wed 23:58</p>
+<p class="date">Created: 2016-09-14 Wed 20:36</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

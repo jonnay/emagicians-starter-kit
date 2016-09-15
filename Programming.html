@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-07 Wed 17:28 -->
+<!-- 2016-09-14 Wed 20:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Programming</title>
@@ -153,102 +153,96 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline21">1. Interface</a>
+<li><a href="#orgheadline19">1. Interface</a>
 <ul>
-<li><a href="#orgheadline14">1.1. Display</a>
+<li><a href="#orgheadline12">1.1. Display</a>
 <ul>
 <li><a href="#orgheadline1">1.1.1. Line Numbers</a></li>
 <li><a href="#orgheadline2">1.1.2. Which Function</a></li>
 <li><a href="#orgheadline3">1.1.3. Check Parens</a></li>
-<li><a href="#orgheadline6">1.1.4. Show Paren Mode</a>
+<li><a href="#orgheadline4">1.1.4. Show Paren Mode</a></li>
+<li><a href="#orgheadline5">1.1.5. Rainbow Delimiters</a></li>
+<li><a href="#orgheadline6">1.1.6. Rainbow Blocks&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
+<li><a href="#orgheadline7">1.1.7. Color Identifiers</a></li>
+<li><a href="#orgheadline8">1.1.8. Show whitespace</a></li>
+<li><a href="#orgheadline11">1.1.9. Prettify Symbols</a>
 <ul>
-<li><a href="#orgheadline4">1.1.4.1. <span class="todo TODO">TODO</span> Snarf the smartparens from interface and barf here instead</a></li>
-<li><a href="#orgheadline5">1.1.4.2. <span class="todo TODO">TODO</span> Update my config to be sane, check </a></li>
-</ul>
-</li>
-<li><a href="#orgheadline7">1.1.5. Rainbow Delimiters</a></li>
-<li><a href="#orgheadline8">1.1.6. Rainbow Blocks&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></a></li>
-<li><a href="#orgheadline9">1.1.7. Color Identifiers</a></li>
-<li><a href="#orgheadline10">1.1.8. Show whitespace</a></li>
-<li><a href="#orgheadline13">1.1.9. Prettify Symbols</a>
+<li><a href="#orgheadline10">1.1.9.1. Prettify Symbols List</a>
 <ul>
-<li><a href="#orgheadline12">1.1.9.1. Prettify Symbols List</a>
+<li><a href="#orgheadline9">1.1.9.1.1. How does this jiggery-pokery work?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline18">1.2. Editing</a>
 <ul>
-<li><a href="#orgheadline11">1.1.9.1.1. How does this jiggery-pokery work?</a></li>
+<li><a href="#orgheadline13">1.2.1. Tabs</a></li>
+<li><a href="#orgheadline14">1.2.2. Spell Checking on Programming Modes</a></li>
+<li><a href="#orgheadline15">1.2.3. Yanking</a></li>
+<li><a href="#orgheadline16">1.2.4. YAS</a></li>
+<li><a href="#orgheadline17">1.2.5. Smart Paren Mode</a></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#orgheadline20">1.2. Editing</a>
+<li><a href="#orgheadline40">2. Tools</a>
 <ul>
-<li><a href="#orgheadline15">1.2.1. Tabs</a></li>
-<li><a href="#orgheadline16">1.2.2. Spell Checking on Programming Modes</a></li>
-<li><a href="#orgheadline17">1.2.3. Yanking</a></li>
-<li><a href="#orgheadline18">1.2.4. YAS</a></li>
-<li><a href="#orgheadline19">1.2.5. Smart Paren Mode</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgheadline42">2. Tools</a>
+<li><a href="#orgheadline20">2.1. Flycheck</a></li>
+<li><a href="#orgheadline21">2.2. DZ, make it easy to run secondary services</a></li>
+<li><a href="#orgheadline22">2.3. Org Source&#x2026; babel babel babel!</a></li>
+<li><a href="#orgheadline23">2.4. Ediff</a></li>
+<li><a href="#orgheadline28">2.5. Jenkins</a>
 <ul>
-<li><a href="#orgheadline22">2.1. Flycheck</a></li>
-<li><a href="#orgheadline23">2.2. DZ, make it easy to run secondary services</a></li>
-<li><a href="#orgheadline24">2.3. Org Source&#x2026; babel babel babel!</a></li>
-<li><a href="#orgheadline25">2.4. Ediff</a></li>
-<li><a href="#orgheadline30">2.5. Jenkins</a>
+<li><a href="#orgheadline27">2.5.1. My wishlist</a>
 <ul>
-<li><a href="#orgheadline29">2.5.1. My wishlist</a>
-<ul>
-<li><a href="#orgheadline26">2.5.1.1. <span class="todo TODO">TODO</span> Refresh PR accepted</a></li>
-<li><a href="#orgheadline27">2.5.1.2. <span class="todo TODO">TODO</span> Add an idle refresh timer</a></li>
-<li><a href="#orgheadline28">2.5.1.3. <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</a></li>
+<li><a href="#orgheadline24">2.5.1.1. <span class="todo TODO">TODO</span> Refresh PR accepted</a></li>
+<li><a href="#orgheadline25">2.5.1.2. <span class="todo TODO">TODO</span> Add an idle refresh timer</a></li>
+<li><a href="#orgheadline26">2.5.1.3. <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline33">2.6. Helm Dash for manuals</a>
+<li><a href="#orgheadline31">2.6. Helm Dash for manuals</a>
 <ul>
-<li><a href="#orgheadline31">2.6.1. <span class="todo TODO">TODO</span> fix this and make it work.</a></li>
-<li><a href="#orgheadline32">2.6.2. <span class="todo TODO">TODO</span> bugfix for the shell-command-to-string bug</a></li>
+<li><a href="#orgheadline29">2.6.1. <span class="todo TODO">TODO</span> fix this and make it work.</a></li>
+<li><a href="#orgheadline30">2.6.2. <span class="todo TODO">TODO</span> bugfix for the shell-command-to-string bug</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline39">2.7. Version control</a>
+<li><a href="#orgheadline37">2.7. Version control</a>
 <ul>
-<li><a href="#orgheadline34">2.7.1. Editing</a></li>
-<li><a href="#orgheadline37">2.7.2. Magit</a>
+<li><a href="#orgheadline32">2.7.1. Editing</a></li>
+<li><a href="#orgheadline35">2.7.2. Magit</a>
 <ul>
-<li><a href="#orgheadline35">2.7.2.1. Interact with github</a></li>
-<li><a href="#orgheadline36">2.7.2.2. Add a function for automagickally setting the config</a></li>
+<li><a href="#orgheadline33">2.7.2.1. Interact with github</a></li>
+<li><a href="#orgheadline34">2.7.2.2. Add a function for automagickally setting the config</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline38">2.7.3. Git Gutter</a></li>
+<li><a href="#orgheadline36">2.7.3. Git Gutter</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline41">2.8. Project Management</a>
+<li><a href="#orgheadline39">2.8. Project Management</a>
 <ul>
-<li><a href="#orgheadline40">2.8.1. Projectile</a></li>
+<li><a href="#orgheadline38">2.8.1. Projectile</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline43">3. Languages</a></li>
-<li><a href="#orgheadline45">4. Quazi-related Modes</a>
+<li><a href="#orgheadline41">3. Languages</a></li>
+<li><a href="#orgheadline43">4. Quazi-related Modes</a>
 <ul>
-<li><a href="#orgheadline44">4.1. Yaml</a></li>
+<li><a href="#orgheadline42">4.1. Yaml</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">1</span> Interface</h2>
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19"><span class="section-number-2">1</span> Interface</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">1.1</span> Display</h3>
+</div><div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">1.1</span> Display</h3>
 <div class="outline-text-3" id="text-1-1">
 </div><div id="outline-container-orgheadline1" class="outline-4">
 <h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Line Numbers</h4>
@@ -304,8 +298,8 @@ Enforce checking of parens in programming modes.  Not 100% sure about this yet. 
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">1.1.4</span> Show Paren Mode</h4>
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">1.1.4</span> Show Paren Mode</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 This config could use tweaking. 
@@ -316,17 +310,10 @@ This config could use tweaking.
 (show-paren-mode)
 </pre>
 </div>
-<div id="outline-container-orgheadline4" class="outline-5">
-<h5 id="orgheadline4"><span class="section-number-5">1.1.4.1</span> <span class="todo TODO">TODO</span> Snarf the smartparens from interface and barf here instead</h5>
-</div>
-<div id="outline-container-orgheadline5" class="outline-5">
-<h5 id="orgheadline5"><span class="section-number-5">1.1.4.2</span> <span class="todo TODO">TODO</span> Update my config to be sane, check <a href="https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens">https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens</a></h5>
-</div>
 </div>
 
-
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">1.1.5</span> Rainbow Delimiters</h4>
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">1.1.5</span> Rainbow Delimiters</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 Not 100% sure about this yet.
@@ -354,8 +341,8 @@ Rainbow Delimiters are static.  It's always the same color regardless of where t
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">1.1.6</span> Rainbow Blocks&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></h4>
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">1.1.6</span> Rainbow Blocks&#xa0;&#xa0;&#xa0;<span class="tag"><span class="disabled">disabled</span></span></h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 Trying an experiment.  Syntax highlight blocks based on overline. 
@@ -394,8 +381,8 @@ I'll need to learn more about emacs faces to continue.
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">1.1.7</span> Color Identifiers</h4>
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">1.1.7</span> Color Identifiers</h4>
 <div class="outline-text-4" id="text-1-1-7">
 <p>
 Like manna from heaven.
@@ -413,8 +400,8 @@ This is one of the coolest modes so far.  Yeah, it's slightly angry fruit salad,
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10"><span class="section-number-4">1.1.8</span> Show whitespace</h4>
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">1.1.8</span> Show whitespace</h4>
 <div class="outline-text-4" id="text-1-1-8">
 <p>
 Whitespace unicode does good stuff with whitespace.  Use that.
@@ -435,8 +422,8 @@ With unicode setup, it is much better.
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13"><span class="section-number-4">1.1.9</span> Prettify Symbols</h4>
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">1.1.9</span> Prettify Symbols</h4>
 <div class="outline-text-4" id="text-1-1-9">
 <p>
 Oh man, with the unicode pretty symbols, this is sweet.  I have been considering making the jump to FiraCode, but there is so many weird little things about it I am unsure of.
@@ -450,8 +437,8 @@ Prettify Symbols is 80% there, and looks freaking hawt.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-5">
-<h5 id="orgheadline12"><span class="section-number-5">1.1.9.1</span> Prettify Symbols List</h5>
+<div id="outline-container-orgheadline10" class="outline-5">
+<h5 id="orgheadline10"><span class="section-number-5">1.1.9.1</span> Prettify Symbols List</h5>
 <div class="outline-text-5" id="text-1-1-9-1">
 <p>
 Thanks to Artur Malabarba <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
@@ -459,21 +446,23 @@ Thanks to Artur Malabarba <label for="1" class="margin-toggle sidenote-number"><
 </span>, Inspired by:  <a href="https://github.com/tonsky/FiraCode">https://github.com/tonsky/FiraCode</a>. 
 </p>
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/prettify-list</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>'((<span class="org-string">"lambda"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>955)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"&lt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8804;))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"&gt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8805;))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10230;)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10233;)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"=="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10869;)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"//"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#11005;))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-string">"-&gt;&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space">  </span>(?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s
-<span class="org-unicode-whitespace-subdued-space">                   </span>(Bl<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;
-<span class="org-unicode-whitespace-subdued-space">                   </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;))))
+<pre class="code"><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/prettify-list</span>
+<span class="org-unicode-whitespace-subdued-space">   </span>'((<span class="org-string">"lambda"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>955)
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"&lt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8804;))
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"&gt;="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8805;))
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"-&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10230;)
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"=&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10233;)
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"=="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>?&#10869;)
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"//"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#11005;))
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"!="</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>(?\s<span class="org-unicode-whitespace-subdued-space">  </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&#8800;))
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-string">"-&gt;&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space">  </span>(?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?\s
+<span class="org-unicode-whitespace-subdued-space">                    </span>(Bl<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;
+<span class="org-unicode-whitespace-subdued-space">                    </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;))))
+
+(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-unprettify-at-point<span class="org-unicode-whitespace-subdued-space"> </span>'right-edge)
 
 (emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
+<span class="org-unicode-whitespace-subdued-space">   </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
 </pre>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -539,8 +528,8 @@ Using <a href="http://unicode-table.com/">http://unicode-table.com/</a> helped a
 </p>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-6">
-<h6 id="orgheadline11"><span class="section-number-6">1.1.9.1.1</span> How does this jiggery-pokery work?</h6>
+<div id="outline-container-orgheadline9" class="outline-6">
+<h6 id="orgheadline9"><span class="section-number-6">1.1.9.1.1</span> How does this jiggery-pokery work?</h6>
 <div class="outline-text-6" id="text-1-1-9-1-1">
 <p>
 Prettify is basically a call to compose region, it automagickally sets
@@ -583,11 +572,11 @@ I don't entirely understand this yet.
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">1.2</span> Editing</h3>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">1.2</span> Editing</h3>
 <div class="outline-text-3" id="text-1-2">
-</div><div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15"><span class="section-number-4">1.2.1</span> Tabs</h4>
+</div><div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">1.2.1</span> Tabs</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Probably one of the most disputed things when "growing up" as a
@@ -612,8 +601,8 @@ reformat it for everyone else outgoing.
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16"><span class="section-number-4">1.2.2</span> Spell Checking on Programming Modes</h4>
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">1.2.2</span> Spell Checking on Programming Modes</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Gah. So bad at this.  
@@ -628,8 +617,8 @@ Gah. So bad at this.
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">1.2.3</span> Yanking</h4>
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15"><span class="section-number-4">1.2.3</span> Yanking</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 This is such a handy piece of functionality.  It just works. 
@@ -642,8 +631,8 @@ This is such a handy piece of functionality.  It just works.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">1.2.4</span> YAS</h4>
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16"><span class="section-number-4">1.2.4</span> YAS</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
 The more boilerplate your language requires, the more abstractions it can afford the user.
@@ -658,18 +647,24 @@ There is always a little bit of boiler-plate that is required.
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-4">
-<h4 id="orgheadline19"><span class="section-number-4">1.2.5</span> Smart Paren Mode</h4>
+<div id="outline-container-orgheadline17" class="outline-4">
+<h4 id="orgheadline17"><span class="section-number-4">1.2.5</span> Smart Paren Mode</h4>
 <div class="outline-text-4" id="text-1-2-5">
 <p>
 I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed from another config somewhere. 
 </p>
 
+
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">smartparens</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:defer</span><span class="org-unicode-whitespace-subdued-space"> </span>t
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9390;"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-space"> </span>((<span class="org-string">"M-9"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-backward-sexp)
-<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"M-0"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-forward-sexp))
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"M-0"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-forward-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span><span class="org-builtin">:smartparens-mode-map</span>
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"C-&lt;right&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-forward-slurp-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"C-&lt;left&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-forward-barf-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"C-M-&lt;right&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-backward-barf-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"C-M-&lt;left&gt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-backward-slurp-sexp)
+<span class="org-unicode-whitespace-subdued-space">         </span>(<span class="org-string">"M-S-s"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>sp-splice-sexp))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'turn-on-smartparens-mode)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
@@ -683,65 +678,20 @@ I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed 
 <span class="org-unicode-whitespace-subdued-space">              </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">fixed</span>
 <span class="org-unicode-whitespace-subdued-space">              </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>sp-autoescape-string-quote<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
 
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">M-&lt;backspace&gt;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">binding</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">smartparens</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">adds</span>
-
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((disabled<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"M-&lt;backspace&gt;"</span>)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>sp-smartparens-bindings
-<span class="org-unicode-whitespace-subdued-space">          </span>(cl-remove-if<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(key-command)
-<span class="org-unicode-whitespace-subdued-space">                          </span>(member<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>key-command)<span class="org-unicode-whitespace-subdued-space"> </span>disabled))
-<span class="org-unicode-whitespace-subdued-space">                        </span>sp-smartparens-bindings)))
-
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;left&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-barf-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;right&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-slurp-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-&lt;left&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-slurp-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-&lt;right&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-barf-sexp)
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;</span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"M-(")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-forward-barf-sexp)</span>
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;</span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"M-)")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-forward-slurp-sexp)</span>
-
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-f"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-b"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-d"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-down-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-down-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-S-a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-beginning-of-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-S-d"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-end-of-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-e"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-up-sexp)
-
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-u"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-up-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-t"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-transpose-sexp)
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"C-M-n")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-next-sexp)</span>
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(define-key</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sp-keymap</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">(kbd</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">"C-M-p")</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">'sp-previous-sexp)</span>
-
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-k"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-kill-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-w"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-copy-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-D"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-splice-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-]"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-next-thing-exchange)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-&lt;left_bracket&gt;"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-previous-thing)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"C-M-]"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-select-next-thing)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-F"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-forward-symbol)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"M-B"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-backward-symbol)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-t"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-prefix-tag-object)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-p"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-prefix-pair-object)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">c"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-convolute-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-absorb-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">e"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-emit-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">p"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-add-to-previous-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">n"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-add-to-next-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">j"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-join-sexp)
-<span class="org-unicode-whitespace-subdued-space">  </span>(define-key<span class="org-unicode-whitespace-subdued-space"> </span>sp-keymap<span class="org-unicode-whitespace-subdued-space"> </span>(kbd<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"H-s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">s"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'sp-split-sexp)
-
+<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">''</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">pairing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">elisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">quoting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">used</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">ton</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(sp-local-pair<span class="org-unicode-whitespace-subdued-space"> </span>'minibuffer-inactive-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"'"</span><span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:actions</span><span class="org-unicode-whitespace-subdued-space"> </span>nil)
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">''</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">pairing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">elisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">quoting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">used</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">ton</span>
+<span class="org-unicode-whitespace-subdued-space">  </span>(sp-local-pair<span class="org-unicode-whitespace-subdued-space"> </span>'web-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&lt;"</span><span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:actions</span><span class="org-unicode-whitespace-subdued-space"> </span>nil)
 )
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline42" class="outline-2">
-<h2 id="orgheadline42"><span class="section-number-2">2</span> Tools</h2>
+<div id="outline-container-orgheadline40" class="outline-2">
+<h2 id="orgheadline40"><span class="section-number-2">2</span> Tools</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">2.1</span> Flycheck</h3>
+</div><div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">2.1</span> Flycheck</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Flycheck is good, but not great.
@@ -767,8 +717,8 @@ But it doesn't work over tramp.  Fine if you are editing a file remotely, less f
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">2.2</span> DZ, make it easy to run secondary services</h3>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">2.2</span> DZ, make it easy to run secondary services</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 This is one of those packages that hasn't updated in forever.
@@ -783,8 +733,8 @@ And doesn't need to.
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">2.3</span> Org Source&#x2026; babel babel babel!</h3>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">2.3</span> Org Source&#x2026; babel babel babel!</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 I use org babel a lot. (duh).
@@ -809,8 +759,8 @@ It's nice to have helpers to see if we are in org-babel mode.
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25"><span class="section-number-3">2.4</span> Ediff</h3>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">2.4</span> Ediff</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Tweak Ediff to be better 
@@ -821,8 +771,8 @@ Tweak Ediff to be better
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">2.5</span> Jenkins</h3>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">2.5</span> Jenkins</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 So far so good. 
@@ -833,23 +783,23 @@ So far so good.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-4">
-<h4 id="orgheadline29"><span class="section-number-4">2.5.1</span> My wishlist</h4>
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">2.5.1</span> My wishlist</h4>
 <div class="outline-text-4" id="text-2-5-1">
-</div><div id="outline-container-orgheadline26" class="outline-5">
-<h5 id="orgheadline26"><span class="section-number-5">2.5.1.1</span> <span class="todo TODO">TODO</span> Refresh PR accepted</h5>
+</div><div id="outline-container-orgheadline24" class="outline-5">
+<h5 id="orgheadline24"><span class="section-number-5">2.5.1.1</span> <span class="todo TODO">TODO</span> Refresh PR accepted</h5>
 </div>
-<div id="outline-container-orgheadline27" class="outline-5">
-<h5 id="orgheadline27"><span class="section-number-5">2.5.1.2</span> <span class="todo TODO">TODO</span> Add an idle refresh timer</h5>
+<div id="outline-container-orgheadline25" class="outline-5">
+<h5 id="orgheadline25"><span class="section-number-5">2.5.1.2</span> <span class="todo TODO">TODO</span> Add an idle refresh timer</h5>
 </div>
-<div id="outline-container-orgheadline28" class="outline-5">
-<h5 id="orgheadline28"><span class="section-number-5">2.5.1.3</span> <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</h5>
+<div id="outline-container-orgheadline26" class="outline-5">
+<h5 id="orgheadline26"><span class="section-number-5">2.5.1.3</span> <span class="todo TODO">TODO</span> Check to make sure it's async.  If not, make it.</h5>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33"><span class="section-number-3">2.6</span> Helm Dash for manuals</h3>
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">2.6</span> Helm Dash for manuals</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 The secret sauce here is activating the doc set. 
@@ -861,16 +811,16 @@ The secret sauce here is activating the doc set.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-4">
-<h4 id="orgheadline31"><span class="section-number-4">2.6.1</span> <span class="todo TODO">TODO</span> fix this and make it work.</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">2.6.1</span> <span class="todo TODO">TODO</span> fix this and make it work.</h4>
 </div>
-<div id="outline-container-orgheadline32" class="outline-4">
-<h4 id="orgheadline32"><span class="section-number-4">2.6.2</span> <span class="todo TODO">TODO</span> bugfix for the shell-command-to-string bug</h4>
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">2.6.2</span> <span class="todo TODO">TODO</span> bugfix for the shell-command-to-string bug</h4>
 </div>
 </div>
 
-<div id="outline-container-orgheadline39" class="outline-3">
-<h3 id="orgheadline39"><span class="section-number-3">2.7</span> Version control</h3>
+<div id="outline-container-orgheadline37" class="outline-3">
+<h3 id="orgheadline37"><span class="section-number-3">2.7</span> Version control</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Version control Gets it's own section. 
@@ -883,8 +833,8 @@ Don't manage ancient version control backends.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-4">
-<h4 id="orgheadline34"><span class="section-number-4">2.7.1</span> Editing</h4>
+<div id="outline-container-orgheadline32" class="outline-4">
+<h4 id="orgheadline32"><span class="section-number-4">2.7.1</span> Editing</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Modes for editing git-specific files. 
@@ -897,8 +847,8 @@ Modes for editing git-specific files.
 </div>
 </div>
 
-<div id="outline-container-orgheadline37" class="outline-4">
-<h4 id="orgheadline37"><span class="section-number-4">2.7.2</span> Magit</h4>
+<div id="outline-container-orgheadline35" class="outline-4">
+<h4 id="orgheadline35"><span class="section-number-4">2.7.2</span> Magit</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Magit is like manna from heaven.
@@ -919,8 +869,8 @@ It is seriously one of the coolest Emacs packages out there.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-5">
-<h5 id="orgheadline35"><span class="section-number-5">2.7.2.1</span> Interact with github</h5>
+<div id="outline-container-orgheadline33" class="outline-5">
+<h5 id="orgheadline33"><span class="section-number-5">2.7.2.1</span> Interact with github</h5>
 <div class="outline-text-5" id="text-2-7-2-1">
 <p>
 I haven't given up on this yet, but I am getting close.  :/
@@ -938,8 +888,8 @@ It doesn't quite work.
 </div>
 </div>
 
-<div id="outline-container-orgheadline36" class="outline-5">
-<h5 id="orgheadline36"><span class="section-number-5">2.7.2.2</span> Add a function for automagickally setting the config</h5>
+<div id="outline-container-orgheadline34" class="outline-5">
+<h5 id="orgheadline34"><span class="section-number-5">2.7.2.2</span> Add a function for automagickally setting the config</h5>
 <div class="outline-text-5" id="text-2-7-2-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-github-gh-pull-config</span><span class="org-unicode-whitespace-subdued-space"> </span>(user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">proper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">gh-pulls."</span>
@@ -951,8 +901,8 @@ It doesn't quite work.
 </div>
 </div>
 
-<div id="outline-container-orgheadline38" class="outline-4">
-<h4 id="orgheadline38"><span class="section-number-4">2.7.3</span> Git Gutter</h4>
+<div id="outline-container-orgheadline36" class="outline-4">
+<h4 id="orgheadline36"><span class="section-number-4">2.7.3</span> Git Gutter</h4>
 <div class="outline-text-4" id="text-2-7-3">
 <p>
 So pleasant. 
@@ -969,11 +919,11 @@ So pleasant.
 </div>
 </div>
 
-<div id="outline-container-orgheadline41" class="outline-3">
-<h3 id="orgheadline41"><span class="section-number-3">2.8</span> Project Management</h3>
+<div id="outline-container-orgheadline39" class="outline-3">
+<h3 id="orgheadline39"><span class="section-number-3">2.8</span> Project Management</h3>
 <div class="outline-text-3" id="text-2-8">
-</div><div id="outline-container-orgheadline40" class="outline-4">
-<h4 id="orgheadline40"><span class="section-number-4">2.8.1</span> Projectile</h4>
+</div><div id="outline-container-orgheadline38" class="outline-4">
+<h4 id="orgheadline38"><span class="section-number-4">2.8.1</span> Projectile</h4>
 <div class="outline-text-4" id="text-2-8-1">
 <p>
 The last time I used projectile it was not what I needed at all.
@@ -996,8 +946,8 @@ But that was a long time ago.
 </div>
 </div>
 
-<div id="outline-container-orgheadline43" class="outline-2">
-<h2 id="orgheadline43"><span class="section-number-2">3</span> Languages</h2>
+<div id="outline-container-orgheadline41" class="outline-2">
+<h2 id="orgheadline41"><span class="section-number-2">3</span> Languages</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Each language gets it's own file.
@@ -1011,11 +961,11 @@ Each language gets it's own file.
 </div>
 </div>
 
-<div id="outline-container-orgheadline45" class="outline-2">
-<h2 id="orgheadline45"><span class="section-number-2">4</span> Quazi-related Modes</h2>
+<div id="outline-container-orgheadline43" class="outline-2">
+<h2 id="orgheadline43"><span class="section-number-2">4</span> Quazi-related Modes</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline44" class="outline-3">
-<h3 id="orgheadline44"><span class="section-number-3">4.1</span> Yaml</h3>
+</div><div id="outline-container-orgheadline42" class="outline-3">
+<h3 id="orgheadline42"><span class="section-number-3">4.1</span> Yaml</h3>
 <div class="outline-text-3" id="text-4-1">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yaml-mode</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\.yml\\'"</span>)
@@ -1036,7 +986,7 @@ Each language gets it's own file.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-07 Wed 17:28</p>
+<p class="date">Created: 2016-09-14 Wed 20:37</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
