@@ -653,124 +653,124 @@ Know your HTTP Well!  M-x http-foo and media-types
 * Alchemical Symbols
   No self respecting Emagicians Starter Kit would be without em!
 
-|    Dec | Hex   | Name                          | S |
-|--------+-------+-------------------------------+---|
-| 128768 | 1F700 | QUINTESSENCE                  | 🜀 |
-| 128769 | 1F701 | AIR                           | 🜁 |
-| 128770 | 1F702 | FIRE                          | 🜂 |
-| 128771 | 1F703 | EARTH                         | 🜃 |
-| 128772 | 1F704 | WATER                         | 🜄 |
-| 128773 | 1F705 | AQUAFORTIS                    | 🜅 |
-| 128774 | 1F706 | AQUA REGIA                    | 🜆 |
-| 128775 | 1F707 | AQUA REGIA-2                  | 🜇 |
-| 128776 | 1F708 | AQUA VITAE                    | 🜈 |
-| 128777 | 1F709 | AQUA VITAE-2                  | 🜉 |
-| 128778 | 1F70A | VINEGAR                       | 🜊 |
-| 128779 | 1F70B | VINEGAR-2                     | 🜋 |
-| 128780 | 1F70C | VINEGAR-3                     | 🜌 |
-| 128781 | 1F70D | SULFUR                        | 🜍 |
-| 128782 | 1F70E | PHILOSOPHERS SULFUR           | 🜎 |
-| 128783 | 1F70F | BLACK SULFUR                  | 🜏 |
-| 128784 | 1F710 | MERCURY SUBLIMATE             | 🜐 |
-| 128785 | 1F711 | MERCURY SUBLIMATE-2           | 🜑 |
-| 128786 | 1F712 | MERCURY SUBLIMATE-3           | 🜒 |
-| 128787 | 1F713 | CINNABAR                      | 🜓 |
-| 128788 | 1F714 | SALT                          | 🜔 |
-| 128789 | 1F715 | NITRE                         | 🜕 |
-| 128790 | 1F716 | VITRIOL                       | 🜖 |
-| 128791 | 1F717 | VITRIOL-2                     | 🜗 |
-| 128792 | 1F718 | ROCK SALT                     | 🜘 |
-| 128793 | 1F719 | ROCK SALT-2                   | 🜙 |
-| 128794 | 1F71A | GOLD                          | 🜚 |
-| 128795 | 1F71B | SILVER                        | 🜛 |
-| 128796 | 1F71C | IRON ORE                      | 🜜 |
-| 128797 | 1F71D | IRON ORE-2                    | 🜝 |
-| 128798 | 1F71E | CROCUS OF IRON                | 🜞 |
-| 128799 | 1F71F | REGULUS OF IRON               | 🜟 |
-| 128800 | 1F720 | COPPER ORE                    | 🜠 |
-| 128801 | 1F721 | IRON-COPPER ORE               | 🜡 |
-| 128802 | 1F722 | SUBLIMATE OF COPPER           | 🜢 |
-| 128803 | 1F723 | CROCUS OF COPPER              | 🜣 |
-| 128804 | 1F724 | CROCUS OF COPPER-2            | 🜤 |
-| 128805 | 1F725 | COPPER ANTIMONIATE            | 🜥 |
-| 128806 | 1F726 | SALT OF COPPER ANTIMONIATE    | 🜦 |
-| 128807 | 1F727 | SUBLIMATE OF SALT OF COPPER   | 🜧 |
-| 128808 | 1F728 | VERDIGRIS                     | 🜨 |
-| 128809 | 1F729 | TIN ORE                       | 🜩 |
-| 128810 | 1F72A | LEAD ORE                      | 🜪 |
-| 128811 | 1F72B | ANTIMONY ORE                  | 🜫 |
-| 128812 | 1F72C | SUBLIMATE OF ANTIMONY         | 🜬 |
-| 128813 | 1F72D | SALT OF ANTIMONY              | 🜭 |
-| 128814 | 1F72E | SUBLIMATE OF SALT OF ANTIMONY | 🜮 |
-| 128815 | 1F72F | VINEGAR OF ANTIMONY           | 🜯 |
-| 128816 | 1F730 | REGULUS OF ANTIMONY           | 🜰 |
-| 128817 | 1F731 | REGULUS OF ANTIMONY-2         | 🜱 |
-| 128818 | 1F732 | REGULUS                       | 🜲 |
-| 128819 | 1F733 | REGULUS-2                     | 🜳 |
-| 128820 | 1F734 | REGULUS-3                     | 🜴 |
-| 128821 | 1F735 | REGULUS-4                     | 🜵 |
-| 128822 | 1F736 | ALKALI                        | 🜶 |
-| 128823 | 1F737 | ALKALI-2                      | 🜷 |
-| 128824 | 1F738 | MARCASITE                     | 🜸 |
-| 128825 | 1F739 | SAL-AMMONIAC                  | 🜹 |
-| 128826 | 1F73A | ARSENIC                       | 🜺 |
-| 128827 | 1F73B | REALGAR                       | 🜻 |
-| 128828 | 1F73C | REALGAR-2                     | 🜼 |
-| 128829 | 1F73D | AURIPIGMENT                   | 🜽 |
-| 128830 | 1F73E | BISMUTH ORE                   | 🜾 |
-| 128831 | 1F73F | TARTAR                        | 🜿 |
-| 128832 | 1F740 | TARTAR-2                      | 🝀 |
-| 128833 | 1F741 | QUICK LIME                    | 🝁 |
-| 128834 | 1F742 | BORAX                         | 🝂 |
-| 128835 | 1F743 | BORAX-2                       | 🝃 |
-| 128836 | 1F744 | BORAX-3                       | 🝄 |
-| 128837 | 1F745 | ALUM                          | 🝅 |
-| 128838 | 1F746 | OIL                           | 🝆 |
-| 128839 | 1F747 | SPIRIT                        | 🝇 |
-| 128840 | 1F748 | TINCTURE                      | 🝈 |
-| 128841 | 1F749 | GUM                           | 🝉 |
-| 128842 | 1F74A | WAX                           | 🝊 |
-| 128843 | 1F74B | POWDER                        | 🝋 |
-| 128844 | 1F74C | CALX                          | 🝌 |
-| 128845 | 1F74D | TUTTY                         | 🝍 |
-| 128846 | 1F74E | CAPUT MORTUUM                 | 🝎 |
-| 128847 | 1F74F | SCEPTER OF JOVE               | 🝏 |
-| 128848 | 1F750 | CADUCEUS                      | 🝐 |
-| 128849 | 1F751 | TRIDENT                       | 🝑 |
-| 128850 | 1F752 | STARRED TRIDENT               | 🝒 |
-| 128851 | 1F753 | LODESTONE                     | 🝓 |
-| 128852 | 1F754 | SOAP                          | 🝔 |
-| 128853 | 1F755 | URINE                         | 🝕 |
-| 128854 | 1F756 | HORSE DUNG                    | 🝖 |
-| 128855 | 1F757 | ASHES                         | 🝗 |
-| 128856 | 1F758 | POT ASHES                     | 🝘 |
-| 128857 | 1F759 | BRICK                         | 🝙 |
-| 128858 | 1F75A | POWDERED BRICK                | 🝚 |
-| 128859 | 1F75B | AMALGAM                       | 🝛 |
-| 128860 | 1F75C | STRATUM SUPER STRATUM         | 🝜 |
-| 128861 | 1F75D | STRATUM SUPER STRATUM-2       | 🝝 |
-| 128862 | 1F75E | SUBLIMATION                   | 🝞 |
-| 128863 | 1F75F | PRECIPITATE                   | 🝟 |
-| 128864 | 1F760 | DISTILL                       | 🝠 |
-| 128865 | 1F761 | DISSOLVE                      | 🝡 |
-| 128866 | 1F762 | DISSOLVE-2                    | 🝢 |
-| 128867 | 1F763 | PURIFY                        | 🝣 |
-| 128868 | 1F764 | PUTREFACTION                  | 🝤 |
-| 128869 | 1F765 | CRUCIBLE                      | 🝥 |
-| 128870 | 1F766 | CRUCIBLE-2                    | 🝦 |
-| 128871 | 1F767 | CRUCIBLE-3                    | 🝧 |
-| 128872 | 1F768 | CRUCIBLE-4                    | 🝨 |
-| 128873 | 1F769 | CRUCIBLE-5                    | 🝩 |
-| 128874 | 1F76A | ALEMBIC                       | 🝪 |
-| 128875 | 1F76B | BATH OF MARY                  | 🝫 |
-| 128876 | 1F76C | BATH OF VAPOURS               | 🝬 |
-| 128877 | 1F76D | RETORT                        | 🝭 |
-| 128878 | 1F76E | HOUR                          | 🝮 |
-| 128879 | 1F76F | NIGHT                         | 🝯 |
-| 128880 | 1F770 | DAY-NIGHT                     | 🝰 |
-| 128881 | 1F771 | MONTH                         | 🝱 |
-| 128882 | 1F772 | HALF DRAM                     | 🝲 |
-| 128883 | 1F773 | HALF OUNCE                    | 🝳 |
+|    Dec | Hex   | Name                          | Meaning     | S |
+|--------+-------+-------------------------------+-------------+---|
+| 128768 | 1F700 | QUINTESSENCE                  | 5th Element | 🜀 |
+| 128769 | 1F701 | AIR                           |             | 🜁 |
+| 128770 | 1F702 | FIRE                          |             | 🜂 |
+| 128771 | 1F703 | EARTH                         |             | 🜃 |
+| 128772 | 1F704 | WATER                         |             | 🜄 |
+| 128773 | 1F705 | AQUAFORTIS                    |             | 🜅 |
+| 128774 | 1F706 | AQUA REGIA                    |             | 🜆 |
+| 128775 | 1F707 | AQUA REGIA-2                  |             | 🜇 |
+| 128776 | 1F708 | AQUA VITAE                    |             | 🜈 |
+| 128777 | 1F709 | AQUA VITAE-2                  |             | 🜉 |
+| 128778 | 1F70A | VINEGAR                       |             | 🜊 |
+| 128779 | 1F70B | VINEGAR-2                     |             | 🜋 |
+| 128780 | 1F70C | VINEGAR-3                     |             | 🜌 |
+| 128781 | 1F70D | SULFUR                        | Mind        | 🜍 |
+| 128782 | 1F70E | PHILOSOPHERS SULFUR           |             | 🜎 |
+| 128783 | 1F70F | BLACK SULFUR                  |             | 🜏 |
+| 128784 | 1F710 | MERCURY SUBLIMATE             |             | 🜐 |
+| 128785 | 1F711 | MERCURY SUBLIMATE-2           |             | 🜑 |
+| 128786 | 1F712 | MERCURY SUBLIMATE-3           |             | 🜒 |
+| 128787 | 1F713 | CINNABAR                      |             | 🜓 |
+| 128788 | 1F714 | SALT                          | Body        | 🜔 |
+| 128789 | 1F715 | NITRE                         |             | 🜕 |
+| 128790 | 1F716 | VITRIOL                       |             | 🜖 |
+| 128791 | 1F717 | VITRIOL-2                     |             | 🜗 |
+| 128792 | 1F718 | ROCK SALT                     |             | 🜘 |
+| 128793 | 1F719 | ROCK SALT-2                   |             | 🜙 |
+| 128794 | 1F71A | GOLD                          |             | 🜚 |
+| 128795 | 1F71B | SILVER                        |             | 🜛 |
+| 128796 | 1F71C | IRON ORE                      |             | 🜜 |
+| 128797 | 1F71D | IRON ORE-2                    |             | 🜝 |
+| 128798 | 1F71E | CROCUS OF IRON                |             | 🜞 |
+| 128799 | 1F71F | REGULUS OF IRON               |             | 🜟 |
+| 128800 | 1F720 | COPPER ORE                    |             | 🜠 |
+| 128801 | 1F721 | IRON-COPPER ORE               |             | 🜡 |
+| 128802 | 1F722 | SUBLIMATE OF COPPER           |             | 🜢 |
+| 128803 | 1F723 | CROCUS OF COPPER              |             | 🜣 |
+| 128804 | 1F724 | CROCUS OF COPPER-2            |             | 🜤 |
+| 128805 | 1F725 | COPPER ANTIMONIATE            |             | 🜥 |
+| 128806 | 1F726 | SALT OF COPPER ANTIMONIATE    |             | 🜦 |
+| 128807 | 1F727 | SUBLIMATE OF SALT OF COPPER   |             | 🜧 |
+| 128808 | 1F728 | VERDIGRIS                     |             | 🜨 |
+| 128809 | 1F729 | TIN ORE                       |             | 🜩 |
+| 128810 | 1F72A | LEAD ORE                      |             | 🜪 |
+| 128811 | 1F72B | ANTIMONY ORE                  |             | 🜫 |
+| 128812 | 1F72C | SUBLIMATE OF ANTIMONY         |             | 🜬 |
+| 128813 | 1F72D | SALT OF ANTIMONY              |             | 🜭 |
+| 128814 | 1F72E | SUBLIMATE OF SALT OF ANTIMONY |             | 🜮 |
+| 128815 | 1F72F | VINEGAR OF ANTIMONY           |             | 🜯 |
+| 128816 | 1F730 | REGULUS OF ANTIMONY           |             | 🜰 |
+| 128817 | 1F731 | REGULUS OF ANTIMONY-2         |             | 🜱 |
+| 128818 | 1F732 | REGULUS                       |             | 🜲 |
+| 128819 | 1F733 | REGULUS-2                     |             | 🜳 |
+| 128820 | 1F734 | REGULUS-3                     |             | 🜴 |
+| 128821 | 1F735 | REGULUS-4                     |             | 🜵 |
+| 128822 | 1F736 | ALKALI                        |             | 🜶 |
+| 128823 | 1F737 | ALKALI-2                      |             | 🜷 |
+| 128824 | 1F738 | MARCASITE                     |             | 🜸 |
+| 128825 | 1F739 | SAL-AMMONIAC                  |             | 🜹 |
+| 128826 | 1F73A | ARSENIC                       |             | 🜺 |
+| 128827 | 1F73B | REALGAR                       |             | 🜻 |
+| 128828 | 1F73C | REALGAR-2                     |             | 🜼 |
+| 128829 | 1F73D | AURIPIGMENT                   |             | 🜽 |
+| 128830 | 1F73E | BISMUTH ORE                   |             | 🜾 |
+| 128831 | 1F73F | TARTAR                        |             | 🜿 |
+| 128832 | 1F740 | TARTAR-2                      |             | 🝀 |
+| 128833 | 1F741 | QUICK LIME                    |             | 🝁 |
+| 128834 | 1F742 | BORAX                         |             | 🝂 |
+| 128835 | 1F743 | BORAX-2                       |             | 🝃 |
+| 128836 | 1F744 | BORAX-3                       |             | 🝄 |
+| 128837 | 1F745 | ALUM                          |             | 🝅 |
+| 128838 | 1F746 | OIL                           |             | 🝆 |
+| 128839 | 1F747 | SPIRIT                        |             | 🝇 |
+| 128840 | 1F748 | TINCTURE                      |             | 🝈 |
+| 128841 | 1F749 | GUM                           |             | 🝉 |
+| 128842 | 1F74A | WAX                           |             | 🝊 |
+| 128843 | 1F74B | POWDER                        |             | 🝋 |
+| 128844 | 1F74C | CALX                          |             | 🝌 |
+| 128845 | 1F74D | TUTTY                         |             | 🝍 |
+| 128846 | 1F74E | CAPUT MORTUUM                 |             | 🝎 |
+| 128847 | 1F74F | SCEPTER OF JOVE               |             | 🝏 |
+| 128848 | 1F750 | CADUCEUS                      |             | 🝐 |
+| 128849 | 1F751 | TRIDENT                       |             | 🝑 |
+| 128850 | 1F752 | STARRED TRIDENT               |             | 🝒 |
+| 128851 | 1F753 | LODESTONE                     |             | 🝓 |
+| 128852 | 1F754 | SOAP                          |             | 🝔 |
+| 128853 | 1F755 | URINE                         |             | 🝕 |
+| 128854 | 1F756 | HORSE DUNG                    |             | 🝖 |
+| 128855 | 1F757 | ASHES                         |             | 🝗 |
+| 128856 | 1F758 | POT ASHES                     |             | 🝘 |
+| 128857 | 1F759 | BRICK                         |             | 🝙 |
+| 128858 | 1F75A | POWDERED BRICK                |             | 🝚 |
+| 128859 | 1F75B | AMALGAM                       |             | 🝛 |
+| 128860 | 1F75C | STRATUM SUPER STRATUM         |             | 🝜 |
+| 128861 | 1F75D | STRATUM SUPER STRATUM-2       |             | 🝝 |
+| 128862 | 1F75E | SUBLIMATION                   |             | 🝞 |
+| 128863 | 1F75F | PRECIPITATE                   |             | 🝟 |
+| 128864 | 1F760 | DISTILL                       |             | 🝠 |
+| 128865 | 1F761 | DISSOLVE                      |             | 🝡 |
+| 128866 | 1F762 | DISSOLVE-2                    |             | 🝢 |
+| 128867 | 1F763 | PURIFY                        |             | 🝣 |
+| 128868 | 1F764 | PUTREFACTION                  |             | 🝤 |
+| 128869 | 1F765 | CRUCIBLE                      |             | 🝥 |
+| 128870 | 1F766 | CRUCIBLE-2                    |             | 🝦 |
+| 128871 | 1F767 | CRUCIBLE-3                    |             | 🝧 |
+| 128872 | 1F768 | CRUCIBLE-4                    |             | 🝨 |
+| 128873 | 1F769 | CRUCIBLE-5                    |             | 🝩 |
+| 128874 | 1F76A | ALEMBIC                       |             | 🝪 |
+| 128875 | 1F76B | BATH OF MARY                  |             | 🝫 |
+| 128876 | 1F76C | BATH OF VAPOURS               |             | 🝬 |
+| 128877 | 1F76D | RETORT                        |             | 🝭 |
+| 128878 | 1F76E | HOUR                          |             | 🝮 |
+| 128879 | 1F76F | NIGHT                         |             | 🝯 |
+| 128880 | 1F770 | DAY-NIGHT                     |             | 🝰 |
+| 128881 | 1F771 | MONTH                         |             | 🝱 |
+| 128882 | 1F772 | HALF DRAM                     |             | 🝲 |
+| 128883 | 1F773 | HALF OUNCE                    |             | 🝳 |
 
 * Footnotes
 

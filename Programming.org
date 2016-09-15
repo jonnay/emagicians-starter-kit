@@ -1,5 +1,5 @@
 #+title:General Programming
-
+#+SETUPFILE: Org-Include.setup
 * Interface
 ** Display
 *** Line Numbers
@@ -45,9 +45,6 @@
  (setq show-paren-delay 0)
  (show-paren-mode)
  #+end_src
-**** TODO  Snarf the smartparens from interface and barf here instead
-**** TODO Update my config to be sane, check https://github.com/wasamasa/dotemacs/blob/master/init.org#smartparens
-
 
 *** Rainbow Delimiters
     Not 100% sure about this yet.
@@ -158,7 +155,9 @@
                     (Bl . Bl) ?- (Bc . Br) ?- (Bc . Bc) ?>
                     (Bc . Bl) ?- (Br . Br) ?>))))
 
- (emagician/defhook emagician-prettify-code prog-mode-hook
+(setq prettify-symbols-unprettify-at-point 'right-edge)
+
+(emagician/defhook emagician-prettify-code prog-mode-hook
    (setq prettify-symbols-alist emagician/prettify-list))
  #+end_src
 
@@ -249,12 +248,18 @@
 *** Smart Paren Mode
     I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed from another config somewhere. 
 
+
  #+begin_src emacs-lisp 
  (use-package smartparens
-   :defer t
    :diminish "⒮"
    :bind (("M-9" . sp-backward-sexp)
-          ("M-0" . sp-forward-sexp))
+          ("M-0" . sp-forward-sexp)
+          :smartparens-mode-map
+          ("C-<right>" . sp-forward-slurp-sexp)
+          ("C-<left>" . sp-forward-barf-sexp)
+          ("C-M-<right>" . sp-backward-barf-sexp)
+          ("C-M-<left>" . sp-backward-slurp-sexp)
+          ("M-S-s" . sp-splice-sexp))
    :init
    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
    :config
@@ -268,56 +273,10 @@
                ;; is fixed
                (setq sp-autoescape-string-quote nil)))
 
-     ;; Remove the M-<backspace> binding that smartparens adds
-
-   (let ((disabled '("M-<backspace>")))
-     (setq sp-smartparens-bindings
-           (cl-remove-if (lambda (key-command)
-                           (member (car key-command) disabled))
-                         sp-smartparens-bindings)))
-
-   (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
-   (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
-   (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-   (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
-     ;(define-key sp-keymap (kbd "M-(") 'sp-forward-barf-sexp)
-     ;(define-key sp-keymap (kbd "M-)") 'sp-forward-slurp-sexp)
-
-   (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
-   (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
-   (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)
-   (define-key sp-keymap (kbd "C-M-a") 'sp-backward-down-sexp)
-   (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
-   (define-key sp-keymap (kbd "C-S-d") 'sp-end-of-sexp)
-   (define-key sp-keymap (kbd "C-M-e") 'sp-up-sexp)
-
-   (define-key sp-keymap (kbd "C-M-u") 'sp-backward-up-sexp)
-   (define-key sp-keymap (kbd "C-M-t") 'sp-transpose-sexp)
-     ;; (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
-     ;; (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
-
-   (define-key sp-keymap (kbd "C-M-k") 'sp-kill-sexp)
-   (define-key sp-keymap (kbd "C-M-w") 'sp-copy-sexp)
-   (define-key sp-keymap (kbd "M-D") 'sp-splice-sexp)
-   (define-key sp-keymap (kbd "C-]") 'sp-select-next-thing-exchange)
-   (define-key sp-keymap (kbd "C-<left_bracket>") 'sp-select-previous-thing)
-   (define-key sp-keymap (kbd "C-M-]") 'sp-select-next-thing)
-   (define-key sp-keymap (kbd "M-F") 'sp-forward-symbol)
-   (define-key sp-keymap (kbd "M-B") 'sp-backward-symbol)
-   (define-key sp-keymap (kbd "H-t") 'sp-prefix-tag-object)
-   (define-key sp-keymap (kbd "H-p") 'sp-prefix-pair-object)
-   (define-key sp-keymap (kbd "H-s c") 'sp-convolute-sexp)
-   (define-key sp-keymap (kbd "H-s a") 'sp-absorb-sexp)
-   (define-key sp-keymap (kbd "H-s e") 'sp-emit-sexp)
-   (define-key sp-keymap (kbd "H-s p") 'sp-add-to-previous-sexp)
-   (define-key sp-keymap (kbd "H-s n") 'sp-add-to-next-sexp)
-   (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
-   (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
-
+   ;; Remove '' pairing in elisp because quoting is used a ton
    (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-     ;; Remove '' pairing in elisp because quoting is used a ton
+   (sp-local-pair 'web-mode "<" nil :actions nil)
  )
-
  #+end_src
 * Tools
 ** Flycheck

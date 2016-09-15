@@ -1,5 +1,5 @@
 #+title: Journal
-
+#+SETUPFILE: Org-Include.setup
 * Wax about Journal
   To the tune of Deck the Halls:
 
@@ -8,6 +8,15 @@
 
 * 2016
 ** September
+*** 11th - Navigation On Top
+    I'd love to get some kind of top-level automagick navigation.    Maybe the ~#+SETUPFILE~ along with an ~HTML_PREAMbLE~ can do it.
+
+    I also wonder if I need a separate directory for the "programming" file set?
+
+*** 8th - Lou The GC 👷
+After my earlier GC Experiments, I made Lou the GC.  Lou might become it's own elisp file and project.   Once I'm sure he works well.
+
+
 *** 6th - Debugging an Emacs slowdown
     Something has gone horribly wrong with my emacs.  Every 5 minutes or so I get a spinning beachball of death.  It's either:
     - I've upgraded a package and it's behaving badly
@@ -50,7 +59,7 @@ kill -SIGUSR2 $( ps aux | grep Emacs | awk '{print $2}')
 
     Maybe keyfreq?  Maybe my save and push? Disabling both
 
-    Postip is next.  Also Achievements Mode.  It shouldn't be enabled, but you don't know.
+    Postip is next.  Also Achievements Mode.  It shouldn't be enabled, but best to remove the possibilities. 
 
     Shit.
 

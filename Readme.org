@@ -1,6 +1,5 @@
 #+title: Read Me
 * Hello! 
-
 #+HTML: <div class= "notice notice-info tiny-box">
   Project Status:
 
@@ -10,6 +9,8 @@
 #+HTML: </div>
 
 🐰-(hello!)
+
+file:assets/images/Screenshot.png
 
 **  Five 'W's and 2 'Y's. 
 *** Who am I?

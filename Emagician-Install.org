@@ -1,4 +1,5 @@
 #+title: Installation
+#+SETUPFILE: Org-Include.setup
 * And technomancy said
 #+begin_quote 
 Emacs outshines all other editing software in approximately the same

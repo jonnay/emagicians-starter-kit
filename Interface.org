@@ -76,7 +76,7 @@ There is an argument that Emacs doesn't need to look pretty.  That all we're rea
 
 I call bullshit.  All of us already live in a prison of existential crisis.  Why would we make our text editor any more of a prison?
 
-I eat delicious food, not Soylent.
+I eat delicious food, not Soy lent.
 
 I drink excellent beer, not Alberta Genuine Draft. 
 
@@ -180,7 +180,6 @@ Amazingly few discotheques provide jukeboxes.
 (set-face-attribute 'default nil :family "Anonymous Pro" :height 140)
 #+end_src
 
-
 *** Describe Char
    Give us all the unicode information for a glyph.
 #+begin_src emacs-lisp 
@@ -218,6 +217,8 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
   (setq unicode-fonts-ignore-overrides t)
   (use-package persistent-soft :demand)
   :config
+  (let ((block (assoc "Enclosed Ideographic Supplement" unicode-fonts-block-font-mapping)))
+    (setf (cdr block) (list (cons "Apple Color Emoji" (cadr block)))))
   (unicode-fonts-setup))
 #+end_src
 
@@ -410,11 +411,14 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 alternate, arrow, arrow-fade, bar, box, brace, butt,
 chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
 
+  - butt :: Looks sexy.  Seriously.
+  - brace :: What it {says} on the tin.
+
 #+begin_src emacs-lisp 
   (use-package powerline
                :demand
                :init
-               (setq powerline-default-separator 'butt)
+               (setq powerline-default-separator 'bar)
                (emagician/powerline-theme))
 #+end_src
 *** Smart Mode Line                                                                       :disabled:
@@ -436,9 +440,9 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   - grey :: file visited
 
 *** Dimention 2: Modal Editing
-   	- overwrite :: hollow box
-   	- 'normal' :: line
-        - god mode :: Horizontal cursor
+   - overwrite :: hollow box
+   - 'normal' :: line
+   - god mode :: Horizontal cursor
 
 *** Enhancements
 **** TODO set up a way to handle production buffers through a buffer local var.
@@ -461,8 +465,8 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
                 ((not (equal buffer-file-name nil)) "grey50")
                 (t "cyan")))
         (type (cond
-               ((member 'god-mode minor-mode-list) '(hbar . 3))
-               ((member overwrite-mode minor-mode-list) 'hollow)
+               (god-local-mode '(hbar . 3))
+               (overwrite-mode 'hollow)
                (t '(bar . 2)))))
     (unless (and
              (string= color emagician/set-cursor-color-color)
@@ -471,7 +475,7 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
       (set-cursor-color (setq emagician/set-cursor-color-color color))
       (setq cursor-type (setq emagician/set-cursor-color-type type))
       (setq emagician/set-cursor-color-buffer (buffer-name)))))
-(setq emagician/dangerous-buffer t)
+
 (add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
 #+end_src
 
@@ -588,6 +592,8 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   (digit-groups-global-mode 1))
 #+end_src
 
+** TODO All the Icons?
+   https://github.com/domtronn/all-the-icons.Eli
 * Editing
 ** UTF-8 Enforcement
   I've kept a version of this since 2006.
@@ -757,23 +763,19 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 ** Completion  :completion:
 *** Company Mode
-
 #+begin_src emacs-lisp
 (use-package company
   :diminish "🈺 "
   :init
   (global-company-mode)
-  (use-package company-quickhelp
-    :init
-    (setq company-quickhelp-delay 0.25)
-    :config
-     (company-quickhelp-mode 1)))
+  :config
+  (use-package company-statistics
+    :config (company-statistics-mode)))
 #+end_src
 
 *** Auto Complete                                                                      :deactivated:
 
     It's time to switch.  AC hasn't really changed that much, and it is starting to look awful.
-
 
    *Note:* if you were looking for the AC sources for a particular language or mode, then you will want to look in those specific language/mode emagician files.
 
@@ -912,6 +914,8 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 (global-set-key [(control r)] 'isearch-backward-regexp)
 #+end_src
 
+** TODO https://github.com/wasamasa/shackle 
+   example: https://github.com/hlissner/.emacs.d/blob/master/core/core-popup.el
 * Saving
 ** Backups
    Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.  I figured since I was working mostly in source control, I'd be safe.  Then I was wrong one day, and lost a very important change.
@@ -1067,7 +1071,18 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
              ("r"    . discover-ruby-tools)))
 #+end_src
 
- *** TODO fix Company Discovery 
+*** TODO fix Company Discovery 
+
+** How Do I?
+
+#+begin_src emacs-lisp 
+(use-package howdoi
+  :init
+  (setq howdoi-display-question t)
+  :bind
+  (:map discovery-map
+        ("?" . howdoi-query)))
+#+end_src
 
 ** Helm
    I have a complicated relationship with helm.  

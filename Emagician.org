@@ -5,9 +5,9 @@
 #+END_SRC
   
   This is my emacs.  There are many like it, but this one is mine.
-
 ** Breakage Helpers
-
+#+INDEX: debugging
+#+INDEX: initialization
 Debug Errors. Super fundamental.
 
 #+BEGIN_SRC emacs-lisp
@@ -15,7 +15,7 @@ Debug Errors. Super fundamental.
 #+END_SRC
 
 *** Scratch messaging
-
+#+INDEX: scratch
    Snarfed this idea from https://github.com/overtone/emacs-live.
 
 #+begin_example
@@ -50,7 +50,7 @@ Now that we have the basics done, lets define 2 helper functions to set or add t
 #+end_src
 
 *** Pre-Scratch-Links
-
+#+INDEX: scractch-links
     The scratch buffer will turn into something of a desktop.  It's handy to be able to stuff "scratch links" in there.  Anything in there gets output to the scratch during [[file:Emagician-Base.org::*Final%20Emagician%20Scratch][Thee Scratch Initiation]].[fn:1]
 
     Then when Emacs loads, you can put the cursor over the sexp and ~C-x C-e~.  I use this to launch magit for work/personal projects, start vms, etc.
@@ -65,7 +65,7 @@ before the rest of the scratch interface is built.")
 #+END_SRC
     
 *** Now set it to our Baseline beautified "you're-busted" text
-
+#+INDEX: scratch
 Okay, so this is the secret sauce.  I set the scratch to this baseline helper (plus cuteness) so that I can debug startups much easier.  It includes a chunk to launch emacs forcing debug-init. 
 
 #+BEGIN_SRC emacs-lisp
@@ -113,6 +113,7 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
 
 ** Use the new improved emagician scratch.
+#+INDEX: scratch
 *** Add a show-scratch function 
 	This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
 #+BEGIN_SRC emacs-lisp
@@ -125,6 +126,7 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
 
 ** Package Archives setup
+#+INDEX: packages
   We set our download dir to local-packages.  We also do the trick of
   doing package-refresh-contents if package-archive-contents is empty.
 
@@ -156,6 +158,7 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
   
 ** Load Paths, Custom Files, etc.
+#+INDEX: load-path
 *** Standard Emagician distribution load paths
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path emagician/dir)
@@ -170,6 +173,7 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
 
 * Emagician/load
+#+INDEX: initialization
 
    Originally from Eschulte.  This function takes a <foo>.org file,
    and load it.  
@@ -218,13 +222,18 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
 
 * Package Management
+#+INDEX: packages
 ** Emagician Expect, for bootstrapping
+   This is almost vestigial.
+
 #+BEGIN_SRC emacs-lisp
 (defun emagician/expect-package (package)
   "If the named PACKAGE isn't currently installed, install it"
   (unless (package-installed-p package)
     (package-install package)))  
 #+END_SRC
+
+Mainly due to…
 
 ** 😻 Use-Package 😻
    https://github.com/jwiegley/use-package
@@ -237,11 +246,13 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 #+END_SRC
 
 * Emagician Starter Kit has it's own Helper Functions
+#+INDEX: loading
 #+BEGIN_SRC emacs-lisp
 (emagician/load "Emagician-Base.org")
 #+END_SRC
 
 * Assets
+#+INDEX: Assets
   Assets are either 
   
   1. org files that tangle assets into a directory or
@@ -255,8 +266,9 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
   - The Bunny of Discoverability
   - The Bunny of Mise en Place
   
-
 * File Layout
+  Most of the files will have a layout similar to this:
+
 ** Interface
    There is both an Interface file to handle the general emacs UI and sections inside of individual files. 
 
@@ -333,6 +345,8 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
   
 
 * Entity Customization
+#+INDEX: customization
+
 ** First the customization
 #+BEGIN_SRC emacs-lisp
 (load custom-file)
@@ -407,6 +421,7 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
  | Wasamasa                    | https://github.com/wasamasa/dotemacs                 |   2016-08-26 |        |
 * Thee End
 *** Initiate thee scratch
+#+INDEX: scratch
 [[file:assets/images/Troll_Scratch.gif]]
 
 #+BEGIN_SRC emacs-lisp
@@ -414,7 +429,7 @@ https://groups.google.com/forum/#!topic/alt.religion.emacs/Yej_PTIqekg
 #+END_SRC
 
 *** Turn off debugging
-
+#+INDEX: debugging
   We're Almost Done. 
 
 #+BEGIN_SRC emacs-lisp

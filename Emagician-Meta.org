@@ -264,7 +264,10 @@ Return output file name."
  
 ** ÆＳÞＥTＩC 
 
-    The current ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead than a raw text export but nowhere near what I want.  [[mn:1][file:./assets/images/tome-quilt/grimoire.jpg]]
+    [[mn:1][file:./assets/images/tome-quilt/grimoire.jpg]]
+    The current
+    ÆＳÞＥTＩC still needs a lot of work.  It's much further ahead
+    than a raw text export but nowhere near what I want.
 
     Using the Tufte CSS along with dakrone's awesome exporter. 
 
@@ -276,14 +279,14 @@ Return output file name."
      - https://github.com/melpa/melpa/pull/4201
      - https://edwardtufte.github.io/tufte-css/
 
-
 *** Image Quilt
 
-#+begin_src emacs-lisp :results html :exports both
-(concat "<div class=\"my-quilt\">\n"      
+#+begin_src emacs-lisp :tangle no :results html :exports both
+(concat "<div class=\"my-quilt\">\n"
         (mapconcat (lambda (f)
                      (format "  <img src=\"./assets/images/tome-quilt/%s\" />\n" f))
-                   (directory-files "assets/images/tome-quilt"
+                   (directory-files (expand-file-name "assets/images/tome-quilt"
+                                                      emagician/dir)
                                     nil
                                     (regexp-opt '("jpg" "jpeg" "png" "gif")))
                    "")
@@ -301,8 +304,6 @@ Return output file name."
   <img src="./assets/images/tome-quilt/psychonaught.jpg" />
 </div>
 #+END_HTML
-
-
 
 *** Styling 
 
@@ -418,6 +419,15 @@ div.figure {
 #+BEGIN_SRC css :tangle "gh-pages/assets/styles/tufte-style.css"
 @import url("tufte.css");
 
+h4 {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
 .title { text-align: left; }
 
 .my-quilt {
@@ -497,6 +507,10 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
     color: #ccc;
 }
 
+#footnotes {
+  display: none;
+}
+
 
 @media screen {
     h1.title {
@@ -517,7 +531,7 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
                     inset -5px 0 5px hsla(0,30%,50%,0.1),
                     inset -8px 0 8px hsla(0,30%,50%,0.1),
                     inset -13px 0 13px hsla(0,30%,50%,0.1),
-                    inset 8px 0 8px hsla(0,0%,0%,0.1),                          
+                    inset 8px 0 8px hula(0,0%,0%,0.1),
                     inset 13px 0 13px hsla(0,0%,0%,0.1);
         width: 220px;
         height: 100vh;
@@ -612,6 +626,7 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
 **** TODO Fix UP | HOME links
 **** TODO Write some kind of basic top menu thing if doable
 
+*** TODO Get some basic Next/Prev links in there 
 * Inserting text chunks
    In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.[fn:2]
 
