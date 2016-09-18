@@ -210,15 +210,22 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 #+end_verse
 
 #+begin_src emacs-lisp 
+(defun add-emoji-to-unicode-block (block-name)
+  (let ((block (assoc block-name unicode-fonts-block-font-mapping)))
+    (setf (cdr block) (list (cons "Apple Color Emoji" (cadr block))))))
+
 (use-package unicode-fonts
   :demand
   :init
-  (setq unicode-fonts-skip-fonts)
+  (setq unicode-fonts-skip-fonts nil)
   (setq unicode-fonts-ignore-overrides t)
   (use-package persistent-soft :demand)
   :config
-  (let ((block (assoc "Enclosed Ideographic Supplement" unicode-fonts-block-font-mapping)))
-    (setf (cdr block) (list (cons "Apple Color Emoji" (cadr block)))))
+  (add-emoji-to-unicode-block "Enclosed Ideographic Supplement")
+  (add-emoji-to-unicode-block "Miscellaneous Symbols")
+  (add-emoji-to-unicode-block "Miscellaneous Symbols and Arrows")
+  (add-emoji-to-unicode-block "Miscellaneous Technical")
+  (add-emoji-to-unicode-block "Supplemental Symbols and Pictographs")
   (unicode-fonts-setup))
 #+end_src
 
@@ -410,15 +417,19 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
      Available Separators are:
 alternate, arrow, arrow-fade, bar, box, brace, butt,
 chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
-
-  - butt :: Looks sexy.  Seriously.
+  - alternate :: spikey and blurry
+  - arrow :: Nice. What it says on the tin too. 
+  - bar :: Blurry and boring
   - brace :: What it {says} on the tin.
+  - butt :: Looks sexy.  Seriously.
+  - chamfer :: Looks circuity-cool
+  - contour :: 
 
 #+begin_src emacs-lisp 
   (use-package powerline
                :demand
                :init
-               (setq powerline-default-separator 'bar)
+               (setq powerline-default-separator 'arrow)
                (emagician/powerline-theme))
 #+end_src
 *** Smart Mode Line                                                                       :disabled:
@@ -446,7 +457,8 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
 
 *** Enhancements
 **** TODO set up a way to handle production buffers through a buffer local var.
-
+**** TODO do proper god-mode check 
+*** Code
 #+name: cursor-status
 #+begin_src emacs-lisp 
 ;; Change cursor color according to mode
@@ -465,7 +477,7 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
                 ((not (equal buffer-file-name nil)) "grey50")
                 (t "cyan")))
         (type (cond
-               (god-local-mode '(hbar . 3))
+               ((and (boundp 'god-local-mode) god-local-mode) '(hbar . 3))
                (overwrite-mode 'hollow)
                (t '(bar . 2)))))
     (unless (and

@@ -30,6 +30,9 @@ Let there be light
      Metalogicon:  John of Salisbury 1159
 
      [[./assets/images/Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg]]
+** Initialize Submodules
+*** TODO shell script to init submoduels
+
 * Running Code blocks
 
   Installing this thing should be as easy as reading through the
