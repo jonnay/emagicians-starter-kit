@@ -418,20 +418,38 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 alternate, arrow, arrow-fade, bar, box, brace, butt,
 chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   - alternate :: spikey and blurry
-  - arrow :: Nice. What it says on the tin too. 
+  - arrow :: Nice. What it says on the tin too.
+  - arrow-fade :: Burry arrow. Not so nice. 
   - bar :: Blurry and boring
   - brace :: What it {says} on the tin.
   - butt :: Looks sexy.  Seriously.
   - chamfer :: Looks circuity-cool
-  - contour :: 
+  - contour :: A bit spikey
+  - curve :: Round butt. 
+  - rounded :: Like a rounded chamfer
+  - roundstub :: Like a round butt.
+  - wave :: contour backwards
+  - zigzag :: Zig-Zag
+  - utf-8 :: Arrow with utf8 chars?
 
 #+begin_src emacs-lisp 
-  (use-package powerline
-               :demand
-               :init
-               (setq powerline-default-separator 'arrow)
-               (emagician/powerline-theme))
+(defun emagician/powerline-separator (&optional random-state)
+  "Sets the powerline separator to a random one that is cool."
+  (let ((r-state (or random-state
+                     (make-random-state t)))
+        (faves '(arrow brace butt chamfer curve rounded roundstub zigzag))
+        (day-of-year (string-to-number (format-time-string "%j"))))
+    (nth (% day-of-year
+            (length faves))
+         faves)))
+
+(use-package powerline
+             :demand
+             :init
+             (setq powerline-default-separator (emagician/powerline-separator))
+             (emagician/powerline-theme))
 #+end_src
+
 *** Smart Mode Line                                                                       :disabled:
     Not sure that this adds anything
 #+begin_src  emacs-lisp :tangle no
@@ -901,7 +919,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
    Saveplace allows emacs to remember where you were in a file.  It is very handy and mostly transparent.
 #+begin_src emacs-lisp
 (require 'saveplace)
-(setq-default save-place t)
+(save-place-mode)
 #+end_src
 
 ** Goto Last Change                                                                          :learn:

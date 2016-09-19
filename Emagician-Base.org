@@ -6,7 +6,7 @@
 
   - Basic helpers in case there is a problem loading
   - Extend emacs lisp evaluation environment 
-  - emagick-🐰 functions to furhter extend emacs lisp 
+  - emagick-🐰 functions to further extend emacs lisp 
   - Emagician helpers to make configuration much easier.
 
 * Basic helpers
