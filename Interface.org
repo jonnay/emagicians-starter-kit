@@ -916,7 +916,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 ** Save Place
-   Saveplace allows emacs to remember where you were in a file.  It is very handy and mostly transparent.
+   Saveplace allows emacs to remember where you were in a file.  It is handy and transparent in most cases.  Except org-mode.
 #+begin_src emacs-lisp
 (require 'saveplace)
 (save-place-mode)
@@ -1203,12 +1203,24 @@ Make it a bit nicer too.
 #+begin_src emacs-lisp 
 (use-package god-mode
   :bind (("<escape>" . god-local-mode))
-  :diminish "🐰 "
   :config
   (which-key-enable-god-mode-support))
-
-
 #+end_src
+
+** PROJECT Look at command composability a-la evil 
+*** TODO Digest this: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
+*** TODO Digest evil 
+*** TODO Duplicate command watcher
+"Instead of hitting forward so many times, you can use C-3 C-f"
+*** TODO command teller-about-er
+ "you can use <whatever vimlike composable command sequence> instead of zap-to-char"
+*** TODO come up with a kickass name.  
+    - Boon
+    - Miracle
+    - Zeal
+    - Some sort of action-of-gods.  A better name would be something more Ancient Egyptian/Greek
+
+
 
 * Footnotes
 

@@ -1,68 +1,65 @@
 #+title: Read Me
-* Hello! 
-#+HTML: <div class= "notice notice-info tiny-box">
-  Project Status:
+* 🐰-(hello!)
 
-  Fit for other humans to tell me it is broken, and I can fix it.
+#+HTML: <img src="assets/images/Screenshot.png" alt="Screenshot.png" class="fullwidth">
+
+* Project Status
+
+  Fit for other humans to tell me "hey, it's broken", and I can fix it.
 
   But Not Even Alpha.
-#+HTML: </div>
 
-🐰-(hello!)
 
-file:assets/images/Screenshot.png
+*  Five 'W's and 2 'Y's. 
+** Who am I?
+   I'm Jonnay!
 
-**  Five 'W's and 2 'Y's. 
-*** Who am I?
-    I'm Jonnay!
+   I've been using Emacs since 2007.  I make [[http://www.jonnay.net][Music, Art and Video
+   Blogs]].  I'm a front-end narwhal (a Canadian coder who can do UX
+   and design as well).  Professionally I have used many
+   languages—including P/LB—but my favorite is Scheme, and my current
+   is ruby.
 
-    I've been using Emacs since 2007.  I make [[http://www.jonnay.net][Music, Art and Video
-    Blogs]].  I'm a front-end narwhal (a Canadian coder who can do UX
-    and design as well).  Professionally I have used many
-    languages—including P/LB—but my favorite is Scheme.
+** What is this? A starter kit for magicians.
+  The Emagicians Starter Kit is a set of org-mode files that are
+  automagikally tangled into Emacs Lisp on startup.
 
-*** What is this? A starter kit for magicians.
-   The Emagicians Starter Kit is a set of org-mode files that are
-   automagikally tangled into Emacs Lisp on startup.
+  I got tired of my old .emacs file and poorly maintained collection
+  of extensions. It was working less and less well the more and more
+  time went on and on.  
 
-   I got tired of my old .emacs file and poorly maintained collection
-   of extensions. It was working less and less well the more and more
-   time went on and on.  So In an airplane across the Atlantic I made
-   the first version of the Emagicians Starter Kit.
+  But it's more than that.  It's a set of lessons learned, ramblings
+  of a lisp fanatic, and something of a personal great work.
 
-   But it's more than that.  It's a set of lessons learned, ramblings
-   of a lisp fanatic, and something of a personal great work.
+** Why?
 
-*** Why?
+  I Love the idea of the starter kits, but I found they made
+  assumptions and just wasn't fit for what I needed.  I also have a
+  bit of a "not-invented-here" problem.  It's minor and I cope pretty
+  well. However with regards to emacs: (and to paraphrase Douglas
+  McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
 
-   I Love the idea of the starter kits, but I found they made
-   assumptions and just wasn't fit for what I needed.  I also have a
-   bit of a "not-invented-here" problem.  It's minor and I cope pretty
-   well. However with regards to emacs: (and to paraphrase Douglas
-   McArther Shaftoe from the Neal Stephenson novel /Cryptonomicon/.)
+  #+begin_quote
+  This is my Emacs.  There are plenty like it, but this one is mine.
+  #+end_quote
 
-   #+begin_quote
-   This is my Emacs.  There are plenty like it, but this one is mine.
-   #+end_quote
+  Additionally, there is real value in people explaining their emacs
+  setup, especially in easily digestible forms.
 
-   Additionally, there is real value in people explaining their emacs
-   setup, especially in easily digestible forms.
+** How 
 
-*** How 
-
-    Everything is in Org-Mode.  If you want to join in all the fun,
-    there is an [[file:./Emagician-Install.org]] file that you can follow
-    along with.  It will get you moving into basic configurations, all
-    the way through testing the result before making the emagician
-    starter kit your actual init file.
+   Everything is in Org-Mode.  If you want to join in all the fun,
+   there is an [[file:./Emagician-Install.org]] file that you can follow
+   along with.  It will get you moving into basic configurations, all
+   the way through testing the result before making the emagician
+   starter kit your actual init file.
     
-*** When
+** When
 
-    March 2012.  It got commited to a git repo later that year.
+   March 2012.  It got commited to a git repo later that year.
 
-*** Where
-
-    It started in an airplane.
+** Where
+   In an airplane across the Atlantic I made the first version of the Emagicians Starter Kit.
     
 * A note about tone
   

@@ -8,6 +8,13 @@
 
 * 2016
 ** September
+*** 19th - I crave vim-style command composability
+    I have found a package, it looks interesting, but it doesn't do it the way I want it to.  It isn't... clean enough. 
+
+    I still need to learn more about how vim composibility works.  Also I need to not get stuck with that as the ultimate.
+
+    Oh no.  It is a starting point.
+
 *** 11th - Navigation On Top
     I'd love to get some kind of top-level automagick navigation.    Maybe the ~#+SETUPFILE~ along with an ~HTML_PREAMbLE~ can do it.
 

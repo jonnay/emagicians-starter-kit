@@ -1,7 +1,7 @@
 #+title: Emagician
 * Base Initialization and Circle Casting
 #+BEGIN_SRC emacs-lisp
-(defconst emagician/version "0.23.1")
+(defconst emagician/version "0.23.2")
 #+END_SRC
   
   This is my emacs.  There are many like it, but this one is mine.

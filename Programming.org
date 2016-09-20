@@ -446,6 +446,8 @@ Tweak Ediff to be better
    (use-package helm-projectile))
  #+end_src
 
+** SQL Mode
+*** TODO company backend for mysql completions.  Should totally either be a thing, or a thing I make.
 * Languages
   Each language gets it's own file.
 

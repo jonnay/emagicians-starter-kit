@@ -1,14 +1,14 @@
-* Introduction 
-
-  #+INCLUDE: Readme.org :minlevel 2
-
 * Topical Index
+- [[./Readme.org]] :: Why this exists, why the world needs another starter kit
+- [[./Journal.org]] :: A development Blog/Journal
+
 ** Installing 
 - [[./Emagician-Install.org]] :: Contains all the install instructions you need 
 
-** Core Emagician 
+** Core Emagician  
+[[mn:1][file:./assets/images/TurtlesAllTheWayDown.jpg]]
 - [[./Emagician.org]] :: The Baseline emagician file.  Does initial setup and defines a few functions to facilitate the loading of the rest of the starter kit.
-- [[./Emagician-Base.org]] :: Secondary base.  It's turtles all the way down baybee.  This provides a bunch of helper functions.
+- [[./Emagician-Base.org]] :: Secondary base.  It's turtles all the way down baybee.  This provides a bunch of other helper functions.
 - [[./Emagician-Meta.org]] :: Tertiary base.  It's tertiary turtles all the way down baybee.  This provides a bunch of helper functions in the development of the emagicians starter kit.
 
 #+BEGIN_QUOTE
@@ -42,6 +42,8 @@
 ** Assets
 - [[./Snippets.org]] :: Yasnippets Snippets
 
-* Alphabetical Index
+* Alphabetical Index by Subject
+#+INCLUDE: theindex.org :minlevel 1
+* Alphabetical Index By File
+#+INCLUDE: sitemap.org :minlevel 1
 
-#+INCLUDE: sitemap.org 
