@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-14 Wed 20:53 -->
+<!-- 2016-09-19 Mon 22:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Installation</title>
@@ -147,13 +147,16 @@ for the JavaScript code in this tag.
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="index"> HOME </a>
-</div><div id="content">
+</div><div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+</div>
+<div id="content">
 <h1 class="title">Installation</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline4">1. And technomancy said</a>
+<li><a href="#orgheadline6">1. And technomancy said</a>
 <ul>
 <li><a href="#orgheadline3">1.1. And eschulte described the light so it shall be understood and organized.</a>
 <ul>
@@ -164,44 +167,49 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#orgheadline5">2. Running Code blocks</a></li>
-<li><a href="#orgheadline21">3. Installation</a>
+<li><a href="#orgheadline5">1.2. Initialize Submodules</a>
 <ul>
-<li><a href="#orgheadline6">3.1. Who the fuck are you?</a></li>
-<li><a href="#orgheadline9">3.2. Make the init files</a>
+<li><a href="#orgheadline4">1.2.1. <span class="todo TODO">TODO</span> shell script to init submoduels</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline7">2. Running Code blocks</a></li>
+<li><a href="#orgheadline23">3. Installation</a>
 <ul>
-<li><a href="#orgheadline7">3.2.1. Step One: Where are we?</a></li>
-<li><a href="#orgheadline8">3.2.2. Step Two: Making it go.</a></li>
-</ul>
-</li>
-<li><a href="#orgheadline10">3.3. Branching for great justice</a></li>
-<li><a href="#orgheadline15">3.4. Customizing and Configuration</a>
+<li><a href="#orgheadline8">3.1. Who the fuck are you?</a></li>
+<li><a href="#orgheadline11">3.2. Make the init files</a>
 <ul>
-<li><a href="#orgheadline11">3.4.1. Your personal file</a></li>
-<li><a href="#orgheadline12">3.4.2. Your System-Type file</a></li>
-<li><a href="#orgheadline13">3.4.3. Your machine file(s)</a></li>
-<li><a href="#orgheadline14">3.4.4. Your account file</a></li>
+<li><a href="#orgheadline9">3.2.1. Step One: Where are we?</a></li>
+<li><a href="#orgheadline10">3.2.2. Step Two: Making it go.</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">3.5. The Testening</a>
+<li><a href="#orgheadline12">3.3. Branching for great justice</a></li>
+<li><a href="#orgheadline17">3.4. Customizing and Configuration</a>
 <ul>
-<li><a href="#orgheadline16">3.5.1. No org-babel-execute function for sh?</a></li>
-<li><a href="#orgheadline17">3.5.2. what you should see when it works</a></li>
-<li><a href="#orgheadline18">3.5.3. A note about some magic&#x2026; Wait, what just happened there?</a></li>
+<li><a href="#orgheadline13">3.4.1. Your personal file</a></li>
+<li><a href="#orgheadline14">3.4.2. Your System-Type file</a></li>
+<li><a href="#orgheadline15">3.4.3. Your machine file(s)</a></li>
+<li><a href="#orgheadline16">3.4.4. Your account file</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline20">3.6. Taking the plunge</a></li>
+<li><a href="#orgheadline21">3.5. The Testening</a>
+<ul>
+<li><a href="#orgheadline18">3.5.1. No org-babel-execute function for sh?</a></li>
+<li><a href="#orgheadline19">3.5.2. what you should see when it works</a></li>
+<li><a href="#orgheadline20">3.5.3. A note about some magic&#x2026; Wait, what just happened there?</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline22">4. The actual Init file</a></li>
-<li><a href="#orgheadline23">5. That's All folks!</a></li>
+<li><a href="#orgheadline22">3.6. Taking the plunge</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline24">4. The actual Init file</a></li>
+<li><a href="#orgheadline25">5. That's All folks!</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">1</span> And technomancy said</h2>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">1</span> And technomancy said</h2>
 <div class="outline-text-2" id="text-1">
 <div class="epigraph"><blockquote>
 <p>
@@ -263,9 +271,17 @@ Metalogicon:  John of Salisbury 1159
 </div>
 </div>
 </div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">1.2</span> Initialize Submodules</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">1.2.1</span> <span class="todo TODO">TODO</span> shell script to init submoduels</h4>
 </div>
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">2</span> Running Code blocks</h2>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7"><span class="section-number-2">2</span> Running Code blocks</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Installing this thing should be as easy as reading through the
@@ -283,8 +299,8 @@ If you can't run the shell blocks, try executing this:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">3</span> Installation</h2>
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23"><span class="section-number-2">3</span> Installation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 You need emacs 24. I am sure you can get it and install it, if you
@@ -292,8 +308,8 @@ haven't already.
 </p>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">3.1</span> Who the fuck are you?</h3>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.1</span> Who the fuck are you?</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Who you are and the set of emacs configurations that you will want,
@@ -319,16 +335,16 @@ Replace "jonnay" with your name!
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">3.2</span> Make the init files</h3>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">3.2</span> Make the init files</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Making the init file is a two stage process.
 </p>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">3.2.1</span> Step One: Where are we?</h4>
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">3.2.1</span> Step One: Where are we?</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 The first is to tell the Emagician Starter kit which directory is
@@ -358,8 +374,8 @@ delete it.
 
 
 
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">3.2.2</span> Step Two: Making it go.</h4>
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">3.2.2</span> Step Two: Making it go.</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 Then this next code block creates the init.el file by running the
@@ -382,8 +398,8 @@ if you are interested, you can have a look at it:
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">3.3</span> Branching for great justice</h3>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">3.3</span> Branching for great justice</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 This next code block sets up a git branch.  Change the branch name
@@ -406,8 +422,8 @@ I shouldn't have to tell you why this is a good idea.
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">3.4</span> Customizing and Configuration</h3>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">3.4</span> Customizing and Configuration</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 In the original starter kit, there were 2 different kinds of custom
@@ -420,8 +436,8 @@ others are optional.
 </p>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11"><span class="section-number-4">3.4.1</span> Your personal file</h4>
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13"><span class="section-number-4">3.4.1</span> Your personal file</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 This next command is an invokation.  Even if you are going to use
@@ -463,8 +479,8 @@ Another option is to store them in a private.org.gpg file.
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12"><span class="section-number-4">3.4.2</span> Your System-Type file</h4>
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">3.4.2</span> Your System-Type file</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <p>
 If you end up using differnet OS's, you may want to have this set up.
@@ -481,8 +497,8 @@ do munge it a little by replacing any <code>/</code> with a <code>-</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13"><span class="section-number-4">3.4.3</span> Your machine file(s)</h4>
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15"><span class="section-number-4">3.4.3</span> Your machine file(s)</h4>
 <div class="outline-text-4" id="text-3-4-3">
 <p>
 Different machines are not nessicarily on differnet OS's.  Different
@@ -496,8 +512,8 @@ granular if need be.
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-4">
-<h4 id="orgheadline14"><span class="section-number-4">3.4.4</span> Your account file</h4>
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16"><span class="section-number-4">3.4.4</span> Your account file</h4>
 <div class="outline-text-4" id="text-3-4-4">
 <p>
 Then again, maybe you need to separate customizations out by user account. Why not?
@@ -509,8 +525,8 @@ Then again, maybe you need to separate customizations out by user account. Why n
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">3.5</span> The Testening</h3>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">3.5</span> The Testening</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 To properly test your magicians kit, you should build the tester,
@@ -546,8 +562,8 @@ control can return to this instance of emacs.
 </pre>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-4">
-<h4 id="orgheadline16"><span class="section-number-4">3.5.1</span> No org-babel-execute function for sh?</h4>
+<div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18"><span class="section-number-4">3.5.1</span> No org-babel-execute function for sh?</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 If you get the message <code>org-babel-execute-src-block: No
@@ -560,8 +576,8 @@ mode for babel.  Do that by running this code block:
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">3.5.2</span> what you should see when it works</h4>
+<div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19"><span class="section-number-4">3.5.2</span> what you should see when it works</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <p>
 If it is working properly, the <code>*Messages*</code> buffer of the new emacs
@@ -575,8 +591,8 @@ loaded /home/jonny/emagicians-starter-kit/Emagician.el
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">3.5.3</span> A note about some magic&#x2026; Wait, what just happened there?</h4>
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20"><span class="section-number-4">3.5.3</span> A note about some magic&#x2026; Wait, what just happened there?</h4>
 <div class="outline-text-4" id="text-3-5-3">
 <p>
 Ok, check it out, the source block just spits out a string, that gets
@@ -593,8 +609,8 @@ cross-lingual aspect to figure out where it is.
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">3.6</span> Taking the plunge</h3>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">3.6</span> Taking the plunge</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 One you run the next source block, you will have fully installed
@@ -615,8 +631,8 @@ cp<span class="org-unicode-whitespace-subdued-space"> </span>-v<span class="org-
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22"><span class="section-number-2">4</span> The actual Init file</h2>
+<div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24"><span class="section-number-2">4</span> The actual Init file</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 This is the init file that is tangled by the <code>org-babel-tagle</code> command, and then copied over to where you need it to be.  You don't really need to read it&#x2026; but you can if you like!
@@ -636,7 +652,7 @@ This is the init file that is tangled by the <code>org-babel-tagle</code> comman
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-string">"/Users/joarkell/projects/emagicians-starter-kit/"</span>
 <span class="org-unicode-whitespace-subdued-space">        </span><span class="org-doc">"Automagically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">where</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">located"</span>)
 <span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">sucks,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">but</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">need</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">properly</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">running</span>
-(setq<span class="org-unicode-whitespace-subdued-space"> </span>package-user-dir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"elpa"</span>))
+(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>package-user-dir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"elpa"</span>))
 (package-initialize)
 (<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org</span>)
 (<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">org-install</span>)
@@ -647,8 +663,8 @@ This is the init file that is tangled by the <code>org-babel-tagle</code> comman
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-2">
-<h2 id="orgheadline23"><span class="section-number-2">5</span> That's All folks!</h2>
+<div id="outline-container-orgheadline25" class="outline-2">
+<h2 id="orgheadline25"><span class="section-number-2">5</span> That's All folks!</h2>
 <div class="outline-text-2" id="text-5">
 <div class="epigraph"><blockquote>
 <p>
@@ -668,7 +684,7 @@ Emacs is the ground. We run around and act silly on top of it, and when we die, 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-14 Wed 20:53</p>
+<p class="date">Created: 2016-09-19 Mon 22:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

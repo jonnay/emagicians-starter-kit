@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-14 Wed 20:53 -->
+<!-- 2016-09-19 Mon 22:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eshell Magick</title>
@@ -147,7 +147,10 @@ for the JavaScript code in this tag.
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="index"> HOME </a>
-</div><div id="content">
+</div><div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+</div>
+<div id="content">
 <h1 class="title">Eshell Magick</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -212,7 +215,7 @@ This is apparently still an issue.
 </p>
 
 <pre class="code">(<span class="org-keyword">defadvice</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">eshell-gather-process-output</span><span class="org-unicode-whitespace-subdued-space"> </span>(before<span class="org-unicode-whitespace-subdued-space"> </span>absolute-cmd<span class="org-unicode-whitespace-subdued-space"> </span>(command<span class="org-unicode-whitespace-subdued-space"> </span>args)<span class="org-unicode-whitespace-subdued-space"> </span>act)
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>command<span class="org-unicode-whitespace-subdued-space"> </span>(file-truename<span class="org-unicode-whitespace-subdued-space"> </span>command)))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>command<span class="org-unicode-whitespace-subdued-space"> </span>(file-truename<span class="org-unicode-whitespace-subdued-space"> </span>command)))
 
 (add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'tramp-remote-path<span class="org-unicode-whitespace-subdued-space"> </span>'tramp-own-remote-path)
 </pre>
@@ -241,7 +244,7 @@ Use cat as a pager.  Fixes all kinds of things.
 <div class="outline-text-3" id="text-3-1">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eshell-prompt-extras</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>eshell-highlight-prompt<span class="org-unicode-whitespace-subdued-space"> </span>nil
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>eshell-highlight-prompt<span class="org-unicode-whitespace-subdued-space"> </span>nil
 <span class="org-unicode-whitespace-subdued-space">        </span>eshell-prompt-function<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/epe-theme))
 </pre>
 </div>
@@ -252,18 +255,18 @@ Use cat as a pager.  Fixes all kinds of things.
 <div class="outline-text-3" id="text-3-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/epe-theme</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Eshell</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Prompt</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Extras</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">theme."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>eshell-prompt-regexp<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#\n&#128048;]*[#&#128048;])</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>eshell-prompt-regexp<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#\n&#128048;]*[#&#128048;])</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(concat
 <span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>'mode-line)
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>'mode-line)
 <span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(epe-remote-p)
-<span class="org-unicode-whitespace-subdued-space">     </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"[</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Remote</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">]"</span>
+<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"[</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Remote</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">]"</span>
 <span class="org-unicode-whitespace-subdued-space">                             </span>'epe-remote-face))
-<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span>(eshell/pwd)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span>(eshell/pwd)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
 <span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(epe-git-p)
 <span class="org-unicode-whitespace-subdued-space">     </span>(concat
-<span class="org-unicode-whitespace-subdued-space">      </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
-<span class="org-unicode-whitespace-subdued-space">      </span>(epe-colorize-with-face
+<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-dir-face)
+<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">epe-colorize-with-face</span>
 <span class="org-unicode-whitespace-subdued-space">       </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(epe-git-branch)
 <span class="org-unicode-whitespace-subdued-space">               </span>(epe-git-dirty)
 <span class="org-unicode-whitespace-subdued-space">               </span>(epe-git-untracked)
@@ -271,8 +274,8 @@ Use cat as a pager.  Fixes all kinds of things.
 <span class="org-unicode-whitespace-subdued-space">                 </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>unpushed<span class="org-unicode-whitespace-subdued-space"> </span>0)
 <span class="org-unicode-whitespace-subdued-space">                   </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">":"</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>unpushed)))))
 <span class="org-unicode-whitespace-subdued-space">       </span>'epe-git-face)))
-<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128048;)"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-symbol-face)
-<span class="org-unicode-whitespace-subdued-space">   </span>(epe-colorize-with-face<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>(user-uid)<span class="org-unicode-whitespace-subdued-space"> </span>0)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-sudo-symbol-face)
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128048;)"</span><span class="org-unicode-whitespace-subdued-space"> </span>'epe-symbol-face)
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">epe-colorize-with-face</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>(user-uid)<span class="org-unicode-whitespace-subdued-space"> </span>0)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"#"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)<span class="org-unicode-whitespace-subdued-space"> </span>'epe-sudo-symbol-face)
 <span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>))
 </pre>
 </div>
@@ -302,7 +305,7 @@ Use cat as a pager.  Fixes all kinds of things.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-14 Wed 20:53</p>
+<p class="date">Created: 2016-09-19 Mon 22:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-14 Wed 20:53 -->
+<!-- 2016-09-19 Mon 22:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>General Programming</title>
@@ -147,7 +147,10 @@ for the JavaScript code in this tag.
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="index"> HOME </a>
-</div><div id="content">
+</div><div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+</div>
+<div id="content">
 <h1 class="title">General Programming</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -187,7 +190,7 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline40">2. Tools</a>
+<li><a href="#orgheadline42">2. Tools</a>
 <ul>
 <li><a href="#orgheadline20">2.1. Flycheck</a></li>
 <li><a href="#orgheadline21">2.2. DZ, make it easy to run secondary services</a></li>
@@ -227,12 +230,17 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline38">2.8.1. Projectile</a></li>
 </ul>
 </li>
+<li><a href="#orgheadline41">2.9. SQL Mode</a>
+<ul>
+<li><a href="#orgheadline40">2.9.1. <span class="todo TODO">TODO</span> company backend for mysql completions.  Should totally either be a thing, or a thing I make.</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline41">3. Languages</a></li>
-<li><a href="#orgheadline43">4. Quazi-related Modes</a>
+</ul>
+</li>
+<li><a href="#orgheadline43">3. Languages</a></li>
+<li><a href="#orgheadline45">4. Quazi-related Modes</a>
 <ul>
-<li><a href="#orgheadline42">4.1. Yaml</a></li>
+<li><a href="#orgheadline44">4.1. Yaml</a></li>
 </ul>
 </li>
 </ul>
@@ -305,8 +313,8 @@ Enforce checking of parens in programming modes.  Not 100% sure about this yet. 
 This config could use tweaking. 
 </p>
 
-<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>show-paren-style<span class="org-unicode-whitespace-subdued-space"> </span>'mixed)
-(setq<span class="org-unicode-whitespace-subdued-space"> </span>show-paren-delay<span class="org-unicode-whitespace-subdued-space"> </span>0)
+<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>show-paren-style<span class="org-unicode-whitespace-subdued-space"> </span>'mixed)
+(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>show-paren-delay<span class="org-unicode-whitespace-subdued-space"> </span>0)
 (show-paren-mode)
 </pre>
 </div>
@@ -326,7 +334,7 @@ Rainbow Delimiters are static.  It's always the same color regardless of where t
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">rainbow-delimiters</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>rainbow-delimiters-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>rainbow-delimiters-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(set-face-attribute<span class="org-unicode-whitespace-subdued-space"> </span>'rainbow-delimiters-depth-1-face<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"grey43"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(set-face-attribute<span class="org-unicode-whitespace-subdued-space"> </span>'rainbow-delimiters-depth-2-face<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"grey45"</span>)
@@ -361,7 +369,7 @@ I'll need to learn more about emacs faces to continue.
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">rainbow-blocks</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:demand</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>rainbow-blocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>rainbow-blocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(custom-set-faces
 <span class="org-unicode-whitespace-subdued-space">   </span>'(rainbow-blocks-depth-1-face<span class="org-unicode-whitespace-subdued-space"> </span>((t<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-builtin">:overline</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"grey10"</span>))))
@@ -459,10 +467,10 @@ Thanks to Artur Malabarba <label for="1" class="margin-toggle sidenote-number"><
 <span class="org-unicode-whitespace-subdued-space">                    </span>(Bl<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bc)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;
 <span class="org-unicode-whitespace-subdued-space">                    </span>(Bc<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Bl)<span class="org-unicode-whitespace-subdued-space"> </span>?-<span class="org-unicode-whitespace-subdued-space"> </span>(Br<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>Br)<span class="org-unicode-whitespace-subdued-space"> </span>?&gt;))))
 
-(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-unprettify-at-point<span class="org-unicode-whitespace-subdued-space"> </span>'right-edge)
+(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-unprettify-at-point<span class="org-unicode-whitespace-subdued-space"> </span>'right-edge)
 
-(emagician/defhook<span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook
-<span class="org-unicode-whitespace-subdued-space">   </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
+(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-code<span class="org-unicode-whitespace-subdued-space"> </span>prog-mode-hook
+<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>emagician/prettify-list))
 </pre>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -596,7 +604,7 @@ it's really brutal, make computers format it for you incoming, and
 reformat it for everyone else outgoing.
 </p>
 
-<pre class="code">(setq-default<span class="org-unicode-whitespace-subdued-space"> </span>indent-tabs-mode<span class="org-unicode-whitespace-subdued-space"> </span>nil)
+<pre class="code">(<span class="org-keyword">setq-default</span><span class="org-unicode-whitespace-subdued-space"> </span>indent-tabs-mode<span class="org-unicode-whitespace-subdued-space"> </span>nil)
 </pre>
 </div>
 </div>
@@ -676,7 +684,7 @@ I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed 
 <span class="org-unicode-whitespace-subdued-space">            </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">              </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">https://github.com/Fuco1/smartparens/issues/257</span>
 <span class="org-unicode-whitespace-subdued-space">              </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">fixed</span>
-<span class="org-unicode-whitespace-subdued-space">              </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>sp-autoescape-string-quote<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
+<span class="org-unicode-whitespace-subdued-space">              </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>sp-autoescape-string-quote<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
 
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Remove</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">''</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">pairing</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">elisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">quoting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">used</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">ton</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(sp-local-pair<span class="org-unicode-whitespace-subdued-space"> </span>'minibuffer-inactive-mode<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"'"</span><span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:actions</span><span class="org-unicode-whitespace-subdued-space"> </span>nil)
@@ -687,8 +695,8 @@ I am not 100% convinced about these keybindings.  Honestly I snarfed and barfed 
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline40" class="outline-2">
-<h2 id="orgheadline40"><span class="section-number-2">2</span> Tools</h2>
+<div id="outline-container-orgheadline42" class="outline-2">
+<h2 id="orgheadline42"><span class="section-number-2">2</span> Tools</h2>
 <div class="outline-text-2" id="text-2">
 </div><div id="outline-container-orgheadline20" class="outline-3">
 <h3 id="orgheadline20"><span class="section-number-3">2.1</span> Flycheck</h3>
@@ -750,11 +758,11 @@ It's nice to have helpers to see if we are in org-babel mode.
 
 (<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/org-src-mode-p</span><span class="org-unicode-whitespace-subdued-space"> </span>()
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'()))
-<span class="org-unicode-whitespace-subdued-space">    </span>(should-not<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should-not</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'(foo<span class="org-unicode-whitespace-subdued-space"> </span>bar)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(should-not<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should-not</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p)))
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((minor-mode-list<span class="org-unicode-whitespace-subdued-space"> </span>'(org-src-mode)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(should<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p))))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/org-src-mode-p))))
 </pre>
 </div>
 </div>
@@ -765,7 +773,7 @@ It's nice to have helpers to see if we are in org-babel mode.
 <p>
 Tweak Ediff to be better 
 </p>
-<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>ediff-window-setup-function<span class="org-unicode-whitespace-subdued-space"> </span>'ediff-setup-windows-plain
+<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>ediff-window-setup-function<span class="org-unicode-whitespace-subdued-space"> </span>'ediff-setup-windows-plain
 <span class="org-unicode-whitespace-subdued-space">      </span>ediff-split-window-function<span class="org-unicode-whitespace-subdued-space"> </span>'split-window-horizontally)
 </pre>
 </div>
@@ -807,7 +815,7 @@ The secret sauce here is activating the doc set.
 
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">helm-dash</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>helm-dash-browser-func<span class="org-unicode-whitespace-subdued-space"> </span>'eww))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>helm-dash-browser-func<span class="org-unicode-whitespace-subdued-space"> </span>'eww))
 </pre>
 </div>
 
@@ -829,7 +837,7 @@ Version control Gets it's own section.
 <p>
 Don't manage ancient version control backends.
 </p>
-<pre class="code">(setq<span class="org-unicode-whitespace-subdued-space"> </span>vc-handled-backends<span class="org-unicode-whitespace-subdued-space"> </span>'(Git))
+<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>vc-handled-backends<span class="org-unicode-whitespace-subdued-space"> </span>'(Git))
 </pre>
 </div>
 
@@ -862,7 +870,7 @@ It is seriously one of the coolest Emacs packages out there.
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128302;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(locate-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span><span class="org-unicode-whitespace-subdued-space"> </span>exec-path)
-<span class="org-unicode-whitespace-subdued-space">    </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>magit-git-executable<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span>))
+<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>magit-git-executable<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"git-achievements"</span>))
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
 <span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"C-c</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">m"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>magit-status)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>)
@@ -893,7 +901,7 @@ It doesn't quite work.
 <div class="outline-text-5" id="text-2-7-2-2">
 <pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-github-gh-pull-config</span><span class="org-unicode-whitespace-subdued-space"> </span>(user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">proper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">gh-pulls."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(interactive<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"sUser/Org:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\nsRepo:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">interactive</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"sUser/Org:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\nsRepo:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span>(magit-git-command-topdir<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"config</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">magit.gh-pulls-repo</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s/%s"</span><span class="org-unicode-whitespace-subdued-space"> </span>user<span class="org-unicode-whitespace-subdued-space"> </span>repo)
 <span class="org-unicode-whitespace-subdued-space">                            </span>(magit-toplevel)))
 </pre>
@@ -911,7 +919,7 @@ So pleasant.
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">git-gutter-fringe+</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span>(git-gutter+-mode<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>git-gutter-fr+-side<span class="org-unicode-whitespace-subdued-space"> </span>'right-fringe)
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>git-gutter-fr+-side<span class="org-unicode-whitespace-subdued-space"> </span>'right-fringe)
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'text-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'git-gutter+-mode)
 <span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'git-gutter+-mode))
 </pre>
@@ -935,7 +943,7 @@ But that was a long time ago.
 
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">projectile</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(setq<span class="org-unicode-whitespace-subdued-space"> </span>projectile-mode-line<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:eval</span><span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128194;[%s]"</span><span class="org-unicode-whitespace-subdued-space"> </span>(projectile-project-name))))
+<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>projectile-mode-line<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:eval</span><span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">&#128194;[%s]"</span><span class="org-unicode-whitespace-subdued-space"> </span>(projectile-project-name))))
 <span class="org-unicode-whitespace-subdued-space">  </span>(projectile-global-mode))
 
 (<span class="org-keyword">with-eval-after-load</span><span class="org-unicode-whitespace-subdued-space"> </span>'helm
@@ -944,10 +952,17 @@ But that was a long time ago.
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgheadline41" class="outline-2">
-<h2 id="orgheadline41"><span class="section-number-2">3</span> Languages</h2>
+<div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41"><span class="section-number-3">2.9</span> SQL Mode</h3>
+<div class="outline-text-3" id="text-2-9">
+</div><div id="outline-container-orgheadline40" class="outline-4">
+<h4 id="orgheadline40"><span class="section-number-4">2.9.1</span> <span class="todo TODO">TODO</span> company backend for mysql completions.  Should totally either be a thing, or a thing I make.</h4>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline43" class="outline-2">
+<h2 id="orgheadline43"><span class="section-number-2">3</span> Languages</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Each language gets it's own file.
@@ -961,11 +976,11 @@ Each language gets it's own file.
 </div>
 </div>
 
-<div id="outline-container-orgheadline43" class="outline-2">
-<h2 id="orgheadline43"><span class="section-number-2">4</span> Quazi-related Modes</h2>
+<div id="outline-container-orgheadline45" class="outline-2">
+<h2 id="orgheadline45"><span class="section-number-2">4</span> Quazi-related Modes</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline42" class="outline-3">
-<h3 id="orgheadline42"><span class="section-number-3">4.1</span> Yaml</h3>
+</div><div id="outline-container-orgheadline44" class="outline-3">
+<h3 id="orgheadline44"><span class="section-number-3">4.1</span> Yaml</h3>
 <div class="outline-text-3" id="text-4-1">
 <pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">yaml-mode</span>
 <span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\.yml\\'"</span>)
@@ -986,7 +1001,7 @@ Each language gets it's own file.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-14 Wed 20:53</p>
+<p class="date">Created: 2016-09-19 Mon 22:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

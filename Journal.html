@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-14 Wed 20:53 -->
+<!-- 2016-09-19 Mon 22:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Journal</title>
@@ -147,21 +147,25 @@ for the JavaScript code in this tag.
  <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="index"> HOME </a>
-</div><div id="content">
+</div><div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+</div>
+<div id="content">
 <h1 class="title">Journal</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">1. Wax about Journal</a></li>
-<li><a href="#orgheadline7">2. 2016</a>
+<li><a href="#orgheadline8">2. 2016</a>
 <ul>
-<li><a href="#orgheadline6">2.1. September</a>
+<li><a href="#orgheadline7">2.1. September</a>
 <ul>
-<li><a href="#orgheadline2">2.1.1. 11th - Navigation On Top</a></li>
-<li><a href="#orgheadline3">2.1.2. 8th - Lou The GC 👷</a></li>
-<li><a href="#orgheadline4">2.1.3. 6th - Debugging an Emacs slowdown</a></li>
-<li><a href="#orgheadline5">2.1.4. 5th - Configs and a new mode</a></li>
+<li><a href="#orgheadline2">2.1.1. 19th - I crave vim-style command composability</a></li>
+<li><a href="#orgheadline3">2.1.2. 11th - Navigation On Top</a></li>
+<li><a href="#orgheadline4">2.1.3. 8th - Lou The GC 👷</a></li>
+<li><a href="#orgheadline5">2.1.4. 6th - Debugging an Emacs slowdown</a></li>
+<li><a href="#orgheadline6">2.1.5. 5th - Configs and a new mode</a></li>
 </ul>
 </li>
 </ul>
@@ -183,15 +187,32 @@ Et Cetera.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">2</span> 2016</h2>
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8"><span class="section-number-2">2</span> 2016</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">2.1</span> September</h3>
+</div><div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">2.1</span> September</h3>
 <div class="outline-text-3" id="text-2-1">
 </div><div id="outline-container-orgheadline2" class="outline-4">
-<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> 11th - Navigation On Top</h4>
+<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> 19th - I crave vim-style command composability</h4>
 <div class="outline-text-4" id="text-2-1-1">
+<p>
+I have found a package, it looks interesting, but it doesn't do it the way I want it to.  It isn't&#x2026; clean enough. 
+</p>
+
+<p>
+I still need to learn more about how vim composibility works.  Also I need to not get stuck with that as the ultimate.
+</p>
+
+<p>
+Oh no.  It is a starting point.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> 11th - Navigation On Top</h4>
+<div class="outline-text-4" id="text-2-1-2">
 <p>
 I'd love to get some kind of top-level automagick navigation.    Maybe the <code>#+SETUPFILE</code> along with an <code>HTML_PREAMbLE</code> can do it.
 </p>
@@ -202,9 +223,9 @@ I also wonder if I need a separate directory for the "programming" file set?
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> 8th - Lou The GC 👷</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">2.1.3</span> 8th - Lou The GC 👷</h4>
+<div class="outline-text-4" id="text-2-1-3">
 <p>
 After my earlier GC Experiments, I made Lou the GC.  Lou might become it's own elisp file and project.   Once I'm sure he works well.
 </p>
@@ -212,9 +233,9 @@ After my earlier GC Experiments, I made Lou the GC.  Lou might become it's own e
 </div>
 
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">2.1.3</span> 6th - Debugging an Emacs slowdown</h4>
-<div class="outline-text-4" id="text-2-1-3">
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">2.1.4</span> 6th - Debugging an Emacs slowdown</h4>
+<div class="outline-text-4" id="text-2-1-4">
 <p>
 Something has gone horribly wrong with my emacs.  Every 5 minutes or so I get a spinning beachball of death.  It's either:
 </p>
@@ -314,9 +335,9 @@ Also: <a href="http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-co
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">2.1.4</span> 5th - Configs and a new mode</h4>
-<div class="outline-text-4" id="text-2-1-4">
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">2.1.5</span> 5th - Configs and a new mode</h4>
+<div class="outline-text-4" id="text-2-1-5">
 <div class="epigraph"><blockquote>
 <p>
 Good artists copy.  Great artists steal.
@@ -338,7 +359,7 @@ As an aside, I started work on a new parens-underlining package.  I don't know i
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-14 Wed 20:53</p>
+<p class="date">Created: 2016-09-19 Mon 22:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
