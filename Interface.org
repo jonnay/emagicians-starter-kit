@@ -443,11 +443,16 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
             (length faves))
          faves)))
 
+(defun emagician/set-random-powerline-separator ()
+  "Set the powerline separator to something randomly cool"
+  (setq powerline-default-separator (emagician/powerline-separator)))
+
 (use-package powerline
              :demand
              :init
-             (setq powerline-default-separator (emagician/powerline-separator))
-             (emagician/powerline-theme))
+             (emagician/set-random-powerline-separator)
+             (emagician/powerline-theme)
+             (add-hook 'midnight-mode 'emagician/set-random-powerline-separator))
 #+end_src
 
 *** Smart Mode Line                                                                       :disabled:
