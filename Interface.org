@@ -412,24 +412,21 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
                              (powerline-fill face1 (powerline-width rhs))
                              (powerline-render rhs)))))))
 #+end_src
-*** Other settings
-
+*** The Separator 
      Available Separators are:
-alternate, arrow, arrow-fade, bar, box, brace, butt,
-chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   - alternate :: spikey and blurry
-  - arrow :: Nice. What it says on the tin too.
+  - 🟏 arrow :: Nice. What it says on the tin too.
   - arrow-fade :: Burry arrow. Not so nice. 
   - bar :: Blurry and boring
-  - brace :: What it {says} on the tin.
-  - butt :: Looks sexy.  Seriously.
-  - chamfer :: Looks circuity-cool
+  - 🟏 brace :: What it {says} on the tin.
+  - 🟏 butt :: Looks sexy.  Seriously.
+  - 🟏 chamfer :: Looks circuity-cool
   - contour :: A bit spikey
-  - curve :: Round butt. 
-  - rounded :: Like a rounded chamfer
-  - roundstub :: Like a round butt.
+  - 🟏 curve :: Round butt. 
+  - 🟏 rounded :: Like a rounded chamfer
+  - 🟏 roundstub :: Like a round butt.
   - wave :: contour backwards
-  - zigzag :: Zig-Zag
+  - 🟏 zigzag :: Zig-Zag
   - utf-8 :: Arrow with utf8 chars?
 
 #+begin_src emacs-lisp 
@@ -558,6 +555,9 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
      | Friday    | Honour      | magenta | ♀ |
      | Saturday  | Loyalty     | b/w     | ♄ |
 
+     Note that at this point the 7 day cycle of days beats against the 8 day cycle of good modelines, see [[*The Separator][The Separator]] of the modeline.
+
+
 #+begin_src emacs-lisp 
 (defun emagician/get-moe-color-for-day (&optional day)
   (when (null day)
@@ -599,6 +599,8 @@ chamfer, contour, curve, rounded, roundstub, slant, wave, zigzag
   (powerline-reset)
 )
 #+end_src
+
+
 *** Org Beautify
     Load from our bad self!
 #+begin_src emacs-lisp 
@@ -1192,7 +1194,6 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+end_src
 
 
-
 *** Personal Preferences
 Make helm open a new window instead of taking over another.
 
@@ -1202,6 +1203,9 @@ Make it a bit nicer too.
 (setq helm-candidate-separator "──────────────────────────────")
 #+end_src
 
+*** The Helm Alternative: Ivy?
+**** TODO read https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/ again
+**** TODO Look at https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
 * God Mode
   Just starting to use god mode, not sure about it yet.
 
@@ -1215,6 +1219,7 @@ Make it a bit nicer too.
 ** PROJECT Look at command composability a-la evil 
 *** TODO Digest this: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
 *** TODO Digest evil 
+*** TODO look at existing interactive spec 
 *** TODO Duplicate command watcher
 "Instead of hitting forward so many times, you can use C-3 C-f"
 *** TODO command teller-about-er
@@ -1224,8 +1229,7 @@ Make it a bit nicer too.
     - Miracle
     - Zeal
     - Some sort of action-of-gods.  A better name would be something more Ancient Egyptian/Greek
-
-
+*** TODO Digest https://github.com/paldepind/composable.el/blob/master/composable.el
 
 * Footnotes
 

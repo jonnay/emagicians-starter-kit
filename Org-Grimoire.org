@@ -743,3 +743,11 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
   (org-display-inline-images t t))
 (add-hook 'org-mode-hook 'turn-on-org-show-all-inline-images)
 #+end_src
+* References and Shoutouts
+  - http://home.fnal.gov/~neilsen/notebook/orgExamples/org-examples.html
+    A set of really good examples in cookbook form. 👍
+
+  - http://fgiasson.com/blog/index.php/2016/06/21/optimal-emacs-settings-for-org-mode-for-literate-programming/
+    Blog post about making org-mode work well with clojure.
+
+

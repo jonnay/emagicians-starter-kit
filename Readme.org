@@ -12,7 +12,7 @@
 
 *  Five 'W's and 2 'Y's. 
 ** Who am I?
-   I'm Jonnay!
+   I'm Jonnay! [[mn:1][file:./assets/images/burning-bunny-transparent.png]]
 
    I've been using Emacs since 2007.  I make [[http://www.jonnay.net][Music, Art and Video
    Blogs]].  I'm a front-end narwhal (a Canadian coder who can do UX
