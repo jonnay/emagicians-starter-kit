@@ -72,7 +72,7 @@
 
 * Display   :display:
 
-There is an argument that Emacs doesn't need to look pretty.  That all we're really doing is editing text, so why do anything to it beyond a basic theme to give you syntax colors.
+There is an argument that Emacs doesn't need to look pretty.  That all we're really doing is editing text, so why do anything to it beyond a basic theme to give you syntax highlighting.
 
 I call bullshit.  All of us already live in a prison of existential crisis.  Why would we make our text editor any more of a prison?
 
@@ -122,6 +122,22 @@ Scrollbars, Toolbars and Menu Bars. Oh my.
    - The differences between ({[]}) are all super apparent.
    - It has a great set of weights.
 
+*** Fantasque Sans Mono
+https://github.com/belluzj/fantasque-sans
+
+qqq
+
+What is this guy like?
+
+Amazingly few discotheques provide jukeboxes.
+01234567890 ({[ .,:;"'`*~^ ]}) 
+
+#+begin_src emacs-lisp 
+(set-face-attribute 'default nil :family "Fantasque Sans Mono" :height 170 :weight 'normal)
+#+end_src
+
+file:./assets/images/FantasqueSansMono.png
+ 
 *** Adobe Source Code Pro
 https://github.com/adobe-fonts/source-code-pro 
 
@@ -289,7 +305,6 @@ The secret sauce to making sure to get all the emoji is ~(setq unicode-fonts-ign
 
 ** Modeline
 The modeline should show as much information as required, in as small a space as possible.  I am a too-much-info kinda guy.  It's a sickness.
-
 *** Basics
 #+begin_src emacs-lisp 
 (setq column-number-mode t)
@@ -475,9 +490,6 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
    - 'normal' :: line
    - god mode :: Horizontal cursor
 
-*** Enhancements
-**** TODO set up a way to handle production buffers through a buffer local var.
-**** TODO do proper god-mode check 
 *** Code
 #+name: cursor-status
 #+begin_src emacs-lisp 
@@ -497,7 +509,7 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
                 ((not (equal buffer-file-name nil)) "grey50")
                 (t "cyan")))
         (type (cond
-               ((and (boundp 'god-local-mode) god-local-mode) '(hbar . 3))
+               ((and (boundp 'god-local-mode) god-local-mode) '(hbar . 7))
                (overwrite-mode 'hollow)
                (t '(bar . 2)))))
     (unless (and
@@ -510,6 +522,25 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 
 (add-hook 'post-command-hook 'emagician/set-cursor-color-according-to-mode)
 #+end_src
+
+#+begin_src emacs-lisp 
+(ert-deftest eamagician/set-cursor-dangerous-buffer-test ()
+  (let ((emagician/dangerous-buffer t))
+    (emagician/set-cursor-color-according-to-mode)
+    (should (equal emagician/set-cursor-color-color "red")))
+  (let ((emagician/dangerous-buffer nil))
+    (emagician/set-cursor-color-according-to-mode)
+    (should-not (equal emagician/set-cursor-color-color "red"))))
+#+end_src
+
+*** Command to mark the current buffer dangerous
+#+begin_src emacs-lisp 
+(defun emagician/make-buffer-dangerous ()
+  "Marks the current buffer dangerous"
+  (interactive)
+  (setq emagician/dangerous-buffer t))
+#+end_src
+
 
 ** Highlight Line
 #+begin_src emacs-lisp 
@@ -658,9 +689,14 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
   I'll fix the emagicians kit so that transient mark mode can be
   easily activated.
 
-#+name: turn-off-transient-mark
 #+begin_src emacs-lisp
   (transient-mark-mode -1)
+#+end_src
+
+  Or with it on?
+
+#+begin_src emacs-lisp 
+(transient-mark-mode 1)
 #+end_src
 
 *** Show Marks   :learn-me:
@@ -805,6 +841,9 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
   :diminish "🈺 "
   :init
   (global-company-mode)
+  :bind (:map company-active-map
+              (("C-n" . company-select-next)
+               ("C-p" . company-select-prev)))
   :config
   (use-package company-statistics
     :config (company-statistics-mode)))
@@ -1121,6 +1160,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
         ("?" . howdoi-query)))
 #+end_src
 
+** TODO Try out IVY instead of helm
 ** Helm
    I have a complicated relationship with helm.  
 

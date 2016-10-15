@@ -8,6 +8,18 @@
 
 * 2016
 ** September
+*** 25th - Mise en place 
+   [[mn:1][file:./assets/images/mise-en-place-gary-stevens.jpg]] In cooking there is this concept of Mise en place―everything in it's place.  I think that should be an option for me.  Being able to launch a particular work context and run with it.
+
+   The thing is a particular work context is going to be a slightly different context for the same physical project (i.e. source control) base.  So this is what I'lll need:
+
+   - VM open
+   - Magit open and running
+   - recent pull from source control
+   - Org file pop-to-window thing
+   - Status of builds immediately visible
+   
+
 *** 19th - I crave vim-style command composability
     I have found a package, it looks interesting, but it doesn't do it the way I want it to.  It isn't... clean enough. 
 

@@ -254,12 +254,12 @@
    :diminish "⒮"
    :bind (("M-9" . sp-backward-sexp)
           ("M-0" . sp-forward-sexp)
-          :smartparens-mode-map
-          ("C-<right>" . sp-forward-slurp-sexp)
-          ("C-<left>" . sp-forward-barf-sexp)
-          ("C-M-<right>" . sp-backward-barf-sexp)
-          ("C-M-<left>" . sp-backward-slurp-sexp)
-          ("M-S-s" . sp-splice-sexp))
+          :map smartparens-mode-map
+          (("C-<right>" . sp-forward-slurp-sexp)
+           ("C-<left>" . sp-forward-barf-sexp)
+           ("C-M-<right>" . sp-backward-barf-sexp)
+           ("C-M-<left>" . sp-backward-slurp-sexp)
+           ("M-S-s" . sp-splice-sexp)))
    :init
    (add-hook 'prog-mode-hook #'turn-on-smartparens-mode)
    :config
@@ -267,6 +267,7 @@
    (add-to-list 'sp-sexp-suffix '(es-mode regex ""))
 
    (require 'smartparens-config)
+   (require 'smartparens-ruby)
    (add-hook 'sh-mode-hook
              (lambda ()
                ;; Remove when https://github.com/Fuco1/smartparens/issues/257
@@ -278,6 +279,8 @@
    (sp-local-pair 'web-mode "<" nil :actions nil)
  )
  #+end_src
+*** TODO Fix pairs for webmode, 
+
 * Tools
 ** Flycheck
 
@@ -431,12 +434,13 @@ Tweak Ediff to be better
 #+end_src
 
 ** Project Management
-*** Projectile
+*** Projectile                                                                         :deactivated:
     The last time I used projectile it was not what I needed at all.
 
     But that was a long time ago.
 
- #+begin_src emacs-lisp 
+    Trying it again, it does not play well with tramp.  A bit of a pity. 
+ #+begin_src emacs-lisp :tangle no
  (use-package projectile
    :init
    (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))

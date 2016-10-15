@@ -299,7 +299,7 @@ Return output file name."
   (emagician/meta/publish "emagician-assets" t nil))
 
 #+END_SRC
-*** TODO Fix Main Publisher to be even less sucky using spliced lists.
+
 ** ÆＳÞＥTＩC 
 
     [[mn:1][file:./assets/images/tome-quilt/grimoire.jpg]]
@@ -510,19 +510,15 @@ pre.code:hover {
 }
 
 span.org-string {
-  color: #f94;
+  color: hsl(30, 90%, 40%);
 }
 
 span.org-keyword {
-  color: #c07;
+  color: hsl(0, 100%, 35%);
 }
 
 span.org-variable-name {
-  color: #f04;
-}
-
-span.org-clojure-keyword {
-  color: #09f;
+  color: hsl(0, 100%, 50%);
 }
 
 span.org-comment, span.org-comment-delimiter {
@@ -550,7 +546,7 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
 }
 
 
-@media screen {
+@media screen and (min-device-width: 1000px) {
   h1.title {
     margin-left: 260px;
   }
@@ -720,11 +716,34 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
     max-width: 960px;
   }
 }
-#+END_SRC
 
-**** TODO Fix colors for syntax highlighting
-**** TODO Fix UP | HOME links
-**** TODO Write some kind of basic top menu thing if doable
+@media only screen and (max-device-width: 768px) {
+  body {
+    padding-left: 30px;
+  }
+
+  #table-of-contents {
+    display: none;
+  }
+}
+
+@media print {
+  #preamble {
+    display: none;
+  }
+
+  #table-of-contents {
+    display: block;
+    width: auto;
+    background: none;
+    box-shadow: none;
+  }
+
+  #table-of-contents>ul>li>ul {
+    display: none;
+  }
+}
+#+END_SRC
 
 * Inserting text chunks
    In 2016 I participated in GISHWHES.  One of the items was to make an animation on a Commodore-64.[fn:2]

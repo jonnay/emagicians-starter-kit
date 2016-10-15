@@ -634,6 +634,19 @@ Know your HTTP Well!  M-x http-foo and media-types
   (emagician/minor-in-major-mode artbollocks-mode org-mode-hook))
 #+end_src
 
+* Random Kawaii
+  I have a monster collection of photos that are so cute, or so awesome, they give me joy each time I see them.
+
+  It would be cool to make mcli do something like that every once in awhile.  
+
+  There is 2 things that'll have to happen:
+  - Metadata for wallpaper
+  - interface to m-cli:  ~m wallpaper path/to/wallpaper~
+
+** TODO simple 'metadata'.  Just a list
+** TODO Sort wallpapers
+** TODO basic command to ~m wallpaper~
+
 * Sierpinski
  ... is my jam! [fn:1]
 
