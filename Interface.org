@@ -992,6 +992,14 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 
 ** TODO https://github.com/wasamasa/shackle 
    example: https://github.com/hlissner/.emacs.d/blob/master/core/core-popup.el
+* Tramp
+
+Tramp has a tendency to 💩 history files everywhere.   This stops it.
+
+#+begin_src emacs-lisp
+(setq tramp-histfile-override t)
+#+end_src
+
 * Saving
 ** Backups
    Disabling backups was a monumentally stupidly bad idea.  I shall never do it again.  I figured since I was working mostly in source control, I'd be safe.  Then I was wrong one day, and lost a very important change.
