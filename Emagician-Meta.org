@@ -774,10 +774,12 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
             (emagician/meta/get-insert-symbol (cdr pair))))
         '(("a" . "ÆＳÞＥTＩC")
           ("b" . "🐰")
-          ("p" . "-|-+-|-")
-          ("m" . "🍄")
           ("e" . "💊")        ; Hah, it's a joke son.
+          ("h" . "ᕕ(ᐛ)ᕗ")  ; ┐(ᐛ)┌
+          ("m" . "🍄")
+          ("p" . "-|-+-|-")
           ("s" . "💩")
+          ("S" . "¯\_(ツ)_/¯")
           ("t" . "🚽")))
 #+END_SRC
 
