@@ -45,7 +45,7 @@ Another option is to handle the setting of the GC value after a period of idle t
 
 http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (defvar lou-the-gc-max (* 512 1024 1024)
   "Maximum Size of garbage collector.  Half gig seems reasonable.
 This value is basically not sane.")
@@ -76,7 +76,7 @@ This value is basically not sane.")
   (setq gc-cons-threshold lou-the-gc-sane))
 
 (unless after-init-time
-  (lou-the-gc-use-max)
+  (lou-the-gc-go-crazy)
   (add-hook 'emacs-startup-hook #'lou-the-gc-be-sane t))
 
 (add-hook 'minibuffer-setup-hook #'lou-the-gc-go-crazy)
@@ -141,6 +141,11 @@ this can go away. That day isn't today.
 
 #+begin_src emacs-lisp 
 (use-package noflet)
+#+end_src
+
+** Memory Usage
+#+begin_src emacs-lisp 
+(use-package memory-usage)
 #+end_src
 
 * emagick-🐰 Extensions to Emacs Lisp
