@@ -779,7 +779,7 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
           ("m" . "🍄")
           ("p" . "-|-+-|-")
           ("s" . "💩")
-          ("S" . "¯\_(ツ)_/¯")
+          ("S" . "¯\\_(ツ)_/¯")
           ("t" . "🚽")))
 #+END_SRC
 
