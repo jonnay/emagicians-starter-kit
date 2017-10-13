@@ -42,6 +42,11 @@
   (setq css-indent-offset 2)
 #+end_src
 
+*** Less mode
+#+begin_src emacs-lisp 
+(use-package less-css-mode)
+#+end_src
+
 *** SCSS Mode 
 #+begin_src emacs-lisp 
 (use-package scss-mode
