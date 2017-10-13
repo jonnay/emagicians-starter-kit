@@ -473,6 +473,14 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 (emagician/expect-package 'smart-mode-line)
 #+end_src
 
+** Echo Area
+   This changes the size of the echo area.
+
+#+begin_src emacs-lisp 
+(with-current-buffer " *Echo Area 0*" (face-remap-add-relative 'default '(:height 2.0)))
+(with-current-buffer " *Echo Area 1*" (face-remap-add-relative 'default '(:height 2.0)))
+#+end_src
+
 ** Cursor Info
    There are a few ways to change the cursor: blinking, shape and
    color.  Basically this gives us three different dimensions of
@@ -546,6 +554,20 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 #+begin_src emacs-lisp 
 (global-hl-line-mode 1)
 #+end_src
+
+** Beacon 
+
+Similar to highlight line.  Does a nice visual ping.  An under-rated package if you ask me.  As a UI guy this is the kind of interface I appreciate.
+
+#+begin_src emacs-lisp 
+(use-package beacon
+  :demand
+  :config
+  (beacon-mode 1)
+  (add-hook 'beacon-blink 'focus-in-hook t))  ; I don't think this works under OSX. Sad.
+#+end_src
+
+
 
 ** Show Empty lines
 #+begin_src emacs-lisp 
@@ -661,7 +683,7 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 #+end_src
 
 ** TODO All the Icons?
-   https://github.com/domtronn/all-the-icons.Eli
+   https://github.com/domtronn/all-the-icons.El
 * Editing
 ** UTF-8 Enforcement
   I've kept a version of this since 2006.
@@ -1278,6 +1300,23 @@ Make it a bit nicer too.
     - Zeal
     - Some sort of action-of-gods.  A better name would be something more Ancient Egyptian/Greek
 *** TODO Digest https://github.com/paldepind/composable.el/blob/master/composable.el
+
+* Hydra.
+
+  Code with poetry.
+
+  YIS.
+  
+#+begin_src emacs-lisp 
+(use-package hydra)
+#+end_src
+
+** Macro funkiness
+
+#+begin_src emacs-lisp 
+
+#+end_src
+
 
 * Footnotes
 
