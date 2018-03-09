@@ -30,8 +30,6 @@ Let there be light
      Metalogicon:  John of Salisbury 1159
 
      [[./assets/images/Library_of_Congress,_Rosenwald_4,_Bl._5r.jpg]]
-** Initialize Submodules
-*** TODO shell script to init submoduels
 
 * Running Code blocks
 
@@ -50,6 +48,13 @@ Let there be light
 
   You need emacs 24. I am sure you can get it and install it, if you
   haven't already.
+** Initialize Submodules
+#+begin_src sh
+git submodule init 
+git submodule update
+#+end_src
+
+#+RESULTS:
 
 ** Who the fuck are you?
 
@@ -72,7 +77,7 @@ Let there be light
 #+end_src 
 
 #+RESULTS: true-name
-: emagician-truename
+: emagician/true-name
 
 ** Make the init files
 
@@ -95,13 +100,13 @@ Let there be light
         "#+end_" "src\n")
 #+end_src
 
+#+RESULTS:
 #+name: set-this-dir-as-var
 #+begin_src emacs-lisp
 (defvar emagician/dir
-        "/Users/joarkell/projects/emagicians-starter-kit/"
+        "/Users/jonnay/emagicians-starter-kit/"
         "Automagically generated variable where the emagicians kit is located")
 #+end_src
-
 
 
 *** Step Two: Making it go.

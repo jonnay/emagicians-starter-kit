@@ -33,9 +33,11 @@ gem rdoc --all --ri
 
 * Mode 
 ** Ruby Block mode
-#+begin_src emacs-lisp 
+This is gone?!?
+#+begin_src emacs-lisp :tangle no
 (use-package ruby-block
   :diminish "[R] "
+  :ensure t
   :init
   (setq ruby-block-highlight-toggle t)
   :config)
@@ -45,11 +47,13 @@ gem rdoc --all --ri
 
 #+begin_src emacs-lisp 
 (use-package rinari
+  :ensure t
   :diminish "🚅 ")
 #+end_src
 ** Robe
 #+begin_src emacs-lisp 
-(use-package robe)
+(use-package robe
+  :ensure t)
 #+end_src
       
 ** Mode setup
@@ -73,9 +77,7 @@ gem rdoc --all --ri
    ("Vagrantfile$" . ruby-mode))
   :init
   (use-package ruby-tools)
-  (emagician/minor-in-major-mode ruby-tools-mode ruby-mode-hook)
-  :config
-  (ruby-block-mode t))
+  (emagician/minor-in-major-mode ruby-tools-mode ruby-mode-hook))
 #+end_src
 
 * Environment

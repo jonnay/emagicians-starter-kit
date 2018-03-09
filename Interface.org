@@ -565,6 +565,7 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
   (setq fci-rule-width 1)
   (setq fci-rule-column 81)
   (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  :config
   (global-fci-mode 1))
 #+end_src
 
@@ -656,7 +657,7 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 #+begin_src emacs-lisp :tangle no
 (use-package digit-groups
   :demand
-  :init
+  :config
   (digit-groups-global-mode 1))
 #+end_src
 
@@ -701,7 +702,8 @@ This theme is a beast.  I don't like it.  I love how it looks visually, but I ha
 
 *** Show Marks   :learn-me:
 #+begin_src emacs-lisp
-(use-package show-marks)
+(use-package show-marks
+  :ensure t)
 #+end_src
 
 ** Multiple Cursors                                                                           :bind:
@@ -761,7 +763,8 @@ Kill-whole-line just blew chunks for me.  REALLY blew chunks.
 #+begin_src emacs-lisp
   (use-package volatile-highlights
     :diminish ""
-    :init
+    :ensure t
+    :config
     (volatile-highlights-mode t))
 #+end_src
 
@@ -808,6 +811,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp 
 (use-package yasnippet
   :diminish ""
+  :ensure t
   :init
   (setq yas-snippet-dirs `(,(emagician/expect-dir "assets/snippets")))
   (setq yas-trigger-key nil)
@@ -839,12 +843,11 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp
 (use-package company
   :diminish "🈺 "
-  :init
-  (global-company-mode)
   :bind (:map company-active-map
               (("C-n" . company-select-next)
                ("C-p" . company-select-prev)))
   :config
+  (global-company-mode)
   (use-package company-statistics
     :config (company-statistics-mode)))
 #+end_src
@@ -905,6 +908,7 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
 #+begin_src emacs-lisp
   (use-package undo-tree
     :diminish ""
+    :ensure t
     :init
     (setq undo-tree-enable-undo-in-region t
           undo-tree-visualizer-diff t
@@ -1108,6 +1112,7 @@ Tramp has a tendency to 💩 history files everywhere.   This stops it.
 #+begin_src emacs-lisp
 (use-package which-key
   :demand
+  :ensure t
   :diminish ""
   :init
   (setq which-key-idle-delay 0.6)
@@ -1117,6 +1122,7 @@ Tramp has a tendency to 💩 history files everywhere.   This stops it.
   (setq which-key-max-description-length 50)
   (setq which-key-show-remaining-keys t)
   (setq which-key-lighter "❔")
+  :config
   (which-key-mode))
 #+end_src
 
@@ -1140,6 +1146,7 @@ Tramp has a tendency to 💩 history files everywhere.   This stops it.
 
 
 (use-package discover-my-major
+  :ensure t
   :init
   (make-discovery paredit)
   (make-discovery projectile)
@@ -1186,6 +1193,7 @@ Tramp has a tendency to 💩 history files everywhere.   This stops it.
   (require 'helm-config)
   (require 'helm-ring)
   (use-package helm-ls-git :demand)
+  :config
   (helm-mode 1))
 #+end_src
 
