@@ -56,6 +56,19 @@
 (bind-key "C-M-<backspace>" 'sanityinc/kill-back-to-indentation)
 
 #+end_src
+* Key UI Pieces
+  Not sure wht to call these.  They're more than display
+** Hydra.
+
+   Code with poetry.
+
+   YIS.
+  
+ #+begin_src emacs-lisp 
+ (use-package hydra)
+ #+end_src
+
+
 * Automated things
 ** Midnight  :automation:
    It's very silent in the background, and just kind of does the right thing.  Clears out old buffers not in use.  I also use it as a next-day scheduler.
@@ -76,9 +89,9 @@ There is an argument that Emacs doesn't need to look pretty.  That all we're rea
 
 I call bullshit.  All of us already live in a prison of existential crisis.  Why would we make our text editor any more of a prison?
 
-I eat delicious food, not Soy lent.
+I eat delicious food, not Soy-lent.
 
-I drink excellent beer, not Alberta Genuine Draft. 
+I drink excellent beer I find tasty, not Alberta Genuine Draft. 
 
 ÆＳÞＥTＩC is important.
 
@@ -935,6 +948,27 @@ Found from Stackoverflow.  Thank you jcubic and legoscia.[fn:1]
     (global-undo-tree-mode))
 #+end_src
 
+*** Hydra for Undo Tree
+
+    Thanks to g00eykabl00ey[fn:4]
+
+#+begin_src emacs-lisp 
+(defhydra hydra-undo-tree (:color yellow
+                                  :hint nil
+                                  )
+  "
+  _p_: undo  _n_: redo _s_: save _l_: load   "
+  ("p"   undo-tree-undo)
+  ("n"   undo-tree-redo)
+  ("s"   undo-tree-save-history)
+  ("l"   undo-tree-load-history)
+  ("u"   undo-tree-visualize "visualize" :color blue)
+  ("q"   nil "quit" :color blue))
+
+(global-set-key (kbd "M-,") 'hydra-undo-tree/undo-tree-undo) 
+#+end_src
+
+
 ** Spell Checking
 
 #+name: Mo Khan
@@ -1205,6 +1239,7 @@ Tramp has a tendency to 💩 history files everywhere.   This stops it.
   :diminish (helm-mode . "")
   :init
   (global-set-key [f2] 'emagician/helm)
+  (require 'helm-for-files)
   (require 'helm-config)
   (require 'helm-ring)
   (use-package helm-ls-git :demand)
@@ -1276,6 +1311,28 @@ Make it a bit nicer too.
 *** The Helm Alternative: Ivy?
 **** TODO read https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/ again
 **** TODO Look at https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
+** Ivy/Council/Smex/Swiper
+#+begin_src emacs-lisp 
+(use-package ivy
+  :demand)
+#+end_src
+
+  (global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)qqqq
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+
+
 * God Mode
   Just starting to use god mode, not sure about it yet.
 
@@ -1301,28 +1358,14 @@ Make it a bit nicer too.
     - Some sort of action-of-gods.  A better name would be something more Ancient Egyptian/Greek
 *** TODO Digest https://github.com/paldepind/composable.el/blob/master/composable.el
 
-* Hydra.
-
-  Code with poetry.
-
-  YIS.
-  
-#+begin_src emacs-lisp 
-(use-package hydra)
-#+end_src
-
-** Macro funkiness
-
-#+begin_src emacs-lisp 
-
-#+end_src
-
-
 * Footnotes
-
 
 [fn:1] http://stackoverflow.com/questions/22039847/emacs-lisp-function-with-optional-argument-call-other-function#22040296
 
 [fn:2] Thanks habamax and jwiegley. https://github.com/jwiegley/use-package/issues/366
 
 [fn:3] https://github.com/wasamasa/dotemacs/blob/master/init.org#display-fringe-indicators-and-fix-line-movement-in-visual-line-mode
+
+[fn:4] https://www.reddit.com/r/emacs/comments/78aa27/hydras_are_just_great_simple_but_super_useful/
+
+

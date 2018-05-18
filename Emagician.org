@@ -127,6 +127,7 @@ Now that we have the emagician/dir we can keep going and add new helpers to the 
 
 ** Package Archives setup
 #+INDEX: packages
+*** TODO Figure out https://github.com/raxod502/straight.el 
   We set our download dir to local-packages.  We also do the trick of
   doing package-refresh-contents if package-archive-contents is empty.
 

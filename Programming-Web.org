@@ -8,6 +8,13 @@
 (use-package ac-html-bootstrap)
 #+end_src
 
+** Colors
+#+begin_src emacs-lisp 
+(use-package rainbow-mode
+  :diminish "🌈"
+  :hook (scss-mode less-mode css-mode))
+#+end_src
+
 * Modes
 ** Web Mode
 *** Mode setup

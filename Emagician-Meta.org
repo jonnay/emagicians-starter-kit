@@ -832,3 +832,4 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
 * Footnotes
 [fn:1] https://github.com/thi-ng/org-spec
 [fn:2] The Greatest International Scavenger Hunt the World Has Ever Seen.  This is a yearly event with up to 10,000 people participating.  It lasts for a week long and participants are split into teams of ~13 people.  Some of the items are silly (go to the dentist and get dental work done while a string quartet performs), some are charitable (go to a nursing home and read to one of the residents while wearing a pirate costume).  More information on [[https://www.youtube.com/watch?v=SxeusMu7FuY][I'm Jonnay Season 9 Season 2 - TAZ]].
+

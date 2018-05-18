@@ -10,6 +10,28 @@ then ~require~ gets problematic.
 #+end_src
 
 * Fixes
+** Jigger path so that jamf won't break shit
+   jamf adds a symlink to the path, which makes completion barf when starting eshell.
+
+   ¯\_(ツ)_/¯
+
+   So we will jiggery poke the path.
+#+begin_src emacs-lisp 
+(setenv "PATH"
+        (replace-regexp-in-string ":/usr/local/bin/jamf"
+                                                ""
+                                                (getenv "PATH")))
+#+end_src
+** Execute an eshell Command Programmatically [fn:1]
+
+   #+begin_src emacs-lisp
+   (defun emagician/eshell-command (cmd) 
+     (with-current-buffer "*eshell*"
+        (eshell-return-to-prompt)
+        (insert cmd)
+        (eshell-send-input)))
+   #+end_src
+
 ** Use helm for history
 
 #+begin_src emacs-lisp 
@@ -91,4 +113,8 @@ Use cat as a pager.  Fixes all kinds of things.
   :init
   (add-hook 'eshell-mode-hook 'eshell-fringe-status-mode))
 #+end_src
+
+* Footnotes
+
+[fn:1] Thank you [[https://emacs.stackexchange.com/questions/7617/how-to-programmatically-execute-a-command-in-eshell][wasamasa]]
 

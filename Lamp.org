@@ -578,8 +578,25 @@ emacs-howdoi
 %%
 Know your HTTP Well!  M-x http-foo and media-types
 %%
+Do An upgrade today.
+%%
 #+end_src
 ^--- %%!
+* Schrute 
+  I am glad someone built this!  I have been thinking about it for awhile, but someone did it.  
+
+  Unfortunately it doesn't fit in with my Lamp Desires.  It just does-the-right-thing for you instead of prompting you for the right thing.
+
+#+begin_src emacs-lisp 
+(use-package schrute
+  :demand
+  :init
+  (setf schrute-shortcuts-commands '((avy-goto-line   . (next-line previous-line))
+                                     (avy-goto-word-1 . (left-char right-char))))
+  (schrute-mode -1))
+#+end_src
+
+
 * Fix-Muscle-Memory (was Emagician-Fix-Spell)
 
   This was originally defined in this file, but it got moved to it's own repo.

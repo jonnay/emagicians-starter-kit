@@ -24,8 +24,8 @@
 (use-package paredit
   :diminish "⒫"
   :bind
-  (:paredit-mode-map
-   (("M-s" . paredit-split-sexp)))
+  (:map paredit-mode-map
+   ("M-s" . paredit-split-sexp))
   :init
   (emagician/minor-in-major-mode paredit-mode generic-lisp-mode-hook))
 #+end_src
@@ -57,6 +57,7 @@
                         :underline t :foreground "green"
                         :weight 'bold))
 #+end_src
+
 
 **** Auto Complete
 #+begin_src emacs-lisp :tangle no 

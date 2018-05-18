@@ -9,7 +9,8 @@
 * Tools 
 ** Bundler
 #+begin_src emacs-lisp 
-(use-package bundler)
+(use-package bundler
+  :load-path "~/projects/emacs/bundler.el")
 #+end_src
 ** Rspec
 #+begin_src emacs-lisp 
@@ -32,6 +33,8 @@ gem rdoc --all --ri
 #+end_src
 
 * Mode 
+
+
 ** Ruby Block mode
 #+begin_src emacs-lisp 
 (use-package ruby-block

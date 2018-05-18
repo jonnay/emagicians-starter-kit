@@ -691,6 +691,11 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 (use-package htmlize)
 #+end_src
 
+* Plotting 
+#+begin_src emacs-lisp 
+(use-package gnuplot)
+#+end_src
+
 * Working with Code in Babel mode
 
 #+begin_src emacs-lisp 
@@ -702,10 +707,21 @@ This is temporarily deactivated.  Loading my agenda currently takes a long time.
 ** Languages
 
 #+begin_src emacs-lisp 
-(require 'ob-sh)
+(require 'ob-shell)
 (require 'ob-sql)
 (require 'ob-org)
 #+end_src
+
+#+begin_src emacs-lisp 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)
+   (sql . t)
+   (emacs-lisp . t)
+   (org . t)
+   ))
+#+end_src
+
 
 
 * Saving and auto Commiting

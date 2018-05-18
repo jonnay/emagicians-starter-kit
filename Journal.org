@@ -6,6 +6,9 @@
   Blah Blah Blah Blah
   Et Cetera.
 
+* 2017
+** October
+   A New position brings new challenges. 
 * 2016
 ** September
 *** 25th - Mise en place 
@@ -108,3 +111,13 @@ kill -SIGUSR2 $( ps aux | grep Emacs | awk '{print $2}')
     
 
     
+
+
+
+** PROJECT 
+   - Purpose - 50K :: 
+   - Success Looks Like - 40K  :: 
+   - Brainstorming - 30K
+     - 
+   - Organize the brainstorming and come up with next actions (20K)
+*** TODO 

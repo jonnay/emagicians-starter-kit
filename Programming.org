@@ -197,6 +197,16 @@
  Rrrriiiiggghhhhht.  
 
  I don't entirely understand this yet. 
+*** Outline Mode
+    Sexy Org-mode mana from heaven inside of code.
+
+#+begin_src emacs-lisp 
+(use-package outshine
+  :init
+  (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+  (add-hook 'prog-mode-hook 'outline-minor-mode))
+#+end_src
+
 ** Editing
 *** Tabs
 
@@ -434,20 +444,22 @@ Tweak Ediff to be better
 #+end_src
 
 ** Project Management
-*** Projectile                                                                         :deactivated:
+*** Projectile                                                                         
     The last time I used projectile it was not what I needed at all.
 
     But that was a long time ago.
 
     Trying it again, it does not play well with tramp.  A bit of a pity. 
- #+begin_src emacs-lisp :tangle no
- (use-package projectile
-   :init
-   (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
-   (projectile-global-mode))
 
- (with-eval-after-load 'helm
-   (use-package helm-projectile))
+    Now that I am off of tramp, maybe projectile will start to work again?
+ #+begin_src emacs-lisp 
+  (use-package projectile
+    :init
+    (setq projectile-mode-line '(:eval (format " 📂[%s]" (projectile-project-name))))
+    (projectile-global-mode))
+
+  (with-eval-after-load 'helm
+    (use-package helm-projectile))
  #+end_src
 
 ** SQL Mode
