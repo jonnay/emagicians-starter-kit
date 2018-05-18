@@ -22,10 +22,8 @@
 ** Paredit
 #+begin_src emacs-lisp 
 (use-package paredit
+  :ensure t
   :diminish "⒫"
-  :bind
-  (:map paredit-mode-map
-   ("M-s" . paredit-split-sexp))
   :init
   (emagician/minor-in-major-mode paredit-mode generic-lisp-mode-hook))
 #+end_src
