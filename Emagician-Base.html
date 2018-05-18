@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:48 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:31 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emagician-Base</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Emagician-Base</h1>
@@ -156,47 +238,48 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Bassline / Baseline</a></li>
-<li><a href="#orgheadline2">2. Basic helpers</a></li>
-<li><a href="#orgheadline11">3. Emacs Lisp Evaluation Environment</a>
+<li><a href="#org5931013">1. Bassline / Baseline</a></li>
+<li><a href="#org059ddbe">2. Basic helpers</a></li>
+<li><a href="#org532518a">3. Emacs Lisp Evaluation Environment</a>
 <ul>
-<li><a href="#orgheadline3">3.1. Garbage Collection</a></li>
-<li><a href="#orgheadline4">3.2. Prefer new files</a></li>
-<li><a href="#orgheadline5">3.3. Lexical Evaluation</a></li>
-<li><a href="#orgheadline6">3.4. Common Lisp</a></li>
-<li><a href="#orgheadline7">3.5. Evaluation and Printing</a></li>
-<li><a href="#orgheadline8">3.6. Anaphoric Goodness</a></li>
-<li><a href="#orgheadline9">3.7. Asyc</a></li>
-<li><a href="#orgheadline10">3.8. Testing</a></li>
+<li><a href="#org4dfef0e">3.1. Garbage Collection</a></li>
+<li><a href="#orgb886716">3.2. Prefer new files</a></li>
+<li><a href="#org61c51b9">3.3. Lexical Evaluation</a></li>
+<li><a href="#orge8edba1">3.4. Common Lisp</a></li>
+<li><a href="#org10d7dca">3.5. Evaluation and Printing</a></li>
+<li><a href="#org31a72a7">3.6. Anaphoric Goodness</a></li>
+<li><a href="#org7101cd5">3.7. Asyc</a></li>
+<li><a href="#org68286f2">3.8. Testing</a></li>
+<li><a href="#org9a8e918">3.9. Memory Usage</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline14">4. emagick-🐰 Extensions to Emacs Lisp</a>
+<li><a href="#org404e019">4. emagick-🐰 Extensions to Emacs Lisp</a>
 <ul>
-<li><a href="#orgheadline12">4.1. Test suite</a></li>
-<li><a href="#orgheadline13">4.2. alist-set: Change element in list</a></li>
+<li><a href="#org5023e82">4.1. Test suite</a></li>
+<li><a href="#org4eba860">4.2. alist-set: Change element in list</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline27">5. Emagician Helpers</a>
+<li><a href="#orga551aab">5. Emagician Helpers</a>
 <ul>
-<li><a href="#orgheadline18">5.1. Hook Helpers</a>
+<li><a href="#org406730a">5.1. Hook Helpers</a>
 <ul>
-<li><a href="#orgheadline15">5.1.1. Minor In Major</a></li>
-<li><a href="#orgheadline17">5.1.2. Def hook</a>
+<li><a href="#orge39cd63">5.1.1. Minor In Major</a></li>
+<li><a href="#org8554f90">5.1.2. Def hook</a>
 <ul>
-<li><a href="#orgheadline16">5.1.2.1. Unit tests</a></li>
+<li><a href="#org2780b8e">5.1.2.1. Unit tests</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline19">5.2. Backtrace Magick</a></li>
-<li><a href="#orgheadline20">5.3. Sanitize File name</a></li>
-<li><a href="#orgheadline21">5.4. Expect Dir</a></li>
-<li><a href="#orgheadline22">5.5. Add to Path</a></li>
-<li><a href="#orgheadline26">5.6. Final Emagician Scratch</a>
+<li><a href="#orgdde00cc">5.2. Backtrace Magick</a></li>
+<li><a href="#org8938658">5.3. Sanitize File name</a></li>
+<li><a href="#orgceaac27">5.4. Expect Dir</a></li>
+<li><a href="#org2317285">5.5. Add to Path</a></li>
+<li><a href="#org40cf2a7">5.6. Final Emagician Scratch</a>
 <ul>
-<li><a href="#orgheadline23">5.6.1. Scratchify</a></li>
-<li><a href="#orgheadline24">5.6.2. Reset Scratch</a></li>
-<li><a href="#orgheadline25">5.6.3. Main Scratch Initiation</a></li>
+<li><a href="#org2b809d9">5.6.1. Scratchify</a></li>
+<li><a href="#org84b69da">5.6.2. Reset Scratch</a></li>
+<li><a href="#orgddcea02">5.6.3. Main Scratch Initiation</a></li>
 </ul>
 </li>
 </ul>
@@ -204,8 +287,8 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Bassline / Baseline</h2>
+<div id="outline-container-org5931013" class="outline-2">
+<h2 id="org5931013"><span class="section-number-2">1</span> Bassline / Baseline</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A baseline set of functions that are helpers for the rest of the Emagician Starter Kit.
@@ -220,28 +303,28 @@ A baseline set of functions that are helpers for the rest of the Emagician Start
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> Basic helpers</h2>
+<div id="outline-container-org059ddbe" class="outline-2">
+<h2 id="org059ddbe"><span class="section-number-2">2</span> Basic helpers</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Just enough to make editing in a broken environment not a pain,
 </p>
 
-<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">ffap</span>)<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-comment-delimiter">;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Will</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">be</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">superceeded,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">but</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">important</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">stuff</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">gets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">broke.</span>
-</pre>
+<pre class="code"><code>(<span class="org-keyword">require</span> '<span class="org-constant">ffap</span>)  <span class="org-comment-delimiter">; </span><span class="org-comment">Will be superceeded, but important when stuff gets broke.</span>
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">3</span> Emacs Lisp Evaluation Environment</h2>
+<div id="outline-container-org532518a" class="outline-2">
+<h2 id="org532518a"><span class="section-number-2">3</span> Emacs Lisp Evaluation Environment</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 There are helpers funcitons and variables that just make working with Emacs Lisp that much nicer.
 </p>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">3.1</span> Garbage Collection</h3>
+<div id="outline-container-org4dfef0e" class="outline-3">
+<h3 id="org4dfef0e"><span class="section-number-3">3.1</span> Garbage Collection</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="epigraph"><blockquote>
 <p>
@@ -254,8 +337,8 @@ There are helpers funcitons and variables that just make working with Emacs Lisp
 Resulting in this abomination:
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>(*<span class="org-unicode-whitespace-subdued-space"> </span>500<span class="org-unicode-whitespace-subdued-space"> </span>1024<span class="org-unicode-whitespace-subdued-space"> </span>1024))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> gc-cons-threshold (* 500 1024 1024))
+</code></pre>
 
 <p>
 There was even a little voice in my head that said "Maybe Jonnay, maybe you shouldn't fuck with the garbage collector?"
@@ -282,114 +365,114 @@ Another option is to handle the setting of the GC value after a period of idle t
 <a href="http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/">http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/</a>
 </p>
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">lou-the-gc-max</span><span class="org-unicode-whitespace-subdued-space"> </span>(*<span class="org-unicode-whitespace-subdued-space"> </span>512<span class="org-unicode-whitespace-subdued-space"> </span>1024<span class="org-unicode-whitespace-subdued-space"> </span>1024)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Maximum</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Size</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">garbage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">collector.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">Half</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">gig</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">seems</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">reasonable.</span>
-<span class="org-doc">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">value</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">basically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sane."</span>)
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">lou-the-gc-max</span> (* 512 1024 1024)
+  <span class="org-doc">"Maximum Size of garbage collector.  Half gig seems reasonable.</span>
+<span class="org-doc">This value is basically not sane."</span>)
 
-(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">lou-the-gc-sane</span><span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(get<span class="org-unicode-whitespace-subdued-space"> </span>'gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>'standard-value))
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Sane</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">GC</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Value,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">straight</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">The</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Yaks</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Mouth."</span>)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">lou-the-gc-sane</span> (car (get 'gc-cons-threshold 'standard-value))
+  <span class="org-doc">"Sane GC Value, straight from The Yaks Mouth."</span>)
 
-(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">lou-is-chatty</span><span class="org-unicode-whitespace-subdued-space"> </span>t
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Whether</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">or</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Lou</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chatty</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">about</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">debug</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">messages"</span>)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">lou-is-chatty</span> t
+  <span class="org-doc">"Whether or not Lou is chatty about debug messages"</span>)
 
-(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">lou-the-gc-go-crazy</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Tell</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Lou</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">garbage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">collector</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">use</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">maximum</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">garbage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">size"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>lou-is-chatty
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">with-current-buffer</span><span class="org-unicode-whitespace-subdued-space"> </span>(messages-buffer)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((inhibit-read-only<span class="org-unicode-whitespace-subdued-space"> </span>t))
-<span class="org-unicode-whitespace-subdued-space">        </span>(goto-char<span class="org-unicode-whitespace-subdued-space"> </span>(point-max))
-<span class="org-unicode-whitespace-subdued-space">        </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\nLou</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">going</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">crazy!"</span>))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>lou-the-gc-max))
+(<span class="org-keyword">defun</span> <span class="org-function-name">lou-the-gc-go-crazy</span> ()
+  <span class="org-doc">"Tell Lou the garbage collector to use maximum garbage size"</span>
+  (<span class="org-keyword">when</span> lou-is-chatty
+    (<span class="org-keyword">with-current-buffer</span> (messages-buffer)
+      (<span class="org-keyword">let</span> ((inhibit-read-only t))
+        (goto-char (point-max))
+        (insert <span class="org-string">"\nLou is going crazy!"</span>))))
+  (<span class="org-keyword">setq</span> gc-cons-threshold lou-the-gc-max))
 
-(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">lou-the-gc-be-sane</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Tell</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">Lou</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">stop</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">acting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">crazy</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">use</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sane</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">garbage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">collection</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ammount"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>lou-is-chatty
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">with-current-buffer</span><span class="org-unicode-whitespace-subdued-space"> </span>(messages-buffer)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((inhibit-read-only<span class="org-unicode-whitespace-subdued-space"> </span>t))
-<span class="org-unicode-whitespace-subdued-space">        </span>(goto-char<span class="org-unicode-whitespace-subdued-space"> </span>(point-max))
-<span class="org-unicode-whitespace-subdued-space">        </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\nLou</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">sane</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">again."</span>))))
+(<span class="org-keyword">defun</span> <span class="org-function-name">lou-the-gc-be-sane</span> ()
+  <span class="org-doc">"Tell Lou to stop acting crazy and use a sane garbage collection ammount"</span>
+  (<span class="org-keyword">when</span> lou-is-chatty
+    (<span class="org-keyword">with-current-buffer</span> (messages-buffer)
+      (<span class="org-keyword">let</span> ((inhibit-read-only t))
+        (goto-char (point-max))
+        (insert <span class="org-string">"\nLou is sane again."</span>))))
 
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>gc-cons-threshold<span class="org-unicode-whitespace-subdued-space"> </span>lou-the-gc-sane))
+  (<span class="org-keyword">setq</span> gc-cons-threshold lou-the-gc-sane))
 
-(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>after-init-time
-<span class="org-unicode-whitespace-subdued-space">  </span>(lou-the-gc-use-max)
-<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emacs-startup-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'lou-the-gc-be-sane<span class="org-unicode-whitespace-subdued-space"> </span>t))
+(<span class="org-keyword">unless</span> after-init-time
+  (lou-the-gc-go-crazy)
+  (add-hook 'emacs-startup-hook #'lou-the-gc-be-sane t))
 
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'minibuffer-setup-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'lou-the-gc-go-crazy)
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'minibuffer-exit-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'lou-the-gc-be-sane)
-</pre>
+(add-hook 'minibuffer-setup-hook #'lou-the-gc-go-crazy)
+(add-hook 'minibuffer-exit-hook #'lou-the-gc-be-sane)
+</code></pre>
 </div>
 </div>
 
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">3.2</span> Prefer new files</h3>
+<div id="outline-container-orgb886716" class="outline-3">
+<h3 id="orgb886716"><span class="section-number-3">3.2</span> Prefer new files</h3>
 <div class="outline-text-3" id="text-3-2">
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>load-prefer-newer<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> load-prefer-newer t)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">3.3</span> Lexical Evaluation</h3>
+<div id="outline-container-org61c51b9" class="outline-3">
+<h3 id="org61c51b9"><span class="section-number-3">3.3</span> Lexical Evaluation</h3>
 <div class="outline-text-3" id="text-3-3">
-<pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">lexically</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>forms)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Lexically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">execute</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">forms"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>`(eval<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>,@forms)<span class="org-unicode-whitespace-subdued-space"> </span>t))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defmacro</span> <span class="org-function-name">lexically</span> (<span class="org-type">&amp;rest</span> forms)
+  <span class="org-doc">"Lexically execute forms"</span>
+  `(eval '(<span class="org-keyword">progn</span> ,@forms) t))
+</code></pre>
 
-<pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">lexially</span><span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(macroexpand<span class="org-unicode-whitespace-subdued-space"> </span>'(lexically<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t))<span class="org-unicode-whitespace-subdued-space"> </span>'(eval<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span>t))<span class="org-unicode-whitespace-subdued-space"> </span>t))))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">lexially</span> () 
+  (<span class="org-keyword">should</span> (equal (macroexpand '(lexically t t t)) '(eval (<span class="org-keyword">quote</span> (<span class="org-keyword">progn</span> t t t)) t)))) 
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">3.4</span> Common Lisp</h3>
+<div id="outline-container-orge8edba1" class="outline-3">
+<h3 id="orge8edba1"><span class="section-number-3">3.4</span> Common Lisp</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Sometimes the depricated CL environment is still required.  One day
 this can go away. That day isn't today.
 </p>
 
-<pre class="code">(<span class="org-keyword">require</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">cl</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">require</span> '<span class="org-constant">cl</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">3.5</span> Evaluation and Printing</h3>
+<div id="outline-container-org10d7dca" class="outline-3">
+<h3 id="org10d7dca"><span class="section-number-3">3.5</span> Evaluation and Printing</h3>
 <div class="outline-text-3" id="text-3-5">
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>eval-expression-print-length<span class="org-unicode-whitespace-subdued-space"> </span>9000
-<span class="org-unicode-whitespace-subdued-space">      </span>print-length<span class="org-unicode-whitespace-subdued-space"> </span>90000
-<span class="org-unicode-whitespace-subdued-space">      </span>eval-expression-print-level<span class="org-unicode-whitespace-subdued-space"> </span>20
-<span class="org-unicode-whitespace-subdued-space">      </span>print-level<span class="org-unicode-whitespace-subdued-space"> </span>900)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> eval-expression-print-length 9000
+      print-length 90000
+      eval-expression-print-level 20
+      print-level 900)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">3.6</span> Anaphoric Goodness</h3>
+<div id="outline-container-org31a72a7" class="outline-3">
+<h3 id="org31a72a7"><span class="section-number-3">3.6</span> Anaphoric Goodness</h3>
 <div class="outline-text-3" id="text-3-6">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">anaphora</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">anaphora</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">3.7</span> Asyc</h3>
+<div id="outline-container-org7101cd5" class="outline-3">
+<h3 id="org7101cd5"><span class="section-number-3">3.7</span> Asyc</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Run commands asyncronously. 
 </p>
 
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">async</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">async</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">3.8</span> Testing</h3>
+<div id="outline-container-org68286f2" class="outline-3">
+<h3 id="org68286f2"><span class="section-number-3">3.8</span> Testing</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 ERT for testing.  Of course.
@@ -403,185 +486,196 @@ El-mock is too damn rubylike.
 Fakir is cool ass, but I don't need it.  yet.  Also, a great name
 </p>
 
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">noflet</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">noflet</span>)
+</code></pre>
+</div>
+</div>
+
+<div id="outline-container-org9a8e918" class="outline-3">
+<h3 id="org9a8e918"><span class="section-number-3">3.9</span> Memory Usage</h3>
+<div class="outline-text-3" id="text-3-9">
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">memory-usage</span>)
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">4</span> emagick-🐰 Extensions to Emacs Lisp</h2>
+<div id="outline-container-org404e019" class="outline-2">
+<h2 id="org404e019"><span class="section-number-2">4</span> emagick-🐰 Extensions to Emacs Lisp</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">4.1</span> Test suite</h3>
+</div>
+<div id="outline-container-org5023e82" class="outline-3">
+<h3 id="org5023e82"><span class="section-number-3">4.1</span> Test suite</h3>
 <div class="outline-text-3" id="text-4-1">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/meta/run-all-emagick-tests</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Run</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">all</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">tests</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagick-&#128048;"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">interactive</span>)
-<span class="org-unicode-whitespace-subdued-space">  </span>(ert-run-tests-interactively<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagick"</span>))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/meta/run-all-emagick-tests</span> ()
+  <span class="org-doc">"Run all tests for emagick-&#128048;"</span> 
+  (<span class="org-keyword">interactive</span>)
+  (ert-run-tests-interactively <span class="org-string">"emagick"</span>))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">4.2</span> alist-set: Change element in list</h3>
+<div id="outline-container-org4eba860" class="outline-3">
+<h3 id="org4eba860"><span class="section-number-3">4.2</span> alist-set: Change element in list</h3>
 <div class="outline-text-3" id="text-4-2">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagick-&#128048;/alist-set</span><span class="org-unicode-whitespace-subdued-space"> </span>(key<span class="org-unicode-whitespace-subdued-space"> </span>value<span class="org-unicode-whitespace-subdued-space"> </span>alist<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>use-proper-list)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Sets</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">or</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">KEY</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">VALUE</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">on</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ALIST,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">return</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list.</span>
-<span class="org-doc">If</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">USE-PROPER-LIST</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">true</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">then</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">instead</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">(dotted</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">.</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list)</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span>
-<span class="org-doc">(proper</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list)</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">constructed</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">insted."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((list-frag<span class="org-unicode-whitespace-subdued-space"> </span>(funcall<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>use-proper-list<span class="org-unicode-whitespace-subdued-space"> </span>#'list<span class="org-unicode-whitespace-subdued-space"> </span>#'cons)
-<span class="org-unicode-whitespace-subdued-space">                            </span>key
-<span class="org-unicode-whitespace-subdued-space">                            </span>value)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(null<span class="org-unicode-whitespace-subdued-space"> </span>alist))
-<span class="org-unicode-whitespace-subdued-space">        </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>list-frag
-<span class="org-unicode-whitespace-subdued-space">              </span>(assq-delete-all<span class="org-unicode-whitespace-subdued-space"> </span>key<span class="org-unicode-whitespace-subdued-space"> </span>alist))
-<span class="org-unicode-whitespace-subdued-space">      </span>(list<span class="org-unicode-whitespace-subdued-space"> </span>list-frag))))
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagick-&#128048;/alist-set</span> (key value alist <span class="org-type">&amp;optional</span> use-proper-list)
+  <span class="org-doc">"Sets or adds KEY with VALUE on ALIST, and return the list.</span>
+<span class="org-doc">If USE-PROPER-LIST is true then instead of a (dotted . list) a</span>
+<span class="org-doc">(proper list) is constructed insted."</span>
+  (<span class="org-keyword">let</span> ((list-frag (funcall (<span class="org-keyword">if</span> use-proper-list #'list #'cons)
+                            key
+                            value)))
+    (<span class="org-keyword">if</span> (not (null alist))
+        (cons list-frag
+              (assq-delete-all key alist))
+      (list list-frag))))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagick-&#128048;/alist-set-on-empty-list</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">""</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'foo<span class="org-unicode-whitespace-subdued-space"> </span>'bar<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>bar))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'foo<span class="org-unicode-whitespace-subdued-space"> </span>'bar<span class="org-unicode-whitespace-subdued-space"> </span>'()<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>bar)))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagick-&#128048;/alist-set-on-empty-list</span> ()
+  <span class="org-doc">""</span>
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'foo 'bar '())
+                 '((foo . bar))))
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'foo 'bar '() t)
+                 '((foo bar)))))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagick-&#128048;/alist-set-on-list-with-element</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">""</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'baz<span class="org-unicode-whitespace-subdued-space"> </span>'blarg<span class="org-unicode-whitespace-subdued-space"> </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>bar)))
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((baz<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>blarg)(foo<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>bar))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'baz<span class="org-unicode-whitespace-subdued-space"> </span>'blarg<span class="org-unicode-whitespace-subdued-space"> </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>bar))<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((baz<span class="org-unicode-whitespace-subdued-space"> </span>blarg)(foo<span class="org-unicode-whitespace-subdued-space"> </span>bar)))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagick-&#128048;/alist-set-on-list-with-element</span> ()
+  <span class="org-doc">""</span>
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'baz 'blarg '((foo . bar)))
+                 '((baz . blarg)(foo . bar))))
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'baz 'blarg '((foo bar)) t)
+                 '((baz blarg)(foo bar)))))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagick-&#128048;/alist-set-on-list-without-element</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">""</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'foo<span class="org-unicode-whitespace-subdued-space"> </span>'bar<span class="org-unicode-whitespace-subdued-space"> </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>baz)))
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>bar))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(emagick-&#128048;/alist-set<span class="org-unicode-whitespace-subdued-space"> </span>'foo<span class="org-unicode-whitespace-subdued-space"> </span>'bar<span class="org-unicode-whitespace-subdued-space"> </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>baz))<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">                 </span>'((foo<span class="org-unicode-whitespace-subdued-space"> </span>bar)))))
-</pre>
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagick-&#128048;/alist-set-on-list-without-element</span> ()
+  <span class="org-doc">""</span>
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'foo 'bar '((foo . baz)))
+                 '((foo . bar))))
+  (<span class="org-keyword">should</span> (equal (emagick-&#128048;/alist-set 'foo 'bar '((foo baz)) t)
+                 '((foo bar)))))
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27"><span class="section-number-2">5</span> Emagician Helpers</h2>
+<div id="outline-container-orga551aab" class="outline-2">
+<h2 id="orga551aab"><span class="section-number-2">5</span> Emagician Helpers</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">5.1</span> Hook Helpers</h3>
+</div>
+<div id="outline-container-org406730a" class="outline-3">
+<h3 id="org406730a"><span class="section-number-3">5.1</span> Hook Helpers</h3>
 <div class="outline-text-3" id="text-5-1">
-</div><div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15"><span class="section-number-4">5.1.1</span> Minor In Major</h4>
+</div>
+<div id="outline-container-orge39cd63" class="outline-4">
+<h4 id="orge39cd63"><span class="section-number-4">5.1.1</span> Minor In Major</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <p>
 Kinda one of those things that I am surprised is not a thing.
 </p>
 
-<pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>(minor-mode<span class="org-unicode-whitespace-subdued-space"> </span>major-mode-hook)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((turn-on-symbol<span class="org-unicode-whitespace-subdued-space"> </span>(intern<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"turn-on-"</span><span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>minor-mode)))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(list<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">     </span>'progn<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">     </span>`(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span>,turn-on-symbol<span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">        </span><span class="org-doc">"Automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">by</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit."</span>
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">interactive</span>)
-<span class="org-unicode-whitespace-subdued-space">        </span>(,minor-mode<span class="org-unicode-whitespace-subdued-space"> </span>+1))
-<span class="org-unicode-whitespace-subdued-space">     </span>`(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,major-mode-hook)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,turn-on-symbol)))))
+<pre class="code"><code>(<span class="org-keyword">defmacro</span> <span class="org-function-name">emagician/minor-in-major-mode</span> (minor-mode major-mode-hook)
+  (<span class="org-keyword">let</span> ((turn-on-symbol (intern (concat <span class="org-string">"turn-on-"</span> (symbol-name minor-mode)))))
+    (list 
+     'progn 
+     `(<span class="org-keyword">defun</span> ,turn-on-symbol ()
+        <span class="org-doc">"Automagickally generated by emagicians starter kit."</span>
+        (<span class="org-keyword">interactive</span>)
+        (,minor-mode +1))
+     `(add-hook (<span class="org-keyword">quote</span> ,major-mode-hook) (<span class="org-keyword">quote</span> ,turn-on-symbol)))))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/test-minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"emagician-minor-in-major</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">macro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">test"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>(macroexpand<span class="org-unicode-whitespace-subdued-space"> </span>'(emagician/minor-in-major-mode<span class="org-unicode-whitespace-subdued-space"> </span>paredit-mode<span class="org-unicode-whitespace-subdued-space"> </span>elisp-mode-hook))
-<span class="org-unicode-whitespace-subdued-space">                 </span>'(<span class="org-keyword">progn</span>
-<span class="org-unicode-whitespace-subdued-space">                    </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">turn-on-paredit-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-doc">"Automagickally</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">generated</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">by</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagicians</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">kit."</span>
-<span class="org-unicode-whitespace-subdued-space">                      </span>(<span class="org-keyword">interactive</span>)
-<span class="org-unicode-whitespace-subdued-space">                      </span>(paredit-mode<span class="org-unicode-whitespace-subdued-space"> </span>+1))
-<span class="org-unicode-whitespace-subdued-space">                    </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'elisp-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-paredit-mode))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">        </span>(executed<span class="org-unicode-whitespace-subdued-space"> </span>0))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">flet</span><span class="org-unicode-whitespace-subdued-space"> </span>((emagician-minor-test<span class="org-unicode-whitespace-subdued-space"> </span>(arg)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>executed))))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician-minor-test<span class="org-unicode-whitespace-subdued-space"> </span>mode-hook)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician-minor-test<span class="org-unicode-whitespace-subdued-space"> </span>mode-hook)
-<span class="org-unicode-whitespace-subdued-space">      </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'mode-hook)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>executed))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(fboundp<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-emagician-minor-test))
-<span class="org-unicode-whitespace-subdued-space">      </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-emagician-minor-test))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/test-minor-in-major-mode</span> ()
+  <span class="org-doc">"emagician-minor-in-major macro test"</span>
+  (<span class="org-keyword">should</span> (equal (macroexpand '(emagician/minor-in-major-mode paredit-mode elisp-mode-hook))
+                 '(<span class="org-keyword">progn</span>
+                    (<span class="org-keyword">defun</span> <span class="org-function-name">turn-on-paredit-mode</span> ()
+                      <span class="org-doc">"Automagickally generated by emagicians starter kit."</span>
+                      (<span class="org-keyword">interactive</span>)
+                      (paredit-mode +1))
+                    (add-hook 'elisp-mode-hook 'turn-on-paredit-mode))))
+  (<span class="org-keyword">let</span> ((mode-hook '())
+        (executed 0))
+    (<span class="org-keyword">flet</span> ((emagician-minor-test (arg) (<span class="org-keyword">setq</span> executed (1+ executed))))
+      (<span class="org-keyword">emagician/minor-in-major-mode</span> emagician-minor-test mode-hook)
+      (<span class="org-keyword">emagician/minor-in-major-mode</span> emagician-minor-test mode-hook)
+      (run-hooks 'mode-hook)
+      (<span class="org-keyword">should</span> (= 1 executed))
+      (<span class="org-keyword">should</span> (fboundp 'turn-on-emagician-minor-test))
+      (fmakunbound 'turn-on-emagician-minor-test))))
 
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-does-not-add-when-existant</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">        </span>(executed<span class="org-unicode-whitespace-subdued-space"> </span>0))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>executed)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>executed)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'hook)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>executed))
-<span class="org-unicode-whitespace-subdued-space">    </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook)))
-</pre>
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/defhook-does-not-add-when-existant</span> ()
+  (<span class="org-keyword">let</span> ((hook '())
+        (executed 0))
+    (<span class="org-keyword">emagician/defhook</span> test-hook hook
+      (<span class="org-keyword">setq</span> executed (1+ executed)))
+    (<span class="org-keyword">emagician/defhook</span> test-hook hook
+      (<span class="org-keyword">setq</span> executed (1+ executed)))
+    (run-hooks 'hook)
+    (<span class="org-keyword">should</span> (= 1 executed))
+    (fmakunbound 'test-hook)))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">5.1.2</span> Def hook</h4>
+<div id="outline-container-org8554f90" class="outline-4">
+<h4 id="org8554f90"><span class="section-number-4">5.1.2</span> Def hook</h4>
 <div class="outline-text-4" id="text-5-1-2">
-<pre class="code">(<span class="org-keyword">defmacro</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>(name<span class="org-unicode-whitespace-subdued-space"> </span>hook<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>b)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">declare</span><span class="org-unicode-whitespace-subdued-space"> </span>(indent<span class="org-unicode-whitespace-subdued-space"> </span>2))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((docp<span class="org-unicode-whitespace-subdued-space"> </span>(stringp<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>b)))
-<span class="org-unicode-whitespace-subdued-space">         </span>(body<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>docp<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>b)<span class="org-unicode-whitespace-subdued-space"> </span>b)))
-<span class="org-unicode-whitespace-subdued-space">    </span>`(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span>,name<span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">         </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>docp<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>b)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Documented\n"</span>)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\nEmagically</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">defined</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/defhook."</span>)
-<span class="org-unicode-whitespace-subdued-space">         </span>,@body)
-<span class="org-unicode-whitespace-subdued-space">       </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">or</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(boundp<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,hook)))
-<span class="org-unicode-whitespace-subdued-space">                 </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(member<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,name)<span class="org-unicode-whitespace-subdued-space"> </span>,hook)))
-<span class="org-unicode-whitespace-subdued-space">         </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,hook)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">quote</span><span class="org-unicode-whitespace-subdued-space"> </span>,name))))))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defmacro</span> <span class="org-function-name">emagician/defhook</span> (name hook <span class="org-type">&amp;rest</span> b)
+  (<span class="org-keyword">declare</span> (indent 2))
+  (<span class="org-keyword">let*</span> ((docp (stringp (car b)))
+         (body (<span class="org-keyword">if</span> docp (cdr b) b)))
+    `(<span class="org-keyword">progn</span> 
+       (<span class="org-keyword">defun</span> ,name () 
+         ,(concat (<span class="org-keyword">if</span> docp (car b) <span class="org-string">"Not Documented\n"</span>) <span class="org-string">"\nEmagically defined with emagician/defhook."</span>)
+         ,@body)
+       (<span class="org-keyword">when</span> (<span class="org-keyword">or</span> (not (boundp (<span class="org-keyword">quote</span> ,hook)))
+                 (not (member (<span class="org-keyword">quote</span> ,name) ,hook)))
+         (add-hook (<span class="org-keyword">quote</span> ,hook) (<span class="org-keyword">quote</span> ,name))))))
+</code></pre>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-5">
-<h5 id="orgheadline16"><span class="section-number-5">5.1.2.1</span> Unit tests</h5>
+<div id="outline-container-org2780b8e" class="outline-5">
+<h5 id="org2780b8e"><span class="section-number-5">5.1.2.1</span> Unit tests</h5>
 <div class="outline-text-5" id="text-5-1-2-1">
-<pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-defines-hook-and-adds-it</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Basic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">test</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">make</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">sure</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">defines</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">hook</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">function</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">        </span>(executed<span class="org-unicode-whitespace-subdued-space"> </span>nil))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>t))
-<span class="org-unicode-whitespace-subdued-space">    </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'hook)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(fboundp<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>executed)
-<span class="org-unicode-whitespace-subdued-space">    </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook)))
+<pre class="code"><code>(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/defhook-defines-hook-and-adds-it</span> ()
+  <span class="org-doc">"Basic test to make sure it defines the hook function and adds it."</span>
+  (<span class="org-keyword">let</span> ((hook '())
+        (executed nil))
+    (<span class="org-keyword">emagician/defhook</span> test-hook hook
+      (<span class="org-keyword">setq</span> executed t))
+    (run-hooks 'hook)
+    (<span class="org-keyword">should</span> (fboundp 'test-hook))
+    (<span class="org-keyword">should</span> executed)
+    (fmakunbound 'test-hook)))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-redefines-when-bound</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">        </span>(executed<span class="org-unicode-whitespace-subdued-space"> </span>nil)
-<span class="org-unicode-whitespace-subdued-space">        </span>(rebound<span class="org-unicode-whitespace-subdued-space"> </span>nil))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">flet</span><span class="org-unicode-whitespace-subdued-space"> </span>((test-hook<span class="org-unicode-whitespace-subdued-space"> </span>()<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>rebound<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>rebound<span class="org-unicode-whitespace-subdued-space"> </span>t))
-<span class="org-unicode-whitespace-subdued-space">      </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'hook)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>executed)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>rebound)
-<span class="org-unicode-whitespace-subdued-space">      </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/defhook-redefines-when-bound</span> ()
+  (<span class="org-keyword">let</span> ((hook '())
+        (executed nil)
+        (rebound nil))
+    (<span class="org-keyword">flet</span> ((test-hook () (<span class="org-keyword">setq</span> rebound nil)))
+      (<span class="org-keyword">emagician/defhook</span> test-hook hook
+        (<span class="org-keyword">setq</span> executed t)
+        (<span class="org-keyword">setq</span> rebound t))
+      (run-hooks 'hook)
+      (<span class="org-keyword">should</span> executed)
+      (<span class="org-keyword">should</span> rebound)
+      (fmakunbound 'test-hook))))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/defhook-does-not-add-when-existant</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((hook<span class="org-unicode-whitespace-subdued-space"> </span>'())
-<span class="org-unicode-whitespace-subdued-space">        </span>(executed<span class="org-unicode-whitespace-subdued-space"> </span>0))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>executed)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>test-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>executed<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>executed)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'hook)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>executed))
-<span class="org-unicode-whitespace-subdued-space">    </span>(fmakunbound<span class="org-unicode-whitespace-subdued-space"> </span>'test-hook)))
-</pre>
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/defhook-does-not-add-when-existant</span> ()
+  (<span class="org-keyword">let</span> ((hook '())
+        (executed 0))
+    (<span class="org-keyword">emagician/defhook</span> test-hook hook
+      (<span class="org-keyword">setq</span> executed (1+ executed)))
+    (<span class="org-keyword">emagician/defhook</span> test-hook hook
+      (<span class="org-keyword">setq</span> executed (1+ executed)))
+    (run-hooks 'hook)
+    (<span class="org-keyword">should</span> (= 1 executed))
+    (fmakunbound 'test-hook)))
+</code></pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">5.2</span> Backtrace Magick</h3>
+<div id="outline-container-orgdde00cc" class="outline-3">
+<h3 id="orgdde00cc"><span class="section-number-3">5.2</span> Backtrace Magick</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 HOLY SHIT. This worked better than I expected. 
@@ -595,105 +689,108 @@ This function snarfs the backtrace when called and returns it as a list.   This 
 (load-file-name or buffer-file-name)
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/snarf-backtrace</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Snarfs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">backtrace</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">as</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((num<span class="org-unicode-whitespace-subdued-space"> </span>3)
-<span class="org-unicode-whitespace-subdued-space">        </span>(frames<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>(backtrace-frame<span class="org-unicode-whitespace-subdued-space"> </span>3)<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">while</span><span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>frames)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(&gt;<span class="org-unicode-whitespace-subdued-space"> </span>num<span class="org-unicode-whitespace-subdued-space"> </span>50)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Too</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">many</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">frames</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%S"</span><span class="org-unicode-whitespace-subdued-space"> </span>(pp<span class="org-unicode-whitespace-subdued-space"> </span>frames)))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>num<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>num))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>frames<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>(backtrace-frame<span class="org-unicode-whitespace-subdued-space"> </span>(+<span class="org-unicode-whitespace-subdued-space"> </span>3<span class="org-unicode-whitespace-subdued-space"> </span>num))<span class="org-unicode-whitespace-subdued-space"> </span>frames)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>frames)))
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/snarf-backtrace</span> ()
+  <span class="org-doc">"Snarfs the backtrace as a list"</span>
+  (<span class="org-keyword">let</span> ((num 3)
+        (frames (cons (backtrace-frame 3) nil)))
+    (<span class="org-keyword">while</span> (car frames)
+      (<span class="org-keyword">when</span> (&gt; num 50) (<span class="org-warning">error</span> <span class="org-string">"Too many frames %S"</span> (pp frames)))
+      (<span class="org-keyword">setq</span> num (1+ num))
+      (<span class="org-keyword">setq</span> frames (cons (backtrace-frame (+ 3 num)) frames)))
+    (cdr frames)))
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/snarf-backtrace</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>'(t<span class="org-unicode-whitespace-subdued-space"> </span>emagician/snarf-backtrace)<span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>(last<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/snarf-backtrace))))))
-</pre>
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/snarf-backtrace</span> ()
+  (<span class="org-keyword">should</span> (equal '(t emagician/snarf-backtrace) (car (last (emagician/snarf-backtrace))))))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">5.3</span> Sanitize File name</h3>
+<div id="outline-container-org8938658" class="outline-3">
+<h3 id="org8938658"><span class="section-number-3">5.3</span> Sanitize File name</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 A bit of a naive version of this for now.
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/sanitize-file-name</span><span class="org-unicode-whitespace-subdued-space"> </span>(str)
-<span class="org-unicode-whitespace-subdued-space">  </span>(replace-regexp-in-string<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"[/~\000]"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-"</span><span class="org-unicode-whitespace-subdued-space"> </span>str))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/sanitize-file-name</span> (str)
+  (replace-regexp-in-string <span class="org-string">"[/~\000]"</span> <span class="org-string">"-"</span> str))
 
-<pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/sanitize-file-name</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo"</span>)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-foo"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"/foo"</span>)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"-foo"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"~foo"</span>))))
-</pre>
+</code></pre>
+
+<pre class="code"><code>(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/sanitize-file-name</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">""</span> (emagician/sanitize-file-name <span class="org-string">""</span>)))
+  (<span class="org-keyword">should</span> (equal <span class="org-string">"foo"</span> (emagician/sanitize-file-name <span class="org-string">"foo"</span>)))
+  (<span class="org-keyword">should</span> (equal <span class="org-string">"-foo"</span> (emagician/sanitize-file-name <span class="org-string">"/foo"</span>)))
+  (<span class="org-keyword">should</span> (equal <span class="org-string">"-foo"</span> (emagician/sanitize-file-name <span class="org-string">"~foo"</span>))))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">5.4</span> Expect Dir</h3>
+<div id="outline-container-orgceaac27" class="outline-3">
+<h3 id="orgceaac27"><span class="section-number-3">5.4</span> Expect Dir</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Make sure a dirs exist.
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>(dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;optional</span><span class="org-unicode-whitespace-subdued-space"> </span>pathroot)<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Ensures</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">named</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">directory</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">exists."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((path<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span>dir
-<span class="org-unicode-whitespace-subdued-space">                                </span>(<span class="org-keyword">or</span><span class="org-unicode-whitespace-subdued-space"> </span>pathroot<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>path))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-exists-p<span class="org-unicode-whitespace-subdued-space"> </span>path)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Cannot</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Create</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">already</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">exists</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">file."</span><span class="org-unicode-whitespace-subdued-space"> </span>path))
-<span class="org-unicode-whitespace-subdued-space">      </span>(make-directory<span class="org-unicode-whitespace-subdued-space"> </span>path<span class="org-unicode-whitespace-subdued-space"> </span>nil))
-<span class="org-unicode-whitespace-subdued-space">    </span>path))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/expect-dir</span> (dir <span class="org-type">&amp;optional</span> pathroot) 
+  <span class="org-doc">"Ensures that the named directory exists."</span>
+  (<span class="org-keyword">let</span> ((path (expand-file-name dir
+                                (<span class="org-keyword">or</span> pathroot emagician/dir))))
+    (<span class="org-keyword">when</span> (not (file-directory-p path))
+      (<span class="org-keyword">when</span> (file-exists-p path)
+        (<span class="org-warning">error</span> <span class="org-string">"Cannot Create %s, it already exists and is a file."</span> path))
+      (make-directory path nil))
+    path))
 
-<pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((tdir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-scratch-monkey"</span>))<span class="org-unicode-whitespace-subdued-trailing">   </span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>(delete-directory<span class="org-unicode-whitespace-subdued-space"> </span>tdir)<span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should-error</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo/bar/baz/notexisting"</span>)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should-error</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician.org"</span>)))
+</code></pre>
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-dir-with-extra-arg</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((dirname<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"emagician-expect-dir-scratch-monkey"</span>)
-<span class="org-unicode-whitespace-subdued-space">         </span>(tdir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>temporary-file-directory<span class="org-unicode-whitespace-subdued-space"> </span>dirname)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/expect-dir<span class="org-unicode-whitespace-subdued-space"> </span>dirname
-<span class="org-unicode-whitespace-subdued-space">                                                    </span>temporary-file-directory)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">progn</span><span class="org-unicode-whitespace-subdued-space"> </span>(delete-directory<span class="org-unicode-whitespace-subdued-space"> </span>tdir)
-<span class="org-unicode-whitespace-subdued-space">                   </span>(not<span class="org-unicode-whitespace-subdued-space"> </span>(file-directory-p<span class="org-unicode-whitespace-subdued-space"> </span>tdir))))))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/expect-dir</span> ()
+  (<span class="org-keyword">let</span> ((tdir <span class="org-string">"emagician-expect-dir-scratch-monkey"</span>))   
+    (<span class="org-keyword">should</span> (not (file-directory-p tdir)))
+    (<span class="org-keyword">should</span> (file-directory-p (emagician/expect-dir <span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
+    (<span class="org-keyword">should</span> (file-directory-p (emagician/expect-dir <span class="org-string">"emagician-expect-dir-dummy-test-dir"</span>)))
+    (<span class="org-keyword">should</span> (<span class="org-keyword">progn</span> (delete-directory tdir) (not (file-directory-p tdir))))
+    (<span class="org-keyword">should-error</span> (emagician/expect-dir <span class="org-string">"foo/bar/baz/notexisting"</span>)))
+  (<span class="org-keyword">should-error</span> (emagician/expect-dir <span class="org-string">"Emagician.org"</span>)))
+
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/expect-dir-with-extra-arg</span> ()
+  (<span class="org-keyword">let*</span> ((dirname <span class="org-string">"emagician-expect-dir-scratch-monkey"</span>)
+         (tdir (concat temporary-file-directory dirname)))
+    (<span class="org-keyword">should</span> (not (file-directory-p tdir)))
+    (<span class="org-keyword">should</span> (file-directory-p (emagician/expect-dir dirname
+                                                    temporary-file-directory)))
+    (<span class="org-keyword">should</span> (<span class="org-keyword">progn</span> (delete-directory tdir)
+                   (not (file-directory-p tdir))))))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">5.5</span> Add to Path</h3>
+<div id="outline-container-org2317285" class="outline-3">
+<h3 id="org2317285"><span class="section-number-3">5.5</span> Add to Path</h3>
 <div class="outline-text-3" id="text-5-5">
-<pre class="code"><span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/add-to-path</span><span class="org-unicode-whitespace-subdued-space"> </span>(path<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>front)
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Adds</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PATH</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PATH</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">env</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">variable,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">eshell-path-env</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">as</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">well</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">as</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">exec-path.</span>
-<span class="org-doc">If</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">FRONT</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">non</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">nil,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">then</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PATH</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">will</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">be</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">prepended</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">env</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">shell</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">vars.</span><span class="org-unicode-whitespace-subdued-trailing">  </span>
-<span class="org-doc">The</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">exec-path</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">always</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">will</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">always</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">have</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">prepended.</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">"</span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((shell-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                       </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>front<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                           </span>path
-<span class="org-unicode-whitespace-subdued-space">                         </span>(getenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PATH"</span>))
-<span class="org-unicode-whitespace-subdued-space">                       </span><span class="org-string">":"</span>
-<span class="org-unicode-whitespace-subdued-space">                       </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>front
-<span class="org-unicode-whitespace-subdued-space">                           </span>(getenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PATH"</span>)
-<span class="org-unicode-whitespace-subdued-space">                         </span>path))))
-<span class="org-unicode-whitespace-subdued-space">      </span>(setenv<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"PATH"</span><span class="org-unicode-whitespace-subdued-space"> </span>shell-path)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>eshell-path-env<span class="org-unicode-whitespace-subdued-space"> </span>shell-path)
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>exec-path<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>path<span class="org-unicode-whitespace-subdued-space"> </span>exec-path))))
-</pre>
+<pre class="code"><code>  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician/add-to-path</span> (path <span class="org-type">&amp;rest</span> front)
+    <span class="org-doc">"Adds PATH to the PATH env variable, eshell-path-env as well as exec-path.</span>
+<span class="org-doc">If FRONT is non nil, then PATH will be prepended to the env and shell vars.  </span>
+<span class="org-doc">The exec-path always will always have it prepended. "</span>
+    (<span class="org-keyword">let</span> ((shell-path (concat 
+                       (<span class="org-keyword">if</span> front 
+                           path
+                         (getenv <span class="org-string">"PATH"</span>))
+                       <span class="org-string">":"</span>
+                       (<span class="org-keyword">if</span> front
+                           (getenv <span class="org-string">"PATH"</span>)
+                         path))))
+      (setenv <span class="org-string">"PATH"</span> shell-path)
+      (<span class="org-keyword">setq</span> eshell-path-env shell-path)
+      (<span class="org-keyword">setq</span> exec-path (cons path exec-path))))
+
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">5.6</span> Final Emagician Scratch</h3>
+<div id="outline-container-org40cf2a7" class="outline-3">
+<h3 id="org40cf2a7"><span class="section-number-3">5.6</span> Final Emagician Scratch</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 When the starter kit is loaded we want to display the scratch buffer
@@ -715,125 +812,125 @@ If you want to add items, you can do so through the
 <code>emagician/scratch-links</code> variable.
 </p>
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/scratch-links</span><span class="org-unicode-whitespace-subdued-space"> </span>`((magit-status<span class="org-unicode-whitespace-subdued-space"> </span>,emagician/dir))
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"A</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">elisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">inserted</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">scratch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">startup."</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/scratch-links</span> `((magit-status ,emagician/dir))
+  <span class="org-doc">"A list of elisp that is inserted in the scratch buffer at startup."</span>)
+</code></pre>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-4">
-<h4 id="orgheadline23"><span class="section-number-4">5.6.1</span> Scratchify</h4>
+<div id="outline-container-org2b809d9" class="outline-4">
+<h4 id="org2b809d9"><span class="section-number-4">5.6.1</span> Scratchify</h4>
 <div class="outline-text-4" id="text-5-6-1">
-<pre class="code"><span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-text</span><span class="org-unicode-whitespace-subdued-space"> </span>(text-or-list)
-<span class="org-unicode-whitespace-subdued-space">    </span><span class="org-doc">"Takes</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chunk</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">text,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">newline</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">boundary</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">inserts</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">;;;</span>
-<span class="org-doc">If</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it's</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">then</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">scratchify</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">members."</span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">cond</span>
-<span class="org-unicode-whitespace-subdued-space">     </span>((null<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list)<span class="org-unicode-whitespace-subdued-space"> </span>nil)
-<span class="org-unicode-whitespace-subdued-space">     </span>((<span class="org-keyword">and</span><span class="org-unicode-whitespace-subdued-space"> </span>(stringp<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list)<span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span><span class="org-unicode-whitespace-subdued-space"> </span>text-or-list))
-<span class="org-unicode-whitespace-subdued-space">      </span><span class="org-string">";;;\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">     </span>((listp<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list)
-<span class="org-unicode-whitespace-subdued-space">      </span>(mapconcat<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))
-<span class="org-unicode-whitespace-subdued-space">     </span>((stringp<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list)
-<span class="org-unicode-whitespace-subdued-space">      </span>(mapconcat<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(line)
-<span class="org-unicode-whitespace-subdued-space">                   </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>line))
-<span class="org-unicode-whitespace-subdued-space">                 </span>(split-string<span class="org-unicode-whitespace-subdued-space"> </span>text-or-list<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">                 </span><span class="org-string">""</span>))))
-</pre>
+<pre class="code"><code>  (<span class="org-keyword">defun</span> <span class="org-function-name">emagician/scratchify-text</span> (text-or-list)
+    <span class="org-doc">"Takes a chunk of text, and at the newline boundary inserts ;;;</span>
+<span class="org-doc">If it's a list, then scratchify the list members."</span>
+    (<span class="org-keyword">cond</span>
+     ((null text-or-list) nil)
+     ((<span class="org-keyword">and</span> (stringp text-or-list) (equal <span class="org-string">""</span> text-or-list))
+      <span class="org-string">";;;\n"</span>)
+     ((listp text-or-list)
+      (mapconcat 'emagician/scratchify-text text-or-list <span class="org-string">""</span>))
+     ((stringp text-or-list)
+      (mapconcat (<span class="org-keyword">lambda</span> (line)
+                   (format <span class="org-string">";;; </span><span class="org-outshine-level-1">%s\n" line))</span>
+                 (split-string text-or-list <span class="org-string">"\n"</span>)
+                 <span class="org-string">""</span>))))
+</code></pre>
 
-<pre class="code">(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-text-props</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">foo\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo"</span><span class="org-unicode-whitespace-subdued-space"> </span>'face<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"red"</span>))))))
+<pre class="code"><code>(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-text-props</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">foo\n" (emagician/scratchify-text (propertize "foo" 'face '(:foreground "red"))))))</span>
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-text</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">foo\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"foo"</span>)))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Topes\n;;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Topes\n"</span>))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-text</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">foo\n" (emagician/scratchify-text "foo")))</span>
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">Topes\n;;; \n" (emagician/scratchify-text "Topes\n"))))</span>
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-list</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">foo\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"foo"</span>))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">foo\n;;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">bar\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"foo"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"bar"</span>)))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-list</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">foo\n" (emagician/scratchify-text '("foo"))))</span>
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">foo\n;;; bar\n" (emagician/scratchify-text '("foo" "bar")))))</span>
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-list-in-list</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">foo\n;;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">bar\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-string">"foo"</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-string">"bar"</span>))))))
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-list-in-list</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;; </span><span class="org-outshine-level-1">foo\n;;; bar\n" (emagician/scratchify-text '("foo" ("bar"))))))</span>
 
-(<span class="org-keyword">ert-deftest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/scratchify-empty</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">should</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>))))
-</pre>
+(<span class="org-keyword">ert-deftest</span> <span class="org-function-name">emagician/scratchify-empty</span> ()
+  (<span class="org-keyword">should</span> (equal <span class="org-string">";;;\n"</span> (emagician/scratchify-text <span class="org-string">""</span>))))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24"><span class="section-number-4">5.6.2</span> Reset Scratch</h4>
+<div id="outline-container-org84b69da" class="outline-4">
+<h4 id="org84b69da"><span class="section-number-4">5.6.2</span> Reset Scratch</h4>
 <div class="outline-text-4" id="text-5-6-2">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/reset-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(str)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">with-current-buffer</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*scratch*"</span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(lisp-interaction-mode)
-<span class="org-unicode-whitespace-subdued-space">    </span>(font-lock-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)
-<span class="org-unicode-whitespace-subdued-space">    </span>(whitespace-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)
-<span class="org-unicode-whitespace-subdued-space">    </span>(erase-buffer)
-<span class="org-unicode-whitespace-subdued-space">    </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>str)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/reset-scratch</span> (str)
+  (<span class="org-keyword">with-current-buffer</span> <span class="org-string">"*scratch*"</span>
+    (lisp-interaction-mode)
+    (font-lock-mode -1)
+    (whitespace-mode -1)
+    (erase-buffer)
+    (insert str)))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">5.6.3</span> Main Scratch Initiation</h4>
+<div id="outline-container-orgddcea02" class="outline-4">
+<h4 id="orgddcea02"><span class="section-number-4">5.6.3</span> Main Scratch Initiation</h4>
 <div class="outline-text-4" id="text-5-6-3">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/initiate-thee-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">flet</span><span class="org-unicode-whitespace-subdued-space"> </span>((with-bg-fg<span class="org-unicode-whitespace-subdued-space"> </span>(str<span class="org-unicode-whitespace-subdued-space"> </span>bg<span class="org-unicode-whitespace-subdued-space"> </span>fg)
-<span class="org-unicode-whitespace-subdued-space">           </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span>str
-<span class="org-unicode-whitespace-subdued-space">                       </span>'face
-<span class="org-unicode-whitespace-subdued-space">                       </span>(list<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:background</span><span class="org-unicode-whitespace-subdued-space"> </span>bg<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span>fg)))
-<span class="org-unicode-whitespace-subdued-space">         </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span>(str<span class="org-unicode-whitespace-subdued-space"> </span>fg)
-<span class="org-unicode-whitespace-subdued-space">           </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span>str
-<span class="org-unicode-whitespace-subdued-space">                       </span>'face
-<span class="org-unicode-whitespace-subdued-space">                       </span>(list<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span>fg))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">let*</span><span class="org-unicode-whitespace-subdued-space"> </span>((banner-color<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DarkViolet"</span>)
-<span class="org-unicode-whitespace-subdued-space">           </span>(info-label<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"DeepSkyBlue"</span>)
-<span class="org-unicode-whitespace-subdued-space">           </span>(info-value<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"cyan"</span><span class="org-unicode-whitespace-subdued-space"> </span>)
-<span class="org-unicode-whitespace-subdued-space">           </span>(banner-line<span class="org-unicode-whitespace-subdued-space"> </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span>(make-string<span class="org-unicode-whitespace-subdued-space"> </span>72<span class="org-unicode-whitespace-subdued-space"> </span>?&#9608;)<span class="org-unicode-whitespace-subdued-space"> </span>banner-color))
-<span class="org-unicode-whitespace-subdued-space">           </span>(header
-<span class="org-unicode-whitespace-subdued-space">            </span>`(,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span>,(with-bg-fg<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9608;&#9608;&#9608;&#9608;</span><span class="org-unicode-whitespace-subdued-space">            </span><span class="org-string">&#128048;-|-+-|-</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Sekrut</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Alien</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Technology</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-|-+-|-&#128048;</span><span class="org-unicode-whitespace-subdued-space">         </span><span class="org-string">&#9608;&#9608;&#9608;"</span><span class="org-unicode-whitespace-subdued-space"> </span>info-label<span class="org-unicode-whitespace-subdued-space"> </span>banner-color)
-<span class="org-unicode-whitespace-subdued-space">              </span>,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-string">""</span>
-<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">It</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Quill</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Echinda</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">I</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">scratch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">upon</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">beat</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">mesa."</span>
-<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-string">""</span>
-<span class="org-unicode-whitespace-subdued-space">              </span>,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emacs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Version:</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>info-label)
-<span class="org-unicode-whitespace-subdued-space">                       </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span>emacs-version<span class="org-unicode-whitespace-subdued-space"> </span>info-value))
-<span class="org-unicode-whitespace-subdued-space">              </span>,(concat<span class="org-unicode-whitespace-subdued-space"> </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Verison:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>info-label)
-<span class="org-unicode-whitespace-subdued-space">                       </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span>emagician/version<span class="org-unicode-whitespace-subdued-space"> </span>info-value))))
-<span class="org-unicode-whitespace-subdued-space">           </span>(startup-time
-<span class="org-unicode-whitespace-subdued-space">            </span>`(,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span>,(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>before-init-time
-<span class="org-unicode-whitespace-subdued-space">                   </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#128346;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Startup</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Time:</span><span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>info-label)
-<span class="org-unicode-whitespace-subdued-space">                           </span>(with-fg<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%.2f"</span><span class="org-unicode-whitespace-subdued-space"> </span>(-<span class="org-unicode-whitespace-subdued-space"> </span>(float-time)
-<span class="org-unicode-whitespace-subdued-space">                                                      </span>(float-time<span class="org-unicode-whitespace-subdued-space"> </span>before-init-time)))
-<span class="org-unicode-whitespace-subdued-space">                                    </span>info-value))
-<span class="org-unicode-whitespace-subdued-space">                 </span>(propertize<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#8263;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">before-init-time</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">null!"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:face</span><span class="org-unicode-whitespace-subdued-space"> </span>'error-face))
-<span class="org-unicode-whitespace-subdued-space">              </span>,(mapcar<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(s)<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">%65s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%.2f"</span><span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>s)<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>s)))
-<span class="org-unicode-whitespace-subdued-space">                       </span>emagician/slow-loaders)))
-<span class="org-unicode-whitespace-subdued-space">           </span>(chaotic-wisdom
-<span class="org-unicode-whitespace-subdued-space">            </span>`(,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span>,(emagician/cookie-from-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/collected-works-ov-chaos.lines"</span>)))
-<span class="org-unicode-whitespace-subdued-space">           </span>(minor-lamp-invocation
-<span class="org-unicode-whitespace-subdued-space">            </span>`(,banner-line
-<span class="org-unicode-whitespace-subdued-space">              </span>,(emagician/cookie-from-file<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"assets/minor-lamp-invocation.lines"</span>)))
-<span class="org-unicode-whitespace-subdued-space">           </span>(tools
-<span class="org-unicode-whitespace-subdued-space">            </span>(mapconcat<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(link<span class="org-unicode-whitespace-subdued-space"> </span>)
-<span class="org-unicode-whitespace-subdued-space">                         </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%S\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>link))
-<span class="org-unicode-whitespace-subdued-space">                       </span>emagician/scratch-links
-<span class="org-unicode-whitespace-subdued-space">                       </span><span class="org-string">""</span>)))
-<span class="org-unicode-whitespace-subdued-space">      </span>(emagician/reset-scratch
-<span class="org-unicode-whitespace-subdued-space">       </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/scratchify-text
-<span class="org-unicode-whitespace-subdued-space">                </span>(list<span class="org-unicode-whitespace-subdued-space"> </span>header
-<span class="org-unicode-whitespace-subdued-space">                      </span>startup-time
-<span class="org-unicode-whitespace-subdued-space">                      </span>chaotic-wisdom
-<span class="org-unicode-whitespace-subdued-space">                      </span>minor-lamp-invocation
-<span class="org-unicode-whitespace-subdued-space">                      </span>banner-line))
-<span class="org-unicode-whitespace-subdued-space">               </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">               </span>tools
-<span class="org-unicode-whitespace-subdued-space">               </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">               </span>(emagician/scratchify-text<span class="org-unicode-whitespace-subdued-space"> </span>banner-line))))))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/initiate-thee-scratch</span> ()
+  (<span class="org-keyword">flet</span> ((with-bg-fg (str bg fg)
+           (propertize str
+                       'face
+                       (list <span class="org-builtin">:background</span> bg <span class="org-builtin">:foreground</span> fg)))
+         (with-fg (str fg)
+           (propertize str
+                       'face
+                       (list <span class="org-builtin">:foreground</span> fg))))
+    (<span class="org-keyword">let*</span> ((banner-color <span class="org-string">"DarkViolet"</span>)
+           (info-label <span class="org-string">"DeepSkyBlue"</span>)
+           (info-value <span class="org-string">"cyan"</span> )
+           (banner-line (with-fg (make-string 72 ?&#9608;) banner-color))
+           (header
+            `(,banner-line
+              ,(with-bg-fg <span class="org-string">"&#9608;&#9608;&#9608;&#9608;            &#128048;-|-+-|- Sekrut Alien Technology -|-+-|-&#128048;         &#9608;&#9608;&#9608;"</span> info-label banner-color)
+              ,banner-line
+              <span class="org-string">""</span>
+              <span class="org-string">"     It is with the Quill of Echinda I scratch upon the beat mesa."</span>
+              <span class="org-string">""</span>
+              ,banner-line
+              ,(concat (with-fg <span class="org-string">"Emacs Version:     "</span> info-label)
+                       (with-fg emacs-version info-value))
+              ,(concat (with-fg <span class="org-string">"Emagician Verison: "</span> info-label)
+                       (with-fg emagician/version info-value))))
+           (startup-time
+            `(,banner-line
+              ,(<span class="org-keyword">if</span> before-init-time
+                   (concat (with-fg <span class="org-string">"&#128346; Startup Time:   "</span> info-label)
+                           (with-fg (format <span class="org-string">"%.2f"</span> (- (float-time)
+                                                      (float-time before-init-time)))
+                                    info-value))
+                 (propertize <span class="org-string">"&#8263; before-init-time is null!"</span> <span class="org-builtin">:face</span> 'error-face))
+              ,(mapcar (<span class="org-keyword">lambda</span> (s) (format <span class="org-string">"  %65s %.2f"</span> (car s) (cdr s)))
+                       emagician/slow-loaders)))
+           (chaotic-wisdom
+            `(,banner-line
+              ,(emagician/cookie-from-file <span class="org-string">"assets/collected-works-ov-chaos.lines"</span>)))
+           (minor-lamp-invocation
+            `(,banner-line
+              ,(emagician/cookie-from-file <span class="org-string">"assets/minor-lamp-invocation.lines"</span>)))
+           (tools
+            (mapconcat (<span class="org-keyword">lambda</span> (link )
+                         (format <span class="org-string">"%S\n"</span> link))
+                       emagician/scratch-links
+                       <span class="org-string">""</span>)))
+      (emagician/reset-scratch
+       (concat (emagician/scratchify-text
+                (list header
+                      startup-time
+                      chaotic-wisdom
+                      minor-lamp-invocation
+                      banner-line))
+               <span class="org-string">"\n"</span>
+               tools
+               <span class="org-string">"\n"</span>
+               (emagician/scratchify-text banner-line))))))
+</code></pre>
 </div>
 </div>
 </div>
@@ -841,7 +938,7 @@ If you want to add items, you can do so through the
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:48</p>
+<p class="date">Created: 2018-05-18 Fri 10:31</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

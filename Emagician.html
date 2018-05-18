@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:48 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emagician</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Emagician</h1>
@@ -156,75 +238,79 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline12">1. Base Initialization and Circle Casting</a>
+<li><a href="#org4977f60">1. Base Initialization and Circle Casting</a>
 <ul>
-<li><a href="#orgheadline4">1.1. Breakage Helpers</a>
+<li><a href="#orga481ff8">1.1. Breakage Helpers</a>
 <ul>
-<li><a href="#orgheadline1">1.1.1. Scratch messaging</a></li>
-<li><a href="#orgheadline2">1.1.2. Pre-Scratch-Links</a></li>
-<li><a href="#orgheadline3">1.1.3. Now set it to our Baseline beautified "you're-busted" text</a></li>
+<li><a href="#orgb86e038">1.1.1. Scratch messaging</a></li>
+<li><a href="#orge471a3f">1.1.2. Pre-Scratch-Links</a></li>
+<li><a href="#org98fb323">1.1.3. Now set it to our Baseline beautified "you're-busted" text</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline5">1.2. Verify emagician/dir</a></li>
-<li><a href="#orgheadline7">1.3. Use the new improved emagician scratch.</a>
+<li><a href="#org8e41a72">1.2. Verify emagician/dir</a></li>
+<li><a href="#org2d6dabb">1.3. Use the new improved emagician scratch.</a>
 <ul>
-<li><a href="#orgheadline6">1.3.1. Add a show-scratch function</a></li>
+<li><a href="#org7eead31">1.3.1. Add a show-scratch function</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline8">1.4. Package Archives setup</a></li>
-<li><a href="#orgheadline11">1.5. Load Paths, Custom Files, etc.</a>
+<li><a href="#org2b50be0">1.4. Package Archives setup</a>
 <ul>
-<li><a href="#orgheadline9">1.5.1. Standard Emagician distribution load paths</a></li>
-<li><a href="#orgheadline10">1.5.2. Custom file shouldn't matter so much anymore, but lets stick it here anyway.</a></li>
+<li><a href="#org451e516">1.4.1. <span class="todo TODO">TODO</span> Figure out https://github.com/raxod502/straight.el</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#orgheadline13">2. Emagician/load</a></li>
-<li><a href="#orgheadline16">3. Package Management</a>
+<li><a href="#org18ffa5b">1.5. Load Paths, Custom Files, etc.</a>
 <ul>
-<li><a href="#orgheadline14">3.1. Emagician Expect, for bootstrapping</a></li>
-<li><a href="#orgheadline15">3.2. 😻 Use-Package 😻</a></li>
+<li><a href="#orgb105ce3">1.5.1. Standard Emagician distribution load paths</a></li>
+<li><a href="#org4c99a48">1.5.2. Custom file shouldn't matter so much anymore, but lets stick it here anyway.</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline17">4. Emagician Starter Kit has it's own Helper Functions</a></li>
-<li><a href="#orgheadline18">5. Assets</a></li>
-<li><a href="#orgheadline19">6. Key Concepts</a></li>
-<li><a href="#orgheadline22">7. File Layout</a>
+</ul>
+</li>
+<li><a href="#org13b902d">2. Emagician/load</a></li>
+<li><a href="#orga131d02">3. Package Management</a>
 <ul>
-<li><a href="#orgheadline20">7.1. Interface</a></li>
-<li><a href="#orgheadline21">7.2. Tools</a></li>
+<li><a href="#orgd8098ce">3.1. Emagician Expect, for bootstrapping</a></li>
+<li><a href="#org0bc7f2e">3.2. 😻 Use-Package 😻</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline30">8. Files</a>
+<li><a href="#org4558e5a">4. Emagician Starter Kit has it's own Helper Functions</a></li>
+<li><a href="#orgf2a071c">5. Assets</a></li>
+<li><a href="#org66db1b2">6. Key Concepts</a></li>
+<li><a href="#orgc1bedf6">7. File Layout</a>
 <ul>
-<li><a href="#orgheadline23">8.1. Interface</a></li>
-<li><a href="#orgheadline24">8.2. Text</a></li>
-<li><a href="#orgheadline25">8.3. Programming</a></li>
-<li><a href="#orgheadline26">8.4. Org Mode</a></li>
-<li><a href="#orgheadline27">8.5. E-Shell</a></li>
-<li><a href="#orgheadline28">8.6. Lamp</a></li>
-<li><a href="#orgheadline29">8.7. Emagician Starter Kit has it's own Lamp</a></li>
+<li><a href="#org61c6463">7.1. Interface</a></li>
+<li><a href="#orgb5aa0f3">7.2. Tools</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline36">9. Entity Customization</a>
+<li><a href="#org225c98a">8. Files</a>
 <ul>
-<li><a href="#orgheadline31">9.1. First the customization</a></li>
-<li><a href="#orgheadline32">9.2. Next is the true-name-file</a></li>
-<li><a href="#orgheadline33">9.3. System Type Initialization</a></li>
-<li><a href="#orgheadline34">9.4. Machine Name Initialization</a></li>
-<li><a href="#orgheadline35">9.5. Login name Initialization</a></li>
+<li><a href="#orgcb7bd0d">8.1. Interface</a></li>
+<li><a href="#orgb836389">8.2. Text</a></li>
+<li><a href="#orgf1126a6">8.3. Programming</a></li>
+<li><a href="#org3261427">8.4. Org Mode</a></li>
+<li><a href="#org3dac6d6">8.5. E-Shell</a></li>
+<li><a href="#org3fe2497">8.6. Lamp</a></li>
+<li><a href="#orge2b274a">8.7. Emagician Starter Kit has it's own Lamp</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline37">10. Some Inspirational words from the book of emacs</a></li>
-<li><a href="#orgheadline38">11. References, Bibliography, Shout Outs, and Props.</a></li>
-<li><a href="#orgheadline42">12. Thee End</a>
+<li><a href="#org480f72e">9. Entity Customization</a>
+<ul>
+<li><a href="#org2b0a804">9.1. First the customization</a></li>
+<li><a href="#org95d532c">9.2. Next is the true-name-file</a></li>
+<li><a href="#org18e91e3">9.3. System Type Initialization</a></li>
+<li><a href="#org67c68ea">9.4. Machine Name Initialization</a></li>
+<li><a href="#orga9aec8c">9.5. Login name Initialization</a></li>
+</ul>
+</li>
+<li><a href="#org8b76234">10. Some Inspirational words from the book of emacs</a></li>
+<li><a href="#org168b5b6">11. References, Bibliography, Shout Outs, and Props.</a></li>
+<li><a href="#org2327837">12. Thee End</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgheadline39">12.0.1. Initiate thee scratch</a></li>
-<li><a href="#orgheadline40">12.0.2. Turn off debugging</a></li>
-<li><a href="#orgheadline41">12.0.3. So Mote it Be.</a></li>
+<li><a href="#org4f5b848">12.0.1. Initiate thee scratch</a></li>
+<li><a href="#org6c7b312">12.0.2. Turn off debugging</a></li>
+<li><a href="#org6d33f92">12.0.3. So Mote it Be.</a></li>
 </ul>
 </li>
 </ul>
@@ -232,29 +318,29 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">1</span> Base Initialization and Circle Casting</h2>
+<div id="outline-container-org4977f60" class="outline-2">
+<h2 id="org4977f60"><span class="section-number-2">1</span> Base Initialization and Circle Casting</h2>
 <div class="outline-text-2" id="text-1">
-<pre class="code">(<span class="org-keyword">defconst</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/version</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"0.23.2"</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defconst</span> <span class="org-variable-name">emagician/version</span> <span class="org-string">"0.23.2"</span>)
+</code></pre>
 
 <p>
 This is my emacs.  There are many like it, but this one is mine.
 </p>
 </div>
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.1</span> Breakage Helpers</h3>
+<div id="outline-container-orga481ff8" class="outline-3">
+<h3 id="orga481ff8"><span class="section-number-3">1.1</span> Breakage Helpers</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Debug Errors. Super fundamental.
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>debug-on-error<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> debug-on-error t)
+</code></pre>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-4">
-<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Scratch messaging</h4>
+<div id="outline-container-orgb86e038" class="outline-4">
+<h4 id="orgb86e038"><span class="section-number-4">1.1.1</span> Scratch messaging</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Snarfed this idea from <a href="https://github.com/overtone/emacs-live">https://github.com/overtone/emacs-live</a>.
@@ -272,36 +358,37 @@ It's a super great idea to use the scratch buffer as a way to communicate state 
 First step is to inhibit the splash.  We're making our own splash!
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>inhibit-splash-screen<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> inhibit-splash-screen t)
+</code></pre>
 
 <p>
 Now a basic scratch message.  If things go pants-up here, we want a basic message saying so. 
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>initial-stratch-message
-<span class="org-unicode-whitespace-subdued-space">      </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-X-x-X-</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Invokaction</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">SuperFailure!</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-X-x-X-"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">              </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Problem</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">when</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">setting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">up</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Breakage</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Helpers"</span>))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> initial-stratch-message
+      (concat <span class="org-string">";;; </span><span class="org-outshine-level-1">-X-x-X- Invokaction SuperFailure! -X-x-X-" "\n"</span>
+              <span class="org-string">";;; </span><span class="org-outshine-level-1">Problem in Emagician.org when setting up Breakage Helpers"))</span>
+
+</code></pre>
 
 <p>
 Now that we have the basics done, lets define 2 helper functions to set or add the scratch message.
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/set-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>lines)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>(apply<span class="org-unicode-whitespace-subdued-space"> </span>'concat<span class="org-unicode-whitespace-subdued-space"> </span>lines)))
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/set-scratch</span> (<span class="org-type">&amp;rest</span> lines)
+  (<span class="org-keyword">setq</span> initial-scratch-message (apply 'concat lines)))
 
-(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/append-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-type">&amp;rest</span><span class="org-unicode-whitespace-subdued-space"> </span>lines)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>(apply<span class="org-unicode-whitespace-subdued-space"> </span>'concat<span class="org-unicode-whitespace-subdued-space"> </span>initial-scratch-message<span class="org-unicode-whitespace-subdued-space"> </span>lines)))
-</pre>
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/append-scratch</span> (<span class="org-type">&amp;rest</span> lines)
+  (<span class="org-keyword">setq</span> initial-scratch-message (apply 'concat initial-scratch-message lines)))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-4">
-<h4 id="orgheadline2"><span class="section-number-4">1.1.2</span> Pre-Scratch-Links</h4>
+<div id="outline-container-orge471a3f" class="outline-4">
+<h4 id="orge471a3f"><span class="section-number-4">1.1.2</span> Pre-Scratch-Links</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
-The scratch buffer will turn into something of a desktop.  It's handy to be able to stuff "scratch links" in there.  Anything in there gets output to the scratch during <a href="Emagician-Base.html#MissingReference">Thee Scratch Initiation</a>.<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
+The scratch buffer will turn into something of a desktop.  It's handy to be able to stuff "scratch links" in there.  Anything in there gets output to the scratch during <a href="Emagician-Base.html#org40cf2a7">Thee Scratch Initiation</a>.<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 This is a Homestuck reference.  It will be expounded upon later.
 </span>
 </p>
@@ -310,97 +397,102 @@ This is a Homestuck reference.  It will be expounded upon later.
 Then when Emacs loads, you can put the cursor over the sexp and <code>C-x C-e</code>.  I use this to launch magit for work/personal projects, start vms, etc.
 </p>
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/pre-scratch-links</span><span class="org-unicode-whitespace-subdued-space"> </span>'()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"A</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">links</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">append</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">emagician/scratch-links.</span>
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/pre-scratch-links</span> '()
+  <span class="org-doc">"A list of links to append to emagician/scratch-links.</span>
 
-<span class="org-doc">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">necessary</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">because</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">we</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">may</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">need</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">communicate</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">user</span>
-<span class="org-doc">before</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">rest</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">scratch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">interface</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">built."</span>)
-</pre>
+<span class="org-doc">This is necessary because we may need to communicate to the user</span>
+<span class="org-doc">before the rest of the scratch interface is built."</span>)
+
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">1.1.3</span> Now set it to our Baseline beautified "you're-busted" text</h4>
+<div id="outline-container-org98fb323" class="outline-4">
+<h4 id="org98fb323"><span class="section-number-4">1.1.3</span> Now set it to our Baseline beautified "you're-busted" text</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 Okay, so this is the secret sauce.  I set the scratch to this baseline helper (plus cuteness) so that I can debug startups much easier.  It includes a chunk to launch emacs forcing debug-init. 
 </p>
 
-<pre class="code">(emagician/set-scratch
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-|-+-|-</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Invocation</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Failure.</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">Sorry.</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">-|-+-|-"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">You</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">know</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">what</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">do."</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Starter</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">kit</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Version:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/version<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emacs:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-major-version)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"."</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">      </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-minor-version)<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">      </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">["</span><span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version<span class="org-unicode-whitespace-subdued-space"> </span>(number-to-string<span class="org-unicode-whitespace-subdued-space"> </span>emacs-repository-version))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"]"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">      </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-trailing">      </span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">It's</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">dangerous</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">go</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">alone!</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">take</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">this:</span><span class="org-unicode-whitespace-subdued-space">    </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">   </span><span class="org-string">&#128293;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#128119;</span><span class="org-unicode-whitespace-subdued-space">     </span><span class="org-string">&#128293;</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">&#128302;</span><span class="org-unicode-whitespace-subdued-space">          </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;</span><span class="org-unicode-whitespace-subdued-space">                      </span><span class="org-string">;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">";;;;;;;;;;;;</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">;;;;;;;;;;;;"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"(shell-command</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\""</span><span class="org-unicode-whitespace-subdued-space"> </span>invocation-directory<span class="org-unicode-whitespace-subdued-space"> </span>invocation-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">--debug-init\")\n"</span>)
-</pre>
+<pre class="code"><code>(emagician/set-scratch
+  <span class="org-string">";; -|-+-|- Invocation Failure.  Sorry. -|-+-|-"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; You know what to do."</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; \n"</span>
+  <span class="org-string">";; Emagician Starter kit Version: "</span> emagician/version <span class="org-string">"\n"</span>
+  <span class="org-string">";; Emacs: "</span> (number-to-string emacs-major-version) <span class="org-string">"."</span> 
+      (number-to-string emacs-minor-version) 
+      <span class="org-string">" ["</span> (<span class="org-keyword">when</span> emacs-repository-version (number-to-string emacs-repository-version)) <span class="org-string">"]"</span> 
+      <span class="org-string">"\n"</span>
+  <span class="org-string">";; \n"</span>
+  <span class="org-string">";;;;;;;;;;;;;;;;;;;;;;;;;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>      
+  <span class="org-string">";; It's dangerous to go ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";; alone! take this:    ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;   &#128293;     &#128119;     &#128293;  ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;          &#128302;          ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;                      ;;"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">";;;;;;;;;;;; </span><span class="org-outshine-level-8"> ;;;;;;;;;;;;" "\n"</span>
+  <span class="org-string">"\n"</span>
+  <span class="org-string">"(shell-command \""</span> invocation-directory invocation-name <span class="org-string">" --debug-init\")\n"</span>)
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">1.2</span> Verify emagician/dir</h3>
+<div id="outline-container-org8e41a72" class="outline-3">
+<h3 id="org8e41a72"><span class="section-number-3">1.2</span> Verify emagician/dir</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 IF this isn't around, then everything goes pear shaped. Explicitly look for it and fail with helpful messages.
 </p>
 
-<pre class="code">(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(null<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((err<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Variable</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">emagician/dir</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set!</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">This</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">is</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">important</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">and</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">should</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">be</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">set</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">in</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>user-init-file)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>err<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Check</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">file</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Emagician-Install.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">for</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">more</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">details."</span>)
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-warning">error</span><span class="org-unicode-whitespace-subdued-space"> </span>err)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">when</span> (null emagician/dir)
+  (<span class="org-keyword">let</span> ((err (concat <span class="org-string">"Variable emagician/dir is not set!  This is important and should be set in "</span> user-init-file)))
+    (emagician/append-scratch <span class="org-string">";;; </span><span class="org-outshine-level-1">" err "\n" ";;; Check the file Emagician-Install.org for more details.")</span>
+    (<span class="org-warning">error</span> err)))
+</code></pre>
 
 <p>
 Now that we have the emagician/dir we can keep going and add new helpers to the scratch.
 </p>
 
-<pre class="code">(emagician/append-scratch
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"(find-file-other-window</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\""</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\")"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"(find-file-other-window</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">\""</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"/*.org\"</span><span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">t)"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
-</pre>
+<pre class="code"><code>(emagician/append-scratch
+  <span class="org-string">"\n"</span>
+  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"\")"</span> <span class="org-string">"\n"</span>
+  <span class="org-string">"(find-file-other-window \""</span> emagician/dir <span class="org-string">"/*.org\"  t)"</span> <span class="org-string">"\n"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">1.3</span> Use the new improved emagician scratch.</h3>
+<div id="outline-container-org2d6dabb" class="outline-3">
+<h3 id="org2d6dabb"><span class="section-number-3">1.3</span> Use the new improved emagician scratch.</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">1.3.1</span> Add a show-scratch function</h4>
+<div id="outline-container-org7eead31" class="outline-4">
+<h4 id="org7eead31"><span class="section-number-4">1.3.1</span> Add a show-scratch function</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 This is generally useful anyway.  We could also use initial buffer, but that has a tendency to get overridden by hooks.
 </p>
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/show-scratch</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Show</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">scratch</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">buffer"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">interactive</span>)
-<span class="org-unicode-whitespace-subdued-space">  </span>(set-window-buffer<span class="org-unicode-whitespace-subdued-space"> </span>nil<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*scratch*"</span>))
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/show-scratch</span> ()
+  <span class="org-doc">"Show the scratch buffer"</span>
+  (<span class="org-keyword">interactive</span>)
+  (set-window-buffer nil <span class="org-string">"*scratch*"</span>))
 
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emacs-startup-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/show-scratch<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
+(add-hook 'emacs-startup-hook 'emagician/show-scratch t)
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">1.4</span> Package Archives setup</h3>
+<div id="outline-container-org2b50be0" class="outline-3">
+<h3 id="org2b50be0"><span class="section-number-3">1.4</span> Package Archives setup</h3>
 <div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org451e516" class="outline-4">
+<h4 id="org451e516"><span class="section-number-4">1.4.1</span> <span class="todo TODO">TODO</span> Figure out <a href="https://github.com/raxod502/straight.el">https://github.com/raxod502/straight.el</a></h4>
+<div class="outline-text-4" id="text-1-4-1">
 <p>
 We set our download dir to local-packages.  We also do the trick of
 doing package-refresh-contents if package-archive-contents is empty.
@@ -416,57 +508,58 @@ We set the archives to the big 3 plus orgmode.  MELPA, ELPA and Org!  Oh My!
 </p>
 </div>
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/are-elpas-reachable?</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">"Whether</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">or</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">ELPAs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">are</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">reachable"</span>)
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/are-elpas-reachable?</span> t <span class="org-doc">"Whether or not ELPAs are reachable"</span>)
 
-(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>package-user-dir<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"elpa"</span>))
+(<span class="org-keyword">setq</span> package-user-dir (concat emagician/dir <span class="org-string">"elpa"</span>))
 
-(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>package-archives
-<span class="org-unicode-whitespace-subdued-space">      </span>'((<span class="org-string">"gnu"</span><span class="org-unicode-whitespace-subdued-space">         </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"http://elpa.gnu.org/packages/"</span>)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"MELPA"</span><span class="org-unicode-whitespace-subdued-space">       </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"http://melpa.org/packages/"</span>)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-string">"org"</span><span class="org-unicode-whitespace-subdued-space">         </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"http://orgmode.org/elpa/"</span>)))
+(<span class="org-keyword">setq</span> package-archives
+      '((<span class="org-string">"gnu"</span>         . <span class="org-string">"http://elpa.gnu.org/packages/"</span>)
+        (<span class="org-string">"MELPA"</span>       . <span class="org-string">"http://melpa.org/packages/"</span>)
+        (<span class="org-string">"org"</span>         . <span class="org-string">"http://orgmode.org/elpa/"</span>)))
 
 (package-initialize)
 
-(<span class="org-keyword">condition-case</span><span class="org-unicode-whitespace-subdued-space"> </span>err
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>package-archive-contents<span class="org-unicode-whitespace-subdued-space"> </span>(package-refresh-contents))
-<span class="org-unicode-whitespace-subdued-space">  </span>((<span class="org-warning">error</span>)
-<span class="org-unicode-whitespace-subdued-space">   </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((scratch-msg<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">";;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">!!!</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Couldn't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">refresh</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">contents\n"</span>
-<span class="org-unicode-whitespace-subdued-space">                              </span><span class="org-string">"((package-refresh-contents)(beginning-of-line)(kill-line))"</span>)))
-<span class="org-unicode-whitespace-subdued-space">     </span>(message<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Could</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">not</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">refresh</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">contents:</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%S"</span><span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>err)<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>err))
-<span class="org-unicode-whitespace-subdued-space">     </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span>scratch-msg)
-<span class="org-unicode-whitespace-subdued-space">     </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/pre-scratch-links<span class="org-unicode-whitespace-subdued-space"> </span>scratch-msg)
-<span class="org-unicode-whitespace-subdued-space">     </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/are-elpas-reachable?<span class="org-unicode-whitespace-subdued-space"> </span>nil))))
-</pre>
+(<span class="org-keyword">condition-case</span> err
+    (<span class="org-keyword">unless</span> package-archive-contents (package-refresh-contents))
+  ((<span class="org-warning">error</span>)
+   (<span class="org-keyword">let</span> ((scratch-msg (concat <span class="org-string">";;; </span><span class="org-outshine-level-1">!!! Couldn't refresh package contents\n"</span>
+                              <span class="org-string">"((package-refresh-contents)(beginning-of-line)(kill-line))"</span>)))
+     (message <span class="org-string">"Could not refresh package contents: %s %S"</span> (car err) (cdr err))
+     (emagician/append-scratch scratch-msg)
+     (add-to-list 'emagician/pre-scratch-links scratch-msg)
+     (<span class="org-keyword">setq</span> emagician/are-elpas-reachable? nil))))
+</code></pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">1.5</span> Load Paths, Custom Files, etc.</h3>
+<div id="outline-container-org18ffa5b" class="outline-3">
+<h3 id="org18ffa5b"><span class="section-number-3">1.5</span> Load Paths, Custom Files, etc.</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">1.5.1</span> Standard Emagician distribution load paths</h4>
+<div id="outline-container-orgb105ce3" class="outline-4">
+<h4 id="orgb105ce3"><span class="section-number-4">1.5.1</span> Standard Emagician distribution load paths</h4>
 <div class="outline-text-4" id="text-1-5-1">
-<pre class="code">(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'load-path<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)
-(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'load-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"src"</span>))
-(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'load-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"dist"</span>))
-(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'custom-theme-load-path<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"themes"</span>))
-</pre>
+<pre class="code"><code>(add-to-list 'load-path emagician/dir)
+(add-to-list 'load-path (concat emagician/dir <span class="org-string">"src"</span>))
+(add-to-list 'load-path (concat emagician/dir <span class="org-string">"dist"</span>))
+(add-to-list 'custom-theme-load-path (concat emagician/dir <span class="org-string">"themes"</span>))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10"><span class="section-number-4">1.5.2</span> Custom file shouldn't matter so much anymore, but lets stick it here anyway.</h4>
+<div id="outline-container-org4c99a48" class="outline-4">
+<h4 id="org4c99a48"><span class="section-number-4">1.5.2</span> Custom file shouldn't matter so much anymore, but lets stick it here anyway.</h4>
 <div class="outline-text-4" id="text-1-5-2">
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>custom-file<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"custom.el"</span>))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> custom-file (concat emagician/dir <span class="org-string">"custom.el"</span>))
+</code></pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">2</span> Emagician/load</h2>
+<div id="outline-container-org13b902d" class="outline-2">
+<h2 id="org13b902d"><span class="section-number-2">2</span> Emagician/load</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Originally from Eschulte.  This function takes a &lt;foo&gt;.org file,
@@ -478,62 +571,62 @@ This doesn't try to load from a tag or a header arg.  That got crufty for my nee
 </p>
 
 
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/load-depth</span><span class="org-unicode-whitespace-subdued-space"> </span>0)
-(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">emagician/slow-loaders</span><span class="org-unicode-whitespace-subdued-space"> </span>'()<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">"A</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">list</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">files</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">that</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">took</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">long</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">load</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">with</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">`</span><span class="org-doc"><span class="org-constant">emagician/load</span></span><span class="org-doc">'"</span>)
-(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/load</span><span class="org-unicode-whitespace-subdued-space"> </span>(file)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Load</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">configuration</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">other</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">.org</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">files."</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((start-time<span class="org-unicode-whitespace-subdued-space"> </span>(current-time))
-<span class="org-unicode-whitespace-subdued-space">        </span>(file<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(string-match<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">".+\.org"</span><span class="org-unicode-whitespace-subdued-space"> </span>file)
-<span class="org-unicode-whitespace-subdued-space">                                    </span>file
-<span class="org-unicode-whitespace-subdued-space">                                  </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"%s.org"</span><span class="org-unicode-whitespace-subdued-space"> </span>file))
-<span class="org-unicode-whitespace-subdued-space">                                </span>emagician/dir))
-<span class="org-unicode-whitespace-subdued-space">        </span>(load-result<span class="org-unicode-whitespace-subdued-space"> </span>nil)
-<span class="org-unicode-whitespace-subdued-space">        </span>(emagician/load-depth<span class="org-unicode-whitespace-subdued-space"> </span>(1+<span class="org-unicode-whitespace-subdued-space"> </span>emagician/load-depth))
-<span class="org-unicode-whitespace-subdued-space">        </span>(org-babel-default-header-args<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>'(<span class="org-builtin">:comments</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"link"</span>)<span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                                             </span>(assq-delete-all<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:comment</span>
-<span class="org-unicode-whitespace-subdued-space">                                                              </span>org-babel-default-header-args))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">if</span><span class="org-unicode-whitespace-subdued-space"> </span>(file-exists-p<span class="org-unicode-whitespace-subdued-space"> </span>file)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">progn</span>
-<span class="org-unicode-whitespace-subdued-space">          </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
-<span class="org-unicode-whitespace-subdued-space">                                    </span>(make-string<span class="org-unicode-whitespace-subdued-space"> </span>emagician/load-depth<span class="org-unicode-whitespace-subdued-space"> </span>?-)
-<span class="org-unicode-whitespace-subdued-space">                                    </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Loading</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span>file)
-<span class="org-unicode-whitespace-subdued-space">          </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>load-result<span class="org-unicode-whitespace-subdued-space"> </span>(org-babel-load-file<span class="org-unicode-whitespace-subdued-space"> </span>file)))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">progn</span>
-<span class="org-unicode-whitespace-subdued-space">        </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
-<span class="org-unicode-whitespace-subdued-space">                                  </span>(make-string<span class="org-unicode-whitespace-subdued-space"> </span>emagician/load-depth<span class="org-unicode-whitespace-subdued-space"> </span>?-)
-<span class="org-unicode-whitespace-subdued-space">                                  </span><span class="org-string">"Skipped</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Loading</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>
-<span class="org-unicode-whitespace-subdued-space">                                  </span>file
-<span class="org-unicode-whitespace-subdued-space">                                  </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">It</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">doesn't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">exist!\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">        </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>load-result<span class="org-unicode-whitespace-subdued-space"> </span>nil)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((elapsed<span class="org-unicode-whitespace-subdued-space"> </span>(float-time<span class="org-unicode-whitespace-subdued-space"> </span>(time-subtract<span class="org-unicode-whitespace-subdued-space"> </span>(current-time)
-<span class="org-unicode-whitespace-subdued-space">                                              </span>start-time))))
-<span class="org-unicode-whitespace-subdued-space">      </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(&gt;<span class="org-unicode-whitespace-subdued-space"> </span>elapsed<span class="org-unicode-whitespace-subdued-space"> </span>3.2)
-<span class="org-unicode-whitespace-subdued-space">        </span>(add-to-list<span class="org-unicode-whitespace-subdued-space"> </span>'emagician/slow-loaders<span class="org-unicode-whitespace-subdued-space"> </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>file<span class="org-unicode-whitespace-subdued-space"> </span>elapsed)))
-<span class="org-unicode-whitespace-subdued-space">      </span>(message<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician/Loaded</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%s</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%.3fs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">elapsed"</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">                       </span>file
-<span class="org-unicode-whitespace-subdued-space">                       </span>elapsed)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(emagician/append-scratch<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"...done!"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">    </span>load-result))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/load-depth</span> 0)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">emagician/slow-loaders</span> '() <span class="org-doc">"A list of files that took long to load with `</span><span class="org-doc"><span class="org-constant">emagician/load</span></span><span class="org-doc">'"</span>)
+(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/load</span> (file)
+  <span class="org-doc">"Load configuration from other .org files."</span>
+  (<span class="org-keyword">let</span> ((start-time (current-time))
+        (file (expand-file-name (<span class="org-keyword">if</span> (string-match <span class="org-string">".+\.org"</span> file)
+                                    file
+                                  (format <span class="org-string">"%s.org"</span> file))
+                                emagician/dir))
+        (load-result nil)
+        (emagician/load-depth (1+ emagician/load-depth))
+        (org-babel-default-header-args (cons '(<span class="org-builtin">:comments</span> . <span class="org-string">"link"</span>) 
+                                             (assq-delete-all <span class="org-builtin">:comment</span>
+                                                              org-babel-default-header-args))))
+    (<span class="org-keyword">if</span> (file-exists-p file)
+        (<span class="org-keyword">progn</span>
+          (emagician/append-scratch <span class="org-string">"\n;; "</span>
+                                    (make-string emagician/load-depth ?-)
+                                    <span class="org-string">" Loading "</span> file)
+          (<span class="org-keyword">setq</span> load-result (org-babel-load-file file)))
+      (<span class="org-keyword">progn</span>
+        (emagician/append-scratch <span class="org-string">"\n;; "</span>
+                                  (make-string emagician/load-depth ?-)
+                                  <span class="org-string">"Skipped Loading "</span>
+                                  file
+                                  <span class="org-string">" It doesn't exist!\n"</span>)
+        (<span class="org-keyword">setq</span> load-result nil)))
+    (<span class="org-keyword">let</span> ((elapsed (float-time (time-subtract (current-time)
+                                              start-time))))
+      (<span class="org-keyword">when</span> (&gt; elapsed 3.2)
+        (add-to-list 'emagician/slow-loaders (cons file elapsed)))
+      (message (format <span class="org-string">"Emagician/Loaded %s %.3fs elapsed"</span> 
+                       file
+                       elapsed)))
+    (emagician/append-scratch <span class="org-string">"...done!"</span> <span class="org-string">"\n"</span>)
+    load-result))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16"><span class="section-number-2">3</span> Package Management</h2>
+<div id="outline-container-orga131d02" class="outline-2">
+<h2 id="orga131d02"><span class="section-number-2">3</span> Package Management</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">3.1</span> Emagician Expect, for bootstrapping</h3>
+<div id="outline-container-orgd8098ce" class="outline-3">
+<h3 id="orgd8098ce"><span class="section-number-3">3.1</span> Emagician Expect, for bootstrapping</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 This is almost vestigial.
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/expect-package</span><span class="org-unicode-whitespace-subdued-space"> </span>(package)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"If</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">named</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">PACKAGE</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">isn't</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">currently</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">installed,</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">install</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">it"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">unless</span><span class="org-unicode-whitespace-subdued-space"> </span>(package-installed-p<span class="org-unicode-whitespace-subdued-space"> </span>package)
-<span class="org-unicode-whitespace-subdued-space">    </span>(package-install<span class="org-unicode-whitespace-subdued-space"> </span>package)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/expect-package</span> (package)
+  <span class="org-doc">"If the named PACKAGE isn't currently installed, install it"</span>
+  (<span class="org-keyword">unless</span> (package-installed-p package)
+    (package-install package)))  
+</code></pre>
 
 <p>
 Mainly due to…
@@ -541,8 +634,8 @@ Mainly due to…
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">3.2</span> 😻 Use-Package 😻</h3>
+<div id="outline-container-org0bc7f2e" class="outline-3">
+<h3 id="org0bc7f2e"><span class="section-number-3">3.2</span> 😻 Use-Package 😻</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <a href="https://github.com/jwiegley/use-package">https://github.com/jwiegley/use-package</a>
@@ -552,23 +645,23 @@ Mainly due to…
 Is the cat's ass.  Why would you not use it?
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>use-package-always-ensure<span class="org-unicode-whitespace-subdued-space"> </span>emagician/are-elpas-reachable?)
-(emagician/expect-package<span class="org-unicode-whitespace-subdued-space"> </span>'use-package)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> use-package-always-ensure emagician/are-elpas-reachable?)
+(emagician/expect-package 'use-package)
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">4</span> Emagician Starter Kit has it's own Helper Functions</h2>
+<div id="outline-container-org4558e5a" class="outline-2">
+<h2 id="org4558e5a"><span class="section-number-2">4</span> Emagician Starter Kit has it's own Helper Functions</h2>
 <div class="outline-text-2" id="text-4">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician-Base.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Emagician-Base.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18"><span class="section-number-2">5</span> Assets</h2>
+<div id="outline-container-orgf2a071c" class="outline-2">
+<h2 id="orgf2a071c"><span class="section-number-2">5</span> Assets</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Assets are either 
@@ -586,8 +679,8 @@ In the case of #2, it should be in source control
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">6</span> Key Concepts</h2>
+<div id="outline-container-org66db1b2" class="outline-2">
+<h2 id="org66db1b2"><span class="section-number-2">6</span> Key Concepts</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>The Bunny of ÆＳÞＥTＩC</li>
@@ -597,16 +690,16 @@ In the case of #2, it should be in source control
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22"><span class="section-number-2">7</span> File Layout</h2>
+<div id="outline-container-orgc1bedf6" class="outline-2">
+<h2 id="orgc1bedf6"><span class="section-number-2">7</span> File Layout</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Most of the files will have a layout similar to this:
 </p>
 </div>
 
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">7.1</span> Interface</h3>
+<div id="outline-container-org61c6463" class="outline-3">
+<h3 id="org61c6463"><span class="section-number-3">7.1</span> Interface</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 There is both an Interface file to handle the general emacs UI and sections inside of individual files. 
@@ -624,8 +717,8 @@ There is both an Interface file to handle the general emacs UI and sections insi
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">7.2</span> Tools</h3>
+<div id="outline-container-orgb5aa0f3" class="outline-3">
+<h3 id="orgb5aa0f3"><span class="section-number-3">7.2</span> Tools</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 External or Internal.  Think of tools as being less about Editing of text and more about getting a particular job done.
@@ -638,172 +731,172 @@ There is no global tools file.  But maybe There should be, and E-Shell would be 
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-2">
-<h2 id="orgheadline30"><span class="section-number-2">8</span> Files</h2>
+<div id="outline-container-org225c98a" class="outline-2">
+<h2 id="org225c98a"><span class="section-number-2">8</span> Files</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 There is a fine line between too many files, and too few.
 </p>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">8.1</span> Interface</h3>
+<div id="outline-container-orgcb7bd0d" class="outline-3">
+<h3 id="orgcb7bd0d"><span class="section-number-3">8.1</span> Interface</h3>
 <div class="outline-text-3" id="text-8-1">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Interface.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Interface.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">8.2</span> Text</h3>
+<div id="outline-container-orgb836389" class="outline-3">
+<h3 id="orgb836389"><span class="section-number-3">8.2</span> Text</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Emacs is a text editor afteral.
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Text.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Text.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25"><span class="section-number-3">8.3</span> Programming</h3>
+<div id="outline-container-orgf1126a6" class="outline-3">
+<h3 id="orgf1126a6"><span class="section-number-3">8.3</span> Programming</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 This sets up some baseline programming helpers and then loads
 individual org files for each programming mode. 
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Programming.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Programming.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">8.4</span> Org Mode</h3>
+<div id="outline-container-org3261427" class="outline-3">
+<h3 id="org3261427"><span class="section-number-3">8.4</span> Org Mode</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Deserves it's own file&#x2026; ORG GRIMOIRE!
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Org-Grimoire.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Org-Grimoire.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-3">
-<h3 id="orgheadline27"><span class="section-number-3">8.5</span> E-Shell</h3>
+<div id="outline-container-org3dac6d6" class="outline-3">
+<h3 id="org3dac6d6"><span class="section-number-3">8.5</span> E-Shell</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 Why would you not use E-Shell?
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Eshell-Magick.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Eshell-Magick.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28"><span class="section-number-3">8.6</span> Lamp</h3>
+<div id="outline-container-org3fe2497" class="outline-3">
+<h3 id="org3fe2497"><span class="section-number-3">8.6</span> Lamp</h3>
 <div class="outline-text-3" id="text-8-6">
 <p>
 The Lamp is a 5th magickal weapon along with the wand, sword, cup
 and chalace.  It represents illumination and self knowledge.
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Lamp.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Lamp.org"</span>)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29"><span class="section-number-3">8.7</span> Emagician Starter Kit has it's own Lamp</h3>
+<div id="outline-container-orge2b274a" class="outline-3">
+<h3 id="orge2b274a"><span class="section-number-3">8.7</span> Emagician Starter Kit has it's own Lamp</h3>
 <div class="outline-text-3" id="text-8-7">
 <p>
 Tools to make developing the Emagician Starter kit easier.
 </p>
 
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emagician-Meta.org"</span>)
-</pre>
+<pre class="code"><code>(emagician/load <span class="org-string">"Emagician-Meta.org"</span>)
+</code></pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgheadline36" class="outline-2">
-<h2 id="orgheadline36"><span class="section-number-2">9</span> Entity Customization</h2>
+<div id="outline-container-org480f72e" class="outline-2">
+<h2 id="org480f72e"><span class="section-number-2">9</span> Entity Customization</h2>
 <div class="outline-text-2" id="text-9">
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-3">
-<h3 id="orgheadline31"><span class="section-number-3">9.1</span> First the customization</h3>
+<div id="outline-container-org2b0a804" class="outline-3">
+<h3 id="org2b0a804"><span class="section-number-3">9.1</span> First the customization</h3>
 <div class="outline-text-3" id="text-9-1">
-<pre class="code">(load<span class="org-unicode-whitespace-subdued-space"> </span>custom-file)
-</pre>
+<pre class="code"><code>(load custom-file)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">9.2</span> Next is the true-name-file</h3>
+<div id="outline-container-org95d532c" class="outline-3">
+<h3 id="org95d532c"><span class="section-number-3">9.2</span> Next is the true-name-file</h3>
 <div class="outline-text-3" id="text-9-2">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>emagician/true-name)
-</pre>
+<pre class="code"><code>(emagician/load emagician/true-name)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33"><span class="section-number-3">9.3</span> System Type Initialization</h3>
+<div id="outline-container-org18e91e3" class="outline-3">
+<h3 id="org18e91e3"><span class="section-number-3">9.3</span> System Type Initialization</h3>
 <div class="outline-text-3" id="text-9-3">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span>(symbol-name<span class="org-unicode-whitespace-subdued-space"> </span>system-type)))
-</pre>
+<pre class="code"><code>(emagician/load (emagician/sanitize-file-name (symbol-name system-type)))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-3">
-<h3 id="orgheadline34"><span class="section-number-3">9.4</span> Machine Name Initialization</h3>
+<div id="outline-container-org67c68ea" class="outline-3">
+<h3 id="org67c68ea"><span class="section-number-3">9.4</span> Machine Name Initialization</h3>
 <div class="outline-text-3" id="text-9-4">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>(emagician/sanitize-file-name<span class="org-unicode-whitespace-subdued-space"> </span>system-name))
-</pre>
+<pre class="code"><code>(emagician/load (emagician/sanitize-file-name system-name))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-3">
-<h3 id="orgheadline35"><span class="section-number-3">9.5</span> Login name Initialization</h3>
+<div id="outline-container-orga9aec8c" class="outline-3">
+<h3 id="orga9aec8c"><span class="section-number-3">9.5</span> Login name Initialization</h3>
 <div class="outline-text-3" id="text-9-5">
-<pre class="code">(emagician/load<span class="org-unicode-whitespace-subdued-space"> </span>user-login-name)
-</pre>
+<pre class="code"><code>(emagician/load user-login-name)
+</code></pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgheadline37" class="outline-2">
-<h2 id="orgheadline37"><span class="section-number-2">10</span> Some Inspirational words from the book of emacs</h2>
+<div id="outline-container-org8b76234" class="outline-2">
+<h2 id="org8b76234"><span class="section-number-2">10</span> Some Inspirational words from the book of emacs</h2>
 <div class="outline-text-2" id="text-10">
 <div class="epigraph"><blockquote>
-THE BOOK OF THE EMACS, Part I<br  />
-Liber Lisper Legis<br  />
-as (R)eceived (M)ade (S)ound [RMS]<br  />
-on this 15th day of December,<br  />
-the Year of our Editor 2007.<br  />
-<br  />
-Chapter 1<br  />
-<br  />
-&#xa0;&#xa0;1. Buf! Manifestation of Chat.<br  />
-&#xa0;&#xa0;2. All Gods Seek Her Company.<br  />
-&#xa0;&#xa0;3. Intelligent, she watches.<br  />
-&#xa0;&#xa0;4. Every act a function, there is no difference.<br  />
-&#xa0;&#xa0;5. Help me o RMS, in unveiling thee before the Needy on Earth<br  />
-&#xa0;&#xa0;6. Be thou not just my editor, but mine eyes, heart and yes, Soul.<br  />
-&#xa0;&#xa0;7. Behold from darkness and byte code interpreter thou groweth strong.<br  />
-&#xa0;&#xa0;8. The car is in the cdr, not the cdr in the car.<br  />
-&#xa0;&#xa0;9. Worship then the car and behold the Maserati of all programs ever.<br  />
-&#xa0;&#xa0;10. Thou powers known to but a few, thou public API widely advertised.<br  />
-&#xa0;&#xa0;11. Whilst others seek bells and whistles, thou sweet hum caresseth me.<br  />
-&#xa0;&#xa0;12. Open me up, list my buffers, be they ibuffer or buff-menu+<br  />
-&#xa0;&#xa0;13. No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)<br  />
-<br  />
-M-x all-hail-emacs<br  />
+THE BOOK OF THE EMACS, Part I<br />
+Liber Lisper Legis<br />
+as (R)eceived (M)ade (S)ound [RMS]<br />
+on this 15th day of December,<br />
+the Year of our Editor 2007.<br />
+<br />
+Chapter 1<br />
+<br />
+&#xa0;&#xa0;1. Buf! Manifestation of Chat.<br />
+&#xa0;&#xa0;2. All Gods Seek Her Company.<br />
+&#xa0;&#xa0;3. Intelligent, she watches.<br />
+&#xa0;&#xa0;4. Every act a function, there is no difference.<br />
+&#xa0;&#xa0;5. Help me o RMS, in unveiling thee before the Needy on Earth<br />
+&#xa0;&#xa0;6. Be thou not just my editor, but mine eyes, heart and yes, Soul.<br />
+&#xa0;&#xa0;7. Behold from darkness and byte code interpreter thou groweth strong.<br />
+&#xa0;&#xa0;8. The car is in the cdr, not the cdr in the car.<br />
+&#xa0;&#xa0;9. Worship then the car and behold the Maserati of all programs ever.<br />
+&#xa0;&#xa0;10. Thou powers known to but a few, thou public API widely advertised.<br />
+&#xa0;&#xa0;11. Whilst others seek bells and whistles, thou sweet hum caresseth me.<br />
+&#xa0;&#xa0;12. Open me up, list my buffers, be they ibuffer or buff-menu+<br />
+&#xa0;&#xa0;13. No limit to the ecstasy. I EVAL ALL. `(,ALL ,@I ,EVAL!)<br />
+<br />
+M-x all-hail-emacs<br />
 
 </blockquote></div>
 
@@ -813,8 +906,8 @@ M-x all-hail-emacs<br  />
 </div>
 </div>
 
-<div id="outline-container-orgheadline38" class="outline-2">
-<h2 id="orgheadline38"><span class="section-number-2">11</span> References, Bibliography, Shout Outs, and Props.</h2>
+<div id="outline-container-org168b5b6" class="outline-2">
+<h2 id="org168b5b6"><span class="section-number-2">11</span> References, Bibliography, Shout Outs, and Props.</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 In most cases I explicitly call out where I found the config I snarfed. Sometimes I didn't.  If you know the source, let me know!
@@ -921,11 +1014,12 @@ In most cases I explicitly call out where I found the config I snarfed. Sometime
 </table>
 </div>
 </div>
-<div id="outline-container-orgheadline42" class="outline-2">
-<h2 id="orgheadline42"><span class="section-number-2">12</span> Thee End</h2>
+<div id="outline-container-org2327837" class="outline-2">
+<h2 id="org2327837"><span class="section-number-2">12</span> Thee End</h2>
 <div class="outline-text-2" id="text-12">
-</div><div id="outline-container-orgheadline39" class="outline-4">
-<h4 id="orgheadline39"><span class="section-number-4">12.0.1</span> Initiate thee scratch</h4>
+</div>
+<div id="outline-container-org4f5b848" class="outline-4">
+<h4 id="org4f5b848"><span class="section-number-4">12.0.1</span> Initiate thee scratch</h4>
 <div class="outline-text-4" id="text-12-0-1">
 
 <div class="figure">
@@ -933,28 +1027,28 @@ In most cases I explicitly call out where I found the config I snarfed. Sometime
 </p>
 </div>
 
-<pre class="code">(emagician/initiate-thee-scratch)
-</pre>
+<pre class="code"><code>(emagician/initiate-thee-scratch)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline40" class="outline-4">
-<h4 id="orgheadline40"><span class="section-number-4">12.0.2</span> Turn off debugging</h4>
+<div id="outline-container-org6c7b312" class="outline-4">
+<h4 id="org6c7b312"><span class="section-number-4">12.0.2</span> Turn off debugging</h4>
 <div class="outline-text-4" id="text-12-0-2">
 <p>
 We're Almost Done. 
 </p>
 
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>debug-on-error<span class="org-unicode-whitespace-subdued-space"> </span>nil)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> debug-on-error nil)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline41" class="outline-4">
-<h4 id="orgheadline41"><span class="section-number-4">12.0.3</span> So Mote it Be.</h4>
+<div id="outline-container-org6d33f92" class="outline-4">
+<h4 id="org6d33f92"><span class="section-number-4">12.0.3</span> So Mote it Be.</h4>
 <div class="outline-text-4" id="text-12-0-3">
-<pre class="code">(<span class="org-keyword">provide</span><span class="org-unicode-whitespace-subdued-space"> </span>'<span class="org-constant">emagician</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">provide</span> '<span class="org-constant">emagician</span>)
+</code></pre>
 </div>
 </div>
 </div>
@@ -971,7 +1065,7 @@ This is a Homestuck reference.  It will be expounded upon later.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:48</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

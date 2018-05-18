@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:47 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thee Lamp</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Thee Lamp</h1>
@@ -156,29 +238,37 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Thee Lamp?</a></li>
-<li><a href="#orgheadline7">2. MOAR YOW</a>
+<li><a href="#orgb2bac6a">1. Thee Lamp?</a></li>
+<li><a href="#orgd112d1d">2. MOAR YOW</a>
 <ul>
-<li><a href="#orgheadline2">2.1. Cookie format</a></li>
-<li><a href="#orgheadline3">2.2. Code</a></li>
-<li><a href="#orgheadline6">2.3. Content</a>
+<li><a href="#orgc00c85a">2.1. Cookie format</a></li>
+<li><a href="#orgdf2cac1">2.2. Code</a></li>
+<li><a href="#orgf32371c">2.3. Content</a>
 <ul>
-<li><a href="#orgheadline4">2.3.1. Collected Works of Chaos&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></a></li>
-<li><a href="#orgheadline5">2.3.2. Minor Lamp Invocation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></a></li>
+<li><a href="#org3c2b7f1">2.3.1. Collected Works of Chaos&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></a></li>
+<li><a href="#org8cdc119">2.3.2. Minor Lamp Invocation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline8">3. Fix-Muscle-Memory (was Emagician-Fix-Spell)</a></li>
-<li><a href="#orgheadline9">4. Rid myself of Art Bollocks</a></li>
-<li><a href="#orgheadline10">5. Sierpinski</a></li>
-<li><a href="#orgheadline11">6. Alchemical Symbols</a></li>
+<li><a href="#orga1d89f0">3. Schrute</a></li>
+<li><a href="#orgb5cf772">4. Fix-Muscle-Memory (was Emagician-Fix-Spell)</a></li>
+<li><a href="#orge9b1f53">5. Rid myself of Art Bollocks</a></li>
+<li><a href="#orga2fbe46">6. Random Kawaii</a>
+<ul>
+<li><a href="#orgae250b6">6.1. <span class="todo TODO">TODO</span> simple 'metadata'.  Just a list</a></li>
+<li><a href="#orgd932afd">6.2. <span class="todo TODO">TODO</span> Sort wallpapers</a></li>
+<li><a href="#orgcce1fc6">6.3. <span class="todo TODO">TODO</span> basic command to <code>m wallpaper</code></a></li>
+</ul>
+</li>
+<li><a href="#orga8f05a1">7. Sierpinski</a></li>
+<li><a href="#orgb638e93">8. Alchemical Symbols</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Thee Lamp?</h2>
+<div id="outline-container-orgb2bac6a" class="outline-2">
+<h2 id="orgb2bac6a"><span class="section-number-2">1</span> Thee Lamp?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Using Emacs to become a better individual.  See also <a href="Emagician-Meta.html">Emagician Meta Development</a>.  
@@ -190,8 +280,8 @@ Thee Lamp provides Thee Illumination.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-2">
-<h2 id="orgheadline7"><span class="section-number-2">2</span> MOAR YOW</h2>
+<div id="outline-container-orgd112d1d" class="outline-2">
+<h2 id="orgd112d1d"><span class="section-number-2">2</span> MOAR YOW</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 It's like the previous generation (yow)
@@ -199,8 +289,8 @@ With the current one (moar)
 </p>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">2.1</span> Cookie format</h3>
+<div id="outline-container-orgc00c85a" class="outline-3">
+<h3 id="orgc00c85a"><span class="section-number-3">2.1</span> Cookie format</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Cookie files are really easy:
@@ -230,24 +320,25 @@ Note the Final <code>%%</code>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">2.2</span> Code</h3>
+<div id="outline-container-orgdf2cac1" class="outline-3">
+<h3 id="orgdf2cac1"><span class="section-number-3">2.2</span> Code</h3>
 <div class="outline-text-3" id="text-2-2">
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">emagician/cookie-from-file</span><span class="org-unicode-whitespace-subdued-space"> </span>(file)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"return</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">piece</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">wisdom</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">from</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">collected</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">works</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">chaos"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">let</span><span class="org-unicode-whitespace-subdued-space"> </span>((cookie-delimiter<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\n%%\n"</span>)
-<span class="org-unicode-whitespace-subdued-space">        </span>(file<span class="org-unicode-whitespace-subdued-space"> </span>(expand-file-name<span class="org-unicode-whitespace-subdued-space"> </span>file<span class="org-unicode-whitespace-subdued-space"> </span>emagician/dir)))
-<span class="org-unicode-whitespace-subdued-space">    </span>(cookie<span class="org-unicode-whitespace-subdued-space"> </span>file
-<span class="org-unicode-whitespace-subdued-space">            </span><span class="org-string">"Loading</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Chaotic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">Wisdom..."</span>
-<span class="org-unicode-whitespace-subdued-space">            </span><span class="org-string">"Loaded!"</span>)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">emagician/cookie-from-file</span> (file)
+  <span class="org-doc">"return a piece of wisdom from the collected works of chaos"</span>
+  (<span class="org-keyword">let</span> ((cookie-delimiter <span class="org-string">"\n%%\n"</span>)
+        (file (expand-file-name file emagician/dir)))
+    (cookie file
+            <span class="org-string">"Loading Chaotic Wisdom..."</span>
+            <span class="org-string">"Loaded!"</span>)))
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">2.3</span> Content</h3>
+<div id="outline-container-orgf32371c" class="outline-3">
+<h3 id="orgf32371c"><span class="section-number-3">2.3</span> Content</h3>
 <div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">2.3.1</span> Collected Works of Chaos&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></h4>
+</div>
+<div id="outline-container-org3c2b7f1" class="outline-4">
+<h4 id="org3c2b7f1"><span class="section-number-4">2.3.1</span> Collected Works of Chaos&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Sources:
@@ -257,7 +348,7 @@ Sources:
 <li>On formerally undecidable propositions of the Principia Discorida and other related systems</li>
 <li>Thee Grey Book</li>
 </ul>
-<pre class="code">A jug of wine,
+<pre class="code"><code>A jug of wine,
 A leg of lamb
 And thou!
 Beside me,
@@ -757,13 +848,13 @@ Sometimes you have to slow it down, and count your blessings that you
 haven't killled yourself yet!
   -- John Kilduff
 %%
-</pre>
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">2.3.2</span> Minor Lamp Invocation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></h4>
+<div id="outline-container-org8cdc119" class="outline-4">
+<h4 id="org8cdc119"><span class="section-number-4">2.3.2</span> Minor Lamp Invocation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="asset">asset</span></span></h4>
 <div class="outline-text-4" id="text-2-3-2">
-<pre class="code">Discover my Major:   C-c C-h
+<pre class="code"><code>Discover my Major:   C-c C-h
 Discover my Mode:    C-c C-S-H
 %%
 Maybe it is time to try projectile?
@@ -791,7 +882,9 @@ emacs-howdoi
 %%
 Know your HTTP Well!  M-x http-foo and media-types
 %%
-</pre>
+Do An upgrade today.
+%%
+</code></pre>
 <p>
 ^&#x2014; %%!
 </p>
@@ -799,34 +892,56 @@ Know your HTTP Well!  M-x http-foo and media-types
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">3</span> Fix-Muscle-Memory (was Emagician-Fix-Spell)</h2>
+<div id="outline-container-orga1d89f0" class="outline-2">
+<h2 id="orga1d89f0"><span class="section-number-2">3</span> Schrute</h2>
 <div class="outline-text-2" id="text-3">
+<p>
+I am glad someone built this!  I have been thinking about it for awhile, but someone did it.  
+</p>
+
+<p>
+Unfortunately it doesn't fit in with my Lamp Desires.  It just does-the-right-thing for you instead of prompting you for the right thing.
+</p>
+
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">schrute</span>
+  <span class="org-builtin">:demand</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setf</span> schrute-shortcuts-commands '((avy-goto-line   . (next-line previous-line))
+                                     (avy-goto-word-1 . (left-char right-char))))
+  (schrute-mode -1))
+</code></pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgb5cf772" class="outline-2">
+<h2 id="orgb5cf772"><span class="section-number-2">4</span> Fix-Muscle-Memory (was Emagician-Fix-Spell)</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 This was originally defined in this file, but it got moved to it's own repo.
 </p>
 
-<pre class="code">(load<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"fix-muscle-memory/fix-muscle-memory.el"</span>)
-(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>fix-muscle-memory-use-emoji<span class="org-unicode-whitespace-subdued-space"> </span>t)
-(fix-muscle-memory-load-problem-words<span class="org-unicode-whitespace-subdued-space"> </span>'foo
-<span class="org-unicode-whitespace-subdued-space">                                      </span>'((<span class="org-string">"teh"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"the"</span>)
-<span class="org-unicode-whitespace-subdued-space">                                        </span>(<span class="org-string">"comptuer"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"computer"</span>)
-<span class="org-unicode-whitespace-subdued-space">                                        </span>(<span class="org-string">"wehre"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"where"</span>)
-<span class="org-unicode-whitespace-subdued-space">                                        </span>(<span class="org-string">"destory"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"destroy"</span>)
-<span class="org-unicode-whitespace-subdued-space">                                        </span>(<span class="org-string">"occured"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"occurred"</span>)
-<span class="org-unicode-whitespace-subdued-space">                                        </span>(<span class="org-string">"prevelence"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"prevalence"</span>)))
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'text-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'abbrev-mode)
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'abbrev-mode)
+<pre class="code"><code>(load <span class="org-string">"fix-muscle-memory/fix-muscle-memory.el"</span>)
+(<span class="org-keyword">setq</span> fix-muscle-memory-use-emoji t)
+(fix-muscle-memory-load-problem-words 'foo
+                                      '((<span class="org-string">"teh"</span> . <span class="org-string">"the"</span>)
+                                        (<span class="org-string">"comptuer"</span> . <span class="org-string">"computer"</span>)
+                                        (<span class="org-string">"wehre"</span> . <span class="org-string">"where"</span>)
+                                        (<span class="org-string">"destory"</span> . <span class="org-string">"destroy"</span>)
+                                        (<span class="org-string">"occured"</span> . <span class="org-string">"occurred"</span>)
+                                        (<span class="org-string">"prevelence"</span> . <span class="org-string">"prevalence"</span>)))
+(add-hook 'text-mode-hook 'abbrev-mode)
+(add-hook 'prog-mode-hook 'abbrev-mode)
 
 (turn-on-fix-muscle-memory-on-extended-command)
 
-(diminish<span class="org-unicode-whitespace-subdued-space"> </span>'abbrev-mode)
-</pre>
+(diminish 'abbrev-mode)
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">4</span> Rid myself of Art Bollocks</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orge9b1f53" class="outline-2">
+<h2 id="orge9b1f53"><span class="section-number-2">5</span> Rid myself of Art Bollocks</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 One of the problems I sort of have a lot of, is that I kind of use a lot of weasel words.  Perhaps I think I should leverage an Emacs plugin to change this.
 </p>
@@ -835,60 +950,91 @@ One of the problems I sort of have a lot of, is that I kind of use a lot of weas
 Like Really a lot.
 </p>
 
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">artbollocks-mode</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-weasel-words-regex
-<span class="org-unicode-whitespace-subdued-space">        </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\b"</span><span class="org-unicode-whitespace-subdued-space"> </span>(regexp-opt
-<span class="org-unicode-whitespace-subdued-space">                       </span>'(<span class="org-string">"one</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"should"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"kinda"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"kind</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"just"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"sort</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">of"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"a</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">lot"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"probably"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"maybe"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"perhaps"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"I</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">think"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"really"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"pretty"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"nice"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"action"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"utilize"</span>
-<span class="org-unicode-whitespace-subdued-space">                         </span><span class="org-string">"leverage"</span>)<span class="org-unicode-whitespace-subdued-space"> </span>t)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"\\b"</span>))
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-jargon<span class="org-unicode-whitespace-subdued-space"> </span>nil)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>text-mode-hook)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>artbollocks-mode<span class="org-unicode-whitespace-subdued-space"> </span>org-mode-hook))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">artbollocks-mode</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> artbollocks-weasel-words-regex
+        (concat <span class="org-string">"\\b"</span> (regexp-opt
+                       '(<span class="org-string">"one of the"</span>
+                         <span class="org-string">"should"</span>
+                         <span class="org-string">"kinda"</span>
+                         <span class="org-string">"kind of"</span>
+                         <span class="org-string">"just"</span>
+                         <span class="org-string">"sort of"</span>
+                         <span class="org-string">"a lot"</span>
+                         <span class="org-string">"probably"</span>
+                         <span class="org-string">"maybe"</span>
+                         <span class="org-string">"perhaps"</span>
+                         <span class="org-string">"I think"</span>
+                         <span class="org-string">"really"</span>
+                         <span class="org-string">"pretty"</span>
+                         <span class="org-string">"nice"</span>
+                         <span class="org-string">"action"</span>
+                         <span class="org-string">"utilize"</span>
+                         <span class="org-string">"leverage"</span>) t) <span class="org-string">"\\b"</span>))
+  (<span class="org-keyword">setq</span> artbollocks-jargon nil)
+  (<span class="org-keyword">emagician/minor-in-major-mode</span> artbollocks-mode text-mode-hook)
+  (<span class="org-keyword">emagician/minor-in-major-mode</span> artbollocks-mode org-mode-hook))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">5</span> Sierpinski</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga2fbe46" class="outline-2">
+<h2 id="orga2fbe46"><span class="section-number-2">6</span> Random Kawaii</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+I have a monster collection of photos that are so cute, or so awesome, they give me joy each time I see them.
+</p>
+
+<p>
+It would be cool to make mcli do something like that every once in awhile.  
+</p>
+
+<p>
+There is 2 things that'll have to happen:
+</p>
+<ul class="org-ul">
+<li>Metadata for wallpaper</li>
+<li>interface to m-cli:  <code>m wallpaper path/to/wallpaper</code></li>
+</ul>
+</div>
+
+<div id="outline-container-orgae250b6" class="outline-3">
+<h3 id="orgae250b6"><span class="section-number-3">6.1</span> <span class="todo TODO">TODO</span> simple 'metadata'.  Just a list</h3>
+</div>
+<div id="outline-container-orgd932afd" class="outline-3">
+<h3 id="orgd932afd"><span class="section-number-3">6.2</span> <span class="todo TODO">TODO</span> Sort wallpapers</h3>
+</div>
+<div id="outline-container-orgcce1fc6" class="outline-3">
+<h3 id="orgcce1fc6"><span class="section-number-3">6.3</span> <span class="todo TODO">TODO</span> basic command to <code>m wallpaper</code></h3>
+</div>
+</div>
+
+<div id="outline-container-orga8f05a1" class="outline-2">
+<h2 id="orga8f05a1"><span class="section-number-2">7</span> Sierpinski</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 &#x2026; is my jam! <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 <a href="http://nullprogram.com/blog/2012/09/14/">http://nullprogram.com/blog/2012/09/14/</a>
 </span>
 </p>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">sierpinski</span><span class="org-unicode-whitespace-subdued-space"> </span>(s)
-<span class="org-unicode-whitespace-subdued-space">  </span>(pop-to-buffer<span class="org-unicode-whitespace-subdued-space"> </span>(get-buffer-create<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"*sierpinski*"</span>))
-<span class="org-unicode-whitespace-subdued-space">  </span>(fundamental-mode)<span class="org-unicode-whitespace-subdued-space"> </span>(erase-buffer)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">labels</span><span class="org-unicode-whitespace-subdued-space"> </span>((fill-p<span class="org-unicode-whitespace-subdued-space"> </span>(x<span class="org-unicode-whitespace-subdued-space"> </span>y)
-<span class="org-unicode-whitespace-subdued-space">                   </span>(<span class="org-keyword">cond</span><span class="org-unicode-whitespace-subdued-space"> </span>((<span class="org-keyword">or</span><span class="org-unicode-whitespace-subdued-space"> </span>(zerop<span class="org-unicode-whitespace-subdued-space"> </span>x)<span class="org-unicode-whitespace-subdued-space"> </span>(zerop<span class="org-unicode-whitespace-subdued-space"> </span>y))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"0"</span>)
-<span class="org-unicode-whitespace-subdued-space">                         </span>((<span class="org-keyword">and</span><span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>(mod<span class="org-unicode-whitespace-subdued-space"> </span>x<span class="org-unicode-whitespace-subdued-space"> </span>3))<span class="org-unicode-whitespace-subdued-space"> </span>(=<span class="org-unicode-whitespace-subdued-space"> </span>1<span class="org-unicode-whitespace-subdued-space"> </span>(mod<span class="org-unicode-whitespace-subdued-space"> </span>y<span class="org-unicode-whitespace-subdued-space"> </span>3)))<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"1"</span>)
-<span class="org-unicode-whitespace-subdued-space">                         </span>(t<span class="org-unicode-whitespace-subdued-space"> </span>(fill-p<span class="org-unicode-whitespace-subdued-space"> </span>(/<span class="org-unicode-whitespace-subdued-space"> </span>x<span class="org-unicode-whitespace-subdued-space"> </span>3)<span class="org-unicode-whitespace-subdued-space"> </span>(/<span class="org-unicode-whitespace-subdued-space"> </span>y<span class="org-unicode-whitespace-subdued-space"> </span>3))))))
-<span class="org-unicode-whitespace-subdued-space">    </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(format<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"P1\n%d</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">%d\n"</span><span class="org-unicode-whitespace-subdued-space"> </span>s<span class="org-unicode-whitespace-subdued-space"> </span>s))
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">dotimes</span><span class="org-unicode-whitespace-subdued-space"> </span>(y<span class="org-unicode-whitespace-subdued-space"> </span>s)<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">dotimes</span><span class="org-unicode-whitespace-subdued-space"> </span>(x<span class="org-unicode-whitespace-subdued-space"> </span>s)<span class="org-unicode-whitespace-subdued-space"> </span>(insert<span class="org-unicode-whitespace-subdued-space"> </span>(fill-p<span class="org-unicode-whitespace-subdued-space"> </span>x<span class="org-unicode-whitespace-subdued-space"> </span>y)<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"</span>))))
-<span class="org-unicode-whitespace-subdued-space">  </span>(image-mode))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">sierpinski</span> (s)
+  (pop-to-buffer (get-buffer-create <span class="org-string">"*sierpinski*"</span>))
+  (fundamental-mode) (erase-buffer)
+  (<span class="org-keyword">labels</span> ((fill-p (x y)
+                   (<span class="org-keyword">cond</span> ((<span class="org-keyword">or</span> (zerop x) (zerop y)) <span class="org-string">"0"</span>)
+                         ((<span class="org-keyword">and</span> (= 1 (mod x 3)) (= 1 (mod y 3))) <span class="org-string">"1"</span>)
+                         (t (fill-p (/ x 3) (/ y 3))))))
+    (insert (format <span class="org-string">"P1\n%d %d\n"</span> s s))
+    (<span class="org-keyword">dotimes</span> (y s) (<span class="org-keyword">dotimes</span> (x s) (insert (fill-p x y) <span class="org-string">" "</span>))))
+  (image-mode))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">6</span> Alchemical Symbols</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orgb638e93" class="outline-2">
+<h2 id="orgb638e93"><span class="section-number-2">8</span> Alchemical Symbols</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 No self respecting Emagicians Starter Kit would be without em!
 </p>
@@ -1861,7 +2007,7 @@ No self respecting Emagicians Starter Kit would be without em!
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:47</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

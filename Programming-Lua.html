@@ -6,7 +6,7 @@
 <!-- 2018-05-18 Fri 10:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Lua</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
@@ -233,39 +233,30 @@ for the JavaScript code in this tag.
 <menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
+<h1 class="title">Lua</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd5973ad">1. Identity</a></li>
-<li><a href="#org97225cb">2. Keybindings</a>
-<ul>
-<li><a href="#org459d57c">2.1. Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keybinding">keybinding</span></span></a></li>
-</ul>
-</li>
+<li><a href="#org3bccae4">1. Love</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd5973ad" class="outline-2">
-<h2 id="orgd5973ad"><span class="section-number-2">1</span> Identity</h2>
+<div id="outline-container-org3bccae4" class="outline-2">
+<h2 id="org3bccae4"><span class="section-number-2">1</span> Love</h2>
 <div class="outline-text-2" id="text-1">
-<pre class="code"><code>(<span class="org-keyword">setq</span> user-full-name <span class="org-string">"Jonathan Arkell"</span>)
-(<span class="org-keyword">setq</span> user-mail-address <span class="org-string">"jonnay@jonnay.net"</span>)
+<pre class="code"><code><span class="org-builtin">export</span> <span class="org-variable-name">PATH</span>=$<span class="org-variable-name">PATH</span>:/Applications/love.app/Contents/MacOS/
 </code></pre>
-</div>
-</div>
 
-<div id="outline-container-org97225cb" class="outline-2">
-<h2 id="org97225cb"><span class="section-number-2">2</span> Keybindings</h2>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-org459d57c" class="outline-3">
-<h3 id="org459d57c"><span class="section-number-3">2.1</span> Control z for zoom? seriously?  MOST ANNOYING KEY EVAR.&#xa0;&#xa0;&#xa0;<span class="tag"><span class="keybinding">keybinding</span></span></h3>
-<div class="outline-text-3" id="text-2-1">
-<pre class="code"><code>(global-unset-key [(control z)])
-(global-unset-key (kbd <span class="org-string">"C-x C-z"</span>))
+
+
+
+
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">lua-mode</span>)
 </code></pre>
-</div>
+
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">love-minor-mode</span>)
+</code></pre>
 </div>
 </div>
 </div>

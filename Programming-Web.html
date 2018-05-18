@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:46 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Web Programming</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Web Programming</h1>
@@ -156,189 +238,213 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline2">1. Interface</a>
+<li><a href="#org84c0f21">1. Interface</a>
 <ul>
-<li><a href="#orgheadline1">1.1. Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a></li>
+<li><a href="#org2fbbbfb">1.1. Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a></li>
+<li><a href="#orgd1c12af">1.2. Colors</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">2. Modes</a>
+<li><a href="#org5b95d0e">2. Modes</a>
 <ul>
-<li><a href="#orgheadline4">2.1. Web Mode</a>
+<li><a href="#org5a8fbc4">2.1. Web Mode</a>
 <ul>
-<li><a href="#orgheadline3">2.1.1. Mode setup</a></li>
+<li><a href="#org020315d">2.1.1. Mode setup</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline8">2.2. Stylesheets</a>
+<li><a href="#org4b1affb">2.2. Stylesheets</a>
 <ul>
-<li><a href="#orgheadline5">2.2.1. CSS Mode</a></li>
-<li><a href="#orgheadline6">2.2.2. SCSS Mode</a></li>
-<li><a href="#orgheadline7">2.2.3. They should descend from prog-mode, but they don't!</a></li>
+<li><a href="#org36b153d">2.2.1. CSS Mode</a></li>
+<li><a href="#org4d13e3c">2.2.2. Less mode</a></li>
+<li><a href="#org1d4a522">2.2.3. SCSS Mode</a></li>
+<li><a href="#orgbd57bc4">2.2.4. They should descend from prog-mode, but they don't!</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline9">2.3. Coffeescript</a></li>
+<li><a href="#org2247409">2.3. Coffeescript</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline15">3. Helpers</a>
+<li><a href="#orgc77f3f8">3. Helpers</a>
 <ul>
-<li><a href="#orgheadline11">3.1. Apache Mode</a></li>
-<li><a href="#orgheadline12">3.2. Restclient Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a></li>
-<li><a href="#orgheadline14">3.3. Fontawesome mode</a>
+<li><a href="#org8705d8c">3.1. Apache Mode</a></li>
+<li><a href="#org3f8b2ad">3.2. Restclient Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></a></li>
+<li><a href="#org968ea50">3.3. Fontawesome mode</a>
 <ul>
-<li><a href="#orgheadline13">3.3.1. Prettify Fontawesome</a></li>
+<li><a href="#orgc5dbb6a">3.3.1. Prettify Fontawesome</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline17">4. Interpreters</a>
+<li><a href="#org7a43e47">4. Interpreters</a>
 <ul>
-<li><a href="#orgheadline16">4.1. Skewer</a></li>
+<li><a href="#org2e700ab">4.1. Skewer</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">5. Documentation</a>
+<li><a href="#org0528ac4">5. Documentation</a>
 <ul>
-<li><a href="#orgheadline18">5.1. HTTP Well</a></li>
+<li><a href="#orgde18a48">5.1. HTTP Well</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">1</span> Interface</h2>
+<div id="outline-container-org84c0f21" class="outline-2">
+<h2 id="org84c0f21"><span class="section-number-2">1</span> Interface</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1"><span class="section-number-3">1.1</span> Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
+</div>
+<div id="outline-container-org2fbbbfb" class="outline-3">
+<h3 id="org2fbbbfb"><span class="section-number-3">1.1</span> Completion&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
 <div class="outline-text-3" id="text-1-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">company-web</span>)
-(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">ac-html-bootstrap</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">company-web</span>)
+(<span class="org-keyword">use-package</span> <span class="org-constant">ac-html-bootstrap</span>)
+</code></pre>
+</div>
+</div>
+
+<div id="outline-container-orgd1c12af" class="outline-3">
+<h3 id="orgd1c12af"><span class="section-number-3">1.2</span> Colors</h3>
+<div class="outline-text-3" id="text-1-2">
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">rainbow-mode</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#127752;"</span>
+  <span class="org-builtin">:hook</span> (scss-mode less-mode css-mode))
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">2</span> Modes</h2>
+<div id="outline-container-org5b95d0e" class="outline-2">
+<h2 id="org5b95d0e"><span class="section-number-2">2</span> Modes</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">2.1</span> Web Mode</h3>
+</div>
+<div id="outline-container-org5a8fbc4" class="outline-3">
+<h3 id="org5a8fbc4"><span class="section-number-3">2.1</span> Web Mode</h3>
 <div class="outline-text-3" id="text-2-1">
-</div><div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">2.1.1</span> Mode setup</h4>
+</div>
+<div id="outline-container-org020315d" class="outline-4">
+<h4 id="org020315d"><span class="section-number-4">2.1.1</span> Mode setup</h4>
 <div class="outline-text-4" id="text-2-1-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">web-mode</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#127758;"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:mode</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>((<span class="org-string">"\\.phtml\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.tpl\\.php\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">      </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.jsp\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">            </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.as[cp]x\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">        </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.erb\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">            </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.mustache\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">       </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.djhtml\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">         </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.jst.ejs\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode)<span class="org-unicode-whitespace-subdued-trailing">        </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-string">"\\.html?\\'"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>web-mode))
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-enable-block-face<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-enable-comment-keywords<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-enable-current-element-highlight<span class="org-unicode-whitespace-subdued-space"> </span>t)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-enable-current-column-highlight<span class="org-unicode-whitespace-subdued-space"> </span>t)<span class="org-unicode-whitespace-subdued-trailing">   </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-script-padding<span class="org-unicode-whitespace-subdued-space"> </span>2)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-style-padding<span class="org-unicode-whitespace-subdued-space"> </span>2)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-comment-style<span class="org-unicode-whitespace-subdued-space"> </span>2)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-code-indent-offset<span class="org-unicode-whitespace-subdued-space"> </span>2)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>web-mode-markup-indent-offset<span class="org-unicode-whitespace-subdued-space"> </span>2))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">web-mode</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#127758;"</span>
+  <span class="org-builtin">:mode</span> 
+  ((<span class="org-string">"\\.phtml\\'"</span> . web-mode)
+  (<span class="org-string">"\\.tpl\\.php\\'"</span> . web-mode)      
+  (<span class="org-string">"\\.jsp\\'"</span> . web-mode)            
+  (<span class="org-string">"\\.as[cp]x\\'"</span> . web-mode)        
+  (<span class="org-string">"\\.erb\\'"</span> . web-mode)            
+  (<span class="org-string">"\\.mustache\\'"</span> . web-mode)       
+  (<span class="org-string">"\\.djhtml\\'"</span> . web-mode)         
+  (<span class="org-string">"\\.jst.ejs\\'"</span> . web-mode)        
+  (<span class="org-string">"\\.html?\\'"</span> . web-mode))
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> web-mode-enable-block-face t)
+  (<span class="org-keyword">setq</span> web-mode-enable-comment-keywords t)
+  (<span class="org-keyword">setq</span> web-mode-enable-current-element-highlight t)
+  (<span class="org-keyword">setq</span> web-mode-enable-current-column-highlight t)   
+  (<span class="org-keyword">setq</span> web-mode-script-padding 2)
+  (<span class="org-keyword">setq</span> web-mode-style-padding 2)
+  (<span class="org-keyword">setq</span> web-mode-comment-style 2)
+  (<span class="org-keyword">setq</span> web-mode-code-indent-offset 2)
+  (<span class="org-keyword">setq</span> web-mode-markup-indent-offset 2))
+</code></pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">2.2</span> Stylesheets</h3>
+<div id="outline-container-org4b1affb" class="outline-3">
+<h3 id="org4b1affb"><span class="section-number-3">2.2</span> Stylesheets</h3>
 <div class="outline-text-3" id="text-2-2">
-</div><div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">2.2.1</span> CSS Mode</h4>
+</div>
+<div id="outline-container-org36b153d" class="outline-4">
+<h4 id="org36b153d"><span class="section-number-4">2.2.1</span> CSS Mode</h4>
 <div class="outline-text-4" id="text-2-2-1">
-<pre class="code">(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>css-indent-level<span class="org-unicode-whitespace-subdued-space"> </span>2)
-(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>css-indent-offset<span class="org-unicode-whitespace-subdued-space"> </span>2)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">setq</span> css-indent-level 2)
+(<span class="org-keyword">setq</span> css-indent-offset 2)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">2.2.2</span> SCSS Mode</h4>
+<div id="outline-container-org4d13e3c" class="outline-4">
+<h4 id="org4d13e3c"><span class="section-number-4">2.2.2</span> Less mode</h4>
 <div class="outline-text-4" id="text-2-2-2">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">scss-mode</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'scss-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'ac-css-mode-setup)
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>scss-compile-at-save<span class="org-unicode-whitespace-subdued-space"> </span>nil))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">less-css-mode</span>)
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">2.2.3</span> They should descend from prog-mode, but they don't!</h4>
+
+<div id="outline-container-org1d4a522" class="outline-4">
+<h4 id="org1d4a522"><span class="section-number-4">2.2.3</span> SCSS Mode</h4>
 <div class="outline-text-4" id="text-2-2-3">
-<pre class="code">(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>run-prog-mode-hooks<span class="org-unicode-whitespace-subdued-space"> </span>css-mode-hook
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-string">"Runs</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">the</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">progmode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">hooks"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'prog-mode-hook))
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">scss-mode</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> scss-compile-at-save nil))
+</code></pre>
+</div>
+</div>
+<div id="outline-container-orgbd57bc4" class="outline-4">
+<h4 id="orgbd57bc4"><span class="section-number-4">2.2.4</span> They should descend from prog-mode, but they don't!</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<pre class="code"><code>(<span class="org-keyword">emagician/defhook</span> run-prog-mode-hooks css-mode-hook
+  <span class="org-string">"Runs the progmode hooks"</span>
+  (run-hooks 'prog-mode-hook))
 
-(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'scss-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'run-prog-mode-hooks)
-</pre>
+(add-hook 'scss-mode-hook 'run-prog-mode-hooks)
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">2.3</span> Coffeescript</h3>
+<div id="outline-container-org2247409" class="outline-3">
+<h3 id="org2247409"><span class="section-number-3">2.3</span> Coffeescript</h3>
 <div class="outline-text-3" id="text-2-3">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">coffee-mode</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9749;"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>coffee-tab-width<span class="org-unicode-whitespace-subdued-space"> </span>2))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">coffee-mode</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9749;"</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> coffee-tab-width 2))
+</code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">3</span> Helpers</h2>
+<div id="outline-container-orgc77f3f8" class="outline-2">
+<h2 id="orgc77f3f8"><span class="section-number-2">3</span> Helpers</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">3.1</span> Apache Mode</h3>
+</div>
+<div id="outline-container-org8705d8c" class="outline-3">
+<h3 id="org8705d8c"><span class="section-number-3">3.1</span> Apache Mode</h3>
 <div class="outline-text-3" id="text-3-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">apache-mode</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">apache-mode</span>)
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">3.2</span> Restclient Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
+<div id="outline-container-org3f8b2ad" class="outline-3">
+<h3 id="org3f8b2ad"><span class="section-number-3">3.2</span> Restclient Mode&#xa0;&#xa0;&#xa0;<span class="tag"><span class="completion">completion</span></span></h3>
 <div class="outline-text-3" id="text-3-2">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">restclient</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">company-restclient</span>))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">restclient</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">use-package</span> <span class="org-constant">company-restclient</span>))
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">3.3</span> Fontawesome mode</h3>
+<div id="outline-container-org968ea50" class="outline-3">
+<h3 id="org968ea50"><span class="section-number-3">3.3</span> Fontawesome mode</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Insert fontawesome icons.
 </p>
 
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">fontawesome</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">fontawesome</span>)
+</code></pre>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13"><span class="section-number-4">3.3.1</span> Prettify Fontawesome</h4>
+<div id="outline-container-orgc5dbb6a" class="outline-4">
+<h4 id="orgc5dbb6a"><span class="section-number-4">3.3.1</span> Prettify Fontawesome</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Take fontawesome-alist, append fa- to the name, and use that as the list for prettify-mode
 </p>
-<pre class="code">(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician-prettify-fontawesome<span class="org-unicode-whitespace-subdued-space"> </span>web-mode-hook
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>prettify-symbols-alist<span class="org-unicode-whitespace-subdued-space"> </span>(mapcar<span class="org-unicode-whitespace-subdued-space"> </span>(<span class="org-keyword">lambda</span><span class="org-unicode-whitespace-subdued-space"> </span>(fa-cons)
-<span class="org-unicode-whitespace-subdued-space">                                         </span>(cons<span class="org-unicode-whitespace-subdued-space"> </span>(concat<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"fa-"</span><span class="org-unicode-whitespace-subdued-space"> </span>(car<span class="org-unicode-whitespace-subdued-space"> </span>fa-cons))
-<span class="org-unicode-whitespace-subdued-space">                                               </span>(aref<span class="org-unicode-whitespace-subdued-space"> </span>(cdr<span class="org-unicode-whitespace-subdued-space"> </span>fa-cons)<span class="org-unicode-whitespace-subdued-space"> </span>0)))
-<span class="org-unicode-whitespace-subdued-space">                                       </span>fontawesome-alist)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">emagician/defhook</span> emagician-prettify-fontawesome web-mode-hook
+  (<span class="org-keyword">setq</span> prettify-symbols-alist (mapcar (<span class="org-keyword">lambda</span> (fa-cons)
+                                         (cons (concat <span class="org-string">"fa-"</span> (car fa-cons))
+                                               (aref (cdr fa-cons) 0)))
+                                       fontawesome-alist)))
+</code></pre>
 
 <p>
 Now you can type out <code>&lt;i icon="fa fa-tree"&gt;</code> and it comes out <code>&lt;i icon="fa "&gt;</code>
@@ -348,38 +454,41 @@ Now you can type out <code>&lt;i icon="fa fa-tree"&gt;</code> and it comes out <
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">4</span> Interpreters</h2>
+<div id="outline-container-org7a43e47" class="outline-2">
+<h2 id="org7a43e47"><span class="section-number-2">4</span> Interpreters</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">4.1</span> Skewer</h3>
+</div>
+<div id="outline-container-org2e700ab" class="outline-3">
+<h3 id="org2e700ab"><span class="section-number-3">4.1</span> Skewer</h3>
 <div class="outline-text-3" id="text-4-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">skewer-mode</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>httpd-port<span class="org-unicode-whitespace-subdued-space"> </span>8123))
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-mode</span>
+  <span class="org-builtin">:init</span> 
+  (<span class="org-keyword">setq</span> httpd-port 8123))
 
-(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">skewer-reload-stylesheets</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span><span class="org-unicode-whitespace-subdued-space"> </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'css-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'skewer-reload-stylesheets-start-editing)
-<span class="org-unicode-whitespace-subdued-space">        </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'scss-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'skewer-reload-stylesheets-start-editing))
-</pre>
+(<span class="org-keyword">use-package</span> <span class="org-constant">skewer-reload-stylesheets</span>
+  <span class="org-builtin">:init</span> (add-hook 'css-mode-hook 'skewer-reload-stylesheets-start-editing)
+        (add-hook 'scss-mode-hook 'skewer-reload-stylesheets-start-editing))
+
+</code></pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">5</span> Documentation</h2>
+<div id="outline-container-org0528ac4" class="outline-2">
+<h2 id="org0528ac4"><span class="section-number-2">5</span> Documentation</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">5.1</span> HTTP Well</h3>
+</div>
+<div id="outline-container-orgde18a48" class="outline-3">
+<h3 id="orgde18a48"><span class="section-number-3">5.1</span> HTTP Well</h3>
 <div class="outline-text-3" id="text-5-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">know-your-http-well</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">know-your-http-well</span>)
+</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:46</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

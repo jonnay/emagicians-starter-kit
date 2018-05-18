@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:48 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lisp</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Lisp</h1>
@@ -156,43 +238,43 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Set up a generalized Lisp mode hook</a></li>
-<li><a href="#orgheadline4">2. Editing</a>
+<li><a href="#org205499b">1. Set up a generalized Lisp mode hook</a></li>
+<li><a href="#org95c73ea">2. Editing</a>
 <ul>
-<li><a href="#orgheadline2">2.1. Paredit</a></li>
-<li><a href="#orgheadline3">2.2. Smart Parens</a></li>
+<li><a href="#org6aadb50">2.1. Paredit</a></li>
+<li><a href="#org4fe5058">2.2. Smart Parens</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">3. Individual Lisps</a>
+<li><a href="#orgac1188e">3. Individual Lisps</a>
 <ul>
-<li><a href="#orgheadline13">3.1. Elisp</a>
+<li><a href="#org930952c">3.1. Elisp</a>
 <ul>
-<li><a href="#orgheadline11">3.1.1. Editing</a>
+<li><a href="#orgae59f6b">3.1.1. Editing</a>
 <ul>
-<li><a href="#orgheadline5">3.1.1.1. Highlighting</a></li>
-<li><a href="#orgheadline6">3.1.1.2. Eldoc</a></li>
-<li><a href="#orgheadline7">3.1.1.3. Auto Complete</a></li>
-<li><a href="#orgheadline8">3.1.1.4. Indentation</a></li>
-<li><a href="#orgheadline10">3.1.1.5. Package checking</a>
+<li><a href="#org2b2785e">3.1.1.1. Highlighting</a></li>
+<li><a href="#orgab17b79">3.1.1.2. Eldoc</a></li>
+<li><a href="#org058edac">3.1.1.3. Auto Complete</a></li>
+<li><a href="#orgffab645">3.1.1.4. Indentation</a></li>
+<li><a href="#orgab30db5">3.1.1.5. Package checking</a>
 <ul>
-<li><a href="#orgheadline9">3.1.1.5.1. Turn off in orc-src buffers</a></li>
+<li><a href="#org5a12737">3.1.1.5.1. Turn off in orc-src buffers</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline12">3.1.2. Environment</a></li>
+<li><a href="#orgdcce3e1">3.1.2. Environment</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline18">3.2. Scheme</a>
+<li><a href="#orge2a59b5">3.2. Scheme</a>
 <ul>
-<li><a href="#orgheadline15">3.2.1. Editing</a>
+<li><a href="#org7fefdbd">3.2.1. Editing</a>
 <ul>
-<li><a href="#orgheadline14">3.2.1.1. Intenting</a></li>
+<li><a href="#org288d62b">3.2.1.1. Intenting</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline17">3.2.2. Interface</a>
+<li><a href="#org760320e">3.2.2. Interface</a>
 <ul>
-<li><a href="#orgheadline16">3.2.2.1. Geiser REPL</a></li>
+<li><a href="#org1687861">3.2.2.1. Geiser REPL</a></li>
 </ul>
 </li>
 </ul>
@@ -203,139 +285,142 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Set up a generalized Lisp mode hook</h2>
+<div id="outline-container-org205499b" class="outline-2">
+<h2 id="org205499b"><span class="section-number-2">1</span> Set up a generalized Lisp mode hook</h2>
 <div class="outline-text-2" id="text-1">
-<pre class="code">(<span class="org-keyword">defvar</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-variable-name">generic-lisp-mode-hook</span><span class="org-unicode-whitespace-subdued-space"> </span>'()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Generic</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">lisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">hooks</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">to</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">run"</span>)
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defvar</span> <span class="org-variable-name">generic-lisp-mode-hook</span> '()
+  <span class="org-doc">"Generic lisp hooks to run"</span>)
+</code></pre>
 
-<pre class="code">(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">run-lisp-mode-hooks</span><span class="org-unicode-whitespace-subdued-space"> </span>()
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-doc">"Run</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">standard</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">lisp</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">mode</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-doc">hooks"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(run-hooks<span class="org-unicode-whitespace-subdued-space"> </span>'generic-lisp-mode-hook))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">defun</span> <span class="org-function-name">run-lisp-mode-hooks</span> ()
+  <span class="org-doc">"Run standard lisp mode hooks"</span>
+  (run-hooks 'generic-lisp-mode-hook))
+</code></pre>
 
-<pre class="code">(<span class="org-keyword">dolist</span><span class="org-unicode-whitespace-subdued-space"> </span>(hook<span class="org-unicode-whitespace-subdued-space"> </span>'(scheme-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>clojure-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>lisp-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>emacs-lisp-mode-hook))
-<span class="org-unicode-whitespace-subdued-space">  </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>hook<span class="org-unicode-whitespace-subdued-space"> </span>'run-lisp-mode-hooks))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">dolist</span> (hook '(scheme-mode-hook clojure-mode-hook lisp-mode-hook emacs-lisp-mode-hook))
+  (add-hook hook 'run-lisp-mode-hooks))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-2">
-<h2 id="orgheadline4"><span class="section-number-2">2</span> Editing</h2>
+<div id="outline-container-org95c73ea" class="outline-2">
+<h2 id="org95c73ea"><span class="section-number-2">2</span> Editing</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">2.1</span> Paredit</h3>
+</div>
+<div id="outline-container-org6aadb50" class="outline-3">
+<h3 id="org6aadb50"><span class="section-number-3">2.1</span> Paredit</h3>
 <div class="outline-text-3" id="text-2-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">paredit</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"&#9387;"</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:bind</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-builtin">:paredit-mode-map</span>
-<span class="org-unicode-whitespace-subdued-space">   </span>((<span class="org-string">"M-s"</span><span class="org-unicode-whitespace-subdued-space"> </span>.<span class="org-unicode-whitespace-subdued-space"> </span>paredit-split-sexp)))
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/minor-in-major-mode</span><span class="org-unicode-whitespace-subdued-space"> </span>paredit-mode<span class="org-unicode-whitespace-subdued-space"> </span>generic-lisp-mode-hook))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">paredit</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:diminish</span> <span class="org-string">"&#9387;"</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">emagician/minor-in-major-mode</span> paredit-mode generic-lisp-mode-hook))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">2.2</span> Smart Parens</h3>
+<div id="outline-container-org4fe5058" class="outline-3">
+<h3 id="org4fe5058"><span class="section-number-3">2.2</span> Smart Parens</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Turn this shit off on lisps
 </p>
 
-<pre class="code">(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'generic-lisp-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>#'turn-off-smartparens-mode<span class="org-unicode-whitespace-subdued-space"> </span>t)
-</pre>
+<pre class="code"><code>(add-hook 'generic-lisp-mode-hook #'turn-off-smartparens-mode t)
+</code></pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">3</span> Individual Lisps</h2>
+<div id="outline-container-orgac1188e" class="outline-2">
+<h2 id="orgac1188e"><span class="section-number-2">3</span> Individual Lisps</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">3.1</span> Elisp</h3>
+</div>
+<div id="outline-container-org930952c" class="outline-3">
+<h3 id="org930952c"><span class="section-number-3">3.1</span> Elisp</h3>
 <div class="outline-text-3" id="text-3-1">
-</div><div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11"><span class="section-number-4">3.1.1</span> Editing</h4>
+</div>
+<div id="outline-container-orgae59f6b" class="outline-4">
+<h4 id="orgae59f6b"><span class="section-number-4">3.1.1</span> Editing</h4>
 <div class="outline-text-4" id="text-3-1-1">
-</div><div id="outline-container-orgheadline5" class="outline-5">
-<h5 id="orgheadline5"><span class="section-number-5">3.1.1.1</span> Highlighting</h5>
+</div>
+<div id="outline-container-org2b2785e" class="outline-5">
+<h5 id="org2b2785e"><span class="section-number-5">3.1.1.1</span> Highlighting</h5>
 <div class="outline-text-5" id="text-3-1-1-1">
-<pre class="code">(<span class="org-keyword">with-eval-after-load</span><span class="org-unicode-whitespace-subdued-space"> </span>'dash
-<span class="org-unicode-whitespace-subdued-space">  </span>(dash-enable-font-lock))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">with-eval-after-load</span> 'dash
+  (dash-enable-font-lock))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-5">
-<h5 id="orgheadline6"><span class="section-number-5">3.1.1.2</span> Eldoc</h5>
+<div id="outline-container-orgab17b79" class="outline-5">
+<h5 id="orgab17b79"><span class="section-number-5">3.1.1.2</span> Eldoc</h5>
 <div class="outline-text-5" id="text-3-1-1-2">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">eldoc</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:diminish</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">""</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>eldoc-idle-delay<span class="org-unicode-whitespace-subdued-space"> </span>0.1)
-<span class="org-unicode-whitespace-subdued-space">    </span>(add-hook<span class="org-unicode-whitespace-subdued-space"> </span>'emacs-lisp-mode-hook<span class="org-unicode-whitespace-subdued-space"> </span>'turn-on-eldoc-mode)
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span>
-<span class="org-unicode-whitespace-subdued-space">    </span>(set-face-attribute<span class="org-unicode-whitespace-subdued-space"> </span>'eldoc-highlight-function-argument<span class="org-unicode-whitespace-subdued-space"> </span>nil
-<span class="org-unicode-whitespace-subdued-space">                        </span><span class="org-builtin">:underline</span><span class="org-unicode-whitespace-subdued-space"> </span>t<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-builtin">:foreground</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"green"</span>
-<span class="org-unicode-whitespace-subdued-space">                        </span><span class="org-builtin">:weight</span><span class="org-unicode-whitespace-subdued-space"> </span>'bold))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">eldoc</span>
+  <span class="org-builtin">:diminish</span> <span class="org-string">""</span>
+  <span class="org-builtin">:init</span> 
+    (<span class="org-keyword">setq</span> eldoc-idle-delay 0.1)
+    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  <span class="org-builtin">:config</span>
+    (set-face-attribute 'eldoc-highlight-function-argument nil
+                        <span class="org-builtin">:underline</span> t <span class="org-builtin">:foreground</span> <span class="org-string">"green"</span>
+                        <span class="org-builtin">:weight</span> 'bold))
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-5">
-<h5 id="orgheadline7"><span class="section-number-5">3.1.1.3</span> Auto Complete</h5>
+
+<div id="outline-container-org058edac" class="outline-5">
+<h5 id="org058edac"><span class="section-number-5">3.1.1.3</span> Auto Complete</h5>
 <div class="outline-text-5" id="text-3-1-1-3">
-<pre class="code">(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/ac-set-elisp-sources<span class="org-unicode-whitespace-subdued-space"> </span>emacs-lisp-mode
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>ac-sources
-<span class="org-unicode-whitespace-subdued-space">        </span>'(ac-source-yasnippet
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-functions
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-features
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-variables
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-symbols
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-files-in-current-dir
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-words-in-buffer
-<span class="org-unicode-whitespace-subdued-space">          </span>ac-source-words-in-same-mode-buffers)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">emagician/defhook</span> emagician/ac-set-elisp-sources emacs-lisp-mode
+  (<span class="org-keyword">setq</span> ac-sources
+        '(ac-source-yasnippet
+          ac-source-functions
+          ac-source-features
+          ac-source-variables
+          ac-source-symbols
+          ac-source-files-in-current-dir
+          ac-source-words-in-buffer
+          ac-source-words-in-same-mode-buffers)))
+</code></pre>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-5">
-<h5 id="orgheadline8"><span class="section-number-5">3.1.1.4</span> Indentation</h5>
+<div id="outline-container-orgffab645" class="outline-5">
+<h5 id="orgffab645"><span class="section-number-5">3.1.1.4</span> Indentation</h5>
 <div class="outline-text-5" id="text-3-1-1-4">
-<pre class="code">(put<span class="org-unicode-whitespace-subdued-space"> </span>'use-package<span class="org-unicode-whitespace-subdued-space"> </span>'lisp-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'lexically<span class="org-unicode-whitespace-subdued-space"> </span>'lisp-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>0)
-</pre>
+<pre class="code"><code>(put 'use-package 'lisp-indent-function 1)
+(put 'lexically 'lisp-indent-function 0)
+</code></pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-5">
-<h5 id="orgheadline10"><span class="section-number-5">3.1.1.5</span> Package checking</h5>
+<div id="outline-container-orgab30db5" class="outline-5">
+<h5 id="orgab30db5"><span class="section-number-5">3.1.1.5</span> Package checking</h5>
 <div class="outline-text-5" id="text-3-1-1-5">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">flycheck-package</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(flycheck-package-setup))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">flycheck-package</span>
+  <span class="org-builtin">:config</span> 
+  (flycheck-package-setup))
+</code></pre>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-6">
-<h6 id="orgheadline9"><span class="section-number-6">3.1.1.5.1</span> Turn off in orc-src buffers</h6>
+<div id="outline-container-org5a12737" class="outline-6">
+<h6 id="org5a12737"><span class="section-number-6">3.1.1.5.1</span> Turn off in orc-src buffers</h6>
 <div class="outline-text-6" id="text-3-1-1-5-1">
 <p>
 Don't flycheck in emacs-lisp-mode org-src buffers!  SO ANNOYING!
 </p>
 
-<pre class="code">(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>turn-off-flycheck-in-emacs-lisp<span class="org-unicode-whitespace-subdued-space"> </span>org-src-mode-hook
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">when</span><span class="org-unicode-whitespace-subdued-space"> </span>(equal<span class="org-unicode-whitespace-subdued-space"> </span>mode-name<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">"Emacs-Lisp"</span>)
-<span class="org-unicode-whitespace-subdued-space">    </span>(flycheck-mode<span class="org-unicode-whitespace-subdued-space"> </span>-1)))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">emagician/defhook</span> turn-off-flycheck-in-emacs-lisp org-src-mode-hook
+  (<span class="org-keyword">when</span> (equal mode-name <span class="org-string">"Emacs-Lisp"</span>)
+    (flycheck-mode -1)))
+</code></pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12"><span class="section-number-4">3.1.2</span> Environment</h4>
+<div id="outline-container-orgdcce3e1" class="outline-4">
+<h4 id="orgdcce3e1"><span class="section-number-4">3.1.2</span> Environment</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
@@ -344,41 +429,44 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">3.2</span> Scheme</h3>
+<div id="outline-container-orge2a59b5" class="outline-3">
+<h3 id="orge2a59b5"><span class="section-number-3">3.2</span> Scheme</h3>
 <div class="outline-text-3" id="text-3-2">
-</div><div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15"><span class="section-number-4">3.2.1</span> Editing</h4>
+</div>
+<div id="outline-container-org7fefdbd" class="outline-4">
+<h4 id="org7fefdbd"><span class="section-number-4">3.2.1</span> Editing</h4>
 <div class="outline-text-4" id="text-3-2-1">
-</div><div id="outline-container-orgheadline14" class="outline-5">
-<h5 id="orgheadline14"><span class="section-number-5">3.2.1.1</span> Intenting</h5>
+</div>
+<div id="outline-container-org288d62b" class="outline-5">
+<h5 id="org288d62b"><span class="section-number-5">3.2.1.1</span> Intenting</h5>
 <div class="outline-text-5" id="text-3-2-1-1">
-<pre class="code"><span class="org-comment-delimiter">;;</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">Indenting</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">module</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">body</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">code</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">at</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">column</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-comment">0</span>
-(<span class="org-keyword">defun</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-function-name">scheme-module-indent</span><span class="org-unicode-whitespace-subdued-space"> </span>(state<span class="org-unicode-whitespace-subdued-space"> </span>indent-point<span class="org-unicode-whitespace-subdued-space"> </span>normal-indent)<span class="org-unicode-whitespace-subdued-space"> </span>0)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'module<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-module-indent)
+<pre class="code"><code><span class="org-comment-delimiter">;; </span><span class="org-comment">Indenting module body code at column 0</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">scheme-module-indent</span> (state indent-point normal-indent) 0)
+(put 'module 'scheme-indent-function 'scheme-module-indent)
 
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'and-let*<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'parameterize<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'handle-exceptions<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'when<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'unless<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-(put<span class="org-unicode-whitespace-subdued-space"> </span>'match<span class="org-unicode-whitespace-subdued-space"> </span>'scheme-indent-function<span class="org-unicode-whitespace-subdued-space"> </span>1)
-</pre>
+(put 'and-let* 'scheme-indent-function 1)
+(put 'parameterize 'scheme-indent-function 1)
+(put 'handle-exceptions 'scheme-indent-function 1)
+(put 'when 'scheme-indent-function 1)
+(put 'unless 'scheme-indent-function 1)
+(put 'match 'scheme-indent-function 1)
+</code></pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">3.2.2</span> Interface</h4>
+<div id="outline-container-org760320e" class="outline-4">
+<h4 id="org760320e"><span class="section-number-4">3.2.2</span> Interface</h4>
 <div class="outline-text-4" id="text-3-2-2">
-</div><div id="outline-container-orgheadline16" class="outline-5">
-<h5 id="orgheadline16"><span class="section-number-5">3.2.2.1</span> Geiser REPL</h5>
+</div>
+<div id="outline-container-org1687861" class="outline-5">
+<h5 id="org1687861"><span class="section-number-5">3.2.2.1</span> Geiser REPL</h5>
 <div class="outline-text-5" id="text-3-2-2-1">
-<pre class="code">(<span class="org-keyword">use-package</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-constant">geiser</span>
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:init</span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">setq</span><span class="org-unicode-whitespace-subdued-space"> </span>geiser-active-implementations<span class="org-unicode-whitespace-subdued-space"> </span>'(chicken))
-<span class="org-unicode-whitespace-subdued-space">  </span><span class="org-builtin">:config</span><span class="org-unicode-whitespace-subdued-trailing"> </span>
-<span class="org-unicode-whitespace-subdued-space">  </span>(<span class="org-keyword">emagician/defhook</span><span class="org-unicode-whitespace-subdued-space"> </span>emagician/ac-set-scheme-sources<span class="org-unicode-whitespace-subdued-space"> </span>scheme-mode-hook))
-</pre>
+<pre class="code"><code>(<span class="org-keyword">use-package</span> <span class="org-constant">geiser</span>
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> geiser-active-implementations '(chicken))
+  <span class="org-builtin">:config</span> 
+  (<span class="org-keyword">emagician/defhook</span> emagician/ac-set-scheme-sources scheme-mode-hook))
+</code></pre>
 </div>
 </div>
 </div>
@@ -387,7 +475,7 @@ See <a href="./Emagician-Base.html">./Emagician-Base.html</a>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:48</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

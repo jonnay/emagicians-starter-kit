@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:48 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Journal</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Journal</h1>
@@ -156,16 +238,27 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Wax about Journal</a></li>
-<li><a href="#orgheadline8">2. 2016</a>
+<li><a href="#org74600c9">1. Wax about Journal</a></li>
+<li><a href="#org1af12d1">2. 2017</a>
 <ul>
-<li><a href="#orgheadline7">2.1. September</a>
+<li><a href="#orge7046ab">2.1. October</a></li>
+</ul>
+</li>
+<li><a href="#org1f64343">3. 2016</a>
 <ul>
-<li><a href="#orgheadline2">2.1.1. 19th - I crave vim-style command composability</a></li>
-<li><a href="#orgheadline3">2.1.2. 11th - Navigation On Top</a></li>
-<li><a href="#orgheadline4">2.1.3. 8th - Lou The GC 👷</a></li>
-<li><a href="#orgheadline5">2.1.4. 6th - Debugging an Emacs slowdown</a></li>
-<li><a href="#orgheadline6">2.1.5. 5th - Configs and a new mode</a></li>
+<li><a href="#org3bd83a8">3.1. September</a>
+<ul>
+<li><a href="#org3bcbc88">3.1.1. 25th - Mise en place</a></li>
+<li><a href="#orgb7d8765">3.1.2. 19th - I crave vim-style command composability</a></li>
+<li><a href="#org4eb2069">3.1.3. 11th - Navigation On Top</a></li>
+<li><a href="#org9a0d18c">3.1.4. 8th - Lou The GC 👷</a></li>
+<li><a href="#org3ed72ea">3.1.5. 6th - Debugging an Emacs slowdown</a></li>
+<li><a href="#org85e4147">3.1.6. 5th - Configs and a new mode</a></li>
+</ul>
+</li>
+<li><a href="#orga27a0cb">3.2. <span class="todo PROJECT">PROJECT</span> </a>
+<ul>
+<li><a href="#orge3b92d4">3.2.1. <span class="todo TODO">TODO</span> </a></li>
 </ul>
 </li>
 </ul>
@@ -173,8 +266,8 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Wax about Journal</h2>
+<div id="outline-container-org74600c9" class="outline-2">
+<h2 id="org74600c9"><span class="section-number-2">1</span> Wax about Journal</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 To the tune of Deck the Halls:
@@ -187,15 +280,52 @@ Et Cetera.
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">2</span> 2016</h2>
+<div id="outline-container-org1af12d1" class="outline-2">
+<h2 id="org1af12d1"><span class="section-number-2">2</span> 2017</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">2.1</span> September</h3>
+</div>
+<div id="outline-container-orge7046ab" class="outline-3">
+<h3 id="orge7046ab"><span class="section-number-3">2.1</span> October</h3>
 <div class="outline-text-3" id="text-2-1">
-</div><div id="outline-container-orgheadline2" class="outline-4">
-<h4 id="orgheadline2"><span class="section-number-4">2.1.1</span> 19th - I crave vim-style command composability</h4>
-<div class="outline-text-4" id="text-2-1-1">
+<p>
+A New position brings new challenges. 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f64343" class="outline-2">
+<h2 id="org1f64343"><span class="section-number-2">3</span> 2016</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org3bd83a8" class="outline-3">
+<h3 id="org3bd83a8"><span class="section-number-3">3.1</span> September</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org3bcbc88" class="outline-4">
+<h4 id="org3bcbc88"><span class="section-number-4">3.1.1</span> 25th - Mise en place</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+<label for="1" class="margin-toggle">&#8853;</label><input type="checkbox" id="1" class="margin-toggle"/><span class="marginnote"><img src="./assets/images/mise-en-place-gary-stevens.jpg" alt="mise-en-place-gary-stevens.jpg" /></span> In cooking there is this concept of Mise en place―everything in it's place.  I think that should be an option for me.  Being able to launch a particular work context and run with it.
+</p>
+
+<p>
+The thing is a particular work context is going to be a slightly different context for the same physical project (i.e. source control) base.  So this is what I'lll need:
+</p>
+
+<ul class="org-ul">
+<li>VM open</li>
+<li>Magit open and running</li>
+<li>recent pull from source control</li>
+<li>Org file pop-to-window thing</li>
+<li>Status of builds immediately visible</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgb7d8765" class="outline-4">
+<h4 id="orgb7d8765"><span class="section-number-4">3.1.2</span> 19th - I crave vim-style command composability</h4>
+<div class="outline-text-4" id="text-3-1-2">
 <p>
 I have found a package, it looks interesting, but it doesn't do it the way I want it to.  It isn't&#x2026; clean enough. 
 </p>
@@ -210,9 +340,9 @@ Oh no.  It is a starting point.
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">2.1.2</span> 11th - Navigation On Top</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<div id="outline-container-org4eb2069" class="outline-4">
+<h4 id="org4eb2069"><span class="section-number-4">3.1.3</span> 11th - Navigation On Top</h4>
+<div class="outline-text-4" id="text-3-1-3">
 <p>
 I'd love to get some kind of top-level automagick navigation.    Maybe the <code>#+SETUPFILE</code> along with an <code>HTML_PREAMbLE</code> can do it.
 </p>
@@ -223,9 +353,9 @@ I also wonder if I need a separate directory for the "programming" file set?
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">2.1.3</span> 8th - Lou The GC 👷</h4>
-<div class="outline-text-4" id="text-2-1-3">
+<div id="outline-container-org9a0d18c" class="outline-4">
+<h4 id="org9a0d18c"><span class="section-number-4">3.1.4</span> 8th - Lou The GC 👷</h4>
+<div class="outline-text-4" id="text-3-1-4">
 <p>
 After my earlier GC Experiments, I made Lou the GC.  Lou might become it's own elisp file and project.   Once I'm sure he works well.
 </p>
@@ -233,9 +363,9 @@ After my earlier GC Experiments, I made Lou the GC.  Lou might become it's own e
 </div>
 
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">2.1.4</span> 6th - Debugging an Emacs slowdown</h4>
-<div class="outline-text-4" id="text-2-1-4">
+<div id="outline-container-org3ed72ea" class="outline-4">
+<h4 id="org3ed72ea"><span class="section-number-4">3.1.5</span> 6th - Debugging an Emacs slowdown</h4>
+<div class="outline-text-4" id="text-3-1-5">
 <p>
 Something has gone horribly wrong with my emacs.  Every 5 minutes or so I get a spinning beachball of death.  It's either:
 </p>
@@ -265,8 +395,8 @@ Also, Helm needed an upgrade, so i did that at the same time as deactivating Com
 One of the things I can do is finally get around to writing the "In case of emergency, break glass" function that sends SIGUSR2 to emacs. 
 </p>
 
-<pre class="code"><span class="org-builtin">kill</span><span class="org-unicode-whitespace-subdued-space"> </span>-SIGUSR2<span class="org-unicode-whitespace-subdued-space"> </span>$(<span class="org-unicode-whitespace-subdued-space"> </span>ps<span class="org-unicode-whitespace-subdued-space"> </span>aux<span class="org-unicode-whitespace-subdued-space"> </span>|<span class="org-unicode-whitespace-subdued-space"> </span>grep<span class="org-unicode-whitespace-subdued-space"> </span>Emacs<span class="org-unicode-whitespace-subdued-space"> </span>|<span class="org-unicode-whitespace-subdued-space"> </span>awk<span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">'{print</span><span class="org-unicode-whitespace-subdued-space"> </span><span class="org-string">$2}'</span>)
-</pre>
+<pre class="code"><code><span class="org-builtin">kill</span> -SIGUSR2 $( ps aux | grep Emacs | awk <span class="org-string">'{print $2}'</span>)
+</code></pre>
 
 <p>
 Ironically, it seems as if the upgrade to helm may have fixed my problem.
@@ -335,9 +465,9 @@ Also: <a href="http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-co
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">2.1.5</span> 5th - Configs and a new mode</h4>
-<div class="outline-text-4" id="text-2-1-5">
+<div id="outline-container-org85e4147" class="outline-4">
+<h4 id="org85e4147"><span class="section-number-4">3.1.6</span> 5th - Configs and a new mode</h4>
+<div class="outline-text-4" id="text-3-1-6">
 <div class="epigraph"><blockquote>
 <p>
 Good artists copy.  Great artists steal.
@@ -355,11 +485,41 @@ As an aside, I started work on a new parens-underlining package.  I don't know i
 </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="outline-container-orga27a0cb" class="outline-3">
+<h3 id="orga27a0cb"><span class="section-number-3">3.2</span> <span class="todo PROJECT">PROJECT</span> </h3>
+<div class="outline-text-3" id="text-3-2">
+<dl class="org-dl">
+<dt>Purpose - 50K</dt><dd></dd>
+
+<dt>Success Looks Like - 40K </dt><dd></dd>
+
+<dt>(no term)</dt><dd>Brainstorming - 30K
+<ul class="org-ul">
+<li></li>
+</ul></dd>
+<dt>(no term)</dt><dd>Organize the brainstorming and come up with next actions (20K)</dd>
+</dl>
+</div>
+<div id="outline-container-orge3b92d4" class="outline-4">
+<h4 id="orge3b92d4"><span class="section-number-4">3.2.1</span> <span class="todo TODO">TODO</span> </h4>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:48</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

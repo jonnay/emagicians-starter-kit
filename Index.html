@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-19 Mon 22:48 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2018-05-18 Fri 10:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Index Sitemap for project emagician-org</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Jonathan Arkell" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jonathan Arkell" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,98 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nixie+One|Taviraj:300,400" rel="stylesheet"><link href="./assets/styles/tufte-style.css" rel="stylesheet"><script src="https://use.fontawesome.com/432a2f463b.js"></script>
@@ -100,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -143,12 +229,8 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="index"> HOME </a>
-</div><div id="preamble" class="status">
-<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu>
+<div id="preamble" class="status">
+<menu class="top"><a href="index.html"> Index </a><a href="Emagician.html"> Emagician </a><a href="Emagician-Base.html"> Base </a><a href="Emagician-Install.html"> Install </a><a href="Emagician-Meta.html"> Meta </a><a href="Interface.html"> Interface </a><a href="Programming.html"> Programming </a><a href="Text.html"> Text </a><a href="Org-Grimoire.html"> Org </a><a href="Lamp.html"> Lamp </a><a href="Journal.html"> Journal </a><a href="Snippets.html"> Snippets </a></menu><menu class="ext"><a class="dotnet" href="http://www.jonnay.net/">jonnay.net</a><a class="github" href="https://github.com/jonnay/emagicians-starter-kit">Fork on Github</a></menu>
 </div>
 <div id="content">
 <h1 class="title">Index Sitemap for project emagician-org</h1>
@@ -156,35 +238,35 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline9">1. Topical Index</a>
+<li><a href="#org204db50">1. Topical Index</a>
 <ul>
-<li><a href="#orgheadline1">1.1. Installing</a></li>
-<li><a href="#orgheadline2">1.2. Core Emagician</a></li>
-<li><a href="#orgheadline3">1.3. The Actual Funk</a></li>
-<li><a href="#orgheadline5">1.4. Mode Specifics</a>
+<li><a href="#orgf1a053b">1.1. Installing</a></li>
+<li><a href="#org365136c">1.2. Core Emagician</a></li>
+<li><a href="#org2aa242d">1.3. The Actual Funk</a></li>
+<li><a href="#org47386e3">1.4. Mode Specifics</a>
 <ul>
-<li><a href="#orgheadline4">1.4.1. Programming modes</a></li>
+<li><a href="#org0e8b016">1.4.1. Programming modes</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline6">1.5. OS customizations</a></li>
-<li><a href="#orgheadline7">1.6. Misc</a></li>
-<li><a href="#orgheadline8">1.7. Assets</a></li>
+<li><a href="#org75f8a20">1.5. OS customizations</a></li>
+<li><a href="#orgf4161d3">1.6. Misc</a></li>
+<li><a href="#org904e4ae">1.7. Assets</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline10">2. Alphabetical Index by Subject</a></li>
-<li><a href="#orgheadline11">3. A</a></li>
-<li><a href="#orgheadline12">4. C</a></li>
-<li><a href="#orgheadline13">5. D</a></li>
-<li><a href="#orgheadline14">6. I</a></li>
-<li><a href="#orgheadline15">7. L</a></li>
-<li><a href="#orgheadline16">8. P</a></li>
-<li><a href="#orgheadline17">9. S</a></li>
-<li><a href="#orgheadline18">10. Alphabetical Index By File</a></li>
+<li><a href="#orgf77c544">2. Alphabetical Index by Subject</a></li>
+<li><a href="#org406523a">3. A</a></li>
+<li><a href="#orgb15ad8e">4. C</a></li>
+<li><a href="#orga8e56f9">5. D</a></li>
+<li><a href="#orgc1ba044">6. I</a></li>
+<li><a href="#org43a57a1">7. L</a></li>
+<li><a href="#org9d322d6">8. P</a></li>
+<li><a href="#orgd6301fc">9. S</a></li>
+<li><a href="#org8ed3514">10. Alphabetical Index By File</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline9" class="outline-2">
-<h2 id="orgheadline9"><span class="section-number-2">1</span> Topical Index</h2>
+<div id="outline-container-org204db50" class="outline-2">
+<h2 id="org204db50"><span class="section-number-2">1</span> Topical Index</h2>
 <div class="outline-text-2" id="text-1">
 <dl class="org-dl">
 <dt><a href="./Readme.html">./Readme.html</a></dt><dd>Why this exists, why the world needs another starter kit</dd>
@@ -192,8 +274,8 @@ for the JavaScript code in this tag.
 </dl>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1"><span class="section-number-3">1.1</span> Installing</h3>
+<div id="outline-container-orgf1a053b" class="outline-3">
+<h3 id="orgf1a053b"><span class="section-number-3">1.1</span> Installing</h3>
 <div class="outline-text-3" id="text-1-1">
 <dl class="org-dl">
 <dt><a href="./Emagician-Install.html">./Emagician-Install.html</a></dt><dd>Contains all the install instructions you need</dd>
@@ -201,8 +283,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">1.2</span> Core Emagician</h3>
+<div id="outline-container-org365136c" class="outline-3">
+<h3 id="org365136c"><span class="section-number-3">1.2</span> Core Emagician</h3>
 <div class="outline-text-3" id="text-1-2">
 
 <div class="figure">
@@ -224,8 +306,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">1.3</span> The Actual Funk</h3>
+<div id="outline-container-org2aa242d" class="outline-3">
+<h3 id="org2aa242d"><span class="section-number-3">1.3</span> The Actual Funk</h3>
 <div class="outline-text-3" id="text-1-3">
 <dl class="org-dl">
 <dt><a href="./Interface.html">./Interface.html</a></dt><dd>Primary file containing all interface related functionality, including look and feel, editing commands, etc.</dd>
@@ -234,8 +316,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">1.4</span> Mode Specifics</h3>
+<div id="outline-container-org47386e3" class="outline-3">
+<h3 id="org47386e3"><span class="section-number-3">1.4</span> Mode Specifics</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt><a href="./Eshell-Magick.html">./Eshell-Magick.html</a></dt><dd>Making eshell RULE.</dd>
@@ -245,8 +327,8 @@ for the JavaScript code in this tag.
 </dl>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4"><span class="section-number-4">1.4.1</span> Programming modes</h4>
+<div id="outline-container-org0e8b016" class="outline-4">
+<h4 id="org0e8b016"><span class="section-number-4">1.4.1</span> Programming modes</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <dl class="org-dl">
 <dt><a href="./Programming-Lisp.html">./Programming-Lisp.html</a></dt><dd>Sekrut Fucking Alien Technology.</dd>
@@ -258,8 +340,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-3">
-<h3 id="orgheadline6"><span class="section-number-3">1.5</span> OS customizations</h3>
+<div id="outline-container-org75f8a20" class="outline-3">
+<h3 id="org75f8a20"><span class="section-number-3">1.5</span> OS customizations</h3>
 <div class="outline-text-3" id="text-1-5">
 <dl class="org-dl">
 <dt><a href="./Nix.html">./Nix.html</a></dt><dd>I don't use this much, but the customization was too valuable to lose.</dd>
@@ -268,8 +350,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">1.6</span> Misc</h3>
+<div id="outline-container-orgf4161d3" class="outline-3">
+<h3 id="orgf4161d3"><span class="section-number-3">1.6</span> Misc</h3>
 <div class="outline-text-3" id="text-1-6">
 <dl class="org-dl">
 <dt><a href="./jonnay.html">./jonnay.html</a></dt><dd>My own customization file.</dd>
@@ -277,8 +359,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8"><span class="section-number-3">1.7</span> Assets</h3>
+<div id="outline-container-org904e4ae" class="outline-3">
+<h3 id="org904e4ae"><span class="section-number-3">1.7</span> Assets</h3>
 <div class="outline-text-3" id="text-1-7">
 <dl class="org-dl">
 <dt><a href="./Snippets.html">./Snippets.html</a></dt><dd>Yasnippets Snippets</dd>
@@ -287,78 +369,78 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-2">
-<h2 id="orgheadline10"><span class="section-number-2">2</span> Alphabetical Index by Subject</h2>
+<div id="outline-container-orgf77c544" class="outline-2">
+<h2 id="orgf77c544"><span class="section-number-2">2</span> Alphabetical Index by Subject</h2>
 <div class="outline-text-2" id="text-2">
 </div>
 </div>
 
-<div id="outline-container-orgheadline11" class="outline-2">
-<h2 id="orgheadline11"><span class="section-number-2">3</span> A</h2>
+<div id="outline-container-org406523a" class="outline-2">
+<h2 id="org406523a"><span class="section-number-2">3</span> A</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline18">Assets</a></li>
+<li><a href="Emagician.html#orgf2a071c">Assets</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">4</span> C</h2>
+<div id="outline-container-orgb15ad8e" class="outline-2">
+<h2 id="orgb15ad8e"><span class="section-number-2">4</span> C</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline36">customization</a></li>
+<li><a href="Emagician.html#org480f72e">customization</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline13" class="outline-2">
-<h2 id="orgheadline13"><span class="section-number-2">5</span> D</h2>
+<div id="outline-container-orga8e56f9" class="outline-2">
+<h2 id="orga8e56f9"><span class="section-number-2">5</span> D</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline4">debugging</a></li>
-<li><a href="Emagician.html#orgheadline40">debugging</a></li>
+<li><a href="Emagician.html#orga481ff8">debugging</a></li>
+<li><a href="Emagician.html#org6c7b312">debugging</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-2">
-<h2 id="orgheadline14"><span class="section-number-2">6</span> I</h2>
+<div id="outline-container-orgc1ba044" class="outline-2">
+<h2 id="orgc1ba044"><span class="section-number-2">6</span> I</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline4">initialization</a></li>
-<li><a href="Emagician.html#orgheadline13">initialization</a></li>
+<li><a href="Emagician.html#orga481ff8">initialization</a></li>
+<li><a href="Emagician.html#org13b902d">initialization</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline15" class="outline-2">
-<h2 id="orgheadline15"><span class="section-number-2">7</span> L</h2>
+<div id="outline-container-org43a57a1" class="outline-2">
+<h2 id="org43a57a1"><span class="section-number-2">7</span> L</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline11">load-path</a></li>
-<li><a href="Emagician.html#orgheadline17">loading</a></li>
+<li><a href="Emagician.html#org18ffa5b">load-path</a></li>
+<li><a href="Emagician.html#org4558e5a">loading</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline16" class="outline-2">
-<h2 id="orgheadline16"><span class="section-number-2">8</span> P</h2>
+<div id="outline-container-org9d322d6" class="outline-2">
+<h2 id="org9d322d6"><span class="section-number-2">8</span> P</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline8">packages</a></li>
-<li><a href="Emagician.html#orgheadline16">packages</a></li>
+<li><a href="Emagician.html#org2b50be0">packages</a></li>
+<li><a href="Emagician.html#orga131d02">packages</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">9</span> S</h2>
+<div id="outline-container-orgd6301fc" class="outline-2">
+<h2 id="orgd6301fc"><span class="section-number-2">9</span> S</h2>
 <div class="outline-text-2" id="text-9">
 <ul class="org-ul">
-<li><a href="Emagician.html#orgheadline2">scractch-links</a></li>
-<li><a href="Emagician.html#orgheadline1">scratch</a></li>
-<li><a href="Emagician.html#orgheadline3">scratch</a></li>
-<li><a href="Emagician.html#orgheadline7">scratch</a></li>
-<li><a href="Emagician.html#orgheadline39">scratch</a></li>
+<li><a href="Emagician.html#orge471a3f">scractch-links</a></li>
+<li><a href="Emagician.html#orgb86e038">scratch</a></li>
+<li><a href="Emagician.html#org98fb323">scratch</a></li>
+<li><a href="Emagician.html#org2d6dabb">scratch</a></li>
+<li><a href="Emagician.html#org4f5b848">scratch</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-2">
-<h2 id="orgheadline18"><span class="section-number-2">10</span> Alphabetical Index By File</h2>
+<div id="outline-container-org8ed3514" class="outline-2">
+<h2 id="org8ed3514"><span class="section-number-2">10</span> Alphabetical Index By File</h2>
 <div class="outline-text-2" id="text-10">
 <ul class="org-ul">
 <li><a href="darwin.html">Darwin (OS X)</a></li>
@@ -366,12 +448,13 @@ for the JavaScript code in this tag.
 <li><a href="Emagician-Base.html">Emagician-Base</a></li>
 <li><a href="Eshell-Magick.html">Eshell Magick</a></li>
 <li><a href="Programming.html">General Programming</a></li>
-<li><a href="theindex.html">Index</a></li>
 <li><a href="index.html">index</a></li>
+<li><a href="theindex.html">Index</a></li>
 <li><a href="Emagician-Install.html">Installation</a></li>
 <li><a href="jonnay.html">jonnay</a></li>
 <li><a href="Journal.html">Journal</a></li>
 <li><a href="Programming-Lisp.html">Lisp</a></li>
+<li><a href="Programming-Lua.html">Lua</a></li>
 <li><a href="Emagician-Meta.html">Meta-Development</a></li>
 <li><a href="Nix.html">NixOS</a></li>
 <li><a href="Org-Grimoire.html">Org-Grimoire</a></li>
@@ -384,6 +467,7 @@ for the JavaScript code in this tag.
 <li><a href="Interface.html">User Interface Elements</a></li>
 <li><a href="Programming-Web.html">Web Programming</a></li>
 <li><a href="joarkell.html">Work Config</a></li>
+<li><a href="JOARKELL-M-11JL.html">Work Lappy</a></li>
 <li><a href="Snippets.html">YASnippets</a></li>
 </ul>
 </div>
@@ -391,7 +475,7 @@ for the JavaScript code in this tag.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jonathan Arkell</p>
-<p class="date">Created: 2016-09-19 Mon 22:48</p>
+<p class="date">Created: 2018-05-18 Fri 10:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
